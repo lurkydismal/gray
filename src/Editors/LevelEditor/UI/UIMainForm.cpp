@@ -233,6 +233,12 @@ void UIMainForm::DrawContextMenu()
 	}
 	if(ImGui::BeginMenu("Locking"))
 	{
+		ESceneToolBase* SceneTool = Scene->GetTool(LTools->CurrentClassID());
+		ESceneToolBase::ETestResult TestOut = SceneTool->TestSelectedObjectsFlag(CCustomObject::flRT_Locked);
+		bool CanLock = TestOut != ESceneToolBase::ETestResult::All;
+		bool CanUnlock = TestOut != ESceneToolBase::ETestResult::None;
+
+		ImGui::BeginDisabled(!CanLock);
 		if(ImGui::MenuItem("Lock selection"))
 		{
             ExecCommand(COMMAND_LOCK_SEL, TRUE);
@@ -245,7 +251,11 @@ void UIMainForm::DrawContextMenu()
 		{
 			ExecCommand(COMMAND_LOCK_ALL, TRUE);
 		}
+		ImGui::EndDisabled();
+
         ImGui::Separator();
+
+		ImGui::BeginDisabled(!CanUnlock);
 		if(ImGui::MenuItem("Unlock selection"))
 		{
 			ExecCommand(COMMAND_LOCK_SEL, FALSE);
@@ -258,6 +268,7 @@ void UIMainForm::DrawContextMenu()
 		{
 			ExecCommand(COMMAND_LOCK_ALL, FALSE);
 		}
+		ImGui::EndDisabled();
 		ImGui::EndMenu();
 	}
 
