@@ -95,6 +95,9 @@ void UIObjectList::Draw()
 		ImGui::Separator();
 
 		DrawObjects();
+
+		ImGui::Text("Find: ", "");
+		ImGui::SameLine();
 		if (ImGui::InputText("##value", m_Filter, sizeof(m_Filter)))
 		{
 			m_Root.ClearSelcted();
