@@ -354,6 +354,16 @@ void CAI_Stalker::HitSignal				(float amount, Fvector& vLocalDir, CObject* who, 
 {
 }
 
+bool CAI_Stalker::CanPutInSlot(PIItem item, u32 slot)
+{
+	if (slot == INV_SLOT_2 || slot == INV_SLOT_3)
+	{
+		return !!g_Alive();
+	}
+
+	return(slot != OUTFIT_SLOT) && (slot != PDA_SLOT);
+}
+
 void CAI_Stalker::OnItemTake			(CInventoryItem *inventory_item)
 {
 	CObjectHandler::OnItemTake	(inventory_item);
