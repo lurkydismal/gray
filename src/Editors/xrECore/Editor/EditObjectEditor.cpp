@@ -404,7 +404,9 @@ bool CEditableObject::CheckShaderCompatible()
 			bRes 		= false;
 		}else{
 			if (!BE(B->canBeLMAPped(),!C->flags.bLIGHT_Vertex)){
-				ELog.Msg	(mtError,"Object '%s': engine shader '%s' non compatible with compiler shader '%s'",GetName(),(*s_it)->_ShaderName(),(*s_it)->_ShaderXRLCName());
+				ELog.Msg	(mtError,"Object '%s', material '%s': engine shader '%s' non compatible with compiler shader '%s'", GetName(),
+					(*s_it)->_Name(), (*s_it)->_ShaderName(), (*s_it)->_ShaderXRLCName());
+				
 				bRes 		= false;
 			}
 		}
