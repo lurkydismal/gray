@@ -20,7 +20,7 @@ UIEditLibrary::UIEditLibrary()
 	m_ObjectList->m_Flags.set(UIItemListForm::fMultiSelect, true);
 	m_Props = new UIPropertiesForm();
 	m_PropsObjects = new UIPropertiesForm();
-	m_Preview = false;
+	m_Preview = ((CLevelPreferences*)(EPrefs))->PreviewRenderLibrary;
 	m_SelectLods = false;
 	m_RealTexture = nullptr;
 
@@ -375,7 +375,11 @@ void UIEditLibrary::DrawRightBar()
 		}
 
 		if (ImGui::Checkbox("Preview", &m_Preview))
+		{
+			((CLevelPreferences*)(EPrefs))->PreviewRenderLibrary = m_Preview;
 			OnPreviewClick();
+		}
+
 		ImGui::SameLine();
 
 		if (ImGui::Checkbox("Dropper", &m_Dropper))

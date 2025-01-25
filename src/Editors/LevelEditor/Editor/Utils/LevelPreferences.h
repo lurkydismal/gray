@@ -23,4 +23,5 @@ public:
 	bool OpenWorldProperties;
 	bool OpenSnapList;
 	bool OpenLightAnim;
+	bool PreviewRenderLibrary = false;
 };

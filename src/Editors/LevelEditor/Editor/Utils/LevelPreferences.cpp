@@ -30,6 +30,11 @@ void CLevelPreferences::Load()
 		PIEArtSpawnPos = JSONData["PIE"]["ArtPos"];
 	}
 
+	if (JSONData.contains("LibaryEditor") && JSONData["LibaryEditor"].contains("Preview"))
+	{
+		PreviewRenderLibrary = JSONData["LibaryEditor"]["Preview"];
+	}
+
 	if (JSONData["windows"].contains("snap_list"))
 	{
 		OpenSnapList = JSONData["windows"]["snap_list"];
@@ -86,6 +91,7 @@ void CLevelPreferences::Save()
 	JSONData["windows"]["snap_list"] = OpenSnapList;
 	JSONData["windows"]["light_anim"] = OpenLightAnim;
 	
+	JSONData["LibaryEditor"]["Preview"] = PreviewRenderLibrary;
 	JSONData["PIE"]["ArtPos"] = PIEArtSpawnPos;
 
 	JSONData["Compilers Path"]["xrLC"] = Compiler_xrLC.c_str();
