@@ -24,8 +24,10 @@ enum class EEngineExternalGame
 	EnableWeaponCollision
 };
 
-enum class EEngineExternalRender {
+enum class EEngineExternalRender 
+{
 	DisableLoadScreenTips,
+	LargeFontAtlas,
 	None
 };
 
