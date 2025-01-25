@@ -494,7 +494,7 @@ bool EScene::Validate(bool bNeedOkMsg, bool bTestPortal, bool bTestHOM, bool bTe
 			if (O->m_objectFlags.is(CEditableObject::eoHOM)){ bHasHOM = true; break; }
 		}
 		if (!bHasHOM)
-			Msg("!Level doesn't contain HOM objects!");
+			Msg("! Level doesn't contain HOM objects!");
 //.			if (mrNo==ELog.DlgMsg(mtConfirmation,mbYes |mbNo,"Level doesn't contain HOM.\nContinue anyway?"))
 //.				return false;
 	}
@@ -568,7 +568,7 @@ bool EScene::Validate(bool bNeedOkMsg, bool bTestPortal, bool bTestHOM, bool bTe
 	if (bRes){
 		if (bNeedOkMsg) ELog.DlgMsg(mtInformation,"Validation OK!");
 	}else{
-		ELog.DlgMsg(mtInformation,"Validation FAILED!");
+		ELog.DlgMsg(mtWarning,"Validation FAILED!");
 	}
 	return bRes;
 }

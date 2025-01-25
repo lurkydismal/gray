@@ -379,7 +379,7 @@ void CImageManager::SynchronizeTextures(bool sync_thm, bool sync_game, bool bFor
 		if (UI->NeedAbort()) break;
 		
 		if (bProgress) 
-			pb->Inc(bUpdated?xr_string(base_name+(bFailed?" - FAILED":" - UPDATED.")).c_str():base_name.c_str(),bUpdated);
+			pb->Inc(bUpdated ? xr_string(base_name+(bFailed?" - FAILED":" - UPDATED.")).c_str() : base_name.c_str(), bFailed);
 			
 		if (bUpdated){
 			string_path             tga_fn,thm_fn,dds_fn;

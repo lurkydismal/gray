@@ -11,7 +11,7 @@ enum TMsgDlgType
 	mtInformation = 2,
 	mtConfirmation = 4,
 	mtSkip = 8,
-
+	mtWarning = 16
 };
 
 enum TMsgDlgButtons

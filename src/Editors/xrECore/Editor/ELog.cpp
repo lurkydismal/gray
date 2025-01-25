@@ -62,6 +62,10 @@ inline TMsgDlgButtons MessageDlg(const char*text, TMsgDlgType mt, int btn)
 		Flags = Flags | SDL_MESSAGEBOX_INFORMATION;
 		break;
 	case mtConfirmation:
+		Title = "Confirmation";
+		Flags = Flags | SDL_MESSAGEBOX_INFORMATION;
+		break;
+	case mtWarning:
 		Title = "Warning";
 		Flags = Flags | SDL_MESSAGEBOX_WARNING;
 		break;

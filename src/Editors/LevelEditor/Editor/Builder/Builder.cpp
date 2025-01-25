@@ -36,7 +36,7 @@ SceneBuilder::~SceneBuilder()
 
 #define CHECK_BREAK     	if (UI->NeedAbort()) break;
 #define VERIFY_COMPILE(x,c1,c2) CHECK_BREAK \
-							if (!x){ELog.Msg(mtError, "ERROR: %s %s", c1,c2); break;}
+							if (!x){error_text = std::format("ERROR: {} {}", c1, c2).c_str(); break;}
 
 BOOL SceneBuilder::Compile(bool b_selected_only, bool show_message )
 {
@@ -49,9 +49,9 @@ BOOL SceneBuilder::Compile(bool b_selected_only, bool show_message )
 		return TRUE;
 	}
 
-	xr_string error_text		= "";
-	UI->ResetBreak				();
+    xr_string error_text = {};
 
+	UI->ResetBreak				();
 	ELog.Msg( mtInformation, "Building started..." );
 
     UI->BeginEState(esBuildLevel);
@@ -97,11 +97,15 @@ BOOL SceneBuilder::Compile(bool b_selected_only, bool show_message )
 		    Clear			();
         } while(0);
 
-        if (!error_text.empty()) 	ELog.DlgMsg(mtError,error_text.c_str());
-        else if (UI->NeedAbort())	ELog.DlgMsg(mtInformation,"Building terminated.");
-        else					if(show_message)	ELog.DlgMsg(mtInformation,"Building OK.");
-    }catch(...){
-    	ELog.DlgMsg(mtError,"Error has occured in builder routine. Editor aborted.");
+        if (!error_text.empty())
+            ELog.DlgMsg(mtError, error_text.c_str());
+        else if (UI->NeedAbort())
+            ELog.DlgMsg(mtInformation, "Building terminated.");
+        else if (show_message)
+            ELog.DlgMsg(mtInformation, "Building OK.");
+    }
+    catch (...) {
+        ELog.DlgMsg(mtError, "Error has occured in builder routine. Editor aborted.");
         UI->EndEState(esBuildLevel);
         return false;
     }
