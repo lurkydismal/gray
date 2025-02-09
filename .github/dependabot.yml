@@ -5,7 +5,7 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    target-branch: default
+    target-branch: main
     groups:
       actions-minor:
         update-types:
