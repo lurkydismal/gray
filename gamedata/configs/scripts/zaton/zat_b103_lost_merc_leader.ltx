@@ -45,7 +45,7 @@ meet   = no_meet
 on_info   = {-zat_b103_merc_fight} %=play_sound(zat_b103_merc_hide_weapon_1)%
 on_signal = sound_end | {!actor_has_weapon} remark@pause_meet %-zat_b103_warning%, remark@warn2
 on_actor_in_zone     = zat_b103_merc_territory | {=actor_has_weapon !has_enemy} %+zat_b103_merc_fight%
-on_actor_in_zone2 	 = zat_b103_merc_robbery | {!actor_has_weapon} remark@pause_meet %=stop_sound -zat_b103_warning%
+on_actor_in_zone2      = zat_b103_merc_robbery | {!actor_has_weapon} remark@pause_meet %=stop_sound -zat_b103_warning%
 on_actor_not_in_zone = zat_b103_sr_def_restr | walker@leader %=stop_sound -zat_b103_warning%
 meet = no_meet
 on_info4 = {=has_enemy !is_enemy_actor =actor_in_zone(zat_b103_sr_def_restr)} walker@force_maj %=stop_sound +zat_b103_force_maj%

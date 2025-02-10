@@ -18,8 +18,8 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 07-31-2006  1.05.09  SAH  FIX      Fixed Linux makefile
 07-24-2006  1.05.08  SAH  OTHER    Added Host self-validation check to the gcd/qr2server sample app
 05-31-2006  1.05.07  SAH  RELEASE  Releasing to developer site
-		     SAH  FIX	   Fixed Linux makefile
-05-25-2006  1.05.06  SAH  FIX	   Changed keyserver_qr2 to have natNegotiate set to 1
+             SAH  FIX       Fixed Linux makefile
+05-25-2006  1.05.06  SAH  FIX       Changed keyserver_qr2 to have natNegotiate set to 1
 04-25-2006  1.05.05  SAH  RELEASE  Releasing to developer site
 04-24-2006  1.05.05  SAH  FIX      Commented out unused gsiIsSocketError check in **server.c tests
 01-27-2006  1.05.04  SN   RELEASE  Releasing to developer site

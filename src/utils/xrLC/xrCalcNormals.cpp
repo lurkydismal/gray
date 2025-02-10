@@ -12,9 +12,9 @@
 void CBuild::CalcNormals()
 {
 
-	calculate_normals<Vertex>::calc_normals( lc_global_data()->g_vertices(), lc_global_data()->g_faces() );
-	// Models
-	Status	("Models...");
-	MU_ModelsCalculateNormals();
+    calculate_normals<Vertex>::calc_normals( lc_global_data()->g_vertices(), lc_global_data()->g_faces() );
+    // Models
+    Status    ("Models...");
+    MU_ModelsCalculateNormals();
 }
 

@@ -1,7 +1,7 @@
 #include "fluid_common_render.hlsli"
 
-//	Vertex
-//	TODO: DX10: replace WorldViewProjection with m_WVP
+//    Vertex
+//    TODO: DX10: replace WorldViewProjection with m_WVP
 PS_INPUT_RAYDATA_BACK main(VS_INPUT input)
 {
     PS_INPUT_RAYDATA_BACK output = (PS_INPUT_RAYDATA_BACK)0;

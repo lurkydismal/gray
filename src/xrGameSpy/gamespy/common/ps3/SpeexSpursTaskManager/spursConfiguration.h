@@ -18,10 +18,10 @@ extern "C" {
 // "-Wl,--whole-archive -lprof_stub -Wl,--no-whole-archive"
 
 enum CellSpursReturn {
-	CELL_SPURS_OK=0,
-	CELL_SPURS_EBUSY,
-	CELL_SPURS_EINVAL,
-	CELL_SPURS_EMISC
+    CELL_SPURS_OK=0,
+    CELL_SPURS_EBUSY,
+    CELL_SPURS_EINVAL,
+    CELL_SPURS_EMISC
 };
 
 /**

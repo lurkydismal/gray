@@ -46,60 +46,60 @@ LIB_MALLOC = libptmalloc3.a
 
 T_SUF =
 TESTS = t-test1$(T_SUF) t-test2$(T_SUF) \
-	tst-independent-alloc$(T_SUF)
+    tst-independent-alloc$(T_SUF)
         #m-test1$(T_SUF) tst-mallocstate$(T_SUF) tst-mstats$(T_SUF)
 
 CFLAGS = $(SYS_FLAGS) $(OPT_FLAGS) $(WARN_FLAGS) $(THR_FLAGS) $(INC_FLAGS)
 
 .c.o:
-	$(CC) -c $(CFLAGS) $<
+    $(CC) -c $(CFLAGS) $<
 
 all: $(LIB_MALLOC) $(TESTS)
 
 ptmalloc3.o: ptmalloc3.c malloc-2.8.3.h
-	$(CC) -c $(CFLAGS) $(M_FLAGS) -DMSPACES=1 $<
+    $(CC) -c $(CFLAGS) $(M_FLAGS) -DMSPACES=1 $<
 
 malloc.o: malloc.c
-	$(CC) -c $(CFLAGS) $(M_FLAGS) -DONLY_MSPACES -DUSE_LOCKS=0 $<
+    $(CC) -c $(CFLAGS) $(M_FLAGS) -DONLY_MSPACES -DUSE_LOCKS=0 $<
 
 #malloc-stats.o: malloc-stats.c malloc.h
-#	$(CC) -c $(CFLAGS) $(M_FLAGS) $<
+#    $(CC) -c $(CFLAGS) $(M_FLAGS) $<
 
 libptmalloc3.a: $(MALLOC_OBJ)
-	$(AR) cr $@ $(MALLOC_OBJ)
-	$(RANLIB) $@
+    $(AR) cr $@ $(MALLOC_OBJ)
+    $(RANLIB) $@
 
 libptmalloc3.so: $(MALLOC_OBJ)
-	$(CC) $(SH_FLAGS) $(CFLAGS) $(M_FLAGS) $(MALLOC_OBJ) -o $@
+    $(CC) $(SH_FLAGS) $(CFLAGS) $(M_FLAGS) $(MALLOC_OBJ) -o $@
 
 again:
-	$(RM) $(TESTS)
-	$(MAKE) $(TESTS)
+    $(RM) $(TESTS)
+    $(MAKE) $(TESTS)
 
 clean:
-	$(RM) $(MALLOC_OBJ) libptmalloc3.a libptmalloc3.so $(TESTS) \
+    $(RM) $(MALLOC_OBJ) libptmalloc3.a libptmalloc3.so $(TESTS) \
          core core.[0-9]*
 
 m-test1$(T_SUF): m-test1.c $(LIB_MALLOC)
-	$(CC) $(CFLAGS) $(T_FLAGS) m-test1.c $(LIB_MALLOC) $(THR_LIBS) -o $@
+    $(CC) $(CFLAGS) $(T_FLAGS) m-test1.c $(LIB_MALLOC) $(THR_LIBS) -o $@
 
 t-test1$(T_SUF): t-test1.c t-test.h $(LIB_MALLOC)
-	$(CC) $(CFLAGS) $(T_FLAGS) t-test1.c $(LIB_MALLOC) $(THR_LIBS) -o $@
+    $(CC) $(CFLAGS) $(T_FLAGS) t-test1.c $(LIB_MALLOC) $(THR_LIBS) -o $@
 
 t-test2$(T_SUF): t-test2.c t-test.h $(LIB_MALLOC)
-	$(CC) $(CFLAGS) $(T_FLAGS) t-test2.c $(LIB_MALLOC) $(THR_LIBS) -o $@
+    $(CC) $(CFLAGS) $(T_FLAGS) t-test2.c $(LIB_MALLOC) $(THR_LIBS) -o $@
 
 tst-mallocstate$(T_SUF): tst-mallocstate.c $(LIB_MALLOC)
-	$(CC) $(CFLAGS) $(T_FLAGS) tst-mallocstate.c $(LIB_MALLOC) \
-	 $(THR_LIBS) -o $@
+    $(CC) $(CFLAGS) $(T_FLAGS) tst-mallocstate.c $(LIB_MALLOC) \
+     $(THR_LIBS) -o $@
 
 tst-mstats$(T_SUF): tst-mstats.c $(LIB_MALLOC)
-	$(CC) $(CFLAGS) $(T_FLAGS) tst-mstats.c $(LIB_MALLOC) \
-	 $(THR_LIBS) -o $@
+    $(CC) $(CFLAGS) $(T_FLAGS) tst-mstats.c $(LIB_MALLOC) \
+     $(THR_LIBS) -o $@
 
 tst-independent-alloc$(T_SUF): tst-independent-alloc.c $(LIB_MALLOC)
-	$(CC) $(CFLAGS) $(T_FLAGS) tst-independent-alloc.c $(LIB_MALLOC) \
-	 $(THR_LIBS) -o $@
+    $(CC) $(CFLAGS) $(T_FLAGS) tst-independent-alloc.c $(LIB_MALLOC) \
+     $(THR_LIBS) -o $@
 
 ############################################################################
 # Platform-specific targets. The ones ending in `-libc' are provided
@@ -112,100 +112,100 @@ tst-independent-alloc$(T_SUF): tst-independent-alloc.c $(LIB_MALLOC)
 
 # posix threads with TSD data hack
 posix:
-	$(MAKE) THR_FLAGS='-DUSE_TSD_DATA_HACK -D_REENTRANT' \
+    $(MAKE) THR_FLAGS='-DUSE_TSD_DATA_HACK -D_REENTRANT' \
  OPT_FLAGS='$(OPT_FLAGS)' SYS_FLAGS='$(SYS_FLAGS)' CC='$(CC)' \
  INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.'
  THR_LIBS=-lpthread
 
 # posix threads with explicit initialization.  Known to be needed on HPUX.
 posix-explicit:
-	$(MAKE) THR_FLAGS='-D_REENTRANT -DUSE_TSD_DATA_HACK -DUSE_STARTER=2' \
-	 THR_LIBS=-lpthread \
-	 OPT_FLAGS='$(OPT_FLAGS)' SYS_FLAGS='$(SYS_FLAGS)' CC='$(CC)' \
-	 INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' \
-	 M_FLAGS='$(M_FLAGS)'
+    $(MAKE) THR_FLAGS='-D_REENTRANT -DUSE_TSD_DATA_HACK -DUSE_STARTER=2' \
+     THR_LIBS=-lpthread \
+     OPT_FLAGS='$(OPT_FLAGS)' SYS_FLAGS='$(SYS_FLAGS)' CC='$(CC)' \
+     INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' \
+     M_FLAGS='$(M_FLAGS)'
 
 # posix threads without TSD data hack -- not known to work
 posix-with-tsd:
-	$(MAKE) THR_FLAGS='-D_REENTRANT' THR_LIBS=-lpthread \
-	INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' \
-	M_FLAGS='$(M_FLAGS)'
+    $(MAKE) THR_FLAGS='-D_REENTRANT' THR_LIBS=-lpthread \
+    INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' \
+    M_FLAGS='$(M_FLAGS)'
 
 posix-libc:
-	$(MAKE) THR_FLAGS='-D_REENTRANT' THR_LIBS=-lpthread \
-	INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' \
-	M_FLAGS='$(M_FLAGS)' LIB_MALLOC= T_FLAGS= T_SUF=-libc
+    $(MAKE) THR_FLAGS='-D_REENTRANT' THR_LIBS=-lpthread \
+    INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' \
+    M_FLAGS='$(M_FLAGS)' LIB_MALLOC= T_FLAGS= T_SUF=-libc
 
 linux-pthread:
-	$(MAKE) SYS_FLAGS='-D_GNU_SOURCE=1' \
+    $(MAKE) SYS_FLAGS='-D_GNU_SOURCE=1' \
  WARN_FLAGS='-Wall -Wstrict-prototypes' \
  OPT_FLAGS='$(OPT_FLAGS)' THR_FLAGS='-DUSE_TSD_DATA_HACK' \
  INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' M_FLAGS='$(M_FLAGS)' \
  TESTS='$(TESTS)'
 
 linux-shared:
-	$(MAKE) SYS_FLAGS='-D_GNU_SOURCE=1 -fpic' \
+    $(MAKE) SYS_FLAGS='-D_GNU_SOURCE=1 -fpic' \
  WARN_FLAGS='-Wall -Wstrict-prototypes' \
  OPT_FLAGS='$(OPT_FLAGS)' THR_FLAGS='-DUSE_TSD_DATA_HACK' \
  INC_FLAGS='-Isysdeps/pthread -Isysdeps/generic -I.' M_FLAGS='$(M_FLAGS)' \
  LIB_MALLOC=libptmalloc3.so
 
 sproc:
-	$(MAKE) THR_FLAGS='' THR_LIBS='' OPT_FLAGS='$(OPT_FLAGS)' CC='$(CC)' \
-	INC_FLAGS='-Isysdeps/sproc -Isysdeps/generic -I.' \
-	M_FLAGS='$(M_FLAGS) -Dmalloc_getpagesize=4096'
+    $(MAKE) THR_FLAGS='' THR_LIBS='' OPT_FLAGS='$(OPT_FLAGS)' CC='$(CC)' \
+    INC_FLAGS='-Isysdeps/sproc -Isysdeps/generic -I.' \
+    M_FLAGS='$(M_FLAGS) -Dmalloc_getpagesize=4096'
 
 sproc-shared:
-	$(MAKE) THR_FLAGS='' THR_LIBS= \
-	 SH_FLAGS='-shared -check_registry /usr/lib/so_locations' \
-	 INC_FLAGS='-Isysdeps/sproc -Isysdeps/generic -I.' \
-	  LIB_MALLOC=libptmalloc3.so M_FLAGS='$(M_FLAGS)'
+    $(MAKE) THR_FLAGS='' THR_LIBS= \
+     SH_FLAGS='-shared -check_registry /usr/lib/so_locations' \
+     INC_FLAGS='-Isysdeps/sproc -Isysdeps/generic -I.' \
+      LIB_MALLOC=libptmalloc3.so M_FLAGS='$(M_FLAGS)'
 
 sproc-libc:
-	$(MAKE) THR_FLAGS='' THR_LIBS= LIB_MALLOC= T_FLAGS= \
-	 INC_FLAGS='-Isysdeps/sproc -Isysdeps/generic -I.' \
-	 T_SUF=-libc M_FLAGS='$(M_FLAGS)'
+    $(MAKE) THR_FLAGS='' THR_LIBS= LIB_MALLOC= T_FLAGS= \
+     INC_FLAGS='-Isysdeps/sproc -Isysdeps/generic -I.' \
+     T_SUF=-libc M_FLAGS='$(M_FLAGS)'
 
 solaris:
-	$(MAKE) THR_FLAGS='-D_REENTRANT' OPT_FLAGS='$(OPT_FLAGS)' \
-	 INC_FLAGS='-Isysdeps/solaris -Isysdeps/generic -I.' \
-	THR_LIBS=-lthread M_FLAGS='$(M_FLAGS)'
+    $(MAKE) THR_FLAGS='-D_REENTRANT' OPT_FLAGS='$(OPT_FLAGS)' \
+     INC_FLAGS='-Isysdeps/solaris -Isysdeps/generic -I.' \
+    THR_LIBS=-lthread M_FLAGS='$(M_FLAGS)'
 
 solaris-libc:
-	$(MAKE) THR_FLAGS='-D_REENTRANT' OPT_FLAGS='$(OPT_FLAGS)' \
-	 INC_FLAGS='-Isysdeps/solaris -Isysdeps/generic -I.' \
+    $(MAKE) THR_FLAGS='-D_REENTRANT' OPT_FLAGS='$(OPT_FLAGS)' \
+     INC_FLAGS='-Isysdeps/solaris -Isysdeps/generic -I.' \
  THR_LIBS=-lthread LIB_MALLOC= T_FLAGS= T_SUF=-libc M_FLAGS='$(M_FLAGS)'
 
 nothreads:
-	$(MAKE) OPT_FLAGS='$(OPT_FLAGS)' SYS_FLAGS='$(SYS_FLAGS)' \
-	 INC_FLAGS='-Isysdeps/generic -I.' \
+    $(MAKE) OPT_FLAGS='$(OPT_FLAGS)' SYS_FLAGS='$(SYS_FLAGS)' \
+     INC_FLAGS='-Isysdeps/generic -I.' \
  THR_FLAGS='' THR_LIBS='' M_FLAGS='$(M_FLAGS)'
 
 gcc-nothreads:
-	$(MAKE) CC='gcc' WARN_FLAGS='-Wall' OPT_FLAGS='$(OPT_FLAGS)' \
-	 INC_FLAGS='-Isysdeps/generic -I.' \
+    $(MAKE) CC='gcc' WARN_FLAGS='-Wall' OPT_FLAGS='$(OPT_FLAGS)' \
+     INC_FLAGS='-Isysdeps/generic -I.' \
  SYS_FLAGS='$(SYS_FLAGS)' THR_FLAGS='' THR_LIBS='' M_FLAGS='$(M_FLAGS)'
 
 linux-nothreads:
-	$(MAKE) CC='gcc' WARN_FLAGS='-Wall' OPT_FLAGS='$(OPT_FLAGS)' \
-	 INC_FLAGS='-Isysdeps/generic -I.' \
+    $(MAKE) CC='gcc' WARN_FLAGS='-Wall' OPT_FLAGS='$(OPT_FLAGS)' \
+     INC_FLAGS='-Isysdeps/generic -I.' \
  SYS_FLAGS='-D_GNU_SOURCE' THR_FLAGS='' THR_LIBS='' M_FLAGS='$(M_FLAGS)'
 
 ############################################################################
 
 check: $(TESTS)
-	./t-test1
-	./t-test2
-	#./tst-mallocstate || echo "Test mallocstate failed!"
-	#./tst-mstats || echo "Test mstats failed!"
+    ./t-test1
+    ./t-test2
+    #./tst-mallocstate || echo "Test mallocstate failed!"
+    #./tst-mstats || echo "Test mstats failed!"
 
 snap:
-	cd ..; tar $(TAR_FLAGS) -c -f - $(DIST_FILES1:%=ptmalloc3/%) | \
-	 gzip -9 >ptmalloc3-current.tar.gz
+    cd ..; tar $(TAR_FLAGS) -c -f - $(DIST_FILES1:%=ptmalloc3/%) | \
+     gzip -9 >ptmalloc3-current.tar.gz
 
 dist:
-	cd ..; tar $(TAR_FLAGS) -c -f - $(DIST_FILES2:%=ptmalloc3/%) | \
-	 gzip -9 >ptmalloc3.tar.gz
+    cd ..; tar $(TAR_FLAGS) -c -f - $(DIST_FILES2:%=ptmalloc3/%) | \
+     gzip -9 >ptmalloc3.tar.gz
 
 # dependencies
 ptmalloc3.o: malloc-private.h

@@ -95,8 +95,8 @@ INCLUDEDIR = ../include
 CPPFLAGS = @CPPFLAGS@ -I$(top_srcdir)/include
 
 INCLUDE_FILES = $(INCLUDEDIR)/fastcgi.h  \
-		  $(INCLUDEDIR)/fcgiapp.h  \
-		  $(INCLUDEDIR)/fcgimisc.h
+          $(INCLUDEDIR)/fcgiapp.h  \
+          $(INCLUDEDIR)/fcgimisc.h
 
 
 LIBDIR = ../libfcgi
@@ -124,12 +124,12 @@ LIBS = @LIBS@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@DEP_FILES = $(DEPDIR)/cgi-fcgi.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+    $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
-	$(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+    $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+    $(AM_LDFLAGS) $(LDFLAGS) -o $@
 CFLAGS = @CFLAGS@
 DIST_SOURCES = $(cgi_fcgi_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
@@ -141,110 +141,110 @@ all: all-am
 .SUFFIXES: .c .lo .o .obj
 
 mostlyclean-libtool:
-	-rm -f *.lo
+    -rm -f *.lo
 
 clean-libtool:
-	-rm -rf .libs _libs
+    -rm -rf .libs _libs
 
 distclean-libtool:
-	-rm -f libtool
+    -rm -f libtool
 $(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
-	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  cgi-fcgi/Makefile
+    cd $(top_srcdir) && \
+      $(AUTOMAKE) --foreign  cgi-fcgi/Makefile
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
-	cd $(top_builddir) && \
-	  CONFIG_HEADERS= CONFIG_LINKS= \
-	  CONFIG_FILES=$(subdir)/$@ $(SHELL) ./config.status
+    cd $(top_builddir) && \
+      CONFIG_HEADERS= CONFIG_LINKS= \
+      CONFIG_FILES=$(subdir)/$@ $(SHELL) ./config.status
 install-binPROGRAMS: $(bin_PROGRAMS)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
-	  if test -f $$p \
-	     || test -f $$p1 \
-	  ; then \
-	    f=`echo $$p1|sed '$(transform);s/$$/$(EXEEXT)/'`; \
-	   echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f"; \
-	   $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f; \
-	  else :; fi; \
-	done
+    @$(NORMAL_INSTALL)
+    $(mkinstalldirs) $(DESTDIR)$(bindir)
+    @list='$(bin_PROGRAMS)'; for p in $$list; do \
+      p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+      if test -f $$p \
+         || test -f $$p1 \
+      ; then \
+        f=`echo $$p1|sed '$(transform);s/$$/$(EXEEXT)/'`; \
+       echo " $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f"; \
+       $(INSTALL_PROGRAM_ENV) $(LIBTOOL) --mode=install $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f; \
+      else :; fi; \
+    done
 
 uninstall-binPROGRAMS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(bin_PROGRAMS)'; for p in $$list; do \
-	  f=`echo $$p|sed 's/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
-	  echo " rm -f $(DESTDIR)$(bindir)/$$f"; \
-	  rm -f $(DESTDIR)$(bindir)/$$f; \
-	done
+    @$(NORMAL_UNINSTALL)
+    @list='$(bin_PROGRAMS)'; for p in $$list; do \
+      f=`echo $$p|sed 's/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
+      echo " rm -f $(DESTDIR)$(bindir)/$$f"; \
+      rm -f $(DESTDIR)$(bindir)/$$f; \
+    done
 
 clean-binPROGRAMS:
-	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+    -test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 cgi-fcgi$(EXEEXT): $(cgi_fcgi_OBJECTS) $(cgi_fcgi_DEPENDENCIES) 
-	@rm -f cgi-fcgi$(EXEEXT)
-	$(LINK) $(cgi_fcgi_LDFLAGS) $(cgi_fcgi_OBJECTS) $(cgi_fcgi_LDADD) $(LIBS)
+    @rm -f cgi-fcgi$(EXEEXT)
+    $(LINK) $(cgi_fcgi_LDFLAGS) $(cgi_fcgi_OBJECTS) $(cgi_fcgi_LDADD) $(LIBS)
 
 mostlyclean-compile:
-	-rm -f *.$(OBJEXT) core *.core
+    -rm -f *.$(OBJEXT) core *.core
 
 distclean-compile:
-	-rm -f *.tab.c
+    -rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/cgi-fcgi.Po@am__quote@
 
 distclean-depend:
-	-rm -rf $(DEPDIR)
+    -rm -rf $(DEPDIR)
 
 .c.o:
-@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(COMPILE) -c `test -f $< || echo '$(srcdir)/'`$<
+@AMDEP_TRUE@    source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@    depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@    $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+    $(COMPILE) -c `test -f $< || echo '$(srcdir)/'`$<
 
 .c.obj:
-@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(COMPILE) -c `cygpath -w $<`
+@AMDEP_TRUE@    source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@    depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@    $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+    $(COMPILE) -c `cygpath -w $<`
 
 .c.lo:
-@AMDEP_TRUE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(LTCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
+@AMDEP_TRUE@    source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@    depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@    $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+    $(LTCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
 CCDEPMODE = @CCDEPMODE@
 uninstall-info-am:
 
 tags: TAGS
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
-	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	mkid -fID $$unique $(LISP)
+    list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+    unique=`for i in $$list; do \
+        if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+      done | \
+      $(AWK) '    { files[$$0] = 1; } \
+           END { for (i in files) print i; }'`; \
+    mkid -fID $$unique $(LISP)
 
 TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
-		$(TAGS_FILES) $(LISP)
-	tags=; \
-	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
-	  || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
+        $(TAGS_FILES) $(LISP)
+    tags=; \
+    here=`pwd`; \
+    list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+    unique=`for i in $$list; do \
+        if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+      done | \
+      $(AWK) '    { files[$$0] = 1; } \
+           END { for (i in files) print i; }'`; \
+    test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+      || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
 
 GTAGS:
-	here=`CDPATH=: && cd $(top_builddir) && pwd` \
-	  && cd $(top_srcdir) \
-	  && gtags -i $(GTAGS_ARGS) $$here
+    here=`CDPATH=: && cd $(top_builddir) && pwd` \
+      && cd $(top_srcdir) \
+      && gtags -i $(GTAGS_ARGS) $$here
 
 distclean-tags:
-	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
+    -rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
@@ -252,27 +252,27 @@ top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
-	@for file in $(DISTFILES); do \
-	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
-	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
-	  if test "$$dir" != "$$file" && test "$$dir" != "."; then \
-	    $(mkinstalldirs) "$(distdir)/$$dir"; \
-	  fi; \
-	  if test -d $$d/$$file; then \
-	    cp -pR $$d/$$file $(distdir) \
-	    || exit 1; \
-	  else \
-	    test -f $(distdir)/$$file \
-	    || cp -p $$d/$$file $(distdir)/$$file \
-	    || exit 1; \
-	  fi; \
-	done
+    @for file in $(DISTFILES); do \
+      if test -f $$file; then d=.; else d=$(srcdir); fi; \
+      dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+      if test "$$dir" != "$$file" && test "$$dir" != "."; then \
+        $(mkinstalldirs) "$(distdir)/$$dir"; \
+      fi; \
+      if test -d $$d/$$file; then \
+        cp -pR $$d/$$file $(distdir) \
+        || exit 1; \
+      else \
+        test -f $(distdir)/$$file \
+        || cp -p $$d/$$file $(distdir)/$$file \
+        || exit 1; \
+      fi; \
+    done
 check-am: all-am
 check: check-am
 all-am: Makefile $(PROGRAMS)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
+    $(mkinstalldirs) $(DESTDIR)$(bindir)
 
 install: install-am
 install-exec: install-exec-am
@@ -280,23 +280,23 @@ install-data: install-data-am
 uninstall: uninstall-am
 
 install-am: all-am
-	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+    @$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
 installcheck: installcheck-am
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
-	  `test -z '$(STRIP)' || \
-	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
+    $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+      `test -z '$(STRIP)' || \
+        echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
 mostlyclean-generic:
 
 clean-generic:
 
 distclean-generic:
-	-rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
+    -rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
 
 maintainer-clean-generic:
-	@echo "This command is intended for maintainers to use"
-	@echo "it deletes files that may require special tools to rebuild."
+    @echo "This command is intended for maintainers to use"
+    @echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
 clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
@@ -304,7 +304,7 @@ clean-am: clean-binPROGRAMS clean-generic clean-libtool mostlyclean-am
 distclean: distclean-am
 
 distclean-am: clean-am distclean-compile distclean-depend \
-	distclean-generic distclean-libtool distclean-tags
+    distclean-generic distclean-libtool distclean-tags
 
 dvi: dvi-am
 
@@ -331,21 +331,21 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 mostlyclean: mostlyclean-am
 
 mostlyclean-am: mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool
+    mostlyclean-libtool
 
 uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 
 .PHONY: GTAGS all all-am check check-am clean clean-binPROGRAMS \
-	clean-generic clean-libtool distclean distclean-compile \
-	distclean-depend distclean-generic distclean-libtool \
-	distclean-tags distdir dvi dvi-am info info-am install \
-	install-am install-binPROGRAMS install-data install-data-am \
-	install-exec install-exec-am install-info install-info-am \
-	install-man install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool tags uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-info-am
+    clean-generic clean-libtool distclean distclean-compile \
+    distclean-depend distclean-generic distclean-libtool \
+    distclean-tags distdir dvi dvi-am info info-am install \
+    install-am install-binPROGRAMS install-data install-data-am \
+    install-exec install-exec-am install-info install-info-am \
+    install-man install-strip installcheck installcheck-am \
+    installdirs maintainer-clean maintainer-clean-generic \
+    mostlyclean mostlyclean-compile mostlyclean-generic \
+    mostlyclean-libtool tags uninstall uninstall-am \
+    uninstall-binPROGRAMS uninstall-info-am
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

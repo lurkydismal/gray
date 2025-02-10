@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_fmatrix.h
-//	Created 	: 28.06.2004
-//  Modified 	: 28.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script float matrix
+//    Module         : script_fmatrix.h
+//    Created     : 28.06.2004
+//  Modified     : 28.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script float matrix
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

@@ -2,7 +2,7 @@
 
 float GravityBuoyancy;
 
-//	Pixel
+//    Pixel
 float4 main(p_fluidsim input) : SV_Target
 {
     float3 npos = GetAdvectedPosTexCoords(input);
@@ -14,7 +14,7 @@ float4 main(p_fluidsim input) : SV_Target
     float Dencity = Texture_color.SampleLevel(samLinear, npos, 0).x;
     Velocity.y += Dencity * GravityBuoyancy;
 
-#endif //	USE_GRAVITY
+#endif //    USE_GRAVITY
 
     return Velocity;
 }

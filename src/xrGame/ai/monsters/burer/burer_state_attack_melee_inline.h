@@ -1,13 +1,13 @@
 #pragma once
 
 #define TEMPLATE_SPECIALIZATION template <\
-	typename _Object\
+    typename _Object\
 >
 
 #define CStateBurerAttackMeleeAbstract CStateBurerAttackMelee<_Object>
 
-#define MIN_DIST_MELEE_ATTACK	5.f
-#define MAX_DIST_MELEE_ATTACK	9.f
+#define MIN_DIST_MELEE_ATTACK    5.f
+#define MAX_DIST_MELEE_ATTACK    9.f
 
 TEMPLATE_SPECIALIZATION
 CStateBurerAttackMeleeAbstract::CStateBurerAttackMelee(_Object *obj) : inherited(obj)
@@ -17,19 +17,19 @@ CStateBurerAttackMeleeAbstract::CStateBurerAttackMelee(_Object *obj) : inherited
 TEMPLATE_SPECIALIZATION
 bool CStateBurerAttackMeleeAbstract::check_start_conditions()
 {
-	float dist = this->object->Position().distance_to(this->object->EnemyMan.get_enemy()->Position());
-	if (dist > MIN_DIST_MELEE_ATTACK) return false;
+    float dist = this->object->Position().distance_to(this->object->EnemyMan.get_enemy()->Position());
+    if (dist > MIN_DIST_MELEE_ATTACK) return false;
 
-	return true;
+    return true;
 }
 
 TEMPLATE_SPECIALIZATION
 bool CStateBurerAttackMeleeAbstract::check_completion()
 {
-	float dist = this->object->Position().distance_to(this->object->EnemyMan.get_enemy()->Position());
-	if (dist < MAX_DIST_MELEE_ATTACK) return false;
+    float dist = this->object->Position().distance_to(this->object->EnemyMan.get_enemy()->Position());
+    if (dist < MAX_DIST_MELEE_ATTACK) return false;
 
-	return true;
+    return true;
 
 }
 

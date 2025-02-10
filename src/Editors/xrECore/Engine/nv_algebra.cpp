@@ -188,7 +188,7 @@ vec3 & mult(vec3& u, const vec3& v, const mat3& M)
 
 const vec3 operator*(const mat3& M, const vec3& v)
 {
-	vec3 u;
+    vec3 u;
     u.x = M.a00 * v.x + M.a01 * v.y + M.a02 * v.z;
     u.y = M.a10 * v.x + M.a11 * v.y + M.a12 * v.z;
     u.z = M.a20 * v.x + M.a21 * v.y + M.a22 * v.z;
@@ -197,7 +197,7 @@ const vec3 operator*(const mat3& M, const vec3& v)
 
 const vec3 operator*(const vec3& v, const mat3& M)
 {
-	vec3 u;
+    vec3 u;
     u.x = M.a00 * v.x + M.a10 * v.y + M.a20 * v.z;
     u.y = M.a01 * v.x + M.a11 * v.y + M.a21 * v.z;
     u.z = M.a02 * v.x + M.a12 * v.y + M.a22 * v.z;
@@ -224,7 +224,7 @@ vec4 & mult(vec4& u, const vec4& v, const mat4& M)
 
 const vec4 operator*(const mat4& M, const vec4& v)
 {
-	vec4 u;
+    vec4 u;
     u.x = M.a00 * v.x + M.a01 * v.y + M.a02 * v.z + M.a03 * v.w;
     u.y = M.a10 * v.x + M.a11 * v.y + M.a12 * v.z + M.a13 * v.w;
     u.z = M.a20 * v.x + M.a21 * v.y + M.a22 * v.z + M.a23 * v.w;
@@ -234,7 +234,7 @@ const vec4 operator*(const mat4& M, const vec4& v)
 
 const vec4 operator*(const vec4& v, const mat4& M)
 {
-	vec4 u;
+    vec4 u;
     u.x = M.a00 * v.x + M.a10 * v.y + M.a20 * v.z + M.a30 * v.w;
     u.y = M.a01 * v.x + M.a11 * v.y + M.a21 * v.z + M.a31 * v.w;
     u.z = M.a02 * v.x + M.a12 * v.y + M.a22 * v.z + M.a32 * v.w;
@@ -729,145 +729,145 @@ quat::quat(nv_scalar x, nv_scalar y, nv_scalar z, nv_scalar w) : x(x), y(y), z(z
 
 quat::quat(const quat& quat)
 {
-	x = quat.x;
-	y = quat.y;
-	z = quat.z;
-	w = quat.w;
+    x = quat.x;
+    y = quat.y;
+    z = quat.z;
+    w = quat.w;
 }
 
 quat::quat(const vec3& axis, nv_scalar angle)
 {
-	nv_scalar len = axis.norm();
-	if (len) {
-		nv_scalar invLen = 1 / len;
-		nv_scalar angle2 = angle / 2;
-		nv_scalar scale = _sin(angle2) * invLen;
-		x = scale * axis[0];
-		y = scale * axis[1];
-		z = scale * axis[2];
-		w = _cos(angle2);
-	}
+    nv_scalar len = axis.norm();
+    if (len) {
+        nv_scalar invLen = 1 / len;
+        nv_scalar angle2 = angle / 2;
+        nv_scalar scale = _sin(angle2) * invLen;
+        x = scale * axis[0];
+        y = scale * axis[1];
+        z = scale * axis[2];
+        w = _cos(angle2);
+    }
 }
 
 quat::quat(const mat3& rot)
 {
-	FromMatrix(rot);
+    FromMatrix(rot);
 }
 
 quat& quat::operator=(const quat& quat)
 {
-	x = quat.x;
-	y = quat.y;
-	z = quat.z;
-	w = quat.w;
-	return *this;
+    x = quat.x;
+    y = quat.y;
+    z = quat.z;
+    w = quat.w;
+    return *this;
 }
 
 quat quat::Inverse()
 {
-	return quat(- x, - y, - z, w);
+    return quat(- x, - y, - z, w);
 }
 
 void quat::Normalize()
 {
-	nv_scalar len = _sqrt(x * x + y * y + z * z + w * w);
-	if (len > 0) {
-		nv_scalar invLen = 1 / len;
-		x *= invLen;
-		y *= invLen;
-		z *= invLen;
-		w *= invLen;
-	}
+    nv_scalar len = _sqrt(x * x + y * y + z * z + w * w);
+    if (len > 0) {
+        nv_scalar invLen = 1 / len;
+        x *= invLen;
+        y *= invLen;
+        z *= invLen;
+        w *= invLen;
+    }
 }
 
 void quat::FromMatrix(const mat3& mat)
 {
-	nv_scalar trace = mat(0, 0) + mat(1, 1) + mat(2, 2);
-	if (trace > 0) {
-		nv_scalar scale = _sqrt(trace + 1.0f);
-		w = 0.5f * scale;
-		scale = 0.5f / scale;
-		x = scale * (mat(2, 1) - mat(1, 2));
-		y = scale * (mat(0, 2) - mat(2, 0));
-		z = scale * (mat(1, 0) - mat(0, 1));
-	}
-	else {
-		static int next[] = { 1, 2, 0 };
-		int i = 0;
-		if (mat(1, 1) > mat(0, 0))
-			i = 1;
-		if (mat(2, 2) > mat(i, i))
-			i = 2;
-		int j = next[i];
-		int k = next[j];
-		nv_scalar scale = _sqrt(mat(i, i) - mat(j, j) - mat(k, k) + 1);
-		nv_scalar* q[] = { &x, &y, &z };
-		*q[i] = 0.5f * scale;
-		scale = 0.5f / scale;
-		w = scale * (mat(k, j) - mat(j, k));
-		*q[j] = scale * (mat(j, i) + mat(i, j));
-		*q[k] = scale * (mat(k, i) + mat(i, k));
-	}
+    nv_scalar trace = mat(0, 0) + mat(1, 1) + mat(2, 2);
+    if (trace > 0) {
+        nv_scalar scale = _sqrt(trace + 1.0f);
+        w = 0.5f * scale;
+        scale = 0.5f / scale;
+        x = scale * (mat(2, 1) - mat(1, 2));
+        y = scale * (mat(0, 2) - mat(2, 0));
+        z = scale * (mat(1, 0) - mat(0, 1));
+    }
+    else {
+        static int next[] = { 1, 2, 0 };
+        int i = 0;
+        if (mat(1, 1) > mat(0, 0))
+            i = 1;
+        if (mat(2, 2) > mat(i, i))
+            i = 2;
+        int j = next[i];
+        int k = next[j];
+        nv_scalar scale = _sqrt(mat(i, i) - mat(j, j) - mat(k, k) + 1);
+        nv_scalar* q[] = { &x, &y, &z };
+        *q[i] = 0.5f * scale;
+        scale = 0.5f / scale;
+        w = scale * (mat(k, j) - mat(j, k));
+        *q[j] = scale * (mat(j, i) + mat(i, j));
+        *q[k] = scale * (mat(k, i) + mat(i, k));
+    }
 }
 
 void quat::ToMatrix(mat3& mat) const
 {
-	nv_scalar x2 = x * 2;
-	nv_scalar y2 = y * 2;
-	nv_scalar z2 = z * 2;
-	nv_scalar wx = x2 * w;
-	nv_scalar wy = y2 * w;
-	nv_scalar wz = z2 * w;
-	nv_scalar xx = x2 * x;
-	nv_scalar xy = y2 * x;
-	nv_scalar xz = z2 * x;
-	nv_scalar yy = y2 * y;
-	nv_scalar yz = z2 * y;
-	nv_scalar zz = z2 * z;
-	mat(0, 0) = 1 - (yy + zz);
-	mat(0, 1) = xy - wz;
-	mat(0, 2) = xz + wy;
-	mat(1, 0) = xy + wz;
-	mat(1, 1) = 1 - (xx + zz);
-	mat(1, 2) = yz - wx;
-	mat(2, 0) = xz - wy;
-	mat(2, 1) = yz + wx;
-	mat(2, 2) = 1 - (xx + yy);
+    nv_scalar x2 = x * 2;
+    nv_scalar y2 = y * 2;
+    nv_scalar z2 = z * 2;
+    nv_scalar wx = x2 * w;
+    nv_scalar wy = y2 * w;
+    nv_scalar wz = z2 * w;
+    nv_scalar xx = x2 * x;
+    nv_scalar xy = y2 * x;
+    nv_scalar xz = z2 * x;
+    nv_scalar yy = y2 * y;
+    nv_scalar yz = z2 * y;
+    nv_scalar zz = z2 * z;
+    mat(0, 0) = 1 - (yy + zz);
+    mat(0, 1) = xy - wz;
+    mat(0, 2) = xz + wy;
+    mat(1, 0) = xy + wz;
+    mat(1, 1) = 1 - (xx + zz);
+    mat(1, 2) = yz - wx;
+    mat(2, 0) = xz - wy;
+    mat(2, 1) = yz + wx;
+    mat(2, 2) = 1 - (xx + yy);
 }
 
 const quat operator*(const quat& p, const quat& q)
 {
-	return quat(
-		p.w * q.x + p.x * q.w + p.y * q.z - p.z * q.y,
-		p.w * q.y + p.y * q.w + p.z * q.x - p.x * q.z,
-		p.w * q.z + p.z * q.w + p.x * q.y - p.y * q.x,
-		p.w * q.w - p.x * q.x - p.y * q.y - p.z * q.z
-	);
+    return quat(
+        p.w * q.x + p.x * q.w + p.y * q.z - p.z * q.y,
+        p.w * q.y + p.y * q.w + p.z * q.x - p.x * q.z,
+        p.w * q.z + p.z * q.w + p.x * q.y - p.y * q.x,
+        p.w * q.w - p.x * q.x - p.y * q.y - p.z * q.z
+    );
 }
 
 quat& quat::operator*=(const quat& quat)
 {
-	*this = *this * quat;
-	return *this;
+    *this = *this * quat;
+    return *this;
 }
 
 mat3 & quat_2_mat(mat3& M, const quat& q)
 {
-	q.ToMatrix(M);
+    q.ToMatrix(M);
     return M;
 }
 
 quat & mat_2_quat(quat& q, const mat3& M)
 {
-	q.FromMatrix(M);
+    q.FromMatrix(M);
     return q;
 } 
 
 quat & mat_2_quat(quat& q, const mat4& M)
 {
-	mat3 m;
-	M.get_rot(m);
-	q.FromMatrix(m);
+    mat3 m;
+    M.get_rot(m);
+    q.FromMatrix(m);
     return q;
 } 
 
@@ -879,7 +879,7 @@ quat & axis_to_quat(quat& q, const vec3& a, const nv_scalar phi)
     vec3 tmp(a.x, a.y, a.z);
 
     normalize(tmp);
-	nv_scalar s = _sin(phi/nv_two);
+    nv_scalar s = _sin(phi/nv_two);
     q.x = s * tmp.x;
     q.y = s * tmp.y;
     q.z = s * tmp.z;
@@ -944,23 +944,23 @@ nv_scalar dot(const quat& q1, const quat& q2)
 quat & slerp_quats(quat & p, nv_scalar s, const quat & q1, const quat & q2)
 {
     nv_scalar cosine = dot(q1, q2);
-	if (cosine < -1)
-		cosine = -1;
-	else if (cosine > 1)
-		cosine = 1;
+    if (cosine < -1)
+        cosine = -1;
+    else if (cosine > 1)
+        cosine = 1;
     nv_scalar angle = (nv_scalar)acosf(cosine);
     if (_abs(angle) < nv_eps) {
-		p = q1;
+        p = q1;
         return p;
-	}
+    }
     nv_scalar sine = _sin(angle);
     nv_scalar sineInv = 1.0f / sine;
     nv_scalar c1 = _sin((1.0f - s) * angle) * sineInv;
     nv_scalar c2 = _sin(s * angle) * sineInv;
-	p.x = c1 * q1.x + c2 * q2.x;
-	p.y = c1 * q1.y + c2 * q2.y;
-	p.z = c1 * q1.z + c2 * q2.z;
-	p.w = c1 * q1.w + c2 * q2.w;
+    p.x = c1 * q1.x + c2 * q2.x;
+    p.y = c1 * q1.y + c2 * q2.y;
+    p.z = c1 * q1.z + c2 * q2.z;
+    p.w = c1 * q1.w + c2 * q2.w;
     return p;
 }
 
@@ -968,7 +968,7 @@ const int HALF_RAND = (RAND_MAX / 2);
 
  nv_scalar nv_random()
 {
-	return ((nv_scalar)(rand() - HALF_RAND) / (nv_scalar)HALF_RAND);
+    return ((nv_scalar)(rand() - HALF_RAND) / (nv_scalar)HALF_RAND);
 }
 
 // v is normalized
@@ -1032,9 +1032,9 @@ void mat3::set_rot(const vec3& u, const vec3& v)
 
 void mat4::set_rot(const quat& q)
 {
-	mat3 m;
-	q.ToMatrix(m);
-	set_rot(m);
+    mat3 m;
+    q.ToMatrix(m);
+    set_rot(m);
 }
 
 // v is normalized
@@ -1130,9 +1130,9 @@ mat3 & mat4::get_rot(mat3& M) const
 
 quat & mat4::get_rot(quat& q) const
 {
-	mat3 m;
-	get_rot(m);
-	q.FromMatrix(m);
+    mat3 m;
+    get_rot(m);
+    q.FromMatrix(m);
     return q;
 }
 

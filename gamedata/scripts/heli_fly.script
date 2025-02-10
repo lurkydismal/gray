@@ -15,7 +15,7 @@ end
 class "heli_fly"
 
 function heli_fly:__init(obj)
-	self.obj            = obj
+    self.obj            = obj
     self.block_flook    = false
     self.dist_by_look   = 0
     self.heliLAccFW     = 6
@@ -29,36 +29,36 @@ end
 
 function heli_fly:fly_on_point_with_vector(dest_point, dest_direction, dest_velocity, flag_to_wp_callback, flag_by_null_velocity)
 
---'	printf("fly_on_point_with_vector()")
+--'    printf("fly_on_point_with_vector()")
 
-	local heli = self.obj:get_helicopter()
-	local curr_heli_position = self.obj:position()						-- текущая позиция
-	local curr_heli_direction = self.obj:direction()					-- единичный вектор текущего направления
-	local curr_heli_velocity = heli:GetCurrVelocity()					-- текущая скорость
-	dest_velocity = dest_velocity * 1000 / 3600
-	if not flag_to_wp_callback then
+    local heli = self.obj:get_helicopter()
+    local curr_heli_position = self.obj:position()                        -- текущая позиция
+    local curr_heli_direction = self.obj:direction()                    -- единичный вектор текущего направления
+    local curr_heli_velocity = heli:GetCurrVelocity()                    -- текущая скорость
+    dest_velocity = dest_velocity * 1000 / 3600
+    if not flag_to_wp_callback then
 --------------Расчеты------------------------------------------------------------------------------------------------------------------------------------------------------
 
-		local a_speed = 0
-		local time_by_fly = 0
-		local rez_point = vector():set(0,0,0)								-- точка, через которую пролетим, что-бы попасть в заданную точку, и выйти на заданную скорость
-		local d_path                                                        -- d_path - допуск расстояния попадания в точку
-	-------------------------------------------------------------
-		if dest_velocity >= curr_heli_velocity then
-	-------------------------------------------------------------
-			a_speed=  self.heliLAccFW										                -- ускорение разгона, берем из helicopter.ltx
-	        d_path = curr_heli_velocity * 2 / a_speed
+        local a_speed = 0
+        local time_by_fly = 0
+        local rez_point = vector():set(0,0,0)                                -- точка, через которую пролетим, что-бы попасть в заданную точку, и выйти на заданную скорость
+        local d_path                                                        -- d_path - допуск расстояния попадания в точку
     -------------------------------------------------------------
-		else
-	-------------------------------------------------------------
-			a_speed= - self.heliLAccBW	    									                -- ускорение торможения, берем из helicopter.ltx
+        if dest_velocity >= curr_heli_velocity then
+    -------------------------------------------------------------
+            a_speed=  self.heliLAccFW                                                        -- ускорение разгона, берем из helicopter.ltx
+            d_path = curr_heli_velocity * 2 / a_speed
+    -------------------------------------------------------------
+        else
+    -------------------------------------------------------------
+            a_speed= - self.heliLAccBW                                                            -- ускорение торможения, берем из helicopter.ltx
             d_path = - curr_heli_velocity * 2 / a_speed
-	-------------------------------------------------------------
-		end
+    -------------------------------------------------------------
+        end
 
-		time_by_fly = (dest_velocity - curr_heli_velocity)/a_speed					-- t=(v2-v1)/a -- t - время, за которое затормозим/разгонимся. a - ускорение торможения/разгона, берем из helicopter.ltx
-		local delta = curr_heli_velocity * time_by_fly + a_speed * time_by_fly * time_by_fly / 2	-- расстояние для выхода на заданную скорость	s=v0t+(at^2)/2	
-		if delta >= d_path then
+        time_by_fly = (dest_velocity - curr_heli_velocity)/a_speed                    -- t=(v2-v1)/a -- t - время, за которое затормозим/разгонимся. a - ускорение торможения/разгона, берем из helicopter.ltx
+        local delta = curr_heli_velocity * time_by_fly + a_speed * time_by_fly * time_by_fly / 2    -- расстояние для выхода на заданную скорость    s=v0t+(at^2)/2    
+        if delta >= d_path then
             self.point_arr[0] = curr_heli_position
             self.point_arr[1] = dest_point
             self.point_arr[2] = curr_heli_direction
@@ -68,18 +68,18 @@ function heli_fly:fly_on_point_with_vector(dest_point, dest_direction, dest_velo
                 rez_point.x = rez_point.x + curr_heli_direction.x * delta / 2
                 rez_point.z = rez_point.z + curr_heli_direction.z * delta / 2
             end
-			flag_to_wp_callback = true
-		else
-			rez_point = dest_point
-			flag_to_wp_callback = false
-		end
+            flag_to_wp_callback = true
+        else
+            rez_point = dest_point
+            flag_to_wp_callback = false
+        end
         self.dest_point = rez_point
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	else
+    else
         self.dest_point = dest_point
-		flag_to_wp_callback = false
-	end
+        flag_to_wp_callback = false
+    end
     heli:SetDestPosition( self.dest_point ) 
     self:correct_velocity()
     if flag_by_null_velocity then
@@ -87,7 +87,7 @@ function heli_fly:fly_on_point_with_vector(dest_point, dest_direction, dest_velo
     else
         heli:SetSpeedInDestPoint(heli:GetMaxVelocity())
     end
-	return flag_to_wp_callback
+    return flag_to_wp_callback
 end
 
 function heli_fly:get_block_flook()
@@ -149,8 +149,8 @@ function heli_fly:lagrange(x, xArr, yArr)
 end
 
 function heli_fly:correct_velocity()
-	local heli = self.obj:get_helicopter()
-	local curr_heli_velocity = heli:GetCurrVelocity()					--' текущая скорость
+    local heli = self.obj:get_helicopter()
+    local curr_heli_velocity = heli:GetCurrVelocity()                    --' текущая скорость
     local dist_to_dest_point = heli:GetDistanceToDestPosition()
     local a_speed =  self.heliLAccFW
     local dest_velocity
@@ -158,9 +158,9 @@ function heli_fly:correct_velocity()
     if self.max_velocity*1000/3600 < dest_velocity then
         dest_velocity = self.max_velocity*1000/3600
     end
-	heli:SetMaxVelocity(dest_velocity)
+    heli:SetMaxVelocity(dest_velocity)
 --'  printf("dist_to_dest_point %s", dist_to_dest_point);  
---'	printf("dest_velocity end = %d", dest_velocity);
+--'    printf("dest_velocity end = %d", dest_velocity);
 
 end
 

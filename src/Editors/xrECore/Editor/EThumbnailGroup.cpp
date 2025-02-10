@@ -1,4 +1,4 @@
-﻿#include "stdafx.h"
+#include "stdafx.h"
 #pragma hdrstop
 
 #include "EThumbnail.h"
@@ -6,32 +6,32 @@
 
 
 //------------------------------------------------------------------------------
-#define THM_GROUP_VERSION				0x0001
+#define THM_GROUP_VERSION                0x0001
 //------------------------------------------------------------------------------
-#define THM_CHUNK_GROUPPARAM			0x0001
+#define THM_CHUNK_GROUPPARAM            0x0001
 //------------------------------------------------------------------------------
 EGroupThumbnail::EGroupThumbnail(LPCSTR src_name, bool bLoad):EImageThumbnail(src_name,ETObject)
 {
-    if (bLoad) 	Load();
+    if (bLoad)     Load();
 }
 //------------------------------------------------------------------------------
 
 EGroupThumbnail::~EGroupThumbnail()
 {
-	m_Pixels.clear();
+    m_Pixels.clear();
 }
 //------------------------------------------------------------------------------
 
 void EGroupThumbnail::CreateFromData(u32* p, u32 w, u32 h, const SStringVec& lst)
 {
-	EImageThumbnail::CreatePixels(p, w, h);
-    objects			= lst;
+    EImageThumbnail::CreatePixels(p, w, h);
+    objects            = lst;
 }
 //------------------------------------------------------------------------------
 
 bool EGroupThumbnail::Load(LPCSTR src_name, LPCSTR path)
 {
-	string_path fn;
+    string_path fn;
     strcpy(fn,EFS.ChangeFileExt(src_name?src_name:m_Name.c_str(),".thm").c_str());
 
     if (path && xr_strlen(path))
@@ -42,32 +42,32 @@ bool EGroupThumbnail::Load(LPCSTR src_name, LPCSTR path)
     if (!FS.TryLoad(fn))
         return false;
 
-    IReader* F 		= FS.r_open(fn);
-    u16 version 	= 0;
+    IReader* F         = FS.r_open(fn);
+    u16 version     = 0;
 
     R_ASSERT(F->r_chunk(THM_CHUNK_VERSION,&version));
     if( version!=THM_GROUP_VERSION ){
-		Msg			("!Thumbnail: Unsupported version.");
-        return 		false;
+        Msg            ("!Thumbnail: Unsupported version.");
+        return         false;
     }
 
-    IReader* D 		= F->open_chunk(THM_CHUNK_DATA); R_ASSERT(D);
-    m_Pixels.resize	(THUMB_SIZE);
-    D->r			(m_Pixels.data(),THUMB_SIZE*sizeof(u32));
-    D->close		();
+    IReader* D         = F->open_chunk(THM_CHUNK_DATA); R_ASSERT(D);
+    m_Pixels.resize    (THUMB_SIZE);
+    D->r            (m_Pixels.data(),THUMB_SIZE*sizeof(u32));
+    D->close        ();
 
-    R_ASSERT		(F->find_chunk(THM_CHUNK_TYPE));
-    m_Type			= THMType(F->r_u32());
-    R_ASSERT		(m_Type==ETObject);
+    R_ASSERT        (F->find_chunk(THM_CHUNK_TYPE));
+    m_Type            = THMType(F->r_u32());
+    R_ASSERT        (m_Type==ETObject);
 
-    R_ASSERT		(F->find_chunk(THM_CHUNK_GROUPPARAM));
-    objects.resize	(F->r_u32());
+    R_ASSERT        (F->find_chunk(THM_CHUNK_GROUPPARAM));
+    objects.resize    (F->r_u32());
     for (SStringVecIt it=objects.begin(); it!=objects.end(); it++)
-    	F->r_stringZ(*it);
-	
-    m_Age 			= FS.get_file_age(fn);
+        F->r_stringZ(*it);
+    
+    m_Age             = FS.get_file_age(fn);
 
-    FS.r_close		(F);
+    FS.r_close        (F);
 
     return true;
 }
@@ -75,28 +75,28 @@ bool EGroupThumbnail::Load(LPCSTR src_name, LPCSTR path)
 
 void EGroupThumbnail::Save(int age, LPCSTR path)
 {
-	if (!Valid()) 	return;
+    if (!Valid())     return;
 
     CMemoryWriter F;
-	F.open_chunk	(THM_CHUNK_VERSION);
-	F.w_u16			(THM_GROUP_VERSION);
-	F.close_chunk	();
+    F.open_chunk    (THM_CHUNK_VERSION);
+    F.w_u16            (THM_GROUP_VERSION);
+    F.close_chunk    ();
 
-	F.w_chunk		(THM_CHUNK_DATA | CFS_CompressMark,m_Pixels.data(),m_Pixels.size()*sizeof(u32));
+    F.w_chunk        (THM_CHUNK_DATA | CFS_CompressMark,m_Pixels.data(),m_Pixels.size()*sizeof(u32));
 
-    F.open_chunk	(THM_CHUNK_TYPE);
-    F.w_u32			(m_Type);
-	F.close_chunk	();
+    F.open_chunk    (THM_CHUNK_TYPE);
+    F.w_u32            (m_Type);
+    F.close_chunk    ();
 
-    F.open_chunk	(THM_CHUNK_GROUPPARAM);
-    F.w_u32			(objects.size());
+    F.open_chunk    (THM_CHUNK_GROUPPARAM);
+    F.w_u32            (objects.size());
     for (SStringVecIt it=objects.begin(); it!=objects.end(); it++)
-    	F.w_stringZ	(*it);
-    F.close_chunk	();
+        F.w_stringZ    (*it);
+    F.close_chunk    ();
 
-	string_path fn;
-    if (path) 		FS.update_path(fn,path,m_Name.c_str());
-    else			FS.update_path(fn, _groups_,m_Name.c_str());
+    string_path fn;
+    if (path)         FS.update_path(fn,path,m_Name.c_str());
+    else            FS.update_path(fn, _groups_,m_Name.c_str());
 
     if (path && xr_strlen(path))
         FS.update_path(fn, path, m_Name.c_str());
@@ -108,16 +108,16 @@ void EGroupThumbnail::Save(int age, LPCSTR path)
 
     if (F.save_to(fn))
     {
-	    FS.set_file_age	(fn,age?age:m_Age);
+        FS.set_file_age    (fn,age?age:m_Age);
     }else{
-        Log			("!Can't save thumbnail:",fn);
+        Log            ("!Can't save thumbnail:",fn);
     }
 }
 //------------------------------------------------------------------------------
 
 void EGroupThumbnail::FillProp(PropItemVec& items)
 {
-    PHelper().CreateCaption	(items, "Objects\\Count", std::to_string(objects.size()).c_str());
+    PHelper().CreateCaption    (items, "Objects\\Count", std::to_string(objects.size()).c_str());
     for (SStringVecIt it = objects.begin(); it != objects.end(); it++)
     {
         string256 Buffer;
@@ -129,7 +129,7 @@ void EGroupThumbnail::FillProp(PropItemVec& items)
 
 void EGroupThumbnail::FillInfo(PropItemVec& items)
 {
-	FillProp		(items);
+    FillProp        (items);
 }
 //------------------------------------------------------------------------------
 

@@ -2,12 +2,12 @@
 
 u32 Platform::GetCoresCount()
 {
-	return sysconf(_SC_NPROCESSORS_ONLN);;
+    return sysconf(_SC_NPROCESSORS_ONLN);;
 }
 
 ThreadID Platform::GetCurrentThread()
 {
-	return pthread_self();
+    return pthread_self();
 }
 
 size_t Platform::GetThreadId(ThreadID ID)

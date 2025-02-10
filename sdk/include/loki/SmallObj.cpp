@@ -273,8 +273,8 @@ FixedAllocator::Chunk* FixedAllocator::VicinityFind(void* p)
     Chunk* loBound = &chunks_.front();
     Chunk* hiBound = &chunks_.back() + 1;
 
-	// Special case: deallocChunk_ is the last in the array
-	if (hi == hiBound) hi = 0;
+    // Special case: deallocChunk_ is the last in the array
+    if (hi == hiBound) hi = 0;
 
     for (;;)
     {

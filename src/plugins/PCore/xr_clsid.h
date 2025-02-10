@@ -9,22 +9,22 @@
 namespace xray_re {
 
 struct xr_clsid {
-			xr_clsid();
-			xr_clsid(const char* clsid);
-			xr_clsid(uint64_t clsid);
-	bool		operator<(const xr_clsid& right) const;
-	bool		operator==(const char* right) const;
-	bool		operator==(const xr_clsid& right) const;
-	bool		operator!=(const xr_clsid& right) const;
-	void		get(char s[]) const;
+            xr_clsid();
+            xr_clsid(const char* clsid);
+            xr_clsid(uint64_t clsid);
+    bool        operator<(const xr_clsid& right) const;
+    bool        operator==(const char* right) const;
+    bool        operator==(const xr_clsid& right) const;
+    bool        operator!=(const xr_clsid& right) const;
+    void        get(char s[]) const;
 
-	static uint64_t	to_quad(const char* s);
+    static uint64_t    to_quad(const char* s);
 
-	union {
-		char		bytes[8];
-		uint32_t	words[2];
-		uint64_t	quad;
-	};
+    union {
+        char        bytes[8];
+        uint32_t    words[2];
+        uint64_t    quad;
+    };
 };
 
 inline xr_clsid::xr_clsid(): quad(0) {}

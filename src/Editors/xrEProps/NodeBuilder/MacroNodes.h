@@ -3,25 +3,25 @@
 
 enum class MacroType
 {
-	eVoid,
-	eOneArg,
-	eTwoArg
+    eVoid,
+    eOneArg,
+    eTwoArg
 };
 
 class XREPROPS_API CNodeMacro :
-	public INodeUnknown
+    public INodeUnknown
 {
-	MacroType Type = MacroType::eVoid;
+    MacroType Type = MacroType::eVoid;
 
 public:
-	CNodeMacro(size_t Marco, const xr_string Name);
-	void Draw() override;
+    CNodeMacro(size_t Marco, const xr_string Name);
+    void Draw() override;
 
-	void SetType(MacroType NewType);
-	MacroType GetType() const;
+    void SetType(MacroType NewType);
+    MacroType GetType() const;
 
 public:
-	size_t MacroCommandID = -1;
-	xr_string FirstValue;
-	xr_string SecondValue;
+    size_t MacroCommandID = -1;
+    xr_string FirstValue;
+    xr_string SecondValue;
 };

@@ -27,87 +27,87 @@
 
 namespace luabind 
 {
-	namespace detail
-	{
-		template<typename Iter>
-		struct iterator_state
-		{
-			typedef iterator_state<Iter> self_t;
+    namespace detail
+    {
+        template<typename Iter>
+        struct iterator_state
+        {
+            typedef iterator_state<Iter> self_t;
 
-			static int step(lua_State* L)
-			{
-				self_t& state = *static_cast<self_t*>(lua_touserdata(L, lua_upvalueindex(1)));
+            static int step(lua_State* L)
+            {
+                self_t& state = *static_cast<self_t*>(lua_touserdata(L, lua_upvalueindex(1)));
 
-				if (state.start == state.end)
-				{
-					lua_pushnil(L);
-				}
-				else
-				{
-					convert_to_lua(L, *state.start);
-					++state.start;
-				}
+                if (state.start == state.end)
+                {
+                    lua_pushnil(L);
+                }
+                else
+                {
+                    convert_to_lua(L, *state.start);
+                    ++state.start;
+                }
 
-				return 1;
-			}
+                return 1;
+            }
 
-			iterator_state(const Iter& s, const Iter& e)
-				: start(s)
-				, end(e)
-			{}
+            iterator_state(const Iter& s, const Iter& e)
+                : start(s)
+                , end(e)
+            {}
 
-			Iter start;
-			Iter end;
-		};
+            Iter start;
+            Iter end;
+        };
 
-		struct iterator_converter
-		{
-			template<typename T>
-			void apply(lua_State* L, const T& c)
-			{
-				typedef typename T::const_iterator iter_t;
-				typedef iterator_state<iter_t> state_t;
+        struct iterator_converter
+        {
+            template<typename T>
+            void apply(lua_State* L, const T& c)
+            {
+                typedef typename T::const_iterator iter_t;
+                typedef iterator_state<iter_t> state_t;
 
-				// note that this should be destructed, for now.. just hope that iterator
-				// is a pod
-				void* iter = lua_newuserdata(L, sizeof(state_t));
-				new (iter) state_t(c.begin(), c.end());
-				lua_pushcclosure(L, state_t::step, 1);
-			}
+                // note that this should be destructed, for now.. just hope that iterator
+                // is a pod
+                void* iter = lua_newuserdata(L, sizeof(state_t));
+                new (iter) state_t(c.begin(), c.end());
+                lua_pushcclosure(L, state_t::step, 1);
+            }
 
-			template<typename T>
-			void apply(lua_State* L, T& c)
-			{
-				typedef typename T::iterator iter_t;
-				typedef iterator_state<iter_t> state_t;
+            template<typename T>
+            void apply(lua_State* L, T& c)
+            {
+                typedef typename T::iterator iter_t;
+                typedef iterator_state<iter_t> state_t;
 
-				// note that this should be destructed, for now.. just hope that iterator
-				// is a pod
-				void* iter = lua_newuserdata(L, sizeof(state_t));
-				new (iter) state_t(c.begin(), c.end());
-				lua_pushcclosure(L, state_t::step, 1);
-			}
-		};
+                // note that this should be destructed, for now.. just hope that iterator
+                // is a pod
+                void* iter = lua_newuserdata(L, sizeof(state_t));
+                new (iter) state_t(c.begin(), c.end());
+                lua_pushcclosure(L, state_t::step, 1);
+            }
+        };
 
-		struct iterator_policy : conversion_policy<0>
-		{
-			static void precall(lua_State*, const index_map&) {}
-			static void postcall(lua_State*, const index_map&) {}
+        struct iterator_policy : conversion_policy<0>
+        {
+            static void precall(lua_State*, const index_map&) {}
+            static void postcall(lua_State*, const index_map&) {}
 
-			template<typename T, Direction>
-			struct generate_converter
-			{
-				typedef iterator_converter type;
-			};
-		};
+            template<typename T, Direction>
+            struct generate_converter
+            {
+                typedef iterator_converter type;
+            };
+        };
 
-	}
+    }
 }
 
 namespace luabind
 {
-	namespace
-	{
-		detail::policy_cons<detail::iterator_policy> return_stl_iterator;
-	}
+    namespace
+    {
+        detail::policy_cons<detail::iterator_policy> return_stl_iterator;
+    }
 }

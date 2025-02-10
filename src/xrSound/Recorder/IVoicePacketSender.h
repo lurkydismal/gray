@@ -4,5 +4,5 @@
 class IVoicePacketSender
 {
 public:
-	virtual void Send(VoicePacket** packets, u8 count) = 0;
+    virtual void Send(VoicePacket** packets, u8 count) = 0;
 };

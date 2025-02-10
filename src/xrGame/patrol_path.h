@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: patrol_path.h
-//	Created 	: 15.06.2004
-//  Modified 	: 15.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Patrol path
+//    Module         : patrol_path.h
+//    Created     : 15.06.2004
+//  Modified     : 15.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Patrol path
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -13,34 +13,34 @@
 
 class CPatrolPath : public CGraphAbstractSerialize<CPatrolPoint,float,u32> {
 private:
-	struct CAlwaysTrueEvaluator {
-		IC	bool	operator()	(const Fvector &position) const
-		{
-			return	(true);
-		}
-	};
+    struct CAlwaysTrueEvaluator {
+        IC    bool    operator()    (const Fvector &position) const
+        {
+            return    (true);
+        }
+    };
 
 protected:
-	typedef CGraphAbstractSerialize<CPatrolPoint,float,u32> inherited;
+    typedef CGraphAbstractSerialize<CPatrolPoint,float,u32> inherited;
 
 public:
 #ifdef DEBUG
-	shared_str				m_name;
+    shared_str                m_name;
 #endif
 
 public:
-							CPatrolPath		(shared_str name = "");
-	virtual					~CPatrolPath	();
-			CPatrolPath		&load_raw		(const ILevelGraph *level_graph, const IGameLevelCrossTable *cross, const IGameGraph *game_graph, IReader &stream);
-	IC		const CVertex	*point			(shared_str name) const;
-	template <typename T>
-	IC		const CVertex	*point			(const Fvector &position, const T &evaluator) const;
-	IC		const CVertex	*point			(const Fvector &position) const;
+                            CPatrolPath        (shared_str name = "");
+    virtual                    ~CPatrolPath    ();
+            CPatrolPath        &load_raw        (const ILevelGraph *level_graph, const IGameLevelCrossTable *cross, const IGameGraph *game_graph, IReader &stream);
+    IC        const CVertex    *point            (shared_str name) const;
+    template <typename T>
+    IC        const CVertex    *point            (const Fvector &position, const T &evaluator) const;
+    IC        const CVertex    *point            (const Fvector &position) const;
 
 #ifdef DEBUG
 public:
-	virtual void			load			(IReader &stream);
-	IC		void			name			(const shared_str &name);
+    virtual void            load            (IReader &stream);
+    IC        void            name            (const shared_str &name);
 #endif
 };
 

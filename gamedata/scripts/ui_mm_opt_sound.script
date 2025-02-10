@@ -15,7 +15,7 @@ function opt_sound:InitControls(x, y, xml, handler)
     self.scroll_v = xml:InitScrollView("main_dialog:scroll_v", self)
 
     local _st
-    local addControl = function(crl)	
+    local addControl = function(crl)    
         self.scroll_v:AddWindow(crl, true)
         crl:SetAutoDelete(false)
     end

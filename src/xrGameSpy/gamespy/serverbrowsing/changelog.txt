@@ -53,7 +53,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
                      SAH  FIX      Moved GSI_UNUSED calls above return statements
 04-20-2006  2.04.14  SAH  FIX      Added _PS3 wrapper typecast for recvfrom calls
 04-19-2006  2.04.13  SAH  FIX      Added || defined(_PS3) to sbctest.c for PS3 Support
-04-13-2006  2.04.12  SAH  FIX      Added parenthesis to remove compiler warnings before Release	
+04-13-2006  2.04.12  SAH  FIX      Added parenthesis to remove compiler warnings before Release    
 04-10-2006  2.04.11  SAH  FEATURE  Multiple sorts will retain previous sorting arrangement when values are equal
 03-28-2006  2.04.10  SN   FIX      Added extra checks to account for empty keys
 03-28-2006  2.04.10  SN   FIX      Fixed SBServerGetIntValue to return negative numbers
@@ -118,7 +118,7 @@ o5-04-2005  2.04.00  SN   OTHER    Created Visual Studio .NET projects
 03-09-2004  2.02.02  BED  FIX      Fixed case where browsing would not complete when all servers were behind a firewall.
 01-12-2004  2.02.01  BED  FEATURE  Added ServerBrowserGetServerByIP for IP lookup into the list.
 01-07-2004  2.02.00  DDW  FEATURE  Added internal support for player searching
-01-07-2004  2.01.01  BED  FIX	   Added prototypes for ascii functions in UNICODE mode.
+01-07-2004  2.01.01  BED  FIX       Added prototypes for ascii functions in UNICODE mode.
 12-16-2003  2.01.00  DDW  FEATURE  Added internal support for map loop lookup
 11-10-2003  2.00.36  DES  RELEASE  Releasing to developer site.
 11-10-2003  2.00.36  BED  FIX      Fixed case where LAN browsing would never complete.

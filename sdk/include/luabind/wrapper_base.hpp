@@ -29,51 +29,51 @@
 
 namespace luabind
 {
-	namespace detail
-	{
-		struct wrap_access;
+    namespace detail
+    {
+        struct wrap_access;
 
-		// implements the selection between dynamic dispatch
-		// or default implementation calls from within a virtual
-		// function wrapper. The input is the self reference on
-		// the top of the stack. Output is the function to call
-		// on the top of the stack (the input self reference will
-		// be popped)
-		LUABIND_API void do_call_member_selection(lua_State* L, char const* name);
-	}
+        // implements the selection between dynamic dispatch
+        // or default implementation calls from within a virtual
+        // function wrapper. The input is the self reference on
+        // the top of the stack. Output is the function to call
+        // on the top of the stack (the input self reference will
+        // be popped)
+        LUABIND_API void do_call_member_selection(lua_State* L, char const* name);
+    }
 
-	struct wrapped_self_t: weak_ref
-	{
-		detail::lua_reference m_strong_ref;
-	};
+    struct wrapped_self_t: weak_ref
+    {
+        detail::lua_reference m_strong_ref;
+    };
 
-	struct wrap_base
-	{
-		friend struct detail::wrap_access;
-		wrap_base() {}
+    struct wrap_base
+    {
+        friend struct detail::wrap_access;
+        wrap_base() {}
 
         template<typename R, typename... Args>
         decltype(auto) call(char const* name, const Args&... args) const
-		{
+        {
             using proxy_type = std::conditional_t<
                 std::is_void_v<R>,
                 luabind::detail::proxy_member_void_caller<const Args*...>,
                 luabind::detail::proxy_member_caller<R, const Args*...>
             >;
 
-			lua_State* L = m_self.state();
-			m_self.get(L);
+            lua_State* L = m_self.state();
+            m_self.get(L);
             assert(!lua_isnil(L, -1));
-			detail::do_call_member_selection(L, name);
+            detail::do_call_member_selection(L, name);
 
-			m_self.get(L);
+            m_self.get(L);
 
-			return proxy_type(L, std::make_tuple(&args...));
-		}
+            return proxy_type(L, std::make_tuple(&args...));
+        }
 
-	private:
-		wrapped_self_t m_self;
-	};
+    private:
+        wrapped_self_t m_self;
+    };
 
     template<typename R , typename... Args>
     decltype(auto) call_member(wrap_base const* self, char const* fn, Args&&... args)
@@ -81,19 +81,19 @@ namespace luabind
         return self->call<R>(fn, std::forward<Args>(args)...);
     }
 
-	namespace detail
-	{
-		struct wrap_access
-		{
-			static wrapped_self_t const& ref(wrap_base const& b)
-			{
-				return b.m_self;
-			}
+    namespace detail
+    {
+        struct wrap_access
+        {
+            static wrapped_self_t const& ref(wrap_base const& b)
+            {
+                return b.m_self;
+            }
 
-			static wrapped_self_t& ref(wrap_base& b)
-			{
-				return b.m_self;
-			}
-		};
-	}
+            static wrapped_self_t& ref(wrap_base& b)
+            {
+                return b.m_self;
+            }
+        };
+    }
 }

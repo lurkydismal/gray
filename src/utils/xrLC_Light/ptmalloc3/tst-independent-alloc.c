@@ -53,23 +53,23 @@ main (void)
   for (i=0; i<25; ++i) {
     for (j=0; j<CSIZE; ++j)
       if (p2[i][j] != '\0')
-	merror("independent_calloc memory not zeroed.");
+    merror("independent_calloc memory not zeroed.");
     p2[i][CSIZE-1] = 'x';
     if (i < 10) {
       p3[i][sizes[i]-1] = 'y';
       if (i % 4 == 0) {
-	p3[i] = realloc (p3[i], i*11 + sizes[9-i]);
-	if (p3[i] == NULL)
-	  merror ("realloc (i*11 + sizes[9-i]) failed.");
+    p3[i] = realloc (p3[i], i*11 + sizes[9-i]);
+    if (p3[i] == NULL)
+      merror ("realloc (i*11 + sizes[9-i]) failed.");
       } else if (i % 4 == 1) {
-	free(p3[i]);
-	p3[i] = 0;
+    free(p3[i]);
+    p3[i] = 0;
       }
     }
     if (i % 4 == 0) {
       p2[i] = realloc (p2[i], i*7 + 3);
       if (p2[i] == NULL)
-	merror ("realloc (i*7 + 3) failed.");
+    merror ("realloc (i*7 + 3) failed.");
     } else if (i % 4 == 1) {
       free(p2[i]);
       p2[i] = 0;

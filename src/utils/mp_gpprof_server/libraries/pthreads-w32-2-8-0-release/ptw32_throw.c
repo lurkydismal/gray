@@ -76,14 +76,14 @@ ptw32_throw (DWORD exception)
       unsigned exitCode = 0;
 
       switch (exception)
-	{
-	case PTW32_EPS_CANCEL:
-	  exitCode = (unsigned) PTHREAD_CANCELED;
-	  break;
-	case PTW32_EPS_EXIT:
-	  exitCode = (unsigned) sp->exitStatus;;
-	  break;
-	}
+    {
+    case PTW32_EPS_CANCEL:
+      exitCode = (unsigned) PTHREAD_CANCELED;
+      break;
+    case PTW32_EPS_EXIT:
+      exitCode = (unsigned) sp->exitStatus;;
+      break;
+    }
 
 #if defined(PTW32_STATIC_LIB)
 

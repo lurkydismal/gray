@@ -6,22 +6,22 @@
 
 typedef enum
 {
-	SCBlack,
-	SCRed,
-	SCGreen,
-	SCBlue,
-	SCYellow,
-	SCPurple,
-	SCLightBlue,
-	SCDarkRed,
-	SCDarkGreen,
-	SCDarkBlue,
-	SCDarkYellow,
-	SCDarkPurple,
-	SCDarkLightBlue,
-	SCGray,
-	SCDarkGray,
-	SCWhite
+    SCBlack,
+    SCRed,
+    SCGreen,
+    SCBlue,
+    SCYellow,
+    SCPurple,
+    SCLightBlue,
+    SCDarkRed,
+    SCDarkGreen,
+    SCDarkBlue,
+    SCDarkYellow,
+    SCDarkPurple,
+    SCDarkLightBlue,
+    SCGray,
+    SCDarkGray,
+    SCWhite
 } ScreenColor;
 
 // can be combined

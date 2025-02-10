@@ -56,19 +56,19 @@ use_wpn = {=dist_to_actor_le(2.5) +agr_shooting_door_exit} self %-agr_shooting_d
 precond = visibility
 allow_break = false
 trade_enable = false
-sound_stop 		= agr_duty_weaponmaster_meet_bye
-quest_npc 		= true
+sound_stop         = agr_duty_weaponmaster_meet_bye
+quest_npc         = true
 
 
 ;for crowkiller
 [meet@minigame_crowkiller]
-use_wpn	= {!is_playing_sound} true, false
+use_wpn    = {!is_playing_sound} true, false
 use = {!is_playing_sound} true, false
 victim = 20 | actor
 victim_wpn = 20 | actor
 trade_enable = false
 allow_break = false
-meet_state 	= 5|nil@nil
+meet_state     = 5|nil@nil
 sound_start = gar_bandit_bookmaker_meet
 sound_stop = gar_bandit_bookmaker_meet_bye
 quest_npc = true

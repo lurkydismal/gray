@@ -14,71 +14,71 @@ CWalmarkManager::CWalmarkManager()
 
 CWalmarkManager::~CWalmarkManager()
 {
-	Clear();
+    Clear();
 }
 void CWalmarkManager::Clear()
 {
-	m_wallmarks->clear();
+    m_wallmarks->clear();
 }
 
 void CWalmarkManager::AddWallmark(const Fvector& dir, const Fvector& start_pos, 
-								  float range, float wallmark_size,
-								  IWallMarkArray& wallmarks_vector,int t)
+                                  float range, float wallmark_size,
+                                  IWallMarkArray& wallmarks_vector,int t)
 {
-	CDB::TRI*	pTri	= Level().ObjectSpace.GetStaticTris()+t;//result.element;
-	SGameMtl*	pMaterial = GMLib.GetMaterialByIdx(pTri->material);
+    CDB::TRI*    pTri    = Level().ObjectSpace.GetStaticTris()+t;//result.element;
+    SGameMtl*    pMaterial = GMLib.GetMaterialByIdx(pTri->material);
 
-	if(pMaterial->Flags.is(SGameMtl::flBloodmark))
-	{
-		//вычислить нормаль к пораженной поверхности
-		Fvector*	pVerts	= Level().ObjectSpace.GetStaticVerts();
+    if(pMaterial->Flags.is(SGameMtl::flBloodmark))
+    {
+        //вычислить нормаль к пораженной поверхности
+        Fvector*    pVerts    = Level().ObjectSpace.GetStaticVerts();
 
-		//вычислить точку попадания
-		Fvector end_point;
-		end_point.set(0,0,0);
-		end_point.mad(start_pos, dir, range);
+        //вычислить точку попадания
+        Fvector end_point;
+        end_point.set(0,0,0);
+        end_point.mad(start_pos, dir, range);
 
-		if (!wallmarks_vector.empty())
-		{		
-			::Render->add_StaticWallmark(&wallmarks_vector, end_point, wallmark_size, pTri, pVerts);
-		}
+        if (!wallmarks_vector.empty())
+        {        
+            ::Render->add_StaticWallmark(&wallmarks_vector, end_point, wallmark_size, pTri, pVerts);
+        }
 
-		/*
-		ref_shader* pWallmarkShader = wallmarks_vector.empty()?nullptr:
-		&wallmarks_vector[::Random.randI(0,wallmarks_vector.size())];
+        /*
+        ref_shader* pWallmarkShader = wallmarks_vector.empty()?nullptr:
+        &wallmarks_vector[::Random.randI(0,wallmarks_vector.size())];
 
-		if (pWallmarkShader)
-		{
-			//добавить отметку на материале
-			::Render->add_StaticWallmark(*pWallmarkShader, end_point, wallmark_size, pTri, pVerts);
-		}
-		*/
-	}
+        if (pWallmarkShader)
+        {
+            //добавить отметку на материале
+            ::Render->add_StaticWallmark(*pWallmarkShader, end_point, wallmark_size, pTri, pVerts);
+        }
+        */
+    }
 }
 
 /*
 void CWalmarkManager::PlaceWallmark(const Fvector& dir, const Fvector& start_pos, 
-									  float trace_dist, float wallmark_size,
-									  SHADER_VECTOR& wallmarks_vector,CObject* ignore_obj)
+                                      float trace_dist, float wallmark_size,
+                                      SHADER_VECTOR& wallmarks_vector,CObject* ignore_obj)
 {
-	collide::rq_result	result;
-	BOOL				reach_wall = 
-		Level().ObjectSpace.RayPick(
-		start_pos,
-		dir,
-		trace_dist, 
-		collide::rqtBoth,
-		result,
-		ignore_obj
-		)
-		&&
-		!result.O;
+    collide::rq_result    result;
+    BOOL                reach_wall = 
+        Level().ObjectSpace.RayPick(
+        start_pos,
+        dir,
+        trace_dist, 
+        collide::rqtBoth,
+        result,
+        ignore_obj
+        )
+        &&
+        !result.O;
 
-	//если кровь долетела до статического объекта
-	if(reach_wall)
-	{
-		AddWallmark(dir,start_pos,result.range,wallmark_size,wallmarks_vector,result.element);
-	}
+    //если кровь долетела до статического объекта
+    if(reach_wall)
+    {
+        AddWallmark(dir,start_pos,result.range,wallmark_size,wallmarks_vector,result.element);
+    }
 }
 */
 
@@ -108,74 +108,74 @@ float Distance (const Fvector& rkPoint, const Fvector rkTri[3], float& pfSParam,
 
 void CWalmarkManager::StartWorkflow(const shared_str& sect)
 {
-	float				m_trace_dist		= pSettings->r_float(sect,"dist");
-	float				m_wallmark_size		= pSettings->r_float(sect,"size");
-	u32					max_wallmarks_count = pSettings->r_u32(sect,"max_count");
+    float                m_trace_dist        = pSettings->r_float(sect,"dist");
+    float                m_wallmark_size        = pSettings->r_float(sect,"size");
+    u32                    max_wallmarks_count = pSettings->r_u32(sect,"max_count");
 
 
-	XRC.box_options							(0);
-	XRC.box_query							(Level().ObjectSpace.GetStaticModel(),m_pos,Fvector().set(m_trace_dist,m_trace_dist,m_trace_dist));
+    XRC.box_options                            (0);
+    XRC.box_query                            (Level().ObjectSpace.GetStaticModel(),m_pos,Fvector().set(m_trace_dist,m_trace_dist,m_trace_dist));
 
-	CDB::TRI*		T_array					= Level().ObjectSpace.GetStaticTris();
-	Fvector*		V_array					= Level().ObjectSpace.GetStaticVerts();
-	CDB::RESULT*	R_begin                 = XRC.r_begin();
-	CDB::RESULT*    R_end                   = XRC.r_end();
+    CDB::TRI*        T_array                    = Level().ObjectSpace.GetStaticTris();
+    Fvector*        V_array                    = Level().ObjectSpace.GetStaticVerts();
+    CDB::RESULT*    R_begin                 = XRC.r_begin();
+    CDB::RESULT*    R_end                   = XRC.r_end();
 
-	u32				wm_count	= 0;
+    u32                wm_count    = 0;
 
 
-	u32 _ray_test		= 0;
-	u32 _tri_not_plane	= 0;
-	u32 _not_dist		= 0;
+    u32 _ray_test        = 0;
+    u32 _tri_not_plane    = 0;
+    u32 _not_dist        = 0;
 
-	for (CDB::RESULT* Res=R_begin; Res!=R_end; ++Res)
-	{
-		if(wm_count >= max_wallmarks_count)
+    for (CDB::RESULT* Res=R_begin; Res!=R_end; ++Res)
+    {
+        if(wm_count >= max_wallmarks_count)
             break;
-		
-		Fvector						end_point;
-		Fvector						pdir;
-		float						pfSParam;
-		float						pfTParam;
+        
+        Fvector                        end_point;
+        Fvector                        pdir;
+        float                        pfSParam;
+        float                        pfTParam;
 
-		Fvector						_tri[3];
+        Fvector                        _tri[3];
 
-		CDB::TRI*		_t			= T_array + Res->id;
+        CDB::TRI*        _t            = T_array + Res->id;
 
-		_tri[0]						= V_array[_t->verts[0]];
-		_tri[1]						= V_array[_t->verts[1]];
-		_tri[2]						= V_array[_t->verts[2]];
+        _tri[0]                        = V_array[_t->verts[0]];
+        _tri[1]                        = V_array[_t->verts[1]];
+        _tri[2]                        = V_array[_t->verts[2]];
 
-		float dist					= Distance (m_pos, _tri, pfSParam, pfTParam, end_point, pdir);
+        float dist                    = Distance (m_pos, _tri, pfSParam, pfTParam, end_point, pdir);
 
-		float test					= dist-EPS_L;
-		
-		if(test>0.f)
-		{
-			if(Level().ObjectSpace.RayTest(m_pos, pdir, test, collide::rqtStatic, nullptr, m_owner))
-			{
-				++_ray_test;
-				continue;
-			}
-		}
-		if( fis_zero(pfSParam) || fis_zero(pfTParam) || fsimilar(pfSParam,1.0f) || fsimilar(pfTParam,1.0f)  )
-		{
-			++_tri_not_plane;
-			continue;
-		}
+        float test                    = dist-EPS_L;
+        
+        if(test>0.f)
+        {
+            if(Level().ObjectSpace.RayTest(m_pos, pdir, test, collide::rqtStatic, nullptr, m_owner))
+            {
+                ++_ray_test;
+                continue;
+            }
+        }
+        if( fis_zero(pfSParam) || fis_zero(pfTParam) || fsimilar(pfSParam,1.0f) || fsimilar(pfTParam,1.0f)  )
+        {
+            ++_tri_not_plane;
+            continue;
+        }
 
-		if(dist <= m_trace_dist )
-		{
-			::Render->add_StaticWallmark(&*m_wallmarks, end_point, m_wallmark_size, _t, V_array);
-			++wm_count;
-		}else
-			++_not_dist;
-	}
+        if(dist <= m_trace_dist )
+        {
+            ::Render->add_StaticWallmark(&*m_wallmarks, end_point, m_wallmark_size, _t, V_array);
+            ++wm_count;
+        }else
+            ++_not_dist;
+    }
 }
 
 void CWalmarkManager::Load (LPCSTR section)
 {
-	//кровавые отметки на стенах
+    //кровавые отметки на стенах
     string256 tmp;
     pcstr wallmarks_name = pSettings->r_string(section, "wallmarks");
     const int cnt = _GetItemCount(wallmarks_name);
@@ -190,12 +190,12 @@ void CWalmarkManager::Load (LPCSTR section)
 
 float Distance (const Fvector& rkPoint, const Fvector rkTri[3], float& pfSParam, float& pfTParam, Fvector& closest, Fvector& dir)
 {
-	
+    
 //.    Fvector kDiff = rkTri.Origin() - rkPoint;
-    Fvector kDiff;		kDiff.sub	( rkTri[0], rkPoint); //
+    Fvector kDiff;        kDiff.sub    ( rkTri[0], rkPoint); //
 
-	Fvector Edge0; Edge0.sub(rkTri[1], rkTri[0]); //
-	Fvector Edge1; Edge1.sub(rkTri[2], rkTri[0]); //
+    Fvector Edge0; Edge0.sub(rkTri[1], rkTri[0]); //
+    Fvector Edge1; Edge1.sub(rkTri[2], rkTri[0]); //
 
 //.    float fA00 = rkTri.Edge0().SquaredLength();
     float fA00 = Edge0.square_magnitude();
@@ -209,8 +209,8 @@ float Distance (const Fvector& rkPoint, const Fvector rkTri[3], float& pfSParam,
 //.    float fB0 = kDiff.Dot(rkTri.Edge0());
     float fB0 = kDiff.dotproduct(Edge0);
 
-//.	float fB1 = kDiff.Dot(rkTri.Edge1());
-	float fB1 = kDiff.dotproduct(Edge1);
+//.    float fB1 = kDiff.Dot(rkTri.Edge1());
+    float fB1 = kDiff.dotproduct(Edge1);
 
 //.    float fC = kDiff.SquaredLength();
     float fC = kDiff.square_magnitude();
@@ -430,9 +430,9 @@ float Distance (const Fvector& rkPoint, const Fvector rkTri[3], float& pfSParam,
     pfSParam = fS;
     pfTParam = fT;
 
-	closest.mad			(rkTri[0], Edge0, fS).mad(Edge1, fT);
-	
-	dir.sub				(closest, rkPoint);
-	dir.normalize_safe	();
-    return _sqrt		(_abs(fSqrDist));
+    closest.mad            (rkTri[0], Edge0, fS).mad(Edge1, fT);
+    
+    dir.sub                (closest, rkPoint);
+    dir.normalize_safe    ();
+    return _sqrt        (_abs(fSqrDist));
 }

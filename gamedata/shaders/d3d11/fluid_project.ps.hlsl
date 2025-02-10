@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Pixel
+//    Pixel
 float3 main(p_fluidsim input) : SV_Target
 {
     if (IsBoundaryCell(input.texcoords.xyz))

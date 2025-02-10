@@ -302,26 +302,26 @@ ptw32_cond_wait_cleanup (void *args)
     {
       /* Use the non-cancellable version of sem_wait() */
       if (ptw32_semwait (&(cv->semBlockLock)) != 0)
-	{
-	  *resultPtr = errno;
-	  /*
-	   * This is a fatal error for this CV,
-	   * so we deliberately don't unlock
-	   * cv->mtxUnblockLock before returning.
-	   */
-	  return;
-	}
+    {
+      *resultPtr = errno;
+      /*
+       * This is a fatal error for this CV,
+       * so we deliberately don't unlock
+       * cv->mtxUnblockLock before returning.
+       */
+      return;
+    }
       cv->nWaitersBlocked -= cv->nWaitersGone;
       if (sem_post (&(cv->semBlockLock)) != 0)
-	{
-	  *resultPtr = errno;
-	  /*
-	   * This is a fatal error for this CV,
-	   * so we deliberately don't unlock
-	   * cv->mtxUnblockLock before returning.
-	   */
-	  return;
-	}
+    {
+      *resultPtr = errno;
+      /*
+       * This is a fatal error for this CV,
+       * so we deliberately don't unlock
+       * cv->mtxUnblockLock before returning.
+       */
+      return;
+    }
       cv->nWaitersGone = 0;
     }
 
@@ -334,10 +334,10 @@ ptw32_cond_wait_cleanup (void *args)
   if (1 == nSignalsWasLeft)
     {
       if (sem_post (&(cv->semBlockLock)) != 0)
-	{
-	  *resultPtr = errno;
-	  return;
-	}
+    {
+      *resultPtr = errno;
+      return;
+    }
     }
 
   /*
@@ -348,11 +348,11 @@ ptw32_cond_wait_cleanup (void *args)
     {
       *resultPtr = result;
     }
-}				/* ptw32_cond_wait_cleanup */
+}                /* ptw32_cond_wait_cleanup */
 
 static INLINE int
 ptw32_cond_timedwait (pthread_cond_t * cond,
-		      pthread_mutex_t * mutex, const struct timespec *abstime)
+              pthread_mutex_t * mutex, const struct timespec *abstime)
 {
   int result = 0;
   pthread_cond_t cv;
@@ -429,9 +429,9 @@ ptw32_cond_timedwait (pthread_cond_t * cond,
        *      counts if we are cancelled, timed out or signalled.
        */
       if (sem_timedwait (&(cv->semBlockQueue), abstime) != 0)
-	{
-	  result = errno;
-	}
+    {
+      result = errno;
+    }
     }
 
   /*
@@ -447,7 +447,7 @@ ptw32_cond_timedwait (pthread_cond_t * cond,
    */
   return result;
 
-}				/* ptw32_cond_timedwait */
+}                /* ptw32_cond_timedwait */
 
 
 int
@@ -505,13 +505,13 @@ pthread_cond_wait (pthread_cond_t * cond, pthread_mutex_t * mutex)
    */
   return (ptw32_cond_timedwait (cond, mutex, NULL));
 
-}				/* pthread_cond_wait */
+}                /* pthread_cond_wait */
 
 
 int
 pthread_cond_timedwait (pthread_cond_t * cond,
-			pthread_mutex_t * mutex,
-			const struct timespec *abstime)
+            pthread_mutex_t * mutex,
+            const struct timespec *abstime)
      /*
       * ------------------------------------------------------
       * DOCPUBLIC
@@ -564,4 +564,4 @@ pthread_cond_timedwait (pthread_cond_t * cond,
 
   return (ptw32_cond_timedwait (cond, mutex, abstime));
 
-}				/* pthread_cond_timedwait */
+}                /* pthread_cond_timedwait */

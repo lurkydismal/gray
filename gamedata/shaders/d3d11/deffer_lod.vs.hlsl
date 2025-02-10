@@ -51,7 +51,7 @@ void main(in v_tree I, out p_bumped_new O)
     O.position = float4(Pe, 1.0f);
 
     float3 N = unpack_bx4(unpack_D3DCOLOR(I.Nh).xyz);
-	
+    
 #if defined(USE_BUMP) || defined(USE_TDETAIL_BUMP)
     float3 T = unpack_bx4(unpack_D3DCOLOR(I.T).xyz);
     float3 B = unpack_bx4(unpack_D3DCOLOR(I.B).xyz);
@@ -65,7 +65,7 @@ void main(in v_tree I, out p_bumped_new O)
     O.M2 = xform[1];
     O.M3 = xform[2];
 #else
-	N = mul((float3x3)m_xform_v, N);
+    N = mul((float3x3)m_xform_v, N);
 
     O.M1 = N.xxx;
     O.M2 = N.yyy;

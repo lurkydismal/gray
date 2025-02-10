@@ -156,8 +156,8 @@ void CEStats::Show()
     DPS.verts = 0;
     DPS.calls = 0;
     DPS.vs = 0;
-    //	DPS.vb		= 0;
-    //	DPS.ib		= 0;
+    //    DPS.vb        = 0;
+    //    DPS.ib        = 0;
 
     dwLevelSelFaceCount = 0;
     dwLevelSelVertexCount = 0;

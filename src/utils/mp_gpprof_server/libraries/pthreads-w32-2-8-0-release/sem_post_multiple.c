@@ -4,10 +4,10 @@
  * Module: sem_post_multiple.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -96,38 +96,38 @@ sem_post_multiple (sem_t * sem, int count)
         }
 
       if (s->value <= (SEM_VALUE_MAX - count))
-	{
-	  waiters = -s->value;
-	  s->value += count;
-	  if (waiters > 0)
-	    {
+    {
+      waiters = -s->value;
+      s->value += count;
+      if (waiters > 0)
+        {
 #ifdef NEED_SEM
-	      if (SetEvent(s->sem))
-		{
-		  waiters--;
-		  s->leftToUnblock += count - 1;
-		  if (s->leftToUnblock > waiters)
-		    {
-		      s->leftToUnblock = waiters;
-		    }
-		}
+          if (SetEvent(s->sem))
+        {
+          waiters--;
+          s->leftToUnblock += count - 1;
+          if (s->leftToUnblock > waiters)
+            {
+              s->leftToUnblock = waiters;
+            }
+        }
 #else
-	      if (ReleaseSemaphore (s->sem,  (waiters<=count)?waiters:count, 0))
-		{
-		  /* No action */
-		}
+          if (ReleaseSemaphore (s->sem,  (waiters<=count)?waiters:count, 0))
+        {
+          /* No action */
+        }
 #endif
-	      else
-		{
-		  s->value -= count;
-		  result = EINVAL;
-		}
-	    }
-	}
+          else
+        {
+          s->value -= count;
+          result = EINVAL;
+        }
+        }
+    }
       else
-	{
-	  result = ERANGE;
-	}
+    {
+      result = ERANGE;
+    }
       (void) pthread_mutex_unlock (&s->lock);
     }
 
@@ -139,4 +139,4 @@ sem_post_multiple (sem_t * sem, int count)
 
   return 0;
 
-}				/* sem_post_multiple */
+}                /* sem_post_multiple */

@@ -47,7 +47,7 @@ float4 main(p_filter I) : SV_Target
 
     // perform accumulation
     float4 final;
-	
+    
     final.x = dot(accum0, 0.25f);
     final.y = dot(accum1, 0.25f);
     final.z = dot(accum2, 0.25f);

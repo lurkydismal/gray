@@ -11,41 +11,41 @@
 
 #include "../xrCore/doug_lea_allocator.h"
 
-#	define CNEW(type)			new ( xr_alloc<type>(1) ) type 
-#	define CDELETE(ptr)			xr_delete(ptr)
-#	define CFREE(ptr)			xr_free(ptr)
-#	define CMALLOC(size)		xr_malloc(size)
-#	define CALLOC(type,count)	xr_alloc<type>(count)
+#    define CNEW(type)            new ( xr_alloc<type>(1) ) type 
+#    define CDELETE(ptr)            xr_delete(ptr)
+#    define CFREE(ptr)            xr_free(ptr)
+#    define CMALLOC(size)        xr_malloc(size)
+#    define CALLOC(type,count)    xr_alloc<type>(count)
 
 template <bool _is_pm, typename T>
 struct cspecial_free
 {
-	IC void operator()(T* &ptr)
-	{
-		void*	_real_ptr	= dynamic_cast<void*>(ptr);
-		ptr->~T			();
-		CFREE	(_real_ptr);
-	}
+    IC void operator()(T* &ptr)
+    {
+        void*    _real_ptr    = dynamic_cast<void*>(ptr);
+        ptr->~T            ();
+        CFREE    (_real_ptr);
+    }
 };
 
 template <typename T>
 struct cspecial_free<false,T>
 {
-	IC void operator()(T* &ptr)
-	{
-		ptr->~T			();
-		CFREE	(ptr);
-	}
+    IC void operator()(T* &ptr)
+    {
+        ptr->~T            ();
+        CFREE    (ptr);
+    }
 };
 
 template <class T>
-IC	void cdelete		(T* &ptr)
+IC    void cdelete        (T* &ptr)
 {
-	if (ptr) 
-	{
-		cspecial_free<std::is_polymorphic<T>::value,T>()(ptr);
-		ptr = nullptr;
-	}
+    if (ptr) 
+    {
+        cspecial_free<std::is_polymorphic<T>::value,T>()(ptr);
+        ptr = nullptr;
+    }
 }
 
 #define ENGINE_API

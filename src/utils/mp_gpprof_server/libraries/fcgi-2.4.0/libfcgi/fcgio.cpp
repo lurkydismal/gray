@@ -100,7 +100,7 @@ int fcgi_streambuf::uflow()
     if (this->bufsize) gbump(1);
     return rv;
 }
-				
+                
 // Note that the expected behaviour when there is no buffer varies
 int fcgi_streambuf::underflow()
 {

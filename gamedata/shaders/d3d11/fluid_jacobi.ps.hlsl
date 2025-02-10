@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Pixel
+//    Pixel
 float4 main(p_fluidsim input) : SV_Target
 {
     float pCenter = Texture_pressure.SampleLevel(samPointClamp, input.texcoords, 0).x;

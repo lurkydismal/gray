@@ -38,21 +38,21 @@
     <texture id="ui_bm_equp_05_t" x="356" y="874" width="68" height="106" />
     <texture id="ui_bm_equp_05_d" x="356" y="874" width="68" height="106" />
 
-    <texture id="ui_btn_shotgun_h"	x="424" y="796" width="256" height="100" />
-    <texture id="ui_btn_shotgun_t"	x="424" y="796" width="256" height="100" />
-    <texture id="ui_btn_shotgun_d"	x="424" y="796" width="256" height="100" />
+    <texture id="ui_btn_shotgun_h"    x="424" y="796" width="256" height="100" />
+    <texture id="ui_btn_shotgun_t"    x="424" y="796" width="256" height="100" />
+    <texture id="ui_btn_shotgun_d"    x="424" y="796" width="256" height="100" />
   
-    <texture id="ui_btn_sniper_h"	x="424" y="924" width="256" height="100" />
-    <texture id="ui_btn_sniper_t"	x="424" y="924" width="256" height="100" />
-    <texture id="ui_btn_sniper_d"	x="424" y="924" width="256" height="100" />
+    <texture id="ui_btn_sniper_h"    x="424" y="924" width="256" height="100" />
+    <texture id="ui_btn_sniper_t"    x="424" y="924" width="256" height="100" />
+    <texture id="ui_btn_sniper_d"    x="424" y="924" width="256" height="100" />
   
-    <texture id="ui_btn_heavy_h"	x="680" y="796" width="256" height="100" />
-    <texture id="ui_btn_heavy_t"	x="680" y="796" width="256" height="100" />
-    <texture id="ui_btn_heavy_d"	x="680" y="796" width="256" height="100" />
+    <texture id="ui_btn_heavy_h"    x="680" y="796" width="256" height="100" />
+    <texture id="ui_btn_heavy_t"    x="680" y="796" width="256" height="100" />
+    <texture id="ui_btn_heavy_d"    x="680" y="796" width="256" height="100" />
   
-    <texture id="ui_btn_assault_h"	x="680" y="924" width="256" height="100" />
-    <texture id="ui_btn_assault_t"	x="680" y="924" width="256" height="100" />
-    <texture id="ui_btn_assault_d"	x="680" y="924" width="256" height="100" />
+    <texture id="ui_btn_assault_h"    x="680" y="924" width="256" height="100" />
+    <texture id="ui_btn_assault_t"    x="680" y="924" width="256" height="100" />
+    <texture id="ui_btn_assault_d"    x="680" y="924" width="256" height="100" />
 
    </file>
 </w>

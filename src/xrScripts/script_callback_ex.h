@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_callback_ex.h
-//	Created 	: 06.02.2004
-//  Modified 	: 11.01.2005
-//	Author		: Sergey Zhemeitsev and Dmitriy Iassenev
-//	Description : Script callbacks with return value
+//    Module         : script_callback_ex.h
+//    Created     : 06.02.2004
+//  Modified     : 11.01.2005
+//    Author        : Sergey Zhemeitsev and Dmitriy Iassenev
+//    Description : Script callbacks with return value
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -13,18 +13,18 @@
 IC bool compare_safe(const luabind::object& o1, const luabind::object& o2)
 {
     if (o1.type() == LUA_TNIL && o2.type() == LUA_TNIL)
-        return						(true);
+        return                        (true);
 
-    return							(o1 == o2);
+    return                            (o1 == o2);
 }
 
 #if XRAY_EXCEPTIONS
-#	define process_error \
-		catch(luabind::error &e) {\
-			g_pScriptEngine->print_output(g_pScriptEngine->lua(),"",LUA_ERRRUN);\
-		}
+#    define process_error \
+        catch(luabind::error &e) {\
+            g_pScriptEngine->print_output(g_pScriptEngine->lua(),"",LUA_ERRRUN);\
+        }
 #else
-#	define process_error
+#    define process_error
 #endif
 
 template<typename TResult>

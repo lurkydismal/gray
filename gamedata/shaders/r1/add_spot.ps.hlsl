@@ -13,5 +13,5 @@ float4 main(vf_spot I) : COLOR
     float final_a = final_color.w;
 
     // out
-    return final_color * 2; // float4	(final_rgb,final_a);
+    return final_color * 2; // float4    (final_rgb,final_a);
 }

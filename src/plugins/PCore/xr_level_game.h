@@ -10,29 +10,29 @@ namespace xray_re {
 
 // in-game format defs.
 enum {
-	GAME_CHUNK_WAYS		= 0x1000,
-	GAME_CHUNK_RPOINTS	= 0x2000,
+    GAME_CHUNK_WAYS        = 0x1000,
+    GAME_CHUNK_RPOINTS    = 0x2000,
 };
 
 class xr_level_game {
 public:
-				xr_level_game();
-				xr_level_game(xr_reader& r);
-	virtual			~xr_level_game();
+                xr_level_game();
+                xr_level_game(xr_reader& r);
+    virtual            ~xr_level_game();
 
-	void			load(xr_reader& r);
-	void			save(xr_writer& w) const;
-	bool			load(const char* path, const char* name);
-	bool			save(const char* path, const char* name) const;
+    void            load(xr_reader& r);
+    void            save(xr_writer& w) const;
+    bool            load(const char* path, const char* name);
+    bool            save(const char* path, const char* name) const;
 
-	way_path_vec&		paths();
-	const way_path_vec&	paths() const;
-	mp_rpoint_vec&		rpoints();
-	const mp_rpoint_vec&	rpoints() const;
+    way_path_vec&        paths();
+    const way_path_vec&    paths() const;
+    mp_rpoint_vec&        rpoints();
+    const mp_rpoint_vec&    rpoints() const;
 
 private:
-	way_path_vec		m_paths;
-	mp_rpoint_vec		m_rpoints;
+    way_path_vec        m_paths;
+    mp_rpoint_vec        m_rpoints;
 };
 
 inline xr_level_game::xr_level_game() {}

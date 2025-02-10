@@ -7,10 +7,10 @@
 #pragma managed(push, off)
 #endif
 
-b_params	&g_params()
+b_params    &g_params()
 {
-	VERIFY(inlc_global_data());
-	return inlc_global_data()->g_params();
+    VERIFY(inlc_global_data());
+    return inlc_global_data()->g_params();
 }
 
 #ifdef _MANAGED

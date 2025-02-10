@@ -33,27 +33,27 @@ subject to the following restrictions:
 ///SpuSampleTaskDesc
 struct SpursSpeexTaskDesc
 {
-	SpursSpeexTaskDesc()
-		:mDebugPause(false)
-	{
-		
-	}
-	int           mQuality; 
-	int           mSamplesPerSecond;
-	int           mEncodedFrameSize;
-	void          *mInputBuffer;     // make it 
-	unsigned int   mInputBufferSize; 
+    SpursSpeexTaskDesc()
+        :mDebugPause(false)
+    {
+        
+    }
+    int           mQuality; 
+    int           mSamplesPerSecond;
+    int           mEncodedFrameSize;
+    void          *mInputBuffer;     // make it 
+    unsigned int   mInputBufferSize; 
 
-	SpursSpeexTaskOutput	*mSpeexTaskOutput;
-	void            *mOutputBuffer; 
-	unsigned int     mOutputBufferSize;
+    SpursSpeexTaskOutput    *mSpeexTaskOutput;
+    void            *mOutputBuffer; 
+    unsigned int     mOutputBufferSize;
 
-	char            *mSpeexStateBuffer; 
-	unsigned int     mSpeexStateBufferSize;
-	bool	mDebugPause;
+    char            *mSpeexStateBuffer; 
+    unsigned int     mSpeexStateBufferSize;
+    bool    mDebugPause;
 
-	uint16_t 	  mTaskId;
-	//uint16_t	_padding_[3]; //padding to make this multiple of 16 bytes
+    uint16_t       mTaskId;
+    //uint16_t    _padding_[3]; //padding to make this multiple of 16 bytes
 } POST_ALIGN(128);
 
 //just add your commands here, try to keep them globally unique for debugging purposes
@@ -70,51 +70,51 @@ struct SpursSpeexTaskDesc
 /// PPU will do postprocessing, dependent on workunit output (not likely)
 class SpursSpeexTaskManager
 {
-	// track task buffers that are being used, and total busy tasks
-	spursAlignedObjectArray<bool>	m_taskBusy;
-	spursAlignedObjectArray<SpursSpeexTaskDesc>mSpursSpeexTaskDesc;
-	
-	unsigned int   m_numBusyTasks;
+    // track task buffers that are being used, and total busy tasks
+    spursAlignedObjectArray<bool>    m_taskBusy;
+    spursAlignedObjectArray<SpursSpeexTaskDesc>mSpursSpeexTaskDesc;
+    
+    unsigned int   m_numBusyTasks;
 
-	// the current task and the current entry to insert a new work unit
-	unsigned int   m_currentTask;
+    // the current task and the current entry to insert a new work unit
+    unsigned int   m_currentTask;
 
-	bool m_initialized;
+    bool m_initialized;
 
-	//void postProcess(int taskId, int outputSize);
-	
-	class	spursThreadSupportInterface*	m_threadInterface;
+    //void postProcess(int taskId, int outputSize);
+    
+    class    spursThreadSupportInterface*    m_threadInterface;
 
-	unsigned int	m_maxNumOutstandingTasks;
+    unsigned int    m_maxNumOutstandingTasks;
 
 
-	int issueTask(SpursSpeexTaskDesc& taskDesc,uint32_t uiCommand);
+    int issueTask(SpursSpeexTaskDesc& taskDesc,uint32_t uiCommand);
 
 
 public:
-	SpursSpeexTaskManager(spursThreadSupportInterface*	threadInterface, unsigned int maxNumOutstandingTasks);
-	
-	~SpursSpeexTaskManager();
-	
-	///call initialize in the beginning of the frame, before addCollisionPairToTask
-	int initialize();
+    SpursSpeexTaskManager(spursThreadSupportInterface*    threadInterface, unsigned int maxNumOutstandingTasks);
+    
+    ~SpursSpeexTaskManager();
+    
+    ///call initialize in the beginning of the frame, before addCollisionPairToTask
+    int initialize();
 
-	int issueEncodeTask(int16_t * inBuffer, int inBufferSize, int encodedFrameSize, char *outBuffer, int outBufferSize, 
-		                SpursSpeexTaskOutput *taskOuput,char *m_userAllocatedSpeexBuffer,int userAllocatedSpeexBufferSize);
+    int issueEncodeTask(int16_t * inBuffer, int inBufferSize, int encodedFrameSize, char *outBuffer, int outBufferSize, 
+                        SpursSpeexTaskOutput *taskOuput,char *m_userAllocatedSpeexBuffer,int userAllocatedSpeexBufferSize);
 
-	int issueEncodeInitTask(int theQuality,int theGviSpeexSamplesPerSecond,  SpursSpeexTaskOutput *taskOutput, char *m_userAllocatedSpeexBuffer,
-	                        int userAllocatedSpeexBufferSize);
+    int issueEncodeInitTask(int theQuality,int theGviSpeexSamplesPerSecond,  SpursSpeexTaskOutput *taskOutput, char *m_userAllocatedSpeexBuffer,
+                            int userAllocatedSpeexBufferSize);
 
-	int issueDecodeAddTask(char *decoderStateBuffer, int decoderStateBufferSize, char *inBuffer, int inBufferSize, int encodedFrameSize,
-		                   short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
+    int issueDecodeAddTask(char *decoderStateBuffer, int decoderStateBufferSize, char *inBuffer, int inBufferSize, int encodedFrameSize,
+                           short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
 
-	int issueDecodeSetTask(char *decoderStateBuffer, int decoderStateBufferSize, char *inBuffer, int inBufferSize, int encodedFrameSize,
-		                   short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
-	
-	int issueDecodeInitTask(char *decoderStateBuffer, int decoderStateBufferSize, int sampleRate, struct SpursSpeexTaskOutput *taskOutput);
+    int issueDecodeSetTask(char *decoderStateBuffer, int decoderStateBufferSize, char *inBuffer, int inBufferSize, int encodedFrameSize,
+                           short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
+    
+    int issueDecodeInitTask(char *decoderStateBuffer, int decoderStateBufferSize, int sampleRate, struct SpursSpeexTaskOutput *taskOutput);
 
-	///call flush to submit potential outstanding work to SPUs and wait for all involved SPUs to be finished
-	int flush();
+    ///call flush to submit potential outstanding work to SPUs and wait for all involved SPUs to be finished
+    int flush();
 };
 
 

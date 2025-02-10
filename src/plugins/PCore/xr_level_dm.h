@@ -10,7 +10,7 @@ namespace xray_re {
 
 class xr_level_dm: public xr_dm {
 protected:
-	virtual xr_surface*	create_surface(const xr_raw_surface& raw_surface) const;
+    virtual xr_surface*    create_surface(const xr_raw_surface& raw_surface) const;
 };
 
 } // end of namespace xray_re

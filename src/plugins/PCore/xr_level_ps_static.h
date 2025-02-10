@@ -10,17 +10,17 @@
 
 namespace xray_re {
 
-const uint32_t PS_VERSION_0 = 0;	// implicit
-const uint32_t PS_VERSION_1 = 1;	// introduced in Clear Sky
+const uint32_t PS_VERSION_0 = 0;    // implicit
+const uint32_t PS_VERSION_1 = 1;    // introduced in Clear Sky
 
 enum {
-	PS_CHUNK_VERSION	= 0x0000,	// CS only
+    PS_CHUNK_VERSION    = 0x0000,    // CS only
 };
 
 struct particle_data {
-	uint16_t	extra;
-	std::string	reference;
-	fmatrix		xform;
+    uint16_t    extra;
+    std::string    reference;
+    fmatrix        xform;
 };
 
 TYPEDEF_STD_VECTOR_PTR(particle_data);
@@ -30,22 +30,22 @@ class xr_writer;
 
 class xr_level_ps_static {
 public:
-				xr_level_ps_static(xr_reader& r);
-				xr_level_ps_static();
-	virtual			~xr_level_ps_static();
+                xr_level_ps_static(xr_reader& r);
+                xr_level_ps_static();
+    virtual            ~xr_level_ps_static();
 
-	bool			load(const char* path, const char* name);
-	bool			save(const char* path, const char* name);
-	void			load(xr_reader& r);
-	void			save(xr_writer& w) const;
+    bool            load(const char* path, const char* name);
+    bool            save(const char* path, const char* name);
+    void            load(xr_reader& r);
+    void            save(xr_writer& w) const;
 
-	uint32_t		version() const;
-	uint32_t&		version();
-	const particle_data_vec&particles() const;
+    uint32_t        version() const;
+    uint32_t&        version();
+    const particle_data_vec&particles() const;
 
 private:
-	uint32_t		m_version;
-	particle_data_vec	m_particles;
+    uint32_t        m_version;
+    particle_data_vec    m_particles;
 };
 
 inline xr_level_ps_static::xr_level_ps_static(xr_reader& r) { load(r); }

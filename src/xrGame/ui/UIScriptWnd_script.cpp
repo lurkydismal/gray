@@ -25,27 +25,27 @@ extern export_class script_register_ui_window2(export_class &&);
 #pragma optimize("s",on)
 void CUIDialogWndEx::script_register(lua_State *L)
 {
-	export_class				instance("CUIScriptWnd");
+    export_class                instance("CUIScriptWnd");
 
-	module(L)
-	[
-		script_register_ui_window2(
-			script_register_ui_window1(
-				std::move(instance)
-			)
-		)
-		.def("Load",			&BaseType::Load)
-	];
+    module(L)
+    [
+        script_register_ui_window2(
+            script_register_ui_window1(
+                std::move(instance)
+            )
+        )
+        .def("Load",            &BaseType::Load)
+    ];
 }
 
 export_class script_register_ui_window1(export_class &&instance)
 {
-	return std::move(instance)
-		.def(					constructor<>())
+    return std::move(instance)
+        .def(                    constructor<>())
 
-		.def("AddCallback",		(void(BaseType::*)(LPCSTR, s16, const luabind::functor<void>&, const luabind::object&))&BaseType::AddCallback)
+        .def("AddCallback",        (void(BaseType::*)(LPCSTR, s16, const luabind::functor<void>&, const luabind::object&))&BaseType::AddCallback)
 
-		.def("Register",		(void (BaseType::*)(CUIWindow*,LPCSTR))&BaseType::Register)
+        .def("Register",        (void (BaseType::*)(CUIWindow*,LPCSTR))&BaseType::Register)
 
-	;
+    ;
 }

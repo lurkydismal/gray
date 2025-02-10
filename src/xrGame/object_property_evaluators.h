@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: object_property_evaluators.h
-//	Created 	: 12.03.2004
-//  Modified 	: 26.03.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Object property evaluators
+//    Module         : object_property_evaluators.h
+//    Created     : 12.03.2004
+//  Modified     : 26.03.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Object property evaluators
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -27,16 +27,16 @@ typedef CPropertyEvaluatorMember<CAI_Stalker> CObjectPropertyEvaluatorMember;
 template <typename _item_type>
 class CObjectPropertyEvaluatorBase : public CPropertyEvaluator<CAI_Stalker> {
 protected:
-	typedef CPropertyEvaluator<CAI_Stalker> inherited;
-	_item_type		*m_item;
+    typedef CPropertyEvaluator<CAI_Stalker> inherited;
+    _item_type        *m_item;
 
 public:
-	IC					CObjectPropertyEvaluatorBase	(_item_type *item, CAI_Stalker *owner);
-	IC		CAI_Stalker &object							() const;	
+    IC                    CObjectPropertyEvaluatorBase    (_item_type *item, CAI_Stalker *owner);
+    IC        CAI_Stalker &object                            () const;    
 };
 
-typedef CObjectPropertyEvaluatorBase<CGameObject>	CSObjectPropertyEvaluatorBase;
-typedef CPropertyEvaluatorConst<CAI_Stalker>		CObjectPropertyEvaluatorConst;
+typedef CObjectPropertyEvaluatorBase<CGameObject>    CSObjectPropertyEvaluatorBase;
+typedef CPropertyEvaluatorConst<CAI_Stalker>        CObjectPropertyEvaluatorConst;
 
 //////////////////////////////////////////////////////////////////////////
 // CObjectPropertyEvaluatorState
@@ -44,21 +44,21 @@ typedef CPropertyEvaluatorConst<CAI_Stalker>		CObjectPropertyEvaluatorConst;
 
 class CObjectPropertyEvaluatorState : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
-	u32						m_state;
-	bool					m_equality;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    u32                        m_state;
+    bool                    m_equality;
 
 public:
-							CObjectPropertyEvaluatorState	(CWeapon *item, CAI_Stalker *owner, u32 state, bool equality = true);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorState    (CWeapon *item, CAI_Stalker *owner, u32 state, bool equality = true);
+    virtual _value_type        evaluate                        ();
 };
 
 class CObjectPropertyEvaluatorWeaponHidden : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
 public:
-							CObjectPropertyEvaluatorWeaponHidden	(CWeapon *item, CAI_Stalker *owner);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorWeaponHidden    (CWeapon *item, CAI_Stalker *owner);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -67,12 +67,12 @@ public:
 
 class CObjectPropertyEvaluatorAmmo : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
-	u32						m_ammo_type;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    u32                        m_ammo_type;
 
 public:
-							CObjectPropertyEvaluatorAmmo	(CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorAmmo    (CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -81,12 +81,12 @@ public:
 
 class CObjectPropertyEvaluatorEmpty : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
-	u32						m_ammo_type;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    u32                        m_ammo_type;
 
 public:
-							CObjectPropertyEvaluatorEmpty	(CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorEmpty    (CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -95,12 +95,12 @@ public:
 
 class CObjectPropertyEvaluatorFull : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
-	u32						m_ammo_type;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    u32                        m_ammo_type;
 
 public:
-							CObjectPropertyEvaluatorFull	(CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorFull    (CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -109,12 +109,12 @@ public:
 
 class CObjectPropertyEvaluatorReady : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
-	u32						m_ammo_type;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    u32                        m_ammo_type;
 
 public:
-							CObjectPropertyEvaluatorReady	(CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorReady    (CWeapon *item, CAI_Stalker *owner, u32 ammo_type);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -123,15 +123,15 @@ public:
 
 class CObjectPropertyEvaluatorQueue : public CObjectPropertyEvaluatorBase<CWeapon> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
+    typedef CObjectPropertyEvaluatorBase<CWeapon> inherited;
 
 protected:
-	u32						m_type;
-	CWeaponMagazined		*m_magazined;
+    u32                        m_type;
+    CWeaponMagazined        *m_magazined;
 
 public:
-							CObjectPropertyEvaluatorQueue	(CWeapon *item, CAI_Stalker *owner, u32 type);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorQueue    (CWeapon *item, CAI_Stalker *owner, u32 type);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -140,12 +140,12 @@ public:
 
 class CObjectPropertyEvaluatorNoItems : public CPropertyEvaluator<CAI_Stalker> {
 protected:
-	typedef CPropertyEvaluator<CAI_Stalker> inherited;
+    typedef CPropertyEvaluator<CAI_Stalker> inherited;
 
 public:
-						CObjectPropertyEvaluatorNoItems	(CAI_Stalker *owner);
-	virtual _value_type	evaluate						();
-	IC		CAI_Stalker &object							() const;	
+                        CObjectPropertyEvaluatorNoItems    (CAI_Stalker *owner);
+    virtual _value_type    evaluate                        ();
+    IC        CAI_Stalker &object                            () const;    
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -154,13 +154,13 @@ public:
 
 class CObjectPropertyEvaluatorMissile : public CObjectPropertyEvaluatorBase<CMissile> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CMissile> inherited;
-	u32						m_state;
-	bool					m_equality;
+    typedef CObjectPropertyEvaluatorBase<CMissile> inherited;
+    u32                        m_state;
+    bool                    m_equality;
 
 public:
-							CObjectPropertyEvaluatorMissile	(CMissile *item, CAI_Stalker *owner, u32 state, bool equality = true);
-	virtual _value_type		evaluate						();
+                            CObjectPropertyEvaluatorMissile    (CMissile *item, CAI_Stalker *owner, u32 state, bool equality = true);
+    virtual _value_type        evaluate                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -169,13 +169,13 @@ public:
 
 class CObjectPropertyEvaluatorMissileStarted : public CObjectPropertyEvaluatorBase<CMissile> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CMissile> inherited;
-	u32						m_state;
-	bool					m_equality;
+    typedef CObjectPropertyEvaluatorBase<CMissile> inherited;
+    u32                        m_state;
+    bool                    m_equality;
 
 public:
-							CObjectPropertyEvaluatorMissileStarted	(CMissile *item, CAI_Stalker *owner);
-	virtual _value_type		evaluate								();
+                            CObjectPropertyEvaluatorMissileStarted    (CMissile *item, CAI_Stalker *owner);
+    virtual _value_type        evaluate                                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -184,13 +184,13 @@ public:
 
 class CObjectPropertyEvaluatorMissileHidden : public CObjectPropertyEvaluatorBase<CMissile> {
 protected:
-	typedef CObjectPropertyEvaluatorBase<CMissile> inherited;
-	u32						m_state;
-	bool					m_equality;
+    typedef CObjectPropertyEvaluatorBase<CMissile> inherited;
+    u32                        m_state;
+    bool                    m_equality;
 
 public:
-							CObjectPropertyEvaluatorMissileHidden	(CMissile *item, CAI_Stalker *owner);
-	virtual _value_type		evaluate								();
+                            CObjectPropertyEvaluatorMissileHidden    (CMissile *item, CAI_Stalker *owner);
+    virtual _value_type        evaluate                                ();
 };
 
 #include "object_property_evaluators_inline.h"

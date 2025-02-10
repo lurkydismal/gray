@@ -5,7 +5,7 @@
 
 // void main(p_bumped_new I, out f_editor_gbuffer O)
 // {
-	// cotangent_frame(I);
+    // cotangent_frame(I);
     // XrayMaterial M;
 
     // M.Sun = I.tcdh.w;
@@ -26,11 +26,11 @@
     // float MaterialID = 0.25f;
 
     // float Gloss = 1.0f - M.Roughness;
-	
+    
 // #ifndef FORWARD_ONLY
-	// O.Albedo = float4(M.Color.xyz, Gloss);
-	// O.Normal = float4(M.Normal.xyz, Gloss);
-	// O.PointZ = float4(M.Point.xyz, MaterialID);
+    // O.Albedo = float4(M.Color.xyz, Gloss);
+    // O.Normal = float4(M.Normal.xyz, Gloss);
+    // O.PointZ = float4(M.Point.xyz, MaterialID);
 // #endif
 
     // float4 Light = float4(L_sun_color, 1.0f) * M.Sun * plight_infinity(MaterialID, M.Point, M.Normal, L_sun_dir_e);
@@ -60,24 +60,24 @@ uniform sampler2D s_dn_a;
 
 void main(p_bumped_new I, out f_editor_gbuffer O)
 {
-	if(is_lighting_enable.x < 0.5f) {
-		O.Color = tex2D(s_base, I.tcdh.xy);
+    if(is_lighting_enable.x < 0.5f) {
+        O.Color = tex2D(s_base, I.tcdh.xy);
 
-		float2 tcdbump = I.tcdh.xy * dt_params.xy;
-		float4 Detail = tex2D(s_detail, tcdbump);
-		
-		O.Color.xyz *= Detail.xyz * 2.0f;
+        float2 tcdbump = I.tcdh.xy * dt_params.xy;
+        float4 Detail = tex2D(s_detail, tcdbump);
+        
+        O.Color.xyz *= Detail.xyz * 2.0f;
 
 #ifndef FORWARD_ONLY
-		O.Normal = float4(I.M1.xyz, def_gloss);
-		O.Albedo = float4(O.Color.xyz, def_gloss);
-		O.PointZ = float4(I.position.xyz, xmaterial);
+        O.Normal = float4(I.M1.xyz, def_gloss);
+        O.Albedo = float4(O.Color.xyz, def_gloss);
+        O.PointZ = float4(I.position.xyz, xmaterial);
 #endif
 
-		return;
-	}
-	
-	cotangent_frame(I);
+        return;
+    }
+    
+    cotangent_frame(I);
     XrayMaterial M;
 
     M.Sun = I.tcdh.w;
@@ -117,14 +117,14 @@ void main(p_bumped_new I, out f_editor_gbuffer O)
 
     M.Sun = saturate(M.Sun * 2.0f);
     M.Color.xyz = saturate(M.Color.xyz);
-	
+    
     float MaterialID = 0.25f;
     float Gloss = 1.0f - M.Roughness;
-	
+    
 #ifndef FORWARD_ONLY
-	O.Albedo = float4(M.Color.xyz, Gloss);
-	O.Normal = float4(M.Normal.xyz, Gloss);
-	O.PointZ = float4(M.Point.xyz, MaterialID);
+    O.Albedo = float4(M.Color.xyz, Gloss);
+    O.Normal = float4(M.Normal.xyz, Gloss);
+    O.PointZ = float4(M.Point.xyz, MaterialID);
 #endif
 
     float4 Light = float4(L_sun_color, 1.0f) * M.Sun * plight_infinity(MaterialID, M.Point, M.Normal, L_sun_dir_e);

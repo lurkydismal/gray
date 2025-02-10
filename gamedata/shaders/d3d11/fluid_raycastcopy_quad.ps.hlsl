@@ -1,7 +1,7 @@
 #include "fluid_common_render.hlsli"
 
-//	Pixel
-//	TODO: DX10: replace WorldViewProjection with m_WVP
+//    Pixel
+//    TODO: DX10: replace WorldViewProjection with m_WVP
 float4 main(PS_INPUT_RAYCAST input) : SV_Target
 {
     float edge = edgeTex.Sample(samLinearClamp, float2(input.pos.x / RTWidth, input.pos.y / RTHeight)).r;
@@ -16,7 +16,7 @@ float4 main(PS_INPUT_RAYCAST input) : SV_Target
     {
         return tex;
     }
-#else //	RENDER_FIRE
+#else //    RENDER_FIRE
     float4 tex = rayCastTex.Sample(samLinearClamp, float2(input.pos.x / RTWidth, input.pos.y / RTHeight));
     if (edge > 0 && tex.a > 0)
     {
@@ -27,6 +27,6 @@ float4 main(PS_INPUT_RAYCAST input) : SV_Target
     {
         return tex * DiffuseLight;
     }
-#endif //	RENDER_FIRE
+#endif //    RENDER_FIRE
 }
 

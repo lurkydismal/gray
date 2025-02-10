@@ -13,24 +13,24 @@ struct ALCcontext;
 class SoundVoiceChat : ISoundVoiceChat
 {
 public:
-	SoundVoiceChat(ALCcontext* pContext);
-	~SoundVoiceChat();
+    SoundVoiceChat(ALCcontext* pContext);
+    ~SoundVoiceChat();
 
-	ISoundRecorder* CreateRecorder(IVoicePacketSender* sender);
+    ISoundRecorder* CreateRecorder(IVoicePacketSender* sender);
 
-	IStreamPlayer* CreateStreamPlayer();
-	void DestroySoundPlayer(IStreamPlayer* player);
+    IStreamPlayer* CreateStreamPlayer();
+    void DestroySoundPlayer(IStreamPlayer* player);
 
-	void Update(const Fvector& P, const Fvector& D, const Fvector& N);
-
-private:
-	void Destroy();
+    void Update(const Fvector& P, const Fvector& D, const Fvector& N);
 
 private:
-	ALCcontext* m_pContext;
+    void Destroy();
 
-	CSoundRecorderA* m_pRecorder = nullptr;
-	CVoicePacketsPacker* m_pVoicePacker = nullptr;
+private:
+    ALCcontext* m_pContext;
 
-	xr_vector<IStreamPlayer*> m_players;
+    CSoundRecorderA* m_pRecorder = nullptr;
+    CVoicePacketsPacker* m_pVoicePacker = nullptr;
+
+    xr_vector<IStreamPlayer*> m_players;
 };

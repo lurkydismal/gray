@@ -24,30 +24,30 @@
 // a single choice on a screen
 typedef struct MenuScreenChoice
 {
-	const char * text;
-	int options;
+    const char * text;
+    int options;
 } MenuScreenChoice;
 
 // an instance of a screen
 typedef struct MenuScreen
 {
-	struct MenuScreenConfiguration * configuration;
-	char extraText[MAX_EXTRA_TEXT_STRINGS][MAX_EXTRA_TEXT_STRING_LEN + 1];
-	char list[MAX_LIST_STRINGS][MAX_LIST_STRING_LEN + 1];
-	int listSelection;  // default -1, no selection
-	char keyboardText[MAX_KEYBOARD_TEXT_LEN + 1];
-	int numChoices;
+    struct MenuScreenConfiguration * configuration;
+    char extraText[MAX_EXTRA_TEXT_STRINGS][MAX_EXTRA_TEXT_STRING_LEN + 1];
+    char list[MAX_LIST_STRINGS][MAX_LIST_STRING_LEN + 1];
+    int listSelection;  // default -1, no selection
+    char keyboardText[MAX_KEYBOARD_TEXT_LEN + 1];
+    int numChoices;
 } MenuScreen;
 
 // the static configuration for a screen
 typedef struct MenuScreenConfiguration
 {
-	const char * topScreenText;
-	MenuScreenChoice choices[MAX_CHOICES];
-	void (* initFunc)(void);
-	void (* choseFunc)(const char * choice);
-	void (* thinkFunc)(void);
-	int options;
+    const char * topScreenText;
+    MenuScreenChoice choices[MAX_CHOICES];
+    void (* initFunc)(void);
+    void (* choseFunc)(const char * choice);
+    void (* thinkFunc)(void);
+    int options;
 } MenuScreenConfiguration;
 
 // call this to start showing a menu, pass in the initial screen to show

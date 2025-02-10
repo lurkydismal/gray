@@ -27,7 +27,7 @@ MultipacketSender::MultipacketSender()
 void MultipacketSender::SendPacket( const void* packet_data, u32 packet_sz, u32 flags, u32 timeout )
 {
     _buf_cs.Enter();
-	
+    
     Buffer* buf = &_buf;
 
     switch( psNET_GuaranteedPacketMode )
@@ -99,7 +99,7 @@ void MultipacketSender::_FlushSendBuffer( u32 timeout, Buffer* buf )
 
         header->tag             = NET_TAG_MERGED;
         header->unpacked_size   = (u16)buf->buffer.B.count;
-		
+        
         // dump/log if needed
 
         #if NET_LOG_PACKETS
@@ -109,10 +109,10 @@ void MultipacketSender::_FlushSendBuffer( u32 timeout, Buffer* buf )
            );
         #endif // NET_LOG_PACKETS
 
-	    if( strstr( Core.Params,"-dump_traffic") ) 
+        if( strstr( Core.Params,"-dump_traffic") ) 
         {
             static bool first_time  = true;
-			FILE*       dump        = fopen( "raw-out-traffic.bins", (first_time)?"wb":"ab" );
+            FILE*       dump        = fopen( "raw-out-traffic.bins", (first_time)?"wb":"ab" );
 
             if( first_time )
             {
@@ -124,9 +124,9 @@ void MultipacketSender::_FlushSendBuffer( u32 timeout, Buffer* buf )
             
             fwrite( &sz, sizeof(u16), 1, dump );
             fwrite( buf->buffer.B.data, buf->buffer.B.count, 1, dump );
-			fclose( dump );
+            fclose( dump );
         }
-		
+        
         // do send
         
         _SendTo_LL( packet_data, comp_sz+sizeof(MultipacketHeader), buf->last_flags, timeout );
@@ -155,7 +155,7 @@ void MultipacketReciever::RecievePacket( const void* packet_data, u32 packet_sz,
     if( strstr( Core.Params,"-dump_traffic") ) 
     {
         static bool first_time  = true;
-		FILE*       dump        = fopen( "raw-in-traffic.bins", (first_time)?"wb":"ab" );
+        FILE*       dump        = fopen( "raw-in-traffic.bins", (first_time)?"wb":"ab" );
 
         if( first_time )
         {
@@ -167,7 +167,7 @@ void MultipacketReciever::RecievePacket( const void* packet_data, u32 packet_sz,
         
         fwrite( &sz, sizeof(u16), 1, dump );
         fwrite( data, header->unpacked_size, 1, dump );
-		fclose( dump );
+        fclose( dump );
     }
 
 
@@ -187,8 +187,8 @@ void MultipacketReciever::RecievePacket( const void* packet_data, u32 packet_sz,
         #if NET_LOG_PACKETS
         Msg( "  packet %u", size );
         #endif
-		        
-		_Recieve( dat, size, param );
+                
+        _Recieve( dat, size, param );
 
         dat          += size;
         processed_sz += size + ((is_multi_packet) ? sizeof(u16) : 0);
@@ -197,5 +197,5 @@ void MultipacketReciever::RecievePacket( const void* packet_data, u32 packet_sz,
 
 void XRNETSERVER_API DumpNetCompressorStats(bool brief)
 {
-	Compressor.DumpStats(brief);
+    Compressor.DumpStats(brief);
 }

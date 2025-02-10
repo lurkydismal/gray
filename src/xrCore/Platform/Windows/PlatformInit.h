@@ -1,13 +1,13 @@
 #pragma once
 
-#define VC_EXTRALEAN				// Exclude rarely-used stuff from Windows headers
-#define WIN32_LEAN_AND_MEAN			// Exclude rarely-used stuff from Windows headers
+#define VC_EXTRALEAN                // Exclude rarely-used stuff from Windows headers
+#define WIN32_LEAN_AND_MEAN            // Exclude rarely-used stuff from Windows headers
 #ifndef STRICT
-#	define STRICT					// Enable strict syntax
+#    define STRICT                    // Enable strict syntax
 #endif // STRICT
-#define IDIRECTPLAY2_OR_GREATER		// ?
-#define DIRECTINPUT_VERSION	0x0800	//
-#define _CRT_SECURE_NO_DEPRECATE	// vc8.0 stuff, don't deprecate several ANSI functions
+#define IDIRECTPLAY2_OR_GREATER        // ?
+#define DIRECTINPUT_VERSION    0x0800    //
+#define _CRT_SECURE_NO_DEPRECATE    // vc8.0 stuff, don't deprecate several ANSI functions
 
 // windows.h
 #undef _WIN32_WINNT
@@ -38,16 +38,16 @@
 #include <dbghelp.h>
 
 #ifdef IXR_ARM64
-#	include <arm64_neon.h>
-#	include <sse2neon/sse2neon.h>
+#    include <arm64_neon.h>
+#    include <sse2neon/sse2neon.h>
 #else
-#	include <xmmintrin.h>
-#	include <atlstr.h>
-#	include <atlimage.h>
+#    include <xmmintrin.h>
+#    include <atlstr.h>
+#    include <atlimage.h>
 #endif
 
 #ifndef __BORLANDC__
-	#include <windowsx.h>
+    #include <windowsx.h>
 #endif
 #pragma warning(pop)
 

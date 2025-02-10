@@ -1,14 +1,14 @@
 #pragma once
 
 #ifdef IXR_WINDOWS
-#	include <ppl.h>
-#	include <concurrent_unordered_map.h>
+#    include <ppl.h>
+#    include <concurrent_unordered_map.h>
 #else
-#	include <tbb/task_group.h>
-#	include <tbb/parallel_for.h>
-#	include <tbb/blocked_range.h>
-#	include <tbb/parallel_for_each.h>
-#	include <tbb/concurrent_unordered_map.h>
+#    include <tbb/task_group.h>
+#    include <tbb/parallel_for.h>
+#    include <tbb/blocked_range.h>
+#    include <tbb/parallel_for_each.h>
+#    include <tbb/concurrent_unordered_map.h>
 #endif
 #include <atomic>
 
@@ -34,22 +34,22 @@ template<typename BlockRangeType, typename Body>
 inline void xr_parallel_for(BlockRangeType Begin, BlockRangeType End, Body Functor)
 {
 #ifdef IXR_WINDOWS
-	concurrency::parallel_for(Begin, End, Functor);
+    concurrency::parallel_for(Begin, End, Functor);
 #else
-	using RangeType = tbb::blocked_range<BlockRangeType>;
-	RangeType RangeBlock(Begin, End);
+    using RangeType = tbb::blocked_range<BlockRangeType>;
+    RangeType RangeBlock(Begin, End);
 
-	tbb::parallel_for
-	(
-		RangeBlock,
-		[&Functor](const RangeType& Range)
-		{
-			for (BlockRangeType Iter = Range.begin(); Iter != Range.end(); ++Iter)
-			{
-				Functor(Iter);
-			}
-		}
-	);
+    tbb::parallel_for
+    (
+        RangeBlock,
+        [&Functor](const RangeType& Range)
+        {
+            for (BlockRangeType Iter = Range.begin(); Iter != Range.end(); ++Iter)
+            {
+                Functor(Iter);
+            }
+        }
+    );
 #endif
 }
 
@@ -57,8 +57,8 @@ template<typename Index, typename Body>
 inline void xr_parallel_foreach(Index Begin, Index End, Body Functor)
 {
 #ifdef IXR_WINDOWS
-	concurrency::parallel_for_each(Begin, End, Functor);
+    concurrency::parallel_for_each(Begin, End, Functor);
 #else
-	tbb::parallel_for_each(Begin, End, Functor);
+    tbb::parallel_for_each(Begin, End, Functor);
 #endif
 }

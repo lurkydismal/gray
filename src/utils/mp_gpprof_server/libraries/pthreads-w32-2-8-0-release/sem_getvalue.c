@@ -4,10 +4,10 @@
  * Module: sem_getvalue.c
  *
  * Purpose:
- *	Semaphores aren't actually part of PThreads.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of PThreads.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1-2001
+ *        POSIX 1003.1-2001
  *
  * -------------------------------------------------------------
  *
@@ -90,14 +90,14 @@ sem_getvalue (sem_t * sem, int *sval)
 
       if ((result = pthread_mutex_lock(&s->lock)) == 0)
         {
-	  /* See sem_destroy.c
-	   */
-	  if (*sem == NULL)
-	    {
-	      (void) pthread_mutex_unlock (&s->lock);
-	      errno = EINVAL;
-	      return -1;
-	    }
+      /* See sem_destroy.c
+       */
+      if (*sem == NULL)
+        {
+          (void) pthread_mutex_unlock (&s->lock);
+          errno = EINVAL;
+          return -1;
+        }
 
           value = s->value;
           (void) pthread_mutex_unlock(&s->lock);
@@ -107,4 +107,4 @@ sem_getvalue (sem_t * sem, int *sval)
       return result;
     }
 
-}				/* sem_getvalue */
+}                /* sem_getvalue */

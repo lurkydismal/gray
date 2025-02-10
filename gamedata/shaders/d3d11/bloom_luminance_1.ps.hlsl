@@ -9,7 +9,7 @@ float luminance(float2 tc)
 float4 main(p_build I) : SV_Target
 {
     float4 final;
-	
+    
     final.x = luminance(I.Tex0);
     final.y = luminance(I.Tex1);
     final.z = luminance(I.Tex2);

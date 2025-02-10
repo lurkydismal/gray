@@ -99,16 +99,16 @@ void CUICarPanel::SetCarFuel(float value)
 
 void CUICarPanel::SetSpeed(float speed)
 {
-    //	clamp(speed,0.f,1.f);
-    //	UISpeedometer.SetValue(speed);
+    //    clamp(speed,0.f,1.f);
+    //    UISpeedometer.SetValue(speed);
 }
 
 //////////////////////////////////////////////////////////////////////////
 
 void CUICarPanel::SetRPM(float rpm)
 {
-    //	clamp(rpm,0.f,1.f);
-    //	UITachometer.SetValue(rpm);
+    //    clamp(rpm,0.f,1.f);
+    //    UITachometer.SetValue(rpm);
 }
 
 void CUICarPanel::SetSpeedMode(const xr_string& Mode)

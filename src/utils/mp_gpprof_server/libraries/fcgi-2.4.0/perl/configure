@@ -78,7 +78,7 @@ $as_unset LC_MESSAGES || test "${LC_MESSAGES+set}" != set || { LC_MESSAGES=C; ex
 # We need space, tab and new line, in precisely that order.
 as_nl='
 '
-IFS=" 	$as_nl"
+IFS="     $as_nl"
 
 # CDPATH.
 $as_unset CDPATH || test "${CDPATH+set}" != set || { CDPATH=:; export CDPATH; }
@@ -779,7 +779,7 @@ do
   | --no-cr | --no-c) ;;
   -no-recursion | --no-recursion | --no-recursio | --no-recursi \
   | --no-recurs | --no-recur | --no-recu | --no-rec | --no-re | --no-r) ;;
-  *" "*|*"	"*|*[\[\]\~\#\$\^\&\*\(\)\{\}\\\|\;\<\>\?\"\']*)
+  *" "*|*"    "*|*[\[\]\~\#\$\^\&\*\(\)\{\}\\\|\;\<\>\?\"\']*)
     ac_arg=`echo "$ac_arg" | sed "s/'/'\\\\\\\\''/g"`
     ac_configure_args="$ac_configure_args$ac_sep'$ac_arg'"
     ac_sep=" " ;;
@@ -806,7 +806,7 @@ trap 'exit_status=$?
     *ac_space=\ *)
       sed -n \
         "s/'"'"'/'"'"'\\\\'"'"''"'"'/g;
-    	  s/^\\([_$as_cr_alnum]*_cv_[_$as_cr_alnum]*\\)=\\(.*\\)/\\1='"'"'\\2'"'"'/p"
+          s/^\\([_$as_cr_alnum]*_cv_[_$as_cr_alnum]*\\)=\\(.*\\)/\\1='"'"'\\2'"'"'/p"
       ;;
     *)
       sed -n \
@@ -909,7 +909,7 @@ echo "$as_me:   current value: $ac_new_val" >&2;}
   # we pass some twice (in addition to the command line arguments).
   if test "$ac_new_set" = set; then
     case $ac_new_val in
-    *" "*|*"	"*|*[\[\]\~\#\$\^\&\*\(\)\{\}\\\|\;\<\>\?\"\']*)
+    *" "*|*"    "*|*[\[\]\~\#\$\^\&\*\(\)\{\}\\\|\;\<\>\?\"\']*)
       ac_arg=$ac_var=`echo "$ac_new_val" | sed "s/'/'\\\\\\\\''/g"`
       ac_configure_args="$ac_configure_args '$ac_arg'"
       ;;
@@ -934,7 +934,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 case `echo "testing\c"; echo 1,2,3`,`echo -n testing; echo 1,2,3` in
   *c*,-n*) ECHO_N= ECHO_C='
-' ECHO_T='	' ;;
+' ECHO_T='    ' ;;
   *c*,*  ) ECHO_N=-n ECHO_C= ECHO_T= ;;
   *)      ECHO_N= ECHO_C='\c' ECHO_T= ;;
 esac
@@ -953,7 +953,7 @@ fi
 PATH_SEPARATOR="$ac_path_separator"
 rm -f conftest.sh
 
-		    		    		    ac_config_headers="$ac_config_headers fcgi_config.h"
+                                    ac_config_headers="$ac_config_headers fcgi_config.h"
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -1339,9 +1339,9 @@ if test "$cross_compiling" != yes; then
     cross_compiling=no
   else
     if test "$cross_compiling" = maybe; then
-	cross_compiling=yes
+    cross_compiling=yes
     else
-	{ { echo "$as_me:1344: error: cannot run C compiled programs.
+    { { echo "$as_me:1344: error: cannot run C compiled programs.
 If you meant to cross compile, use \`--host'." >&5
 echo "$as_me: error: cannot run C compiled programs.
 If you meant to cross compile, use \`--host'." >&2;}
@@ -2084,11 +2084,11 @@ return f (e, argv, 0) != argv[0]  ||  f (e, argv, 1) != argv[1];
 _ACEOF
 # Don't try gcc -ansi; that turns off useful extensions and
 # breaks some systems' header files.
-# AIX			-qlanglvl=ansi
-# Ultrix and OSF/1	-std1
-# HP-UX 10.20 and later	-Ae
-# HP-UX older versions	-Aa -D_HPUX_SOURCE
-# SVR4			-Xc -D__EXTENSIONS__
+# AIX            -qlanglvl=ansi
+# Ultrix and OSF/1    -std1
+# HP-UX 10.20 and later    -Ae
+# HP-UX older versions    -Aa -D_HPUX_SOURCE
+# SVR4            -Xc -D__EXTENSIONS__
 for ac_arg in "" -qlanglvl=ansi -std1 -Ae "-Aa -D_HPUX_SOURCE" "-Xc -D__EXTENSIONS__"
 do
   CC="$ac_save_CC $ac_arg"
@@ -2345,9 +2345,9 @@ fi
 rm -f conftest*
 
     if test "$HAVE_SYS_SOCKET_H"; then
-	echo "$as_me:2348: checking for socklen_t in sys/socket.h" >&5
+    echo "$as_me:2348: checking for socklen_t in sys/socket.h" >&5
 echo $ECHO_N "checking for socklen_t in sys/socket.h... $ECHO_C" >&6
-	cat >conftest.$ac_ext <<_ACEOF
+    cat >conftest.$ac_ext <<_ACEOF
 #line 2351 "configure"
 #include "confdefs.h"
 #include <sys/socket.h>
@@ -2376,19 +2376,19 @@ rm -f conftest*
     echo "$as_me:2376: checking whether cross-process locking is required by accept()" >&5
 echo $ECHO_N "checking whether cross-process locking is required by accept()... $ECHO_C" >&6
     case "`uname -sr`" in
-	IRIX\ 5.* | SunOS\ 5.* | UNIX_System_V\ 4.0)
-		    echo "$as_me:2380: result: yes" >&5
+    IRIX\ 5.* | SunOS\ 5.* | UNIX_System_V\ 4.0)
+            echo "$as_me:2380: result: yes" >&5
 echo "${ECHO_T}yes" >&6
 
 cat >>confdefs.h <<\EOF
 #define USE_LOCKING 1
 EOF
 
-	    ;;
-	*)
-		    echo "$as_me:2389: result: no" >&5
+        ;;
+    *)
+            echo "$as_me:2389: result: no" >&5
 echo "${ECHO_T}no" >&6
-		;;
+        ;;
     esac
 
     #--------------------------------------------------------------------
@@ -2558,7 +2558,7 @@ _ACEOF
       # substitution turns \\\\ into \\, and sed turns \\ into \).
       sed -n \
         "s/'/'\\\\''/g;
-    	  s/^\\([_$as_cr_alnum]*_cv_[_$as_cr_alnum]*\\)=\\(.*\\)/\\1='\\2'/p"
+          s/^\\([_$as_cr_alnum]*_cv_[_$as_cr_alnum]*\\)=\\(.*\\)/\\1='\\2'/p"
       ;;
     *)
       # `set' quotes correctly as required by POSIX, so do not add quotes.
@@ -2593,13 +2593,13 @@ test "x$exec_prefix" = xNONE && exec_prefix='${prefix}'
 # trailing colons and then remove the whole line if VPATH becomes empty
 # (actually we leave an empty line to preserve line numbers).
 if test "x$srcdir" = x.; then
-  ac_vpsub='/^[ 	]*VPATH[ 	]*=/{
+  ac_vpsub='/^[     ]*VPATH[     ]*=/{
 s/:*\$(srcdir):*/:/;
 s/:*\${srcdir}:*/:/;
 s/:*@srcdir@:*/:/;
-s/^\([^=]*=[ 	]*\):*/\1/;
+s/^\([^=]*=[     ]*\):*/\1/;
 s/:*$//;
-s/^[^=]*=[ 	]*$//;
+s/^[^=]*=[     ]*$//;
 }'
 fi
 
@@ -2682,7 +2682,7 @@ $as_unset LC_MESSAGES || test "${LC_MESSAGES+set}" != set || { LC_MESSAGES=C; ex
 # We need space, tab and new line, in precisely that order.
 as_nl='
 '
-IFS=" 	$as_nl"
+IFS="     $as_nl"
 
 # CDPATH.
 $as_unset CDPATH || test "${CDPATH+set}" != set || { CDPATH=:; export CDPATH; }
@@ -2878,12 +2878,12 @@ cat >>$CONFIG_STATUS <<\EOF
 # NAME is the cpp macro being defined and VALUE is the value it is being given.
 #
 # ac_d sets the value in "#define NAME VALUE" lines.
-ac_dA='s,^\([ 	]*\)#\([ 	]*define[ 	][ 	]*\)'
-ac_dB='[ 	].*$,\1#\2'
+ac_dA='s,^\([     ]*\)#\([     ]*define[     ][     ]*\)'
+ac_dB='[     ].*$,\1#\2'
 ac_dC=' '
 ac_dD=',;t'
 # ac_u turns "#undef NAME" without trailing blanks into "#define NAME VALUE".
-ac_uA='s,^\([ 	]*\)#\([ 	]*\)undef\([ 	][ 	]*\)'
+ac_uA='s,^\([     ]*\)#\([     ]*\)undef\([     ][     ]*\)'
 ac_uB='$,\1#\2define\3'
 ac_uC=' '
 ac_uD=',;t'
@@ -2931,7 +2931,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
       esac
     done` || { (exit 1); exit 1; }
   # Remove the trailing spaces.
-  sed 's/[ 	]*$//' $ac_file_inputs >$tmp/in
+  sed 's/[     ]*$//' $ac_file_inputs >$tmp/in
 
 EOF
 
@@ -2954,9 +2954,9 @@ s/[\\&,]/\\&/g
 s,[\\$`],\\&,g
 t clear
 : clear
-s,^[ 	]*#[ 	]*define[ 	][ 	]*\(\([^ 	(][^ 	(]*\)([^)]*)\)[ 	]*\(.*\)$,${ac_dA}\2${ac_dB}\1${ac_dC}\3${ac_dD},gp
+s,^[     ]*#[     ]*define[     ][     ]*\(\([^     (][^     (]*\)([^)]*)\)[     ]*\(.*\)$,${ac_dA}\2${ac_dB}\1${ac_dC}\3${ac_dD},gp
 t end
-s,^[ 	]*#[ 	]*define[ 	][ 	]*\([^ 	][^ 	]*\)[ 	]*\(.*\)$,${ac_dA}\1${ac_dB}\1${ac_dC}\2${ac_dD},gp
+s,^[     ]*#[     ]*define[     ][     ]*\([^     ][^     ]*\)[     ]*\(.*\)$,${ac_dA}\1${ac_dB}\1${ac_dC}\2${ac_dD},gp
 : end
 EOF
 # If some macros were called several times there might be several times
@@ -2970,13 +2970,13 @@ rm -f confdef2sed.sed
 # example, in the case of _POSIX_SOURCE, which is predefined and required
 # on some systems where configure will not decide to define it.
 cat >>conftest.undefs <<\EOF
-s,^[ 	]*#[ 	]*undef[ 	][ 	]*[a-zA-Z_][a-zA-Z_0-9]*,/* & */,
+s,^[     ]*#[     ]*undef[     ][     ]*[a-zA-Z_][a-zA-Z_0-9]*,/* & */,
 EOF
 
 # Break up conftest.defines because some shells have a limit on the size
 # of here documents, and old seds have small limits too (100 cmds).
 echo '  # Handle all the #define templates only if necessary.' >>$CONFIG_STATUS
-echo '  if egrep "^[ 	]*#[ 	]*define" $tmp/in >/dev/null; then' >>$CONFIG_STATUS
+echo '  if egrep "^[     ]*#[     ]*define" $tmp/in >/dev/null; then' >>$CONFIG_STATUS
 echo '  # If there are no defines, we may have an empty if/fi' >>$CONFIG_STATUS
 echo '  :' >>$CONFIG_STATUS
 rm -f conftest.tail
@@ -2985,7 +2985,7 @@ do
   # Write a limited-size here document to $tmp/defines.sed.
   echo '  cat >$tmp/defines.sed <<CEOF' >>$CONFIG_STATUS
   # Speed up: don't consider the non `#define' lines.
-  echo '/^[ 	]*#[ 	]*define/!b' >>$CONFIG_STATUS
+  echo '/^[     ]*#[     ]*define/!b' >>$CONFIG_STATUS
   # Work around the forget-to-reset-the-flag bug.
   echo 't clr' >>$CONFIG_STATUS
   echo ': clr' >>$CONFIG_STATUS
@@ -3012,7 +3012,7 @@ do
   # Write a limited-size here document to $tmp/undefs.sed.
   echo '  cat >$tmp/undefs.sed <<CEOF' >>$CONFIG_STATUS
   # Speed up: don't consider the non `#undef'
-  echo '/^[ 	]*#[ 	]*undef/!b' >>$CONFIG_STATUS
+  echo '/^[     ]*#[     ]*undef/!b' >>$CONFIG_STATUS
   # Work around the forget-to-reset-the-flag bug.
   echo 't clr' >>$CONFIG_STATUS
   echo ': clr' >>$CONFIG_STATUS
@@ -3051,10 +3051,10 @@ echo "$as_me: $ac_file is unchanged" >&6;}
          .     : '\(.\)' 2>/dev/null ||
 echo X"$ac_file" |
     sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{ s//\1/; q; }
-  	  /^X\(\/\/\)[^/].*/{ s//\1/; q; }
-  	  /^X\(\/\/\)$/{ s//\1/; q; }
-  	  /^X\(\/\).*/{ s//\1/; q; }
-  	  s/.*/./; q'`
+        /^X\(\/\/\)[^/].*/{ s//\1/; q; }
+        /^X\(\/\/\)$/{ s//\1/; q; }
+        /^X\(\/\).*/{ s//\1/; q; }
+        s/.*/./; q'`
       if test "$ac_dir" != "$ac_file" && test "$ac_dir" != .; then
         { case "$ac_dir" in
   [\\/]* | ?:[\\/]* ) as_incr_dir=;;

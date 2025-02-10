@@ -40,7 +40,7 @@ namespace Platform
         }
         return std::string(ModuleName);
     }
-	
+    
     IC std::string GetModuleNameForAddress(uintptr_t address) 
     {
         char formatBuff[MAX_PATH] = { 0 };
@@ -79,8 +79,8 @@ namespace Platform
         return {};
     }
 
-	bool OpenFileWnd(char* buffer, size_t sz_buf, FS_Path* P, int start_flt_ext, char flt[1024], LPCSTR offset, bool bMulti);
-	//bool SaveFileWnd(char* buffer, size_t sz_buf, FS_Path* P, int start_flt_ext, char flt[1024], LPCSTR offset);
+    bool OpenFileWnd(char* buffer, size_t sz_buf, FS_Path* P, int start_flt_ext, char flt[1024], LPCSTR offset, bool bMulti);
+    //bool SaveFileWnd(char* buffer, size_t sz_buf, FS_Path* P, int start_flt_ext, char flt[1024], LPCSTR offset);
 
     IC FileHandle CreateFile(const char* FilePath, bool SharedWrite)
     {

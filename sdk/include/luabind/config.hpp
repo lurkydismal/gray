@@ -26,11 +26,11 @@
 
 #ifndef LUA_DEBUG
 
-#	ifndef LUABIND_NO_ERROR_CHECKING
-#		define LUABIND_NO_ERROR_CHECKING
-#	endif // LUABIND_NO_ERROR_CHECKING
+#    ifndef LUABIND_NO_ERROR_CHECKING
+#        define LUABIND_NO_ERROR_CHECKING
+#    endif // LUABIND_NO_ERROR_CHECKING
 
-#	pragma warning(disable: 4251 577 297)
+#    pragma warning(disable: 4251 577 297)
 #   define LUABIND_DTOR_NOEXCEPT noexcept
 #else
 #   define LUABIND_DTOR_NOEXCEPT
@@ -69,11 +69,11 @@
 // for all classes that you have type-info for.
 
 #ifndef LUABIND_TYPE_INFO
-#	define LUABIND_TYPE_INFO const type_info*
-#	define LUABIND_TYPEID(t) &typeid(t)
-#	define LUABIND_TYPE_INFO_EQUAL(i1, i2) *i1 == *i2
-#	define LUABIND_INVALID_TYPE_INFO &typeid(std::in_place_t)
-#	include <typeinfo>
+#    define LUABIND_TYPE_INFO const type_info*
+#    define LUABIND_TYPEID(t) &typeid(t)
+#    define LUABIND_TYPE_INFO_EQUAL(i1, i2) *i1 == *i2
+#    define LUABIND_INVALID_TYPE_INFO &typeid(std::in_place_t)
+#    include <typeinfo>
 #endif
 
 // LUABIND_NO_EXCEPTIONS
@@ -95,10 +95,10 @@
 #include "luabind_api.h"
 #include <luabind/luabind_memory.h>
 
-using	string_class =	luabind::internal_string;
-#define vector_class	luabind::internal_vector
-#define list_class		luabind::internal_list
-#define map_class				luabind::internal_map
-#define set_class				luabind::internal_set
-#define multimap_class			luabind::internal_multimap
-#define multiset_class			luabind::internal_multiset
+using    string_class =    luabind::internal_string;
+#define vector_class    luabind::internal_vector
+#define list_class        luabind::internal_list
+#define map_class                luabind::internal_map
+#define set_class                luabind::internal_set
+#define multimap_class            luabind::internal_multimap
+#define multiset_class            luabind::internal_multiset

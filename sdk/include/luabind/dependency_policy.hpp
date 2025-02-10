@@ -27,38 +27,38 @@
 
 namespace luabind { namespace detail 
 {
-	// makes A dependent on B, meaning B will outlive A.
-	// internally A stores a reference to B
-	template<size_t A, size_t B>
-	struct dependency_policy
-	{
-		static void postcall(lua_State* L, const index_map& indices)
-		{
-			const int nurse_index = indices[A];
-			const int patient = indices[B];
+    // makes A dependent on B, meaning B will outlive A.
+    // internally A stores a reference to B
+    template<size_t A, size_t B>
+    struct dependency_policy
+    {
+        static void postcall(lua_State* L, const index_map& indices)
+        {
+            const int nurse_index = indices[A];
+            const int patient = indices[B];
 
-			object_rep* nurse = static_cast<object_rep*>(lua_touserdata(L, nurse_index));
-			assert((nurse != 0) && "internal error, please report"); // internal error
+            object_rep* nurse = static_cast<object_rep*>(lua_touserdata(L, nurse_index));
+            assert((nurse != 0) && "internal error, please report"); // internal error
 
-			nurse->add_dependency(L, patient);
-		}
-	};
+            nurse->add_dependency(L, patient);
+        }
+    };
 
 }}
 
 namespace luabind
 {
-	template<size_t A, size_t B>
-	detail::policy_cons<detail::dependency_policy<A, B>>
-	dependency()
-	{
-		return detail::policy_cons<detail::dependency_policy<A, B>>();
-	}
+    template<size_t A, size_t B>
+    detail::policy_cons<detail::dependency_policy<A, B>>
+    dependency()
+    {
+        return detail::policy_cons<detail::dependency_policy<A, B>>();
+    }
 
-	template<size_t A>
-	detail::policy_cons<detail::dependency_policy<0, A>>
-	return_internal_reference()
-	{
-		return detail::policy_cons<detail::dependency_policy<0, A>>();
-	}
+    template<size_t A>
+    detail::policy_cons<detail::dependency_policy<0, A>>
+    return_internal_reference()
+    {
+        return detail::policy_cons<detail::dependency_policy<0, A>>();
+    }
 }

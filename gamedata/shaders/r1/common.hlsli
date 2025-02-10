@@ -4,7 +4,7 @@
 #include "shared\common.hlsli"
 
 uniform float4 L_dynamic_props; // per object, xyz=sun,w=hemi
-uniform float4 L_dynamic_color; // dynamic light color (rgb1)	- spot/point
+uniform float4 L_dynamic_color; // dynamic light color (rgb1)    - spot/point
 uniform float4 L_dynamic_pos; // dynamic light pos+1/range(w) - spot/point
 uniform float4x4 L_dynamic_xform;
 
@@ -20,7 +20,7 @@ float2 calc_detail(float3 w_pos)
     float dtl = distance(w_pos, eye_position) * dt_params.w;
     dtl = min(dtl * dtl, 1.0f);
     float dt_mul = 1.0f - dtl; // dt*  [1 ..  0 ]
-    float dt_add = 0.5f * dtl; // dt+	[0 .. 0.5]
+    float dt_add = 0.5f * dtl; // dt+    [0 .. 0.5]
     return float2(dt_mul, dt_add);
 }
 float3 calc_reflection(float3 pos_w, float3 norm_w)
@@ -151,8 +151,8 @@ float3 v_sun_wrap(float3 n, float w)
 }
 float3 p_hemi(float2 tc)
 {
-    // float3	t_lmh 	= tex2D		(s_hemi, tc);
-    // return  dot	(t_lmh,1.h/3.h);
+    // float3    t_lmh     = tex2D        (s_hemi, tc);
+    // return  dot    (t_lmh,1.h/3.h);
     float4 t_lmh = tex2D(s_hemi, tc);
     return t_lmh.a;
 }

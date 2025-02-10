@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: aimers_bone.h
-//	Created 	: 04.04.2008
-//  Modified 	: 08.04.2008
-//	Author		: Dmitriy Iassenev
-//	Description : bone aimer class
+//    Module         : aimers_bone.h
+//    Created     : 04.04.2008
+//  Modified     : 08.04.2008
+//    Author        : Dmitriy Iassenev
+//    Description : bone aimer class
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef AIMERS_BONE_H_INCLUDED
@@ -20,26 +20,26 @@ template <u32 bone_count>
 class bone : public base
 {
 public:
-							bone	(
-								CGameObject* object,
-								LPCSTR animation_id,
-								bool animation_start,
-								Fvector const& target,
-								LPCSTR (&bones)[bone_count]
-							);
-	inline	Fmatrix const&	get_bone			(u32 const& bone_id) const;
+                            bone    (
+                                CGameObject* object,
+                                LPCSTR animation_id,
+                                bool animation_start,
+                                Fvector const& target,
+                                LPCSTR (&bones)[bone_count]
+                            );
+    inline    Fmatrix const&    get_bone            (u32 const& bone_id) const;
 
 private:
-	typedef base			inherited;
+    typedef base            inherited;
 
 private:
-			void			compute_bone		(u32 const bone_id);
-			void			compute_bones		(u32 const bone_id);
+            void            compute_bone        (u32 const bone_id);
+            void            compute_bones        (u32 const bone_id);
 
 private:
-	Fmatrix					m_result[bone_count];
-	Fmatrix					m_bones[bone_count];
-	u16						m_bones_ids[bone_count];
+    Fmatrix                    m_result[bone_count];
+    Fmatrix                    m_bones[bone_count];
+    u16                        m_bones_ids[bone_count];
 }; // class bone
 
 } // namespace aimers

@@ -1,7 +1,7 @@
 #include "fluid_common.hlsli"
 
 //////////////////////////////////////////////////////////////////////////////////////////
-//	Pixel
+//    Pixel
 float4 main(p_fluidsim input) : SV_Target
 {
     if (IsNonEmptyCell(input.texcoords.xyz))

@@ -6,24 +6,24 @@ class CUITextWnd;
 class game_cl_freemp;
 
 class CUIGameFMP :
-	public UIGameMP
+    public UIGameMP
 {
 private:
-	game_cl_freemp* m_game;
-	typedef UIGameMP inherited;
+    game_cl_freemp* m_game;
+    typedef UIGameMP inherited;
 protected:
-	CUITextWnd* m_stats;
+    CUITextWnd* m_stats;
 public:
-	CUIGameFMP();
-	virtual ~CUIGameFMP();
+    CUIGameFMP();
+    virtual ~CUIGameFMP();
 
-	virtual	void Init(int stage);
+    virtual    void Init(int stage);
 
-	virtual void SetClGame(game_cl_GameState* g);
+    virtual void SetClGame(game_cl_GameState* g);
 
-	virtual void HideShownDialogs();
+    virtual void HideShownDialogs();
 
-	virtual void _BCL OnFrame();
+    virtual void _BCL OnFrame();
 
-	virtual bool IR_UIOnKeyboardPress(int dik);
+    virtual bool IR_UIOnKeyboardPress(int dik);
 };

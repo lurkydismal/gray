@@ -3172,7 +3172,7 @@ end
 -- CHANGELOG
 --   0.9.20 Introduction of local Lua functions for private functions (removed _ function prefix).
 --          Fixed Lua 5.1 compatibility issues.
---   		Introduced json.null to have null values in associative arrays.
+--           Introduced json.null to have null values in associative arrays.
 --          json.encode() performance improvement (more than 50%) through table.concat rather than ..
 --          Introduced decode ability to ignore /**/ comments in the JSON string.
 --   0.9.10 Fix to array encoding / decoding to correctly manage nil/null values in arrays.
@@ -3226,7 +3226,7 @@ function tools.createJson()
 
         -- Handle strings
         if vtype=='string' then
-            return '"' .. json_private.encodeString(v) .. '"'	    -- Need to handle encoding in string
+            return '"' .. json_private.encodeString(v) .. '"'        -- Need to handle encoding in string
         end
 
         -- Handle booleans
@@ -3243,7 +3243,7 @@ function tools.createJson()
                 for i = 1,maxCount do
                     table.insert(rval, json.encode(v[i]))
                 end
-            else	-- An object, not an array
+            else    -- An object, not an array
                 for i,j in pairs(v) do
                     if isEncodable(i) and isEncodable(j) then
                         table.insert(rval, '"' .. json_private.encodeString(i) .. '":' .. json.encode(j))
@@ -3318,7 +3318,7 @@ function tools.createJson()
     -- @param startPos The starting position for the scan.
     -- @return table, int The scanned array as a table, and the position of the next character to scan.
     function decode_scanArray(s,startPos)
-        local array = {}	-- The return value
+        local array = {}    -- The return value
         local stringLen = string.len(s)
         assert(string.sub(s,startPos,startPos)=='[','decode_scanArray called but array does not start at position ' .. startPos .. ' in string:\n'..s )
         startPos = startPos + 1
@@ -3428,7 +3428,7 @@ function tools.createJson()
             assert(startPos<=stringLen, 'JSON string ended unexpectedly searching for value of key ' .. key)
             value, startPos = json.decode(s,startPos)
             object[key]=value
-        until false	-- infinite loop while key-value pairs are found
+        until false    -- infinite loop while key-value pairs are found
     end
 
     -- START SoniEx2
@@ -3554,8 +3554,8 @@ function tools.createJson()
 
         local maxIndex = 0
         for k,v in pairs(t) do
-            if (type(k)=='number' and math.floor(k)==k and 1<=k) then	-- k,v is an indexed pair
-                if (not isEncodable(v)) then return false end	-- All array elements must be encodable
+            if (type(k)=='number' and math.floor(k)==k and 1<=k) then    -- k,v is an indexed pair
+                if (not isEncodable(v)) then return false end    -- All array elements must be encodable
                 maxIndex = math.max(maxIndex,k)
             else
                 if (k=='n') then

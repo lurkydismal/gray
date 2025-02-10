@@ -56,10 +56,10 @@ DLLAPI void FCGI_SetExitStatus(int status);
  * Wrapper stdin, stdout, and stderr variables, set up by FCGI_Accept()
  */
 
-DLLAPI extern	FCGI_FILE	_fcgi_sF[];
-#define FCGI_stdin	(&_fcgi_sF[0])
-#define FCGI_stdout	(&_fcgi_sF[1])
-#define FCGI_stderr	(&_fcgi_sF[2])
+DLLAPI extern    FCGI_FILE    _fcgi_sF[];
+#define FCGI_stdin    (&_fcgi_sF[0])
+#define FCGI_stdout    (&_fcgi_sF[1])
+#define FCGI_stderr    (&_fcgi_sF[2])
 
 /*
  * Wrapper function prototypes, grouped according to sections
@@ -138,31 +138,31 @@ DLLAPI int        FCGI_pclose(FCGI_FILE *);
  */
 
 #undef  FILE
-#define	FILE     FCGI_FILE
+#define    FILE     FCGI_FILE
 
 #undef  stdin
-#define	stdin    FCGI_stdin
+#define    stdin    FCGI_stdin
 #undef  stdout
-#define	stdout   FCGI_stdout
+#define    stdout   FCGI_stdout
 #undef  stderr
-#define	stderr   FCGI_stderr
+#define    stderr   FCGI_stderr
 
 #undef  perror
-#define	perror   FCGI_perror
+#define    perror   FCGI_perror
 
 #undef  fopen
-#define	fopen    FCGI_fopen
+#define    fopen    FCGI_fopen
 #undef  fclose
-#define	fclose   FCGI_fclose
+#define    fclose   FCGI_fclose
 #undef  fflush
-#define	fflush   FCGI_fflush
+#define    fflush   FCGI_fflush
 #undef  freopen
-#define	freopen  FCGI_freopen
+#define    freopen  FCGI_freopen
 
 #undef  setvbuf
-#define	setvbuf  FCGI_setvbuf
+#define    setvbuf  FCGI_setvbuf
 #undef  setbuf
-#define	setbuf   FCGI_setbuf
+#define    setbuf   FCGI_setbuf
 
 #undef  fseek
 #define fseek    FCGI_fseek
@@ -176,35 +176,35 @@ DLLAPI int        FCGI_pclose(FCGI_FILE *);
 #define fsetpos  FCGI_fsetpos
 
 #undef  fgetc
-#define	fgetc    FCGI_fgetc
+#define    fgetc    FCGI_fgetc
 #undef  getc
 #define getc     FCGI_fgetc
 #undef  getchar
-#define	getchar  FCGI_getchar
+#define    getchar  FCGI_getchar
 #undef  ungetc
 #define ungetc   FCGI_ungetc
 
 #undef  fgets
 #define fgets    FCGI_fgets
 #undef  gets
-#define	gets     FCGI_gets
+#define    gets     FCGI_gets
 
 #undef  fputc
 #define fputc    FCGI_fputc
 #undef  putc
 #define putc     FCGI_fputc
 #undef  putchar
-#define	putchar  FCGI_putchar
+#define    putchar  FCGI_putchar
 
 #undef  fputs
-#define	fputs    FCGI_fputs
+#define    fputs    FCGI_fputs
 #undef  puts
-#define	puts     FCGI_puts
+#define    puts     FCGI_puts
 
 #undef  fprintf
-#define	fprintf  FCGI_fprintf
+#define    fprintf  FCGI_fprintf
 #undef  printf
-#define	printf   FCGI_printf
+#define    printf   FCGI_printf
 
 #undef  vfprintf
 #define vfprintf FCGI_vfprintf
@@ -212,16 +212,16 @@ DLLAPI int        FCGI_pclose(FCGI_FILE *);
 #define vprintf  FCGI_vprintf
 
 #undef  fread
-#define	fread    FCGI_fread
+#define    fread    FCGI_fread
 #undef  fwrite
 #define fwrite   FCGI_fwrite
 
 #undef  feof
-#define	feof     FCGI_feof
+#define    feof     FCGI_feof
 #undef  ferror
 #define ferror   FCGI_ferror
 #undef  clearerr
-#define	clearerr FCGI_clearerr
+#define    clearerr FCGI_clearerr
 
 #undef  tmpfile
 #define tmpfile  FCGI_tmpfile
@@ -233,7 +233,7 @@ DLLAPI int        FCGI_pclose(FCGI_FILE *);
 #undef  popen
 #define popen    FCGI_popen
 #undef  pclose
-#define	pclose   FCGI_pclose
+#define    pclose   FCGI_pclose
 
 #endif /* NO_FCGI_DEFINES */
 

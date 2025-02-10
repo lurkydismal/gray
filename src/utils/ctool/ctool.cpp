@@ -1,10 +1,10 @@
 
 
-	#include <stdlib.h>
+    #include <stdlib.h>
 #include "../../xrCore/_types.h"
-	#undef FLT_MAX
-	#undef FLT_MIN
-	#include <stdio.h>
+    #undef FLT_MAX
+    #undef FLT_MIN
+    #include <stdio.h>
     #include <vector>
     #include <algorithm>
     #include <string>
@@ -29,9 +29,9 @@ IsEmptyString( const char* str )
 static unsigned _LZO_MinPacketSize = 8;
 static unsigned _LZO_MaxPacketSize = 8*1024;
 
-int	_PPM_MaxOrder	= 2;
-int _PPM_SaSize		= 48;
-int	_PPM_ModelSize	= 64;
+int    _PPM_MaxOrder    = 2;
+int _PPM_SaSize        = 48;
+int    _PPM_ModelSize    = 64;
 
 
 //------------------------------------------------------------------------------
@@ -88,7 +88,7 @@ _UnpackPackets( const char* src_bin, const char* dst_name="" )
             // TODO: error 
         }
 
-		delete[] src_data;
+        delete[] src_data;
     }
     else
     {
@@ -189,25 +189,25 @@ extern int MakePPMDictionary(char const * file_name);
 static void
 _BuildDictionary( const char* bins_file, const char* dst_name="" )
 {
-	vector<PacketInfo>  packet_info;
+    vector<PacketInfo>  packet_info;
     unsigned            total_packet_count = 0;
     
-	FILE* src_file;
-	fopen_s(&src_file, bins_file, "rb" );
-	static char const * raw_bins_filename = "raw_bins_tmp.bin";
-	FILE*	raw_bins_file;
-	fopen_s(&raw_bins_file, raw_bins_filename, "wb");
-	if (!raw_bins_file)
-	{
-		if (src_file)
-			fclose(src_file);
-		printf("ERROR: failed to create raw_bins_tmp.bin");
-		return;
-	}
+    FILE* src_file;
+    fopen_s(&src_file, bins_file, "rb" );
+    static char const * raw_bins_filename = "raw_bins_tmp.bin";
+    FILE*    raw_bins_file;
+    fopen_s(&raw_bins_file, raw_bins_filename, "wb");
+    if (!raw_bins_file)
+    {
+        if (src_file)
+            fclose(src_file);
+        printf("ERROR: failed to create raw_bins_tmp.bin");
+        return;
+    }
 
     if( src_file )
     {
-		
+        
         // read the file
         
         fseek( src_file, 0, SEEK_END );
@@ -253,7 +253,7 @@ _BuildDictionary( const char* bins_file, const char* dst_name="" )
                 }
 
                 info->add_data( data, sz );
-				fwrite(data, sz, 1, raw_bins_file);
+                fwrite(data, sz, 1, raw_bins_file);
                 
                 data += sz;
                 ++total_packet_count;
@@ -262,18 +262,18 @@ _BuildDictionary( const char* bins_file, const char* dst_name="" )
         }
         else
         {
-			printf("ERROR: Unknown file format");
+            printf("ERROR: Unknown file format");
         }
 
         delete[] src_data;
     }
     else
     {
-		printf("ERROR: can't open file");
+        printf("ERROR: can't open file");
     }
 
-	fclose(raw_bins_file);
-	MakePPMDictionary(raw_bins_filename);
+    fclose(raw_bins_file);
+    MakePPMDictionary(raw_bins_filename);
 
     // dump stats by size
 
@@ -327,7 +327,7 @@ _BuildDictionary( const char* bins_file, const char* dst_name="" )
     FILE* dic;
     fopen_s(&dic, dic_file, "wb" );
 
-	float const lzo_dict_max_size = 5.0f * 1024; //5 Kb
+    float const lzo_dict_max_size = 5.0f * 1024; //5 Kb
 
     if( dic )
     {
@@ -348,8 +348,8 @@ _BuildDictionary( const char* bins_file, const char* dst_name="" )
                               ? unsigned((10000.0f/float(info.size)) * info.weight)
                               : 1;*/
             
-			//unsigned int n   = 0;
-			unsigned int cnt = unsigned int((lzo_dict_max_size*info.weight) / info.size);
+            //unsigned int n   = 0;
+            unsigned int cnt = unsigned int((lzo_dict_max_size*info.weight) / info.size);
            
             for( unsigned p=0,n=0; p<cnt; ++p,++n )
             {
@@ -359,12 +359,12 @@ _BuildDictionary( const char* bins_file, const char* dst_name="" )
                 fwrite( info.packet[n].data, info.packet[n].size, 1, dic );
             }
         }
-		
+        
         fclose( dic );
     }
     else
     {
-		printf("ERROR: failed to create LZO dic file");
+        printf("ERROR: failed to create LZO dic file");
     }
 }
 
@@ -384,25 +384,25 @@ main( int argc, char* argv[] )
     }
 
     int     i = 2;
-	string  dic_name;
+    string  dic_name;
     
     for( ; i<argc; ++i )
     {
         if( argv[i][0] != '-'  &&  argv[i][0] != '/' )
             break;
 
-		if     ( !_strnicmp( argv[i]+1, "dic", 3 ) )
+        if     ( !_strnicmp( argv[i]+1, "dic", 3 ) )
             dic_name = argv[i]+1+3+1;
         else if( !_strnicmp( argv[i]+1, "min_sz", 6 ) )
             _LZO_MinPacketSize = atoi( argv[i]+1+6+1 );
         else if( !_strnicmp( argv[i]+1, "max_sz", 6 ) )
             _LZO_MaxPacketSize = atoi( argv[i]+1+6+1 );
-		else if (!_strnicmp( argv[i]+1, "order", 5 ) )
-			_PPM_MaxOrder = atoi(argv[i]+1+5+1);
-		else if (!_strnicmp( argv[i]+1, "salloc", 6 ) )
-			_PPM_SaSize	= atoi(argv[i]+1+6+1);
-		else if (!_strnicmp( argv[i]+1, "msize", 5 ) )
-			_PPM_ModelSize = atoi(argv[i]+1+5+1);
+        else if (!_strnicmp( argv[i]+1, "order", 5 ) )
+            _PPM_MaxOrder = atoi(argv[i]+1+5+1);
+        else if (!_strnicmp( argv[i]+1, "salloc", 6 ) )
+            _PPM_SaSize    = atoi(argv[i]+1+6+1);
+        else if (!_strnicmp( argv[i]+1, "msize", 5 ) )
+            _PPM_ModelSize = atoi(argv[i]+1+5+1);
 
         if( _LZO_MinPacketSize < 8 )
             _LZO_MinPacketSize = 8;

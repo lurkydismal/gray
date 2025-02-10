@@ -1,82 +1,82 @@
 #pragma once
 
 namespace GameObject {
-	enum ECallbackType {
-		eTradeStart = u32(0),
-		eTradeStop,
-		eTradeSellBuyItem,
-		eTradePerformTradeOperation,
+    enum ECallbackType {
+        eTradeStart = u32(0),
+        eTradeStop,
+        eTradeSellBuyItem,
+        eTradePerformTradeOperation,
 
-		eZoneEnter,
-		eZoneExit,
-		eExitLevelBorder,
-		eEnterLevelBorder,
-		eDeath,
+        eZoneEnter,
+        eZoneExit,
+        eExitLevelBorder,
+        eEnterLevelBorder,
+        eDeath,
 
-		ePatrolPathInPoint,
+        ePatrolPathInPoint,
 
-		eInventoryPda,
-		eInventoryInfo,
-		eArticleInfo,
-		eTaskStateChange,
-		eMapLocationAdded,
+        eInventoryPda,
+        eInventoryInfo,
+        eArticleInfo,
+        eTaskStateChange,
+        eMapLocationAdded,
 
-		eUseObject,
+        eUseObject,
 
-		eHit,
+        eHit,
 
-		eSound,
+        eSound,
 
-		eActionTypeMovement,
-		eActionTypeWatch,
-		eActionTypeRemoved,
-		eActionTypeAnimation,
-		eActionTypeSound,
-		eActionTypeParticle,
-		eActionTypeObject,
+        eActionTypeMovement,
+        eActionTypeWatch,
+        eActionTypeRemoved,
+        eActionTypeAnimation,
+        eActionTypeSound,
+        eActionTypeParticle,
+        eActionTypeObject,
 
-		eActorSleep,
+        eActorSleep,
 
-		eHelicopterOnPoint,
-		eHelicopterOnHit,
+        eHelicopterOnPoint,
+        eHelicopterOnHit,
 
-		eOnItemTake,
-		eOnItemDrop,
+        eOnItemTake,
+        eOnItemDrop,
 
-		eScriptAnimation,
-		
-		eTraderGlobalAnimationRequest,
-		eTraderHeadAnimationRequest,
-		eTraderSoundEnd,
+        eScriptAnimation,
+        
+        eTraderGlobalAnimationRequest,
+        eTraderHeadAnimationRequest,
+        eTraderSoundEnd,
 
-		eInvBoxItemTake,
-		eWeaponNoAmmoAvailable,
+        eInvBoxItemTake,
+        eWeaponNoAmmoAvailable,
 
-		eKeyPress,
-		eKeyRelease,
-		eKeyHold,
-		eMouseMove,
-		eMouseWheel,
+        eKeyPress,
+        eKeyRelease,
+        eKeyHold,
+        eMouseMove,
+        eMouseWheel,
 
-		eOnWeaponFired,
-		eOnWeaponJammed,
-		eOnWeaponZoomIn,
-		eOnWeaponZoomOut,
-		eOnWeaponMagazineEmpty,
+        eOnWeaponFired,
+        eOnWeaponJammed,
+        eOnWeaponZoomIn,
+        eOnWeaponZoomOut,
+        eOnWeaponMagazineEmpty,
 
-		eItemToBelt,
-		eItemToSlot,
-		eItemToRuck,
-		eOnFootStep,
+        eItemToBelt,
+        eItemToSlot,
+        eItemToRuck,
+        eOnFootStep,
 
-		eAttachVehicle,
-		eDetachVehicle,
-		eUseVehicle,
+        eAttachVehicle,
+        eDetachVehicle,
+        eUseVehicle,
 
-		eActorBeforeDeath,
-		eActorHudAnimationEnd,
+        eActorBeforeDeath,
+        eActorHudAnimationEnd,
 
-		eDummy = u32(-1),
-	};
+        eDummy = u32(-1),
+    };
 };
 

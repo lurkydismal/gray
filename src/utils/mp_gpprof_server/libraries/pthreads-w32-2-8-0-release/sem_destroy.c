@@ -4,10 +4,10 @@
  * Module: sem_destroy.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -95,12 +95,12 @@ sem_destroy (sem_t * sem)
               /* There are no threads currently blocked on this semaphore. */
 
               if (!CloseHandle (s->sem))
-	        {
+            {
                   (void) pthread_mutex_unlock (&s->lock);
-	          result = EINVAL;
-	        }
-	      else
-	        {
+              result = EINVAL;
+            }
+          else
+            {
                   /*
                    * Invalidate the semaphore handle when we have the lock.
                    * Other sema operations should test this after acquiring the lock
@@ -141,4 +141,4 @@ sem_destroy (sem_t * sem)
 
   return 0;
 
-}				/* sem_destroy */
+}                /* sem_destroy */

@@ -2,9 +2,9 @@
 #pragma once
 
 #ifndef XRGAME_EXPORTS
-#define	MTL_EXPORT_API
+#define    MTL_EXPORT_API
 #define ENGINE_API _declspec(dllimport)
-#define DLL_API		
+#define DLL_API        
 #endif
 #define ECORE_API
 
@@ -20,6 +20,6 @@
 class CGameMtlLibrary;
 IC CGameMtlLibrary &GMLibrary()
 {
-	VERIFY(PGMLib);
-	return *PGMLib;
+    VERIFY(PGMLib);
+    return *PGMLib;
 }

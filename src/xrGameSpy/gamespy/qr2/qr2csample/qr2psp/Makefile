@@ -12,7 +12,7 @@ SDK_CFLAGS  = -DUNIQUEID
 TARGET      = qr2csample
 
 #All the object files needed for this SDK
-OBJS	= ../../../common/psp/pspcommon.o\
+OBJS    = ../../../common/psp/pspcommon.o\
           ../../../common/psp/gsUtilPSP.o\
           ../../../common/gsPlatformSocket.o\
           ../../../common/gsPlatformUtil.o\
@@ -20,7 +20,7 @@ OBJS	= ../../../common/psp/pspcommon.o\
           ../../qr2.o\
           ../../qr2regkeys.o\
           ../$(TARGET).o
-	  
+      
 #Include the stuff common to the GameSpy.net SDKs
 include ../../../common/psp/Makefile.common
 

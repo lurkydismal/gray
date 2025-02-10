@@ -5,7 +5,7 @@
 #ifndef SHARED_COMMON_H
 #define SHARED_COMMON_H
 
-//	Used by VS
+//    Used by VS
 cbuffer dynamic_transforms
 {
     uniform float4x4 m_WVP;

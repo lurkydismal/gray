@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_effector.cpp
-//	Created 	: 06.02.2004
-//  Modified 	: 06.02.2004
-//	Author		: Dmitriy Iassenev
-//	Description : XRay Script effector class
+//    Module         : script_effector.cpp
+//    Created     : 06.02.2004
+//  Modified     : 06.02.2004
+//    Author        : Dmitriy Iassenev
+//    Description : XRay Script effector class
 ////////////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
@@ -11,27 +11,27 @@
 #include "Actor.h"
 #include "ActorEffector.h"
 
-CScriptEffector::~CScriptEffector	()
+CScriptEffector::~CScriptEffector    ()
 {
-	Msg								("CScriptEffector::~CScriptEffector() called");
+    Msg                                ("CScriptEffector::~CScriptEffector() called");
 }
 
-BOOL CScriptEffector::Process		(SPPInfo	&pp)
+BOOL CScriptEffector::Process        (SPPInfo    &pp)
 {
-	return							(!!process(&pp));
+    return                            (!!process(&pp));
 }
 
-bool CScriptEffector::process		(SPPInfo *pp)
+bool CScriptEffector::process        (SPPInfo *pp)
 {
-	return							(!!inherited::Process(*pp));
+    return                            (!!inherited::Process(*pp));
 }
 
-void CScriptEffector::Add			()
+void CScriptEffector::Add            ()
 {
-	Actor()->Cameras().AddPPEffector		(this);
+    Actor()->Cameras().AddPPEffector        (this);
 }
 
-void CScriptEffector::Remove		()
+void CScriptEffector::Remove        ()
 {
-	Actor()->Cameras().RemovePPEffector	(m_tEffectorType);
+    Actor()->Cameras().RemovePPEffector    (m_tEffectorType);
 }

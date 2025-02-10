@@ -823,21 +823,21 @@ void debug_hook_c(lua_State* L, lua_Debug* ar) {
     if (lua_getinfo(L, "Slf", ar) != 0) {
         //if in c function , return
         if (!hook_process_cfunction(L, ar)) return;
-        //if in debugger , return	
+        //if in debugger , return    
         int source_len = (int)strlen(ar->source);
         if (debug_file_path_len == source_len) {
-            if (!strcmp(debug_file_path, ar->source))	return;
+            if (!strcmp(debug_file_path, ar->source))    return;
         }
         if (tools_file_path_len == source_len) {
-            if (!strcmp(tools_file_path, ar->source))	return;
+            if (!strcmp(tools_file_path, ar->source))    return;
         }
         //slua "temp buffer"
         if (11 == source_len) {
-            if (!strcmp("temp buffer", ar->source))	return;
+            if (!strcmp("temp buffer", ar->source))    return;
         }
         //xlua "chunk"
         if (5 == source_len) {
-            if (!strcmp("chunk", ar->source))	return;
+            if (!strcmp("chunk", ar->source))    return;
         }
 
         //code section
@@ -1015,7 +1015,7 @@ struct LuaCppBinding<void(T::*)(ARGS...), F> {
 #endif // LUA_VERSION_NUM > 501
 
 void Slua_UE_find_function()
-{		//slua - ue Lua 5.3
+{        //slua - ue Lua 5.3
 #if LUA_VERSION_NUM > 501
 #define SLUABINDING(f) LuaCppBinding<decltype(f), f>::luaCFunction;
     lua_version = SLUABINDING(&slua::LuaInterface::lua_version);

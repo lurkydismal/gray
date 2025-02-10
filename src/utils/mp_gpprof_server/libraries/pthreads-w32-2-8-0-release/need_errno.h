@@ -52,7 +52,7 @@ extern "C" {
 /* Define _CRTAPI1 (for compatibility with the NT SDK) */
 
 #ifndef _CRTAPI1
-#if	_MSC_VER >= 800 && _M_IX86 >= 300
+#if    _MSC_VER >= 800 && _M_IX86 >= 300
 #define _CRTAPI1 __cdecl
 #else
 #define _CRTAPI1

@@ -40,7 +40,7 @@
 
 int
 pthread_setschedparam (pthread_t thread, int policy,
-		       const struct sched_param *param)
+               const struct sched_param *param)
 {
   int result;
 
@@ -93,7 +93,7 @@ ptw32_setthreadpriority (pthread_t thread, int policy, int priority)
       prio = THREAD_PRIORITY_LOWEST;
     }
   else if (THREAD_PRIORITY_TIME_CRITICAL > prio
-	   && THREAD_PRIORITY_HIGHEST < prio)
+       && THREAD_PRIORITY_HIGHEST < prio)
     {
       prio = THREAD_PRIORITY_HIGHEST;
     }
@@ -106,17 +106,17 @@ ptw32_setthreadpriority (pthread_t thread, int policy, int priority)
     {
       /* If this fails, the current priority is unchanged. */
       if (0 == SetThreadPriority (tp->threadH, prio))
-	{
-	  result = EINVAL;
-	}
+    {
+      result = EINVAL;
+    }
       else
-	{
-	  /*
-	   * Must record the thread's sched_priority as given,
-	   * not as finally adjusted.
-	   */
-	  tp->sched_priority = priority;
-	}
+    {
+      /*
+       * Must record the thread's sched_priority as given,
+       * not as finally adjusted.
+       */
+      tp->sched_priority = priority;
+    }
 
       (void) pthread_mutex_unlock (&tp->threadLock);
     }

@@ -32,8 +32,8 @@ typedef unsigned int TCLASSID;
   virtual ULONG __stdcall Release() {return 1;};  
 
 #define IUNKNOWN_METHODS_IMPLEMENTATION_REFERENCE_EXCLUDEQUERYINTERFACE()    \
-	virtual ULONG __stdcall AddRef() {return 1;};  \
-	virtual ULONG __stdcall Release() {return 1;};
+    virtual ULONG __stdcall AddRef() {return 1;};  \
+    virtual ULONG __stdcall Release() {return 1;};
 
 //REVIEW: QueryInterface()
 //The interface returned by QueryInterface in response to a request for IID_IUnknown (the interface 
@@ -128,10 +128,10 @@ template <class InterfaceClass>
 class TInterfaceObject : public InterfaceClass
 {
 public:
-	virtual DWORD __stdcall GetVersion() const
-	{
-		return InterfaceClass::VERSION;
-	}
+    virtual DWORD __stdcall GetVersion() const
+    {
+        return InterfaceClass::VERSION;
+    }
 }; 
 
 #endif VECOM_INCLUDED

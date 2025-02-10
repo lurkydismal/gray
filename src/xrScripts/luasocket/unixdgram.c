@@ -142,10 +142,10 @@ static int meth_sendto(lua_State *L)
     size_t len = strlen(path);
 
     if (len >= sizeof(remote.sun_path)) {
-		lua_pushnil(L);
-		lua_pushstring(L, "path too long");
-		return 2;
-	}
+        lua_pushnil(L);
+        lua_pushstring(L, "path too long");
+        return 2;
+    }
 
     memset(&remote, 0, sizeof(remote));
     strcpy(remote.sun_path, path);
@@ -157,7 +157,7 @@ static int meth_sendto(lua_State *L)
     err = socket_sendto(&un->sock, data, count, &sent, (SA *) &remote, remote.sun_len, tm);
 #else
     err = socket_sendto(&un->sock, data, count, &sent, (SA *) &remote,
-		   	sizeof(remote.sun_family) + len, tm);
+               sizeof(remote.sun_family) + len, tm);
 #endif
     if (err != IO_DONE) {
         lua_pushnil(L);
@@ -224,7 +224,7 @@ static int meth_receivefrom(lua_State *L) {
     }
 
     lua_pushlstring(L, dgram, got);
-	/* the path may be empty, when client send without bind */
+    /* the path may be empty, when client send without bind */
     lua_pushstring(L, addr.sun_path);
     if (wanted > sizeof(buf)) free(dgram);
     return 2;

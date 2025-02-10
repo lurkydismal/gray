@@ -16,7 +16,7 @@ struct v2p_particle
 void main(in vv I, out v2p_particle pp)
 {
     pp.color = I.c;
-	
+    
     pp.hpos = mul(m_WVP, I.P);
     pp.hpos.xy += m_taa_jitter.xy * pp.hpos.w;
 }

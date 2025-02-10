@@ -11,12 +11,12 @@
 namespace xray_re {
 
 enum {
-	RSF_COLLISION	= 0x0001,
-	RSF_RENDERING	= 0x0002,
-	RSF_LIGHTMAP	= 0x0004,
-	RSF_TWO_SIDED	= 0x0008,
-	RSF_AUTOMATIC	= 0x0010,	// assign texture/engine shader basing on game material
-	RSF_DEBUG	= 0x0020,
+    RSF_COLLISION    = 0x0001,
+    RSF_RENDERING    = 0x0002,
+    RSF_LIGHTMAP    = 0x0004,
+    RSF_TWO_SIDED    = 0x0008,
+    RSF_AUTOMATIC    = 0x0010,    // assign texture/engine shader basing on game material
+    RSF_DEBUG    = 0x0020,
 };
 
 // editable object surface flags
@@ -26,34 +26,34 @@ const uint32_t ESURFACE_DEFAULT_FVF = 0x112;
 
 class xr_raw_surface {
 public:
-	void		set(uint16_t _texture, uint16_t _eshader = UINT16_MAX,
-					uint16_t _gamemtl = UINT16_MAX, uint16_t _flags = RSF_RENDERING);
-	void		clear();
+    void        set(uint16_t _texture, uint16_t _eshader = UINT16_MAX,
+                    uint16_t _gamemtl = UINT16_MAX, uint16_t _flags = RSF_RENDERING);
+    void        clear();
 
-	bool		collision() const;
-	bool		rendering() const;
-	bool		lightmap() const;
-	bool		two_sided() const;
-	bool		automatic() const;
-	bool		debug() const;
+    bool        collision() const;
+    bool        rendering() const;
+    bool        lightmap() const;
+    bool        two_sided() const;
+    bool        automatic() const;
+    bool        debug() const;
 
-	int		compare(const xr_raw_surface& right) const;
-	bool		operator<(const xr_raw_surface& right) const;
-	bool		operator==(const xr_raw_surface& right) const;
+    int        compare(const xr_raw_surface& right) const;
+    bool        operator<(const xr_raw_surface& right) const;
+    bool        operator==(const xr_raw_surface& right) const;
 
-	union {
-		struct {
-			uint16_t	texture;
-			uint16_t	eshader;
-			uint16_t	gamemtl;
-			uint16_t	flags;
-		};
-		// for comparison
-		struct {
-			uint32_t	blob32[2];
-		};
-		uint64_t		blob64;
-	};
+    union {
+        struct {
+            uint16_t    texture;
+            uint16_t    eshader;
+            uint16_t    gamemtl;
+            uint16_t    flags;
+        };
+        // for comparison
+        struct {
+            uint32_t    blob32[2];
+        };
+        uint64_t        blob64;
+    };
 };
 
 TYPEDEF_STD_VECTOR(xr_raw_surface)
@@ -63,64 +63,64 @@ class xr_writer;
 
 class xr_surface {
 public:
-			xr_surface(bool skeletal = false);
-	virtual		~xr_surface();
+            xr_surface(bool skeletal = false);
+    virtual        ~xr_surface();
 
-	void		load_0(xr_reader& r);
-	void		load_1(xr_reader& r);
-	void		load_2(xr_reader& r);
-	void		save(xr_writer& w) const;
+    void        load_0(xr_reader& r);
+    void        load_1(xr_reader& r);
+    void        load_2(xr_reader& r);
+    void        save(xr_writer& w) const;
 
-	int		compare(const xr_surface& right) const;
-	bool		operator==(const xr_surface& right) const;
-	bool		operator<(const xr_surface& right) const;
+    int        compare(const xr_surface& right) const;
+    bool        operator==(const xr_surface& right) const;
+    bool        operator<(const xr_surface& right) const;
 
-	std::string&		name();
-	const std::string&	name() const;
-	std::string&		eshader();
-	const std::string&	eshader() const;
-	std::string&		cshader();
-	const std::string&	cshader() const;
-	std::string&		gamemtl();
-	const std::string&	gamemtl() const;
-	std::string&		texture();
-	const std::string&	texture() const;
-	std::string&		vmap();
-	const std::string&	vmap() const;
-	uint32_t&		flags();
-	uint32_t		flags() const;
+    std::string&        name();
+    const std::string&    name() const;
+    std::string&        eshader();
+    const std::string&    eshader() const;
+    std::string&        cshader();
+    const std::string&    cshader() const;
+    std::string&        gamemtl();
+    const std::string&    gamemtl() const;
+    std::string&        texture();
+    const std::string&    texture() const;
+    std::string&        vmap();
+    const std::string&    vmap() const;
+    uint32_t&        flags();
+    uint32_t        flags() const;
 
-	// shortcuts
-	bool			two_sided() const;
-	void			set_two_sided();
+    // shortcuts
+    bool            two_sided() const;
+    void            set_two_sided();
 
 private:
-	std::string	m_name;
-	std::string	m_eshader;
-	std::string	m_cshader;
-	std::string	m_gamemtl;
-	std::string	m_texture;
-	std::string	m_vmap;
-	uint32_t	m_flags;
-	uint32_t	m_fvf;
+    std::string    m_name;
+    std::string    m_eshader;
+    std::string    m_cshader;
+    std::string    m_gamemtl;
+    std::string    m_texture;
+    std::string    m_vmap;
+    uint32_t    m_flags;
+    uint32_t    m_fvf;
 };
 
 TYPEDEF_STD_VECTOR_PTR(xr_surface)
 
 inline void xr_raw_surface::clear()
 {
-	texture = UINT16_MAX;
-	eshader = UINT16_MAX;
-	gamemtl = UINT16_MAX;
-	flags = 0;
+    texture = UINT16_MAX;
+    eshader = UINT16_MAX;
+    gamemtl = UINT16_MAX;
+    flags = 0;
 }
 
 inline void xr_raw_surface::set(uint16_t _texture, uint16_t _eshader, uint16_t _gamemtl, uint16_t _flags)
 {
-	texture = _texture;
-	eshader = _eshader;
-	gamemtl = _gamemtl;
-	flags = _flags;
+    texture = _texture;
+    eshader = _eshader;
+    gamemtl = _gamemtl;
+    flags = _flags;
 }
 
 inline bool xr_raw_surface::collision() const { return !!(flags & RSF_COLLISION); }
@@ -132,7 +132,7 @@ inline bool xr_raw_surface::debug() const { return !!(flags & RSF_DEBUG); }
 
 inline int xr_raw_surface::compare(const xr_raw_surface& right) const
 {
-	return (blob64 < right.blob64) ? -1 : ((blob64 == right.blob64) ? 0 : +1);
+    return (blob64 < right.blob64) ? -1 : ((blob64 == right.blob64) ? 0 : +1);
 }
 inline bool xr_raw_surface::operator<(const xr_raw_surface& right) const { return blob64 < right.blob64; }
 inline bool xr_raw_surface::operator==(const xr_raw_surface& right) const { return blob64 == right.blob64; }

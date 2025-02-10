@@ -4,35 +4,35 @@
 PROJECT=gptestc
 
 PROG_OBJS = \
-	../../../md5c.o\
-	../../../darray.o\
-	../../../hashtable.o\
-	../../../common/gsAvailable.o\
-	../../../common/gsDebug.o\
-	../../../common/gsStringUtil.o\
-	../../../common/gsPlatform.o\
-	../../../common/gsPlatformSocket.o\
-	../../../common/gsPlatformThread.o\
-	../../../common/gsPlatformUtil.o\
-	../../../common/gsMemory.o\
+    ../../../md5c.o\
+    ../../../darray.o\
+    ../../../hashtable.o\
+    ../../../common/gsAvailable.o\
+    ../../../common/gsDebug.o\
+    ../../../common/gsStringUtil.o\
+    ../../../common/gsPlatform.o\
+    ../../../common/gsPlatformSocket.o\
+    ../../../common/gsPlatformThread.o\
+    ../../../common/gsPlatformUtil.o\
+    ../../../common/gsMemory.o\
         ../../../common/gsUdpEngine.o\
-	../../../common/macosx/MacOSXCommon.o\
-	../../gp.o\
-	../../gpi.o\
-	../../gpiBuddy.o\
-	../../gpiBuffer.o\
-	../../gpiCallback.o\
-	../../gpiConnect.o\
-	../../gpiInfo.o\
+    ../../../common/macosx/MacOSXCommon.o\
+    ../../gp.o\
+    ../../gpi.o\
+    ../../gpiBuddy.o\
+    ../../gpiBuffer.o\
+    ../../gpiCallback.o\
+    ../../gpiConnect.o\
+    ../../gpiInfo.o\
         ../../gpiKeys.o\
-	../../gpiOperation.o\
-	../../gpiPeer.o\
-	../../gpiProfile.o\
-	../../gpiSearch.o\
-	../../gpiUnique.o\
-	../../gpiUtility.o\
-	../../gpiTransfer.o\
-	../gptestc.o\
+    ../../gpiOperation.o\
+    ../../gpiPeer.o\
+    ../../gpiProfile.o\
+    ../../gpiSearch.o\
+    ../../gpiUnique.o\
+    ../../gpiUtility.o\
+    ../../gpiTransfer.o\
+    ../gptestc.o\
         ../../../gt2/gt2Auth.o\
         ../../../gt2/gt2Buffer.o\
         ../../../gt2/gt2Callback.o\

@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: steering_behaviour_alignment.h
-//	Created 	: 07.11.2007
-//  Modified 	: 07.11.2007
-//	Author		: Dmitriy Iassenev
-//	Description : steering behaviour alignment class
+//    Module         : steering_behaviour_alignment.h
+//    Created     : 07.11.2007
+//  Modified     : 07.11.2007
+//    Author        : Dmitriy Iassenev
+//    Description : steering behaviour alignment class
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef STEERING_BEHAVIOUR_ALIGNMENT_H_INCLUDED
@@ -19,13 +19,13 @@ namespace steering_behaviour {
 class alignment final : public base
 {
 public:
-	alignment(const alignment& other) = delete;
-	alignment& operator=(const alignment& other) = delete;
-						alignment	(CAI_Rat const *object);
-	virtual	Fvector		direction	();
+    alignment(const alignment& other) = delete;
+    alignment& operator=(const alignment& other) = delete;
+                        alignment    (CAI_Rat const *object);
+    virtual    Fvector        direction    ();
 
 private:
-	typedef base		inherited;
+    typedef base        inherited;
 };
 
 } // namespace steering_behaviour

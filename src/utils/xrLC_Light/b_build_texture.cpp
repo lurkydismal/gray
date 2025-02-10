@@ -4,17 +4,17 @@
 /*
 struct b_texture
 {
-	string128			name;
-	u32					dwWidth;
-	u32					dwHeight;
-	BOOL				bHasAlpha;
-	u32*				pSurface;
+    string128            name;
+    u32                    dwWidth;
+    u32                    dwHeight;
+    BOOL                bHasAlpha;
+    u32*                pSurface;
 };
-STextureParams	THM;
+STextureParams    THM;
 */
 
 void clear( b_BuildTexture &texture )
 {
-	xr_free(texture.pSurface);
+    xr_free(texture.pSurface);
 }
  

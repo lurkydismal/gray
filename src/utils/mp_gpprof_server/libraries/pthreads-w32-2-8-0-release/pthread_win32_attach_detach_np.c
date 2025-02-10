@@ -70,18 +70,18 @@ pthread_win32_process_attach_np ()
 #else
 
   if (GetProcessAffinityMask (GetCurrentProcess (),
-			      &vProcessCPUs, &vSystemCPUs))
+                  &vProcessCPUs, &vSystemCPUs))
     {
       int CPUs = 0;
       DWORD_PTR bit;
 
       for (bit = 1; bit != 0; bit <<= 1)
-	{
-	  if (vSystemCPUs & bit)
-	    {
-	      CPUs++;
-	    }
-	}
+    {
+      if (vSystemCPUs & bit)
+        {
+          CPUs++;
+        }
+    }
       ptw32_smp_system = (CPUs > 1);
     }
   else
@@ -113,7 +113,7 @@ pthread_win32_process_attach_np ()
       PTW32_INTERLOCKED_LONG))
 #if defined(NEED_UNICODE_CONSTS)
     GetProcAddress (ptw32_h_kernel32,
-		    (const TCHAR *) TEXT ("InterlockedCompareExchange"));
+            (const TCHAR *) TEXT ("InterlockedCompareExchange"));
 #else
     GetProcAddress (ptw32_h_kernel32, (LPCSTR) "InterlockedCompareExchange");
 #endif
@@ -153,10 +153,10 @@ pthread_win32_process_attach_np ()
     {
       ptw32_register_cancelation = (DWORD (*)(PAPCFUNC, HANDLE, DWORD))
 #if defined(NEED_UNICODE_CONSTS)
-	GetProcAddress (ptw32_h_quserex,
-			(const TCHAR *) TEXT ("QueueUserAPCEx"));
+    GetProcAddress (ptw32_h_quserex,
+            (const TCHAR *) TEXT ("QueueUserAPCEx"));
 #else
-	GetProcAddress (ptw32_h_quserex, (LPCSTR) "QueueUserAPCEx");
+    GetProcAddress (ptw32_h_quserex, (LPCSTR) "QueueUserAPCEx");
 #endif
     }
 
@@ -165,9 +165,9 @@ pthread_win32_process_attach_np ()
       ptw32_register_cancelation = ptw32_RegisterCancelation;
 
       if (ptw32_h_quserex != NULL)
-	{
-	  (void) FreeLibrary (ptw32_h_quserex);
-	}
+    {
+      (void) FreeLibrary (ptw32_h_quserex);
+    }
       ptw32_h_quserex = 0;
     }
   else
@@ -177,19 +177,19 @@ pthread_win32_process_attach_np ()
 
       queue_user_apc_ex_init = (BOOL (*)(VOID))
 #if defined(NEED_UNICODE_CONSTS)
-	GetProcAddress (ptw32_h_quserex,
-			(const TCHAR *) TEXT ("QueueUserAPCEx_Init"));
+    GetProcAddress (ptw32_h_quserex,
+            (const TCHAR *) TEXT ("QueueUserAPCEx_Init"));
 #else
-	GetProcAddress (ptw32_h_quserex, (LPCSTR) "QueueUserAPCEx_Init");
+    GetProcAddress (ptw32_h_quserex, (LPCSTR) "QueueUserAPCEx_Init");
 #endif
 
       if (queue_user_apc_ex_init == NULL || !queue_user_apc_ex_init ())
-	{
-	  ptw32_register_cancelation = ptw32_RegisterCancelation;
+    {
+      ptw32_register_cancelation = ptw32_RegisterCancelation;
 
-	  (void) FreeLibrary (ptw32_h_quserex);
-	  ptw32_h_quserex = 0;
-	}
+      (void) FreeLibrary (ptw32_h_quserex);
+      ptw32_h_quserex = 0;
+    }
     }
 
   if (ptw32_h_quserex)
@@ -209,17 +209,17 @@ pthread_win32_process_detach_np ()
       ptw32_thread_t * sp = (ptw32_thread_t *) pthread_getspecific (ptw32_selfThreadKey);
 
       if (sp != NULL)
-	{
-	  /*
-	   * Detached threads have their resources automatically
-	   * cleaned up upon exit (others must be 'joined').
-	   */
-	  if (sp->detachState == PTHREAD_CREATE_DETACHED)
-	    {
-	      ptw32_threadDestroy (sp->ptHandle);
-	      TlsSetValue (ptw32_selfThreadKey->key, NULL);
-	    }
-	}
+    {
+      /*
+       * Detached threads have their resources automatically
+       * cleaned up upon exit (others must be 'joined').
+       */
+      if (sp->detachState == PTHREAD_CREATE_DETACHED)
+        {
+          ptw32_threadDestroy (sp->ptHandle);
+          TlsSetValue (ptw32_selfThreadKey->key, NULL);
+        }
+    }
 
       /*
        * The DLL is being unmapped from the process's address space
@@ -227,29 +227,29 @@ pthread_win32_process_detach_np ()
       ptw32_processTerminate ();
 
       if (ptw32_h_quserex)
-	{
-	  /* Close QueueUserAPCEx */
-	  BOOL (*queue_user_apc_ex_fini) (VOID);
+    {
+      /* Close QueueUserAPCEx */
+      BOOL (*queue_user_apc_ex_fini) (VOID);
 
-	  queue_user_apc_ex_fini = (BOOL (*)(VOID))
+      queue_user_apc_ex_fini = (BOOL (*)(VOID))
 #if defined(NEED_UNICODE_CONSTS)
-	    GetProcAddress (ptw32_h_quserex,
-			    (const TCHAR *) TEXT ("QueueUserAPCEx_Fini"));
+        GetProcAddress (ptw32_h_quserex,
+                (const TCHAR *) TEXT ("QueueUserAPCEx_Fini"));
 #else
-	    GetProcAddress (ptw32_h_quserex, (LPCSTR) "QueueUserAPCEx_Fini");
+        GetProcAddress (ptw32_h_quserex, (LPCSTR) "QueueUserAPCEx_Fini");
 #endif
 
-	  if (queue_user_apc_ex_fini != NULL)
-	    {
-	      (void) queue_user_apc_ex_fini ();
-	    }
-	  (void) FreeLibrary (ptw32_h_quserex);
-	}
+      if (queue_user_apc_ex_fini != NULL)
+        {
+          (void) queue_user_apc_ex_fini ();
+        }
+      (void) FreeLibrary (ptw32_h_quserex);
+    }
 
       if (ptw32_h_kernel32)
-	{
-	  (void) FreeLibrary (ptw32_h_kernel32);
-	}
+    {
+      (void) FreeLibrary (ptw32_h_kernel32);
+    }
     }
 
   return TRUE;
@@ -273,24 +273,24 @@ pthread_win32_thread_detach_np ()
       ptw32_thread_t * sp = (ptw32_thread_t *) pthread_getspecific (ptw32_selfThreadKey);
 
       if (sp != NULL) // otherwise Win32 thread with no implicit POSIX handle.
-	{
-	  ptw32_callUserDestroyRoutines (sp->ptHandle);
+    {
+      ptw32_callUserDestroyRoutines (sp->ptHandle);
 
-	  (void) pthread_mutex_lock (&sp->cancelLock);
-	  sp->state = PThreadStateLast;
-	  /*
-	   * If the thread is joinable at this point then it MUST be joined
-	   * or detached explicitly by the application.
-	   */
-	  (void) pthread_mutex_unlock (&sp->cancelLock);
+      (void) pthread_mutex_lock (&sp->cancelLock);
+      sp->state = PThreadStateLast;
+      /*
+       * If the thread is joinable at this point then it MUST be joined
+       * or detached explicitly by the application.
+       */
+      (void) pthread_mutex_unlock (&sp->cancelLock);
 
-	  if (sp->detachState == PTHREAD_CREATE_DETACHED)
-	    {
-	      ptw32_threadDestroy (sp->ptHandle);
+      if (sp->detachState == PTHREAD_CREATE_DETACHED)
+        {
+          ptw32_threadDestroy (sp->ptHandle);
 
-	      TlsSetValue (ptw32_selfThreadKey->key, NULL);
-	    }
-	}
+          TlsSetValue (ptw32_selfThreadKey->key, NULL);
+        }
+    }
     }
 
   return TRUE;

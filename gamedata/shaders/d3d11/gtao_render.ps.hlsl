@@ -143,12 +143,12 @@ uint main(PSInput I) : SV_Target
 
     // This noise pattern seems to work best
     float noise_pattern[16] =
-	{
-		0.40625, 0.71875, 0.03125, 0.84375,
-		0.90625, 0.78125, 0.34375, 0.21875,
-		0.53125, 0.15625, 0.65625, 0.28125,
-		0.96875, 0.59375, 0.09375, 0.46875
-	};
+    {
+        0.40625, 0.71875, 0.03125, 0.84375,
+        0.90625, 0.78125, 0.34375, 0.21875,
+        0.53125, 0.15625, 0.65625, 0.28125,
+        0.96875, 0.59375, 0.09375, 0.46875
+    };
 
     float jitter = noise_pattern[pixel_index.x + pixel_index.y * 4u];
 
@@ -158,7 +158,7 @@ uint main(PSInput I) : SV_Target
         Normal = s_normal.SampleLevel(smp_nofilter, I.texcoord.xy, 0.0f).xyz;
         Normal = normalize(Normal.xyz - 0.5f);
         Normal.z = -Normal.z;
-		
+        
         Depth = s_position.SampleLevel(smp_nofilter, I.texcoord.xy, 0.0f).x;
         Point = GbufferGetPointRealUnjitter(I.texcoord.xy, Depth);
     }

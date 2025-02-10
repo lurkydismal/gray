@@ -51,31 +51,31 @@ LDFLAGS     = -Wl,-Map,$(TARGET).map -mno-crt0 -L$(LIBDIR) -lm
 .SUFFIXES: .c .s
 
 all: FORCE
-	@echo type either make eenet or make snsystems
+    @echo type either make eenet or make snsystems
 
 $(TARGET).elf: $(OBJS) $(LIBS)
-	$(LD) -o $@ -T $(LCFILE) $(OBJS) $(STACKLIB) $(LIBS) $(LDFLAGS)
+    $(LD) -o $@ -T $(LCFILE) $(OBJS) $(STACKLIB) $(LIBS) $(LDFLAGS)
 
 crt0.o: $(LIBDIR)/crt0.s
-	$(AS) $(ASFLAGS) -o $@ $< > $*.lst
+    $(AS) $(ASFLAGS) -o $@ $< > $*.lst
 
 .s.o:
-	$(AS) $(ASFLAGS) $(INCDIR) -o $@ $< > $*.lst
+    $(AS) $(ASFLAGS) $(INCDIR) -o $@ $< > $*.lst
 
 .c.o:
-	$(CC) $(CFLAGS) -D$(STACKDEF) $(INCDIR) -c $< -o $*.o > $*.lst
+    $(CC) $(CFLAGS) -D$(STACKDEF) $(INCDIR) -c $< -o $*.o > $*.lst
 
 run: $(TARGET).elf
-	$(RUN) $(TARGET).elf
+    $(RUN) $(TARGET).elf
 
 snsystems: $(TARGET).elf
 
 $(ENTCNF):
-	cd $(ENTCNFDIR) ; make
+    cd $(ENTCNFDIR) ; make
 
 eenet: $(ENTCNF) $(TARGET).elf
 
 clean:
-	$(RM) $(OBJS) *.o *.map *.lst core *.dis *.elf
+    $(RM) $(OBJS) *.o *.map *.lst core *.dis *.elf
 
 FORCE:

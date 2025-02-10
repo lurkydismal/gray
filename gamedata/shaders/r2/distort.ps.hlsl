@@ -5,7 +5,7 @@ struct v2p
     float2 tc : TEXCOORD0; // base & distort
 };
 
-// uniform sampler2D 	s_base;
+// uniform sampler2D     s_base;
 uniform sampler2D s_distort;
 
 // Pixel

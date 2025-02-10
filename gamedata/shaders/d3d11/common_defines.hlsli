@@ -1,7 +1,7 @@
 #ifndef common_defines_h_included
 #define common_defines_h_included
 
-// Defines                                		//
+// Defines                                        //
 #define def_gloss float(2.f / 255.f)
 #define def_dbumph float(0.333f)
 #define def_virtualh float(0.05f) // 5cm
@@ -21,4 +21,4 @@
     #define SMAP_size 1024
 #endif
 
-#endif //	common_defines_h_included
+#endif //    common_defines_h_included

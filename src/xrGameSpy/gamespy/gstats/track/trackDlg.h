@@ -30,58 +30,58 @@ class CTrackDlg : public CDialog
 {
 // Construction
 public:
-	void SetupUser();
-	DWORD m_start;
-	int m_count;
-	int m_event;
-	BOOL m_racing;
-	int m_numSteps;
-	int m_step;
-	int m_totalSteps;
-	void ReportStats(DWORD time);
+    void SetupUser();
+    DWORD m_start;
+    int m_count;
+    int m_event;
+    BOOL m_racing;
+    int m_numSteps;
+    int m_step;
+    int m_totalSteps;
+    void ReportStats(DWORD time);
 
-	CTrackDlg(CWnd* pParent = NULL);	// standard constructor
+    CTrackDlg(CWnd* pParent = NULL);    // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CTrackDlg)
-	enum { IDD = IDD_TRACK_DIALOG };
-	CProgressCtrl	m_progress;
-	CString	m_info;
-	CString	m_best100;
-	CString	m_best200;
-	CString	m_best50;
-	CString	m_top100;
-	CString	m_top200;
-	CString	m_top50;
-	//}}AFX_DATA
+    //{{AFX_DATA(CTrackDlg)
+    enum { IDD = IDD_TRACK_DIALOG };
+    CProgressCtrl    m_progress;
+    CString    m_info;
+    CString    m_best100;
+    CString    m_best200;
+    CString    m_best50;
+    CString    m_top100;
+    CString    m_top200;
+    CString    m_top50;
+    //}}AFX_DATA
 
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CTrackDlg)
-	public:
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CTrackDlg)
+    public:
+    virtual BOOL PreTranslateMessage(MSG* pMsg);
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
-	CLoginDlg m_loginDlg;
+    CLoginDlg m_loginDlg;
 
 // Implementation
 protected:
-	HICON m_hIcon;
+    HICON m_hIcon;
 
-	// Generated message map functions
-	//{{AFX_MSG(CTrackDlg)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg void OnLogout();
-	afx_msg void OnTimer(UINT nIDEvent);
-	afx_msg void OnStart50();
-	afx_msg void OnStart100();
-	afx_msg void OnStart200();
-	afx_msg void OnDestroy();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CTrackDlg)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnPaint();
+    afx_msg HCURSOR OnQueryDragIcon();
+    afx_msg void OnLogout();
+    afx_msg void OnTimer(UINT nIDEvent);
+    afx_msg void OnStart50();
+    afx_msg void OnStart100();
+    afx_msg void OnStart200();
+    afx_msg void OnDestroy();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

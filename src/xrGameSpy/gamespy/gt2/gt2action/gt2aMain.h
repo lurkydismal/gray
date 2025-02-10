@@ -78,8 +78,8 @@ extern const V3b Grey;
 
 void Log
 (
-	const char * format,
-	...
+    const char * format,
+    ...
 );
 
 #endif

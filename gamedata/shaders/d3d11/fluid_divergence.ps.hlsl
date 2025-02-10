@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Pixel
+//    Pixel
 float4 main(p_fluidsim input) : SV_Target
 {
     float4 fieldL = Texture_velocity1.SampleLevel(samPointClamp, LEFTCELL, 0);

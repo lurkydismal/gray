@@ -4,12 +4,12 @@
 class ESceneToolBase;
 
 struct SBeforeAppendCallbackParams{
-	LPVOID 		data;
-    xr_string 	name_prefix;
+    LPVOID         data;
+    xr_string     name_prefix;
     SBeforeAppendCallbackParams()
     {
-    	data 		= 0;
-        name_prefix	= "";
+        data         = 0;
+        name_prefix    = "";
     }
 };
 typedef  xr_delegate<bool(SBeforeAppendCallbackParams*)> TBeforeAppendCallback;
@@ -22,13 +22,13 @@ protected:
     int action;
     // select
     bool bBoxSelection;
-    bool SelectStart	(TShiftState _Shift);
-    void SelectProcess	(TShiftState _Shift);
-    bool SelectEnd		(TShiftState _Shift);
+    bool SelectStart    (TShiftState _Shift);
+    void SelectProcess    (TShiftState _Shift);
+    bool SelectEnd        (TShiftState _Shift);
     // add
-    bool AddStart		(TShiftState _Shift);
-    void AddProcess		(TShiftState _Shift);
-    bool AddEnd			(TShiftState _Shift);
+    bool AddStart        (TShiftState _Shift);
+    void AddProcess        (TShiftState _Shift);
+    bool AddEnd            (TShiftState _Shift);
     // move
     Fvector m_MovingXVector;
     Fvector m_MovingYVector;
@@ -41,7 +41,7 @@ protected:
     void    ScaleProcess(TShiftState _Shift);
     bool    ScaleEnd(TShiftState _Shift);
     // rotate
-	Fvector m_RotateVector;
+    Fvector m_RotateVector;
     float   m_fRotateSnapAngle;
 
     bool    RotateStart(TShiftState _Shift);
@@ -49,25 +49,25 @@ protected:
     bool    RotateEnd(TShiftState _Shift);
 
 protected:
-	bool				CheckSnapList 	(TShiftState Shift);
+    bool                CheckSnapList     (TShiftState Shift);
 
-    CCustomObject*		DefaultAddObject(TShiftState Shift, TBeforeAppendCallback before=0, TAfterAppendCallback after=0);
-    bool				DefaultMovingProcess(TShiftState Shift, Fvector& amount);
+    CCustomObject*        DefaultAddObject(TShiftState Shift, TBeforeAppendCallback before=0, TAfterAppendCallback after=0);
+    bool                DefaultMovingProcess(TShiftState Shift, Fvector& amount);
 public:
-    ESceneToolBase*	parent_tool;
+    ESceneToolBase*    parent_tool;
 
 public:
-    				TUI_CustomControl	(int st, int act, ESceneToolBase* parent);
-    virtual 		~TUI_CustomControl	(){;}
-	virtual bool 	Start  				(TShiftState _Shift);
-	virtual bool 	End    				(TShiftState _Shift);
-	virtual void 	Move   				(TShiftState _Shift);
-	virtual bool 	HiddenMode			();
-    virtual bool 	KeyDown				(WORD Key, TShiftState Shift){return false;}
-    virtual bool 	KeyUp  				(WORD Key, TShiftState Shift){return false;}
-    virtual bool 	KeyPress			(WORD Key, TShiftState Shift){return false;}
-    virtual void 	OnEnter				(){;}
-    virtual void 	OnExit				(){;}
+                    TUI_CustomControl    (int st, int act, ESceneToolBase* parent);
+    virtual         ~TUI_CustomControl    (){;}
+    virtual bool     Start                  (TShiftState _Shift);
+    virtual bool     End                    (TShiftState _Shift);
+    virtual void     Move                   (TShiftState _Shift);
+    virtual bool     HiddenMode            ();
+    virtual bool     KeyDown                (WORD Key, TShiftState Shift){return false;}
+    virtual bool     KeyUp                  (WORD Key, TShiftState Shift){return false;}
+    virtual bool     KeyPress            (WORD Key, TShiftState Shift){return false;}
+    virtual void     OnEnter                (){;}
+    virtual void     OnExit                (){;}
     //virtual void    DragDrop            (const xr_string& Path);
-    int 			Action				(){return action;}
+    int             Action                (){return action;}
 };

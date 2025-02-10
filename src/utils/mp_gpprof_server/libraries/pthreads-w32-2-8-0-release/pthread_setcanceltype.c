@@ -85,7 +85,7 @@ pthread_setcanceltype (int type, int *oldtype)
 
   if (sp == NULL
       || (type != PTHREAD_CANCEL_DEFERRED
-	  && type != PTHREAD_CANCEL_ASYNCHRONOUS))
+      && type != PTHREAD_CANCEL_ASYNCHRONOUS))
     {
       return EINVAL;
     }
@@ -122,4 +122,4 @@ pthread_setcanceltype (int type, int *oldtype)
 
   return (result);
 
-}				/* pthread_setcanceltype */
+}                /* pthread_setcanceltype */

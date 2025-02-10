@@ -13,14 +13,14 @@ class xr_reader;
 class xr_writer;
 
 struct xr_guid {
-	void		reset();
-	bool		operator==(const xr_guid& right) const;
-	bool		operator!=(const xr_guid& right) const;
+    void        reset();
+    bool        operator==(const xr_guid& right) const;
+    bool        operator!=(const xr_guid& right) const;
 
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
 
-	uint32_t	g[4];
+    uint32_t    g[4];
 };
 
 inline void xr_guid::reset() { std::memset(g, 0x55, sizeof(g)); }

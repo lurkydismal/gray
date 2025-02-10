@@ -48,8 +48,8 @@
 
 PTW32_INTERLOCKED_LONG WINAPI
 ptw32_InterlockedCompareExchange (PTW32_INTERLOCKED_LPLONG location,
-				  PTW32_INTERLOCKED_LONG value,
-				  PTW32_INTERLOCKED_LONG comparand)
+                  PTW32_INTERLOCKED_LONG value,
+                  PTW32_INTERLOCKED_LONG comparand)
 {
 
 #if defined(__WATCOMC__)
@@ -77,29 +77,29 @@ ptw32_InterlockedCompareExchange (PTW32_INTERLOCKED_LPLONG location,
 #define HAVE_INLINABLE_INTERLOCKED_CMPXCHG
     {
       _asm {
-	PUSH         ecx
-	PUSH         edx
-	MOV          ecx,dword ptr [location]
-	MOV          edx,dword ptr [value]
-	MOV          eax,dword ptr [comparand]
-	LOCK CMPXCHG dword ptr [ecx],edx
-	MOV          dword ptr [result], eax
-	POP          edx
-	POP          ecx
+    PUSH         ecx
+    PUSH         edx
+    MOV          ecx,dword ptr [location]
+    MOV          edx,dword ptr [value]
+    MOV          eax,dword ptr [comparand]
+    LOCK CMPXCHG dword ptr [ecx],edx
+    MOV          dword ptr [result], eax
+    POP          edx
+    POP          ecx
       }
     }
   else
     {
       _asm {
-	PUSH         ecx
-	PUSH         edx
-	MOV          ecx,dword ptr [location]
-	MOV          edx,dword ptr [value]
-	MOV          eax,dword ptr [comparand]
-	CMPXCHG      dword ptr [ecx],edx
-	MOV          dword ptr [result], eax
-	POP          edx
-	POP          ecx
+    PUSH         ecx
+    PUSH         edx
+    MOV          ecx,dword ptr [location]
+    MOV          edx,dword ptr [value]
+    MOV          eax,dword ptr [comparand]
+    CMPXCHG      dword ptr [ecx],edx
+    MOV          dword ptr [result], eax
+    POP          edx
+    POP          ecx
       }
     }
 
@@ -108,25 +108,25 @@ ptw32_InterlockedCompareExchange (PTW32_INTERLOCKED_LPLONG location,
 
     {
       __asm__ __volatile__
-	(
-	 "lock\n\t"
-	 "cmpxchgl       %2,%1"      /* if (EAX == [location])  */
-	                             /*   [location] = value    */
+    (
+     "lock\n\t"
+     "cmpxchgl       %2,%1"      /* if (EAX == [location])  */
+                                 /*   [location] = value    */
                                      /* else                    */
                                      /*   EAX = [location]      */
-	 :"=a" (result)
-	 :"m"  (*location), "r" (value), "a" (comparand));
+     :"=a" (result)
+     :"m"  (*location), "r" (value), "a" (comparand));
     }
   else
     {
       __asm__ __volatile__
-	(
-	 "cmpxchgl       %2,%1"      /* if (EAX == [location])  */
-	                             /*   [location] = value    */
+    (
+     "cmpxchgl       %2,%1"      /* if (EAX == [location])  */
+                                 /*   [location] = value    */
                                      /* else                    */
                                      /*   EAX = [location]      */
-	 :"=a" (result)
-	 :"m"  (*location), "r" (value), "a" (comparand));
+     :"=a" (result)
+     :"m"  (*location), "r" (value), "a" (comparand));
     }
 
 #endif
@@ -160,7 +160,7 @@ ptw32_InterlockedCompareExchange (PTW32_INTERLOCKED_LPLONG location,
 
 LONG WINAPI
 ptw32_InterlockedExchange (LPLONG location,
-			   LONG value)
+               LONG value)
 {
 
 #if defined(__WATCOMC__)
@@ -188,11 +188,11 @@ ptw32_InterlockedExchange (LPLONG location,
 
     {
       _asm {
-	PUSH         ecx
-	MOV          ecx,dword ptr [location]
-	MOV          eax,dword ptr [value]
-	XCHG         dword ptr [ecx],eax
-	MOV          dword ptr [result], eax
+    PUSH         ecx
+    MOV          ecx,dword ptr [location]
+    MOV          eax,dword ptr [value]
+    XCHG         dword ptr [ecx],eax
+    MOV          dword ptr [result], eax
         POP          ecx
       }
     }
@@ -215,15 +215,15 @@ ptw32_InterlockedExchange (LPLONG location,
        * Can we do without the PUSH/POP instructions?
        */
       _asm {
-	PUSH         ecx
-	PUSH         edx
-	MOV          ecx,dword ptr [location]
-	MOV          edx,dword ptr [value]
-L1:	MOV          eax,dword ptr [ecx]
-	CMPXCHG      dword ptr [ecx],edx
-	JNZ          L1
-	MOV          dword ptr [result], eax
-	POP          edx
+    PUSH         ecx
+    PUSH         edx
+    MOV          ecx,dword ptr [location]
+    MOV          edx,dword ptr [value]
+L1:    MOV          eax,dword ptr [ecx]
+    CMPXCHG      dword ptr [ecx],edx
+    JNZ          L1
+    MOV          dword ptr [result], eax
+    POP          edx
         POP          ecx
       }
     }
@@ -233,10 +233,10 @@ L1:	MOV          eax,dword ptr [ecx]
 
     {
       __asm__ __volatile__
-	(
-	 "xchgl          %2,%1"
-	 :"=r" (result)
-	 :"m"  (*location), "0" (value));
+    (
+     "xchgl          %2,%1"
+     :"=r" (result)
+     :"m"  (*location), "0" (value));
     }
   else
     {
@@ -255,13 +255,13 @@ L1:	MOV          eax,dword ptr [ecx]
        * doing something similar to this (on UP systems).
        */
       __asm__ __volatile__
-	(
-	 "0:\n\t"
-	 "movl           %1,%%eax\n\t"
-	 "cmpxchgl       %2,%1\n\t"
-	 "jnz            0b"
-	 :"=&a" (result)
-	 :"m"  (*location), "r" (value));
+    (
+     "0:\n\t"
+     "movl           %1,%%eax\n\t"
+     "cmpxchgl       %2,%1\n\t"
+     "jnz            0b"
+     :"=&a" (result)
+     :"m"  (*location), "r" (value));
     }
 
 #endif

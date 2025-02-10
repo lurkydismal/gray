@@ -24,7 +24,7 @@ struct p_smaa
 struct v2p_smaa
 {
     float2 tc0 : TEXCOORD0;
-    float4 HPos : POSITIONT; // Clip-space position 	(for rasterization)
+    float4 HPos : POSITIONT; // Clip-space position     (for rasterization)
 };
 
 // Vertex

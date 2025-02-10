@@ -10,16 +10,16 @@
 
 CUI_Camera::CUI_Camera()
 {
-	m_Style = csPlaneMove;
+    m_Style = csPlaneMove;
 
-	m_Znear = 0.2f;
-	m_Zfar = 1500.f;
+    m_Znear = 0.2f;
+    m_Zfar = 1500.f;
     m_HPB.set(0,0,0);
     m_Position.set(0,0,0);
     m_Target.set(0,0,0);
     m_CamMat.identity();
 
-	m_FlySpeed = 5.f;
+    m_FlySpeed = 5.f;
     m_FlyAltitude = 1.8f;
 
     m_bMoving=false;
@@ -31,28 +31,28 @@ CUI_Camera::~CUI_Camera()
 
 void CUI_Camera::SetStyle(ECameraStyle new_style)
 {
-  	if (new_style==cs3DArcBall){
-	    Fvector dir;
-        dir.sub			(m_Target,m_Position);
+      if (new_style==cs3DArcBall){
+        Fvector dir;
+        dir.sub            (m_Target,m_Position);
         // parse heading
-   	    Fvector DYaw; DYaw.set(dir.x,0.f,dir.z); DYaw.normalize_safe();
-        if (DYaw.x<0)	m_HPB.x = acosf(DYaw.z);
-   	    else			m_HPB.x = 2*PI-acosf(DYaw.z);
+           Fvector DYaw; DYaw.set(dir.x,0.f,dir.z); DYaw.normalize_safe();
+        if (DYaw.x<0)    m_HPB.x = acosf(DYaw.z);
+           else            m_HPB.x = 2*PI-acosf(DYaw.z);
         // parse pitch
-   	    dir.normalize_safe	();
-        m_HPB.y			= asinf(dir.y);
+           dir.normalize_safe    ();
+        m_HPB.y            = asinf(dir.y);
 
-        BuildCamera		();
+        BuildCamera        ();
     }
-	m_Style				= new_style;
+    m_Style                = new_style;
     UI->RedrawScene();
 }
 
 void CUI_Camera::Reset()
 {
-	m_HPB.set(0,0,0);
+    m_HPB.set(0,0,0);
     m_Position.set(0,3,-10);
-	SetStyle(m_Style);
+    SetStyle(m_Style);
     BuildCamera();
 }
 
@@ -67,71 +67,71 @@ const Fvector& CUI_Camera::GetPosition() const
 
 const Fvector& CUI_Camera::GetRight() const
 {
-	if (UI->IsPlayInEditor())
-	{
+    if (UI->IsPlayInEditor())
+    {
         return g_pGameLevel->Cameras().Right();
-	}
+    }
    return m_CamMat.i;
 }
 
 const Fvector& CUI_Camera::GetNormal() const
 {
-	if (UI->IsPlayInEditor())
-	{
+    if (UI->IsPlayInEditor())
+    {
         return g_pGameLevel->Cameras().Up();
-	}
+    }
     return m_CamMat.j;
 }
 
 const Fvector& CUI_Camera::GetDirection() const
 {
-	if (UI->IsPlayInEditor())
-	{
+    if (UI->IsPlayInEditor())
+    {
         return g_pGameLevel->Cameras().Direction();
-	}
+    }
     return m_CamMat.k;
 }
 
 void CUI_Camera::Set(float h, float p, float b, float x, float y, float z)
 {
-	m_HPB.set(h,p,b);
+    m_HPB.set(h,p,b);
     m_Position.set(x,y,z);
     BuildCamera();
 }
 
 void CUI_Camera::Set(const Fvector& hpb, const Fvector& pos)
 {
-	m_HPB.set(hpb);
+    m_HPB.set(hpb);
     m_Position.set(pos);
     BuildCamera();
 }
 
 void CUI_Camera::BuildCamera()
 {
-	if (m_HPB.x>PI_MUL_2)  m_HPB.x-=PI_MUL_2;	if (m_HPB.x<-PI_MUL_2) m_HPB.x+=PI_MUL_2;
-	if (m_HPB.y>PI_MUL_2)  m_HPB.y-=PI_MUL_2;	if (m_HPB.y<-PI_MUL_2) m_HPB.y+=PI_MUL_2;
-	if (m_HPB.z>PI_MUL_2)  m_HPB.z-=PI_MUL_2;	if (m_HPB.z<-PI_MUL_2) m_HPB.z+=PI_MUL_2;
+    if (m_HPB.x>PI_MUL_2)  m_HPB.x-=PI_MUL_2;    if (m_HPB.x<-PI_MUL_2) m_HPB.x+=PI_MUL_2;
+    if (m_HPB.y>PI_MUL_2)  m_HPB.y-=PI_MUL_2;    if (m_HPB.y<-PI_MUL_2) m_HPB.y+=PI_MUL_2;
+    if (m_HPB.z>PI_MUL_2)  m_HPB.z-=PI_MUL_2;    if (m_HPB.z<-PI_MUL_2) m_HPB.z+=PI_MUL_2;
 
     if (m_Style==cs3DArcBall){
-	    Fvector D;
-    	D.setHP			(m_HPB.x,m_HPB.y);
-		float dist = m_Position.distance_to(m_Target);
-	    m_Position.mul	(D,-dist);
-    	m_Position.add	(m_Target);
+        Fvector D;
+        D.setHP            (m_HPB.x,m_HPB.y);
+        float dist = m_Position.distance_to(m_Target);
+        m_Position.mul    (D,-dist);
+        m_Position.add    (m_Target);
     }
 
-	m_CamMat.setHPB(m_HPB.x,m_HPB.y,m_HPB.z);
+    m_CamMat.setHPB(m_HPB.x,m_HPB.y,m_HPB.z);
     m_CamMat.translate_over(m_Position);
     
-	EDevice->vCameraPosition.set	(m_CamMat.c);
-	EDevice->vCameraDirection.set	(m_CamMat.k);
-	EDevice->vCameraTop.set		(m_CamMat.j);
-    EDevice->vCameraRight.set		(m_CamMat.i);
+    EDevice->vCameraPosition.set    (m_CamMat.c);
+    EDevice->vCameraDirection.set    (m_CamMat.k);
+    EDevice->vCameraTop.set        (m_CamMat.j);
+    EDevice->vCameraRight.set        (m_CamMat.i);
 }
 
 void CUI_Camera::SetDepth(float _far, bool bForcedUpdate)
 {
-    if (m_Zfar!=_far)	{m_Zfar=_far; UI->Resize(bForcedUpdate);}
+    if (m_Zfar!=_far)    {m_Zfar=_far; UI->Resize(bForcedUpdate);}
 }
 
 void CUI_Camera::SetViewport(float _near, float _far, float _fov, bool Silent)
@@ -171,27 +171,27 @@ static const Fvector down_dir={0.f,-1.f,0.f};
 
 void CUI_Camera::Update(float dt)
 {
-	if (m_bMoving){
-    	BOOL bLeftDn = m_Shift&ssLeft;
-    	BOOL bRightDn = m_Shift&ssRight;
-		if ((m_Style==csFreeFly)&&(bLeftDn||bRightDn)&&!(bLeftDn&&bRightDn)){
-			Fvector vmove;
-	        vmove.set( m_CamMat.k );
-			vmove.mul( m_FlySpeed*dt );
-    		if (bLeftDn) 		m_Position.add( vmove );
-    		else if (bRightDn) 	m_Position.sub( vmove );
+    if (m_bMoving){
+        BOOL bLeftDn = m_Shift&ssLeft;
+        BOOL bRightDn = m_Shift&ssRight;
+        if ((m_Style==csFreeFly)&&(bLeftDn||bRightDn)&&!(bLeftDn&&bRightDn)){
+            Fvector vmove;
+            vmove.set( m_CamMat.k );
+            vmove.mul( m_FlySpeed*dt );
+            if (bLeftDn)         m_Position.add( vmove );
+            else if (bRightDn)     m_Position.sub( vmove );
 
             if (m_Shift&ssCtrl){
                 float dist = UI->ZFar();
-            	if (Tools->RayPick(m_Position,down_dir,dist))//UI->R PickGround(pos,m_Position,dir,-1))
-                	m_Position.y = m_Position.y+down_dir.y*dist+m_FlyAltitude;
+                if (Tools->RayPick(m_Position,down_dir,dist))//UI->R PickGround(pos,m_Position,dir,-1))
+                    m_Position.y = m_Position.y+down_dir.y*dist+m_FlyAltitude;
                 else
-                	m_Position.y = m_FlyAltitude;
-                	
+                    m_Position.y = m_FlyAltitude;
+                    
             }
 
-        	UI->RedrawScene();
-	    }
+            UI->RedrawScene();
+        }
         BuildCamera();
     }
 }
@@ -224,8 +224,8 @@ void CUI_Camera::Scale(float dy)
 
 void CUI_Camera::Rotate(float dx, float dy)
 {
-	m_HPB.x-=m_SR*dx;
-	m_HPB.y-=m_SR*dy*EDevice->fASPECT;
+    m_HPB.x-=m_SR*dx;
+    m_HPB.y-=m_SR*dy*EDevice->fASPECT;
 
     BuildCamera();
 }
@@ -240,7 +240,7 @@ bool CUI_Camera::MoveStart(TShiftState Shift)
         m_bMoving = true;
     }
 
-	m_Shift = Shift;
+    m_Shift = Shift;
     return bTest;
 }
 
@@ -285,80 +285,80 @@ bool CUI_Camera::Process(TShiftState Shift, int dx, int dy)
                 if ((m_Shift&ssLeft)||(m_Shift&ssRight)) Rotate (dx,dy);
             break;
             case cs3DArcBall:
-            	ArcBall(m_Shift,dx,dy);
+                ArcBall(m_Shift,dx,dy);
             break;
             }
-		    UI->RedrawScene();
+            UI->RedrawScene();
         }
         return true;
-	}
+    }
     return false;
 }
 
 bool CUI_Camera::KeyDown(WORD Key, TShiftState Shift)
 {
     if (m_bMoving){
-    	switch (Key){
+        switch (Key){
         case SDL_SCANCODE_LCTRL:  m_Shift = ssCtrl | m_Shift; break;
         default: return false;
         }
-	    return true;
+        return true;
     }
-	return false;
+    return false;
 }
 
 bool CUI_Camera::KeyUp(WORD Key, TShiftState Shift)
 {
     if (m_bMoving){
-    	switch (Key){
+        switch (Key){
         case SDL_SCANCODE_LSHIFT:  m_Shift = ~ssShift & m_Shift; MoveEnd(m_Shift); break;
         case SDL_SCANCODE_LCTRL: m_Shift = ~ssCtrl & m_Shift; break;
         default: return false;
         }
-	    return true;
+        return true;
     }
-	return false;
+    return false;
 }
 
 void CUI_Camera::MouseRayFromPoint( Fvector& start, Fvector& direction, const Ivector2& point )
 {
-	int halfwidth  = UI->CurrentView().RTSize.x * 0.5f;
-	int halfheight = UI->CurrentView().RTSize.y * 0.5f;
+    int halfwidth  = UI->CurrentView().RTSize.x * 0.5f;
+    int halfheight = UI->CurrentView().RTSize.y * 0.5f;
 
     if (!halfwidth||!halfheight) return;
 
     Ivector2 point2;
     point2.set(point.x-halfwidth, halfheight-point.y);
 
-	start.set( m_Position );
+    start.set( m_Position );
 
-	float size_y = m_Znear * tan( deg2rad(EDevice->fFOV) * 0.5f );
-	float size_x = size_y / EDevice->fASPECT;
+    float size_y = m_Znear * tan( deg2rad(EDevice->fFOV) * 0.5f );
+    float size_x = size_y / EDevice->fASPECT;
 
-	float r_pt = float(point2.x) * size_x / (float) halfwidth;
-	float u_pt = float(point2.y) * size_y / (float) halfheight;
+    float r_pt = float(point2.x) * size_x / (float) halfwidth;
+    float u_pt = float(point2.y) * size_y / (float) halfheight;
 
-	direction.mul( m_CamMat.k, m_Znear );
-	direction.mad( direction, m_CamMat.j, u_pt );
-	direction.mad( direction, m_CamMat.i, r_pt );
-	direction.normalize();
+    direction.mul( m_CamMat.k, m_Znear );
+    direction.mad( direction, m_CamMat.j, u_pt );
+    direction.mad( direction, m_CamMat.i, r_pt );
+    direction.normalize();
 }
 
 void CUI_Camera::ZoomExtents(const Fbox& bb)
 {
-	Fvector C,D;
+    Fvector C,D;
     float R,H1,H2;
     bb.getsphere(C,R);
-	D.mul(m_CamMat.k,-1);
+    D.mul(m_CamMat.k,-1);
     H1 = R/sinf(deg2rad(EDevice->fFOV)*0.5f);
     H2 = R/sinf(deg2rad(EDevice->fFOV)*0.5f/EDevice->fASPECT);
     m_Position.mad(C,D,_max(H1,H2));
-	m_Target.set(C);
+    m_Target.set(C);
 
-	BuildCamera();
+    BuildCamera();
 /*
-	eye_k - фокусное расстояние, eye_k=eye_width/2
-	camera.alfa:=0;
+    eye_k - фокусное расстояние, eye_k=eye_width/2
+    camera.alfa:=0;
      camera.beta:=-30*pi/180;
      camera.gama:=0;
      s:=(maxx-minx)*eye_k/eye_width*0.5*0.5;
@@ -370,9 +370,9 @@ void CUI_Camera::ZoomExtents(const Fbox& bb)
 
 void CUI_Camera::ArcBall(TShiftState Shift, float dx, float dy)
 {
-	float dist = m_Position.distance_to(m_Target);
-	if (Shift&ssAlt){
-		if (Shift&ssLeft){
+    float dist = m_Position.distance_to(m_Target);
+    if (Shift&ssAlt){
+        if (Shift&ssLeft){
             Fvector vmove;
             vmove.set( m_CamMat.k );  vmove.y = 0;
             vmove.normalize_safe();
@@ -390,21 +390,21 @@ void CUI_Camera::ArcBall(TShiftState Shift, float dx, float dy)
             m_Target.add( vmove );
         }
     }else{
-    	if (Shift&ssRight){
-        	dist -= dx*m_SM;
-	    }else if (Shift&ssLeft){
-    	    m_HPB.x-=m_SR*dx;
-        	m_HPB.y-=m_SR*dy*EDevice->fASPECT;
-	    }
+        if (Shift&ssRight){
+            dist -= dx*m_SM;
+        }else if (Shift&ssLeft){
+            m_HPB.x-=m_SR*dx;
+            m_HPB.y-=m_SR*dy*EDevice->fASPECT;
+        }
     }
 
     Fvector D;
-    D.setHP			(m_HPB.x,m_HPB.y);
+    D.setHP            (m_HPB.x,m_HPB.y);
 
-    m_Position.mul	(D,-dist);
-    m_Position.add	(m_Target);
+    m_Position.mul    (D,-dist);
+    m_Position.add    (m_Target);
 
-	BuildCamera		();
+    BuildCamera        ();
 }
 
 

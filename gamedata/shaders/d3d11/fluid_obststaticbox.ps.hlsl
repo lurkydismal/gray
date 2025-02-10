@@ -2,8 +2,8 @@
 
 cbuffer BoxBounds
 {
-    //	float3	boxLBDcorner;
-    //	float3	boxRTUcorner;
+    //    float3    boxLBDcorner;
+    //    float3    boxRTUcorner;
     float4 boxLBDcorner;
     float4 boxRTUcorner;
 }
@@ -21,7 +21,7 @@ bool PointIsInsideBox(float3 p, float3 LBUcorner, float3 RTDcorner)
         (p.z > LBUcorner.z) && (p.z < RTDcorner.z));
 }
 
-//	Pixel
+//    Pixel
 PSDrawBoxOut main(p_fluidsim input)
 {
     PSDrawBoxOut voxel;
@@ -44,7 +44,7 @@ PSDrawBoxOut main(p_fluidsim input)
         return voxel;
     }
 
-    //	Kill texel to preserve other obstacles
+    //    Kill texel to preserve other obstacles
     clip(-1);
 
     return (PSDrawBoxOut)0;

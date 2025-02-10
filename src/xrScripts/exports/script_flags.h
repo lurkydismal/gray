@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_flags.h
-//	Created 	: 19.07.2004
-//  Modified 	: 19.07.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script flags
+//    Module         : script_flags.h
+//    Created     : 19.07.2004
+//  Modified     : 19.07.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script flags
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

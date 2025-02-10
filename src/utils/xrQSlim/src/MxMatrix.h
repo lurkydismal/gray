@@ -41,15 +41,15 @@ public:
     unsigned int dim() const { return width(); }
 
     MxMatrix& operator+=(const MxMatrix& m)
-	{ mxm_addinto(*this, m, dim()); return *this; }
+    { mxm_addinto(*this, m, dim()); return *this; }
     MxMatrix& operator-=(const MxMatrix& m)
-	{ mxm_subfrom(*this, m, dim()); return *this; }
+    { mxm_subfrom(*this, m, dim()); return *this; }
     MxMatrix& operator*=(double d) {mxm_scale(*this, d, dim()); return *this;}
     MxMatrix& operator/=(double d) {mxm_invscale(*this,d,dim());return *this;}
 
 
     MxVector operator*(const MxVector& v) const
-	{ MxVector r(dim()); mxm_xform(r, *this, v, dim()); return r; }
+    { MxVector r(dim()); mxm_xform(r, *this, v, dim()); return r; }
 
     double invert(MxMatrix& inv) const {return mxm_invert(inv, *this, dim());}
 };

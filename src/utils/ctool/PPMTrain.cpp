@@ -436,43 +436,43 @@ void _STDCALL EncodeFile(FILE* DecodedFile,int MaxOrder,int MaxSize)
 
 void _STDCALL EncodeFileChunked(FILE* DecodedFile,int MaxOrder,int MaxSize)
 {
-	fseek(DecodedFile, 0, SEEK_END);
+    fseek(DecodedFile, 0, SEEK_END);
     
     long    src_sz      = ftell(DecodedFile);
-    u8*     src_data	= new u8 [src_sz];
+    u8*     src_data    = new u8 [src_sz];
 
     fseek(DecodedFile, 0, SEEK_SET);
-	fread( src_data, src_sz, 1, DecodedFile);
+    fread( src_data, src_sz, 1, DecodedFile);
 
-	u32 id = *((u32*)src_data);
+    u32 id = *((u32*)src_data);
     if(id != MAKE_FOUR_CC('B','I','N','S'))
     {
-		printf("ERROR: bad bins file format");
-		fclose(DecodedFile);
-		delete[] src_data;
-		return;
-	}
+        printf("ERROR: bad bins file format");
+        fclose(DecodedFile);
+        delete[] src_data;
+        return;
+    }
 
-	const u8*   data        = src_data + sizeof(u32);
+    const u8*   data        = src_data + sizeof(u32);
     const u8*   data_end    = src_data + src_sz;
     unsigned    count       = 0;
 
-	static char const * tmp_filename = "tmp_packet.bin";
-	while( data < data_end )
-	{
-		FILE* tmp_file = fopen(tmp_filename, "wb");
-		u16	sz	= *((u16*)data);
-		data	+= sizeof(u16);
-		fwrite(data, sz, 1, tmp_file);
-		data	+= sz;
-		fclose(tmp_file);
-		FILE* tmp_r_file = fopen(tmp_filename, "rb");
-		StartModelRare(MaxOrder);
-		EncodeFile1(tmp_r_file);
-		fclose(tmp_r_file);
-	}
-	fclose(DecodedFile);
-	delete[] src_data;
+    static char const * tmp_filename = "tmp_packet.bin";
+    while( data < data_end )
+    {
+        FILE* tmp_file = fopen(tmp_filename, "wb");
+        u16    sz    = *((u16*)data);
+        data    += sizeof(u16);
+        fwrite(data, sz, 1, tmp_file);
+        data    += sz;
+        fclose(tmp_file);
+        FILE* tmp_r_file = fopen(tmp_filename, "rb");
+        StartModelRare(MaxOrder);
+        EncodeFile1(tmp_r_file);
+        fclose(tmp_r_file);
+    }
+    fclose(DecodedFile);
+    delete[] src_data;
 
     ShrinkModel(MaxSize);
     FILE* fp=fopen("!PPMd.mdl","wb");       nc=0;
@@ -482,30 +482,30 @@ void _STDCALL EncodeFileChunked(FILE* DecodedFile,int MaxOrder,int MaxSize)
 }
 */
 
-extern int	_PPM_MaxOrder;
-extern int	_PPM_SaSize;
-extern int	_PPM_ModelSize;
+extern int    _PPM_MaxOrder;
+extern int    _PPM_SaSize;
+extern int    _PPM_ModelSize;
 
 int MakePPMDictionaryFromFile(FILE* raw_bins_file_src)
 {
-    int MaxOrder	= _PPM_MaxOrder;
-	int SASize		= _PPM_SaSize;
-	int ModelSize	= _PPM_ModelSize;
+    int MaxOrder    = _PPM_MaxOrder;
+    int SASize        = _PPM_SaSize;
+    int ModelSize    = _PPM_ModelSize;
     
     StartSubAllocator(SASize);
-	fseek(raw_bins_file_src, 0, SEEK_SET );
-	EncodeFile(raw_bins_file_src,MaxOrder,ModelSize*1024);
+    fseek(raw_bins_file_src, 0, SEEK_SET );
+    EncodeFile(raw_bins_file_src,MaxOrder,ModelSize*1024);
     return 0;
 }
 
 int MakePPMDictionary(char const * file_name)
 {
-	FILE* fpIn;
-	fopen_s(&fpIn, file_name, "rb");
-	if (!fpIn)
-		return 1;
-	MakePPMDictionaryFromFile(fpIn);
-	fclose(fpIn);
-	return 0;
+    FILE* fpIn;
+    fopen_s(&fpIn, file_name, "rb");
+    if (!fpIn)
+        return 1;
+    MakePPMDictionaryFromFile(fpIn);
+    fclose(fpIn);
+    return 0;
 }
 

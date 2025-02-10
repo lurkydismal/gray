@@ -43,7 +43,7 @@ light_range           = 8
 light_time            = 0.35
 light_height        = 0.75      ;подъем источника света на высоту
 
-idle_light_r1			= false
+idle_light_r1            = false
 idle_light          = on
 idle_light_range      = 8.0
 idle_light_range_delta    = 0.25
@@ -56,13 +56,13 @@ accamulate_time       = 0
 
 blowout_wind        = off
 
-blowout_wind_time_start	= 0
-blowout_wind_time_peak	= 600
-blowout_wind_time_end	= 899
-blowout_wind_power		= 0.5     ;сила поднимаего ветра (от 0 до 1), в момент blowout_wind_time_peak
+blowout_wind_time_start    = 0
+blowout_wind_time_peak    = 600
+blowout_wind_time_end    = 899
+blowout_wind_power        = 0.5     ;сила поднимаего ветра (от 0 до 1), в момент blowout_wind_time_peak
 
-shape_transp_color		= 255, 0, 0, 60
-shape_edge_color		= 32, 32, 32, 255
+shape_transp_color        = 255, 0, 0, 60
+shape_edge_color        = 32, 32, 32, 255
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ disable_time_small      = -1  ;время игнорирования маленького неживого объекта в
 disable_idle_time     = 50000 ;время отключения idle партиклов
 
 ignore_nonalive      = true
-ignore_small        	= true
+ignore_small            = true
 ignore_artefacts     = true
 
 blowout_light       = off
@@ -111,7 +111,7 @@ light_range           = 8
 light_time            = 0.35
 light_height        = 0.75      ;подъем источника света на высоту
 
-idle_light_r1			= false
+idle_light_r1            = false
 idle_light          = off
 idle_light_range      = 8.0
 idle_light_range_delta    = 0.25
@@ -124,27 +124,27 @@ accamulate_time       = 0
 
 blowout_wind        = off
 
-blowout_wind_time_start	= 0
-blowout_wind_time_peak	= 600
-blowout_wind_time_end	= 899
-blowout_wind_power		= 0.5     ;сила поднимаего ветра (от 0 до 1), в момент blowout_wind_time_peak
+blowout_wind_time_start    = 0
+blowout_wind_time_peak    = 600
+blowout_wind_time_end    = 899
+blowout_wind_power        = 0.5     ;сила поднимаего ветра (от 0 до 1), в момент blowout_wind_time_peak
 
-shape_transp_color		= 255, 0, 0, 60
-shape_edge_color		= 32, 32, 32, 255
+shape_transp_color        = 255, 0, 0, 60
+shape_edge_color        = 32, 32, 32, 255
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 [campfire]:campfire_base
-$spawn            		= "campfire\campfire_dynamics"
-class           			= Z_CFIRE
-script_binding        	= bind_campfire.bind
+$spawn                    = "campfire\campfire_dynamics"
+class                       = Z_CFIRE
+script_binding            = bind_campfire.bind
 
-disabled_particles		= explosions\campfire_disabled
-enabling_particles		= explosions\campfire_enabled
-disabled_sound				= ambient\fire2
+disabled_particles        = explosions\campfire_disabled
+enabling_particles        = explosions\campfire_enabled
+disabled_sound                = ambient\fire2
 
-shape_transp_color		= 255, 0, 0, 60
-shape_edge_color		= 32, 32, 32, 255
+shape_transp_color        = 255, 0, 0, 60
+shape_edge_color        = 32, 32, 32, 255
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------
 ;-------------------------------------------------------------------------------

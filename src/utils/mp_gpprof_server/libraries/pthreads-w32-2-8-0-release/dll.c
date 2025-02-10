@@ -52,7 +52,7 @@
  * Dear c++: Please don't mangle this name. -thanks
  */
 extern "C"
-#endif				/* __cplusplus */
+#endif                /* __cplusplus */
   BOOL WINAPI
 DllMain (HINSTANCE hinstDll, DWORD fdwReason, LPVOID lpvReserved)
 {
@@ -87,6 +87,6 @@ DllMain (HINSTANCE hinstDll, DWORD fdwReason, LPVOID lpvReserved)
 
   return (result);
 
-}				/* DllMain */
+}                /* DllMain */
 
 #endif /* PTW32_STATIC_LIB */

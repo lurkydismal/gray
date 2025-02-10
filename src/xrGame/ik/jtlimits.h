@@ -44,8 +44,8 @@ inline float asin1(float x)
 {
     if (_abs(x) > 1.0f)
     {
-//	printf("Domain error in asin1 %lf\n", x);
-	x = (x > 0.f) ? 1.0f : -1.0f;
+//    printf("Domain error in asin1 %lf\n", x);
+    x = (x > 0.f) ? 1.0f : -1.0f;
     }
     return angle_normalize(asin(x));
 }
@@ -55,8 +55,8 @@ inline float asin2(float x)
 {   
     if (_abs(x) > 1.0f)
     {
-//	printf("Domain error in asin2 %lf\n", x);
-	x = (x > 0) ? 1.0f : -1.0f;
+//    printf("Domain error in asin2 %lf\n", x);
+    x = (x > 0) ? 1.0f : -1.0f;
     }
     return angle_normalize(M_PI - asin(x));
 }
@@ -67,8 +67,8 @@ inline float acos1(float x)
 {
     if (_abs(x) > 1.0f)
     {
-//	printf("Domain error in acos1 %lf\n", x);
-	x = (x > 0) ? 1.0f : -1.0f;
+//    printf("Domain error in acos1 %lf\n", x);
+    x = (x > 0) ? 1.0f : -1.0f;
     }
     return angle_normalize(acos(x));
 }
@@ -78,8 +78,8 @@ inline float acos2(float x)
 {
     if (_abs(x) > 1.0f)
     {
-//	printf("Domain error in acos2 %lf\n", x);
-	x = (x > 0) ? 1.0f : -1.0f;
+//    printf("Domain error in acos2 %lf\n", x);
+    x = (x > 0) ? 1.0f : -1.0f;
     }
     return angle_normalize(- acos(x));
 }
@@ -120,21 +120,21 @@ private:
 
 
     void clip(int family, 
-	      float psi0, float psi1, 
-	      float low, float high, 
-	      AngleIntList &a) const; 
+          float psi0, float psi1, 
+          float low, float high, 
+          AngleIntList &a) const; 
 
 public:
 
     void init(int jt_type, 
-	 float a, float b, float c,
-	 float low, float high);
+     float a, float b, float c,
+     float low, float high);
 
     SimpleJtLimit(int jt_type, 
-		  float a, float b, float c,
-		  float low, float high)
+          float a, float b, float c,
+          float low, float high)
     {
-	init(jt_type, a, b, c, low, high);
+    init(jt_type, a, b, c, low, high);
     }
 
     SimpleJtLimit() {} 
@@ -187,7 +187,7 @@ public:
     // second family
 
     void PsiLimits(AngleIntList &psi1, 
-		   AngleIntList &psi2) const;
+           AngleIntList &psi2) const;
 
 };
 
@@ -219,7 +219,7 @@ public:
 //
 // neg_interval indicates an angle interval for psi in which
 // sin(x) or cos(x) is negative
-	    
+        
 
 //
 // A complex joint limit is one of the form
@@ -242,8 +242,8 @@ class ComplexJtLimit
 private:
     PsiEquation cos_eq;  // cos(theta) equation
     PsiEquation sin_eq;  // sin(theta) equation
-    PsiEquation eq;	 // gamma equation 
-    int type;		 // Whether eq is a sin or cos of gamma
+    PsiEquation eq;     // gamma equation 
+    int type;         // Whether eq is a sin or cos of gamma
     PsiEquation deriv;   // Derivative of sin_eq/cos_eq without denom
     AngleInt limits;
     float    tan_low, tan_high;
@@ -252,26 +252,26 @@ private:
 
 #if 0
     void clip(int family, 
-	      float psi0, float psi1, 
-	      float low, float high, 
-	      AngleIntList &a) const;
+          float psi0, float psi1, 
+          float low, float high, 
+          AngleIntList &a) const;
 #else
     void clip(float low, float high, 
-	      int family,
-	      int n,
-	      const float p[],
-	      AngleIntList &f) const;
+          int family,
+          int n,
+          const float p[],
+          AngleIntList &f) const;
 
     void store_intersections(int n,
-		 const float *s,
-		 float low,
-		 float high,
-		 float tan_l,
-		 float tan_h,
-		 int  &n1,
-		 float *f1,
-		 int &n2,		
-		 float *f2) const;
+         const float *s,
+         float low,
+         float high,
+         float tan_l,
+         float tan_h,
+         int  &n1,
+         float *f1,
+         int &n2,        
+         float *f2) const;
 #endif
 
     // Used by Solve and Solve2
@@ -279,18 +279,18 @@ private:
 public:
 
     void init(int jt_type, 
-	  float a1, float b1, float c1,
-	  float a2, float b2, float c2,
-	  float a3, float b3, float c3,
-	  float low, float high);
+      float a1, float b1, float c1,
+      float a2, float b2, float c2,
+      float a3, float b3, float c3,
+      float low, float high);
 
     ComplexJtLimit(int jt_type, 
-	  float a1, float b1, float c1,
-	  float a2, float b2, float c2,
-	  float a3, float b3, float c3,
-	  float low, float high)
+      float a1, float b1, float c1,
+      float a2, float b2, float c2,
+      float a3, float b3, float c3,
+      float low, float high)
     {
-	init(jt_type, a1, b1, c1, a2, b2, c2, a3, b3, c3, low, high); 
+    init(jt_type, a1, b1, c1, a2, b2, c2, a3, b3, c3, low, high); 
     }
 
 
@@ -336,9 +336,9 @@ public:
     // the singular pts are only computed once.
 
     void PsiLimits(int num_singular,
-		   float singular_pts[],
-		   AngleIntList &psi1, 
-		   AngleIntList &psi2) const;
+           float singular_pts[],
+           AngleIntList &psi1, 
+           AngleIntList &psi2) const;
 
 
     //
@@ -361,9 +361,9 @@ public:
 
     int Solve(int family, float v, float tan_v, float psi[2]) const;
     void Solve2(float v, float tan_v, 
-		int &n1, float psi_1[2], 
-		int &n2, float psi_2[2]) const;
-	       
+        int &n1, float psi_1[2], 
+        int &n2, float psi_2[2]) const;
+           
     float Low()  const { return limits.Low(); }
     float High() const { return limits.High(); }
 

@@ -1,23 +1,23 @@
 [sim_faction]
-GroupControlSection	= 
-$spawn 			= "ai\DO_NOT_USE"
-class			= SCRIPTZN
-;script_binding	= bind_faction.bind
+GroupControlSection    = 
+$spawn             = "ai\DO_NOT_USE"
+class            = SCRIPTZN
+;script_binding    = bind_faction.bind
 
-shape_transp_color		= 0, 0, 255, 60 ;0x1800FF00
-shape_edge_color		= 32, 32, 32, 255 ;0xFF202020
+shape_transp_color        = 0, 0, 255, 60 ;0x1800FF00
+shape_edge_color        = 32, 32, 32, 255 ;0xFF202020
 
 
 [smart_terrain]
-GroupControlSection	= 
-$spawn 			= "ai\smart_terrain"
-;$prefetch 		= 4
-$def_sphere		= 2
-class			= SMRTTRRN
-script_binding	= bind_smart_terrain.bind
+GroupControlSection    = 
+$spawn             = "ai\smart_terrain"
+;$prefetch         = 4
+$def_sphere        = 2
+class            = SMRTTRRN
+script_binding    = bind_smart_terrain.bind
 
-shape_transp_color		= 100, 100, 180, 60 ;0x1800FF00
-shape_edge_color		= 32, 32, 32, 255 ;0xFF202020
+shape_transp_color        = 100, 100, 180, 60 ;0x1800FF00
+shape_edge_color        = 32, 32, 32, 255 ;0xFF202020
 
 
 [smart_terrain_stay_time]
@@ -247,7 +247,7 @@ pri_a17_recon_squad = pri_a16
 sim_stalker_squad_1 = sim_smart_1
 sim_stalker_squad_2 = sim_smart_2
 ;sim_stalker_squad_4 = sim_smart_8
-;sim_snork_4			= sim_smart_6
+;sim_snork_4            = sim_smart_6
 ;sim_monolith_squad_3= sim_smart_base
 
 ;run_string bind_camfire.campfire_table_by_smart_names["sim_smart_5"][40]:turn_on()

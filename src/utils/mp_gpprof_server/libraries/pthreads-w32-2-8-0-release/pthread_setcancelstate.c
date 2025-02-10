@@ -121,4 +121,4 @@ pthread_setcancelstate (int state, int *oldstate)
 
   return (result);
 
-}				/* pthread_setcancelstate */
+}                /* pthread_setcancelstate */

@@ -22,18 +22,18 @@ float4 main(v2p I) : SV_Target
     float4 P4 = float4(I.vPos, 1);
     float4 PS = mul(m_shadow, P4);
     float s = 1.0f;
-	
+    
 #ifdef USE_SHADOW
     s = shadow(PS);
 #endif
 
     // ----- lightmap
     float4 lightmap = 1.0f;
-	
+    
 #ifdef USE_LMAP
     #ifdef USE_LMAPXFORM
-		PS.x = dot(P4, m_lmap[0]);
-		PS.y = dot(P4, m_lmap[1]);
+        PS.x = dot(P4, m_lmap[0]);
+        PS.y = dot(P4, m_lmap[1]);
     #endif
     lightmap = s_lmap.Sample(smp_rtlinear, PS.xy / PS.w);
 #endif
@@ -47,19 +47,19 @@ float4 main(v2p I) : SV_Target
     PS.xy *= 0.3333;
     float time = timers.z * 0.1;
     PS.x += time;
-	
+    
     float4 t_noise = s_noise.SampleLevel(smp_linear, PS.xy, 0);
-	
+    
     PS.x -= time;
     PS.y -= time * 0.70091;
-	
+    
     t_noise *= s_noise.SampleLevel(smp_linear, PS.xy, 0);
     t_noise = t_noise * 0.5 + 0.5;
 
     // out
     float maxIntens = I.fDensity;
     float3 result = maxIntens * s * att;
-	
+    
     result *= lightmap.xyz;
     result *= Ldynamic_color.xyz * t_noise.xyz;
 

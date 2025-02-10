@@ -88,24 +88,24 @@ pthread_mutexattr_setpshared (pthread_mutexattr_t * attr, int pshared)
        (pshared == PTHREAD_PROCESS_PRIVATE)))
     {
       if (pshared == PTHREAD_PROCESS_SHARED)
-	{
+    {
 
 #if !defined( _POSIX_THREAD_PROCESS_SHARED )
 
-	  result = ENOSYS;
-	  pshared = PTHREAD_PROCESS_PRIVATE;
+      result = ENOSYS;
+      pshared = PTHREAD_PROCESS_PRIVATE;
 
 #else
 
-	  result = 0;
+      result = 0;
 
 #endif /* _POSIX_THREAD_PROCESS_SHARED */
 
-	}
+    }
       else
-	{
-	  result = 0;
-	}
+    {
+      result = 0;
+    }
 
       (*attr)->pshared = pshared;
     }
@@ -116,4 +116,4 @@ pthread_mutexattr_setpshared (pthread_mutexattr_t * attr, int pshared)
 
   return (result);
 
-}				/* pthread_mutexattr_setpshared */
+}                /* pthread_mutexattr_setpshared */

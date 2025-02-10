@@ -40,9 +40,9 @@
 // Given matrices G, S, T solve the equation 
 //
 // G = R2*S*Ry*T*R1
-//	for R1,Ry,R2 
+//    for R1,Ry,R2 
 // where
-//	R1 and R2 represent general rotation matrices
+//    R1 and R2 represent general rotation matrices
 //      Ry represents a rotation about the y axis
 // and
 //      G is the desired goal matrix
@@ -51,8 +51,8 @@
 
 //
 // In the case of the arm:
-//	 R2 : Wrist joints 
-//	 S  : Wrist to Elbow transformation
+//     R2 : Wrist joints 
+//     S  : Wrist to Elbow transformation
 //       Ry : Elbow joint
 //       T  : Elbow to Shoulder transformation
 //       R1 : Shoulder joints 
@@ -117,16 +117,16 @@ private:
 
 public:
     void ProjectOn() 
-	{ project_to_workspace = 1; }
+    { project_to_workspace = 1; }
 
     void ProjectOff() 
-	{ project_to_workspace = 0; }
+    { project_to_workspace = 0; }
 
     //
     // Given the position of the R joint find the corresponding 
     // swivel angle. Must call SetGoal or SetGoalPos first.
     // 
-	float Length( ) const { return get_translation( T ) + get_translation( S ); }
+    float Length( ) const { return get_translation( T ) + get_translation( S ); }
     float PosToAngle( const float p[3] );
 
     //
@@ -139,7 +139,7 @@ public:
     // positive direction axis
     // Returns 1 if the goal is feasible
     int  SetGoal(const Matrix  G, float &rangle);
-	void EvaluateCircle(const float p[3]);
+    void EvaluateCircle(const float p[3]);
     // Solve for both R1 and R2 given the pos or angle of the R joint
     // returns the angle of the R joint 
 
@@ -161,7 +161,7 @@ public:
     //
 
     int R1R2Psi(Matrix alpha,  Matrix beta, Matrix xi,
-		Matrix alpha2, Matrix beta2, Matrix xi2); 
+        Matrix alpha2, Matrix beta2, Matrix xi2); 
 
     
     // Sets the goal pos. EE is a constant matrix that specifies
@@ -196,21 +196,21 @@ public:
 
     void Tmatrix(Matrix  TT)
     {
-	cpmatrix(TT, T);
+    cpmatrix(TT, T);
     }
     void Smatrix(Matrix  SS)
     {
-	cpmatrix(SS, S);
+    cpmatrix(SS, S);
     }
-	void SetTMatrix(const Matrix  TT)
-	{
-	cpmatrix(T,TT);
-	}
+    void SetTMatrix(const Matrix  TT)
+    {
+    cpmatrix(T,TT);
+    }
 
-	void SetSMatrix(const Matrix  SS)
-	{
-		cpmatrix(S,SS);
-	}
+    void SetSMatrix(const Matrix  SS)
+    {
+        cpmatrix(S,SS);
+    }
 
     // Sets the goal for an aiming problem
     // goal is the point we want to point to 
@@ -220,8 +220,8 @@ public:
     void SRS::SetAimGoal(const float goal[3],
 */
     void SetAimGoal(const float goal[3],
-		     const float axis[3],
-		     float flex_angle);
+             const float axis[3],
+             float flex_angle);
 
 
     //

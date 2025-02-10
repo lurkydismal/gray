@@ -14,9 +14,9 @@
 
 unsigned char * LoadTGAFile
 (
-	const char * filename,
-	int * width,
-	int * height
+    const char * filename,
+    int * width,
+    int * height
 );
 
 #endif

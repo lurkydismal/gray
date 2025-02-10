@@ -85,25 +85,25 @@ ptw32_semwait (sem_t * sem)
             {
               /* Must wait */
               if (WaitForSingleObject (s->sem, INFINITE) == WAIT_OBJECT_0)
-		{
+        {
 #ifdef NEED_SEM
-		  if (pthread_mutex_lock (&s->lock) == 0)
-		    {
-		      if (s->leftToUnblock > 0)
-			{
-			  --s->leftToUnblock;
-			  SetEvent(s->sem);
-			}
-		      (void) pthread_mutex_unlock (&s->lock);
-		    }
+          if (pthread_mutex_lock (&s->lock) == 0)
+            {
+              if (s->leftToUnblock > 0)
+            {
+              --s->leftToUnblock;
+              SetEvent(s->sem);
+            }
+              (void) pthread_mutex_unlock (&s->lock);
+            }
 #endif
-		  return 0;
-		}
+          return 0;
+        }
             }
           else
-	    {
-	      return 0;
-	    }
+        {
+          return 0;
+        }
         }
     }
 
@@ -115,4 +115,4 @@ ptw32_semwait (sem_t * sem)
 
   return 0;
 
-}				/* ptw32_semwait */
+}                /* ptw32_semwait */

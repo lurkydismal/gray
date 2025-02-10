@@ -1,7 +1,7 @@
 #pragma once
 
 #define TEMPLATE_SPECIALIZATION template <\
-	typename _Object\
+    typename _Object\
 >
 
 #define CStateMonsterRestWalkGraphAbstract CStateMonsterRestWalkGraph<_Object>
@@ -12,15 +12,15 @@ CStateMonsterRestWalkGraphAbstract::CStateMonsterRestWalkGraph(_Object *obj) : i
 }
 
 TEMPLATE_SPECIALIZATION
-CStateMonsterRestWalkGraphAbstract::~CStateMonsterRestWalkGraph	()
+CStateMonsterRestWalkGraphAbstract::~CStateMonsterRestWalkGraph    ()
 {
 }
 
 TEMPLATE_SPECIALIZATION
 void CStateMonsterRestWalkGraphAbstract::execute()
 {
-	this->object->path().detour_graph_points	();
-	this->object->set_action					(ACT_WALK_FWD);
-	this->object->set_state_sound				(MonsterSound::eMonsterSoundIdle);
+    this->object->path().detour_graph_points    ();
+    this->object->set_action                    (ACT_WALK_FWD);
+    this->object->set_state_sound                (MonsterSound::eMonsterSoundIdle);
 }
 

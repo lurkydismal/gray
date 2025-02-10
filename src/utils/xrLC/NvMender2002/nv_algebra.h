@@ -18,11 +18,11 @@ Comments:
 
 struct DECLSPEC_NV_MATH vec2
 {
-	vec2() { }
+    vec2() { }
     vec2(nv_scalar x, nv_scalar y) : x(x), y(y) { }
     vec2(const nv_scalar* xy) : x(xy[0]), y(xy[1]) { }
-	vec2(const vec2& u) : x(u.x), y(u.y) { }
-	vec2(const vec3t<nv_scalar>&);
+    vec2(const vec2& u) : x(u.x), y(u.y) { }
+    vec2(const vec3t<nv_scalar>&);
 
     bool operator==(const vec2 & u) const
     {
@@ -78,7 +78,7 @@ struct DECLSPEC_NV_MATH vec2
 
 inline const vec2 operator+(const vec2& u, const vec2& v)
 {
-	return vec2(u.x + v.x, u.y + v.y);
+    return vec2(u.x + v.x, u.y + v.y);
 }
 
 inline const vec2 operator-(const vec2& u, const vec2& v)
@@ -88,71 +88,71 @@ inline const vec2 operator-(const vec2& u, const vec2& v)
 
 inline const vec2 operator*(const nv_scalar s, const vec2& u)
 {
-	return vec2(s * u.x, s * u.y);
+    return vec2(s * u.x, s * u.y);
 }
 
 inline const vec2 operator/(const vec2& u, const nv_scalar s)
 {
-	return vec2(u.x / s, u.y / s);
+    return vec2(u.x / s, u.y / s);
 }
 
 inline const vec2 operator*(const vec2&u, const vec2&v)
 {
-	return vec2(u.x * v.x, u.y * v.y);
+    return vec2(u.x * v.x, u.y * v.y);
 }
 
 #undef _T
 template<class _T>
 struct vec3t
 {
-	vec3t() { }
-    vec3t(_T x, _T y, _T z)			: x(x), y(y), z(z)			{ }
-    vec3t(const _T* xyz)			: x(xyz[0]), y(xyz[1]), z(xyz[2]) { }
-	vec3t(const vec2& u)			: x(u.x), y(u.y), z(1.0f)	{ }
-	vec3t(const vec3t<float>& u)	: x(_T(u.x)), y(_T(u.y)), z(_T(u.z))	{ }
-	vec3t(const vec3t<double>& u)	: x(_T(u.x)), y(_T(u.y)), z(_T(u.z))	{ }
-	vec3t(const vec4&);
+    vec3t() { }
+    vec3t(_T x, _T y, _T z)            : x(x), y(y), z(z)            { }
+    vec3t(const _T* xyz)            : x(xyz[0]), y(xyz[1]), z(xyz[2]) { }
+    vec3t(const vec2& u)            : x(u.x), y(u.y), z(1.0f)    { }
+    vec3t(const vec3t<float>& u)    : x(_T(u.x)), y(_T(u.y)), z(_T(u.z))    { }
+    vec3t(const vec3t<double>& u)    : x(_T(u.x)), y(_T(u.y)), z(_T(u.z))    { }
+    vec3t(const vec4&);
 
-    bool operator==(const vec3t<_T> & u) const		{
+    bool operator==(const vec3t<_T> & u) const        {
         return (u.x == x && u.y == y && u.z == z) ? true : false;
     }
-    bool operator!=( const vec3t<_T>& rhs ) const	{
+    bool operator!=( const vec3t<_T>& rhs ) const    {
         return !(*this == rhs );
     }
-    vec3t<_T> & operator*=(const _T & lambda)		{
+    vec3t<_T> & operator*=(const _T & lambda)        {
         x*= lambda;
         y*= lambda;
         z*= lambda;
         return *this;
     }
-    vec3t<_T> operator - () const					{
-		return vec3t<_T>(-x, -y, -z);
-	}
-    vec3t<_T> & operator-=(const vec3t<_T> & u)		{
+    vec3t<_T> operator - () const                    {
+        return vec3t<_T>(-x, -y, -z);
+    }
+    vec3t<_T> & operator-=(const vec3t<_T> & u)        {
         x-= u.x;
         y-= u.y;
         z-= u.z;
         return *this;
     }
-    vec3t<_T> & operator+=(const vec3t<_T> & u)		{
+    vec3t<_T> & operator+=(const vec3t<_T> & u)        {
         x+= u.x;
         y+= u.y;
         z+= u.z;
         return *this;
     }
-	_T sq_norm() const	{ return x * x + y * y + z * z; }
-	_T norm() const		{ return _sqrt(sq_norm()); }
-	_T normalize	()	{
-		_T _norm = norm();
-		if (_norm > nv_eps)	_norm = nv_one / _norm;
-		else				_norm = nv_zero;
-		x *= _norm;
-		y *= _norm;
-		z *= _norm;
-		return _norm;
-	}
+    _T sq_norm() const    { return x * x + y * y + z * z; }
+    _T norm() const        { return _sqrt(sq_norm()); }
+    _T normalize    ()    {
+        _T _norm = norm();
+        if (_norm > nv_eps)    _norm = nv_one / _norm;
+        else                _norm = nv_zero;
+        x *= _norm;
+        y *= _norm;
+        z *= _norm;
+        return _norm;
+    }
 
-    _T & operator[](int i)							{
+    _T & operator[](int i)                            {
         return vec_array[i];
     }
 
@@ -166,49 +166,49 @@ struct vec3t
         _T vec_array[3];     // array access
     };
 
-    const _T operator[](int i) const				{
+    const _T operator[](int i) const                {
         return vec_array[i];
     }
 };
 
-template<class _T>			inline const vec3t<_T> operator+(const vec3t<_T>& u, const vec3t<_T>& v)	{
-	return vec3t<_T>(u.x + v.x, u.y + v.y, u.z + v.z);
+template<class _T>            inline const vec3t<_T> operator+(const vec3t<_T>& u, const vec3t<_T>& v)    {
+    return vec3t<_T>(u.x + v.x, u.y + v.y, u.z + v.z);
 }
-template<class _T>			inline const vec3t<_T> operator-(const vec3t<_T>& u, const vec3t<_T>& v)	{
+template<class _T>            inline const vec3t<_T> operator-(const vec3t<_T>& u, const vec3t<_T>& v)    {
     return vec3t<_T>(u.x - v.x, u.y - v.y, u.z - v.z);
 }
-template<class _T>			inline const vec3t<_T> operator^(const vec3t<_T>& u, const vec3t<_T>& v)	{
+template<class _T>            inline const vec3t<_T> operator^(const vec3t<_T>& u, const vec3t<_T>& v)    {
     return vec3t<_T>(u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z, u.x * v.y - u.y * v.x);
 }
-template<class _T>			inline const vec3t<_T> operator*(const _T s, const vec3t<_T>& u)			{
-	return vec3t<_T>(s * u.x, s * u.y, s * u.z);
+template<class _T>            inline const vec3t<_T> operator*(const _T s, const vec3t<_T>& u)            {
+    return vec3t<_T>(s * u.x, s * u.y, s * u.z);
 }
-template<class _T>			inline const vec3t<_T> operator/(const vec3t<_T>& u, const _T s)			{
-	return vec3t<_T>(u.x / s, u.y / s, u.z / s);
+template<class _T>            inline const vec3t<_T> operator/(const vec3t<_T>& u, const _T s)            {
+    return vec3t<_T>(u.x / s, u.y / s, u.z / s);
 }
-template<class _T>			inline const vec3t<_T> operator*(const vec3t<_T>& u, const vec3t<_T>& v)	{
-	return vec3t<_T>(u.x * v.x, u.y * v.y, u.z * v.z);
+template<class _T>            inline const vec3t<_T> operator*(const vec3t<_T>& u, const vec3t<_T>& v)    {
+    return vec3t<_T>(u.x * v.x, u.y * v.y, u.z * v.z);
 }
 
 //
-typedef	vec3t<nv_scalar>	vec3;
-typedef	vec3t<float>		vec3f;
-typedef	vec3t<double>		vec3d;
+typedef    vec3t<nv_scalar>    vec3;
+typedef    vec3t<float>        vec3f;
+typedef    vec3t<double>        vec3d;
 
 inline vec2::vec2(const vec3& u)
 {
-	nv_scalar k = 1 / u.z;
-	x = k * u.x;
-	y = k * u.y;
+    nv_scalar k = 1 / u.z;
+    x = k * u.x;
+    y = k * u.y;
 }
 
 struct DECLSPEC_NV_MATH vec4
 {
-	vec4() { }
+    vec4() { }
     vec4(nv_scalar x, nv_scalar y, nv_scalar z, nv_scalar w) : x(x), y(y), z(z), w(w) { }
     vec4(const nv_scalar* xyzw) : x(xyzw[0]), y(xyzw[1]), z(xyzw[2]), w(xyzw[3]) { }
-	vec4(const vec3& u) : x(u.x), y(u.y), z(u.z), w(1.0f) { }
-	vec4(const vec4& u) : x(u.x), y(u.y), z(u.z), w(u.w) { }
+    vec4(const vec3& u) : x(u.x), y(u.y), z(u.z), w(1.0f) { }
+    vec4(const vec4& u) : x(u.x), y(u.y), z(u.z), w(u.w) { }
 
     bool operator==(const vec4 & u) const
     {
@@ -249,9 +249,9 @@ struct DECLSPEC_NV_MATH vec4
     }
 
     vec4 operator - () const
-	{
-		return vec4(-x, -y, -z, -w);
-	}
+    {
+        return vec4(-x, -y, -z, -w);
+    }
 
     nv_scalar & operator[](int i)
     {
@@ -276,7 +276,7 @@ struct DECLSPEC_NV_MATH vec4
 
 inline const vec4 operator+(const vec4& u, const vec4& v)
 {
-	return vec4(u.x + v.x, u.y + v.y, u.z + v.z, u.w + v.w);
+    return vec4(u.x + v.x, u.y + v.y, u.z + v.z, u.w + v.w);
 }
 
 inline const vec4 operator-(const vec4& u, const vec4& v)
@@ -286,23 +286,23 @@ inline const vec4 operator-(const vec4& u, const vec4& v)
 
 inline const vec4 operator*(const nv_scalar s, const vec4& u)
 {
-	return vec4(s * u.x, s * u.y, s * u.z, s * u.w);
+    return vec4(s * u.x, s * u.y, s * u.z, s * u.w);
 }
 
 inline const vec4 operator/(const vec4& u, const nv_scalar s)
 {
-	return vec4(u.x / s, u.y / s, u.z / s, u.w / s);
+    return vec4(u.x / s, u.y / s, u.z / s, u.w / s);
 }
 
 inline const vec4 operator*(const vec4& u, const vec4& v)
 {
-	return vec4(u.x * v.x, u.y * v.y, u.z * v.z, u.w * v.w);
+    return vec4(u.x * v.x, u.y * v.y, u.z * v.z, u.w * v.w);
 }
 
-template<class _T>	inline vec3t<_T>::vec3t(const vec4& u)	{
-	x = u.x;
-	y = u.y;
-	z = u.z;
+template<class _T>    inline vec3t<_T>::vec3t(const vec4& u)    {
+    x = u.x;
+    y = u.y;
+    z = u.z;
 }
 
 // quaternion
@@ -323,9 +323,9 @@ struct DECLSPEC_NV_MATH mat3
     mat3( const nv_scalar& f0,  const nv_scalar& f1,  const nv_scalar& f2,  
           const nv_scalar& f3,  const nv_scalar& f4,  const nv_scalar& f5,  
           const nv_scalar& f6,  const nv_scalar& f7,  const nv_scalar& f8 )
-  		  : a00( f0 ), a10( f1 ), a20( f2 ), 
+            : a00( f0 ), a10( f1 ), a20( f2 ), 
             a01( f3 ), a11( f4 ), a21( f5 ),
-  		    a02( f6 ), a12( f7 ), a22( f8) { }
+              a02( f6 ), a12( f7 ), a22( f8) { }
 
     const vec3 col(const int i) const
     {
@@ -354,12 +354,12 @@ struct DECLSPEC_NV_MATH mat3
         mat_array[i + 6] = v.z;
     }
 
-	void set_col(int i, const vec3 & v)
-	{
+    void set_col(int i, const vec3 & v)
+    {
         mat_array[i * 3] = v.x;
         mat_array[i * 3 + 1] = v.y;
         mat_array[i * 3 + 2] = v.z;
-	}
+    }
 
     void set_rot(const nv_scalar & theta, const vec3 & v);
     void set_rot(const vec3 & u, const vec3 & v);
@@ -384,13 +384,13 @@ struct DECLSPEC_NV_MATH mat4
     mat4(const mat4 & M);
 
     mat4( const nv_scalar& f0,  const nv_scalar& f1,  const nv_scalar& f2,  const nv_scalar& f3,
-  		  const nv_scalar& f4,  const nv_scalar& f5,  const nv_scalar& f6,  const nv_scalar& f7,
-  		  const nv_scalar& f8,  const nv_scalar& f9,  const nv_scalar& f10, const nv_scalar& f11,
-  		  const nv_scalar& f12, const nv_scalar& f13, const nv_scalar& f14, const nv_scalar& f15 )
-  		  : a00( f0 ), a10( f1 ), a20( f2 ), a30( f3 ),
-  		    a01( f4 ), a11( f5 ), a21( f6 ), a31( f7 ),
-  		    a02( f8 ), a12( f9 ), a22( f10), a32( f11),
-			a03( f12), a13( f13), a23( f14), a33( f15) { }
+            const nv_scalar& f4,  const nv_scalar& f5,  const nv_scalar& f6,  const nv_scalar& f7,
+            const nv_scalar& f8,  const nv_scalar& f9,  const nv_scalar& f10, const nv_scalar& f11,
+            const nv_scalar& f12, const nv_scalar& f13, const nv_scalar& f14, const nv_scalar& f15 )
+            : a00( f0 ), a10( f1 ), a20( f2 ), a30( f3 ),
+              a01( f4 ), a11( f5 ), a21( f6 ), a31( f7 ),
+              a02( f8 ), a12( f9 ), a22( f10), a32( f11),
+            a03( f12), a13( f13), a23( f14), a33( f15) { }
  
     const vec4 col(const int i) const
     {
@@ -438,7 +438,7 @@ struct DECLSPEC_NV_MATH mat4
     void set_translation(const vec3 & t);
     vec3 & get_translation(vec3 & t) const;
 
-	mat4 operator*(const mat4&) const;
+    mat4 operator*(const mat4&) const;
 
     union {
         struct {
@@ -471,29 +471,29 @@ const vec4 operator*(const vec4&, const mat4&);
 // quaternion
 struct DECLSPEC_NV_MATH quat {
 public:
-	quat(nv_scalar x = 0, nv_scalar y = 0, nv_scalar z = 0, nv_scalar w = 1);
-	quat(const quat& quat);
-	quat(const vec3& axis, nv_scalar angle);
-	quat(const mat3& rot);
-	quat& operator=(const quat& quat);
-	quat operator-()
-	{
-		return quat(-x, -y, -z, -w);
-	}
-	quat Inverse();
-	void Normalize();
-	void FromMatrix(const mat3& mat);
-	void ToMatrix(mat3& mat) const;
-	quat& operator*=(const quat& quat);
-	static const quat Identity;
-	nv_scalar& operator[](int i) { return comp[i]; }
-	const nv_scalar operator[](int i) const { return comp[i]; }
-	union {
-		struct {
-			nv_scalar x, y, z, w;
-		};
-		nv_scalar comp[4];
-	};
+    quat(nv_scalar x = 0, nv_scalar y = 0, nv_scalar z = 0, nv_scalar w = 1);
+    quat(const quat& quat);
+    quat(const vec3& axis, nv_scalar angle);
+    quat(const mat3& rot);
+    quat& operator=(const quat& quat);
+    quat operator-()
+    {
+        return quat(-x, -y, -z, -w);
+    }
+    quat Inverse();
+    void Normalize();
+    void FromMatrix(const mat3& mat);
+    void ToMatrix(mat3& mat) const;
+    quat& operator*=(const quat& quat);
+    static const quat Identity;
+    nv_scalar& operator[](int i) { return comp[i]; }
+    const nv_scalar operator[](int i) const { return comp[i]; }
+    union {
+        struct {
+            nv_scalar x, y, z, w;
+        };
+        nv_scalar comp[4];
+    };
 };
 const quat operator*(const quat&, const quat&);
 extern quat & conj(quat & p, const quat & q);

@@ -37,14 +37,14 @@ unsigned int gsiGetResolvedIP(GSIResolveHostnameHandle handle);
 // Get rid of compiler warnings when parameters are never used
 // (Mainly used in sample apps and callback for platform switches)
 #if (defined(__MWERKS__) && !defined(_NITRO)) || defined(WIN32)
-	#define GSI_UNUSED(x) x
+    #define GSI_UNUSED(x) x
 #elif defined(_PS2) || defined(_NITRO) || defined(_PS3) || defined(_MACOSX)
-	#define GSI_UNUSED(x) {void* y=&x;y=NULL;}
+    #define GSI_UNUSED(x) {void* y=&x;y=NULL;}
 #elif defined(_PSP)
 #define GSI_UNUSED(x) (void)x;
-	
+    
 #else
-	#define GSI_UNUSED(x)
+    #define GSI_UNUSED(x)
 #endif
 
 
@@ -66,9 +66,9 @@ int B64DecodeLen(const char *input, int encodingType);
 
 typedef struct
 {
-	const char *input;
-	int len;
-	int encodingType;
+    const char *input;
+    int len;
+    int encodingType;
 } B64StreamData;
 
 void B64InitEncodeStream(B64StreamData *data, const char *input, int len, int encodingType);
@@ -89,9 +89,9 @@ gsi_i8 * gsXxteaDecrypt(const gsi_i8 * iStr, gsi_i32 iLength, gsi_i8 key[XXTEA_K
 #endif
 
 #if defined(_DEBUG)
-	void gsiCheckStack(void);
+    void gsiCheckStack(void);
 #else
-	#define gsiCheckStack() 
+    #define gsiCheckStack() 
 #endif
 
 
@@ -104,36 +104,36 @@ gsi_time current_time_hires();   // microseconds
 void msleep(gsi_time msec);      // milliseconds
 
 // GSI equivalent of common C-lib time functions
-struct tm * gsiSecondsToDate(const time_t *timp);		//gmtime
-time_t  gsiDateToSeconds(struct tm *tb);				//mktime
-char * gsiSecondsToString(const time_t *timp);			//ctime
+struct tm * gsiSecondsToDate(const time_t *timp);        //gmtime
+time_t  gsiDateToSeconds(struct tm *tb);                //mktime
+char * gsiSecondsToString(const time_t *timp);            //ctime
 
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 // Misc utilities
 
-	
+    
 #if defined(_NITRO) 
-	time_t time(time_t *timer);
-	
-	#define gmtime(t)	gsiSecondsToDate(t)
-	#define ctime(t)	gsiSecondsToString(t)
-	#define mktime(t)	gsiDateToSeconds(t)	
+    time_t time(time_t *timer);
+    
+    #define gmtime(t)    gsiSecondsToDate(t)
+    #define ctime(t)    gsiSecondsToString(t)
+    #define mktime(t)    gsiDateToSeconds(t)    
 #elif defined(_REVOLUTION)
-	time_t gsiTimeInSec(time_t *timer);
-	struct tm *gsiGetGmTime(time_t *theTime);
-	char *gsiCTime(time_t *theTime);
-	#define time(t) gsiTimeInSec(t)
-	#define gmtime(t) gsiGetGmTime(t)
-	#define ctime(t) gsiCTime(t)
+    time_t gsiTimeInSec(time_t *timer);
+    struct tm *gsiGetGmTime(time_t *theTime);
+    char *gsiCTime(time_t *theTime);
+    #define time(t) gsiTimeInSec(t)
+    #define gmtime(t) gsiGetGmTime(t)
+    #define ctime(t) gsiCTime(t)
 #else
-	#include <time.h>
+    #include <time.h>
 #endif
 
 
-	#ifndef SOMAXCONN
-	#define SOMAXCONN 5
+    #ifndef SOMAXCONN
+    #define SOMAXCONN 5
 #endif
 
 typedef const char * (* GetUniqueIDFunction)();

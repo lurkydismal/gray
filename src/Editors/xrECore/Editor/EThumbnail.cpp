@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 ECustomThumbnail::ECustomThumbnail(LPCSTR src_name, THMType type)
 {
-	m_Type		= type;
+    m_Type        = type;
     m_SrcName   = src_name;
-	m_Name 		= ChangeFileExt(xr_string(src_name),".thm");
-    m_Age		= 0;
+    m_Name         = ChangeFileExt(xr_string(src_name),".thm");
+    m_Age        = 0;
 }
 
 //------------------------------------------------------------------------------
@@ -24,19 +24,19 @@ ECustomThumbnail::~ECustomThumbnail()
 //------------------------------------------------------------------------------
 EImageThumbnail::~EImageThumbnail()
 {
-	m_Pixels.clear();
+    m_Pixels.clear();
 }
 
 void EImageThumbnail::VFlip()
 {
-	R_ASSERT(!m_Pixels.empty());
-	u32 line[THUMB_WIDTH];
+    R_ASSERT(!m_Pixels.empty());
+    u32 line[THUMB_WIDTH];
     u32 sz_ln=sizeof(u32)*THUMB_WIDTH;
     u32 y2 = THUMB_WIDTH-1;
     for (int y=0; y<THUMB_HEIGHT/2; y++,y2--){
-    	CopyMemory(line,m_Pixels.data()+y2*THUMB_WIDTH,sz_ln);
-    	CopyMemory(m_Pixels.data()+y2*THUMB_WIDTH,m_Pixels.data()+y*THUMB_WIDTH,sz_ln);
-    	CopyMemory(m_Pixels.data()+y*THUMB_WIDTH,line,sz_ln);
+        CopyMemory(line,m_Pixels.data()+y2*THUMB_WIDTH,sz_ln);
+        CopyMemory(m_Pixels.data()+y2*THUMB_WIDTH,m_Pixels.data()+y*THUMB_WIDTH,sz_ln);
+        CopyMemory(m_Pixels.data()+y*THUMB_WIDTH,line,sz_ln);
     }
 }
 
@@ -84,9 +84,9 @@ void EImageThumbnail::Update(ImTextureID& Texture)
 ECORE_API EImageThumbnail* CreateThumbnail(LPCSTR src_name, ECustomThumbnail::THMType type, bool bLoad)
 {
     switch (type){
-    case ECustomThumbnail::ETObject: 	return new EObjectThumbnail	(src_name,bLoad);
-    case ECustomThumbnail::ETTexture:	return new ETextureThumbnail(src_name,bLoad);
-    case ECustomThumbnail::ETGroup:		return new EGroupThumbnail	(src_name,bLoad);
+    case ECustomThumbnail::ETObject:     return new EObjectThumbnail    (src_name,bLoad);
+    case ECustomThumbnail::ETTexture:    return new ETextureThumbnail(src_name,bLoad);
+    case ECustomThumbnail::ETGroup:        return new EGroupThumbnail    (src_name,bLoad);
     default: NODEFAULT;
     }
     return 0;              

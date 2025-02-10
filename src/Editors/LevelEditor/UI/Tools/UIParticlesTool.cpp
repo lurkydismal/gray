@@ -53,8 +53,8 @@ void UIParticlesTool::Draw()
         }
         ImGui::Indent(ImGui::GetTreeNodeToLabelSpacing());
         ImGui::TreePop();
-	}
-	ImGui::Separator();
+    }
+    ImGui::Separator();
     ImGui::SetNextItemOpen(true, ImGuiCond_FirstUseEver);
 }
 

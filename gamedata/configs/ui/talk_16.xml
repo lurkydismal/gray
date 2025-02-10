@@ -16,7 +16,7 @@
     </text_color>
   </button>
 
-  <answers_list	  x="296" y="63" width="437" height="423" always_show_scroll="1"/>
+  <answers_list      x="296" y="63" width="437" height="423" always_show_scroll="1"/>
   <questions_list x="296" y="542" width="437" height="166" always_show_scroll="0"/>
 
   <question_item x="0" y="0" width="439" height="20" min_height="13">
@@ -65,16 +65,16 @@
     <msg_icon x="17" y="3" width="41" height="29" stretch="1"/>
   </iconed_answer_item>
 
-	<simple_answer_item x="0" y="0" width="527" height="0" min_height="13" bottom_footer="5">
-		<name_caption x="0" y="0" width="0" height="0"/>
+    <simple_answer_item x="0" y="0" width="527" height="0" min_height="13" bottom_footer="5">
+        <name_caption x="0" y="0" width="0" height="0"/>
 
-		<content_text x="50" y="0" width="450" height="29" complex_mode="1">
-			<text font="letterica18" color="ui_1"/>
-    	</content_text>
+        <content_text x="50" y="0" width="450" height="29" complex_mode="1">
+            <text font="letterica18" color="ui_1"/>
+        </content_text>
 
-		<msg_icon x="20" y="3" width="0" height="0">
-		</msg_icon>
-	</simple_answer_item>
+        <msg_icon x="20" y="3" width="0" height="0">
+        </msg_icon>
+    </simple_answer_item>
   <iconed_trade_info x="0" y="0" width="439" height="0" min_height="20" bottom_footer="5">
     <name_caption x="0" y="0" width="0" height="0"/>
 

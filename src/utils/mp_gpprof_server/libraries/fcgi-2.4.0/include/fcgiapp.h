@@ -81,7 +81,7 @@ typedef char **FCGX_ParamArray;
  * Setting FCGI_FAIL_ACCEPT_ON_INTR prevents FCGX_Accept() from
  * restarting upon being interrupted.
  */
-#define FCGI_FAIL_ACCEPT_ON_INTR	1
+#define FCGI_FAIL_ACCEPT_ON_INTR    1
 
 /*
  * FCGX_Request -- State associated with a request.
@@ -94,9 +94,9 @@ typedef struct FCGX_Request {
     FCGX_Stream *in;
     FCGX_Stream *out;
     FCGX_Stream *err;
-	char **envp;
+    char **envp;
 
-	/* Don't use anything below here */
+    /* Don't use anything below here */
 
     struct Params *paramsPtr;
     int ipcFd;               /* < 0 means no connection */
@@ -104,8 +104,8 @@ typedef struct FCGX_Request {
     int keepConnection;       /* don't close ipcFd at end of request */
     int appStatus;
     int nWriters;             /* number of open writers (0..2) */
-	int flags;
-	int listen_sock;
+    int flags;
+    int listen_sock;
 } FCGX_Request;
 
 
@@ -146,12 +146,12 @@ DLLAPI int FCGX_Init(void);
  *
  * FCGX_OpenSocket --
  *
- *	Create a FastCGI listen socket.
+ *    Create a FastCGI listen socket.
  *
- *	path is the Unix domain socket (named pipe for WinNT), or a colon
- *	followed by a port number.  e.g. "/tmp/fastcgi/mysocket", ":5000"
+ *    path is the Unix domain socket (named pipe for WinNT), or a colon
+ *    followed by a port number.  e.g. "/tmp/fastcgi/mysocket", ":5000"
  *
- *	backlog is the listen queue depth used in the listen() call.
+ *    backlog is the listen queue depth used in the listen() call.
  *
  *  Returns the socket's file descriptor or -1 on error.
  *
@@ -164,12 +164,12 @@ DLLAPI int FCGX_OpenSocket(const char *path, int backlog);
  *
  * FCGX_InitRequest --
  *
- *	Initialize a FCGX_Request for use with FCGX_Accept_r().
+ *    Initialize a FCGX_Request for use with FCGX_Accept_r().
  *
- * 	sock is a file descriptor returned by FCGX_OpenSocket() or 0 (default).
- * 	The only supported flag at this time is FCGI_FAIL_ON_INTR.
+ *     sock is a file descriptor returned by FCGX_OpenSocket() or 0 (default).
+ *     The only supported flag at this time is FCGI_FAIL_ON_INTR.
  *
- * 	Returns 0 upon success.
+ *     Returns 0 upon success.
  *----------------------------------------------------------------------
  */
 DLLAPI int FCGX_InitRequest(FCGX_Request *request, int sock, int flags);
@@ -180,10 +180,10 @@ DLLAPI int FCGX_InitRequest(FCGX_Request *request, int sock, int flags);
  * FCGX_Accept_r --
  *
  *      Accept a new request (multi-thread safe).  Be sure to call
- * 	FCGX_Init() first.
+ *     FCGX_Init() first.
  *
  * Results:
- *	0 for successful call, -1 for error.
+ *    0 for successful call, -1 for error.
  *
  * Side effects:
  *
@@ -200,7 +200,7 @@ DLLAPI int FCGX_InitRequest(FCGX_Request *request, int sock, int flags);
  *      since these will be freed by the next call to FCGX_Finish
  *      or FCGX_Accept.
  *
- *	DON'T use the FCGX_Request, its structure WILL change.
+ *    DON'T use the FCGX_Request, its structure WILL change.
  *
  *----------------------------------------------------------------------
  */
@@ -233,7 +233,7 @@ DLLAPI void FCGX_Finish_r(FCGX_Request *request);
  * FCGX_Free --
  *
  *      Free the memory and, if close is true, 
- *	    IPC FD associated with the request (multi-thread safe).
+ *        IPC FD associated with the request (multi-thread safe).
  *
  *----------------------------------------------------------------------
  */
@@ -247,7 +247,7 @@ DLLAPI void FCGX_Free(FCGX_Request * request, int close);
  *      Accept a new request (NOT multi-thread safe).
  *
  * Results:
- *	0 for successful call, -1 for error.
+ *    0 for successful call, -1 for error.
  *
  * Side effects:
  *
@@ -340,7 +340,7 @@ DLLAPI void FCGX_SetExitStatus(int status, FCGX_Stream *stream);
  *
  *
  * Results:
- *	Value bound to name, NULL if name not present in the
+ *    Value bound to name, NULL if name not present in the
  *      environment envp.  Caller must not mutate the result
  *      or retain it past the end of this request.
  *
@@ -362,7 +362,7 @@ DLLAPI char *FCGX_GetParam(const char *name, FCGX_ParamArray envp);
  *      Reads a byte from the input stream and returns it.
  *
  * Results:
- *	The byte, or EOF (-1) if the end of input has been reached.
+ *    The byte, or EOF (-1) if the end of input has been reached.
  *
  *----------------------------------------------------------------------
  */
@@ -378,7 +378,7 @@ DLLAPI int FCGX_GetChar(FCGX_Stream *stream);
  *      has been read.  No pushback is possible for EOF.
  *
  * Results:
- *	Returns c if the pushback succeeded, EOF if not.
+ *    Returns c if the pushback succeeded, EOF if not.
  *
  *----------------------------------------------------------------------
  */
@@ -394,7 +394,7 @@ DLLAPI int FCGX_UnGetChar(int c, FCGX_Stream *stream);
  *      of the input bytes.
  *
  * Results:
- *	Number of bytes read.  If result is smaller than n,
+ *    Number of bytes read.  If result is smaller than n,
  *      the end of input has been reached.
  *
  *----------------------------------------------------------------------
@@ -413,7 +413,7 @@ DLLAPI int FCGX_GetStr(char *str, int n, FCGX_Stream *stream);
  *      stores a '\0' terminator.
  *
  * Results:
- *	NULL if EOF is the first thing read from the input stream,
+ *    NULL if EOF is the first thing read from the input stream,
  *      str otherwise.
  *
  *----------------------------------------------------------------------
@@ -434,7 +434,7 @@ DLLAPI char *FCGX_GetLine(char *str, int n, FCGX_Stream *stream);
  *      ability to peek ahead.
  *
  * Results:
- *	EOF if end-of-file has been detected, 0 if not.
+ *    EOF if end-of-file has been detected, 0 if not.
  *
  *----------------------------------------------------------------------
  */
@@ -455,7 +455,7 @@ DLLAPI  int FCGX_HasSeenEOF(FCGX_Stream *stream);
  *      Writes a byte to the output stream.
  *
  * Results:
- *	The byte, or EOF (-1) if an error occurred.
+ *    The byte, or EOF (-1) if an error occurred.
  *
  *----------------------------------------------------------------------
  */
@@ -619,4 +619,4 @@ DLLAPI void FCGX_ShutdownPending(void);
 } /* terminate extern "C" { */
 #endif
 
-#endif	/* _FCGIAPP_H */
+#endif    /* _FCGIAPP_H */

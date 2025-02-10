@@ -110,45 +110,45 @@ pthread_join (pthread_t thread, void **value_ptr)
       self = pthread_self();
 
       if (NULL == self.p)
-	{
-	  result = ENOENT;
-	}
+    {
+      result = ENOENT;
+    }
       else if (pthread_equal (self, thread))
-	{
-	  result = EDEADLK;
-	}
+    {
+      result = EDEADLK;
+    }
       else
-	{
-	  /*
-	   * Pthread_join is a cancelation point.
-	   * If we are canceled then our target thread must not be
-	   * detached (destroyed). This is guarranteed because
-	   * pthreadCancelableWait will not return if we
-	   * are canceled.
-	   */
-	  result = pthreadCancelableWait (tp->threadH);
+    {
+      /*
+       * Pthread_join is a cancelation point.
+       * If we are canceled then our target thread must not be
+       * detached (destroyed). This is guarranteed because
+       * pthreadCancelableWait will not return if we
+       * are canceled.
+       */
+      result = pthreadCancelableWait (tp->threadH);
 
-	  if (0 == result)
-	    {
-	      if (value_ptr != NULL)
-		{
-		  *value_ptr = tp->exitStatus;
-		}
+      if (0 == result)
+        {
+          if (value_ptr != NULL)
+        {
+          *value_ptr = tp->exitStatus;
+        }
 
-	      /*
-	       * The result of making multiple simultaneous calls to
-	       * pthread_join() or pthread_detach() specifying the same
-	       * target is undefined.
-	       */
-	      result = pthread_detach (thread);
-	    }
-	  else
-	    {
-	      result = ESRCH;
-	    }
-	}
+          /*
+           * The result of making multiple simultaneous calls to
+           * pthread_join() or pthread_detach() specifying the same
+           * target is undefined.
+           */
+          result = pthread_detach (thread);
+        }
+      else
+        {
+          result = ESRCH;
+        }
+    }
     }
 
   return (result);
 
-}				/* pthread_join */
+}                /* pthread_join */

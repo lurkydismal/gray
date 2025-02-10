@@ -14,7 +14,7 @@ void skinned_main(in v_model I, out p_bumped_new O)
     O.position = float4(Pe, 1.0f);
 
     float3 N = I.N * 2.0f;
-	
+    
 #if defined(USE_BUMP) || defined(USE_TDETAIL_BUMP)
     float3 T = I.T * 2.0f;
     float3 B = I.B * 2.0f;
@@ -28,7 +28,7 @@ void skinned_main(in v_model I, out p_bumped_new O)
     O.M2 = xform[1];
     O.M3 = xform[2];
 #else
-	N = mul((float3x3)m_WV, N);
+    N = mul((float3x3)m_WV, N);
 
     O.M1 = N.xxx;
     O.M2 = N.yyy;

@@ -22,98 +22,98 @@ TYPEDEF_STD_VECTOR_PTR(xr_bone)
 
 class xr_bone {
 public:
-			xr_bone();
-	virtual		~xr_bone();
+            xr_bone();
+    virtual        ~xr_bone();
 
-	void		load_0(xr_reader& r);
-	void		load_1(xr_reader& r);
-	void		load_data(xr_reader& r);
-	void		save(xr_writer& w) const;
-	void		save_data(xr_writer& w) const;
+    void        load_0(xr_reader& r);
+    void        load_1(xr_reader& r);
+    void        load_data(xr_reader& r);
+    void        save(xr_writer& w) const;
+    void        save_data(xr_writer& w) const;
 
-	void		calculate_bind(const fmatrix& parent_xform);
-	void		calculate_motion(xr_skl_motion* sm, const fmatrix& parent_xform);
-	void		update_motion(const fvector3& offset, const fvector3& rotate);
-	void		setup(uint16_t id, xr_object& object);
+    void        calculate_bind(const fmatrix& parent_xform);
+    void        calculate_motion(xr_skl_motion* sm, const fmatrix& parent_xform);
+    void        update_motion(const fvector3& offset, const fvector3& rotate);
+    void        setup(uint16_t id, xr_object& object);
 
-	bool			is_root() const;
+    bool            is_root() const;
 
-	uint16_t		id() const;
-	const xr_bone*		parent() const;
+    uint16_t        id() const;
+    const xr_bone*        parent() const;
 
-	xr_bone_vec&		children();
-	const xr_bone_vec&	children() const;
+    xr_bone_vec&        children();
+    const xr_bone_vec&    children() const;
 
-	std::string&		name();
-	const std::string&	name() const;
-	std::string&		parent_name();
-	const std::string&	parent_name() const;
-	std::string&		vmap_name();
-	const std::string&	vmap_name() const;
-	const fmatrix&		bind_xform() const;
-	const fmatrix&		bind_i_xform() const;
-	const fmatrix&		motion_xform() const;
-	const fmatrix&		motion_i_xform() const;
-	const fmatrix&		last_xform() const;
-	fvector3&		bind_offset();
-	const fvector3&		bind_offset() const;
-	fvector3&		bind_rotate();
-	const fvector3&		bind_rotate() const;
-	std::string&		gamemtl();
-	const std::string&	gamemtl() const;
+    std::string&        name();
+    const std::string&    name() const;
+    std::string&        parent_name();
+    const std::string&    parent_name() const;
+    std::string&        vmap_name();
+    const std::string&    vmap_name() const;
+    const fmatrix&        bind_xform() const;
+    const fmatrix&        bind_i_xform() const;
+    const fmatrix&        motion_xform() const;
+    const fmatrix&        motion_i_xform() const;
+    const fmatrix&        last_xform() const;
+    fvector3&        bind_offset();
+    const fvector3&        bind_offset() const;
+    fvector3&        bind_rotate();
+    const fvector3&        bind_rotate() const;
+    std::string&        gamemtl();
+    const std::string&    gamemtl() const;
 
 protected:
-	uint16_t		m_id;
-	xr_bone*		m_parent;
-	xr_bone_vec		m_children;
+    uint16_t        m_id;
+    xr_bone*        m_parent;
+    xr_bone_vec        m_children;
 
-	fvector3		m_mot_offset;
-	fvector3		m_mot_rotate;
-	float			m_mot_length;
+    fvector3        m_mot_offset;
+    fvector3        m_mot_rotate;
+    float            m_mot_length;
 
-	fmatrix			m_mot_xform;
-	fmatrix			m_mot_i_xform;
-	fmatrix			m_bind_xform;
-	fmatrix			m_bind_i_xform;
-	fmatrix			m_last_xform;
-	fmatrix			m_render_xform;
+    fmatrix            m_mot_xform;
+    fmatrix            m_mot_i_xform;
+    fmatrix            m_bind_xform;
+    fmatrix            m_bind_i_xform;
+    fmatrix            m_last_xform;
+    fmatrix            m_render_xform;
 
-	std::string		m_name;			// BONE_CHUNK_DEF (there are two flavours of it!)
-	std::string		m_parent_name;
-	std::string		m_vmap_name;
+    std::string        m_name;            // BONE_CHUNK_DEF (there are two flavours of it!)
+    std::string        m_parent_name;
+    std::string        m_vmap_name;
 
-	fvector3		m_bind_rotate;		// BONE_CHUNK_BIND_POSE
-	fvector3		m_bind_offset;
-	float			m_bind_length;
+    fvector3        m_bind_rotate;        // BONE_CHUNK_BIND_POSE
+    fvector3        m_bind_offset;
+    float            m_bind_length;
 
-	std::string		m_gamemtl;		// BONE_CHUNK_MATERIAL
-	s_bone_shape		m_shape;		// BONE_CHUNK_SHAPE
+    std::string        m_gamemtl;        // BONE_CHUNK_MATERIAL
+    s_bone_shape        m_shape;        // BONE_CHUNK_SHAPE
 
-	s_joint_ik_data		m_joint_ik_data;	// BONE_CHUNK_IK_JOINT, BONE_CHUNK_IK_FLAGS,
-							// BONE_CHUNK_BREAK_PARAMS, BONE_CHUNK_FRICTION
-	float			m_mass;			// BONE_CHUNK_MASS_PARAMS
-	fvector3		m_center_of_mass;
+    s_joint_ik_data        m_joint_ik_data;    // BONE_CHUNK_IK_JOINT, BONE_CHUNK_IK_FLAGS,
+                            // BONE_CHUNK_BREAK_PARAMS, BONE_CHUNK_FRICTION
+    float            m_mass;            // BONE_CHUNK_MASS_PARAMS
+    fvector3        m_center_of_mass;
 };
 
 class xr_partition {
 public:
-				xr_partition();
-				xr_partition(const xr_bone_vec& bones);
-	virtual			~xr_partition();
+                xr_partition();
+                xr_partition(const xr_bone_vec& bones);
+    virtual            ~xr_partition();
 
-	void			load_0(xr_reader& r, const xr_bone_vec& all_bones);
-	void			load_1(xr_reader& r);
-	void			save(xr_writer& w) const;
-	void			setup(uint16_t id);
+    void            load_0(xr_reader& r, const xr_bone_vec& all_bones);
+    void            load_1(xr_reader& r);
+    void            save(xr_writer& w) const;
+    void            setup(uint16_t id);
 
-	uint16_t			id() const;
-	const std::string&		name() const;
-	std::vector<std::string>&	bones();
+    uint16_t            id() const;
+    const std::string&        name() const;
+    std::vector<std::string>&    bones();
 
 protected:
-	uint16_t			m_id;
-	std::string			m_name;
-	std::vector<std::string>	m_bones;
+    uint16_t            m_id;
+    std::string            m_name;
+    std::vector<std::string>    m_bones;
 };
 
 TYPEDEF_STD_VECTOR_PTR(xr_partition)

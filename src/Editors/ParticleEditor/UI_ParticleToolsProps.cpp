@@ -58,34 +58,34 @@ void CParticleTool::OnParticleCloneItem(LPCSTR parent_path, LPCSTR new_full_name
 
 void CParticleTool::OnParticleItemRename(LPCSTR old_name, LPCSTR new_name, EItemType type)
 {
-	Rename			(old_name,new_name);
-	Modified		();
+    Rename            (old_name,new_name);
+    Modified        ();
 }
 
 void CParticleTool::OnParticleItemRemove(LPCSTR name, EItemType type)
 {
-	Remove			(name);
-    Modified		();
+    Remove            (name);
+    Modified        ();
 }
 
 void  CParticleTool::OnControlClick(ButtonValue* sender, bool& bDataModified, bool& bSafe)
 {
-	m_Transform.identity();
-    bDataModified	= false;
+    m_Transform.identity();
+    bDataModified    = false;
 }
 
 void CParticleTool::OnParticleItemFocused(ListItem* items)
 {
-	PropItemVec props;
-	m_EditMode	= emEffect;
+    PropItemVec props;
+    m_EditMode    = emEffect;
 
     ButtonValue* B;
-	B=PHelper().CreateButton	(props,"Transform\\Edit",	"Reset",	ButtonValue::flFirstOnly);
+    B=PHelper().CreateButton    (props,"Transform\\Edit",    "Reset",    ButtonValue::flFirstOnly);
     B->OnBtnClickEvent = ButtonValue::TOnBtnClick(this,&CParticleTool::OnControlClick);
-    PHelper().CreateFlag32		(props,"Transform\\Type",	&m_Flags,	flSetXFORM,"Update","Set");
+    PHelper().CreateFlag32        (props,"Transform\\Type",    &m_Flags,    flSetXFORM,"Update","Set");
 
     // reset to default
-    ResetCurrent	();
+    ResetCurrent    ();
 
     if (items) {
 
@@ -110,7 +110,7 @@ void CParticleTool::OnParticleItemFocused(ListItem* items)
     }
 
     m_ItemProps->ClearProperties();
-	m_ItemProps->AssignItems(props);
+    m_ItemProps->AssignItems(props);
 
     UI->RedrawScene();
 }
@@ -120,9 +120,9 @@ extern xr_string _item_to_select_after_edit;
 
 void CParticleTool::RealUpdateProperties()
 {
-	m_Flags.set(flRefreshProps,FALSE);
+    m_Flags.set(flRefreshProps,FALSE);
 
-	ListItemsVec items;
+    ListItemsVec items;
     {
         PS::PEDIt Pe = RImplementation.PSLibrary.FirstPED();
         PS::PEDIt Ee = RImplementation.PSLibrary.LastPED();
@@ -130,7 +130,7 @@ void CParticleTool::RealUpdateProperties()
             ListItem* I=LHelper().CreateItem(items,*(*Pe)->m_Name,emEffect,0,*Pe);
             I->SetIcon(1);
         }
-	}
+    }
     {
         PS::PGDIt Pg = RImplementation.PSLibrary.FirstPGD();
         PS::PGDIt Eg = RImplementation.PSLibrary.LastPGD();
@@ -138,11 +138,11 @@ void CParticleTool::RealUpdateProperties()
             ListItem* I=LHelper().CreateItem(items,*(*Pg)->m_Name,emGroup,0,*Pg);
             I->SetIcon(2);
         }
-	}
-	m_PList->AssignItems(items,nullptr,true);
+    }
+    m_PList->AssignItems(items,nullptr,true);
     if(_item_to_select_after_edit.size())
     {
-    	m_PList->SelectItem(_item_to_select_after_edit.c_str());
+        m_PList->SelectItem(_item_to_select_after_edit.c_str());
         _item_to_select_after_edit = "";
     }
     else

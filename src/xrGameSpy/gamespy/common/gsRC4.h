@@ -16,9 +16,9 @@ extern "C"
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct RC4Context
 {
-	unsigned char x;
-	unsigned char y;
-	unsigned char state[256];
+    unsigned char x;
+    unsigned char y;
+    unsigned char state[256];
 } RC4Context;
 
 void RC4Init(RC4Context *context, const unsigned char *key, int len);

@@ -459,7 +459,7 @@ namespace Loki
               // VC7 fail NPS_HierarchyGenerators.h if this one is enum
               static const unsigned int type_id = sizeof(check( Type2Type<T>() ));
             #else
-						  enum { type_id = sizeof(check( Type2Type<T>() )) };
+                          enum { type_id = sizeof(check( Type2Type<T>() )) };
             #endif
 
             enum { value = type_id != sizeof(no) };

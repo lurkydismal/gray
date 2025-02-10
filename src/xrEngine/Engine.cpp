@@ -5,7 +5,7 @@
 #include "stdafx.h"
 #include "Engine.h"
 
-CEngine				Engine;
+CEngine                Engine;
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -13,22 +13,22 @@ CEngine				Engine;
 
 CEngine::CEngine()
 {
-	g_pEventManager = new CEventManager;
+    g_pEventManager = new CEventManager;
 }
 
 CEngine::~CEngine()
 {
-	delete g_pEventManager;
+    delete g_pEventManager;
 }
 
-void CEngine::Initialize	(void)
+void CEngine::Initialize    (void)
 {
-	// Other stuff
-	Engine.Sheduler.Initialize			( );
+    // Other stuff
+    Engine.Sheduler.Initialize            ( );
 }
 
-void CEngine::Destroy	()
+void CEngine::Destroy    ()
 {
-	Engine.Sheduler.Destroy				( );
-	Engine.External.Destroy				( );
+    Engine.Sheduler.Destroy                ( );
+    Engine.External.Destroy                ( );
 }

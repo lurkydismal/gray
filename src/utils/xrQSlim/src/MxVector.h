@@ -40,7 +40,7 @@ private:
 
 protected:
     inline void copy(const MxVBlock<T,N>& v)
-	{ for(unsigned int i=0; i<N; i++) elt[i]=v.elt[i]; }
+    { for(unsigned int i=0; i<N; i++) elt[i]=v.elt[i]; }
 
 public:
     MxVBlock() { }
@@ -59,11 +59,11 @@ public:
     // In-place arithmetic methods
     //
     inline MxVBlock<T,N>& operator=(const MxVBlock<T,N>& v)
-	{ mxv_set(elt, v, N); return *this; }
+    { mxv_set(elt, v, N); return *this; }
     inline MxVBlock<T,N>& operator+=(const MxVBlock<T,N>& v)
-	{ mxv_addinto(elt, v, N); return *this; }
+    { mxv_addinto(elt, v, N); return *this; }
     inline MxVBlock<T,N>& operator-=(const MxVBlock<T,N>& v)
-	{ mxv_subfrom(elt, v, N); return *this; }
+    { mxv_subfrom(elt, v, N); return *this; }
     inline MxVBlock<T,N>& operator*=(T s) { mxv_scale(elt,s,N); return *this; }
     inline MxVBlock<T,N>& operator/=(T s) {mxv_invscale(elt,s,N);return *this;}
     inline MxVBlock<T,N>& negate() { mxv_neg(elt, N); return *this; }
@@ -71,23 +71,23 @@ public:
     // Binary arithmetic methods
     // 
     inline MxVBlock<T,N> operator+(const MxVBlock<T,N>& v) const
-	{ MxVBlock<T,N> r; mxv_add(r, elt, v, N); return r; }
+    { MxVBlock<T,N> r; mxv_add(r, elt, v, N); return r; }
     inline MxVBlock<T,N> operator-(const MxVBlock<T,N>& v) const
-	{ MxVBlock<T,N> r; mxv_sub(r, elt, v, N); return r; }
+    { MxVBlock<T,N> r; mxv_sub(r, elt, v, N); return r; }
     inline MxVBlock<T,N> operator*(T s) const
-	{ MxVBlock<T,N> r; mxv_scale(r, elt, s, N); return r; }
+    { MxVBlock<T,N> r; mxv_scale(r, elt, s, N); return r; }
     inline MxVBlock<T,N> operator/(T s) const
-	{ MxVBlock<T,N> r; mxv_invscale(r, elt, s, N); return r; }
+    { MxVBlock<T,N> r; mxv_invscale(r, elt, s, N); return r; }
     inline MxVBlock<T,N> operator-() const
-	{ MxVBlock<T,N> r; mxv_neg(r, elt, N); return r; }
+    { MxVBlock<T,N> r; mxv_neg(r, elt, N); return r; }
 
     inline T operator*(const MxVBlock<T,N>& v) const {return mxv_dot(elt,v,N);}
 
     // Comparison operators
     inline bool operator==(const MxVBlock<T,N>& v) const
-	{ return mxv_equal(elt, v, N); }
+    { return mxv_equal(elt, v, N); }
     inline bool operator!=(const MxVBlock<T,N>& v) const
-	{ return !mxv_equal(elt, v, N); }
+    { return !mxv_equal(elt, v, N); }
 };
 
 
@@ -114,13 +114,13 @@ public:
     unsigned int dim() const { return length(); }
 
     MxVector& operator+=(const MxVector& v)
-	{ mxv_addinto(*this, v, dim()); return *this; }
+    { mxv_addinto(*this, v, dim()); return *this; }
     MxVector& operator-=(const MxVector& v)
-	{ mxv_subfrom(*this, v, dim()); return *this; }
+    { mxv_subfrom(*this, v, dim()); return *this; }
     MxVector& operator*=(double d)
-	{ mxv_scale(*this, d, dim()); return *this; }
+    { mxv_scale(*this, d, dim()); return *this; }
     MxVector& operator/=(double d)
-	{ mxv_invscale(*this, d, dim()); return *this; }
+    { mxv_invscale(*this, d, dim()); return *this; }
 
     double operator*(const MxVector& v) const {return mxv_dot(*this,v,dim());}
 };

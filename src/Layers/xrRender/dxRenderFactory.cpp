@@ -24,22 +24,22 @@ dxRenderFactory RenderFactoryImpl;
 //# include "dx##Class.h" \
 
 #define RENDER_FACTORY_IMPLEMENT(Class) \
-	I##Class* dxRenderFactory::Create##Class() \
+    I##Class* dxRenderFactory::Create##Class() \
 { \
-	return new dx##Class(); \
+    return new dx##Class(); \
 } \
-	void dxRenderFactory::Destroy##Class(I##Class *pObject)\
+    void dxRenderFactory::Destroy##Class(I##Class *pObject)\
 { \
-	xr_delete((dx##Class*&)pObject); \
+    xr_delete((dx##Class*&)pObject); \
 } \
 
 RENDER_FACTORY_IMPLEMENT(UISequenceVideoItem)
 RENDER_FACTORY_IMPLEMENT(UIShader)
 RENDER_FACTORY_IMPLEMENT(StatGraphRender)
 RENDER_FACTORY_IMPLEMENT(RenderDeviceRender)
-#	ifdef DEBUG
+#    ifdef DEBUG
 RENDER_FACTORY_IMPLEMENT(ObjectSpaceRender)
-#	endif // DEBUG
+#    endif // DEBUG
 RENDER_FACTORY_IMPLEMENT(WallMarkArray)
 RENDER_FACTORY_IMPLEMENT(StatsRender)
 

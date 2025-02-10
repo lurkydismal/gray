@@ -61,7 +61,7 @@ namespace luabind { namespace detail {
             class_cache<T>::state = L;
 
             class_registry* registry = class_registry::get_registry(L);
-			class_cache<T>::class_ = registry->find_class(LUABIND_TYPEID(T));
+            class_cache<T>::class_ = registry->find_class(LUABIND_TYPEID(T));
         }
 
         return class_cache<T>::class_;

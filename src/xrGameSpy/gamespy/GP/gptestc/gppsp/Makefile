@@ -12,7 +12,7 @@ SDK_CFLAGS  = -DUNIQUEID -DGSI_MEM_MANAGED -DGSI_COMMON_DEBUG
 TARGET      = gptestc
 
 #All the object files needed for this SDK
-OBJS	= ../../../common/psp/pspcommon.o\
+OBJS    = ../../../common/psp/pspcommon.o\
           ../../../common/psp/gsUtilPSP.o\
           ../../../common/gsPlatformSocket.o\
           ../../../common/gsPlatformUtil.o\
@@ -38,7 +38,7 @@ OBJS	= ../../../common/psp/pspcommon.o\
           ../../gpiUnique.o\
           ../../gpiUtility.o\
           ../$(TARGET).o
-	  
+      
 #Include the stuff common to the GameSpy.net SDKs
 include ../../../common/psp/Makefile.common
 

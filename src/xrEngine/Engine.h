@@ -11,18 +11,18 @@
 class ENGINE_API CEngine
 {
 public:
-	// DLL api stuff
-	CEngineAPI			External;
-	CSheduler			Sheduler;
+    // DLL api stuff
+    CEngineAPI            External;
+    CSheduler            Sheduler;
 
-	void				Initialize	();
-	void				Destroy		();
-	
-	CEngine();
-	~CEngine();
+    void                Initialize    ();
+    void                Destroy        ();
+    
+    CEngine();
+    ~CEngine();
 };
 
-ENGINE_API extern CEngine			Engine;
+ENGINE_API extern CEngine            Engine;
 
 // These variables have corrensponding console commands, and can be used to quickly tune or test smth, without quiting from game
 extern ENGINE_API float devfloat1;

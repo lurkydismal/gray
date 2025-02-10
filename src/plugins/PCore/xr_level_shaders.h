@@ -15,37 +15,37 @@ class xr_writer;
 
 class xr_level_shaders {
 public:
-			xr_level_shaders(uint32_t xrlc_version, xr_reader& r);
-	virtual		~xr_level_shaders();
+            xr_level_shaders(uint32_t xrlc_version, xr_reader& r);
+    virtual        ~xr_level_shaders();
 
-	void		load(uint32_t xrlc_version, xr_reader& r);
-	void		save(xr_writer& w) const;
+    void        load(uint32_t xrlc_version, xr_reader& r);
+    void        save(xr_writer& w) const;
 
-	std::vector<std::string>&	shaders();
-	const std::vector<std::string>&	shaders() const;
-	std::vector<std::string>&	textures();
-	const std::vector<std::string>&	textures() const;
-	std::vector<std::string>&	lightmaps0();
-	const std::vector<std::string>&	lightmaps0() const;
-	std::vector<std::string>&	lightmaps1();
-	const std::vector<std::string>&	lightmaps1() const;
-
-private:
-	void		load_shaders_v5(xr_reader& r);
-	void		load_textures_v5(xr_reader& r);
-	void		load_v8(xr_reader& r);
-	void		load_v13(xr_reader& r);
+    std::vector<std::string>&    shaders();
+    const std::vector<std::string>&    shaders() const;
+    std::vector<std::string>&    textures();
+    const std::vector<std::string>&    textures() const;
+    std::vector<std::string>&    lightmaps0();
+    const std::vector<std::string>&    lightmaps0() const;
+    std::vector<std::string>&    lightmaps1();
+    const std::vector<std::string>&    lightmaps1() const;
 
 private:
-	std::vector<std::string>	m_shaders;
-	std::vector<std::string>	m_textures;
-	std::vector<std::string>	m_lightmaps0;
-	std::vector<std::string>	m_lightmaps1;
+    void        load_shaders_v5(xr_reader& r);
+    void        load_textures_v5(xr_reader& r);
+    void        load_v8(xr_reader& r);
+    void        load_v13(xr_reader& r);
+
+private:
+    std::vector<std::string>    m_shaders;
+    std::vector<std::string>    m_textures;
+    std::vector<std::string>    m_lightmaps0;
+    std::vector<std::string>    m_lightmaps1;
 };
 
 inline xr_level_shaders::xr_level_shaders(uint32_t xrlc_version, xr_reader& r)
 {
-	load(xrlc_version, r);
+    load(xrlc_version, r);
 }
 
 inline std::vector<std::string>& xr_level_shaders::shaders() { return m_shaders; }

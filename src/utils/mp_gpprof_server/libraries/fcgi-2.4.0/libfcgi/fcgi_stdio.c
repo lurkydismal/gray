@@ -267,7 +267,7 @@ void FCGI_perror(const char *str)
  *      Constructs a new FCGI_FILE * from the FILE *stream.
  *
  * Results:
- *	NULL if stream == NULL or storage could not be allocated,
+ *    NULL if stream == NULL or storage could not be allocated,
  *      otherwise the new FCGI_FILE *.
  *
  *----------------------------------------------------------------------
@@ -328,7 +328,7 @@ int FCGI_fclose(FCGI_FILE *fp)
 int FCGI_fflush(FCGI_FILE *fp)
 {
     if(fp == NULL)
-    	return fflush(NULL);
+        return fflush(NULL);
     if(fp->stdio_stream)
         return fflush(fp->stdio_stream);
     else if(fp->fcgx_stream)
@@ -350,9 +350,9 @@ FCGI_FILE *FCGI_freopen(const char *path, const char *mode,
         if(fp->stdio_stream == NULL)
             return NULL;
         else {
-	    fp->fcgx_stream = NULL;
+        fp->fcgx_stream = NULL;
             return fp;
-	}
+    }
     }
     return NULL;
 }

@@ -4,10 +4,10 @@
 #include "tcf.h"
 
 
-struct XRLC_LIGHT_API UVtri : public _TCF		
+struct XRLC_LIGHT_API UVtri : public _TCF        
 {
-	Face*	owner;
+    Face*    owner;
  
-	bool	similar				( const UVtri &uv, float eps = EPS ) const;
+    bool    similar                ( const UVtri &uv, float eps = EPS ) const;
 };
 

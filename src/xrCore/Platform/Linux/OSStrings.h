@@ -149,8 +149,8 @@ IC bool IsCharAlphaNumeric(char ch)
 }
 
 #include <stdint.h>
-#define MSVCRT_EINVAL	22
-#define MSVCRT_ERANGE	34
+#define MSVCRT_EINVAL    22
+#define MSVCRT_ERANGE    34
 
 #define MSVCRT_UI64_MAX   (((uint64_t)0xffffffff << 32) | 0xffffffff)
 

@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_fvector.h
-//	Created 	: 28.06.2004
-//  Modified 	: 28.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script float vector
+//    Module         : script_fvector.h
+//    Created     : 28.06.2004
+//  Modified     : 28.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script float vector
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

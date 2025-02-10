@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: alife_registry_container.h
-//	Created 	: 01.07.2004
-//  Modified 	: 01.07.2004
-//	Author		: Dmitriy Iassenev
-//	Description : ALife registry container class
+//    Module         : alife_registry_container.h
+//    Created     : 01.07.2004
+//  Modified     : 01.07.2004
+//    Author        : Dmitriy Iassenev
+//    Description : ALife registry container class
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -17,15 +17,15 @@ struct CLinearRegistryType : public _base, public _type {};
 
 class CALifeRegistryContainer : public Loki::GenLinearHierarchy<registry_type_list,CLinearRegistryType>::LinBase {
 private:
-	typedef registry_type_list TYPE_LIST;
+    typedef registry_type_list TYPE_LIST;
 
 public:
-	template <typename T>
-	IC		T		&operator()	(const T*);
-	template <typename T>
-	IC		const T &operator()	(const T*) const;
-	virtual	void	load		(IReader &file_stream);
-	virtual void	save		(IWriter &memory_stream);
+    template <typename T>
+    IC        T        &operator()    (const T*);
+    template <typename T>
+    IC        const T &operator()    (const T*) const;
+    virtual    void    load        (IReader &file_stream);
+    virtual void    save        (IWriter &memory_stream);
 };
 
 #include "alife_registry_container_inline.h"

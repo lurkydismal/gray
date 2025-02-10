@@ -25,8 +25,8 @@ union SDL_Event;
 
 enum class APILevel
 {
-	DX9,
-	DX11
+    DX9,
+    DX11
 };
 
 #ifdef IXR_WINDOWS
@@ -36,107 +36,107 @@ enum class APILevel
 class IRenderDevice
 {
 public:
-	virtual		CStatsPhysics*	_BCL		StatPhysics		()							= 0;								
-	virtual				void	_BCL		AddSeqFrame		( pureFrame* f, bool mt )	= 0;
-	virtual				void	_BCL		RemoveSeqFrame	( pureFrame* f )			= 0;
+    virtual        CStatsPhysics*    _BCL        StatPhysics        ()                            = 0;                                
+    virtual                void    _BCL        AddSeqFrame        ( pureFrame* f, bool mt )    = 0;
+    virtual                void    _BCL        RemoveSeqFrame    ( pureFrame* f )            = 0;
 
-	virtual				bool				InitRenderDevice(APILevel API) = 0;
-	virtual				void				DestroyRenderDevice() = 0;
+    virtual                bool                InitRenderDevice(APILevel API) = 0;
+    virtual                void                DestroyRenderDevice() = 0;
 
-	virtual				void*               GetRenderDevice() = 0;
-	virtual				void*               GetRenderContext() = 0;
-	virtual				void*               GetRenderTexture() = 0;
-	virtual				void*               GetDepthTexture() = 0;
-	virtual				void*               GetSwapchainTexture() = 0;
+    virtual                void*               GetRenderDevice() = 0;
+    virtual                void*               GetRenderContext() = 0;
+    virtual                void*               GetRenderTexture() = 0;
+    virtual                void*               GetDepthTexture() = 0;
+    virtual                void*               GetSwapchainTexture() = 0;
 
-	virtual				void*				GetSwapchain() = 0;
-	virtual				u32					GetSwapchainWidth() = 0;
-	virtual				u32					GetSwapchainHeight() = 0;
+    virtual                void*                GetSwapchain() = 0;
+    virtual                u32                    GetSwapchainWidth() = 0;
+    virtual                u32                    GetSwapchainHeight() = 0;
 
-	virtual				void				ResizeWindow(u32 width, u32 height) = 0;
+    virtual                void                ResizeWindow(u32 width, u32 height) = 0;
 
 #ifdef IXR_WINDOWS
-	virtual				D3D_FEATURE_LEVEL	GetFeatureLevel() = 0;
+    virtual                D3D_FEATURE_LEVEL    GetFeatureLevel() = 0;
 #endif
-	virtual				RENDERDOC_API_1_6_0* GetRenderDocAPI() = 0;
+    virtual                RENDERDOC_API_1_6_0* GetRenderDocAPI() = 0;
 
-	virtual				void				BeginRender() = 0;
-	virtual				void				EndRender() = 0;
-	virtual				bool				IsEditorMode() { return false; }
+    virtual                void                BeginRender() = 0;
+    virtual                void                EndRender() = 0;
+    virtual                bool                IsEditorMode() { return false; }
 };
 
 class ENGINE_API CRenderDeviceData
 {
 
 public:
-	u32										TargetWidth;
-	u32										TargetHeight;
-	float									RenderScale = 1.0f;
-	
-	u32										dwPrecacheFrame;
-	BOOL									b_is_Ready;
-	BOOL									b_is_Active;
+    u32                                        TargetWidth;
+    u32                                        TargetHeight;
+    float                                    RenderScale = 1.0f;
+    
+    u32                                        dwPrecacheFrame;
+    BOOL                                    b_is_Ready;
+    BOOL                                    b_is_Active;
 public:
 
-	// Engine flow-control
-	u32										dwFrame;
+    // Engine flow-control
+    u32                                        dwFrame;
 
-	float									fTimeDelta;
-	float									fTimeGlobal;
-	u32										dwTimeDelta;
-	u32										dwTimeGlobal;
-	u32										dwTimeContinual;
+    float                                    fTimeDelta;
+    float                                    fTimeGlobal;
+    u32                                        dwTimeDelta;
+    u32                                        dwTimeGlobal;
+    u32                                        dwTimeContinual;
 
-	Fvector									vCameraPosition;
-	Fvector									vCameraDirection;
-	Fvector									vCameraTop;
-	Fvector									vCameraRight;
+    Fvector                                    vCameraPosition;
+    Fvector                                    vCameraDirection;
+    Fvector                                    vCameraTop;
+    Fvector                                    vCameraRight;
 
-	Fmatrix									mView;
-	Fmatrix									mProject;
-	Fmatrix									mFullTransform;
+    Fmatrix                                    mView;
+    Fmatrix                                    mProject;
+    Fmatrix                                    mFullTransform;
 
-	// Copies of corresponding members. Used for synchronization.
-	Fvector									vCameraPosition_saved;
+    // Copies of corresponding members. Used for synchronization.
+    Fvector                                    vCameraPosition_saved;
 
-	Fmatrix									mView_saved;
-	Fmatrix									mProject_saved;
-	Fmatrix									mFullTransform_saved;
+    Fmatrix                                    mView_saved;
+    Fmatrix                                    mProject_saved;
+    Fmatrix                                    mFullTransform_saved;
 
-	Fmatrix									mView_old;
-	Fmatrix									mProject_old;
-	Fmatrix									mFullTransform_old;
+    Fmatrix                                    mView_old;
+    Fmatrix                                    mProject_old;
+    Fmatrix                                    mFullTransform_old;
 
-	Fmatrix									mView_hud;
-	Fmatrix									mProject_hud;
-	Fmatrix									mFullTransform_hud;
+    Fmatrix                                    mView_hud;
+    Fmatrix                                    mProject_hud;
+    Fmatrix                                    mFullTransform_hud;
 
-	Fmatrix									mView_hud_old;
-	Fmatrix									mProject_hud_old;
-	Fmatrix									mFullTransform_hud_old;
+    Fmatrix                                    mView_hud_old;
+    Fmatrix                                    mProject_hud_old;
+    Fmatrix                                    mFullTransform_hud_old;
 
-	float									fFOV;
-	float									fASPECT;
+    float                                    fFOV;
+    float                                    fASPECT;
 protected:
 
-	u32										Timer_MM_Delta;
-	CTimer_paused							Timer;
-	CTimer_paused							TimerGlobal;
+    u32                                        Timer_MM_Delta;
+    CTimer_paused                            Timer;
+    CTimer_paused                            TimerGlobal;
 public:
 
 // Registrators
-	CRegistrator	<pureRender			>			seqRender;
-	CRegistrator	<pureAppActivate	>			seqAppActivate;
-	CRegistrator	<pureAppDeactivate	>			seqAppDeactivate;
-	CRegistrator	<pureAppStart		>			seqAppStart;
-	CRegistrator	<pureAppEnd			>			seqAppEnd;
-	CRegistrator	<pureFrame			>			seqFrame;
-	CRegistrator	<pureScreenResolutionChanged>	seqResolutionChanged;
+    CRegistrator    <pureRender            >            seqRender;
+    CRegistrator    <pureAppActivate    >            seqAppActivate;
+    CRegistrator    <pureAppDeactivate    >            seqAppDeactivate;
+    CRegistrator    <pureAppStart        >            seqAppStart;
+    CRegistrator    <pureAppEnd            >            seqAppEnd;
+    CRegistrator    <pureFrame            >            seqFrame;
+    CRegistrator    <pureScreenResolutionChanged>    seqResolutionChanged;
 };
 
-class	ENGINE_API CRenderDeviceBase :
-	public IRenderDevice,
-	public CRenderDeviceData
+class    ENGINE_API CRenderDeviceBase :
+    public IRenderDevice,
+    public CRenderDeviceData
 {
 public:
 };
@@ -145,151 +145,151 @@ public:
 // refs
 class ENGINE_API CRenderDevice: public CRenderDeviceBase
 {
-	friend void CreateRDoc();
-	friend class CPHWorld;
+    friend void CreateRDoc();
+    friend class CPHWorld;
 
-	RENDERDOC_API_1_6_0* pRDocAPI = nullptr;
+    RENDERDOC_API_1_6_0* pRDocAPI = nullptr;
 
 public:
-	int Width = 0, Height = 0, PosX = 0, PosY = 0;
+    int Width = 0, Height = 0, PosX = 0, PosY = 0;
 
-	CTimer									TimerMM;
+    CTimer                                    TimerMM;
 
-	void									_Create		(LPCSTR shName);
-	void									_Destroy	(BOOL	bKeepTextures);
-	void									_SetupStates();
+    void                                    _Create        (LPCSTR shName);
+    void                                    _Destroy    (BOOL    bKeepTextures);
+    void                                    _SetupStates();
 
-	bool InitRenderDeviceEditor();
-	bool InitRenderDevice(APILevel API) override;
-	void DestroyRenderDevice() override;
+    bool InitRenderDeviceEditor();
+    bool InitRenderDevice(APILevel API) override;
+    void DestroyRenderDevice() override;
 
-	void* GetRenderDevice() override;
-	void* GetRenderContext() override;
-	void* GetRenderTexture() override;
-	void* GetDepthTexture() override;
-	void* GetSwapchainTexture() override;
-	void* GetSwapchain() override;
-	u32	GetSwapchainWidth() override;
-	u32	GetSwapchainHeight() override;
+    void* GetRenderDevice() override;
+    void* GetRenderContext() override;
+    void* GetRenderTexture() override;
+    void* GetDepthTexture() override;
+    void* GetSwapchainTexture() override;
+    void* GetSwapchain() override;
+    u32    GetSwapchainWidth() override;
+    u32    GetSwapchainHeight() override;
 
-	void ResizeBuffers(u32 Width, u32 Height);
-	void ResizeWindow(u32 width, u32 height);
+    void ResizeBuffers(u32 Width, u32 Height);
+    void ResizeWindow(u32 width, u32 height);
 
 #ifdef IXR_WINDOWS
-	D3D_FEATURE_LEVEL GetFeatureLevel() override;
+    D3D_FEATURE_LEVEL GetFeatureLevel() override;
 #endif
-	RENDERDOC_API_1_6_0* GetRenderDocAPI() override;
+    RENDERDOC_API_1_6_0* GetRenderDocAPI() override;
 
-	void BeginRender() override;
-	void EndRender() override;
-
-public:
-	LRESULT									MsgProc		(HWND,UINT,WPARAM,LPARAM);
-
-	u32										dwPrecacheTotal;
-
-	float									HalfTargetWidth, HalfTargetHeight;
-	void									OnWM_Activate(bool active, bool minimized);
+    void BeginRender() override;
+    void EndRender() override;
 
 public:
-	IRenderDeviceRender						*m_pRender;
+    LRESULT                                    MsgProc        (HWND,UINT,WPARAM,LPARAM);
 
-	BOOL									m_bNearer;
-	void									SetNearer	(BOOL enabled)
-	{
-		if (enabled&&!m_bNearer){
-			m_bNearer						= TRUE;
-			mProject._43					-= EPS_L;
-		}else if (!enabled&&m_bNearer){
-			m_bNearer						= FALSE;
-			mProject._43					+= EPS_L;
-		}
-		m_pRender->SetCacheXform(mView, mProject);
-	}
+    u32                                        dwPrecacheTotal;
 
-	void									DumpResourcesMemoryUsage() { m_pRender->ResourcesDumpMemoryUsage();}
-public:
-	// Registrators
-	CRegistrator	<pureFrame			>			seqFrameMT;
-	CRegistrator	<pureDeviceReset	>			seqDeviceReset;
-	xr_vector		<xr_delegate<void()>>	seqParallel;
-	xr_vector		<xr_delegate<void()>>	seqParallelRender;
-
-	std::function<void()> ParticleWorkerCallback;
-
-	std::unordered_multimap<u32,std::function<void()>> m_time_callbacks;
-	void callback(const u32& cb_time, const std::function<void()> &func);
-	// Dependent classes
-	CStats*									Statistic;
-
-	// Engine flow-control
-	Fmatrix									mInvFullTransform;
-	
-	CRenderDevice();
-
-	virtual void	Pause							(BOOL bOn, BOOL bTimer, BOOL bSound, LPCSTR reason);
-	BOOL	Paused							();
-
-	// Scene control
-	virtual void PreCache							(u32 amount, bool b_draw_loadscreen, bool b_wait_user_input);
-	BOOL Begin								();
-	virtual void Clear						();
-	void End								();
-	void FrameMove							();
-	
-	void overdrawBegin						();
-	void overdrawEnd						();
-
-	// Mode control
-	void DumpFlags							();
-	IC	 CTimer_paused* GetTimerGlobal		()	{ return &TimerGlobal;								}
-	u32	 TimerAsync							()	{ return TimerGlobal.GetElapsed_ms();				}
-	u32	 TimerAsync_MMT						()	{ return TimerMM.GetElapsed_ms() +	Timer_MM_Delta; }
-
-	// Creation & Destroying
-	void ConnectToRender();
-	void Create								(void);
-	void Run								(void);
-	void Destroy							(void);
-	void Reset								(bool precache = true);
-
-	void Initialize							(void);
-	void ShutDown							(void);
+    float                                    HalfTargetWidth, HalfTargetHeight;
+    void                                    OnWM_Activate(bool active, bool minimized);
 
 public:
-	void time_factor						(const float &time_factor);
-	
-	IC	const float &time_factor			() const
-	{
-		VERIFY					(Timer.time_factor() == TimerGlobal.time_factor());
-		return					(Timer.time_factor());
-	}
+    IRenderDeviceRender                        *m_pRender;
 
-	// Multi-threading
-	xrCriticalSection	mt_csEnter;
-	xrCriticalSection	mt_csLeave;
-	volatile BOOL		mt_bMustExit;
+    BOOL                                    m_bNearer;
+    void                                    SetNearer    (BOOL enabled)
+    {
+        if (enabled&&!m_bNearer){
+            m_bNearer                        = TRUE;
+            mProject._43                    -= EPS_L;
+        }else if (!enabled&&m_bNearer){
+            m_bNearer                        = FALSE;
+            mProject._43                    += EPS_L;
+        }
+        m_pRender->SetCacheXform(mView, mProject);
+    }
 
-	ICF		void			remove_from_seq_parallel	(const xr_delegate<void()> &delegate)
-	{
-		xr_vector<xr_delegate<void()> >::iterator I = std::find(
-			seqParallel.begin(),
-			seqParallel.end(),
-			delegate
-		);
-		if (I != seqParallel.end())
-			seqParallel.erase	(I);
-	}
+    void                                    DumpResourcesMemoryUsage() { m_pRender->ResourcesDumpMemoryUsage();}
+public:
+    // Registrators
+    CRegistrator    <pureFrame            >            seqFrameMT;
+    CRegistrator    <pureDeviceReset    >            seqDeviceReset;
+    xr_vector        <xr_delegate<void()>>    seqParallel;
+    xr_vector        <xr_delegate<void()>>    seqParallelRender;
+
+    std::function<void()> ParticleWorkerCallback;
+
+    std::unordered_multimap<u32,std::function<void()>> m_time_callbacks;
+    void callback(const u32& cb_time, const std::function<void()> &func);
+    // Dependent classes
+    CStats*                                    Statistic;
+
+    // Engine flow-control
+    Fmatrix                                    mInvFullTransform;
+    
+    CRenderDevice();
+
+    virtual void    Pause                            (BOOL bOn, BOOL bTimer, BOOL bSound, LPCSTR reason);
+    BOOL    Paused                            ();
+
+    // Scene control
+    virtual void PreCache                            (u32 amount, bool b_draw_loadscreen, bool b_wait_user_input);
+    BOOL Begin                                ();
+    virtual void Clear                        ();
+    void End                                ();
+    void FrameMove                            ();
+    
+    void overdrawBegin                        ();
+    void overdrawEnd                        ();
+
+    // Mode control
+    void DumpFlags                            ();
+    IC     CTimer_paused* GetTimerGlobal        ()    { return &TimerGlobal;                                }
+    u32     TimerAsync                            ()    { return TimerGlobal.GetElapsed_ms();                }
+    u32     TimerAsync_MMT                        ()    { return TimerMM.GetElapsed_ms() +    Timer_MM_Delta; }
+
+    // Creation & Destroying
+    void ConnectToRender();
+    void Create                                (void);
+    void Run                                (void);
+    void Destroy                            (void);
+    void Reset                                (bool precache = true);
+
+    void Initialize                            (void);
+    void ShutDown                            (void);
 
 public:
-			void 		on_idle				();
-			bool 		on_event			(SDL_Event& Event);
+    void time_factor                        (const float &time_factor);
+    
+    IC    const float &time_factor            () const
+    {
+        VERIFY                    (Timer.time_factor() == TimerGlobal.time_factor());
+        return                    (Timer.time_factor());
+    }
+
+    // Multi-threading
+    xrCriticalSection    mt_csEnter;
+    xrCriticalSection    mt_csLeave;
+    volatile BOOL        mt_bMustExit;
+
+    ICF        void            remove_from_seq_parallel    (const xr_delegate<void()> &delegate)
+    {
+        xr_vector<xr_delegate<void()> >::iterator I = std::find(
+            seqParallel.begin(),
+            seqParallel.end(),
+            delegate
+        );
+        if (I != seqParallel.end())
+            seqParallel.erase    (I);
+    }
+
+public:
+            void         on_idle                ();
+            bool         on_event            (SDL_Event& Event);
 
 private:
-			void					message_loop		();
-virtual		void			_BCL	AddSeqFrame			( pureFrame* f, bool mt );
-virtual		void			_BCL	RemoveSeqFrame		( pureFrame* f );
-virtual		CStatsPhysics*	_BCL	StatPhysics			()	{ return  Statistic ;}
+            void                    message_loop        ();
+virtual        void            _BCL    AddSeqFrame            ( pureFrame* f, bool mt );
+virtual        void            _BCL    RemoveSeqFrame        ( pureFrame* f );
+virtual        CStatsPhysics*    _BCL    StatPhysics            ()    { return  Statistic ;}
 };
 
 extern ENGINE_API CRenderDevice* DevicePtr;
@@ -299,24 +299,24 @@ extern ENGINE_API void* g_pAnnotation;
 
 
 #define Device (*DevicePtr)
-#define	RDEVICE	Device
+#define    RDEVICE    Device
 
-typedef xr_delegate<bool()>		LOADING_EVENT;
-extern	ENGINE_API xr_list<LOADING_EVENT>		g_loading_events;
+typedef xr_delegate<bool()>        LOADING_EVENT;
+extern    ENGINE_API xr_list<LOADING_EVENT>        g_loading_events;
 
 class ENGINE_API CLoadScreenRenderer :public pureRender
 {
 public:
-					CLoadScreenRenderer	();
-	void			start				(bool b_user_input);
-	void			stop				();
-	virtual void	OnRender			();
+                    CLoadScreenRenderer    ();
+    void            start                (bool b_user_input);
+    void            stop                ();
+    virtual void    OnRender            ();
 
-	bool IsActive() const {
-		return b_registered;
-	}
+    bool IsActive() const {
+        return b_registered;
+    }
 
-	bool			b_registered;
-	bool			b_need_user_input;
+    bool            b_registered;
+    bool            b_need_user_input;
 };
 extern ENGINE_API CLoadScreenRenderer load_screen_renderer;

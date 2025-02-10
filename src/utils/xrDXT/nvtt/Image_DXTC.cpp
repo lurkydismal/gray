@@ -27,7 +27,7 @@ Comments:
 //-----------------------------------------------------------------------------
 // Name: GetNumberOfBits()
 // Desc: Returns the number of bits set in a DWORD mask
-//	from microsoft mssdk d3dim sample "Compress"
+//    from microsoft mssdk d3dim sample "Compress"
 //-----------------------------------------------------------------------------
 u16 GetNumberOfBits(DWORD dwMask)
 {
@@ -193,16 +193,16 @@ void Image_DXTC::Decompress()
 {
     VERIFY(m_pCompBytes);
     AllocateDecompBytes();
-    VERIFY(m_pDecompBytes);		// must already have allocated memory
+    VERIFY(m_pDecompBytes);        // must already have allocated memory
     switch (m_CompFormat)
     {
-		case PF_DXT1: DecompressDXT1(); break;
-		case PF_DXT2:
-		case PF_DXT3: DecompressDXT3(); break;
-		case PF_DXT4:
-		case PF_DXT5: DecompressDXT5(); break;
-		case PF_ARGB:
-		case PF_UNKNOWN:  break;
+        case PF_DXT1: DecompressDXT1(); break;
+        case PF_DXT2:
+        case PF_DXT3: DecompressDXT3(); break;
+        case PF_DXT4:
+        case PF_DXT5: DecompressDXT5(); break;
+        case PF_ARGB:
+        case PF_UNKNOWN:  break;
     }
     //. swap R<->B channels
     for (int y = 0; y<m_nHeight; y++)
@@ -268,7 +268,7 @@ inline void GetColorBlockColors(DXTColBlock* pBlock,
     pCol = (Color565*)&pBlock->col0;
     col_0->a = 0xff;
     col_0->r = pCol->nRed;
-    col_0->r <<= 3;	// shift to full precision
+    col_0->r <<= 3;    // shift to full precision
     col_0->g = pCol->nGreen;
     col_0->g <<= 2;
     col_0->b = pCol->nBlue;
@@ -348,12 +348,12 @@ inline void DecodeColorBlock(DWORD* pImPos, DXTColBlock* pColorBlock, int width,
             bits >>= shift[n];
             switch (bits)
             {
-				/* increment to next DWORD */
-				case 0: *pImPos = *col_0; pImPos++; break;
-				case 1: *pImPos = *col_1; pImPos++; break;
-				case 2: *pImPos = *col_2; pImPos++; break;
-				case 3: *pImPos = *col_3; pImPos++; break;
-				default: pImPos++; break;
+                /* increment to next DWORD */
+                case 0: *pImPos = *col_0; pImPos++; break;
+                case 1: *pImPos = *col_1; pImPos++; break;
+                case 2: *pImPos = *col_2; pImPos++; break;
+                case 3: *pImPos = *col_3; pImPos++; break;
+                default: pImPos++; break;
             }
         }
     }
@@ -388,7 +388,7 @@ inline void  DecodeAlphaExplicit(DWORD* pImPos, DXTAlphaBlockExplicit* pAlphaBlo
             // It's much cheaper than divide & scale though.
             // To correct for this, and get 0xff for max alpha,
             //  or the low bits back in after left shifting
-            col.a = col.a | (col.a << 4);	// This allows max 4 bit alpha to be 0xff alpha
+            col.a = col.a | (col.a << 4);    // This allows max 4 bit alpha to be 0xff alpha
             //  in final image, and is crude approach to full 
             //  range scale
             *pImPos |= *(DWORD*)&col; // or the bits into the prev. nulled alpha
@@ -411,21 +411,21 @@ inline void DecodeAlpha3BitLinear(DWORD* pImPos, DXTAlphaBlock3BitLinear* pAlpha
     {
         // 8-alpha block:  derive the other 6 alphas.    
         // 000 = alpha_0, 001 = alpha_1, others are interpolated
-        gAlphas[2] = (6 * gAlphas[0] + gAlphas[1]) / 7;	// bit code 010
-        gAlphas[3] = (5 * gAlphas[0] + 2 * gAlphas[1]) / 7;	// Bit code 011    
-        gAlphas[4] = (4 * gAlphas[0] + 3 * gAlphas[1]) / 7;	// Bit code 100    
-        gAlphas[5] = (3 * gAlphas[0] + 4 * gAlphas[1]) / 7;	// Bit code 101
-        gAlphas[6] = (2 * gAlphas[0] + 5 * gAlphas[1]) / 7;	// Bit code 110    
-        gAlphas[7] = (gAlphas[0] + 6 * gAlphas[1]) / 7;	// Bit code 111
+        gAlphas[2] = (6 * gAlphas[0] + gAlphas[1]) / 7;    // bit code 010
+        gAlphas[3] = (5 * gAlphas[0] + 2 * gAlphas[1]) / 7;    // Bit code 011    
+        gAlphas[4] = (4 * gAlphas[0] + 3 * gAlphas[1]) / 7;    // Bit code 100    
+        gAlphas[5] = (3 * gAlphas[0] + 4 * gAlphas[1]) / 7;    // Bit code 101
+        gAlphas[6] = (2 * gAlphas[0] + 5 * gAlphas[1]) / 7;    // Bit code 110    
+        gAlphas[7] = (gAlphas[0] + 6 * gAlphas[1]) / 7;    // Bit code 111
     }
     else
     {
         // 6-alpha block:  derive the other alphas.    
         // 000 = alpha_0, 001 = alpha_1, others are interpolated
         gAlphas[2] = (4 * gAlphas[0] + gAlphas[1]) / 5; // Bit code 010
-        gAlphas[3] = (3 * gAlphas[0] + 2 * gAlphas[1]) / 5;	// Bit code 011    
-        gAlphas[4] = (2 * gAlphas[0] + 3 * gAlphas[1]) / 5;	// Bit code 100    
-        gAlphas[5] = (gAlphas[0] + 4 * gAlphas[1]) / 5;	// Bit code 101
+        gAlphas[3] = (3 * gAlphas[0] + 2 * gAlphas[1]) / 5;    // Bit code 011    
+        gAlphas[4] = (2 * gAlphas[0] + 3 * gAlphas[1]) / 5;    // Bit code 100    
+        gAlphas[5] = (gAlphas[0] + 4 * gAlphas[1]) / 5;    // Bit code 101
         gAlphas[6] = 0; // Bit code 110
         gAlphas[7] = 255; // Bit code 111
     }
@@ -499,8 +499,8 @@ void Image_DXTC::DecompressDXT1()
     int xblocks = m_DDSD.dwWidth / 4;
     int yblocks = m_DDSD.dwHeight / 4;
     DWORD* pBase = (DWORD*)m_pDecompBytes;
-    DWORD* pImPos = (DWORD*)pBase;			// pos in decompressed data
-    WORD* pPos = (WORD*)m_pCompBytes;	// pos in compressed data
+    DWORD* pImPos = (DWORD*)pBase;            // pos in decompressed data
+    WORD* pPos = (WORD*)m_pCompBytes;    // pos in compressed data
     DXTColBlock* pBlock;
     Color8888 col_0, col_1, col_2, col_3;
     WORD wrd;
@@ -537,7 +537,7 @@ void Image_DXTC::DecompressDXT3()
     col_0.a = 0;
     col_0.r = col_0.g = col_0.b = 0xff;
     DWORD alphazero = *((DWORD*)&col_0);
-    //	//TRACE("blocks: x: %d    y: %d\n", xblocks, yblocks );
+    //    //TRACE("blocks: x: %d    y: %d\n", xblocks, yblocks );
     for (int j = 0; j < yblocks; j++)
     {
         // 8 bytes per block
@@ -578,7 +578,7 @@ void Image_DXTC::DecompressDXT5()
     col_0.r = col_0.g = col_0.b = 0xff;
     DWORD alphazero = *(DWORD*)&col_0;
     WORD wrd;
-    //	//TRACE("blocks: x: %d    y: %d\n", xblocks, yblocks );
+    //    //TRACE("blocks: x: %d    y: %d\n", xblocks, yblocks );
     for (int j = 0; j < yblocks; j++)
     {
         // 8 bytes per block
@@ -607,7 +607,7 @@ void Image_DXTC::DecompressDXT5()
 //-----------------------------------------------------------------------------
 // Name: PixelFormatToString()
 // Desc: Creates a string describing a pixel format.
-//	adapted from microsoft mssdk D3DIM Compress example
+//    adapted from microsoft mssdk D3DIM Compress example
 //  PixelFormatToString()
 //-----------------------------------------------------------------------------
 void Image_DXTC::DecodePixelFormat(char* strPixelFormat, DDS_PIXELFORMAT* pddpf)

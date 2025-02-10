@@ -1,6 +1,6 @@
 // stdafx.cpp : source file that includes just the standard includes
-//	track.pch will be the pre-compiled header
-//	stdafx.obj will contain the pre-compiled type information
+//    track.pch will be the pre-compiled header
+//    stdafx.obj will contain the pre-compiled type information
 
 #include "StdAfx.h"
 

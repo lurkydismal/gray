@@ -18,7 +18,7 @@ end
 function new(arg)
   if base.type(arg)=="table" then 
     base.setmetatable(arg,{__index=xml, __tostring=xml.str})
-	return arg
+    return arg
   end
   local var={}
   base.setmetatable(var,{__index=xml, __tostring=xml.str})

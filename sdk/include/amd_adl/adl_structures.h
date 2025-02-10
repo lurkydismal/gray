@@ -120,20 +120,20 @@ typedef struct XScreenInfo
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLAdapterCaps
 {
-	/// AdapterID for this adapter
-	int iAdapterID;
-	/// Number of controllers for this adapter
-	int iNumControllers;
-	/// Number of displays for this adapter
-	int iNumDisplays;
-	/// Number of overlays for this adapter
-	int iNumOverlays;
-	/// Number of GLSyncConnectors
-	int iNumOfGLSyncConnectors;
-	/// The bit mask identifies the adapter caps
-	int iCapsMask;
-	/// The bit identifies the adapter caps \ref define_adapter_caps
-	int iCapsValue;
+    /// AdapterID for this adapter
+    int iAdapterID;
+    /// Number of controllers for this adapter
+    int iNumControllers;
+    /// Number of displays for this adapter
+    int iNumDisplays;
+    /// Number of overlays for this adapter
+    int iNumOverlays;
+    /// Number of GLSyncConnectors
+    int iNumOfGLSyncConnectors;
+    /// The bit mask identifies the adapter caps
+    int iCapsMask;
+    /// The bit identifies the adapter caps \ref define_adapter_caps
+    int iCapsValue;
 }ADLAdapterCaps;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,19 +145,19 @@ typedef struct ADLAdapterCaps
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLMemoryInfo2
 {
-	/// Memory size in bytes.
-	long long iMemorySize;
-	/// Memory type in string.
-	char strMemoryType[ADL_MAX_PATH];
-	/// Highest default performance level Memory bandwidth in Mbytes/s
-	long long iMemoryBandwidth;
-	/// HyperMemory size in bytes.
-	long long iHyperMemorySize;
+    /// Memory size in bytes.
+    long long iMemorySize;
+    /// Memory type in string.
+    char strMemoryType[ADL_MAX_PATH];
+    /// Highest default performance level Memory bandwidth in Mbytes/s
+    long long iMemoryBandwidth;
+    /// HyperMemory size in bytes.
+    long long iHyperMemorySize;
 
-	/// Invisible Memory size in bytes.
-	long long iInvisibleMemorySize;
-	/// Visible Memory size in bytes.
-	long long iVisibleMemorySize;
+    /// Invisible Memory size in bytes.
+    long long iInvisibleMemorySize;
+    /// Visible Memory size in bytes.
+    long long iVisibleMemorySize;
 } ADLMemoryInfo2, *LPADLMemoryInfo2;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -245,11 +245,11 @@ enum ADLvRamVendors
 
 typedef struct ADLGcnInfo
 {
-	int CuCount; //Number of compute units on the ASIC.
-	int TexCount; //Number of texture mapping units.
-	int RopCount; //Number of Render backend Units.
-	int ASICFamilyId; //Such SI, VI. See /inc/asic_reg/atiid.h for family ids
-	int ASICRevisionId; //Such as Ellesmere, Fiji.   For example - VI family revision ids are stored in /inc/asic_reg/vi_id.h
+    int CuCount; //Number of compute units on the ASIC.
+    int TexCount; //Number of texture mapping units.
+    int RopCount; //Number of Render backend Units.
+    int ASICFamilyId; //Such SI, VI. See /inc/asic_reg/atiid.h for family ids
+    int ASICRevisionId; //Such as Ellesmere, Fiji.   For example - VI family revision ids are stored in /inc/asic_reg/vi_id.h
 }ADLGcnInfo;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -260,15 +260,15 @@ typedef struct ADLGcnInfo
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLVirtualSegmentSettingsOutput
 {
-	int                      virtualSegmentSupported;   // 1 - subsequent values are valid
-	int                      virtualSegmentDefault;     //virtual segment default, 1: enable, 0: disable
-	int                      virtualSegmentCurrent;     //virtual segment current, 1: enable, 0: disable
-	int                      iMinSizeInMB;              //minimum value
-	int                      iMaxSizeInMB;              //maximum value
-	int                      icurrentSizeInMB;          //last configured otherwise same as factory default
-	int                      idefaultSizeInMB;          //factory default
-	int                      iMask;                     //fileds for extension in the future
-	int                      iValue;                    //fileds for extension in the future
+    int                      virtualSegmentSupported;   // 1 - subsequent values are valid
+    int                      virtualSegmentDefault;     //virtual segment default, 1: enable, 0: disable
+    int                      virtualSegmentCurrent;     //virtual segment current, 1: enable, 0: disable
+    int                      iMinSizeInMB;              //minimum value
+    int                      iMaxSizeInMB;              //maximum value
+    int                      icurrentSizeInMB;          //last configured otherwise same as factory default
+    int                      idefaultSizeInMB;          //factory default
+    int                      iMask;                     //fileds for extension in the future
+    int                      iValue;                    //fileds for extension in the future
 } ADLVirtualSegmentSettingsOutput;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -280,12 +280,12 @@ typedef struct ADLVirtualSegmentSettingsOutput
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLChipSetInfo
 {
-	int iBusType; 		///< Bus type.
-	int iBusSpeedType;	///Maximum Bus Speed of the current platform
-	int iMaxPCIELaneWidth; 	///< Number of PCIE lanes.
-	int iCurrentPCIELaneWidth;  ///< Current PCIE Lane Width
-	int iSupportedAGPSpeeds;    ///< Bit mask or AGP transfer speed.
-	int iCurrentAGPSpeed;       ///< Current AGP speed
+    int iBusType;         ///< Bus type.
+    int iBusSpeedType;    ///Maximum Bus Speed of the current platform
+    int iMaxPCIELaneWidth;     ///< Number of PCIE lanes.
+    int iCurrentPCIELaneWidth;  ///< Current PCIE Lane Width
+    int iSupportedAGPSpeeds;    ///< Bit mask or AGP transfer speed.
+    int iCurrentAGPSpeed;       ///< Current AGP speed
 } ADLChipSetInfo, *LPADLChipSetInfo;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -1908,16 +1908,16 @@ typedef struct ADLPXConfigCaps
 //////////////////////////////////////////////////////////////////////////////////////////
 typedef enum ADLPxType
 {
-	//Not AMD related PX/HG or not PX or HG at all
-	ADL_PX_NONE = 0,
-	//A+A PX
-	ADL_SWITCHABLE_AMDAMD = 1,
-	// A+A HG
-	ADL_HG_AMDAMD = 2,
-	//A+I PX
-	ADL_SWITCHABLE_AMDOTHER = 3,
-	//A+I HG
-	ADL_HG_AMDOTHER = 4,
+    //Not AMD related PX/HG or not PX or HG at all
+    ADL_PX_NONE = 0,
+    //A+A PX
+    ADL_SWITCHABLE_AMDAMD = 1,
+    // A+A HG
+    ADL_HG_AMDAMD = 2,
+    //A+I PX
+    ADL_SWITCHABLE_AMDOTHER = 3,
+    //A+I HG
+    ADL_HG_AMDOTHER = 4,
 }ADLPxType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -2365,45 +2365,45 @@ typedef struct ADLDisplayModeX2
 
 typedef enum ADLAppProcessState
 {
-	APP_PROC_INVALID = 0,          // Invalid Application
-	APP_PROC_PREMPTION = 1,          // The Application is being set up for Process Creation
-	APP_PROC_CREATION = 2,          // The Application's Main Process is created by the OS
-	APP_PROC_READ = 3,          // The Application's Data is ready to be read
-	APP_PROC_WAIT = 4,          // The Application is waiting for Timeout or Notification to Resume
-	APP_PROC_RUNNING = 5,          // The Application is running
-	APP_PROC_TERMINATE = 6           // The Application is about to terminate
+    APP_PROC_INVALID = 0,          // Invalid Application
+    APP_PROC_PREMPTION = 1,          // The Application is being set up for Process Creation
+    APP_PROC_CREATION = 2,          // The Application's Main Process is created by the OS
+    APP_PROC_READ = 3,          // The Application's Data is ready to be read
+    APP_PROC_WAIT = 4,          // The Application is waiting for Timeout or Notification to Resume
+    APP_PROC_RUNNING = 5,          // The Application is running
+    APP_PROC_TERMINATE = 6           // The Application is about to terminate
 }ADLAppProcessState;
 
 typedef enum ADLAppInterceptionListType
 {
-	ADL_INVALID_FORMAT = 0,
-	ADL_IMAGEFILEFORMAT = 1,
-	ADL_ENVVAR = 2
+    ADL_INVALID_FORMAT = 0,
+    ADL_IMAGEFILEFORMAT = 1,
+    ADL_ENVVAR = 2
 }ADLAppInterceptionListType;
 
 typedef struct ADLAppInterceptionInfo
 {
-	wchar_t                     AppName[ADL_MAX_PATH]; // the file name of the application or env var
-	unsigned int                ProcessId;
-	ADLAppInterceptionListType  AppFormat;
-	ADLAppProcessState          AppState;
+    wchar_t                     AppName[ADL_MAX_PATH]; // the file name of the application or env var
+    unsigned int                ProcessId;
+    ADLAppInterceptionListType  AppFormat;
+    ADLAppProcessState          AppState;
 } ADLAppInterceptionInfo;
 
 typedef enum ADL_AP_DATABASE // same as _SHARED_AP_DATABASE in "inc/shared/shared_escape.h"
 {
-	ADL_AP_DATABASE__SYSTEM,
-	ADL_AP_DATABASE__USER,
-	ADL_AP_DATABASE__OEM
+    ADL_AP_DATABASE__SYSTEM,
+    ADL_AP_DATABASE__USER,
+    ADL_AP_DATABASE__OEM
 } ADL_AP_DATABASE;
 
 typedef struct ADLAppInterceptionInfoX2
 {
-	wchar_t                     AppName[ADL_MAX_PATH]; // the file name of the application or env var
-	unsigned int                ProcessId;
-	unsigned int                WaitForResumeNeeded;
-	wchar_t                     CommandLine[ADL_MAX_PATH]; // The command line on app start/stop event
-	ADLAppInterceptionListType  AppFormat;
-	ADLAppProcessState          AppState;
+    wchar_t                     AppName[ADL_MAX_PATH]; // the file name of the application or env var
+    unsigned int                ProcessId;
+    unsigned int                WaitForResumeNeeded;
+    wchar_t                     CommandLine[ADL_MAX_PATH]; // The command line on app start/stop event
+    ADLAppInterceptionListType  AppFormat;
+    ADLAppProcessState          AppState;
 } ADLAppInterceptionInfoX2;
 
 typedef struct ADLAppInterceptionInfoX3
@@ -2425,12 +2425,12 @@ typedef struct ADLAppInterceptionInfoX3
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLPropertyRecordCreate
 {
-	/// Name of the property
-	wchar_t * strPropertyName;
-	/// Data type of the property
-	ADLProfilePropertyType eType;
-	// Value of the property
-	wchar_t * strPropertyValue;
+    /// Name of the property
+    wchar_t * strPropertyName;
+    /// Data type of the property
+    ADLProfilePropertyType eType;
+    // Value of the property
+    wchar_t * strPropertyValue;
 } ADLPropertyRecordCreate;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3139,11 +3139,11 @@ typedef struct ADLODNCurrentPowerParameters
 //ODN Ext range data structure
 typedef struct ADLODNExtSingleInitSetting
 {
-	int mode;
-	int minValue;
-	int maxValue;
-	int step;
-	int defaultValue;
+    int mode;
+    int minValue;
+    int maxValue;
+    int step;
+    int defaultValue;
 } ADLODNExtSingleInitSetting;
 
 //OD8 Ext range data structure
@@ -3564,9 +3564,9 @@ typedef struct ADL_ERROR_REASON2
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_DELAG_NOTFICATION_REASON
 {
-	int HotkeyChanged; //Set when Hotkey value is changed
-	int GlobalEnableChanged; //Set when Global enable value is changed
-	int GlobalLimitFPSChanged; //Set when Global enable value is changed
+    int HotkeyChanged; //Set when Hotkey value is changed
+    int GlobalEnableChanged; //Set when Global enable value is changed
+    int GlobalLimitFPSChanged; //Set when Global enable value is changed
 }ADL_DELAG_NOTFICATION_REASON;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3577,12 +3577,12 @@ typedef struct ADL_DELAG_NOTFICATION_REASON
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_DELAG_SETTINGS
 {
-	int Hotkey; // Hotkey value
-	int GlobalEnable; //Global enable value
-	int GlobalLimitFPS; //Global Limit FPS
-	int GlobalLimitFPS_MinLimit; //Gloabl Limit FPS slider min limit value
-	int GlobalLimitFPS_MaxLimit; //Gloabl Limit FPS slider max limit value
-	int GlobalLimitFPS_Step; //Gloabl Limit FPS step  value
+    int Hotkey; // Hotkey value
+    int GlobalEnable; //Global enable value
+    int GlobalLimitFPS; //Global Limit FPS
+    int GlobalLimitFPS_MinLimit; //Gloabl Limit FPS slider min limit value
+    int GlobalLimitFPS_MaxLimit; //Gloabl Limit FPS slider max limit value
+    int GlobalLimitFPS_Step; //Gloabl Limit FPS step  value
 }ADL_DELAG_SETTINGS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3593,9 +3593,9 @@ typedef struct ADL_DELAG_SETTINGS
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_BOOST_NOTFICATION_REASON
 {
-	int HotkeyChanged; //Set when Hotkey value is changed
-	int GlobalEnableChanged; //Set when Global enable value is changed
-	int GlobalMinResChanged; //Set when Global min resolution value is changed
+    int HotkeyChanged; //Set when Hotkey value is changed
+    int GlobalEnableChanged; //Set when Global enable value is changed
+    int GlobalMinResChanged; //Set when Global min resolution value is changed
 }ADL_BOOST_NOTFICATION_REASON;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3606,12 +3606,12 @@ typedef struct ADL_BOOST_NOTFICATION_REASON
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_BOOST_SETTINGS
 {
-	int Hotkey; // Hotkey value
-	int GlobalEnable; //Global enable value
-	int GlobalMinRes; //Gloabl Min Resolution value
-	int GlobalMinRes_MinLimit; //Gloabl Min Resolution slider min limit value
-	int GlobalMinRes_MaxLimit; //Gloabl Min Resolution slider max limit value
-	int GlobalMinRes_Step; //Gloabl Min Resolution step  value
+    int Hotkey; // Hotkey value
+    int GlobalEnable; //Global enable value
+    int GlobalMinRes; //Gloabl Min Resolution value
+    int GlobalMinRes_MinLimit; //Gloabl Min Resolution slider min limit value
+    int GlobalMinRes_MaxLimit; //Gloabl Min Resolution slider max limit value
+    int GlobalMinRes_Step; //Gloabl Min Resolution step  value
 }ADL_BOOST_SETTINGS;
 
 
@@ -3623,8 +3623,8 @@ typedef struct ADL_BOOST_SETTINGS
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_PROVSR_NOTFICATION_REASON
 {
-	int HotkeyChanged; //Set when Hotkey value is changed
-	int GlobalEnableChanged; //Set when Global enable value is changed
+    int HotkeyChanged; //Set when Hotkey value is changed
+    int GlobalEnableChanged; //Set when Global enable value is changed
 }ADL_PROVSR_NOTFICATION_REASON;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3635,8 +3635,8 @@ typedef struct ADL_PROVSR_NOTFICATION_REASON
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_PROVSR_SETTINGS
 {
-	int Hotkey; // Hotkey value
-	int GlobalEnable; //Global enable value
+    int Hotkey; // Hotkey value
+    int GlobalEnable; //Global enable value
 }ADL_PROVSR_SETTINGS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3673,8 +3673,8 @@ typedef struct ADL_IMAGE_BOOST_SETTINGS
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_RIS_NOTFICATION_REASON
 {
-	unsigned int GlobalEnableChanged; //Set when Global enable value is changed
-	unsigned int GlobalSharpeningDegreeChanged; //Set when Global sharpening Degree value is changed
+    unsigned int GlobalEnableChanged; //Set when Global enable value is changed
+    unsigned int GlobalSharpeningDegreeChanged; //Set when Global sharpening Degree value is changed
 }ADL_RIS_NOTFICATION_REASON;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3685,11 +3685,11 @@ typedef struct ADL_RIS_NOTFICATION_REASON
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_RIS_SETTINGS
 {
-	int GlobalEnable; //Global enable value
-	int GlobalSharpeningDegree; //Global sharpening value
-	int GlobalSharpeningDegree_MinLimit; //Gloabl sharpening slider min limit value
-	int GlobalSharpeningDegree_MaxLimit; //Gloabl sharpening slider max limit value
-	int GlobalSharpeningDegree_Step; //Gloabl sharpening step  value
+    int GlobalEnable; //Global enable value
+    int GlobalSharpeningDegree; //Global sharpening value
+    int GlobalSharpeningDegree_MinLimit; //Gloabl sharpening slider min limit value
+    int GlobalSharpeningDegree_MaxLimit; //Gloabl sharpening slider max limit value
+    int GlobalSharpeningDegree_Step; //Gloabl sharpening step  value
 }ADL_RIS_SETTINGS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3700,10 +3700,10 @@ typedef struct ADL_RIS_SETTINGS
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_CHILL_NOTFICATION_REASON
 {
-	int HotkeyChanged; //Set when Hotkey value is changed
-	int GlobalEnableChanged; //Set when Global enable value is changed
-	int GlobalMinFPSChanged; //Set when Global min FPS value is changed
-	int GlobalMaxFPSChanged; //Set when Global max FPS value is changed
+    int HotkeyChanged; //Set when Hotkey value is changed
+    int GlobalEnableChanged; //Set when Global enable value is changed
+    int GlobalMinFPSChanged; //Set when Global min FPS value is changed
+    int GlobalMaxFPSChanged; //Set when Global max FPS value is changed
 }ADL_CHILL_NOTFICATION_REASON;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3714,13 +3714,13 @@ typedef struct ADL_CHILL_NOTFICATION_REASON
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_CHILL_SETTINGS
 {
-	int Hotkey; // Hotkey value
-	int GlobalEnable; //Global enable value
-	int GlobalMinFPS; //Global Min FPS value
-	int GlobalMaxFPS; //Global Max FPS value
-	int GlobalFPS_MinLimit; //Gloabl FPS slider min limit value
-	int GlobalFPS_MaxLimit; //Gloabl FPS slider max limit value
-	int GlobalFPS_Step; //Gloabl FPS Slider step  value
+    int Hotkey; // Hotkey value
+    int GlobalEnable; //Global enable value
+    int GlobalMinFPS; //Global Min FPS value
+    int GlobalMaxFPS; //Global Max FPS value
+    int GlobalFPS_MinLimit; //Gloabl FPS slider min limit value
+    int GlobalFPS_MaxLimit; //Gloabl FPS slider max limit value
+    int GlobalFPS_Step; //Gloabl FPS Slider step  value
 }ADL_CHILL_SETTINGS;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3755,9 +3755,9 @@ typedef struct ADL_DRIVERUPSCALE_SETTINGS
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_RADEON_LED_COLOR_CONFIG
 {
-	unsigned short R : 8; // Red Value
-	unsigned short G : 8; // Green Value
-	unsigned short B : 8; // Blue Value
+    unsigned short R : 8; // Red Value
+    unsigned short G : 8; // Green Value
+    unsigned short B : 8; // Blue Value
 }ADL_RADEON_LED_COLOR_CONFIG;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3768,13 +3768,13 @@ typedef struct ADL_RADEON_LED_COLOR_CONFIG
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_RADEON_LED_PATTERN_CONFIG_GENERIC
 {
-	short brightness : 8; // Brightness of LED
-	short speed : 8; // Speed of LED pattern
-	bool directionCounterClockWise; //Direction of LED Pattern
-	ADL_RADEON_LED_COLOR_CONFIG colorConfig; // RGB value of LED pattern
-	char morseCodeText[ADL_RADEON_LED_MAX_MORSE_CODE]; // Morse Code user input for Morse Code LED pattern
-	char morseCodeTextOutPut[ADL_RADEON_LED_MAX_MORSE_CODE]; // Driver set output representation of Morse Code
-	int  morseCodeTextOutPutLen; // Length of Morse Code output
+    short brightness : 8; // Brightness of LED
+    short speed : 8; // Speed of LED pattern
+    bool directionCounterClockWise; //Direction of LED Pattern
+    ADL_RADEON_LED_COLOR_CONFIG colorConfig; // RGB value of LED pattern
+    char morseCodeText[ADL_RADEON_LED_MAX_MORSE_CODE]; // Morse Code user input for Morse Code LED pattern
+    char morseCodeTextOutPut[ADL_RADEON_LED_MAX_MORSE_CODE]; // Driver set output representation of Morse Code
+    int  morseCodeTextOutPutLen; // Length of Morse Code output
 }ADL_RADEON_LED_PATTERN_CONFIG_GENERIC;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3785,8 +3785,8 @@ typedef struct ADL_RADEON_LED_PATTERN_CONFIG_GENERIC
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_RADEON_LED_CUSTOM_LED_CONFIG
 {
-	short brightness : 8; // Brightness of LED
-	ADL_RADEON_LED_COLOR_CONFIG colorConfig[ADL_RADEON_LED_MAX_LED_ROW_ON_GRID][ADL_RADEON_LED_MAX_LED_COLUMN_ON_GRID]; // Full grid array representation of Radeon LED to be populated by user
+    short brightness : 8; // Brightness of LED
+    ADL_RADEON_LED_COLOR_CONFIG colorConfig[ADL_RADEON_LED_MAX_LED_ROW_ON_GRID][ADL_RADEON_LED_MAX_LED_COLUMN_ON_GRID]; // Full grid array representation of Radeon LED to be populated by user
 }ADL_RADEON_LED_CUSTOM_GRID_LED_CONFIG;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -3797,12 +3797,12 @@ typedef struct ADL_RADEON_LED_CUSTOM_LED_CONFIG
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADL_RADEON_LED_PATTERN_CONFIG
 {
-	ADL_RADEON_USB_LED_BAR_CONTROLS control; //Requested LED pattern
+    ADL_RADEON_USB_LED_BAR_CONTROLS control; //Requested LED pattern
 
     union
     {
-		ADL_RADEON_LED_PATTERN_CONFIG_GENERIC genericPararmeters; //Requested pattern configuration settings
-		ADL_RADEON_LED_CUSTOM_GRID_LED_CONFIG customGridConfig; //Requested custom grid configuration settings
+        ADL_RADEON_LED_PATTERN_CONFIG_GENERIC genericPararmeters; //Requested pattern configuration settings
+        ADL_RADEON_LED_CUSTOM_GRID_LED_CONFIG customGridConfig; //Requested custom grid configuration settings
     };
 }ADL_RADEON_LED_PATTERN_CONFIG;
 
@@ -4039,7 +4039,7 @@ typedef struct ADLI2CLargePayload
 } ADLI2CLargePayload;
 
 /// Size in bytes of the Feature Name
-#define ADL_FEATURE_NAME_LENGTH 	16
+#define ADL_FEATURE_NAME_LENGTH     16
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 ///\brief Structure containing the Multimedia Feature Name
@@ -4049,7 +4049,7 @@ typedef struct ADLFeatureName
 {
     /// The Feature Name
     char FeatureName[ADL_FEATURE_NAME_LENGTH];
-}	ADLFeatureName, *LPADLFeatureName;
+}    ADLFeatureName, *LPADLFeatureName;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 ///\brief Structure containing information about MM Feature Capabilities.
@@ -4058,8 +4058,8 @@ typedef struct ADLFeatureName
 typedef struct ADLFeatureCaps
 {
     /// The Feature Name
-    ADLFeatureName	Name;
-    //	char strFeatureName[ADL_FEATURE_NAME_LENGTH];
+    ADLFeatureName    Name;
+    //    char strFeatureName[ADL_FEATURE_NAME_LENGTH];
 
     /// Group ID. All Features in the same group are shown sequentially in the same UI Page.
     int  iGroupID;
@@ -4126,8 +4126,8 @@ typedef struct ADLFeatureCaps
 typedef struct ADLFeatureValues
 {
     /// The Feature Name
-    ADLFeatureName	Name;
-    //	char strFeatureName[ADL_FEATURE_NAME_LENGTH];
+    ADLFeatureName    Name;
+    //    char strFeatureName[ADL_FEATURE_NAME_LENGTH];
 
     /// User controlled Boolean current value. Valid only if ADLFeatureCaps supports Boolean.
     int bCurrent;
@@ -4152,11 +4152,11 @@ typedef struct ADLFeatureValues
 
 typedef struct ADLHDCPSettings
 {
-	int iHDCPProtectionVersion; // Version, starting from 1
-	int iHDCPCaps; //Caps used to ensure at least one protection scheme is supported, 1 is HDCP1X and 2 is HDCP22
-	int iAllowAll; //Allow all is true, disable all is false
-	int iHDCPVale;
-	int iHDCPMask;
+    int iHDCPProtectionVersion; // Version, starting from 1
+    int iHDCPCaps; //Caps used to ensure at least one protection scheme is supported, 1 is HDCP1X and 2 is HDCP22
+    int iAllowAll; //Allow all is true, disable all is false
+    int iHDCPVale;
+    int iHDCPMask;
 } ADLHDCPSettings;
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -4168,32 +4168,32 @@ typedef struct ADLHDCPSettings
 
 typedef struct ADLMantleAppInfo
 {
-	/// mantle api version
-	int   apiVersion;
-	/// mantle driver version
-	long   driverVersion;
-	/// mantle vendroe id
-	long   vendorId;
-	/// mantle device id
-	long   deviceId;
-	/// mantle gpu type;
-	int     gpuType;
-	/// gpu name
-	char     gpuName[256];
-	/// mem size
-	int     maxMemRefsPerSubmission;
-	/// virtual mem size
-	long long virtualMemPageSize;
-	/// mem update
-	long long maxInlineMemoryUpdateSize;
-	/// bound descriptot
-	long     maxBoundDescriptorSets;
-	/// thread group size
-	long     maxThreadGroupSize;
-	/// time stamp frequency
-	long  long timestampFrequency;
-	/// color target
-	long     multiColorTargetClears;
+    /// mantle api version
+    int   apiVersion;
+    /// mantle driver version
+    long   driverVersion;
+    /// mantle vendroe id
+    long   vendorId;
+    /// mantle device id
+    long   deviceId;
+    /// mantle gpu type;
+    int     gpuType;
+    /// gpu name
+    char     gpuName[256];
+    /// mem size
+    int     maxMemRefsPerSubmission;
+    /// virtual mem size
+    long long virtualMemPageSize;
+    /// mem update
+    long long maxInlineMemoryUpdateSize;
+    /// bound descriptot
+    long     maxBoundDescriptorSets;
+    /// thread group size
+    long     maxThreadGroupSize;
+    /// time stamp frequency
+    long  long timestampFrequency;
+    /// color target
+    long     multiColorTargetClears;
 }ADLMantleAppInfo, *LPADLMantleAppInfo;
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -4203,10 +4203,10 @@ typedef struct ADLMantleAppInfo
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLSDIData
 {
-	/// The SDI state, ADL_SDI_ON or ADL_SDI_OFF, for the current SDI mode
-	int iSDIState;
-	/// Size of the memory segment for SDI (in MB).
-	int iSizeofSDISegment;
+    /// The SDI state, ADL_SDI_ON or ADL_SDI_OFF, for the current SDI mode
+    int iSDIState;
+    /// Size of the memory segment for SDI (in MB).
+    int iSizeofSDISegment;
 } ADLSDIData, *LPADLSDIData;
 
 
@@ -4278,12 +4278,12 @@ typedef union _ADLDCESupport
 ////////////////////////////////////////////////////////////////////////////////////////////
 typedef struct ADLSmartShiftSettings
 {
-	int iMinRange;
-	int iMaxRange;
-	int iDefaultMode; //Refer to CWDDEPM_ODN_CONTROL_TYPE
-	int iDefaultValue;
-	int iCurrentMode;
-	int iCurrentValue;
+    int iMinRange;
+    int iMaxRange;
+    int iDefaultMode; //Refer to CWDDEPM_ODN_CONTROL_TYPE
+    int iDefaultValue;
+    int iCurrentMode;
+    int iCurrentValue;
     int iFlags; //refer to define_smartshift_bits
 }ADLSmartShiftSettings, *LPADLSmartShiftSettings;
 #endif /* ADL_STRUCTURES_H_ */

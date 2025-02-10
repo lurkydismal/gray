@@ -2,14 +2,14 @@
 
 cbuffer DynOOBBData
 {
-    float3x4 WorldToLocal; //	World to local of fog volume
-    float3x4 LocalToWorld; //	Local of fog volume to world
-    float4 MassCenter; //	Center for angular velocity
+    float3x4 WorldToLocal; //    World to local of fog volume
+    float3x4 LocalToWorld; //    Local of fog volume to world
+    float4 MassCenter; //    Center for angular velocity
     float4 OOBBWorldAngularVelocity;
     float4 OOBBWorldTranslationVelocity;
 }
 
-//	Vertex
+//    Vertex
 v2g_fluidsim_dyn_aabb main(v_fluidsim input)
 {
     v2g_fluidsim_dyn_aabb output = (v2g_fluidsim_dyn_aabb)0;
@@ -35,19 +35,19 @@ v2g_fluidsim_dyn_aabb main(v_fluidsim input)
     // {
         // output.clip0[i] = dot(float4(output.cell0, 1), OOBBClipPlane[i]);
         // output.clip1[i] = dot(float4(output.cell0, 1), OOBBClipPlane[i + 3]);
-        // //	Make box a voxel bigger in each direction
-        // //	BOX_EXPANSION - voxel diagonal length
+        // //    Make box a voxel bigger in each direction
+        // //    BOX_EXPANSION - voxel diagonal length
         // // output.clip0[i] += BOX_EXPANSION;
         // // output.clip1[i] += BOX_EXPANSION;
     // }
 
-	output.clip0.x = dot(float4(output.cell0, 1), OOBBClipPlane[0]);
-	output.clip0.y = dot(float4(output.cell0, 1), OOBBClipPlane[1]);
-	output.clip0.z = dot(float4(output.cell0, 1), OOBBClipPlane[2]);
-	
-	output.clip1.x = dot(float4(output.cell0, 1), OOBBClipPlane[3]);
-	output.clip1.y = dot(float4(output.cell0, 1), OOBBClipPlane[4]);
-	output.clip1.z = dot(float4(output.cell0, 1), OOBBClipPlane[5]);
+    output.clip0.x = dot(float4(output.cell0, 1), OOBBClipPlane[0]);
+    output.clip0.y = dot(float4(output.cell0, 1), OOBBClipPlane[1]);
+    output.clip0.z = dot(float4(output.cell0, 1), OOBBClipPlane[2]);
+    
+    output.clip1.x = dot(float4(output.cell0, 1), OOBBClipPlane[3]);
+    output.clip1.y = dot(float4(output.cell0, 1), OOBBClipPlane[4]);
+    output.clip1.z = dot(float4(output.cell0, 1), OOBBClipPlane[5]);
 
     return output;
 }

@@ -31,7 +31,7 @@ static void FromAxisAngle(Fmatrix &self, const Fvector& rkAxis, float fRadians)
     float fYSin = rkAxis.y*fSin;
     float fZSin = rkAxis.z*fSin;
     
-	self.identity	();
+    self.identity    ();
     self._11 = fX2*fOneMinusCos+fCos;
     self._12 = fXYM-fZSin;
     self._13 = fXZM+fYSin;
@@ -45,14 +45,14 @@ static void FromAxisAngle(Fmatrix &self, const Fvector& rkAxis, float fRadians)
 
 static Fvector GetColumn(Fmatrix &self, const u32 &index)
 {
-	switch (index) {
-		case 0 : return(Fvector().set(self._11,self._21,self._31));
-		case 1 : return(Fvector().set(self._12,self._22,self._32));
-		case 2 : return(Fvector().set(self._13,self._23,self._33));
-		default : NODEFAULT;
-	}
+    switch (index) {
+        case 0 : return(Fvector().set(self._11,self._21,self._31));
+        case 1 : return(Fvector().set(self._12,self._22,self._32));
+        case 2 : return(Fvector().set(self._13,self._23,self._33));
+        default : NODEFAULT;
+    }
 #ifdef DEBUG
-	return	(Fvector().set(flt_max,flt_max,flt_max));
+    return    (Fvector().set(flt_max,flt_max,flt_max));
 #endif // DEBUG
 }
 
@@ -70,13 +70,13 @@ static float Volume (const float* afAngle, void* pvUserData)
     Fmatrix kRot;
     FromAxisAngle(kRot,kAxis,afAngle[2]);
 
-	Fvector  kMin;
-	kRot.transform_tiny(kMin,akPoint[0]);
-	Fvector  kMax = kMin;
+    Fvector  kMin;
+    kRot.transform_tiny(kMin,akPoint[0]);
+    Fvector  kMax = kMin;
     for (int i = 1; i < iQuantity; i++)
     {
         Fvector kTest;
-		kRot.transform_tiny(kTest,akPoint[i]);
+        kRot.transform_tiny(kTest,akPoint[i]);
 
         if ( kTest.x < kMin.x )
             kMin.x = kTest.x;
@@ -101,21 +101,21 @@ static float Volume (const float* afAngle, void* pvUserData)
 static void MinimalBoxForAngles (int iQuantity, const Fvector* akPoint,
     float afAngle[3], MagicBox3& rkBox)
 {
-    float		fCos0 = _cos(afAngle[0]);
-    float		fSin0 = _sin(afAngle[0]);
-    float		fCos1 = _cos(afAngle[1]);
-    float		fSin1 = _sin(afAngle[1]);
-    Fvector		kAxis = Fvector().set(fCos0*fSin1,fSin0*fSin1,fCos1);
-    Fmatrix		kRot;
+    float        fCos0 = _cos(afAngle[0]);
+    float        fSin0 = _sin(afAngle[0]);
+    float        fCos1 = _cos(afAngle[1]);
+    float        fSin1 = _sin(afAngle[1]);
+    Fvector        kAxis = Fvector().set(fCos0*fSin1,fSin0*fSin1,fCos1);
+    Fmatrix        kRot;
     FromAxisAngle(kRot,kAxis,afAngle[2]);
 
     Fvector kMin;
-	kRot.transform_tiny(kMin,akPoint[0]);
+    kRot.transform_tiny(kMin,akPoint[0]);
     Fvector kMax = kMin;
     for (int i = 1; i < iQuantity; i++)
     {
         Fvector kTest;
-		kRot.transform_tiny(kTest,akPoint[i]);
+        kRot.transform_tiny(kTest,akPoint[i]);
 
         if ( kTest.x < kMin.x )
             kMin.x = kTest.x;
@@ -135,8 +135,8 @@ static void MinimalBoxForAngles (int iQuantity, const Fvector* akPoint,
 
     Fvector kMid = Fvector().add(kMax,kMin).mul(0.5f);
     Fvector kRng = Fvector().sub(kMax,kMin).mul(0.5f);
-	
-	kRot.transform_tiny(rkBox.Center(),kMid);
+    
+    kRot.transform_tiny(rkBox.Center(),kMid);
     rkBox.Axis(0) = GetColumn(kRot,0);
     rkBox.Axis(1) = GetColumn(kRot,1);
     rkBox.Axis(2) = GetColumn(kRot,2);

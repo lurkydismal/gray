@@ -2,7 +2,7 @@
 #include "deffer_model.vs.hlsl"
 #else
 
-#include "common.hlsli"	
+#include "common.hlsli"    
 
 void main(in v_editor I, out p_bumped_new O)
 {
@@ -12,7 +12,7 @@ void main(in v_editor I, out p_bumped_new O)
     O.position = float4(Pe, 1.0f);
 
     float3 N = normalize(mul(m_W, I.N));
-	O.tcdh.z = N.y * 0.3f + 0.5f;
+    O.tcdh.z = N.y * 0.3f + 0.5f;
     N = normalize(mul(m_V, N));
 
     O.M1 = N;

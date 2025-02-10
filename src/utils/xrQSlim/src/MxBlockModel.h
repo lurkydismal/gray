@@ -60,19 +60,19 @@ public:
 
 public:
     MxBlockModel(int nvert, int nface) : vertices(nvert), faces(nface)
-	{
-	    colors = NULL;  normals = NULL;  tcoords = NULL;
-	    cbinding = nbinding = tbinding = MX_UNBOUND;
-	    binding_mask = MX_ALL_MASK;
-	    tex_name = NULL;
-	}
+    {
+        colors = NULL;  normals = NULL;  tcoords = NULL;
+        cbinding = nbinding = tbinding = MX_UNBOUND;
+        binding_mask = MX_ALL_MASK;
+        tex_name = NULL;
+    }
     virtual ~MxBlockModel()
-	{
-	    if( normals )	xr_delete	(normals);
-	    if( colors )	xr_delete	(colors);
-	    if( tcoords )	xr_delete	(tcoords);
-	    if( tex_name )	xr_free		(tex_name);
-	}
+    {
+        if( normals )    xr_delete    (normals);
+        if( colors )    xr_delete    (colors);
+        if( tcoords )    xr_delete    (tcoords);
+        if( tex_name )    xr_free        (tex_name);
+    }
 
     MxBlockModel *clone(MxBlockModel *into=NULL);
 

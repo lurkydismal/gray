@@ -1,7 +1,7 @@
 /* 
  * fastcgi.h --
  *
- *	Defines for the FastCGI protocol.
+ *    Defines for the FastCGI protocol.
  *
  *
  * Copyright (c) 1995-1996 Open Market, Inc.
@@ -132,5 +132,5 @@ typedef struct {
     FCGI_UnknownTypeBody body;
 } FCGI_UnknownTypeRecord;
 
-#endif	/* _FASTCGI_H */
+#endif    /* _FASTCGI_H */
 

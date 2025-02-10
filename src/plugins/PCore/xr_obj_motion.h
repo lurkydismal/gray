@@ -11,28 +11,28 @@ namespace xray_re {
 
 class xr_obj_motion: public xr_motion {
 public:
-			xr_obj_motion();
-	virtual 	~xr_obj_motion();
-	virtual void	load(xr_reader& r);
-	virtual void	save(xr_writer& w) const;
-	bool		load_anm(const char* path);
-	bool		save_anm(const char* path) const;
+            xr_obj_motion();
+    virtual     ~xr_obj_motion();
+    virtual void    load(xr_reader& r);
+    virtual void    save(xr_writer& w) const;
+    bool        load_anm(const char* path);
+    bool        save_anm(const char* path) const;
 
-	void		evaluate(float time, fvector3& t, fvector3& r) const;
+    void        evaluate(float time, fvector3& t, fvector3& r) const;
 
-	void		create_envelopes();
-	void		delete_envelopes();
+    void        create_envelopes();
+    void        delete_envelopes();
 
-	const xr_envelope* const*	envelopes() const;
-	xr_envelope* const*		envelopes();
+    const xr_envelope* const*    envelopes() const;
+    xr_envelope* const*        envelopes();
 
 private:
-	enum {
-		OMOTION_VERSION_3	= 3,
-		OMOTION_VERSION_4	= 4,
-		OMOTION_VERSION_5	= 5,
-	};
-	xr_envelope*	m_envelopes[6];
+    enum {
+        OMOTION_VERSION_3    = 3,
+        OMOTION_VERSION_4    = 4,
+        OMOTION_VERSION_5    = 5,
+    };
+    xr_envelope*    m_envelopes[6];
 };
 
 inline xr_envelope* const* xr_obj_motion::envelopes() { return m_envelopes; }

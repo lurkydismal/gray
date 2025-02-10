@@ -5,23 +5,23 @@
 
 typedef enum
 {
-	PadLeft,
-	PadDown,
-	PadRight,
-	PadUp,
-	PadStart,
-	PadRightStick,
-	PadLeftStick,
-	PadSelect,
-	PadSquare,
-	PadX,
-	PadCircle,
-	PadTriangle,
-	PadR1,
-	PadL1,
-	PadR2,
-	PadL2,
-	NumPadEvents
+    PadLeft,
+    PadDown,
+    PadRight,
+    PadUp,
+    PadStart,
+    PadRightStick,
+    PadLeftStick,
+    PadSelect,
+    PadSquare,
+    PadX,
+    PadCircle,
+    PadTriangle,
+    PadR1,
+    PadL1,
+    PadR2,
+    PadL2,
+    NumPadEvents
 } PadEvents;
 
 int PadInit(void);

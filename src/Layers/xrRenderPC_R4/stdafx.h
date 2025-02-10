@@ -21,10 +21,10 @@
 
 #include "../xrRender/Debug/dxPixEventWrapper.h"
 
-#define		R_R1	1
-#define		R_R2	2
-#define		R_R4	4
-#define		RENDER	R_R4
+#define        R_R1    1
+#define        R_R2    2
+#define        R_R4    4
+#define        RENDER    R_R4
 
 #include "../../xrParticles/psystem.h"
 
@@ -44,10 +44,10 @@
 #include "../xrRender/xrRender_console.h"
 #include "r4.h"
 
-IC	void jitter(CBlender_Compile& C) {
-	C.r_dx10Texture("jitter0", JITTER(0));
-	C.r_dx10Texture("jitter1", JITTER(1));
-	C.r_dx10Texture("jitter2", JITTER(2));
+IC    void jitter(CBlender_Compile& C) {
+    C.r_dx10Texture("jitter0", JITTER(0));
+    C.r_dx10Texture("jitter1", JITTER(1));
+    C.r_dx10Texture("jitter2", JITTER(2));
 
-	C.r_dx10Sampler("smp_jitter");
+    C.r_dx10Sampler("smp_jitter");
 }

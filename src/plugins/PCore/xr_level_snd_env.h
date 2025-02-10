@@ -11,22 +11,22 @@
 namespace xray_re {
 
 enum {
-	FSL_SND_ENV_IDS		= 0,
-	FSL_SND_ENV_GEOMETRY	= 1,
+    FSL_SND_ENV_IDS        = 0,
+    FSL_SND_ENV_GEOMETRY    = 1,
 };
 
 class xr_level_snd_env: public xr_cform {
 public:
-			xr_level_snd_env(xr_reader& r);
-	virtual		~xr_level_snd_env();
+            xr_level_snd_env(xr_reader& r);
+    virtual        ~xr_level_snd_env();
 
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
 
-	const std::vector<std::string>&	env_ids() const;
+    const std::vector<std::string>&    env_ids() const;
 
 private:
-	std::vector<std::string>	m_env_ids;
+    std::vector<std::string>    m_env_ids;
 };
 
 inline xr_level_snd_env::xr_level_snd_env(xr_reader& r) { load(r); }

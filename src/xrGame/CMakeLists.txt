@@ -3,60 +3,60 @@ set(XGM_SRC_FILES)
 
 # Files import
 file(GLOB_RECURSE XGM_SOURCE_ALL_FILES CONFIGURE_DEPENDS
-	"*.cpp"
-	"*.cxx"
-	"*.c"
-	"*.h"
-	"../xrServerEntities/*.*"
-	"../xrGameSpy/gamespy/md5c.c"
+    "*.cpp"
+    "*.cxx"
+    "*.c"
+    "*.h"
+    "../xrServerEntities/*.*"
+    "../xrGameSpy/gamespy/md5c.c"
 )
 file(GLOB_RECURSE XGM_SOURCE_AI_FILES
-	"ai/*.*"
-	"ai_*.*"
+    "ai/*.*"
+    "ai_*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_SC_FILES
-	"smart_cover*.*"
+    "smart_cover*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_SR_FILES
-	"space_restriction*.*"
+    "space_restriction*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_UI_FILES
-	"ui/*.*"
-	"ui*.*"
-	"UI*.*"
+    "ui/*.*"
+    "ui*.*"
+    "UI*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_IKAN_FILES
-	"ik/*.*"
-	"ik_*.*"
-	"IK*.*"
+    "ik/*.*"
+    "ik_*.*"
+    "IK*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_ACTOR_FILES
-	"Actor*.*"
+    "Actor*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_LEVEL_FILES
-	"Level*.*"
-	"level*.*"
+    "Level*.*"
+    "level*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_INV_FILES
-	"inventory*.*"
-	"Inventory*.*"
+    "inventory*.*"
+    "Inventory*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_CAR_FILES
-	"Car*.*"
-	"car*.*"
+    "Car*.*"
+    "car*.*"
 )
 file(GLOB XGM_SOURCE_ALIFE_FILES
-	"../xrServerEntities/alife_*.*"
-	"alife_*.*"
+    "../xrServerEntities/alife_*.*"
+    "alife_*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_SCRIPT_FILES
-	"../xrServerEntities/script_*.*"
-	"script_*.*"
+    "../xrServerEntities/script_*.*"
+    "script_*.*"
 )
 file(GLOB_RECURSE XGM_SOURCE_SERV_FILES
-	"../xrServerEntities/xrServer*.*"
-	"xrServer*.*"
-	"game_*.*"
+    "../xrServerEntities/xrServer*.*"
+    "xrServer*.*"
+    "game_*.*"
 )
 
 file(GLOB_RECURSE XGM_SOURCE_AI_BASE_FILES "ai/monsters/base_monster/*.*")
@@ -133,9 +133,9 @@ list(FILTER XGM_SRC_FILES EXCLUDE REGEX "ui/UIStalkersRankingWnd.*")
 add_library(xrGame SHARED ${XGM_SRC_FILES})
 
 if (IXRAY_UNITYBUILD)
-	set_target_properties(xrGame PROPERTIES UNITY_BUILD ON UNITY_BUILD_BATCH_SIZE 32)
-	target_compile_options(xrGame PRIVATE /bigobj)
-	set_source_files_properties(../xrServerEntities/script_engine_export.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+    set_target_properties(xrGame PROPERTIES UNITY_BUILD ON UNITY_BUILD_BATCH_SIZE 32)
+    target_compile_options(xrGame PRIVATE /bigobj)
+    set_source_files_properties(../xrServerEntities/script_engine_export.cpp PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 endif()
 
 # Include directories
@@ -150,7 +150,7 @@ target_compile_definitions(xrGame PRIVATE XRGAME_EXPORTS)
 target_compile_definitions(xrGame PRIVATE dSINGLE)
 
 if (IXRAY_MP)
-	target_compile_definitions(xrGame PRIVATE XR_MP_BUILD)
+    target_compile_definitions(xrGame PRIVATE XR_MP_BUILD)
 endif()
 
 add_compile_options(/fp:fast)
@@ -176,12 +176,12 @@ endif()
 set_target_properties(xrGame PROPERTIES DISABLE_PRECOMPILE_HEADERS ON)
 
 if (NOT IXRAY_UNITYBUILD)
-	set_target_properties(xrGame PROPERTIES COMPILE_FLAGS "/Yustdafx.h")
-	set_source_files_properties(stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
-	target_precompile_headers(xrGame PUBLIC "stdafx.h")
+    set_target_properties(xrGame PROPERTIES COMPILE_FLAGS "/Yustdafx.h")
+    set_source_files_properties(stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+    target_precompile_headers(xrGame PUBLIC "stdafx.h")
 
-	file(GLOB_RECURSE GAME_SOURCE_ALL_C_FILES "*.c" "../xrGameSpy/gamespy/md5c.c")
-	set_source_files_properties(${GAME_SOURCE_ALL_C_FILES} PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
+    file(GLOB_RECURSE GAME_SOURCE_ALL_C_FILES "*.c" "../xrGameSpy/gamespy/md5c.c")
+    set_source_files_properties(${GAME_SOURCE_ALL_C_FILES} PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
 endif()
 
 file(GLOB_RECURSE GAME_SOURCE_PCH_FILES "stdafx.*")

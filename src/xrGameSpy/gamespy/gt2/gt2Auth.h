@@ -20,19 +20,19 @@ extern "C" {
 
 GT2Byte * gti2GetChallenge
 (
-	GT2Byte * buffer
+    GT2Byte * buffer
 );
 
 GT2Byte * gti2GetResponse
 (
-	GT2Byte * buffer,
-	const GT2Byte * challenge
+    GT2Byte * buffer,
+    const GT2Byte * challenge
 );
 
 GT2Bool gti2CheckResponse
 (
-	const GT2Byte * response1,
-	const GT2Byte * response2
+    const GT2Byte * response1,
+    const GT2Byte * response2
 );
 
 #ifdef __cplusplus

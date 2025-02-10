@@ -10,10 +10,10 @@ constexpr u32 color_rgba(u32 r, u32 g, u32 b, u32 a) {
 }
 
 IC u32 color_argb_f(float a, float r, float g, float b) {
-    s32	 _r = clampr(iFloor(r * 255.f), 0, 255);
-    s32	 _g = clampr(iFloor(g * 255.f), 0, 255);
-    s32	 _b = clampr(iFloor(b * 255.f), 0, 255);
-    s32	 _a = clampr(iFloor(a * 255.f), 0, 255);
+    s32     _r = clampr(iFloor(r * 255.f), 0, 255);
+    s32     _g = clampr(iFloor(g * 255.f), 0, 255);
+    s32     _b = clampr(iFloor(b * 255.f), 0, 255);
+    s32     _a = clampr(iFloor(a * 255.f), 0, 255);
     return color_argb(_a, _r, _g, _b);
 }
 

@@ -4,12 +4,12 @@
 class CTushkano;
 
 class CStateManagerTushkano : public CMonsterStateManager<CTushkano> {
-	typedef CMonsterStateManager<CTushkano> inherited;
+    typedef CMonsterStateManager<CTushkano> inherited;
 
 public:
-						CStateManagerTushkano	(CTushkano *obj);
-	virtual				~CStateManagerTushkano	();
+                        CStateManagerTushkano    (CTushkano *obj);
+    virtual                ~CStateManagerTushkano    ();
 
-	virtual	void		execute					();
-	virtual void		remove_links			(CObject* object_) { inherited::remove_links(object_);}
+    virtual    void        execute                    ();
+    virtual void        remove_links            (CObject* object_) { inherited::remove_links(object_);}
 };

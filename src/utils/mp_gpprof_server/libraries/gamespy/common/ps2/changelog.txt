@@ -8,9 +8,9 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 04-04-2005  1.05.19  SN   RELEASE  Releasing to developer site.
 09-16-2004  1.05.19  SN   RELEASE  Releasing to developer site.
 08-05-2004  1.05.19  SN   RELEASE  Releasing to developer site.
-07-23-2004  1.05.19  SN	  FIX      Updated code with explicit casts to remove implicit cast error 
+07-23-2004  1.05.19  SN      FIX      Updated code with explicit casts to remove implicit cast error 
                                    when compiling at highest level and warnings treated as errors.(ps2pad.c)
-07-19-2004  1.05.18  SN	  FIX      Updated code with explicit casts to remove implicit cast error 
+07-19-2004  1.05.18  SN      FIX      Updated code with explicit casts to remove implicit cast error 
                                    when compiling at highest level and warnings treated as errors.(ps2common.c)
 07-14-2004  1.05.17  DES  CLEANUP  Updated and unified IRX module loading code.
                           FEATURE  Added loading of IRX modules needed by GV SPU2 code.

@@ -111,7 +111,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
                      SAH  FIX      Added LinuxCommon.c for linux projects
 05-30-2006  2.00.42  SAH  FIX      #include "time.h" for PS3 time support in gsPlatform.h
                      SAH  FIX      Added newlines to end of files, couple GSI_UNUSED calls
-                     SAH  FIX      Added PS3 Threads stub in gsPlatformThreads	     
+                     SAH  FIX      Added PS3 Threads stub in gsPlatformThreads         
 05-25-2006  2.00.41  SAH  FIX      added GSI_UNUSED call to gsAssert to get rid of Nitro warning
 05-24-2006  2.00.40  SAH  FIX      moved GSI_UNUSED call below #endif in win32common.c
 05-23-2006  2.00.39  SAH  FIX      Got rid of month/week arrays in gsXML.c - they are declared in nitroThread
@@ -157,7 +157,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 11-15-2005  2.00.16  DES  FIX      Updated cross-platform compatibility.
 11-14-2005  2.00.15  DES  FEATURE  Added GSI_DOMAIN_NAME to define "gamespy.com".
 11-14-2005  2.00.14  MJ   FEATURE  Replaced memory management code.
-								   Added stubbed files for cross platform rendering, input, and fileio
+                                   Added stubbed files for cross platform rendering, input, and fileio
 11-14-2005  2.00.13  DES  CLEANUP  Cleanup for Nitro and OSX.
 11-11-2005  2.00.12  DES  FIX      Changes to crypt code for OSX compiler.
                      DES  FIX      added GSI_UNUSED for OSX.

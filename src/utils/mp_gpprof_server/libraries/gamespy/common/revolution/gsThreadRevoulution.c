@@ -8,27 +8,27 @@
 ///////////////////////////////////////////////////////////////////////////////
 gsi_u32 gsiInterlockedIncrement(gsi_u32 * value)
 {
-	BOOL enabled = OSDisableInterrupts();
+    BOOL enabled = OSDisableInterrupts();
 
-	gsi_u32 ret = ++(*value);
-	OSRestoreInterrupts(enabled);
+    gsi_u32 ret = ++(*value);
+    OSRestoreInterrupts(enabled);
 
-	// return "ret" rather than "value" here b/c
-	// value may be modified by another thread 
-	// before we can return it
-	return ret;
+    // return "ret" rather than "value" here b/c
+    // value may be modified by another thread 
+    // before we can return it
+    return ret;
 }
 
 gsi_u32 gsiInterlockedDecrement(gsi_u32 * value)
 {
-	BOOL state = OSDisableInterrupts();
-	gsi_u32 ret = --(*value);
-	OSRestoreInterrupts(state);
+    BOOL state = OSDisableInterrupts();
+    gsi_u32 ret = --(*value);
+    OSRestoreInterrupts(state);
 
-	// return "ret" rather than "value" here b/c
-	// value may be modified by another thread 
-	// before we can return it
-	return ret;
+    // return "ret" rather than "value" here b/c
+    // value may be modified by another thread 
+    // before we can return it
+    return ret;
 }
 
 
@@ -36,22 +36,22 @@ gsi_u32 gsiInterlockedDecrement(gsi_u32 * value)
 ///////////////////////////////////////////////////////////////////////////////
 int gsiStartThread(GSThreadFunc aThreadFunc, gsi_u32 theStackSize, void *arg, GSIThreadID* theThreadIdOut)
 {
-	char *aStackBase;
-	if(theStackSize % 32 != 0)
-	{
-		OSRoundUp32B(theStackSize);
-	}
+    char *aStackBase;
+    if(theStackSize % 32 != 0)
+    {
+        OSRoundUp32B(theStackSize);
+    }
 
-	theThreadIdOut->mStack = gsimalloc(theStackSize);
-	aStackBase = (char *)theThreadIdOut->mStack;
-	aStackBase += theStackSize;
-	
-	OSCreateThread(&theThreadIdOut->mThread, aThreadFunc, arg, (void *)aStackBase, 
-				   theStackSize, 16, OS_THREAD_ATTR_DETACH);
+    theThreadIdOut->mStack = gsimalloc(theStackSize);
+    aStackBase = (char *)theThreadIdOut->mStack;
+    aStackBase += theStackSize;
+    
+    OSCreateThread(&theThreadIdOut->mThread, aThreadFunc, arg, (void *)aStackBase, 
+                   theStackSize, 16, OS_THREAD_ATTR_DETACH);
 
-	OSResumeThread(&theThreadIdOut->mThread);
+    OSResumeThread(&theThreadIdOut->mThread);
 
-	return 0;
+    return 0;
 }
 
 
@@ -59,12 +59,12 @@ int gsiStartThread(GSThreadFunc aThreadFunc, gsi_u32 theStackSize, void *arg, GS
 ///////////////////////////////////////////////////////////////////////////////
 void gsiCancelThread(GSIThreadID theThreadID)
 {
-	OSCancelThread(&theThreadID.mThread);
-	if(theThreadID.mStack)
-	{
-		gsifree(theThreadID.mStack);
-		theThreadID.mStack = NULL;
-	}
+    OSCancelThread(&theThreadID.mThread);
+    if(theThreadID.mStack)
+    {
+        gsifree(theThreadID.mStack);
+        theThreadID.mStack = NULL;
+    }
 }
 
 
@@ -73,13 +73,13 @@ void gsiCancelThread(GSIThreadID theThreadID)
 void gsiCleanupThread(GSIThreadID theThreadID)
 {
 
-	if (!OSIsThreadTerminated(&theThreadID.mThread))
-		OSCancelThread(&theThreadID.mThread);
-	if(theThreadID.mStack)
-	{
-		gsifree(theThreadID.mStack);
-		theThreadID.mStack = NULL;
-	}
+    if (!OSIsThreadTerminated(&theThreadID.mThread))
+        OSCancelThread(&theThreadID.mThread);
+    if(theThreadID.mStack)
+    {
+        gsifree(theThreadID.mStack);
+        theThreadID.mStack = NULL;
+    }
 }
 
 
@@ -87,11 +87,11 @@ void gsiCleanupThread(GSIThreadID theThreadID)
 ///////////////////////////////////////////////////////////////////////////////
 gsi_u32 gsiHasThreadShutdown(GSIThreadID theThreadID)
 {
-	BOOL shutdown = OSIsThreadTerminated(&theThreadID.mThread);
+    BOOL shutdown = OSIsThreadTerminated(&theThreadID.mThread);
 
-	if(shutdown == TRUE)
-		return 1;
-	return 0;
+    if(shutdown == TRUE)
+        return 1;
+    return 0;
 }
 
 
@@ -99,7 +99,7 @@ gsi_u32 gsiHasThreadShutdown(GSIThreadID theThreadID)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiInitializeCriticalSection(GSICriticalSection *theCrit)
 {
-	OSInitMutex(theCrit);
+    OSInitMutex(theCrit);
 }
 
 
@@ -107,7 +107,7 @@ void gsiInitializeCriticalSection(GSICriticalSection *theCrit)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiEnterCriticalSection(GSICriticalSection *theCrit)
 {
-	OSLockMutex(theCrit);
+    OSLockMutex(theCrit);
 }
 
 
@@ -115,7 +115,7 @@ void gsiEnterCriticalSection(GSICriticalSection *theCrit)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiLeaveCriticalSection(GSICriticalSection *theCrit)
 {
-	OSUnlockMutex(theCrit);
+    OSUnlockMutex(theCrit);
 }
 
 
@@ -123,7 +123,7 @@ void gsiLeaveCriticalSection(GSICriticalSection *theCrit)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiDeleteCriticalSection(GSICriticalSection *theCrit)
 {
-	GSI_UNUSED(theCrit);
+    GSI_UNUSED(theCrit);
 }
 
 
@@ -131,14 +131,14 @@ void gsiDeleteCriticalSection(GSICriticalSection *theCrit)
 ///////////////////////////////////////////////////////////////////////////////
 GSISemaphoreID gsiCreateSemaphore(gsi_i32 theInitialCount, gsi_i32 theMaxCount, char* theName)
 {
-	GSISemaphoreID semaphore;
+    GSISemaphoreID semaphore;
 
-	OSInitSemaphore(&semaphore, theInitialCount);
+    OSInitSemaphore(&semaphore, theInitialCount);
 
-	GSI_UNUSED(theName);
-	GSI_UNUSED(theMaxCount);
-	
-	return semaphore;
+    GSI_UNUSED(theName);
+    GSI_UNUSED(theMaxCount);
+    
+    return semaphore;
 }
 
 
@@ -146,9 +146,9 @@ GSISemaphoreID gsiCreateSemaphore(gsi_i32 theInitialCount, gsi_i32 theMaxCount, 
 ///////////////////////////////////////////////////////////////////////////////
 gsi_u32 gsiWaitForSemaphore(GSISemaphoreID theSemaphore, gsi_u32 theTimeoutMs)
 {
-	gsi_u32 retval = (unsigned int)OSWaitSemaphore(&theSemaphore);
-	GSI_UNUSED(theTimeoutMs);
-	return retval;
+    gsi_u32 retval = (unsigned int)OSWaitSemaphore(&theSemaphore);
+    GSI_UNUSED(theTimeoutMs);
+    return retval;
 }
 
 
@@ -156,8 +156,8 @@ gsi_u32 gsiWaitForSemaphore(GSISemaphoreID theSemaphore, gsi_u32 theTimeoutMs)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiReleaseSemaphore(GSISemaphoreID theSemaphore, gsi_i32 theReleaseCount)
 {
-	OSSignalSemaphore(&theSemaphore);
-	GSI_UNUSED(theReleaseCount);
+    OSSignalSemaphore(&theSemaphore);
+    GSI_UNUSED(theReleaseCount);
 }
 
 
@@ -165,7 +165,7 @@ void gsiReleaseSemaphore(GSISemaphoreID theSemaphore, gsi_i32 theReleaseCount)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiCloseSemaphore(GSISemaphoreID theSemaphore)
 {
-	GSI_UNUSED(theSemaphore);
+    GSI_UNUSED(theSemaphore);
 }
 
 
@@ -173,7 +173,7 @@ void gsiCloseSemaphore(GSISemaphoreID theSemaphore)
 ///////////////////////////////////////////////////////////////////////////////
 void gsiExitThread(GSIThreadID theThreadID)
 {
-	GSI_UNUSED(theThreadID);
+    GSI_UNUSED(theThreadID);
 }
 
 

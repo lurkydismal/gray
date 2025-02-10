@@ -18,7 +18,7 @@ void main(p_bumped_new I, out IXrayGbufferPack O)
 #ifdef USE_4_BUMP
     float4 Mask = s_mask.Sample(smp_base, I.tcdh.xy);
     Mask /= dot(Mask, 1.0f);
-	
+    
     float3 Detail_R = s_dt_r.Sample(smp_base, tcdbump).xyz * Mask.x;
     float3 Detail_G = s_dt_g.Sample(smp_base, tcdbump).xyz * Mask.y;
     float3 Detail_B = s_dt_b.Sample(smp_base, tcdbump).xyz * Mask.z;
@@ -34,12 +34,12 @@ void main(p_bumped_new I, out IXrayGbufferPack O)
     M.Roughness = min(1.0f, Normal_R.x + Normal_G.x + Normal_B.x + Normal_A.x);
 #else
     float4 Detail = s_detail.Sample(smp_base, tcdbump);
-	float4 DetailBump = s_detailBump.Sample(smp_base, tcdbump);
-	
+    float4 DetailBump = s_detailBump.Sample(smp_base, tcdbump);
+    
     M.Roughness = DetailBump.x;
-	M.Normal.xyz = DetailBump.wzy - 0.5f;
+    M.Normal.xyz = DetailBump.wzy - 0.5f;
 #endif
-	
+    
     M.Color.xyz *= Detail * 2.0f;
 
     M.Metalness = 0.0f;

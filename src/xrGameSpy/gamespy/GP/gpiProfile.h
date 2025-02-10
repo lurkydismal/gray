@@ -30,49 +30,49 @@ Please see the GameSpy Presence SDK documentation for more information
 // New Status Info
 typedef struct _GPIBuddyStatusInfo 
 {
-	int buddyIndex;
-	GPEnum statusState;
-	char *richStatus;
-	char *gameType;
-	char *gameVariant;
-	char *gameMapName;
-	unsigned int sessionFlags;
-	unsigned int buddyIp;
-	unsigned short buddyPort;
-	unsigned int hostIp;
-	unsigned int hostPrivateIp;
-	unsigned short queryPort;
-	unsigned short hostPort;
-	GPEnum quietModeFlags;
-	int productId;
-	// New Status Info extended info Keys
-	DArray extendedInfoKeys;
+    int buddyIndex;
+    GPEnum statusState;
+    char *richStatus;
+    char *gameType;
+    char *gameVariant;
+    char *gameMapName;
+    unsigned int sessionFlags;
+    unsigned int buddyIp;
+    unsigned short buddyPort;
+    unsigned int hostIp;
+    unsigned int hostPrivateIp;
+    unsigned short queryPort;
+    unsigned short hostPort;
+    GPEnum quietModeFlags;
+    int productId;
+    // New Status Info extended info Keys
+    DArray extendedInfoKeys;
 } GPIBuddyStatusInfo;
 
 // Old status 
 typedef struct
 {
-	int buddyIndex;
-	GPEnum status;
-	char * statusString;
-	char * locationString;
-	unsigned int ip;
-	unsigned short port;
-	GPEnum quietModeFlags;
+    int buddyIndex;
+    GPEnum status;
+    char * statusString;
+    char * locationString;
+    unsigned int ip;
+    unsigned short port;
+    GPEnum quietModeFlags;
 } GPIBuddyStatus;
 
 // Profile data.
 ////////////////
 typedef struct GPIProfile
 {
-	int profileId;
-	int userId;
-	GPIBuddyStatus * buddyStatus;
-	GPIBuddyStatusInfo *buddyStatusInfo;
-	GPIInfoCache * cache;
-	char * authSig;
-	int requestCount;
-	char * peerSig;
+    int profileId;
+    int userId;
+    GPIBuddyStatus * buddyStatus;
+    GPIBuddyStatusInfo *buddyStatusInfo;
+    GPIInfoCache * cache;
+    char * authSig;
+    int requestCount;
+    char * peerSig;
     gsi_bool blocked;
     int blockIndex;
     gsi_bool buddyOrBlockCache;
@@ -82,9 +82,9 @@ typedef struct GPIProfile
 //////////////////////
 typedef struct
 {
-	HashTable profileTable;
-	int num;
-	int numBuddies;
+    HashTable profileTable;
+    int num;
+    int numBuddies;
     int numBlocked;
 } GPIProfileList;
 
@@ -135,7 +135,7 @@ GPResult gpiProcessDeleteProfle
 GPResult gpiDeleteProfile(
     GPConnection * connection,
     GPCallback callback,
-	void * param
+    void * param
 );
 
 void

@@ -5,23 +5,23 @@
 float3x4 m_sunmask; // ortho-projection
 #endif
 
-// Texture2D	s_water;
+// Texture2D    s_water;
 Texture3D s_water;
 Texture3D s_waterFall;
 float4 RainDensity;
 float4 RainFallof;
-float4 WorldX; //	Float3
-float4 WorldZ; //	Float3
+float4 WorldX; //    Float3
+float4 WorldZ; //    Float3
 
 float3 GetNVNMap(Texture3D s_texture, float2 tc, float time)
 {
-    //	Unpack NVidia normal map
+    //    Unpack NVidia normal map
     float4 water = s_texture.SampleBias(smp_base, float3(tc, time), -3.) - 0.5;
 
-    //	Swizzle
+    //    Swizzle
     water.xyz = water.wyz;
 
-    //	Renormalize (*2) and scale (*3)
+    //    Renormalize (*2) and scale (*3)
     water.xyz *= 6;
     water.y = 0;
 
@@ -30,7 +30,7 @@ float3 GetNVNMap(Texture3D s_texture, float2 tc, float time)
 
 float3 GetWaterNMap(Texture3D s_texture, float2 tc, float time)
 {
-    //	Unpack normal map
+    //    Unpack normal map
     float4 water = s_texture.Sample(smp_base, float3(tc, time));
     water.xyz = (water.xzy - 0.5) * 2;
 
@@ -61,11 +61,11 @@ float4 main(float2 tc : TEXCOORD0, float2 tcJ : TEXCOORD1, float4 Color : COLOR,
 
     float s = shadow_rain(PS, WorldP.xz * 2);
 
-    //	Apply distance falloff
+    //    Apply distance falloff
     float fAtten = 1 - smoothstep(10, 30, length(_P.xyz));
     s *= fAtten * fAtten;
 
-    //	Apply rain density
+    //    Apply rain density
     s *= RainDensity.x;
 
     float fIsUp = -dot(Ldynamic_dir.xyz, _N.xyz);
@@ -102,7 +102,7 @@ float4 main(float2 tc : TEXCOORD0, float2 tcJ : TEXCOORD1, float4 Color : COLOR,
     water += waterFallX.yxz * (abs(fIsX) * ApplyNormalCoeff);
     water += waterFallZ.zxy * (abs(fIsZ) * ApplyNormalCoeff);
 
-    //	Translate NM to view space
+    //    Translate NM to view space
     water.xyz = mul(m_V, water.xyz);
 
     _N += 0.01 * water.xyz;

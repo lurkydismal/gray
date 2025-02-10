@@ -8,67 +8,67 @@
 struct IReaderBase_Test {};
 #pragma warning (disable:4701)
 
-IC	u32 IReaderBase::find_chunk	(u32 ID, BOOL* bCompressed)	
+IC    u32 IReaderBase::find_chunk    (u32 ID, BOOL* bCompressed)    
 {
 #ifdef FIND_CHUNK_BENCHMARK_ENABLE
-	find_chunk_auto_timer timer;
+    find_chunk_auto_timer timer;
 #endif // FIND_CHUNK_BENCHMARK_ENABLE
 
-	u32	dwSize, dwType;
+    u32    dwSize, dwType;
 
-	bool success = false;
+    bool success = false;
 
-	if ( m_last_pos != 0 )
-	{
-		seek(m_last_pos);
-		dwType = r_u32();
-		dwSize = r_u32();
+    if ( m_last_pos != 0 )
+    {
+        seek(m_last_pos);
+        dwType = r_u32();
+        dwSize = r_u32();
 
-		if ( (dwType & (~CFS_CompressMark)) == ID ) 
-		{
-			success = true;
-		}
-	}
+        if ( (dwType & (~CFS_CompressMark)) == ID ) 
+        {
+            success = true;
+        }
+    }
 
-	if ( !success )
-	{
-		rewind();
-		while ( !eof() ) 
-		{
-			dwType = r_u32();
-			dwSize = r_u32();
-			if ( (dwType & (~CFS_CompressMark)) == ID )
-			{
-				success = true;
-				break;
-			}
-			else 
-			{
-				advance(dwSize);
-			}
-		}
+    if ( !success )
+    {
+        rewind();
+        while ( !eof() ) 
+        {
+            dwType = r_u32();
+            dwSize = r_u32();
+            if ( (dwType & (~CFS_CompressMark)) == ID )
+            {
+                success = true;
+                break;
+            }
+            else 
+            {
+                advance(dwSize);
+            }
+        }
 
-		if ( !success )
-		{
-			m_last_pos = 0;
-			return 0;
-		}
-	}
+        if ( !success )
+        {
+            m_last_pos = 0;
+            return 0;
+        }
+    }
 
-	VERIFY ((u32)tell() + dwSize <= (u32)length());
-	if (bCompressed) *bCompressed = dwType & CFS_CompressMark;
+    VERIFY ((u32)tell() + dwSize <= (u32)length());
+    if (bCompressed) *bCompressed = dwType & CFS_CompressMark;
 
-	const int dwPos = tell();
-	if ( dwPos + dwSize < (u32)length() )
-	{
-		m_last_pos = dwPos + dwSize;
-	}
-	else
-	{
-		m_last_pos = 0;
-	}
+    const int dwPos = tell();
+    if ( dwPos + dwSize < (u32)length() )
+    {
+        m_last_pos = dwPos + dwSize;
+    }
+    else
+    {
+        m_last_pos = 0;
+    }
 
-	return dwSize;
+    return dwSize;
 }
 
 #pragma warning (default:4701)

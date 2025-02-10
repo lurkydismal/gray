@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: steering_behaviour_separation.h
-//	Created 	: 07.11.2007
-//  Modified 	: 07.11.2007
-//	Author		: Dmitriy Iassenev
-//	Description : steering behaviour separation class
+//    Module         : steering_behaviour_separation.h
+//    Created     : 07.11.2007
+//  Modified     : 07.11.2007
+//    Author        : Dmitriy Iassenev
+//    Description : steering behaviour separation class
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef STEERING_BEHAVIOUR_SEPARATION_H_INCLUDED
@@ -19,13 +19,13 @@ namespace steering_behaviour {
 class separation final : public base
 {
 public:
-	separation(const separation& other) = delete;
-	separation& operator=(const separation& other) = delete;
-						separation	(CAI_Rat const *object);
-	virtual	Fvector		direction	();
+    separation(const separation& other) = delete;
+    separation& operator=(const separation& other) = delete;
+                        separation    (CAI_Rat const *object);
+    virtual    Fvector        direction    ();
 
 private:
-	typedef base		inherited;
+    typedef base        inherited;
 };
 
 } // namespace steering_behaviour

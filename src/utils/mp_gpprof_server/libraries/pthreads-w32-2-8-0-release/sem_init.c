@@ -4,10 +4,10 @@
  * Module: sem_init.c
  *
  * Purpose:
- *	Semaphores aren't actually part of PThreads.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of PThreads.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1-2001
+ *        POSIX 1003.1-2001
  *
  * -------------------------------------------------------------
  *
@@ -102,58 +102,58 @@ sem_init (sem_t * sem, int pshared, unsigned int value)
       s = (sem_t) calloc (1, sizeof (*s));
 
       if (NULL == s)
-	{
-	  result = ENOMEM;
-	}
+    {
+      result = ENOMEM;
+    }
       else
-	{
+    {
 
-	  s->value = value;
-	  if (pthread_mutex_init(&s->lock, NULL) == 0)
-	    {
+      s->value = value;
+      if (pthread_mutex_init(&s->lock, NULL) == 0)
+        {
 
 #ifdef NEED_SEM
 
-	  s->sem = CreateEvent (NULL,
-				PTW32_FALSE,	/* auto (not manual) reset */
-				PTW32_FALSE,	/* initial state is unset */
-				NULL);
+      s->sem = CreateEvent (NULL,
+                PTW32_FALSE,    /* auto (not manual) reset */
+                PTW32_FALSE,    /* initial state is unset */
+                NULL);
 
-	  if (0 == s->sem)
-	    {
-	      free (s);
-	      (void) pthread_mutex_destroy(&s->lock);
-	      result = ENOSPC;
-	    }
-	  else
-	    {
-	      s->leftToUnblock = 0;
-	    }
+      if (0 == s->sem)
+        {
+          free (s);
+          (void) pthread_mutex_destroy(&s->lock);
+          result = ENOSPC;
+        }
+      else
+        {
+          s->leftToUnblock = 0;
+        }
 
 #else /* NEED_SEM */
 
-	      if ((s->sem = CreateSemaphore (NULL,	/* Always NULL */
-					     (long) 0,	/* Force threads to wait */
-					     (long) SEM_VALUE_MAX,	/* Maximum value */
-					     NULL)) == 0)	/* Name */
-		{
-		  (void) pthread_mutex_destroy(&s->lock);
-		  result = ENOSPC;
-		}
+          if ((s->sem = CreateSemaphore (NULL,    /* Always NULL */
+                         (long) 0,    /* Force threads to wait */
+                         (long) SEM_VALUE_MAX,    /* Maximum value */
+                         NULL)) == 0)    /* Name */
+        {
+          (void) pthread_mutex_destroy(&s->lock);
+          result = ENOSPC;
+        }
 
 #endif /* NEED_SEM */
 
-	    }
-	  else
-	    {
-	      result = ENOSPC;
-	    }
+        }
+      else
+        {
+          result = ENOSPC;
+        }
 
-	  if (result != 0)
-	    {
-	      free(s);
-	    }
-	}
+      if (result != 0)
+        {
+          free(s);
+        }
+    }
     }
 
   if (result != 0)
@@ -166,4 +166,4 @@ sem_init (sem_t * sem, int pshared, unsigned int value)
 
   return 0;
 
-}				/* sem_init */
+}                /* sem_init */

@@ -33,46 +33,46 @@
 
 namespace luabind { namespace detail
 {
-	struct construct_rep
-	{
-		struct overload_t: public overload_rep_base
-		{
-			overload_t()
-		        : construct_fun(nullptr),
-		          wrapped_construct_fun(nullptr) 
-			{
-			}
+    struct construct_rep
+    {
+        struct overload_t: public overload_rep_base
+        {
+            overload_t()
+                : construct_fun(nullptr),
+                  wrapped_construct_fun(nullptr) 
+            {
+            }
 
-			typedef void*(*construct_ptr)(lua_State*, weak_ref const&);
-			typedef void*(*wrapped_construct_ptr)(lua_State*, weak_ref const&);
-			typedef void(*get_signature_ptr)(lua_State*, string_class&);
+            typedef void*(*construct_ptr)(lua_State*, weak_ref const&);
+            typedef void*(*wrapped_construct_ptr)(lua_State*, weak_ref const&);
+            typedef void(*get_signature_ptr)(lua_State*, string_class&);
 
-			void set_constructor(construct_ptr f) { construct_fun = f; }
-			void set_wrapped_constructor(wrapped_construct_ptr f) { wrapped_construct_fun = f; }
+            void set_constructor(construct_ptr f) { construct_fun = f; }
+            void set_wrapped_constructor(wrapped_construct_ptr f) { wrapped_construct_fun = f; }
 
-			void* construct(lua_State* L, weak_ref const& backref) const
-			{ 
-				return construct_fun(L, backref); 
-			}
+            void* construct(lua_State* L, weak_ref const& backref) const
+            { 
+                return construct_fun(L, backref); 
+            }
 
-			void* construct_wrapped(lua_State* L, weak_ref const& ref) const { return wrapped_construct_fun(L, ref); } 
-			bool has_wrapped_construct() const { return wrapped_construct_fun != nullptr; }
+            void* construct_wrapped(lua_State* L, weak_ref const& ref) const { return wrapped_construct_fun(L, ref); } 
+            bool has_wrapped_construct() const { return wrapped_construct_fun != nullptr; }
 
-			void set_arity(const int arity) { m_arity = arity; }
+            void set_arity(const int arity) { m_arity = arity; }
 
-		private:
+        private:
 
-			construct_ptr construct_fun;
-			wrapped_construct_ptr wrapped_construct_fun;
+            construct_ptr construct_fun;
+            wrapped_construct_ptr wrapped_construct_fun;
 
-		};
+        };
 
-		void swap(construct_rep& x)
-		{
-			std::swap(x.overloads, overloads);
-		}
+        void swap(construct_rep& x)
+        {
+            std::swap(x.overloads, overloads);
+        }
 
-		vector_class<overload_t> overloads;
-	};
+        vector_class<overload_t> overloads;
+    };
 
 }}

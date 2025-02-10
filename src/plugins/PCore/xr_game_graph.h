@@ -13,20 +13,20 @@ TYPEDEF_STD_VECTOR_PTR(xr_level_gct)
 
 class xr_game_graph: public xr_level_graph {
 public:
-			xr_game_graph();
-	virtual		~xr_game_graph();
+            xr_game_graph();
+    virtual        ~xr_game_graph();
 
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
-	bool		load(const char* path, const char* name);
-	bool		save(const char* path, const char* name) const;
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
+    bool        load(const char* path, const char* name);
+    bool        save(const char* path, const char* name) const;
 
-	xr_level_gct_vec&	cross_tables();
-	const xr_level_gct_vec&	cross_tables() const;
+    xr_level_gct_vec&    cross_tables();
+    const xr_level_gct_vec&    cross_tables() const;
 
 private:
-	// v9-v10 addition
-	xr_level_gct_vec	m_cross_tables;
+    // v9-v10 addition
+    xr_level_gct_vec    m_cross_tables;
 };
 
 inline xr_game_graph::xr_game_graph() {}

@@ -31,17 +31,17 @@
     <texture id="ui_statTwo2_b" x="0" y="0" width="839" height="0" />
     <texture id="ui_statTwo2_e" x="0" y="267" width="839" height="58" />
 
- 	<texture id="ui_statSingle_b" x="0" y="350" width="447" height="95" />
-	<texture id="ui_statSingle_e" x="0" y="445" width="447" height="58" />
-	<texture id="ui_statSingle_back" x="447" y="350" width="447" height="163" />
+     <texture id="ui_statSingle_b" x="0" y="350" width="447" height="95" />
+    <texture id="ui_statSingle_e" x="0" y="445" width="447" height="58" />
+    <texture id="ui_statSingle_back" x="447" y="350" width="447" height="163" />
 
-	<texture id="ui_statGreen_b" x="0" y="0" width="424" height="98" />
-	<texture id="ui_statGreen_e" x="0" y="282" width="424" height="31" />
-	<texture id="ui_statGreen_back" x="0" y="99" width="424" height="174" />
+    <texture id="ui_statGreen_b" x="0" y="0" width="424" height="98" />
+    <texture id="ui_statGreen_e" x="0" y="282" width="424" height="31" />
+    <texture id="ui_statGreen_back" x="0" y="99" width="424" height="174" />
 
-	<texture id="ui_statBlue_b" x="424" y="0" width="424" height="98" />
-	<texture id="ui_statBlue_e" x="424" y="282" width="424" height="31" />
-	<texture id="ui_statBlue_back" x="424" y="99" width="424" height="174" />
+    <texture id="ui_statBlue_b" x="424" y="0" width="424" height="98" />
+    <texture id="ui_statBlue_e" x="424" y="282" width="424" height="31" />
+    <texture id="ui_statBlue_back" x="424" y="99" width="424" height="174" />
 
     <texture id="ui_statSpectators_b" x="0" y="350" width="446" height="95" />
     <texture id="ui_statSpectators_e" x="0" y="460" width="446" height="31" />

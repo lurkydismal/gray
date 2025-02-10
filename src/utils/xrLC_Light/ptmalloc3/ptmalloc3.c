@@ -34,7 +34,7 @@ PERFORMANCE OF THIS SOFTWARE.
  *       better mstats
  */
 #if defined(WIN32) || defined(_XBOX)
-#	define LACKS_SYS_MMAN_H
+#    define LACKS_SYS_MMAN_H
 #endif // #if defined(WIN32) || defined(_XBOX)
 
 #ifndef __STD_C
@@ -86,7 +86,7 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /* Minimum size for a newly created arena.  */
 #ifndef ARENA_SIZE_MIN
-# define ARENA_SIZE_MIN	   (128*1024)
+# define ARENA_SIZE_MIN       (128*1024)
 #endif
 #define HAVE_MEMCPY        1
 
@@ -227,10 +227,10 @@ struct malloc_arena {
   /* Space for mstate.  The size is just the minimum such that
      create_mspace_with_base can be successfully called.  */
   char buf_[pad_request(sizeof(struct malloc_state)) + TOP_FOOT_SIZE +
-	    CHUNK_ALIGN_MASK + 1];
+        CHUNK_ALIGN_MASK + 1];
 };
 #define MSPACE_OFFSET (((offsetof(struct malloc_arena, buf_) \
-			 + CHUNK_ALIGN_MASK) & ~CHUNK_ALIGN_MASK))
+             + CHUNK_ALIGN_MASK) & ~CHUNK_ALIGN_MASK))
 #define arena_to_mspace(a) ((void *)chunk2mem((char*)(a) + MSPACE_OFFSET))
 
 /* check for chunk from non-main arena */
@@ -259,7 +259,7 @@ static struct malloc_arena main_arena;
   ((char*)(ptr) + chunksize(ptr) - sizeof(struct malloc_arena*))   \
   : &main_arena)
 
-#define set_non_main_arena(mem, ar_ptr) do {                   		      \
+#define set_non_main_arena(mem, ar_ptr) do {                                 \
   mchunkptr P = mem2chunk(mem);                                               \
   size_t SZ = chunksize(P) - (is_mmapped(P) ? sizeof(struct malloc_arena*)    \
                               : (FOOTER_OVERHEAD - SIZE_T_SIZE));             \
@@ -365,8 +365,8 @@ _int_new_arena( size_t size)
     return 0;
 
   m = create_mspace_with_base((char*)a + MSPACE_OFFSET,
-			      mmap_sz - MSPACE_OFFSET,
-			      0,0,0);
+                  mmap_sz - MSPACE_OFFSET,
+                  0,0,0);
 
   if (!m) { 
     CALL_MUNMAP( a, (int)mmap_sz);
@@ -401,7 +401,7 @@ _int_new_arena( size_t size)
 static void* malloc_hook_ini ( size_t sz, const void *caller);
 static void* realloc_hook_ini ( void* ptr, size_t sz, const void* caller);
 static void* memalign_hook_ini ( size_t alignment, size_t sz,
-				const void* caller);
+                const void* caller);
 #else
 # define free_hook_ini     free_starter
 # define malloc_hook_ini   malloc_starter
@@ -513,7 +513,7 @@ free_starter( void* mem, const void *caller)
 static void * (*save_malloc_hook) ( size_t __size, const void *);
 # if !defined _LIBC || !defined USE_TLS || (defined SHARED && !USE___THREAD)
 static void * (*save_memalign_hook) ( size_t __align, size_t __size,
-				     const void *);
+                     const void *);
 # endif
 static void   (*save_free_hook) (  void * __ptr, const void *);
 static void*  save_arena;
@@ -559,7 +559,7 @@ free_atfork( void* mem, const void *caller)
 
   if (is_mmapped(p)) {                      /* release mmapped memory. */
     ar_ptr = arena_for_mmap_chunk(p);
-	munmap_chunk(arena_to_mspace(ar_ptr), p);
+    munmap_chunk(arena_to_mspace(ar_ptr), p);
     return;
   }
 
@@ -698,8 +698,8 @@ ptmalloc_init( )
   mutex_init(&main_arena.mutex);
   main_arena.next = &main_arena;
   mspace = create_mspace_with_base((char*)&main_arena + MSPACE_OFFSET,
-				   sizeof(main_arena) - MSPACE_OFFSET,
-				   0,0,0);
+                   sizeof(main_arena) - MSPACE_OFFSET,
+                   0,0,0);
   assert(mspace == arena_to_mspace(&main_arena));
 
   mutex_init(&list_lock);
@@ -765,7 +765,7 @@ public_mALLOc(size_t bytes)
     set_non_main_arena(victim, ar_ptr);
   (void)mutex_unlock(&ar_ptr->mutex);
   assert(!victim || is_mmapped(mem2chunk(victim)) ||
-	 ar_ptr == arena_for_chunk(mem2chunk(victim)));
+     ar_ptr == arena_for_chunk(mem2chunk(victim)));
   return victim;
 }
 #ifdef libc_hidden_def
@@ -864,7 +864,7 @@ public_rEALLOc(void* oldmem, size_t bytes)
   (void)mutex_unlock(&ar_ptr->mutex);
 
   assert(!newp || is_mmapped(mem2chunk(newp)) ||
-	 ar_ptr == arena_for_chunk(mem2chunk(newp)));
+     ar_ptr == arena_for_chunk(mem2chunk(newp)));
   return newp;
 }
 #ifdef libc_hidden_def
@@ -889,7 +889,7 @@ public_mEMALIGn( size_t alignment, size_t bytes)
     alignment = MIN_CHUNK_SIZE;
 
   arena_get(ar_ptr,
-	    bytes + FOOTER_OVERHEAD + alignment + MIN_CHUNK_SIZE);
+        bytes + FOOTER_OVERHEAD + alignment + MIN_CHUNK_SIZE);
   if(!ar_ptr)
     return 0;
 
@@ -902,7 +902,7 @@ public_mEMALIGn( size_t alignment, size_t bytes)
   (void)mutex_unlock(&ar_ptr->mutex);
 
   assert(!p || is_mmapped(mem2chunk(p)) ||
-	 ar_ptr == arena_for_chunk(mem2chunk(p)));
+     ar_ptr == arena_for_chunk(mem2chunk(p)));
   return p;
 }
 #ifdef libc_hidden_def
@@ -997,7 +997,7 @@ public_cALLOc( size_t n_elements, size_t elem_size)
   (void)mutex_unlock(&ar_ptr->mutex);
   
   assert(!mem || is_mmapped(mem2chunk(mem)) ||
-	 ar_ptr == arena_for_chunk(mem2chunk(mem)));
+     ar_ptr == arena_for_chunk(mem2chunk(mem)));
 
   return mem;
 }
@@ -1048,11 +1048,11 @@ public_iCOMALLOc( size_t n, size_t sizes[], void* chunks[])
       m_sizes[i] = sizes[i] + FOOTER_OVERHEAD;
     if (!chunks) {
       chunks = mspace_malloc(arena_to_mspace(ar_ptr),
-			     n*sizeof(void*)+FOOTER_OVERHEAD);
+                 n*sizeof(void*)+FOOTER_OVERHEAD);
       if (!chunks) {
-	mspace_free(arena_to_mspace(ar_ptr), m_sizes);
-	(void)mutex_unlock(&ar_ptr->mutex);
-	return 0;
+    mspace_free(arena_to_mspace(ar_ptr), m_sizes);
+    (void)mutex_unlock(&ar_ptr->mutex);
+    return 0;
       }
       set_non_main_arena(chunks, ar_ptr);
     }
@@ -1065,7 +1065,7 @@ public_iCOMALLOc( size_t n, size_t sizes[], void* chunks[])
     mspace_free(arena_to_mspace(ar_ptr), m_sizes);
     if (m)
       for (i=0; i<n; ++i)
-	set_non_main_arena(m[i], ar_ptr);
+    set_non_main_arena(m[i], ar_ptr);
   }
   (void)mutex_unlock(&ar_ptr->mutex);
   return m;
@@ -1127,7 +1127,7 @@ public_mALLINFo(  )
     ptmalloc_init ();
 
   for (i=0, ar_ptr = &main_arena;; ++i) {
-	result.uordblks += mspace_mallinfo(arena_to_mspace(ar_ptr)).uordblks;
+    result.uordblks += mspace_mallinfo(arena_to_mspace(ar_ptr)).uordblks;
     ar_ptr = ar_ptr->next;
     if (ar_ptr == &main_arena)
       break;
@@ -1162,9 +1162,9 @@ public_mSTATs(  )
       struct malloc_segment* mseg = &msp->seg;
       while (mseg) {
     char* temp = mseg->base + mseg->size;
-	fprintf(stderr, " seg %08lx-%08lx\n", *(unsigned long*)&mseg->base,
-		*(unsigned long*)(&temp));
-	mseg = mseg->next;
+    fprintf(stderr, " seg %08lx-%08lx\n", *(unsigned long*)&mseg->base,
+        *(unsigned long*)(&temp));
+    mseg = mseg->next;
       }
     }
     ar_ptr = ar_ptr->next;
@@ -1182,42 +1182,42 @@ public_mSTATs(  )
 #endif
 }
 
-struct virtual_alloc_arena	g_ptmalloc3_arena;
+struct virtual_alloc_arena    g_ptmalloc3_arena;
 
-void initialize_virtual_alloc_arena			(
-		struct virtual_alloc_arena* result,
-		void* buffer,
-		size_t buffer_size,
-		size_t granularity,
-		char const* arena_id,
-		out_of_memory_handler_type handler,
-		out_of_memory_handler_parameter_type parameter
-	)
+void initialize_virtual_alloc_arena            (
+        struct virtual_alloc_arena* result,
+        void* buffer,
+        size_t buffer_size,
+        size_t granularity,
+        char const* arena_id,
+        out_of_memory_handler_type handler,
+        out_of_memory_handler_parameter_type parameter
+    )
 {
-	struct virtual_alloc_region* region		= ( struct virtual_alloc_region* )buffer;
-	assert									( buffer_size % granularity == 0 );
+    struct virtual_alloc_region* region        = ( struct virtual_alloc_region* )buffer;
+    assert                                    ( buffer_size % granularity == 0 );
 
-	region->next_free_region				= 0;
-	region->previous_free_region			= 0;
-	region->size							= buffer_size;
+    region->next_free_region                = 0;
+    region->previous_free_region            = 0;
+    region->size                            = buffer_size;
 
-	result->arena_id						= arena_id;
-	result->out_of_memory_handler			= handler;
-	result->out_of_memory_handler_parameter	= parameter;
-	result->start_pointer					= ( char* )buffer;
-	result->first_free_region				= region;
-	result->total_size						= buffer_size;
-	result->free_size						= buffer_size;
-	result->region_count					= 1;
+    result->arena_id                        = arena_id;
+    result->out_of_memory_handler            = handler;
+    result->out_of_memory_handler_parameter    = parameter;
+    result->start_pointer                    = ( char* )buffer;
+    result->first_free_region                = region;
+    result->total_size                        = buffer_size;
+    result->free_size                        = buffer_size;
+    result->region_count                    = 1;
 }
 
-void finalize_virtual_alloc_arena			( struct virtual_alloc_arena* arena)
+void finalize_virtual_alloc_arena            ( struct virtual_alloc_arena* arena)
 {
-	arena->start_pointer					= 0;
-	arena->first_free_region				= 0;
-	arena->total_size						= 0;
-	arena->free_size						= 0;
-	arena->region_count						= 0;
+    arena->start_pointer                    = 0;
+    arena->first_free_region                = 0;
+    arena->total_size                        = 0;
+    arena->free_size                        = 0;
+    arena->region_count                        = 0;
 }
 /*
  * Local variables:

@@ -243,9 +243,9 @@
     #define SMAA_BRANCH [branch]
 #endif
 #if defined(SMAA_HLSL_4) || defined(SMAA_HLSL_4_1)
-	//LV: Don't touch this ;)
-	#define LinearSampler smp_rtlinear
-	#define PointSampler smp_nofilter
+    //LV: Don't touch this ;)
+    #define LinearSampler smp_rtlinear
+    #define PointSampler smp_nofilter
 
     #define SMAATexture2D(tex) Texture2D tex
     #define SMAATexturePass2D(tex) tex

@@ -8,7 +8,7 @@ FCGI - Fast CGI module
 
     $count = 0;
     while(FCGI::accept() >= 0) {
-	print("Content-type: text/html\r\n\r\n", ++$count);
+    print("Content-type: text/html\r\n\r\n", ++$count);
     }
 
 =head1 DESCRIPTION

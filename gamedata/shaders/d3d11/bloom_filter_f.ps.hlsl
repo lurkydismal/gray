@@ -1,7 +1,7 @@
 #include "common.hlsli"
 
 /*
-struct	v2p
+struct    v2p
 {
          float2         tc0:         TEXCOORD0;        // base
          float2         tc1:         TEXCOORD1;        // base

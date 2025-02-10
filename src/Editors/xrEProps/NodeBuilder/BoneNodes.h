@@ -2,44 +2,44 @@
 #include "Nodes.h"
 
 class CNodeBone:
-	public INodeUnknown
+    public INodeUnknown
 {
-	CBone* BonePtr = nullptr;
+    CBone* BonePtr = nullptr;
 
-	xr_string BoneName;
-	float Mass = 0;
+    xr_string BoneName;
+    float Mass = 0;
 
-	Fvector3 MassPos = {};
-	Fvector3 Pos = {};
-	Fvector3 Rot = {};
+    Fvector3 MassPos = {};
+    Fvector3 Pos = {};
+    Fvector3 Rot = {};
 
 public:
-	CNodeBone(const char* Name);
-	void Draw() override;
+    CNodeBone(const char* Name);
+    void Draw() override;
 
-	void SetBone(CBone* Ptr);
+    void SetBone(CBone* Ptr);
 };
 
 class CNodeShape :
-	public INodeUnknown
+    public INodeUnknown
 {
-	bool Pickable = true;
-	bool Physics = true;
-	bool RemoveAfterBreak = false;
-	bool FogCollider = true;
-	int Type = SBoneShape::stNone;
+    bool Pickable = true;
+    bool Physics = true;
+    bool RemoveAfterBreak = false;
+    bool FogCollider = true;
+    int Type = SBoneShape::stNone;
 
-	SBoneShape* ShapePtr = nullptr;
-
-public:
-	CNodeShape();
-	void Draw() override;
-
-	void SetShape(SBoneShape* Ptr);
+    SBoneShape* ShapePtr = nullptr;
 
 public:
-	inline bool operator==(const SBoneShape& Left)
-	{
-		return *ShapePtr == Left;
-	}
+    CNodeShape();
+    void Draw() override;
+
+    void SetShape(SBoneShape* Ptr);
+
+public:
+    inline bool operator==(const SBoneShape& Left)
+    {
+        return *ShapePtr == Left;
+    }
 };

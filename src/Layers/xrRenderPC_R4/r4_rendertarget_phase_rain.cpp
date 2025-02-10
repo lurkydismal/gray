@@ -2,6 +2,6 @@
 
 void CRenderTarget::phase_rain()
 {
-	u_setrt(rt_Color, nullptr, nullptr, RDepth);
-	RImplementation.rmNormal();
+    u_setrt(rt_Color, nullptr, nullptr, RDepth);
+    RImplementation.rmNormal();
 }

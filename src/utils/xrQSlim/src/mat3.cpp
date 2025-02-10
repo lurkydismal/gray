@@ -41,8 +41,8 @@ Mat3 Mat3::outer_product(const Vec3& u, const Vec3& v)
     Mat3 A;
 
     for(int i=0; i<3; i++)
-	for(int j=0; j<3; j++)
-	    A(i, j) = u[i]*v[j];
+    for(int j=0; j<3; j++)
+        A(i, j) = u[i]*v[j];
 
     return A;
 }
@@ -52,8 +52,8 @@ Mat3 operator*(const Mat3& n, const Mat3& m)
     Mat3 A;
 
     for(int i=0;i<3;i++)
-	for(int j=0;j<3;j++)
-	    A(i,j) = n[i]*m.col(j);
+    for(int j=0;j<3;j++)
+        A(i,j) = n[i]*m.col(j);
 
     return A;
 }
@@ -61,8 +61,8 @@ Mat3 operator*(const Mat3& n, const Mat3& m)
 Mat3 adjoint(const Mat3& m)
 {
     return Mat3(m[1]^m[2],
-		m[2]^m[0],
-		m[0]^m[1]);
+        m[2]^m[0],
+        m[0]^m[1]);
 }
 
 double invert(Mat3& inv, const Mat3& m)
@@ -71,7 +71,7 @@ double invert(Mat3& inv, const Mat3& m)
     double d = A[0] * m[0];
 
     if( d==0.0 )
-	return 0.0;
+    return 0.0;
 
     inv = transpose(A) / d;
     return d;

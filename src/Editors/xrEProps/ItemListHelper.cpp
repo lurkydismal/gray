@@ -4,25 +4,25 @@
 #include "ItemListHelper.h"
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
-CListHelper 	LHelper_impl;
-IListHelper& 	LHelper		(){return LHelper_impl;}
+CListHelper     LHelper_impl;
+IListHelper&     LHelper        (){return LHelper_impl;}
 //---------------------------------------------------------------------------
 
-ListItem* CListHelper::FindItem		(ListItemsVec& items,	LPCSTR key)
+ListItem* CListHelper::FindItem        (ListItemsVec& items,    LPCSTR key)
 {
     for (ListItemsIt it=items.begin(); it!=items.end(); it++)
         if ((*it)->key==key) return *it;
     return 0;
 }
     
-ListItem* CListHelper::CreateItem	(ListItemsVec& items, LPCSTR key, int type, u32 item_flags, void* object)
+ListItem* CListHelper::CreateItem    (ListItemsVec& items, LPCSTR key, int type, u32 item_flags, void* object)
 {
-    ListItem* item	= new ListItem	(type);
-    item->SetName	(key);
-    item->m_Object	= object;
+    ListItem* item    = new ListItem    (type);
+    item->SetName    (key);
+    item->m_Object    = object;
     item->m_Flags.set(item_flags,TRUE);
-    items.push_back	(item);
-    return			item;
+    items.push_back    (item);
+    return            item;
 }
 
 bool CListHelper::NameAfterEdit(ListItem* sender, LPCSTR value, shared_str& N)
@@ -45,7 +45,7 @@ bool CListHelper::NameAfterEdit(ListItem* sender, LPCSTR value, shared_str& N)
             }
         }
     string2048 tmp;
-    _ReplaceItem(value, _GetItemCount(value, '\\') - 1, N.c_str(), tmp, '\\');	N = tmp;
+    _ReplaceItem(value, _GetItemCount(value, '\\') - 1, N.c_str(), tmp, '\\');    N = tmp;
     return true;
 }
 //---------------------------------------------------------------------------

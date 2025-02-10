@@ -9,12 +9,12 @@
 #include "../xrScripts/script_export_space.h"
 
 class CScope : 
-	public CInventoryItemObject 
+    public CInventoryItemObject 
 {
 private:
-	typedef CInventoryItemObject inherited;
+    typedef CInventoryItemObject inherited;
 public:
-			CScope ();
-	virtual ~CScope();
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+            CScope ();
+    virtual ~CScope();
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

@@ -4,25 +4,25 @@
 
 struct MacroNodeTypes
 {
-	xr_string RegName;
-	size_t CommandID;
-	MacroType Type;
+    xr_string RegName;
+    size_t CommandID;
+    MacroType Type;
 };
 
 class CUIMacroView:
-	public CNodeViewport
+    public CNodeViewport
 {
-	bool IsOpen = false;
-	xr_vector<MacroNodeTypes> CommandsList;
+    bool IsOpen = false;
+    xr_vector<MacroNodeTypes> CommandsList;
 
 public:
-	CUIMacroView();
-	~CUIMacroView();
+    CUIMacroView();
+    ~CUIMacroView();
 
-	virtual void Draw() override;
-	void Show(bool State);
-	void Exec();
+    virtual void Draw() override;
+    void Show(bool State);
+    void Exec();
 
 private:
-	void ExecMacro(CNodeMacro* Node);
+    void ExecMacro(CNodeMacro* Node);
 };

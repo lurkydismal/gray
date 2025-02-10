@@ -22,10 +22,10 @@ LD          = ppu-lv2-g++
 .SUFFIXES: .c
 
 $(TARGET).elf: $(OBJS)
-	$(LD) -o $@ $(OBJS) $(LIBS) $(LDFLAGS)
+    $(LD) -o $@ $(OBJS) $(LIBS) $(LDFLAGS)
 
 .c.o:
-	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $*.o > /dev/null
+    $(CC) $(CFLAGS) $(INCDIR) -c $< -o $*.o > /dev/null
 
 clean:
-	$(RM) $(OBJS) *.o $(TARGET).elf
+    $(RM) $(OBJS) *.o $(TARGET).elf

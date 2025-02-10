@@ -5,16 +5,16 @@
   Donated by J. Walter <Walter@GeNeSys-e.de> and improved by Niall Douglas
   For additional information about this code, and malloc on Win32, see 
      http://www.genesys-e.de/jwalter/ or
-	 http://www.nedprod.com/programs/Win32/ptmalloc2/index.html
+     http://www.nedprod.com/programs/Win32/ptmalloc2/index.html
 */
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #define _WIN32_WINNT 0x600
 #ifndef _XBOX
-#	include <windows.h>
+#    include <windows.h>
 #else // #ifndef _XBOX
-#	include <xtl.h>
+#    include <xtl.h>
 #endif // #ifndef _XBOX
 
 #include <assert.h>
@@ -75,16 +75,16 @@
 #if defined(_M_IX86)
 static INLINE LONG interlockedexchange(LONG volatile *data, LONG value)
 {
-	LONG myret;
-	__asm
-	{
-		mov ecx, [data]
-		mov eax, [value]
-		pause
-		xchg eax, [ecx]
-		mov [myret], eax
-	}
-	return myret;
+    LONG myret;
+    __asm
+    {
+        mov ecx, [data]
+        mov eax, [value]
+        pause
+        xchg eax, [ecx]
+        mov [myret], eax
+    }
+    return myret;
 }
 #else
 #if defined(_MSC_VER) && _MSC_VER>=1310
@@ -99,10 +99,10 @@ static INLINE LONG interlockedexchange(LONG volatile *data, LONG value)
 /* Wait for spin lock */
 static INLINE LONG slwait (volatile LONG *sl) {
     while (interlockedexchange (sl, 1) != 0) 
-#ifndef FX_SMPBUILD		// Faster not to sleep on multiprocessor machines
-	    Sleep (0)
+#ifndef FX_SMPBUILD        // Faster not to sleep on multiprocessor machines
+        Sleep (0)
 #endif
-		;
+        ;
     return 0;
 }
 
@@ -131,7 +131,7 @@ static INTERNAL_INTPTR_T getpagesize (void) {
 #elif defined(_XBOX) // #ifdef WIN32
         g_pagesize = 4096;
 #else // #elif defined(_XBOX) 
-#	error please define your platform
+#    error please define your platform
 #endif // #elif defined(_XBOX) 
     }
     return g_pagesize;
@@ -146,7 +146,7 @@ static INTERNAL_INTPTR_T getregionsize (void) {
 #elif defined(_XBOX) // #ifdef WIN32
         g_regionsize = 64*1024;
 #else // #elif defined(_XBOX) 
-#	error please define your platform
+#    error please define your platform
 #endif // #elif defined(_XBOX) 
     }
     return g_regionsize;
@@ -184,8 +184,8 @@ static int region_list_remove (region_list_entry **last) {
     return TRUE;
 }
 
-#define CEIL(size,to)	(((size)+(to)-1)&~((to)-1))
-#define FLOOR(size,to)	((size)&~((to)-1))
+#define CEIL(size,to)    (((size)+(to)-1)&~((to)-1))
+#define FLOOR(size,to)    ((size)&~((to)-1))
 
 #define SBRK_SCALE  0
 /* #define SBRK_SCALE  1 */
@@ -247,7 +247,7 @@ static void *sbrk (INTERNAL_INTPTR_T size) {
                     assert (0 < remaining_commit_size && remaining_commit_size % g_pagesize == 0); {
                         /* Commit this */
                         void *base_committed = VirtualAlloc (g_last->top_committed, remaining_commit_size,
-							                                 MEM_COMMIT, PAGE_READWRITE);
+                                                             MEM_COMMIT, PAGE_READWRITE);
                         /* Check returned pointer for consistency */
                         if (base_committed != g_last->top_committed)
                             goto sbrk_exit;
@@ -309,7 +309,7 @@ static void *sbrk (INTERNAL_INTPTR_T size) {
                         assert (0 < reserve_size && reserve_size % g_regionsize == 0);
                         /* Try to reserve this */
                         base_reserved = VirtualAlloc (memory_info.BaseAddress, reserve_size, 
-					                                  MEM_RESERVE, PAGE_NOACCESS);
+                                                      MEM_RESERVE, PAGE_NOACCESS);
                         if (! base_reserved) {
                             int rc = GetLastError ();
                             if (rc != ERROR_INVALID_ADDRESS) 
@@ -355,7 +355,7 @@ static void *sbrk (INTERNAL_INTPTR_T size) {
             assert (0 < commit_size && commit_size % g_pagesize == 0); {
                 /* Commit this */
                 void *base_committed = VirtualAlloc (g_last->top_committed, commit_size, 
-				    			                     MEM_COMMIT, PAGE_READWRITE);
+                                                     MEM_COMMIT, PAGE_READWRITE);
                 /* Check returned pointer for consistency */
                 if (base_committed != g_last->top_committed)
                     goto sbrk_exit;
@@ -456,7 +456,7 @@ sbrk_exit:
 #define USE_PTMALLOC3_ARENA
 
 #ifdef USE_PTMALLOC3_ARENA
-#	include "virtual_alloc.h"
+#    include "virtual_alloc.h"
 #endif // #ifdef USE_PTMALLOC3_ARENA
 
 #pragma warning(disable:4100)
@@ -468,9 +468,9 @@ void *mmap ( void *ptr, INTERNAL_INTPTR_T size, INTERNAL_INTPTR_T prot, INTERNAL
 #ifndef USE_PTMALLOC3_ARENA
     static INTERNAL_INTPTR_T g_pagesize;
     static INTERNAL_INTPTR_T g_regionsize;
-	DWORD alloc=MEM_RESERVE|MEM_TOP_DOWN, ntprot=0;
-	INTERNAL_INTPTR_T rounding=0;
-	char *p;
+    DWORD alloc=MEM_RESERVE|MEM_TOP_DOWN, ntprot=0;
+    INTERNAL_INTPTR_T rounding=0;
+    char *p;
 #ifdef TRACE
     printf ("mmap %p %d %d %d\n", ptr, size, prot, type);
 #endif
@@ -485,79 +485,79 @@ void *mmap ( void *ptr, INTERNAL_INTPTR_T size, INTERNAL_INTPTR_T prot, INTERNAL
     assert ((unsigned) ptr % g_pagesize == 0);
     assert (size % g_pagesize == 0);
     /* Allocate this */
-	if(!(type & MAP_NORESERVE)) alloc|=MEM_COMMIT;
-	if((prot & (PROT_READ|PROT_WRITE))==(PROT_READ|PROT_WRITE)) ntprot|=PAGE_READWRITE;
-	else if(prot & PROT_READ) ntprot|=PAGE_READONLY;
-	else if(prot & PROT_WRITE) ntprot|=PAGE_READWRITE;
-	else
-	{
-		ntprot|=PAGE_NOACCESS;
-		if(size==HEAP_MAX_SIZE)
-		{
-			rounding=size;
-			size<<=1;
+    if(!(type & MAP_NORESERVE)) alloc|=MEM_COMMIT;
+    if((prot & (PROT_READ|PROT_WRITE))==(PROT_READ|PROT_WRITE)) ntprot|=PAGE_READWRITE;
+    else if(prot & PROT_READ) ntprot|=PAGE_READONLY;
+    else if(prot & PROT_WRITE) ntprot|=PAGE_READWRITE;
+    else
+    {
+        ntprot|=PAGE_NOACCESS;
+        if(size==HEAP_MAX_SIZE)
+        {
+            rounding=size;
+            size<<=1;
 #ifdef TRACE
-			printf("Rounding to multiple of %d\n", rounding);
+            printf("Rounding to multiple of %d\n", rounding);
 #endif
-		}
-		if(ptr)
-		{	/* prot==PROT_NONE also appears to be a euphemism for free */
-			MEMORY_BASIC_INFORMATION mbi;
-			DWORD read=0;
-			for(p=((char *)ptr)+read; read<(DWORD) size && VirtualQuery(p, &mbi, sizeof(mbi)); read+=mbi.RegionSize)
-			{
-				if(mbi.State & MEM_COMMIT)
-				{
-//					if(!VirtualFree((LPVOID) p, mbi.RegionSize, MEM_DECOMMIT))
-//						goto mmap_exit;
-					if(!VirtualAlloc((LPVOID) p, mbi.RegionSize, MEM_RESERVE, PAGE_NOACCESS))
-						goto mmap_exit;
+        }
+        if(ptr)
+        {    /* prot==PROT_NONE also appears to be a euphemism for free */
+            MEMORY_BASIC_INFORMATION mbi;
+            DWORD read=0;
+            for(p=((char *)ptr)+read; read<(DWORD) size && VirtualQuery(p, &mbi, sizeof(mbi)); read+=mbi.RegionSize)
+            {
+                if(mbi.State & MEM_COMMIT)
+                {
+//                    if(!VirtualFree((LPVOID) p, mbi.RegionSize, MEM_DECOMMIT))
+//                        goto mmap_exit;
+                    if(!VirtualAlloc((LPVOID) p, mbi.RegionSize, MEM_RESERVE, PAGE_NOACCESS))
+                        goto mmap_exit;
 #ifdef TRACE
-					printf ("Release %p %d\n", p, mbi.RegionSize);
+                    printf ("Release %p %d\n", p, mbi.RegionSize);
 #endif
-				}
-			}
-			ptr=0; /* success */
-			goto mmap_exit;
-		}
-	}
+                }
+            }
+            ptr=0; /* success */
+            goto mmap_exit;
+        }
+    }
     ptr = VirtualAlloc (ptr, size, alloc, ntprot);
     if (! ptr) {
         ptr = (void *) MORECORE_FAILURE;
         goto mmap_exit;
     }
-	if(rounding)
-	{
-//		VirtualFree(ptr, 0, MEM_RELEASE);
-		VirtualAlloc(ptr, 0, MEM_RESERVE, PAGE_NOACCESS);
-		ptr=(void *)(((INTERNAL_SIZE_T)ptr + (rounding-1)) & ~(rounding-1));
-//		if(!(ptr=VirtualAlloc(ptr, rounding, alloc, ntprot)))
-		if(!(ptr=VirtualAlloc(ptr, rounding, alloc, ntprot)))
-		{
-			ptr = (void *) MORECORE_FAILURE;
-			goto mmap_exit;
-		}
-		assert ((unsigned) ptr % rounding == 0);
-		size=rounding;
-	}
-	else
-	{
-		/* Assert postconditions */
-		assert ((unsigned) ptr % g_regionsize == 0);
-	}
+    if(rounding)
+    {
+//        VirtualFree(ptr, 0, MEM_RELEASE);
+        VirtualAlloc(ptr, 0, MEM_RESERVE, PAGE_NOACCESS);
+        ptr=(void *)(((INTERNAL_SIZE_T)ptr + (rounding-1)) & ~(rounding-1));
+//        if(!(ptr=VirtualAlloc(ptr, rounding, alloc, ntprot)))
+        if(!(ptr=VirtualAlloc(ptr, rounding, alloc, ntprot)))
+        {
+            ptr = (void *) MORECORE_FAILURE;
+            goto mmap_exit;
+        }
+        assert ((unsigned) ptr % rounding == 0);
+        size=rounding;
+    }
+    else
+    {
+        /* Assert postconditions */
+        assert ((unsigned) ptr % g_regionsize == 0);
+    }
 #ifdef TRACE
-	printf ("%s %p %d %d %d\n", (type & MAP_NORESERVE) ? "Reserve" : "Commit", ptr, size, prot, type);
+    printf ("%s %p %d %d %d\n", (type & MAP_NORESERVE) ? "Reserve" : "Commit", ptr, size, prot, type);
 #endif
 mmap_exit:
     /* Release spin lock */
     slrelease (&g_sl);
     return ptr;
 #else // #ifndef USE_PTMALLOC3_ARENA
-	void*		result;
-    slwait		( &g_sl );
-	result		= 0;//virtual_alloc ( &g_ptmalloc3_arena, (unsigned int)size );
-    slrelease	( &g_sl );
-	return		( result );
+    void*        result;
+    slwait        ( &g_sl );
+    result        = 0;//virtual_alloc ( &g_ptmalloc3_arena, (unsigned int)size );
+    slrelease    ( &g_sl );
+    return        ( result );
 #endif // #ifndef USE_PTMALLOC3_ARENA
 }
 
@@ -576,7 +576,7 @@ INTERNAL_INTPTR_T munmap ( void *ptr, INTERNAL_INTPTR_T size) {
     if (! g_pagesize) 
         g_pagesize = getpagesize ();
     /* Assert preconditions */
-	assert (((INTERNAL_SIZE_T) ptr) % g_pagesize == 0);
+    assert (((INTERNAL_SIZE_T) ptr) % g_pagesize == 0);
     assert (size % g_pagesize == 0);
     /* Free this */
 //    if (! VirtualFree (ptr, 0, 
@@ -593,10 +593,10 @@ munmap_exit:
     /* slrelease (&g_sl); */
     return rc;
 #else // #ifndef USE_PTMALLOC3_ARENA
-    slwait		( &g_sl );
-//	virtual_free( &g_ptmalloc3_arena, ptr, size );
-    slrelease	( &g_sl );
-	return		( 0 );
+    slwait        ( &g_sl );
+//    virtual_free( &g_ptmalloc3_arena, ptr, size );
+    slrelease    ( &g_sl );
+    return        ( 0 );
 #endif // #ifndef USE_PTMALLOC3_ARENA
 }
 
@@ -606,10 +606,10 @@ static int mprotect(const void *addr, INTERNAL_INTPTR_T len, int prot)
     static INTERNAL_INTPTR_T g_pagesize;
     static INTERNAL_INTPTR_T g_regionsize;
     int rc = -1;
-	DWORD ntprot=0, oldntprot=0;
-	MEMORY_BASIC_INFORMATION mbi;
-	DWORD read=0;
-	char *p;
+    DWORD ntprot=0, oldntprot=0;
+    MEMORY_BASIC_INFORMATION mbi;
+    DWORD read=0;
+    char *p;
 #ifdef TRACE
     printf ("mprotect %p %d %d\n", addr, len, prot);
 #endif
@@ -624,41 +624,41 @@ static int mprotect(const void *addr, INTERNAL_INTPTR_T len, int prot)
     assert ((unsigned) addr % g_pagesize == 0);
     assert (len% g_pagesize == 0);
 
-	if((prot & (PROT_READ|PROT_WRITE))==(PROT_READ|PROT_WRITE)) ntprot|=PAGE_READWRITE;
-	else if(prot & PROT_READ) ntprot|=PAGE_READONLY;
-	else if(prot & PROT_WRITE) ntprot|=PAGE_READWRITE;
-	else ntprot|=PAGE_NOACCESS;
-	if(prot)
-	{	/* Do we need to commit any? */
-		MEMORY_BASIC_INFORMATION mbi;
-		DWORD read=0;
-		for(; read<(DWORD) len && VirtualQuery(((char *)(addr))+read, &mbi, sizeof(mbi)); read+=mbi.RegionSize)
-		{
-			if(!(mbi.State & MEM_COMMIT))
-			{	/* Might as well do the lot */
-				if(!VirtualAlloc((LPVOID) addr, len, MEM_COMMIT, ntprot))
-					goto mprotect_exit;
+    if((prot & (PROT_READ|PROT_WRITE))==(PROT_READ|PROT_WRITE)) ntprot|=PAGE_READWRITE;
+    else if(prot & PROT_READ) ntprot|=PAGE_READONLY;
+    else if(prot & PROT_WRITE) ntprot|=PAGE_READWRITE;
+    else ntprot|=PAGE_NOACCESS;
+    if(prot)
+    {    /* Do we need to commit any? */
+        MEMORY_BASIC_INFORMATION mbi;
+        DWORD read=0;
+        for(; read<(DWORD) len && VirtualQuery(((char *)(addr))+read, &mbi, sizeof(mbi)); read+=mbi.RegionSize)
+        {
+            if(!(mbi.State & MEM_COMMIT))
+            {    /* Might as well do the lot */
+                if(!VirtualAlloc((LPVOID) addr, len, MEM_COMMIT, ntprot))
+                    goto mprotect_exit;
 #ifdef TRACE
-				printf ("Commit (mprotect) %p %d\n", addr, len);
+                printf ("Commit (mprotect) %p %d\n", addr, len);
 #endif
-				break;
-			}
-		}
-	}
-	else
-	{	/* prot==PROT_NONE also appears to be a euphemism for free */
-		for(p=((char *)addr)+read; read<(DWORD) len && VirtualQuery(p, &mbi, sizeof(mbi)); read+=mbi.RegionSize)
-		{
-			if(mbi.State & MEM_COMMIT)
-			{
-				if(!VirtualFree((LPVOID) p, mbi.RegionSize, MEM_DECOMMIT))
-					goto mprotect_exit;
+                break;
+            }
+        }
+    }
+    else
+    {    /* prot==PROT_NONE also appears to be a euphemism for free */
+        for(p=((char *)addr)+read; read<(DWORD) len && VirtualQuery(p, &mbi, sizeof(mbi)); read+=mbi.RegionSize)
+        {
+            if(mbi.State & MEM_COMMIT)
+            {
+                if(!VirtualFree((LPVOID) p, mbi.RegionSize, MEM_DECOMMIT))
+                    goto mprotect_exit;
 #ifdef TRACE
-				printf ("Release (mprotect) %p %d\n", p, mbi.RegionSize);
+                printf ("Release (mprotect) %p %d\n", p, mbi.RegionSize);
 #endif
-			}
-		}
-	}
+            }
+        }
+    }
     /* Change */
     if (! VirtualProtect ((LPVOID) addr, len, ntprot, &oldntprot))
         goto mprotect_exit;

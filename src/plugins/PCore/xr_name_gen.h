@@ -10,26 +10,26 @@ namespace xray_re {
 
 class xr_name_gen {
 public:
-			xr_name_gen();
-			xr_name_gen(const char* pattern, bool mimic_gsc = true);
-			~xr_name_gen();
+            xr_name_gen();
+            xr_name_gen(const char* pattern, bool mimic_gsc = true);
+            ~xr_name_gen();
 
-	void		init(const char* pattern, bool mimic_gsc = true);
+    void        init(const char* pattern, bool mimic_gsc = true);
 
-	const char*	get() const;
-	void		next();
+    const char*    get() const;
+    void        next();
 
 private:
-	char*		m_name;
-	int		m_next_idx;
-	unsigned	m_offset;
+    char*        m_name;
+    int        m_next_idx;
+    unsigned    m_offset;
 };
 
 inline xr_name_gen::xr_name_gen(): m_name(0) {}
 
 inline xr_name_gen::xr_name_gen(const char* pattern, bool mimic_gsc)
 {
-	init(pattern, mimic_gsc);
+    init(pattern, mimic_gsc);
 }
 
 inline xr_name_gen::~xr_name_gen() { delete m_name; }

@@ -6,7 +6,7 @@ struct PSDrawBoxOut
     float4 velocity : SV_TARGET1;
 };
 
-//	Pixel
+//    Pixel
 PSDrawBoxOut main(p_fluidsim_dyn_aabb input)
 {
     PSDrawBoxOut voxel;

@@ -40,9 +40,9 @@ Please see the GameSpy Presence SDK documentation for more information
 
 typedef enum
 {
-	GPI_PEER_OP_STATE_NONE,
-	GPI_PEER_OP_STATE_REQUESTED,
-	GPI_PEER_OP_STATE_FINISHED
+    GPI_PEER_OP_STATE_NONE,
+    GPI_PEER_OP_STATE_REQUESTED,
+    GPI_PEER_OP_STATE_FINISHED
 } GPIPeerOpState;
  
 typedef struct GPITransferID_s * GPITransferID_st;
@@ -53,45 +53,45 @@ typedef struct GPITransferID_s * GPITransferID_st;
 //////////////////
 typedef struct GPIMessage
 {
-	GPIBuffer buffer;
-	int type;
-	int start;
+    GPIBuffer buffer;
+    int type;
+    int start;
 } GPIMessage;
 
 typedef struct _GPIPeerOp
 {
-	GPIPeerOpState state;
-	void *userData;
-	GPCallback callback;
-	struct _GPIPeerOp * next;
-	int type;
-	gsi_time timeout;
+    GPIPeerOpState state;
+    void *userData;
+    GPCallback callback;
+    struct _GPIPeerOp * next;
+    int type;
+    gsi_time timeout;
 } GPIPeerOp;
 
 typedef struct _GPIPeerOpQueue
 {
-	GPIPeerOp * opList;
-	GPIPeerOp * first;
-	GPIPeerOp * last;
+    GPIPeerOp * opList;
+    GPIPeerOp * first;
+    GPIPeerOp * last;
 } GPIPeerOpQueue;
 
 // A peer connection.
 /////////////////////
 typedef struct GPIPeer_s
 {
-	int state;
-	GPIBool initiated;
-	//SOCKET sock;
-	unsigned int ip;
-	unsigned short port;
-	GPProfile profile;
-	time_t timeout;
-	int nackCount;
-	GPIBuffer inputBuffer;
-	GPIBuffer outputBuffer;
-	DArray messages;
-	GPIPeerOpQueue peerOpQueue;
-	struct GPIPeer_s * pnext;
+    int state;
+    GPIBool initiated;
+    //SOCKET sock;
+    unsigned int ip;
+    unsigned short port;
+    GPProfile profile;
+    time_t timeout;
+    int nackCount;
+    GPIBuffer inputBuffer;
+    GPIBuffer outputBuffer;
+    DArray messages;
+    GPIPeerOpQueue peerOpQueue;
+    struct GPIPeer_s * pnext;
 } GPIPeer;
 
 //FUNCTIONS
@@ -115,7 +115,7 @@ gpiPeerStartConnect(
 
 // NOTE: use this function when in a gp function
 GPIPeer * gpiGetPeerByProfile(const GPConnection * connection,
-							  int profileid);
+                              int profileid);
 
 // NOTE: use this function only when in a UDP layer callback
 GPIPeer *gpiGetPeerByAddr(const GPConnection *connection,
@@ -175,9 +175,9 @@ gpiPeerSendMessages(
 
 void gpiPeerLeftCallback(unsigned int ip, unsigned short port, GSUdpCloseReason reason, void *userData);
 void gpiPeerMessageCallback(unsigned int ip, unsigned short port, unsigned char *message, 
-							unsigned int messageLength, gsi_bool reliable, void *userData);
+                            unsigned int messageLength, gsi_bool reliable, void *userData);
 void gpiPeerAcceptedCallback(unsigned int ip, unsigned short port, 
-							 GSUdpErrorCode error, gsi_bool rejected, void *userData);
+                             GSUdpErrorCode error, gsi_bool rejected, void *userData);
 void gpiPeerPingReplyCallback(unsigned int ip, unsigned short port, unsigned int latency, void *userData);
 
 void gpiPeerAddOp(GPIPeer *peer, GPIPeerOp *operation);

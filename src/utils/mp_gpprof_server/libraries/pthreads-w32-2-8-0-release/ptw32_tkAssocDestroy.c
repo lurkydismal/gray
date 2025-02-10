@@ -68,47 +68,47 @@ ptw32_tkAssocDestroy (ThreadKeyAssoc * assoc)
       prev = assoc->prevKey;
       next = assoc->nextKey;
       if (prev != NULL)
-	{
-	  prev->nextKey = next;
-	}
+    {
+      prev->nextKey = next;
+    }
       if (next != NULL)
-	{
-	  next->prevKey = prev;
-	}
+    {
+      next->prevKey = prev;
+    }
 
       if (assoc->thread->keys == assoc)
-	{
-	  /* We're at the head of the thread's keys chain */
-	  assoc->thread->keys = next;
-	}
+    {
+      /* We're at the head of the thread's keys chain */
+      assoc->thread->keys = next;
+    }
       if (assoc->thread->nextAssoc == assoc)
-	{
-	  /*
-	   * Thread is exiting and we're deleting the assoc to be processed next.
-	   * Hand thread the assoc after this one.
-	   */
-	  assoc->thread->nextAssoc = next;
-	}
+    {
+      /*
+       * Thread is exiting and we're deleting the assoc to be processed next.
+       * Hand thread the assoc after this one.
+       */
+      assoc->thread->nextAssoc = next;
+    }
 
       /* Remove assoc from key's threads chain */
       prev = assoc->prevThread;
       next = assoc->nextThread;
       if (prev != NULL)
-	{
-	  prev->nextThread = next;
-	}
+    {
+      prev->nextThread = next;
+    }
       if (next != NULL)
-	{
-	  next->prevThread = prev;
-	}
+    {
+      next->prevThread = prev;
+    }
 
       if (assoc->key->threads == assoc)
-	{
-	  /* We're at the head of the key's threads chain */
-	  assoc->key->threads = next;
-	}
+    {
+      /* We're at the head of the key's threads chain */
+      assoc->key->threads = next;
+    }
 
       free (assoc);
     }
 
-}				/* ptw32_tkAssocDestroy */
+}                /* ptw32_tkAssocDestroy */

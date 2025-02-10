@@ -9,12 +9,12 @@
 class CThornArtefact : public CArtefact 
 {
 private:
-	typedef CArtefact inherited;
+    typedef CArtefact inherited;
 public:
-	CThornArtefact(void);
-	virtual ~CThornArtefact(void);
+    CThornArtefact(void);
+    virtual ~CThornArtefact(void);
 
-	virtual void Load				(LPCSTR section);
+    virtual void Load                (LPCSTR section);
 
 protected:
 };

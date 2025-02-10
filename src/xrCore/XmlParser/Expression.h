@@ -158,7 +158,7 @@ public:
     ~CExpression();
 
     CExpression(const CExpression& Other);
-	CExpression& operator=(const CExpression& Other);
+    CExpression& operator=(const CExpression& Other);
 
     CExpression(CExpression&& Other);
     CExpression& operator=(CExpression&& Other);

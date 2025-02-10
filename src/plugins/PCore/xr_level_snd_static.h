@@ -12,13 +12,13 @@
 namespace xray_re {
 
 struct sound_src_data {
-	std::string	name;
-	fvector3	position;
-	float		volume;
-	float		freq;
-	i32vector2	active_time;
-	i32vector2	play_time;
-	i32vector2	pause_time;
+    std::string    name;
+    fvector3    position;
+    float        volume;
+    float        freq;
+    i32vector2    active_time;
+    i32vector2    play_time;
+    i32vector2    pause_time;
 };
 
 TYPEDEF_STD_VECTOR_PTR(sound_src_data)
@@ -29,19 +29,19 @@ class xr_ini_file;
 
 class xr_level_snd_static {
 public:
-			xr_level_snd_static();
-			xr_level_snd_static(xr_reader& r);
-			xr_level_snd_static(const xr_ini_file& ini);
-	virtual		~xr_level_snd_static();
+            xr_level_snd_static();
+            xr_level_snd_static(xr_reader& r);
+            xr_level_snd_static(const xr_ini_file& ini);
+    virtual        ~xr_level_snd_static();
 
-	void		load(const xr_ini_file& ini);
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
+    void        load(const xr_ini_file& ini);
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
 
-	const sound_src_data_vec&	sound_srcs() const;
+    const sound_src_data_vec&    sound_srcs() const;
 
 private:
-	sound_src_data_vec	m_sound_srcs;
+    sound_src_data_vec    m_sound_srcs;
 };
 
 inline xr_level_snd_static::xr_level_snd_static() {}

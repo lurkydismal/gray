@@ -16,7 +16,7 @@ void RemapVector(inout float3 vreflect)
 {
     float3 vreflectabs = abs(vreflect);
     float vreflectmax = max(vreflectabs.x, max(vreflectabs.y, vreflectabs.z));
-	
+    
     vreflect *= rcp(vreflectmax);
     vreflect.y = vreflect.y * 2.0 - 1.0;
 }
@@ -36,13 +36,13 @@ float3 CompureDiffuseIrradance(float3 N, float Hemi)
 float3 CompureSpecularIrradance(float3 R, float Hemi, float Roughness)
 {
     float3 LightDirection = mul((float3x3)m_invV, R);
-	
+    
 #ifndef IBL_FAKE_IRRADANCE
     float4 MipLevels = 0.0f;
     sky_s0.GetDimensions(MipLevels.x, MipLevels.y, MipLevels.z, MipLevels.w);
     float Lod = MipLevels.w * Roughness;
 #else
-	float Lod = 0.0f; Roughness = sqrt(Roughness);
+    float Lod = 0.0f; Roughness = sqrt(Roughness);
     float3 SampleLastD = env_s0.SampleLevel(smp_rtlinear, LightDirection, 0.0f).xyz;
     float3 SampleNextD = env_s1.SampleLevel(smp_rtlinear, LightDirection, 0.0f).xyz;
 #endif
@@ -51,13 +51,13 @@ float3 CompureSpecularIrradance(float3 R, float Hemi, float Roughness)
     LightDirection.y = abs(LightDirection.y);
     RemapVector(LightDirection);
 #endif
-	
+    
     float3 SampleLast = sky_s0.SampleLevel(smp_rtlinear, LightDirection, Lod).xyz;
     float3 SampleNext = sky_s1.SampleLevel(smp_rtlinear, LightDirection, Lod).xyz;
-	
+    
 #ifdef IBL_FAKE_IRRADANCE
-	SampleLast = lerp(SampleLast, SampleLastD, Roughness);
-	SampleNext = lerp(SampleNext, SampleNextD, Roughness);
+    SampleLast = lerp(SampleLast, SampleLastD, Roughness);
+    SampleNext = lerp(SampleNext, SampleNextD, Roughness);
 #endif
 
     float3 Irradance = L_sky_color.xyz * lerp(SampleLast, SampleNext, L_hemi_color.w);

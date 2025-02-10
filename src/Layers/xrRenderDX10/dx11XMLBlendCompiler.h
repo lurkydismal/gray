@@ -5,21 +5,21 @@
 
 class CXMLBlend
 {
-	CBlender_Compile* pCompiler;
-	string256			File;
-	CXml				Parser;
+    CBlender_Compile* pCompiler;
+    string256            File;
+    CXml                Parser;
 
 public:
-	CXMLBlend(const char* FileName);
-	~CXMLBlend();
-	Shader* Compile(const char* Texture);
-	ShaderElement* MakeShader(const char* Texture, XML_NODE* pElement);
+    CXMLBlend(const char* FileName);
+    ~CXMLBlend();
+    Shader* Compile(const char* Texture);
+    ShaderElement* MakeShader(const char* Texture, XML_NODE* pElement);
 
-	static bool			Check(const char* FileName);
+    static bool            Check(const char* FileName);
 
 private:
-	u32				BlendValidate(shared_str type);
-	u32				StencilValidate(shared_str type);
-	u32				CMPFunValidate(shared_str type);
-	D3DCULL			CullModeValidate(shared_str type);
+    u32                BlendValidate(shared_str type);
+    u32                StencilValidate(shared_str type);
+    u32                CMPFunValidate(shared_str type);
+    D3DCULL            CullModeValidate(shared_str type);
 };

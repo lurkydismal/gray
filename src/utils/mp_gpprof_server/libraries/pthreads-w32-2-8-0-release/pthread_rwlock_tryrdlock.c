@@ -62,9 +62,9 @@ pthread_rwlock_tryrdlock (pthread_rwlock_t * rwlock)
       result = ptw32_rwlock_check_need_init (rwlock);
 
       if (result != 0 && result != EBUSY)
-	{
-	  return result;
-	}
+    {
+      return result;
+    }
     }
 
   rwl = *rwlock;
@@ -82,21 +82,21 @@ pthread_rwlock_tryrdlock (pthread_rwlock_t * rwlock)
   if (++rwl->nSharedAccessCount == INT_MAX)
     {
       if ((result =
-	   pthread_mutex_lock (&(rwl->mtxSharedAccessCompleted))) != 0)
-	{
-	  (void) pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
-	  return result;
-	}
+       pthread_mutex_lock (&(rwl->mtxSharedAccessCompleted))) != 0)
+    {
+      (void) pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
+      return result;
+    }
 
       rwl->nSharedAccessCount -= rwl->nCompletedSharedAccessCount;
       rwl->nCompletedSharedAccessCount = 0;
 
       if ((result =
-	   pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted))) != 0)
-	{
-	  (void) pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
-	  return result;
-	}
+       pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted))) != 0)
+    {
+      (void) pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
+      return result;
+    }
     }
 
   return (pthread_mutex_unlock (&rwl->mtxExclusiveAccess));

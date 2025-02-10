@@ -38,30 +38,30 @@ class MxColor
 {
 private:
     inline unsigned char _ftop(float x)
-	{ return (unsigned char)((x>1.0f?1.0f:x)*255.0f); }
+    { return (unsigned char)((x>1.0f?1.0f:x)*255.0f); }
     inline float _ptof(unsigned char c) const { return ((float)c) / 255.0f; }
 
 public:
     union {
 #if defined(MX_COLOR_RGBA)
-	struct { unsigned char r, g, b, a; } chan;
+    struct { unsigned char r, g, b, a; } chan;
 #elif defined(MX_COLOR_ABGR)
-	struct { unsigned char a, b, g, r; } chan;
+    struct { unsigned char a, b, g, r; } chan;
 #else
 #  error "Packed color format illegal or left unspecified"
 #endif
-	unsigned int word;
+    unsigned int word;
     } as;
 
     MxColor() { }
     MxColor(float r, float g, float b) { as.chan.a=0; set(r, g, b); }
 
     void set(float r, float g, float b)
-	{ as.chan.r=_ftop(r);  as.chan.g=_ftop(g);  as.chan.b=_ftop(b); }
+    { as.chan.r=_ftop(r);  as.chan.g=_ftop(g);  as.chan.b=_ftop(b); }
     void set(const float *c)
-	{ as.chan.r=_ftop(c[0]);as.chan.g=_ftop(c[1]);as.chan.b=_ftop(c[2]); }
+    { as.chan.r=_ftop(c[0]);as.chan.g=_ftop(c[1]);as.chan.b=_ftop(c[2]); }
     void set(const double *c)
-	{ as.chan.r=_ftop((float)c[0]);as.chan.g=_ftop((float)c[1]);as.chan.b=_ftop((float)c[2]); }
+    { as.chan.r=_ftop((float)c[0]);as.chan.g=_ftop((float)c[1]);as.chan.b=_ftop((float)c[2]); }
 
     float R() const { return _ptof(as.chan.r); }
     float G() const { return _ptof(as.chan.g); }
@@ -84,7 +84,7 @@ public:
     operator       float*()       { return u; }
 
     MxTexCoord& operator=(const MxTexCoord& t)
-	{ u[0]=t[0];  u[1]=t[1]; return *this; }
+    { u[0]=t[0];  u[1]=t[1]; return *this; }
 };
 
 
@@ -92,8 +92,8 @@ class MxVertex
 {
 public:
     union {
-	float pos[3];
-	struct { MxVertexID parent, next, prev; } proxy;
+    float pos[3];
+    struct { MxVertexID parent, next, prev; } proxy;
     } as;
 
     MxVertex() { }
@@ -101,8 +101,8 @@ public:
     MxVertex(const MxVertex& v) { *this = v; }
     
     MxVertex& operator=(const MxVertex& v)
-	{ as.pos[0]=v.as.pos[0]; as.pos[1]=v.as.pos[1];
-	  as.pos[2]=v.as.pos[2]; return *this; }
+    { as.pos[0]=v.as.pos[0]; as.pos[1]=v.as.pos[1];
+      as.pos[2]=v.as.pos[2]; return *this; }
     operator const float*() const { return as.pos; }
     operator const float*() { return as.pos; }
     operator float*() { return as.pos; }
@@ -120,9 +120,9 @@ class MxNormal
 {
 private:
     inline short _ftos(float x)
-	{ return (short)rint((x>1.0f?1.0f:x)*(float)SHRT_MAX); }
+    { return (short)rint((x>1.0f?1.0f:x)*(float)SHRT_MAX); }
     inline short _dtos(double x)
-	{ return (short)rint((x>1.0?1.0:x)*(double)SHRT_MAX); }
+    { return (short)rint((x>1.0?1.0:x)*(double)SHRT_MAX); }
 
     inline float _stof(short s) const { return (float)s/(float)SHRT_MAX; }
     inline double _stod(short s) const { return (double)s/(double)SHRT_MAX; }
@@ -136,11 +136,11 @@ public:
     MxNormal(const double *v) { set(v); }
 
     inline void set(double x, double y, double z)
-	{ dir[0]=_dtos(x);  dir[1]=_dtos(y);  dir[2]=_dtos(z); }
+    { dir[0]=_dtos(x);  dir[1]=_dtos(y);  dir[2]=_dtos(z); }
     inline void set(const float *v)
-	{ dir[0]=_ftos(v[0]);  dir[1]=_ftos(v[1]);  dir[2]=_ftos(v[2]); }
+    { dir[0]=_ftos(v[0]);  dir[1]=_ftos(v[1]);  dir[2]=_ftos(v[2]); }
     inline void set(const double *v)
-	{ dir[0]=_dtos(v[0]);  dir[1]=_dtos(v[1]);  dir[2]=_dtos(v[2]); }
+    { dir[0]=_dtos(v[0]);  dir[1]=_dtos(v[1]);  dir[2]=_dtos(v[2]); }
 
     float operator[](unsigned int i) const { VERIFY(i<3); return _stof(dir[i]); }
     short raw(unsigned int i) const { return dir[i]; }
@@ -157,10 +157,10 @@ public:
     MxEdge(const MxEdge& e) { v1=e.v1;  v2=e.v2; }
 
     MxVertexID opposite_vertex(MxVertexID v)
-	{
-	    if( v==v1 ) return v2;
-	    else { VERIFY(v==v2); return v1; }
-	}
+    {
+        if( v==v1 ) return v2;
+        else { VERIFY(v==v2); return v1; }
+    }
 };
 
 class MxFace
@@ -170,7 +170,7 @@ public:
 
     MxFace() { }
     MxFace(MxVertexID v0, MxVertexID v1, MxVertexID v2)
-	{ v[0]=v0;  v[1]=v1;  v[2]=v2; }
+    { v[0]=v0;  v[1]=v1;  v[2]=v2; }
     MxFace(const MxFace& f) { v[0]=f.v[0]; v[1]=f.v[1]; v[2]=f.v[2]; }
 
     MxVertexID& operator()(int i)       { return v[i]; }
@@ -182,37 +182,37 @@ public:
     MxVertexID  operator[](int i) const { return v[i]; }
 
     int remap_vertex(MxVertexID from, MxVertexID to)
-	{
-	    int nmapped = 0;
-	    for(int i=0; i<3; i++)
-		if( v[i]==from )
-		{
-		    v[i]=to;
-		    nmapped++;
-		}
-	    return nmapped;
-	}
+    {
+        int nmapped = 0;
+        for(int i=0; i<3; i++)
+        if( v[i]==from )
+        {
+            v[i]=to;
+            nmapped++;
+        }
+        return nmapped;
+    }
 
     unsigned int find_vertex(MxVertexID i)
-	{
-	    if( v[0]==i ) return 0;
-	    else if( v[1]==i ) return 1;
-	    else { VERIFY(v[2]==i); return 2; }
-	}
+    {
+        if( v[0]==i ) return 0;
+        else if( v[1]==i ) return 1;
+        else { VERIFY(v[2]==i); return 2; }
+    }
 
     MxVertexID opposite_vertex(MxVertexID v0, MxVertexID v1)
-	{
-	    if( v[0]!=v0 && v[0]!=v1 ) return v[0];
-	    else if( v[1]!=v0 && v[1]!=v1 ) return v[1];
-	    else { VERIFY( v[2]!=v0 && v[2]!=v1 ); return v[2]; }
-	}
+    {
+        if( v[0]!=v0 && v[0]!=v1 ) return v[0];
+        else if( v[1]!=v0 && v[1]!=v1 ) return v[1];
+        else { VERIFY( v[2]!=v0 && v[2]!=v1 ); return v[2]; }
+    }
 
     bool is_inorder(MxVertexID v0, MxVertexID v1)
-	{
-	    if( v[0]==v0 ) return v[1]==v1;
-	    else if( v[1]==v0 ) return v[2]==v1;
-	    else { VERIFY(v[2]==v0); return v[0]==v1; }
-	}
+    {
+        if( v[0]==v0 ) return v[1]==v1;
+        else if( v[1]==v0 ) return v[2]==v1;
+        else { VERIFY(v[2]==v0); return v[0]==v1; }
+    }
 };
 
 /*

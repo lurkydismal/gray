@@ -38,10 +38,10 @@ namespace luabind { namespace detail
         static constexpr int value = Value;
     };
 
-	template<size_t N>
+    template<size_t N>
     struct calc_arity
-	{
-	private:
+    {
+    private:
 
         template <size_t Index, typename... Policies>
         static constexpr int hasArg() noexcept
@@ -56,14 +56,14 @@ namespace luabind { namespace detail
             return sum_arity<hasArg<Indices, Policies...>()...>::value;
         }
 
-	public:
+    public:
 
         template <typename... Policies>
-	    static constexpr int apply() noexcept
-	    {
+        static constexpr int apply() noexcept
+        {
             return applyImpl<Policies...>(std::make_index_sequence<N>());
-	    }
-	};
+        }
+    };
 
     template<>
     struct calc_arity<0>

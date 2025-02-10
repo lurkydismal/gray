@@ -115,4 +115,4 @@ ptw32_tkAssocCreate (ptw32_thread_t * sp, pthread_key_t key)
 
   return (0);
 
-}				/* ptw32_tkAssocCreate */
+}                /* ptw32_tkAssocCreate */

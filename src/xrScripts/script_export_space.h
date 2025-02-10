@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_export_space.h
-//	Created 	: 22.09.2003
-//  Modified 	: 01.04.2004
-//	Author		: Dmitriy Iassenev
-//	Description : XRay Script export space 
+//    Module         : script_export_space.h
+//    Created     : 22.09.2003
+//  Modified     : 01.04.2004
+//    Author        : Dmitriy Iassenev
+//    Description : XRay Script export space 
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

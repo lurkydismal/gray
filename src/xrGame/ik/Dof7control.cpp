@@ -81,10 +81,10 @@ void SRS::init(const Matrix  T1, const Matrix  T2, const float a[3], const float
 // Only return positive solution
 //
 static int solve_R_angle(const float g[3], 
-			 const float s[3], 
-			 const float t[3], 
-			 const Matrix  T, 
-			 float &r_angle)
+             const float s[3], 
+             const float t[3], 
+             const Matrix  T, 
+             float &r_angle)
 {
     float rhs = DOT(g,g) - DOT(s,s) - DOT(t,t);
 
@@ -94,9 +94,9 @@ static int solve_R_angle(const float g[3],
 
     for (int j = 0; j < 3; j++)
     {
-	alpha[j] = 0;
-	for (int i = 0; i < 3; i++)
-	    alpha[j] += T[j][i] * t[i]; 
+    alpha[j] = 0;
+    for (int i = 0; i < 3; i++)
+        alpha[j] += T[j][i] * t[i]; 
     }
 
     float a = alpha[0]*s[0] + alpha[2]*s[2];
@@ -114,36 +114,36 @@ static int solve_R_angle(const float g[3],
 
     if (n == 2)
     {
-		// Two positive solutions. choose first
-		if (temp[0] < 0 && temp[1] < 0)
-		{
-			r_angle = temp[0];
-			// printf("Two solutions: %lf %lf\n", temp[0], temp[1]);
-			n = 1;
-		}
-		else if (temp[0] < 0)
-		{
-			n = 1;
-			r_angle = temp[0];
-		}
-		else if (temp[1] < 0)
-		{
-			n = 1;
-			r_angle = temp[1];
-		}
-		else
-		{
-			n = 1;
-			r_angle = temp[1];//?
-		}
+        // Two positive solutions. choose first
+        if (temp[0] < 0 && temp[1] < 0)
+        {
+            r_angle = temp[0];
+            // printf("Two solutions: %lf %lf\n", temp[0], temp[1]);
+            n = 1;
+        }
+        else if (temp[0] < 0)
+        {
+            n = 1;
+            r_angle = temp[0];
+        }
+        else if (temp[1] < 0)
+        {
+            n = 1;
+            r_angle = temp[1];
+        }
+        else
+        {
+            n = 1;
+            r_angle = temp[1];//?
+        }
     }
     else if (n == 1)
     {
-	// Is solution positive ?
-	if (temp[0] < 0) 
-	    n = 0;
-	else 
-	    r_angle = temp[0]; 
+    // Is solution positive ?
+    if (temp[0] < 0) 
+        n = 0;
+    else 
+        r_angle = temp[0]; 
 
     }
 
@@ -156,7 +156,7 @@ static int solve_R_angle(const float g[3],
 // and the upper and lower lengths of the mechanism.
 //
 // Outputs
-//	c: center of circle
+//    c: center of circle
 //      u: local x axis
 //      v: local y axis
 //      n: normal to plane of circle = cross(u,v)
@@ -164,14 +164,14 @@ static int solve_R_angle(const float g[3],
 //
 
 float get_circle_equation(const float ee[3], 
-			  const float axis[3],
-			  const float pos_axis[3],
-			  float upper_len,
-			  float lower_len,
-			  float c[3],
-			  float u[3],
-			  float v[3],
-			  float n[3])
+              const float axis[3],
+              const float pos_axis[3],
+              float upper_len,
+              float lower_len,
+              float c[3],
+              float u[3],
+              float v[3],
+              float n[3])
 {
     float wn = norm((float *)ee);
     float radius;
@@ -186,7 +186,7 @@ float get_circle_equation(const float ee[3],
     float alpha; 
 
     if (!law_of_cosines(wn, upper_len, lower_len, alpha))
-	return 0;
+    return 0;
 
     // center of circle (origin is location of first S joint)
     vecscalarmult(c, n, _cos(alpha) * upper_len);
@@ -203,7 +203,7 @@ float get_circle_equation(const float ee[3],
     //
 
     if (DOT(n,pos_axis) < 0.0)
-	vecscalarmult(n,n,-1.0);
+    vecscalarmult(n,n,-1.0);
 
     vecscalarmult(temp, n, DOT(axis,n));
     vecsub(u, (float *)axis, temp);
@@ -234,8 +234,8 @@ float get_circle_equation(const float ee[3],
 //
 
 int scale_goal(const float l1[3], 
-	       const float l2[3], 
-	       float g[3])
+           const float l2[3], 
+           float g[3])
 {
     float g_len = _sqrt(DOT(g,g));
     float L1    = _sqrt(DOT(l1,l1));
@@ -245,14 +245,14 @@ int scale_goal(const float l1[3],
 
     if (g_len > max_len)
     {
-		vecscalarmult(g,g,max_len/(g_len/**1.01f*/));
-		return 1;
-    }	
+        vecscalarmult(g,g,max_len/(g_len/**1.01f*/));
+        return 1;
+    }    
     /*
     if (g_len < min_len)
     {
-	vecscalarmult(g,g,(1.01 * min_len)/g_len);
-	return 1;
+    vecscalarmult(g,g,(1.01 * min_len)/g_len);
+    return 1;
     }
     */
 
@@ -298,13 +298,13 @@ int SRS::SetGoalPos(const float eee[3],  const Matrix  E,  float &rangle)
     // we use the length of the lower limb extended by E
     //
     radius = get_circle_equation(ee, 
-		 proj_axis, 
-		 pos_axis,
-		 upper_len, 
-		 norm(s), c, u, v, n);
+         proj_axis, 
+         pos_axis,
+         upper_len, 
+         norm(s), c, u, v, n);
 
     if (!solve_R_angle(ee, s, p_r1, T, r_angle))
-	return 0; 
+    return 0; 
     rangle = r_angle;
 
     // Find RY, and store the positions of the R jt and
@@ -321,8 +321,8 @@ int SRS::SetGoalPos(const float eee[3],  const Matrix  E,  float &rangle)
 
 void SRS::EvaluateCircle(const float p[3])
 {
-	 radius = get_circle_equation(p, proj_axis, pos_axis, 
-				 upper_len, lower_len, c, u, v, n);
+     radius = get_circle_equation(p, proj_axis, pos_axis, 
+                 upper_len, lower_len, c, u, v, n);
 
 }
 
@@ -348,14 +348,14 @@ int SRS::SetGoal(const Matrix  GG, float &rangle)
 
     EvaluateCircle(ee);
     //radius = get_circle_equation(ee, proj_axis, pos_axis, 
-	//			 upper_len, lower_len, c, u, v, n);
+    //             upper_len, lower_len, c, u, v, n);
 
     //
     // Build rotation matrix about the R joint
     //
 
     if (!solve_R_angle(ee, s, p_r1, T, r_angle))
-	return 0; 
+    return 0; 
     r_angle=-r_angle;
     rangle = r_angle;
 
@@ -378,11 +378,11 @@ int SRS::SetGoal(const Matrix  GG, float &rangle)
 }
 
 inline void evalcircle(const float c[3],
-		       const float u[3],
-		       const float v[3],
-		       float radius,
-		       float angle,
-		       float p[3])
+               const float u[3],
+               const float v[3],
+               float radius,
+               float angle,
+               float p[3])
 {
     // p = o + r*cos(f)*u + r*sin(f)*v
 
@@ -423,10 +423,10 @@ void SRS::evaluate_circle(float angle, float p[3])
 // construct the transpose of the rotation matrix instead
 //
 inline void make_frame(const float p[3], 
-		       float p_scale,
-		       const float q[3], 
-		       Matrix R, 
-		       int invert = 0)
+               float p_scale,
+               const float q[3], 
+               Matrix R, 
+               int invert = 0)
 {
     float x[3], y[3], t[3];
 
@@ -442,21 +442,21 @@ inline void make_frame(const float p[3],
 
     if (invert)
     {
-	R[0][0] = x[0];	R[1][0] = x[1];	R[2][0] = x[2];
-	R[0][1] = y[0];	R[1][1] = y[1];	R[2][1] = y[2];
+    R[0][0] = x[0];    R[1][0] = x[1];    R[2][0] = x[2];
+    R[0][1] = y[0];    R[1][1] = y[1];    R[2][1] = y[2];
 
-	R[0][2] = x[1]*y[2] - x[2]*y[1];
-	R[1][2] = x[2]*y[0] - x[0]*y[2];
-	R[2][2] = x[0]*y[1] - x[1]*y[0];
+    R[0][2] = x[1]*y[2] - x[2]*y[1];
+    R[1][2] = x[2]*y[0] - x[0]*y[2];
+    R[2][2] = x[0]*y[1] - x[1]*y[0];
     }
     else
     {
-	R[0][0] = x[0];	R[0][1] = x[1];	R[0][2] = x[2];
-	R[1][0] = y[0];	R[1][1] = y[1];	R[1][2] = y[2];
+    R[0][0] = x[0];    R[0][1] = x[1];    R[0][2] = x[2];
+    R[1][0] = y[0];    R[1][1] = y[1];    R[1][2] = y[2];
 
-	R[2][0] = x[1]*y[2] - x[2]*y[1];
-	R[2][1] = x[2]*y[0] - x[0]*y[2];
-	R[2][2] = x[0]*y[1] - x[1]*y[0];
+    R[2][0] = x[1]*y[2] - x[2]*y[1];
+    R[2][1] = x[2]*y[0] - x[0]*y[2];
+    R[2][2] = x[0]*y[1] - x[1]*y[0];
     }
 
     R[3][0] = R[3][1] = R[3][2] = 
@@ -467,8 +467,8 @@ inline void make_frame(const float p[3],
 
 
 static void solve_R1(float p[3], float q[3], 
-		     float p2[3],float q2[3],
-		     float p_scale, Matrix  R1)	       
+             float p2[3],float q2[3],
+             float p_scale, Matrix  R1)           
 {
     Matrix T, S;
 
@@ -498,11 +498,11 @@ void SRS::SolveR1(float angle, Matrix  R1)
     vecsub(t2, p, ee);
 
     printf("Elbow distance error is %lf\n", 
-	   DOT(p_r1, p_r1) - DOT(p,p));
+       DOT(p_r1, p_r1) - DOT(p,p));
     printf("EE distance error is %lf\n", 
-	   DOT(ee,ee) - DOT(ee_r1,ee_r1));
+       DOT(ee,ee) - DOT(ee_r1,ee_r1));
     printf("Distance between elbow and wrist error is %lf\n", 
-	   DOT(t1,t1) - DOT(t2,t2));
+       DOT(t1,t1) - DOT(t2,t2));
 #endif
 }
 
@@ -524,9 +524,9 @@ void SRS::SolveR1R2(float angle, Matrix  R1, Matrix  R2)
     printf("Displaying the error matrix\n");
     for (int i = 0; i < 4; i++)
     {
-	for (int j = 0; j < 4; j++)
-	    printf(" %lf ", fabs(G2[i][j] - G[i][j]));
-	printf("\n");
+    for (int j = 0; j < 4; j++)
+        printf(" %lf ", fabs(G2[i][j] - G[i][j]));
+    printf("\n");
     }
 #endif
 }
@@ -637,7 +637,7 @@ int SRS::R1Psi(Matrix C, Matrix s, Matrix o)
 
 
 int SRS::R1R2Psi(Matrix C, Matrix s, Matrix o,
-		 Matrix c2, Matrix s2, Matrix o2)
+         Matrix c2, Matrix s2, Matrix o2)
 {
     Matrix R0, Temp;
 
@@ -680,15 +680,15 @@ int SRS::R1R2Psi(Matrix C, Matrix s, Matrix o,
 //
 
 static void get_aim_circle_equation(const float g[3], 
-			 const float a[3],
-			 const float ta[3],
-			 const float tb[3],
-			 const float proj_axis[3],
-			 float theta4,
-			 float center[3],
-			 float u[3],
-			 float v[3],
-			 float &radius)
+             const float a[3],
+             const float ta[3],
+             const float tb[3],
+             const float proj_axis[3],
+             float theta4,
+             float center[3],
+             float u[3],
+             float v[3],
+             float &radius)
 {
     float L1 = DOT(ta,ta);
     float L2 = DOT(tb,tb);
@@ -731,7 +731,7 @@ static void get_aim_circle_equation(const float g[3],
 
     float delta = asin(_sin(beta)*L3/L4);
     if (delta < 0)
-	delta = - delta;
+    delta = - delta;
     float gamma = M_PI - delta - beta;
 
     float c_gamma = _cos(gamma);
@@ -749,8 +749,8 @@ static void get_aim_circle_equation(const float g[3],
 
 
 void SRS::SetAimGoal(const float goal[3],
-		     const float ax[3],
-		     float flex_angle)
+             const float ax[3],
+             float flex_angle)
 {
     float s[3];
 
@@ -760,7 +760,7 @@ void SRS::SetAimGoal(const float goal[3],
     get_translation(S, s);
 
     get_aim_circle_equation(goal, 
-	    axis, p_r1, s, proj_axis, flex_angle, c, u, v, radius);
+        axis, p_r1, s, proj_axis, flex_angle, c, u, v, radius);
 
     rotation_principal_axis_to_matrix('y', flex_angle, Ry);
     vecmult(ee_r1, (float*)s, Ry); 

@@ -73,4 +73,4 @@ pthread_equal (pthread_t t1, pthread_t t2)
 
   return (result);
 
-}				/* pthread_equal */
+}                /* pthread_equal */

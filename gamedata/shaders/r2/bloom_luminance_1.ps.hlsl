@@ -20,11 +20,11 @@ float luminance(float2 tc)
     return dot(source, LUMINANCE_VECTOR * def_hdr);
 }
 
-// 	perform 2x2=4s convolution, working on 4x4=16p area
-//	that means 256x256 source will be scaled to (256/4)x(256/4) = 64x64p
-//	a):	256x256 => 64x64p	with log
-//	b):	64x64p	=> 8x8p
-//	c):	8x8p	=> 1x1p		with exp
+//     perform 2x2=4s convolution, working on 4x4=16p area
+//    that means 256x256 source will be scaled to (256/4)x(256/4) = 64x64p
+//    a):    256x256 => 64x64p    with log
+//    b):    64x64p    => 8x8p
+//    c):    8x8p    => 1x1p        with exp
 float4 main(v2p I) : COLOR
 {
     // first 8 bilinear samples (8x4 = 32 pixels)

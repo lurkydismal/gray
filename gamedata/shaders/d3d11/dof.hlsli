@@ -11,7 +11,7 @@ float3 dof(float2 center)
     return img;
 }
 
-#else //	USE_DOF
+#else //    USE_DOF
 
 // x - near y - focus z - far w - sky distance
 float4 dof_params;
@@ -75,6 +75,6 @@ float3 dof(float2 center)
     return float3(sum / contrib);
 }
 
-#endif //	USE_DOF
-#endif //	DOF_H_INCLUDED
+#endif //    USE_DOF
+#endif //    DOF_H_INCLUDED
 

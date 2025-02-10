@@ -1,7 +1,7 @@
 #pragma once
 
-#define TEMPLATE_SPECIALIZATION	template <int m_iDimensions>
-#define _MinimizeND				MinimizeND<m_iDimensions>
+#define TEMPLATE_SPECIALIZATION    template <int m_iDimensions>
+#define _MinimizeND                MinimizeND<m_iDimensions>
 
 TEMPLATE_SPECIALIZATION
 inline int& _MinimizeND::MaxLevel ()
@@ -29,7 +29,7 @@ _MinimizeND::MinimizeND (Function oF, int iMaxLevel,
 {
     VERIFY( m_iDimensions >= 1 && oF );
     
-	m_oF = oF;
+    m_oF = oF;
     m_iMaxIterations = iMaxIterations;
     m_pvUserData = pvUserData;
 

@@ -9,5 +9,5 @@ class TUI_ControlSpawnAdd: public TUI_CustomControl
 public:
     TUI_ControlSpawnAdd(int st, int act, ESceneToolBase* parent);
     virtual ~TUI_ControlSpawnAdd(){;}
-	virtual bool Start  (TShiftState _Shift);
+    virtual bool Start  (TShiftState _Shift);
 };

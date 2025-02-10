@@ -77,12 +77,12 @@ combat_ignore_cond = {!actor_enemy} true, false
 on_game_timer = 600 | {=squad_exist(jup_b202_bandit_squad)} %+jup_b202_stalker_snag_go_base =set_squad_goodwill_to_npc(jup_b202_bandit_squad:enemy)%, %+jup_b202_stalker_snag_go_base%
 
 [meet@jup_b202_stalker_snag_sit]
-close_distance 	= 0
-close_anim 		= nil
-close_victim 	= nil
-far_distance 	= 0
-far_anim 		= nil
-far_victim 		= nil
+close_distance     = 0
+close_anim         = nil
+close_victim     = nil
+far_distance     = 0
+far_anim         = nil
+far_victim         = nil
 use = {!actor_enemy !actor_has_weapon} true, false
 abuse           = false
 trade_enable    = false
@@ -139,4 +139,4 @@ use             = {+jup_b202_bandit_meet_actor -jup_b202_bandit_talked_with_acto
 abuse           = false
 trade_enable    = false
 allow_break     = false
-meet_dialog		= jup_b202_bandit_meet_actor
+meet_dialog        = jup_b202_bandit_meet_actor

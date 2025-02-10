@@ -26,7 +26,7 @@ bool TUI_ControlAIMapNodeAdd::Start(TShiftState Shift)
 void TUI_ControlAIMapNodeAdd::Move(TShiftState _Shift)
 {
     Fvector p;
-    ESceneAIMapTool* S 	= (ESceneAIMapTool*)parent_tool;
+    ESceneAIMapTool* S     = (ESceneAIMapTool*)parent_tool;
     if (S->PickObjects(p,UI->m_CurrentRStart,UI->m_CurrentRDir,UI->ZFar()))
     {
         append_nodes+=S->AddNode(p,((UIAIMapTool*)S->pForm)->IsIgnoreConstraints(),((UIAIMapTool*)S->pForm)->IsAutoLink(),S->m_BrushSize);

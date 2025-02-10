@@ -27,8 +27,8 @@ Mat2 operator*(const Mat2 &n, const Mat2& m)
     int i,j;
 
     for(i=0;i<2;i++)
-	for(j=0;j<2;j++)
-	    A(i,j) = n[i]*m.col(j);
+    for(j=0;j<2;j++)
+        A(i,j) = n[i]*m.col(j);
 
     return A;
 }
@@ -38,7 +38,7 @@ double invert(Mat2 &inv, const Mat2 &m)
     double d = det(m);
 
     if( d==0.0 )
-	return 0.0;
+    return 0.0;
 
     inv(0, 0) =  m(1,1)/d;
     inv(0, 1) = -m(0,1)/d;
@@ -55,14 +55,14 @@ bool eigenvalues(const Mat2& M, Vec2& evals)
 
     double dis = B*B - 4.0*C;
     if( dis<FEQ_EPS )
-	return false;
+    return false;
     else
     {
-	double s = _sqrt(dis);
+    double s = _sqrt(dis);
 
-	evals[0] = 0.5*(-B + s);
-	evals[1] = 0.5*(-B - s);
-	return true;
+    evals[0] = 0.5*(-B + s);
+    evals[1] = 0.5*(-B - s);
+    return true;
     }
 }
 
@@ -81,7 +81,7 @@ bool eigen(const Mat2& M, Vec2& evals, Vec2 evecs[2])
 {
     bool result = eigenvalues(M, evals);
     if( result )
-	eigenvectors(M, evals, evecs);
+    eigenvectors(M, evals, evecs);
     return result;
 }
 

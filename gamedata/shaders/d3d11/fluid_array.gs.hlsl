@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Geometry
+//    Geometry
 [maxvertexcount(3)]
 void main(triangle v2g_fluidsim In[3], inout TriangleStream<g2p_fluidsim> triStream)
 {

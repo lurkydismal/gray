@@ -24,5 +24,5 @@ using ImTextureID = IDirect3DBaseTexture9*;
 
 namespace ImGui
 {
-	XREUI_API bool HyperLink(const char* label, const char* url, bool underlineWhenHoveredOnly = false);
+    XREUI_API bool HyperLink(const char* label, const char* url, bool underlineWhenHoveredOnly = false);
 }

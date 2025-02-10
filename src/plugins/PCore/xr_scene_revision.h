@@ -15,16 +15,16 @@ class xr_ini_writer;
 
 class xr_scene_revision {
 public:
-			xr_scene_revision();
+            xr_scene_revision();
 
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
 
-	void		save_v12(xr_ini_writer *w, bool scene_part = false);
+    void        save_v12(xr_ini_writer *w, bool scene_part = false);
 
 private:
-	std::string	m_modifier;
-	uint32_t	m_modified_time;
+    std::string    m_modifier;
+    uint32_t    m_modified_time;
 };
 
 } // end of namespace xray_re

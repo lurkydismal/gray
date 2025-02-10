@@ -61,26 +61,26 @@ pthread_once (pthread_once_t * once_control, void (*init_routine) (void))
       ptw32_mcs_lock_acquire((ptw32_mcs_lock_t *)&once_control->lock, &node);
 
       if (!once_control->done)
-	{
+    {
 
 #ifdef _MSC_VER
 #pragma inline_depth(0)
 #endif
 
-	  pthread_cleanup_push(ptw32_once_on_init_cancel, (void *)&node);
-	  (*init_routine)();
-	  pthread_cleanup_pop(0);
+      pthread_cleanup_push(ptw32_once_on_init_cancel, (void *)&node);
+      (*init_routine)();
+      pthread_cleanup_pop(0);
 
 #ifdef _MSC_VER
 #pragma inline_depth()
 #endif
 
-	  once_control->done = PTW32_TRUE;
-	}
+      once_control->done = PTW32_TRUE;
+    }
 
-	ptw32_mcs_lock_release(&node);
+    ptw32_mcs_lock_release(&node);
     }
 
   return 0;
 
-}				/* pthread_once */
+}                /* pthread_once */

@@ -1,9 +1,9 @@
 #include "StdAfx.h"
 #include "magic_box3.h"
 
-bool MagicBox3::intersects	(const MagicBox3 &rkBox1) const
+bool MagicBox3::intersects    (const MagicBox3 &rkBox1) const
 {
-	const MagicBox3 &rkBox0 = *this;
+    const MagicBox3 &rkBox0 = *this;
     // convenience variables
     const Fvector* akA = rkBox0.Axes();
     const Fvector* akB = rkBox1.Axes();

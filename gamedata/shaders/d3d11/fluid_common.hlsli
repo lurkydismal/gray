@@ -9,7 +9,7 @@
 #define DOWNCELL float3(input.texcoords.x, input.texcoords.y, input.DU.x)
 #define UPCELL float3(input.texcoords.x, input.texcoords.y, input.DU.y)
 
-//	1.73 - voxel diagonal length
+//    1.73 - voxel diagonal length
 #define BOX_EXPANSION 1.73
 
 //--------------------------------------------------------------------------------------
@@ -46,37 +46,37 @@ cbuffer FluidSimConfig
     float epsilon;
     float timestep;
     float forward = 1.0;
-    float4 floatVolumeDim; //	Actually float3. We don't support float3 and float2
+    float4 floatVolumeDim; //    Actually float3. We don't support float3 and float2
 }
 
 cbuffer AABBBounds
 {
-    float4 boxLBDcorner; //	float3
-    float4 boxRTUcorner; //	float3
+    float4 boxLBDcorner; //    float3
+    float4 boxRTUcorner; //    float3
 }
 
 cbuffer EmitterParams
 {
     float size;
-    float4 center; //	Actually float3. We don't support float3 and float2
+    float4 center; //    Actually float3. We don't support float3 and float2
     float4 splatColor;
 }
 
 cbuffer OOBBClipPlanes
 {
     float4 OOBBClipPlane[6];
-    //	0 - Top
-    //	1 - Bottom
+    //    0 - Top
+    //    1 - Bottom
 }
 
-//	For fire simulation. Fuel extinction speed.
+//    For fire simulation. Fuel extinction speed.
 static const float k = 0.006;
 
 /////////////////////////////////////////////////////////////////
-//	Structs
+//    Structs
 
 /////////////////////////////////////////////////////////////////
-//	fluidsim
+//    fluidsim
 struct v_fluidsim
 {
     float3 position : POSITION; // 2D slice vertex coordinates in clip space
@@ -114,8 +114,8 @@ struct p_fluidsim
 };
 
 /////////////////////////////////////////////////////////////////
-//	fluidsim_clip
-//	TODO: DX10: These structures are used for obstacle rendering. Remove unused fields.
+//    fluidsim_clip
+//    TODO: DX10: These structures are used for obstacle rendering. Remove unused fields.
 
 struct v2g_fluidsim_clip
 {
@@ -154,8 +154,8 @@ struct p_fluidsim_clip
 };
 
 /////////////////////////////////////////////////////////////////
-//	fluidsim_clip
-//	TODO: DX10: These structures are used for obstacle rendering. Remove unused fields.
+//    fluidsim_clip
+//    TODO: DX10: These structures are used for obstacle rendering. Remove unused fields.
 
 struct v2g_fluidsim_dyn_aabb
 {

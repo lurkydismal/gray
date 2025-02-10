@@ -83,64 +83,64 @@ void hmatmult(Matrix A,Matrix B,Matrix C)
  * A *CAN* point to the same matrix as B or C.
  */
 {
-    float	*a,*b,*c,*bp,*cp;
-    float	*bmax,*cmax,*cpmax;
-    float	*b32,*c00,*c03;
-    Matrix		Bt,Ct;
+    float    *a,*b,*c,*bp,*cp;
+    float    *bmax,*cmax,*cpmax;
+    float    *b32,*c00,*c03;
+    Matrix        Bt,Ct;
 
     if (A == B) {
-	cpmatrix(Bt,B);
-	bmax = &Bt[3][0];
-	b = &Bt[0][0];
-	b32 = &Bt[3][2];
+    cpmatrix(Bt,B);
+    bmax = &Bt[3][0];
+    b = &Bt[0][0];
+    b32 = &Bt[3][2];
     } else {
-	bmax = &B[3][0];
-	b = &B[0][0];
-	b32 = &B[3][2];
+    bmax = &B[3][0];
+    b = &B[0][0];
+    b32 = &B[3][2];
     }
 
     if (A == C) {
-	cpmatrix(Ct,C);
-	c00 = &Ct[0][0];
-	c03 = &Ct[0][3];
+    cpmatrix(Ct,C);
+    c00 = &Ct[0][0];
+    c03 = &Ct[0][3];
     } else {
-	c00 = &C[0][0];
-	c03 = &C[0][3];
+    c00 = &C[0][0];
+    c03 = &C[0][3];
     }
 
     a = (float *) &A[0][0];
 
     while (b < bmax) {
-	c = c00;
-	cmax = c03;
-	while (c < cmax) {
-	    cp = c;
-	    cpmax = c + 8;
-	    bp = b;
-	    *a = (*bp++) * (*cp);
-	    do {
-		cp += 4;
-		*a += *bp++ * (*cp);
-	    } while (cp < cpmax);
-	    a++;
-	    c++;
-	}
-	b += 4;
-	*a++ = 0.0;
+    c = c00;
+    cmax = c03;
+    while (c < cmax) {
+        cp = c;
+        cpmax = c + 8;
+        bp = b;
+        *a = (*bp++) * (*cp);
+        do {
+        cp += 4;
+        *a += *bp++ * (*cp);
+        } while (cp < cpmax);
+        a++;
+        c++;
+    }
+    b += 4;
+    *a++ = 0.0;
     }
 
     c = c00;
     cmax = c03;
     while (c < cmax) {
-	cp = c + 12;
-	bp = b32;
-	*a = *cp;
-	do {
-	    cp -= 4;
-	    *a += *bp-- * (*cp);
-	} while (cp > c);
-	a++;
-	c++;
+    cp = c + 12;
+    bp = b32;
+    *a = *cp;
+    do {
+        cp -= 4;
+        *a += *bp-- * (*cp);
+    } while (cp > c);
+    a++;
+    c++;
     }
     *a = 1.0;
 }
@@ -160,14 +160,14 @@ void inverthomomatrix(Matrix N,Matrix M)
     n = &N[0][0];
     C = &M[0][0];
     while (n < nmax) {
-	m = C;
-	*n++ = *m;
-	m += 4;
-	*n++ = *m;
-	m += 4;
-	*n++ = *m;
-	*n++ = 0.0;
-	C++;
+    m = C;
+    *n++ = *m;
+    m += 4;
+    *n++ = *m;
+    m += 4;
+    *n++ = *m;
+    *n++ = 0.0;
+    C++;
     }
     
     m3 = &M[3][0];
@@ -190,8 +190,8 @@ void vecmult0(float y[],float x[],Matrix M)
  * y = x * M, with y[3] = 0
  */
 {
-    int	i,j;
-    float   	Y[3];
+    int    i,j;
+    float       Y[3];
     
     for (i=0; i<3; i++) {
         Y[i] = 0;
@@ -211,7 +211,7 @@ void vecmult(float y[],float x[],Matrix M)
  */
 {
     int i,j;
-    float   	Y[3];
+    float       Y[3];
     
     for (i=0; i<3; i++) {
         Y[i] = M[3][i];
@@ -233,103 +233,103 @@ axisangletomatrix(Matrix m, float axis[], float theta)
  * like the coordinate axes.
  */
 {
-    float	s,v,c;
-    float	*p;
-    float	a01,a02,a12,a0s,a1s,a2s,a01v,a02v,a12v;
+    float    s,v,c;
+    float    *p;
+    float    a01,a02,a12,a0s,a1s,a2s,a01v,a02v,a12v;
     
     c = _cos(theta);
     s = _sin(theta);
     v = 1.0f - c;
     
     p = (float *) m;
-	
+    
     if (axis[0] == 0.0f && axis[1] == 0.0f) {
-	if (axis[2] < 0) {
-	    s = -s;
-	}
-	/*
-	 * z rotation
-	 */
-	*p++ = c;
-	*p++ = s;
-	*p++ = 0.0;
-	*p++ = 0.0;
-	
-	*p++ = - s;
-	*p++ = c;
-	*p++ = 0.0;
-	*p++ = 0.0;
-	
-	*p++ = 0.0;
-	*p++ = 0.0;
-	*p++ = 1.0;
+    if (axis[2] < 0) {
+        s = -s;
+    }
+    /*
+     * z rotation
+     */
+    *p++ = c;
+    *p++ = s;
+    *p++ = 0.0;
+    *p++ = 0.0;
+    
+    *p++ = - s;
+    *p++ = c;
+    *p++ = 0.0;
+    *p++ = 0.0;
+    
+    *p++ = 0.0;
+    *p++ = 0.0;
+    *p++ = 1.0;
     } else if (axis[0] == 0.0 && axis[2] == 0.0) {
-	if (axis[1] < 0) {
-	    s = -s;
-	}
-	/*
-	 * y rotation
-	 */
-	*p++ = c;
-	*p++ = 0.0;
-	*p++ = - s;
-	*p++ = 0.0;
-	
-	*p++ = 0.0;
-	*p++ = 1.0;
-	*p++ = 0.0;
-	*p++ = 0.0;
-	
-	*p++ = s;
-	*p++ = 0.0;
-	*p++ = c;
+    if (axis[1] < 0) {
+        s = -s;
+    }
+    /*
+     * y rotation
+     */
+    *p++ = c;
+    *p++ = 0.0;
+    *p++ = - s;
+    *p++ = 0.0;
+    
+    *p++ = 0.0;
+    *p++ = 1.0;
+    *p++ = 0.0;
+    *p++ = 0.0;
+    
+    *p++ = s;
+    *p++ = 0.0;
+    *p++ = c;
     } else if (axis[1] == 0.0 && axis[2] == 0.0) {
-	if (axis[0] < 0) {
-	    s = -s;
-	}
-	/*
-	 * x rotation
-	 */
-	*p++ = 1.0;
-	*p++ = 0.0;
-	*p++ = 0.0;
-	*p++ = 0.0;
-	
-	*p++ = 0.0;
-	*p++ = c;
-	*p++ = s;
-	*p++ = 0.0;
-	
-	*p++ = 0.0;
-	*p++ = -s;
-	*p++ = c;
-    } else {	
-	a01 = axis[0] * axis[1];
-	a02 = axis[0] * axis[2];
-	a12 = axis[1] * axis[2];
-	a0s = axis[0] * s;
-	a1s = axis[1] * s;
-	a2s = axis[2] * s;
-	a01v = a01 * v;
-	a02v = a02 * v;
-	a12v = a12 * v;
-	
-	*p++ = axis[0] * axis[0] * v + c;
-	*p++ = a01v + a2s;
-	*p++ = a02v - a1s;
-	*p++ = 0.0;
-	
-	*p++ = a01v - a2s;
-	*p++ = axis[1] * axis[1] * v + c;
-	*p++ = a12v + a0s;
-	*p++ = 0.0;
-	
-	*p++ = a02v + a1s;
-	*p++ = a12v - a0s;
-	*p++ = axis[2] * axis[2] * v + c;
+    if (axis[0] < 0) {
+        s = -s;
+    }
+    /*
+     * x rotation
+     */
+    *p++ = 1.0;
+    *p++ = 0.0;
+    *p++ = 0.0;
+    *p++ = 0.0;
+    
+    *p++ = 0.0;
+    *p++ = c;
+    *p++ = s;
+    *p++ = 0.0;
+    
+    *p++ = 0.0;
+    *p++ = -s;
+    *p++ = c;
+    } else {    
+    a01 = axis[0] * axis[1];
+    a02 = axis[0] * axis[2];
+    a12 = axis[1] * axis[2];
+    a0s = axis[0] * s;
+    a1s = axis[1] * s;
+    a2s = axis[2] * s;
+    a01v = a01 * v;
+    a02v = a02 * v;
+    a12v = a12 * v;
+    
+    *p++ = axis[0] * axis[0] * v + c;
+    *p++ = a01v + a2s;
+    *p++ = a02v - a1s;
+    *p++ = 0.0;
+    
+    *p++ = a01v - a2s;
+    *p++ = axis[1] * axis[1] * v + c;
+    *p++ = a12v + a0s;
+    *p++ = 0.0;
+    
+    *p++ = a02v + a1s;
+    *p++ = a12v - a0s;
+    *p++ = axis[2] * axis[2] * v + c;
     }
     *p++ = 0.0;
-	
+    
     *p++ = 0.0;
     *p++ = 0.0;
     *p++ = 0.0;
@@ -448,18 +448,18 @@ float angle_between_vectors(float u[3], float v[3], float n[3])
     // Vectors are parallel at 0 or 180 
     if (mag*mag < 1e-8)
     {
-	if (DOT(up,vp) < 0)
-	    return M_PI;
-	else
-	    return 0;
+    if (DOT(up,vp) < 0)
+        return M_PI;
+    else
+        return 0;
     }
 
     int sign = (mag > 0) ? 1 : -1;
     float t = DOT(up,vp); 
     if (t > 1.0)
-	t = 1.0;
+    t = 1.0;
     else if (t < -1.0)
-	t = -1.0;
+    t = -1.0;
     return sign*acos(t);
 #else
 
@@ -483,9 +483,9 @@ void print_matrix(Matrix M)
 {
     for (int i = 0; i < 4; i++)
     {
-	for (int j = 0; j < 4; j++)
-	    printf(" %lf ", M[i][j]);
-	printf("\n");
+    for (int j = 0; j < 4; j++)
+        printf(" %lf ", M[i][j]);
+    printf("\n");
     }
 }
 
@@ -515,20 +515,20 @@ void find_normal_vector(float v[3], float n[3])
 
     temp = _abs(v[1]);
     if (temp < 1e-8f)
-	num_zero++; 
+    num_zero++; 
     if (temp < min)
     {
-	min = temp;
-	min_i = 1;
+    min = temp;
+    min_i = 1;
     }
 
     temp = _abs(v[2]);
     if (temp < 1e-8)
-	num_zero++; 
+    num_zero++; 
     if (temp < min)
     {
-	min = temp;
-	min_i = 2;
+    min = temp;
+    min_i = 2;
     }
 
     n[0] = n[1] = n[2] = 0.0;
@@ -536,34 +536,34 @@ void find_normal_vector(float v[3], float n[3])
     switch (num_zero)
     {
     case 3:
-	// Vector is zero so there is no soln
-	break;
+    // Vector is zero so there is no soln
+    break;
     case 2:
-	// Vector has only one nonzero component. Set any of the
-	// other to 1.0 and 0 to the others
-	n[min_i] = 1.0; 
-	break;
+    // Vector has only one nonzero component. Set any of the
+    // other to 1.0 and 0 to the others
+    n[min_i] = 1.0; 
+    break;
 
-	// Vector has at least two nonzero components
+    // Vector has at least two nonzero components
     case 1:
     default:
-	if (min_i == 0)
-	{
-	    n[1] = -v[2];
-	    n[2] = v[1];
-	}
-	else if (min_i == 1)
-	{
-	    n[0] = -v[2];
-	    n[2] = v[0];
-	}
-	else
-	{
-	    n[0] = -v[1];
-	    n[1] = v[0];
-	}
-	unitize(n);
-	break;
+    if (min_i == 0)
+    {
+        n[1] = -v[2];
+        n[2] = v[1];
+    }
+    else if (min_i == 1)
+    {
+        n[0] = -v[2];
+        n[2] = v[0];
+    }
+    else
+    {
+        n[0] = -v[1];
+        n[1] = v[0];
+    }
+    unitize(n);
+    break;
     }
 
 }
@@ -586,18 +586,18 @@ void rmatmult(Matrix A, Matrix B, Matrix C)
 
     if (A == B)
     {
-	cpmatrix(Temp1, B);
-	b = (float *) Temp1;
+    cpmatrix(Temp1, B);
+    b = (float *) Temp1;
     }
     else
-	b = (float *) B; 
+    b = (float *) B; 
     if (A == C)
     {
-	cpmatrix(Temp2, C);
-	c = (float *) Temp2;
+    cpmatrix(Temp2, C);
+    c = (float *) Temp2;
     }
     else
-	c = (float *) C; 
+    c = (float *) C; 
 
     float c11 = *c++; 
     float c12 = *c++; 
@@ -646,14 +646,14 @@ void invertrmatrix(Matrix N,Matrix M)
     n = &N[0][0];
     C = &M[0][0];
     while (n < nmax) {
-	m = C;
-	*n++ = *m;
-	m += 4;
-	*n++ = *m;
-	m += 4;
-	*n++ = *m;
-	*n++ = 0.0;
-	C++;
+    m = C;
+    *n++ = *m;
+    m += 4;
+    *n++ = *m;
+    m += 4;
+    *n++ = *m;
+    *n++ = 0.0;
+    C++;
     }
     
     *n++ = 0;
@@ -677,20 +677,20 @@ void rotation_principal_axis_to_deriv_matrix(char axis, float angle, Matrix m)
     {
     case 'x':
     case 'X':
-	m[1][1] = -sin_a; m[2][1] = -cos_a;
-	m[1][2] = cos_a; m[2][2] = -sin_a;
-	break;
-	
+    m[1][1] = -sin_a; m[2][1] = -cos_a;
+    m[1][2] = cos_a; m[2][2] = -sin_a;
+    break;
+    
     case 'y':
     case 'Y':
-	m[0][0] = -sin_a;  m[2][0] = cos_a;
-	m[0][2] = -cos_a; m[2][2] = -sin_a;
-	break;
-	
+    m[0][0] = -sin_a;  m[2][0] = cos_a;
+    m[0][2] = -cos_a; m[2][2] = -sin_a;
+    break;
+    
     default:
-	m[0][0] = -sin_a; m[1][0] = -cos_a; 
-	m[0][1] = cos_a; m[1][1] = -sin_a;  
-	break;
+    m[0][0] = -sin_a; m[1][0] = -cos_a; 
+    m[0][1] = cos_a; m[1][1] = -sin_a;  
+    break;
     }
 }
 
@@ -706,29 +706,29 @@ void rotation_principal_axis_to_matrix(char axis, float angle, Matrix m)
     {
     case 'x':
     case 'X':
-	m[1][1] = cos_a; m[2][1] = -sin_a;
-	m[1][2] = sin_a; m[2][2] = cos_a;
-	break;
-	
+    m[1][1] = cos_a; m[2][1] = -sin_a;
+    m[1][2] = sin_a; m[2][2] = cos_a;
+    break;
+    
     case 'y':
     case 'Y':
-	m[0][0] = cos_a;  m[2][0] = sin_a;
-	m[0][2] = -sin_a; m[2][2] = cos_a;
-	break;
-	
+    m[0][0] = cos_a;  m[2][0] = sin_a;
+    m[0][2] = -sin_a; m[2][2] = cos_a;
+    break;
+    
     default:
-	m[0][0] = cos_a; m[1][0] = -sin_a; 
-	m[0][1] = sin_a; m[1][1] = cos_a;  
-	break;
+    m[0][0] = cos_a; m[1][0] = -sin_a; 
+    m[0][1] = sin_a; m[1][1] = cos_a;  
+    break;
     }
 }
 
 //
 // To extract axis and angle from R use the formulas (murray, pg 414)
 //
-//	2 * cos(theta) - 1 = trace(R) 
+//    2 * cos(theta) - 1 = trace(R) 
 // and 
-//	axis = vector associated with skew symmetric matrix (R-R')/(2*sin(theta)) 
+//    axis = vector associated with skew symmetric matrix (R-R')/(2*sin(theta)) 
 //
 //
 // By our convention always return 0 <= angle < M_PI
@@ -743,15 +743,15 @@ void rotation_matrix_to_axis(const Matrix R, float axis[], float &angle)
     // Close to identity. Arbitrarily set solution to z axis rotation of 0 
     if (_abs(angle) < eps || _abs(angle - M_PI) < eps)
     {
-	angle = 0.0;
-	axis[0] = axis[1] = 0.0; axis[2] = 1.0; 
+    angle = 0.0;
+    axis[0] = axis[1] = 0.0; axis[2] = 1.0; 
     }
     else
     {
-	axis[0] = R[1][2] - R[2][1]; 
-	axis[1] = R[2][0] - R[0][2];
-	axis[2] = R[0][1] - R[1][0]; 
-	unitize(axis);
+    axis[0] = R[1][2] - R[2][1]; 
+    axis[1] = R[2][0] - R[0][2];
+    axis[2] = R[0][1] - R[1][0]; 
+    unitize(axis);
     }
 }
 
@@ -942,9 +942,9 @@ void get_translation(const Matrix M, float p[3])
 
 float get_translation( const Matrix M)
 {
-	float p[3];
-	get_translation( M, p );
-	return norm( p );
+    float p[3];
+    get_translation( M, p );
+    return norm( p );
 }
 
 void set_translation(Matrix  M, const float p[3])

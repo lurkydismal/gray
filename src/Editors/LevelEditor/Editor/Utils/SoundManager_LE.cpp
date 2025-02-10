@@ -4,20 +4,20 @@ CLevelSoundManager* LSndLib=(CLevelSoundManager*)SndLib;
 
 bool CLevelSoundManager::Validate()
 {
-	ObjectList& snd_envs = Scene->ListObj(OBJCLASS_SOUND_ENV);
+    ObjectList& snd_envs = Scene->ListObj(OBJCLASS_SOUND_ENV);
     for (ObjectIt it=snd_envs.begin(); it!=snd_envs.end(); it++){
-    	ESoundEnvironment* E = smart_cast<ESoundEnvironment*>(*it); R_ASSERT(E);
+        ESoundEnvironment* E = smart_cast<ESoundEnvironment*>(*it); R_ASSERT(E);
         if (E->m_EnvInner==E->m_EnvOuter){ 
-        	ELog.DlgMsg(mtError,"SoundEnvironment: '%s' inner and outer environment must be different.",E->GetName());
-        	return false;
+            ELog.DlgMsg(mtError,"SoundEnvironment: '%s' inner and outer environment must be different.",E->GetName());
+            return false;
         }
     }
-	ObjectList& snd_src = Scene->ListObj(OBJCLASS_SOUND_SRC);
+    ObjectList& snd_src = Scene->ListObj(OBJCLASS_SOUND_SRC);
     for (ObjectIt it=snd_src.begin(); it!=snd_src.end(); it++){
-    	ESoundSource* S = smart_cast<ESoundSource*>(*it); R_ASSERT(S);
+        ESoundSource* S = smart_cast<ESoundSource*>(*it); R_ASSERT(S);
         if (!S->GetSourceWAV()||(0==strlen(S->GetSourceWAV()))){
-        	ELog.DlgMsg(mtError,"SoundSource: '%s' hasn't wave.",S->GetName());
-        	return false;
+            ELog.DlgMsg(mtError,"SoundSource: '%s' hasn't wave.",S->GetName());
+            return false;
         } 
     }
     return true;
@@ -25,17 +25,17 @@ bool CLevelSoundManager::Validate()
 
 bool CLevelSoundManager::MakeEnvGeometry(CMemoryWriter& F, bool bErrMsg)
 {
-	ObjectList& snd_envs = Scene->ListObj(OBJCLASS_SOUND_ENV);
+    ObjectList& snd_envs = Scene->ListObj(OBJCLASS_SOUND_ENV);
 
     if (snd_envs.empty()){ 
-		if (bErrMsg) ELog.Msg(mtError,"Scene hasn't sound environment geometry.");
-    	return false;
+        if (bErrMsg) ELog.Msg(mtError,"Scene hasn't sound environment geometry.");
+        return false;
     }
     
-	RStringVec env_names;
+    RStringVec env_names;
 
     CDB::Collector CP;
-	Fbox aabb; aabb.invalidate();
+    Fbox aabb; aabb.invalidate();
     for (ObjectIt it = snd_envs.begin(); it != snd_envs.end(); it++) {
         ESoundEnvironment* E = smart_cast<ESoundEnvironment*>(*it); R_ASSERT(E);
         Fbox bb;
@@ -62,7 +62,7 @@ bool CLevelSoundManager::MakeEnvGeometry(CMemoryWriter& F, bool bErrMsg)
         u32 idx = (inner << 16) | (outer);
 
         // append to collector
-        Fmatrix M;	E->get_box(M);
+        Fmatrix M;    E->get_box(M);
 
         Fvector bv[DU_BOX_NUMVERTEX];
         for (int k = 0; k < DU_BOX_NUMVERTEX; k++)
@@ -75,24 +75,24 @@ bool CLevelSoundManager::MakeEnvGeometry(CMemoryWriter& F, bool bErrMsg)
     if (env_names.empty()) return false;
     
     // write names
-    F.open_chunk	(0);
-	for (RStringVecIt e_it=env_names.begin(); e_it!=env_names.end(); e_it++)
-    	F.w_stringZ	(e_it->c_str());
-    F.close_chunk	();
+    F.open_chunk    (0);
+    for (RStringVecIt e_it=env_names.begin(); e_it!=env_names.end(); e_it++)
+        F.w_stringZ    (e_it->c_str());
+    F.close_chunk    ();
     
     // write geom
-    F.open_chunk	(1);
+    F.open_chunk    (1);
     // write header
-	hdrCFORM		H;
-    H.version		= CFORM_CURRENT_VERSION;
-    H.vertcount		= CP.getVS();
-    H.facecount		= CP.getTS();
-    H.aabb			= aabb;
-	F.w				(&H,sizeof(hdrCFORM));
+    hdrCFORM        H;
+    H.version        = CFORM_CURRENT_VERSION;
+    H.vertcount        = CP.getVS();
+    H.facecount        = CP.getTS();
+    H.aabb            = aabb;
+    F.w                (&H,sizeof(hdrCFORM));
     // write vertices&TRIs
-    F.w				(CP.getV(),sizeof(Fvector)*H.vertcount);
-    F.w				(CP.getT(),sizeof(CDB::TRI)*H.facecount);
-    F.close_chunk	();
+    F.w                (CP.getV(),sizeof(Fvector)*H.vertcount);
+    F.w                (CP.getT(),sizeof(CDB::TRI)*H.facecount);
+    F.close_chunk    ();
 
     return true;
 }
@@ -110,16 +110,16 @@ void CLevelSoundManager::RealRefreshEnvGeometry()
 */
 void CLevelSoundManager::OnFrame()
 {
-	inherited::OnFrame();
-	if (bNeedRefreshEnvGeom){
-    	bNeedRefreshEnvGeom 	= false;
-  //      RealRefreshEnvGeometry	();
+    inherited::OnFrame();
+    if (bNeedRefreshEnvGeom){
+        bNeedRefreshEnvGeom     = false;
+  //      RealRefreshEnvGeometry    ();
     }
 }
 /*
 void CLevelSoundManager::RefreshEnvLibrary()
 {
-	Sound->refresh_env_library();
-    RefreshEnvGeometry		();
+    Sound->refresh_env_library();
+    RefreshEnvGeometry        ();
 }
 */

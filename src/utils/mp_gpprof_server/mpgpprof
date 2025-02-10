@@ -24,17 +24,17 @@ case "$1" in
         ;;
   stop)
         echo -n "Shutting down $prog:"
-	kill `cat $pidfile`
+    kill `cat $pidfile`
         echo
-	rm -f $pidfile
+    rm -f $pidfile
         ;;
   restart)
         $0 stop
         $0 start
         ;;
   status)
-	status_of_proc -p $pidfile "$DAEMON" $exe
-	;;
+    status_of_proc -p $pidfile "$DAEMON" $exe
+    ;;
   *)
         echo "Usage: $0 {start|stop|restart|status}"
         exit 1

@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Pixel
+//    Pixel
 float3 main(p_fluidsim input) : SV_Target
 {
     // Texture_tempvector contains the vorticity computed by PS_VORTICITY

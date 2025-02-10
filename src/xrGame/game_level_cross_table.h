@@ -5,13 +5,13 @@ class CGameLevelCrossTable :public  IGameLevelCrossTable
 {
 
 public:
-	IReader* m_tpCrossTableVFS = nullptr;
+    IReader* m_tpCrossTableVFS = nullptr;
 
 public:
-	CGameLevelCrossTable(const void* buffer, const u32& buffer_size);
+    CGameLevelCrossTable(const void* buffer, const u32& buffer_size);
 #ifdef AI_COMPILER
-	CGameLevelCrossTable(LPCSTR fName);
+    CGameLevelCrossTable(LPCSTR fName);
 #endif
 
-	virtual ~CGameLevelCrossTable();
+    virtual ~CGameLevelCrossTable();
 };

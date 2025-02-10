@@ -20,7 +20,7 @@ Please see the GameSpy Presence SDK documentation for more information
 
 //TYPES
 ///////
-#define GPI_SEARCH_PROFILE			    1
+#define GPI_SEARCH_PROFILE                1
 #define GPI_SEARCH_IS_VALID             2
 #define GPI_SEARCH_NICKS                3
 #define GPI_SEARCH_PLAYERS              4
@@ -38,28 +38,28 @@ Please see the GameSpy Presence SDK documentation for more information
 /////////////////////////////////
 typedef struct
 {
-	int type;
-	SOCKET sock;
-	GPIBuffer inputBuffer;
-	GPIBuffer outputBuffer;
-	char nick[GP_NICK_LEN];
-	char uniquenick[GP_UNIQUENICK_LEN];
-	int namespaceIDs[GP_MAX_NAMESPACEIDS];
-	int numNamespaces;
-	char email[GP_EMAIL_LEN];
-	char firstname[GP_FIRSTNAME_LEN];
-	char lastname[GP_LASTNAME_LEN];
-	char password[GP_PASSWORD_LEN];
-	char cdkey[GP_CDKEY_LEN];
-	int partnerID;
-	int icquin;
-	int skip;
-	int productID;
-	GPIBool processing;
-	GPIBool remove;
-	gsi_time searchStartTime;
-	int *revBuddyProfileIds;
-	int numOfRevBuddyProfiles;
+    int type;
+    SOCKET sock;
+    GPIBuffer inputBuffer;
+    GPIBuffer outputBuffer;
+    char nick[GP_NICK_LEN];
+    char uniquenick[GP_UNIQUENICK_LEN];
+    int namespaceIDs[GP_MAX_NAMESPACEIDS];
+    int numNamespaces;
+    char email[GP_EMAIL_LEN];
+    char firstname[GP_FIRSTNAME_LEN];
+    char lastname[GP_LASTNAME_LEN];
+    char password[GP_PASSWORD_LEN];
+    char cdkey[GP_CDKEY_LEN];
+    int partnerID;
+    int icquin;
+    int skip;
+    int productID;
+    GPIBool processing;
+    GPIBool remove;
+    gsi_time searchStartTime;
+    int *revBuddyProfileIds;
+    int numOfRevBuddyProfiles;
 } GPISearchData;
 
 //FUNCTIONS
@@ -148,12 +148,12 @@ GPResult gpiOthersBuddy(
 );
 
 GPResult gpiOthersBuddyList(
-	GPConnection * connection,
-	int *profiles, 
-	int numOfProfiles,
-	GPEnum blocking,
-	GPCallback callback,
-	void * param
+    GPConnection * connection,
+    int *profiles, 
+    int numOfProfiles,
+    GPEnum blocking,
+    GPCallback callback,
+    void * param
 );
 
 GPResult gpiSuggestUniqueNick(

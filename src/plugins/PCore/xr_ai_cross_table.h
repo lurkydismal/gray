@@ -15,32 +15,32 @@ const uint16_t AI_GRAPH_BAD_VERTEX = 0xffff;
 
 // v9 too
 struct gct_header_v8 {
-	uint32_t	version;
-	uint32_t	node_count;
-	uint32_t	graph_point_count;
-	xr_guid		level_guid;
-	xr_guid		game_guid;
+    uint32_t    version;
+    uint32_t    node_count;
+    uint32_t    graph_point_count;
+    xr_guid        level_guid;
+    xr_guid        game_guid;
 };
 
 struct gct_cell_v8 {
-	uint16_t	graph_id;
-	float		distance;
+    uint16_t    graph_id;
+    float        distance;
 };
 #pragma pack(pop)
 
 // in-memory structure
 struct gct_cell {
-	uint16_t	graph_id;
-	uint16_t	__pad;
-	float		distance;
+    uint16_t    graph_id;
+    uint16_t    __pad;
+    float        distance;
 };
 
 class xr_reader;
 class xr_writer;
 
 struct gct_cell_io {
-	void	operator()(gct_cell& cell, xr_reader& r) const;
-	void	operator()(const gct_cell& cell, xr_writer& w) const;
+    void    operator()(gct_cell& cell, xr_reader& r) const;
+    void    operator()(const gct_cell& cell, xr_writer& w) const;
 };
 
 } // end of namespace xray_re

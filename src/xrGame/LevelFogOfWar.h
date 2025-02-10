@@ -13,29 +13,29 @@ class CFogOfWarWrapper;
 class CLevelFogOfWar: public IPureSerializeObject<IReader,IWriter>, public CUIWindow
 {
 public:
-	ref_shader			hShader;
-	ref_geom			hGeom;	
+    ref_shader            hShader;
+    ref_geom            hGeom;    
 
-	shared_str			m_level_name;
-	Frect				m_levelRect;
-	u32					m_rowNum, m_colNum;
-	xr_vector<bool>		m_cells;
+    shared_str            m_level_name;
+    Frect                m_levelRect;
+    u32                    m_rowNum, m_colNum;
+    xr_vector<bool>        m_cells;
 
 public:
-						CLevelFogOfWar			();
+                        CLevelFogOfWar            ();
 
-	virtual void		Draw					();
+    virtual void        Draw                    ();
 
-	void				Open					(Fvector2 pos);
-	void				Open					(u32 row, u32 col, bool mask);
-	void				Init					(const shared_str& level);
-	void				GetTexUVLT				(Fvector2& frame, u32 col, u32 row);
-	Ivector2			ConvertRealToLocal		(const Fvector2& src);
-	Irect				ConvertRealToLocal		(const Frect& src);
-	Fvector2			ConvertLocalToReal		(const Ivector2& src);
+    void                Open                    (Fvector2 pos);
+    void                Open                    (u32 row, u32 col, bool mask);
+    void                Init                    (const shared_str& level);
+    void                GetTexUVLT                (Fvector2& frame, u32 col, u32 row);
+    Ivector2            ConvertRealToLocal        (const Fvector2& src);
+    Irect                ConvertRealToLocal        (const Frect& src);
+    Fvector2            ConvertLocalToReal        (const Ivector2& src);
 
-	virtual void		save					(IWriter &stream);
-	virtual void		load					(IReader &stream);
+    virtual void        save                    (IWriter &stream);
+    virtual void        load                    (IReader &stream);
 };
 
 
@@ -47,10 +47,10 @@ using CFogOfWarRegistry = CALifeAbstractRegistry<u16, FOG_STORAGE_T>;
 
 class CFogOfWarMngr
 {
-	CFogOfWarWrapper*						m_fogOfWarRegistry;
-	FOG_STORAGE_T&							GetFogStorage();
+    CFogOfWarWrapper*                        m_fogOfWarRegistry;
+    FOG_STORAGE_T&                            GetFogStorage();
 public:
-	CFogOfWarMngr							();
-	virtual					~CFogOfWarMngr	();
-	CLevelFogOfWar*			GetFogOfWar		(const shared_str& level_name);
+    CFogOfWarMngr                            ();
+    virtual                    ~CFogOfWarMngr    ();
+    CLevelFogOfWar*            GetFogOfWar        (const shared_str& level_name);
 };

@@ -53,18 +53,18 @@ sched_setscheduler (pid_t pid, int policy)
       int selfPid = (int) GetCurrentProcessId ();
 
       if (pid != selfPid)
-	{
-	  HANDLE h =
-	    OpenProcess (PROCESS_SET_INFORMATION, PTW32_FALSE, (DWORD) pid);
+    {
+      HANDLE h =
+        OpenProcess (PROCESS_SET_INFORMATION, PTW32_FALSE, (DWORD) pid);
 
-	  if (NULL == h)
-	    {
-	      errno =
-		(GetLastError () ==
-		 (0xFF & ERROR_ACCESS_DENIED)) ? EPERM : ESRCH;
-	      return -1;
-	    }
-	}
+      if (NULL == h)
+        {
+          errno =
+        (GetLastError () ==
+         (0xFF & ERROR_ACCESS_DENIED)) ? EPERM : ESRCH;
+          return -1;
+        }
+    }
     }
 
   if (SCHED_OTHER != policy)

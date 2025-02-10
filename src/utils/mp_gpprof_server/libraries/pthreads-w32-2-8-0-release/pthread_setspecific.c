@@ -77,9 +77,9 @@ pthread_setspecific (pthread_key_t key, const void *value)
        */
       self = pthread_self ();
       if (self.p == NULL)
-	{
-	  return ENOENT;
-	}
+    {
+      return ENOENT;
+    }
     }
   else
     {
@@ -91,15 +91,15 @@ pthread_setspecific (pthread_key_t key, const void *value)
 
       if (sp == NULL)
         {
-	  if (value == NULL)
-	    {
-	      return ENOENT;
-	    }
+      if (value == NULL)
+        {
+          return ENOENT;
+        }
           self = *((pthread_t *) value);
         }
       else
         {
-	  self = sp->ptHandle;
+      self = sp->ptHandle;
         }
     }
 
@@ -108,61 +108,61 @@ pthread_setspecific (pthread_key_t key, const void *value)
   if (key != NULL)
     {
       if (self.p != NULL && key->destructor != NULL && value != NULL)
-	{
-	  /*
-	   * Only require associations if we have to
-	   * call user destroy routine.
-	   * Don't need to locate an existing association
-	   * when setting data to NULL for WIN32 since the
-	   * data is stored with the operating system; not
-	   * on the association; setting assoc to NULL short
-	   * circuits the search.
-	   */
-	  ThreadKeyAssoc *assoc;
+    {
+      /*
+       * Only require associations if we have to
+       * call user destroy routine.
+       * Don't need to locate an existing association
+       * when setting data to NULL for WIN32 since the
+       * data is stored with the operating system; not
+       * on the association; setting assoc to NULL short
+       * circuits the search.
+       */
+      ThreadKeyAssoc *assoc;
 
-	  if (pthread_mutex_lock(&(key->keyLock)) == 0)
-	    {
-	      ptw32_thread_t * sp = (ptw32_thread_t *) self.p;
+      if (pthread_mutex_lock(&(key->keyLock)) == 0)
+        {
+          ptw32_thread_t * sp = (ptw32_thread_t *) self.p;
 
-	      (void) pthread_mutex_lock(&(sp->threadLock));
+          (void) pthread_mutex_lock(&(sp->threadLock));
 
-	      assoc = (ThreadKeyAssoc *) sp->keys;
-	      /*
-	       * Locate existing association
-	       */
-	      while (assoc != NULL)
-		{
-		  if (assoc->key == key)
-		    {
-		      /*
-		       * Association already exists
-		       */
-		      break;
-		    }
-		  assoc = assoc->nextKey;
-		}
+          assoc = (ThreadKeyAssoc *) sp->keys;
+          /*
+           * Locate existing association
+           */
+          while (assoc != NULL)
+        {
+          if (assoc->key == key)
+            {
+              /*
+               * Association already exists
+               */
+              break;
+            }
+          assoc = assoc->nextKey;
+        }
 
-	      /*
-	       * create an association if not found
-	       */
-	      if (assoc == NULL)
-		{
-		  result = ptw32_tkAssocCreate (sp, key);
-		}
+          /*
+           * create an association if not found
+           */
+          if (assoc == NULL)
+        {
+          result = ptw32_tkAssocCreate (sp, key);
+        }
 
-	      (void) pthread_mutex_unlock(&(sp->threadLock));
-	    }
-	  (void) pthread_mutex_unlock(&(key->keyLock));
-	}
+          (void) pthread_mutex_unlock(&(sp->threadLock));
+        }
+      (void) pthread_mutex_unlock(&(key->keyLock));
+    }
 
-	if (result == 0)
-	  {
-	    if (!TlsSetValue (key->key, (LPVOID) value))
-	      {
-		result = EAGAIN;
-	      }
-	  }
+    if (result == 0)
+      {
+        if (!TlsSetValue (key->key, (LPVOID) value))
+          {
+        result = EAGAIN;
+          }
+      }
     }
 
   return (result);
-}				/* pthread_setspecific */
+}                /* pthread_setspecific */

@@ -5,7 +5,7 @@
 #include <conio.h>
 
 #ifndef _STLP_NO_IOSTREAMS
-#	include <iostream>
+#    include <iostream>
 #else //#ifdef _STLP_NO_IOSTREAMS
 
 namespace std
@@ -14,20 +14,20 @@ namespace std
 class console_output
 {
 public:
-	console_output()	{};
-	~console_output()	{};
+    console_output()    {};
+    ~console_output()    {};
 
-	console_output & operator << (char const * str)
-	{
-		printf(str);
-		return *this;
-	}
+    console_output & operator << (char const * str)
+    {
+        printf(str);
+        return *this;
+    }
 };//class console_output
 
-extern console_output	cout;
-extern console_output	cerr;
-extern console_output	clog;
-extern char const *		endl;
+extern console_output    cout;
+extern console_output    cerr;
+extern console_output    clog;
+extern char const *        endl;
 
 }; //namespace std
 

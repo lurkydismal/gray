@@ -29,9 +29,9 @@
  *
  */
 #ifndef _PS3
-	// these common types are defined in sony libs
-	typedef gsi_u32 uint32_t;
-	typedef gsi_u8  uint8_t;
+    // these common types are defined in sony libs
+    typedef gsi_u32 uint32_t;
+    typedef gsi_u8  uint8_t;
 #endif
 
 typedef gsi_i16 int_least16_t;

@@ -11,7 +11,7 @@ namespace xray_re {
 
 template<typename T> class xr_numeric_limits: public std::numeric_limits<T> {
 public:
-	static T	real_min()/* throw()*/;
+    static T    real_min()/* throw()*/;
 };
 
 template<> inline float xr_numeric_limits<float>::real_min() { return -FLT_MAX; }

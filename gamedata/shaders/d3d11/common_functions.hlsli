@@ -1,7 +1,7 @@
 #ifndef common_functions_h_included
 #define common_functions_h_included
 
-//	contrast function
+//    contrast function
 float Contrast(float Input, float ContrastPower)
 {
     // piecewise contrast function
@@ -147,14 +147,14 @@ void build_contangent_frame(float3 position, float3 normal, float2 uv, out float
     float4 duv = float4(ddx(uv), ddy(uv));
     float3 dp1perp = cross(normal, ddx(position));
     float3 dp2perp = cross(ddy(position), normal);
-	
+    
     tangent = dp2perp * duv.x + dp1perp * duv.z;
     binormal = dp2perp * duv.y + dp1perp * duv.w;
-	
+    
     float invmax = rsqrt(max(dot(tangent, tangent), dot(binormal, binormal)));
-	
-	tangent *= invmax;
-	binormal *= invmax;
+    
+    tangent *= invmax;
+    binormal *= invmax;
 }
 
 float4 combine_bloom(float3 low, float4 high)
@@ -391,4 +391,4 @@ gbuffer_data gbuffer_load_data_offset(float2 tc : TEXCOORD, float2 OffsetTC : TE
     return gbuffer_load_data(OffsetTC, pos2d + delta);
 }
 
-#endif //	common_functions_h_included
+#endif //    common_functions_h_included

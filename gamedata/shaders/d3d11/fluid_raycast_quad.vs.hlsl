@@ -1,7 +1,7 @@
 #include "fluid_common_render.hlsli"
 
-//	Vertex
-//	TODO: DX10: replace WorldViewProjection with m_WVP
+//    Vertex
+//    TODO: DX10: replace WorldViewProjection with m_WVP
 PS_INPUT_RAYCAST main(VS_INPUT input)
 {
     PS_INPUT_RAYCAST output = (PS_INPUT_RAYCAST)0;

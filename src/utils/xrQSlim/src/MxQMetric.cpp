@@ -16,11 +16,11 @@ static
 void symmetric_subfrom(MxMatrix& A, const MxVector& a, const MxVector& b)
 {
     for(unsigned int i=0; i<A.dim(); i++)  for(unsigned int j=0; j<A.dim(); j++)
-	A(i,j) -= a[i]*b[j];
+    A(i,j) -= a[i]*b[j];
 }
 
 MxQuadric::MxQuadric(const MxVector& p1,const MxVector& p2,const MxVector& p3,
-		     double area)
+             double area)
     : A(p1.dim()), b(p1.dim())
 {
     VERIFY( p1.dim()==p2.dim() && p1.dim()==p3.dim() );
@@ -57,10 +57,10 @@ MxQuadric::MxQuadric(const MxQuadric3& Q3, unsigned int N)
 
     for(i=0; i<3; i++)
     {
-	for(j=0; j<3; j++)
-	    A(i,j) = A3(i,j);
+    for(j=0; j<3; j++)
+        A(i,j) = A3(i,j);
 
-	b[i] = b3[i];
+    b[i] = b3[i];
     }
 
     c = Q3.offset();
@@ -74,10 +74,10 @@ MxMatrix& MxQuadric::homogeneous(MxMatrix& H) const
     unsigned int i, j;
 
     for(i=0; i<A.dim(); i++)  for(j=0; j<A.dim(); i++)
-	H(i,j) = A(i,j);
+    H(i,j) = A(i,j);
 
     for(i=0; i<b.dim(); i++)
-	H(i, b.dim()) = H(b.dim(), i) = b[i];
+    H(i, b.dim()) = H(b.dim(), i) = b[i];
 
     H(b.dim(), b.dim()) = c;
 
@@ -96,7 +96,7 @@ bool MxQuadric::optimize(MxVector& v) const
 
     double det = A.invert(Ainv);
     if( FEQ(det, 0.0, 1e-12) )
-	return false;
+    return false;
 
     v = (Ainv * b);
     mxv_neg(v, v.dim());

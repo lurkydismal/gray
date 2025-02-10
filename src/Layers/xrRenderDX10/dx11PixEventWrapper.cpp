@@ -24,4 +24,4 @@ PixEventWrapper::~PixEventWrapper()
     }
 }
 
-#endif	//	DEBUG
+#endif    //    DEBUG

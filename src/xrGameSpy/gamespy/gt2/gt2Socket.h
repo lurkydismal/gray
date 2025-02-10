@@ -15,12 +15,12 @@ devsupport@gamespy.com
 
 GT2Result gti2CreateSocket
 (
-	GT2Socket * socket,
-	const char * localAddress,
-	int outgoingBufferSize,
-	int incomingBufferSize,
-	gt2SocketErrorCallback callback,
-	GTI2ProtocolType type
+    GT2Socket * socket,
+    const char * localAddress,
+    int outgoingBufferSize,
+    int incomingBufferSize,
+    gt2SocketErrorCallback callback,
+    GTI2ProtocolType type
 );
 
 void gti2CloseSocket(GT2Socket socket);

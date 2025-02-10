@@ -1,8 +1,8 @@
 #include "fluid_common_render.hlsli"
 
-//	Pixel
+//    Pixel
 // A full-screen edge detection pass to locate artifacts
-//	these artifacts are located on a downsized version of the rayDataTexture
+//    these artifacts are located on a downsized version of the rayDataTexture
 // We use a smaller texture both to accurately find all the depth artifacts
 //  when raycasting to this smaller size and to save on the cost of this pass
 // Use col.a to find depth edges of objects occluding the smoke

@@ -169,7 +169,7 @@ gather_items_enabled = false
 help_wounded_enabled = false
 corpse_detection_enabled = false
 combat_ignore_cond = {=check_enemy_name(jup_b19_zombied_1) -jup_b19_actor_damaged_zombied} true, {=check_enemy_name(jup_b19_zombied_2) -jup_b19_actor_damaged_zombied} true, {=check_enemy_name(jup_b19_merc)} true, {=check_enemy_name(sim_default) =fighting_dist_ge(30)} true
-danger = danger	
+danger = danger    
 meet = no_meet 
 wounded = wounded
 out_restr = jup_b19_sr_actor_close_by_yar
@@ -277,29 +277,29 @@ out_restr = jup_a6_sr_noweap
 
 
 [meet@hunter]
-close_anim		= guard_na
+close_anim        = guard_na
 close_victim    = actor
 close_distance  = 3
 close_snd_hello = {=actor_has_weapon} meet_hide_weapon, nil
 close_snd_bye   = nil
-abuse			= true
-use				= {+jup_b19_ui_input_enabled} self, false
-trade_enable 	= false
-allow_break 	= false
-meet_dialog		= {+jup_b19_arrived -jup_b19_following_yar} jup_b19_freedom_yar_prepare_start
+abuse            = true
+use                = {+jup_b19_ui_input_enabled} self, false
+trade_enable     = false
+allow_break     = false
+meet_dialog        = {+jup_b19_arrived -jup_b19_following_yar} jup_b19_freedom_yar_prepare_start
 
 [meet@final]
-close_anim		= guard_na
+close_anim        = guard_na
 close_victim    = actor
 close_distance  = 3
 close_snd_hello = {=actor_has_weapon} meet_hide_weapon, nil
 close_snd_bye   = nil
-;use			= {=actor_has_weapon} false, true
-use				= true
-abuse			= true
-trade_enable 	= false
-allow_break 	= false
-meet_dialog		= jup_b19_freedom_yar_done_start
+;use            = {=actor_has_weapon} false, true
+use                = true
+abuse            = true
+trade_enable     = false
+allow_break     = false
+meet_dialog        = jup_b19_freedom_yar_done_start
 
 [meet@camper]
 close_distance  = 0
@@ -313,17 +313,17 @@ abuse           = false
 [meet]
 ;close_anim      = guard
 close_victim    = actor
-use			= {=actor_enemy} false, true
-abuse			= true
-trade_enable 	= false
-allow_break 	= false
+use            = {=actor_enemy} false, true
+abuse            = true
+trade_enable     = false
+allow_break     = false
 
 [wounded]
-hp_state 		= 0|wounded_heavy@help_heavy
-hp_state_see 	= 0|wounded_heavy@help_heavy
-hp_victim 		= 0|nil
-hp_fight 		= 0|false
-hp_cover		= 0|false
+hp_state         = 0|wounded_heavy@help_heavy
+hp_state_see     = 0|wounded_heavy@help_heavy
+hp_victim         = 0|nil
+hp_fight         = 0|false
+hp_cover        = 0|false
 
 [danger]
 ignore_distance = 0

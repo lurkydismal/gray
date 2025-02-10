@@ -35,4 +35,4 @@
 #define ASSERT(assertion) assert(assertion)
 #endif
 
-#endif	/* _FCGIMISC_H */
+#endif    /* _FCGIMISC_H */

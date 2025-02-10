@@ -671,7 +671,7 @@ namespace IMGUIZMO_NAMESPACE
    {
       Context() : mbUsing(false), mbUsingViewManipulate(false), mbEnable(true), mbUsingBounds(false)
       {
-		  mIDStack.push_back(-1);
+          mIDStack.push_back(-1);
       }
 
       ImDrawList* mDrawList;

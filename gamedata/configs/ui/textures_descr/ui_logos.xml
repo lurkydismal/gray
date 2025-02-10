@@ -16,8 +16,8 @@
     <texture id="csky_logo"       x="574" y="205" width="277" height="304" />
     <texture id="renegade_logo"   x="12"  y="402" width="276" height="356" />
     
-	<texture id="actor_big"       x="1023" y="1023" width="1" height="1" />
-	<texture id="actor_logo"      x="1023" y="1023" width="1" height="1" />
+    <texture id="actor_big"       x="1023" y="1023" width="1" height="1" />
+    <texture id="actor_logo"      x="1023" y="1023" width="1" height="1" />
     <texture id="logos_big_empty" x="1023" y="1023" width="1" height="1" />
 
    </file>

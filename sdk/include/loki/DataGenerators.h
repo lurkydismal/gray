@@ -22,24 +22,24 @@ namespace Loki
 ////////////////////////////////////////////////////////////////////////////////
 // class template IterateTypes
 ////////////////////////////////////////////////////////////////////////////////
-	namespace TL
-		{
-		template<typename T>
-		struct nameof_type
-			{
-			const char* operator()()
-				{
-				return typeid(T).name();
-				}
-			};
-		template<typename T>
-		struct sizeof_type
-			{
-			size_t operator()()
-				{
-				return sizeof(T);
-				}
-			};    
+    namespace TL
+        {
+        template<typename T>
+        struct nameof_type
+            {
+            const char* operator()()
+                {
+                return typeid(T).name();
+                }
+            };
+        template<typename T>
+        struct sizeof_type
+            {
+            size_t operator()()
+                {
+                return sizeof(T);
+                }
+            };    
     template <class TList, template <typename> class UnitFunc>
     struct IterateTypes;
 
@@ -96,25 +96,25 @@ namespace Loki
         { 
             struct Result
             {
-				typedef GenFunc<AtomicType> genfunc_t;
+                typedef GenFunc<AtomicType> genfunc_t;
                 template<class II>
                 void operator()(II ii)
                 {
                 genfunc_t gen;
-				//warning C4267: 'argument' : conversion from 'size_t' to 'const std::_Vbase', possible loss of data
+                //warning C4267: 'argument' : conversion from 'size_t' to 'const std::_Vbase', possible loss of data
 #pragma warning(push)
 #pragma warning(disable: 4267)
-				//TODOSGB
-				*ii = gen();
+                //TODOSGB
+                *ii = gen();
 #pragma warning(pop)
-				++ii;
+                ++ii;
                 }
                 template<class II, class P1>
                 void operator()(II ii, P1 p1)
                 {
                     genfunc_t gen;
-						  *ii = gen(p1);
-						  ++ii;
+                          *ii = gen(p1);
+                          ++ii;
                 }
             };
         };
@@ -129,7 +129,7 @@ namespace Loki
             struct Result 
             {
                 template<class II> void operator()(II) {}
-				    template<class II, class P1> void operator()(II, P1) {}
+                    template<class II, class P1> void operator()(II, P1) {}
             }; 
         };        
     };
@@ -144,8 +144,8 @@ namespace Loki
             struct Result 
             {
                 template<class II> void operator()(II) {}
-				    template<class II, class P1> void operator()(II, P1) {}
-				}; 
+                    template<class II, class P1> void operator()(II, P1) {}
+                }; 
         };        
     };
 
@@ -158,7 +158,7 @@ namespace Loki
             struct Result 
             {
                 template<class II> void operator()(II) {}
-				    template<class II, class P1> void operator()(II, P1) {}
+                    template<class II, class P1> void operator()(II, P1) {}
             }; 
         };        
     };
@@ -192,34 +192,34 @@ namespace Loki
             typename TL::is_Typelist<T>::type_tag
         >
         ::template In<T, GenFunc>::Result tail_t;
-		  head_t head;
-		  tail_t tail;
+          head_t head;
+          tail_t tail;
 
-	     template<class II>
+         template<class II>
         void operator()(II ii)
         {
-		  this->head.operator()(ii);
-		  this->tail.operator()(ii);
-		  }
-	     template<class II, class P1>
+          this->head.operator()(ii);
+          this->tail.operator()(ii);
+          }
+         template<class II, class P1>
         void operator()(II ii, P1 p1)
         {
-		  this->head.operator()(ii, p1);
-		  this->tail.operator()(ii, p1);
-		  }
-	 };
+          this->head.operator()(ii, p1);
+          this->tail.operator()(ii, p1);
+          }
+     };
 
-	//UnitFunc is really a template-template parameter, but MSVC7
-	// chokes on the correct defintion.  Oddly enough, it works correctly
-	// with the 'undecorated' template parameter declaraion!
-	//template <class> class UnitFunc
-	template<typename Types, class UnitFunc, typename II>
-	void iterate_types(II ii)
-		{
-		Loki::TL::IterateTypes<Types, UnitFunc> it;
-		it(ii);
-		}
-	}//ns TL
+    //UnitFunc is really a template-template parameter, but MSVC7
+    // chokes on the correct defintion.  Oddly enough, it works correctly
+    // with the 'undecorated' template parameter declaraion!
+    //template <class> class UnitFunc
+    template<typename Types, class UnitFunc, typename II>
+    void iterate_types(II ii)
+        {
+        Loki::TL::IterateTypes<Types, UnitFunc> it;
+        it(ii);
+        }
+    }//ns TL
 }//ns Loki
 
 ////////////////////////////////////////////////////////////////////////////////

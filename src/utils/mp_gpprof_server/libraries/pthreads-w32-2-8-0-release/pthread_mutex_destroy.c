@@ -62,53 +62,53 @@ pthread_mutex_destroy (pthread_mutex_t * mutex)
        * can be destroyed.
        */
       if (result == 0)
-	{
-	  if (mx->kind != PTHREAD_MUTEX_RECURSIVE || 1 == mx->recursive_count)
-	    {
-	      /*
-	       * FIXME!!!
-	       * The mutex isn't held by another thread but we could still
-	       * be too late invalidating the mutex below since another thread
-	       * may already have entered mutex_lock and the check for a valid
-	       * *mutex != NULL.
-	       *
-	       * Note that this would be an unusual situation because it is not
-	       * common that mutexes are destroyed while they are still in
-	       * use by other threads.
-	       */
-	      *mutex = NULL;
+    {
+      if (mx->kind != PTHREAD_MUTEX_RECURSIVE || 1 == mx->recursive_count)
+        {
+          /*
+           * FIXME!!!
+           * The mutex isn't held by another thread but we could still
+           * be too late invalidating the mutex below since another thread
+           * may already have entered mutex_lock and the check for a valid
+           * *mutex != NULL.
+           *
+           * Note that this would be an unusual situation because it is not
+           * common that mutexes are destroyed while they are still in
+           * use by other threads.
+           */
+          *mutex = NULL;
 
-	      result = pthread_mutex_unlock (&mx);
+          result = pthread_mutex_unlock (&mx);
 
-	      if (result == 0)
-		{
-		  if (!CloseHandle (mx->event))
-		    {
-		      *mutex = mx;
-		      result = EINVAL;
-		    }
-		  else
-		    {
-		      free (mx);
-		    }
-		}
-	      else
-		{
-		  /*
-		   * Restore the mutex before we return the error.
-		   */
-		  *mutex = mx;
-		}
-	    }
-	  else			/* mx->recursive_count > 1 */
-	    {
-	      /*
-	       * The mutex must be recursive and already locked by us (this thread).
-	       */
-	      mx->recursive_count--;	/* Undo effect of pthread_mutex_trylock() above */
-	      result = EBUSY;
-	    }
-	}
+          if (result == 0)
+        {
+          if (!CloseHandle (mx->event))
+            {
+              *mutex = mx;
+              result = EINVAL;
+            }
+          else
+            {
+              free (mx);
+            }
+        }
+          else
+        {
+          /*
+           * Restore the mutex before we return the error.
+           */
+          *mutex = mx;
+        }
+        }
+      else            /* mx->recursive_count > 1 */
+        {
+          /*
+           * The mutex must be recursive and already locked by us (this thread).
+           */
+          mx->recursive_count--;    /* Undo effect of pthread_mutex_trylock() above */
+          result = EBUSY;
+        }
+    }
     }
   else
     {
@@ -121,23 +121,23 @@ pthread_mutex_destroy (pthread_mutex_t * mutex)
        * Check again.
        */
       if (*mutex >= PTHREAD_ERRORCHECK_MUTEX_INITIALIZER)
-	{
-	  /*
-	   * This is all we need to do to destroy a statically
-	   * initialised mutex that has not yet been used (initialised).
-	   * If we get to here, another thread
-	   * waiting to initialise this mutex will get an EINVAL.
-	   */
-	  *mutex = NULL;
-	}
+    {
+      /*
+       * This is all we need to do to destroy a statically
+       * initialised mutex that has not yet been used (initialised).
+       * If we get to here, another thread
+       * waiting to initialise this mutex will get an EINVAL.
+       */
+      *mutex = NULL;
+    }
       else
-	{
-	  /*
-	   * The mutex has been initialised while we were waiting
-	   * so assume it's in use.
-	   */
-	  result = EBUSY;
-	}
+    {
+      /*
+       * The mutex has been initialised while we were waiting
+       * so assume it's in use.
+       */
+      result = EBUSY;
+    }
 
       LeaveCriticalSection (&ptw32_mutex_test_init_lock);
     }

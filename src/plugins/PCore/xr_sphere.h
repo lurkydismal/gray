@@ -9,11 +9,11 @@
 namespace xray_re {
 
 template<typename T> struct _sphere {
-	void		reset();
-	_sphere<T>&	set(const _sphere<T>& s);
+    void        reset();
+    _sphere<T>&    set(const _sphere<T>& s);
 
-	_vector3<T>	p;
-	T		r;
+    _vector3<T>    p;
+    T        r;
 };
 
 typedef _sphere<float> fsphere;
@@ -21,15 +21,15 @@ typedef _sphere<double> dsphere;
 
 template<typename T> void _sphere<T>::reset()
 {
-	p.set();
-	r = 0;
+    p.set();
+    r = 0;
 }
 
 template<typename T> inline _sphere<T>& _sphere<T>::set(const _sphere<T>& s)
 {
-	p.set(s.p);
-	r = s.r;
-	return *this;
+    p.set(s.p);
+    r = s.r;
+    return *this;
 }
 
 } // end of namespace xray_re

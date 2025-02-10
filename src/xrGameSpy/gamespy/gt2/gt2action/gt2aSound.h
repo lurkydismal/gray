@@ -13,32 +13,32 @@ Copyright 2000 GameSpy Industries, Inc
 
 enum
 {
-	SOUND_EXPLOSION,
-	SOUND_MINE,
-	SOUND_DIE,
-	SOUND_ROCKET,
-	SOUND_PICKUP,
-	NUM_SOUNDS
+    SOUND_EXPLOSION,
+    SOUND_MINE,
+    SOUND_DIE,
+    SOUND_ROCKET,
+    SOUND_PICKUP,
+    NUM_SOUNDS
 };
 
 GT2Bool InitializeSound
 (
-	void
+    void
 );
 
 void CleanupSound
 (
-	void
+    void
 );
 
 void ToggleSound
 (
-	void
+    void
 );
 
 void PlaySoundEffect
 (
-	int sound
+    int sound
 );
 
 #endif

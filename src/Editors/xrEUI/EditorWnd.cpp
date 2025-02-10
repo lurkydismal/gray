@@ -17,13 +17,13 @@ void IEditorWnd::ResetEnd()
 
 void IEditorWnd::BeginDraw() const
 {
-	if (!IsFocused && !IsDocked && !IsContextMenu)
-	{
-		ImGui::SetNextWindowBgAlpha(CUIThemeManager::Get().TransparentUnfocused);
-	}
+    if (!IsFocused && !IsDocked && !IsContextMenu)
+    {
+        ImGui::SetNextWindowBgAlpha(CUIThemeManager::Get().TransparentUnfocused);
+    }
 }
 
 void IEditorWnd::EndDraw() const
 {
-	ImGui::SetNextWindowBgAlpha(CUIThemeManager::Get().TransparentDefault);
+    ImGui::SetNextWindowBgAlpha(CUIThemeManager::Get().TransparentDefault);
 }

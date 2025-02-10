@@ -13,9 +13,9 @@ namespace xray_re {
 
 // Common definitions.
 struct wm_vertex {
-	fvector3	p;
-	rgba32		color;
-	float		u, v;
+    fvector3    p;
+    rgba32        color;
+    float        u, v;
 };
 
 TYPEDEF_STD_VECTOR(wm_vertex)

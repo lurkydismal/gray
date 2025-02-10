@@ -16,13 +16,13 @@ invulnerable = false
 
 [meet@jup_a6_animpoint_meet]
 close_snd_hello = {=check_npc_name(monolith)} nil, {=is_wounded} nil, {!is_squad_commander} nil, {=actor_enemy} nil, {=actor_has_weapon} meet_hide_weapon, meet_hello
-close_snd_bye 	= {=check_npc_name(monolith)} nil, {=is_wounded} nil, {!is_squad_commander} nil, {=actor_enemy} nil, {=actor_has_weapon} nil, meet_hello
-close_anim 		= nil
-close_victim 	= nil
-far_anim 		= nil
-far_victim 		= nil
-close_distance 	= 0
-far_distance 	= 0
+close_snd_bye     = {=check_npc_name(monolith)} nil, {=is_wounded} nil, {!is_squad_commander} nil, {=actor_enemy} nil, {=actor_has_weapon} nil, meet_hello
+close_anim         = nil
+close_victim     = nil
+far_anim         = nil
+far_victim         = nil
+close_distance     = 0
+far_distance     = 0
 use = {=actor_enemy} false, {=dist_to_actor_le(3)} true, false
 snd_on_use = {!dist_to_actor_le(3)} nil
 meet_on_talking = false
@@ -342,7 +342,7 @@ cover_name = jup_b221_duty_02
 
 [animpoint@jup_a6_animp_93_reached]:animpoint@jup_a6_animp_gen
 cover_name = jup_b221_duty_03
-			
+            
 
 
 [logic@jup_a6_duty_guard]

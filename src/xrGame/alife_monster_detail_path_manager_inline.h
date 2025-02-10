@@ -1,38 +1,38 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: alife_monster_detail_path_manager_inline.h
-//	Created 	: 01.11.2005
-//  Modified 	: 22.11.2005
-//	Author		: Dmitriy Iassenev
-//	Description : ALife monster detail path manager class inline functions
+//    Module         : alife_monster_detail_path_manager_inline.h
+//    Created     : 01.11.2005
+//  Modified     : 22.11.2005
+//    Author        : Dmitriy Iassenev
+//    Description : ALife monster detail path manager class inline functions
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-IC	CALifeMonsterDetailPathManager::object_type &CALifeMonsterDetailPathManager::object	() const
+IC    CALifeMonsterDetailPathManager::object_type &CALifeMonsterDetailPathManager::object    () const
 {
-	VERIFY		(m_object);
-	return		(*m_object);
+    VERIFY        (m_object);
+    return        (*m_object);
 }
 
-IC	void CALifeMonsterDetailPathManager::speed										(const float &speed)
+IC    void CALifeMonsterDetailPathManager::speed                                        (const float &speed)
 {
-	VERIFY		(_valid(speed));
-	m_speed		= speed;
+    VERIFY        (_valid(speed));
+    m_speed        = speed;
 }
 
-IC	const float &CALifeMonsterDetailPathManager::speed								() const
+IC    const float &CALifeMonsterDetailPathManager::speed                                () const
 {
-	VERIFY		(_valid(m_speed));
-	return		(m_speed);
+    VERIFY        (_valid(m_speed));
+    return        (m_speed);
 }
 
-IC	const CALifeMonsterDetailPathManager::PATH &CALifeMonsterDetailPathManager::path	() const
+IC    const CALifeMonsterDetailPathManager::PATH &CALifeMonsterDetailPathManager::path    () const
 {
-	return		(m_path);
+    return        (m_path);
 }
 
-IC	const float	&CALifeMonsterDetailPathManager::walked_distance					() const
+IC    const float    &CALifeMonsterDetailPathManager::walked_distance                    () const
 {
-	VERIFY		(path().size() > 1);
-	return		(m_walked_distance);
+    VERIFY        (path().size() > 1);
+    return        (m_walked_distance);
 }

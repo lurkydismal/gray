@@ -2,8 +2,8 @@
 
 UIWayTool::UIWayTool()
 {
-	m_WayMode = true;
-	m_AutoLink = true;
+    m_WayMode = true;
+    m_AutoLink = true;
 }
 
 UIWayTool::~UIWayTool()

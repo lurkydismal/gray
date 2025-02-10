@@ -2,28 +2,28 @@
 #include "NodeBuilder/BoneNodes.h"
 
 class XREPROPS_API CNodeViewport:
-	public IEditorWnd
+    public IEditorWnd
 {
-	friend void RegNode(size_t NodeID, ELinkType Type);
+    friend void RegNode(size_t NodeID, ELinkType Type);
 
-	void* Context = nullptr;
-	xr_hash_map<size_t, ELinkType> LinksStorage;
-
-protected:
-	xr_vector<INodeUnknown*> Nodes;
-	xr_vector<std::pair<int, int>> Links;
-
-public:
-	int LinkDrawCounter = 0;
+    void* Context = nullptr;
+    xr_hash_map<size_t, ELinkType> LinksStorage;
 
 protected:
-	bool CanCreateLink(size_t LeftID, size_t RightID);
-	int GetHoveredMode() const;
+    xr_vector<INodeUnknown*> Nodes;
+    xr_vector<std::pair<int, int>> Links;
 
 public:
-	CNodeViewport();
-	virtual ~CNodeViewport();
+    int LinkDrawCounter = 0;
 
-	virtual void Draw() override;
-	virtual void DrawEnd();
+protected:
+    bool CanCreateLink(size_t LeftID, size_t RightID);
+    int GetHoveredMode() const;
+
+public:
+    CNodeViewport();
+    virtual ~CNodeViewport();
+
+    virtual void Draw() override;
+    virtual void DrawEnd();
 };

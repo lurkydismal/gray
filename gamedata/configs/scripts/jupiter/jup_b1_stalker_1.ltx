@@ -27,8 +27,8 @@ close_distance  = 10
 close_anim      = guard
 close_victim    = actor
 abuse           = false
-use 			= true
-trade_enable	= false
+use             = true
+trade_enable    = false
 allow_break     = false
 
 [walker@go_to_tunnel]:walker@generic
@@ -81,7 +81,7 @@ close_distance  = 10
 close_anim      = guard
 close_victim    = actor
 abuse           = false
-use 			= false
+use             = false
 
 ;--------------------- после превращения в зомби
 
@@ -111,8 +111,8 @@ close_distance  = 10
 close_anim      = guard
 close_victim    = actor
 abuse           = false
-meet_dialog	= jup_b1_st_go_to_exit
-trade_enable	= false
+meet_dialog    = jup_b1_st_go_to_exit
+trade_enable    = false
 allow_break     = false
 
 [walker@on_air]:walker@generic
@@ -133,9 +133,9 @@ meet = meet@go_home
 close_distance  = 10
 close_anim      = guard
 close_victim    = actor
-use 			= true
+use             = true
 abuse           = false
-trade_enable	= false
+trade_enable    = false
 allow_break     = false
 
 [patrol@go_to_base]:walker@generic
@@ -207,11 +207,11 @@ ignore_distance_hit = 0
 ignore_distance_sound = 0
 
 [wounded]
-hp_state 		= 0|wounded_heavy@help_heavy
-hp_state_see 	= 0|wounded_heavy@help_heavy
-hp_victim 		= 0|nil
-hp_fight 		= 0|false
-hp_cover		= 0|false
+hp_state         = 0|wounded_heavy@help_heavy
+hp_state_see     = 0|wounded_heavy@help_heavy
+hp_victim         = 0|nil
+hp_fight         = 0|false
+hp_cover        = 0|false
 
 [combat]
 on_info = {=actor_enemy} %+jup_b1_actor_atk_squad%

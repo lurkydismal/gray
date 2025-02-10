@@ -1,11 +1,11 @@
 #include "stdafx.h"
 
-#define CPSOBJECT_VERSION  				0x0013
+#define CPSOBJECT_VERSION                  0x0013
 
-#define CPSOBJECT_CHUNK_VERSION			0x0001
-#define CPSOBJECT_CHUNK_REFERENCE		0x0002
-#define CPSOBJECT_CHUNK_PARAMS			0x0003
-#define CPSOBJECT_CHUNK_GAMETYPE		0x0004
+#define CPSOBJECT_CHUNK_VERSION            0x0001
+#define CPSOBJECT_CHUNK_REFERENCE        0x0002
+#define CPSOBJECT_CHUNK_PARAMS            0x0003
+#define CPSOBJECT_CHUNK_GAMETYPE        0x0004
 
 
 #define PSOBJECT_SIZE 0.5f
@@ -14,14 +14,14 @@
 
 EParticlesObject::EParticlesObject(LPVOID data, LPCSTR name):CCustomObject(data,name)
 {
-	Construct(data);
+    Construct(data);
 }
 
 
 void EParticlesObject::Construct(LPVOID data)
 {
-	FClassID   	= OBJCLASS_PS;
-    m_Particles	= 0;
+    FClassID       = OBJCLASS_PS;
+    m_Particles    = 0;
     m_GameType.SetDefaults();
 }
 
@@ -29,39 +29,39 @@ void EParticlesObject::Construct(LPVOID data)
 EParticlesObject::~EParticlesObject()
 {
     auto model = smart_cast<IRenderVisual*>(m_Particles);
-	::Render->model_Delete	(model);
+    ::Render->model_Delete    (model);
     m_Particles = nullptr;
 }
 
 
 bool EParticlesObject::GetBox( Fbox& box ) 
 {
-	box.set( GetPosition(), GetPosition() );
-	box.min.x -= PSOBJECT_SIZE;
-	box.min.y -= PSOBJECT_SIZE;
-	box.min.z -= PSOBJECT_SIZE;
-	box.max.x += PSOBJECT_SIZE;
-	box.max.y += PSOBJECT_SIZE;
-	box.max.z += PSOBJECT_SIZE;
+    box.set( GetPosition(), GetPosition() );
+    box.min.x -= PSOBJECT_SIZE;
+    box.min.y -= PSOBJECT_SIZE;
+    box.min.z -= PSOBJECT_SIZE;
+    box.max.x += PSOBJECT_SIZE;
+    box.max.y += PSOBJECT_SIZE;
+    box.max.z += PSOBJECT_SIZE;
     return true;
 }
 
 
 void EParticlesObject::OnUpdateTransform()
 {
-	inherited::OnUpdateTransform	();
-	Fvector v={0.f,0.f,0.f};
-	if (m_Particles) m_Particles->UpdateParent(_Transform(),v,FALSE);
+    inherited::OnUpdateTransform    ();
+    Fvector v={0.f,0.f,0.f};
+    if (m_Particles) m_Particles->UpdateParent(_Transform(),v,FALSE);
 }
 
 
 void EParticlesObject::OnFrame()
 {
-	inherited::OnFrame();
+    inherited::OnFrame();
     Fbox bb; GetBox(bb);
     if (::Render->occ_visible(bb))
-	    if (m_Particles)
-        	m_Particles->OnFrame(EDevice->dwTimeDelta);
+        if (m_Particles)
+            m_Particles->OnFrame(EDevice->dwTimeDelta);
 }
 
 
@@ -104,8 +104,8 @@ void EParticlesObject::Render(int priority, bool strictB2F)
 
 void EParticlesObject::RenderSingle()
 {
-	Render(1,false);
-	Render(1,true);
+    Render(1,false);
+    Render(1,true);
 }
 
 bool EParticlesObject::FrustumPick(const CFrustum& frustum)
@@ -141,14 +141,14 @@ bool EParticlesObject::RayPick(float& distance, const Fvector& start, const Fvec
 
 void EParticlesObject::Play()
 {
-	if (m_Particles)
+    if (m_Particles)
         m_Particles->Play();
 }
 
 
 void EParticlesObject::Stop()
 {
-	if (m_Particles) 
+    if (m_Particles) 
         m_Particles->Stop();
 }
 
@@ -177,17 +177,17 @@ bool EParticlesObject::LoadLTX(CInifile& ini, LPCSTR sect_name)
 
 void EParticlesObject::SaveLTX(CInifile& ini, LPCSTR sect_name)
 {
-	CCustomObject::SaveLTX(ini, sect_name);
+    CCustomObject::SaveLTX(ini, sect_name);
 
-	ini.w_u32			(sect_name, "version", CPSOBJECT_VERSION);
+    ini.w_u32            (sect_name, "version", CPSOBJECT_VERSION);
 
-    ini.w_string		(sect_name, "ref_name", m_RefName.c_str());
-	m_GameType.SaveLTX	(ini, sect_name);
+    ini.w_string        (sect_name, "ref_name", m_RefName.c_str());
+    m_GameType.SaveLTX    (ini, sect_name);
 }
 
 bool EParticlesObject::LoadStream(IReader& F)
 {
-	u16 version = 0;
+    u16 version = 0;
 
     R_ASSERT(F.r_chunk(CPSOBJECT_CHUNK_VERSION,&version));
     if(version<0x0011)
@@ -196,7 +196,7 @@ bool EParticlesObject::LoadStream(IReader& F)
         return false;
     }
 
-	inherited::LoadStream(F);
+    inherited::LoadStream(F);
 
 
     R_ASSERT(F.find_chunk(CPSOBJECT_CHUNK_REFERENCE));
@@ -205,8 +205,8 @@ bool EParticlesObject::LoadStream(IReader& F)
 
     if(version>=0x0013)
     {
-    	R_ASSERT(F.find_chunk(CPSOBJECT_CHUNK_GAMETYPE));
-		m_GameType.LoadStream(F);
+        R_ASSERT(F.find_chunk(CPSOBJECT_CHUNK_GAMETYPE));
+        m_GameType.LoadStream(F);
     }
 
     xr_string CopyName = *m_RefName;
@@ -222,19 +222,19 @@ bool EParticlesObject::LoadStream(IReader& F)
 
 void EParticlesObject::SaveStream(IWriter& F)                               
 {
-	inherited::SaveStream(F);
+    inherited::SaveStream(F);
 
-	F.open_chunk	(CPSOBJECT_CHUNK_VERSION);
-	F.w_u16			(CPSOBJECT_VERSION);
-	F.close_chunk	();
+    F.open_chunk    (CPSOBJECT_CHUNK_VERSION);
+    F.w_u16            (CPSOBJECT_VERSION);
+    F.close_chunk    ();
 
-	F.open_chunk	(CPSOBJECT_CHUNK_REFERENCE);
-    F.w_stringZ		(m_RefName);
-	F.close_chunk	();
+    F.open_chunk    (CPSOBJECT_CHUNK_REFERENCE);
+    F.w_stringZ        (m_RefName);
+    F.close_chunk    ();
 
-	F.open_chunk	(CPSOBJECT_CHUNK_GAMETYPE);
-	m_GameType.SaveStream(F);
-	F.close_chunk	();
+    F.open_chunk    (CPSOBJECT_CHUNK_GAMETYPE);
+    m_GameType.SaveStream(F);
+    F.close_chunk    ();
 }
 
 
@@ -248,20 +248,20 @@ void EParticlesObject::OnDeviceDestroy()
 
 bool EParticlesObject::ExportGame(SExportStreams* F)
 {
-	SExportStreamItem& I	= F->pe_static;
+    SExportStreamItem& I    = F->pe_static;
 
     if(I.chunk==0)
     {
-        I.stream.open_chunk		(I.chunk++);
-        I.stream.w_u32			(1); //version
-        I.stream.close_chunk	();
+        I.stream.open_chunk        (I.chunk++);
+        I.stream.w_u32            (1); //version
+        I.stream.close_chunk    ();
     }
     
-	I.stream.open_chunk		(I.chunk++);
-    I.stream.w_u16			(m_GameType.m_GameType.get());
-    I.stream.w_stringZ		(m_RefName);
-    I.stream.w				(&_Transform(),sizeof(Fmatrix));
-    I.stream.close_chunk	();
+    I.stream.open_chunk        (I.chunk++);
+    I.stream.w_u16            (m_GameType.m_GameType.get());
+    I.stream.w_stringZ        (m_RefName);
+    I.stream.w                (&_Transform(),sizeof(Fmatrix));
+    I.stream.close_chunk    ();
     return true;
 }
 
@@ -273,63 +273,63 @@ bool EParticlesObject::Compile(LPCSTR ref_name)
     m_Particles = nullptr;
     if (ref_name)
     {
-    	IRenderVisual* base = ::Render->model_CreateParticles(ref_name);
-		m_Particles 		= smart_cast<IParticleCustom*>(base);
+        IRenderVisual* base = ::Render->model_CreateParticles(ref_name);
+        m_Particles         = smart_cast<IParticleCustom*>(base);
         if (m_Particles){
-			UpdateTransform	();
-		    m_RefName		= ref_name;
+            UpdateTransform    ();
+            m_RefName        = ref_name;
             return true;
         }
     }
-    m_RefName				= "";
+    m_RefName                = "";
     return false;
 }
 
 void EParticlesObject::OnRefChange(PropValue* V)
 {
-	if (!Compile(*m_RefName)){
+    if (!Compile(*m_RefName)){
         ELog.Msg( mtError, "Can't compile particle system '%s'", *m_RefName );
     }else{
-    	ExecCommand(COMMAND_REFRESH_PROPERTIES);
+        ExecCommand(COMMAND_REFRESH_PROPERTIES);
     }
 }
 
 void EParticlesObject::OnControlClick(ButtonValue* sender, bool& bModif, bool& bSafe)
 {
-	ButtonValue* V = smart_cast<ButtonValue*>(sender); R_ASSERT(V);
+    ButtonValue* V = smart_cast<ButtonValue*>(sender); R_ASSERT(V);
     switch (V->btn_num){
-    case 0: Play();	break;
-    case 1: Stop();	break;
-	}
+    case 0: Play();    break;
+    case 1: Stop();    break;
+    }
     UI->RedrawScene();
     bModif = false;
 }
 
 void EParticlesObject::FillProp(LPCSTR pref, PropItemVec& items)
 {
-	inherited::FillProp(pref, items);
+    inherited::FillProp(pref, items);
     PropValue* V;
-    V=PHelper().CreateChoose	(items,PrepareKey(pref, "Reference"),&m_RefName, smParticles);
-    V->OnChangeEvent.bind		(this,&EParticlesObject::OnRefChange);
-	ButtonValue* B;
-    B=PHelper().CreateButton	(items,PrepareKey(pref,"Controls"), 	"Play,Stop",0);
-    B->OnBtnClickEvent.bind		(this,&EParticlesObject::OnControlClick);
+    V=PHelper().CreateChoose    (items,PrepareKey(pref, "Reference"),&m_RefName, smParticles);
+    V->OnChangeEvent.bind        (this,&EParticlesObject::OnRefChange);
+    ButtonValue* B;
+    B=PHelper().CreateButton    (items,PrepareKey(pref,"Controls"),     "Play,Stop",0);
+    B->OnBtnClickEvent.bind        (this,&EParticlesObject::OnControlClick);
 
-	m_GameType.FillProp			(pref, items);
+    m_GameType.FillProp            (pref, items);
 }
 
 
 bool EParticlesObject::GetSummaryInfo(SSceneSummary* inf)
 {
-	inherited::GetSummaryInfo	(inf);
+    inherited::GetSummaryInfo    (inf);
 /*
-	if (!m_RefName.IsEmpty()&&m_PE.GetDefinition()){ 
-    	inf->pe_static.insert(m_PE.GetDefinition()->m_Name);
-		if (m_PE.GetDefinition()->m_TextureName&&m_PE.GetDefinition()->m_TextureName[0]) inf->textures.insert(ChangeFileExt(m_PE.GetDefinition()->m_TextureName,"").LowerCase());
+    if (!m_RefName.IsEmpty()&&m_PE.GetDefinition()){ 
+        inf->pe_static.insert(m_PE.GetDefinition()->m_Name);
+        if (m_PE.GetDefinition()->m_TextureName&&m_PE.GetDefinition()->m_TextureName[0]) inf->textures.insert(ChangeFileExt(m_PE.GetDefinition()->m_TextureName,"").LowerCase());
     }
-	inf->pe_static_cnt++;
+    inf->pe_static_cnt++;
 */
-	return true;
+    return true;
 }
 
 

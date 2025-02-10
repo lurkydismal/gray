@@ -9,42 +9,42 @@
 namespace xray_re {
 
 enum {
-	GCT_CHUNK_HEADER	= 0,
-	GCT_CHUNK_CELLS		= 1,
+    GCT_CHUNK_HEADER    = 0,
+    GCT_CHUNK_CELLS        = 1,
 };
 
 class xr_level_gct {
 public:
-			xr_level_gct();
-			xr_level_gct(const xr_level_gct& that);
-	virtual		~xr_level_gct();
+            xr_level_gct();
+            xr_level_gct(const xr_level_gct& that);
+    virtual        ~xr_level_gct();
 
-	void		clear();
+    void        clear();
 
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
-	void		load_v9(xr_reader& r);
-	void		save_v9(xr_writer& w) const;
-	bool		load(const char* path, const char* name);
-	bool		save(const char* path, const char* name) const;
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
+    void        load_v9(xr_reader& r);
+    void        save_v9(xr_writer& w) const;
+    bool        load(const char* path, const char* name);
+    bool        save(const char* path, const char* name) const;
 
-	uint32_t&	version();
-	uint32_t	version() const;
-	const xr_guid&	level_guid() const;
-	const xr_guid&	game_guid() const;
-	uint32_t	num_nodes() const;
-	uint32_t	num_graph_points() const;
-	gct_cell*	cells();
-	const gct_cell*	cells() const;
-	uint16_t	graph_id(uint32_t node_id) const;
+    uint32_t&    version();
+    uint32_t    version() const;
+    const xr_guid&    level_guid() const;
+    const xr_guid&    game_guid() const;
+    uint32_t    num_nodes() const;
+    uint32_t    num_graph_points() const;
+    gct_cell*    cells();
+    const gct_cell*    cells() const;
+    uint16_t    graph_id(uint32_t node_id) const;
 
 protected:
-	uint32_t	m_version;
-	uint32_t	m_num_nodes;
-	uint32_t	m_num_graph_points;
-	xr_guid		m_level_guid;
-	xr_guid		m_game_guid;
-	gct_cell*	m_cells;
+    uint32_t    m_version;
+    uint32_t    m_num_nodes;
+    uint32_t    m_num_graph_points;
+    xr_guid        m_level_guid;
+    xr_guid        m_game_guid;
+    gct_cell*    m_cells;
 };
 
 inline uint32_t& xr_level_gct::version() { return m_version; }
@@ -58,8 +58,8 @@ inline const gct_cell* xr_level_gct::cells() const { return m_cells; }
 
 inline uint16_t xr_level_gct::graph_id(uint32_t node_id) const
 {
-	return (node_id < m_num_nodes) ?
-			m_cells[node_id].graph_id : AI_GRAPH_BAD_VERTEX;
+    return (node_id < m_num_nodes) ?
+            m_cells[node_id].graph_id : AI_GRAPH_BAD_VERTEX;
 }
 
 } // end of namespace xray_re

@@ -118,21 +118,21 @@ do not exist. The native Win32 routines must be used.
 - in misc.c:
 
 #ifdef NEED_DUPLICATEHANDLE
-	  /* DuplicateHandle does not exist on WinCE */
-	  self->threadH = GetCurrentThread();
+      /* DuplicateHandle does not exist on WinCE */
+      self->threadH = GetCurrentThread();
 #else
-	  if( !DuplicateHandle(
-			       GetCurrentProcess(),
-			       GetCurrentThread(),
-			       GetCurrentProcess(),
-			       &self->threadH,
-			       0,
-			       FALSE,
-			       DUPLICATE_SAME_ACCESS ) )
-	    {
-	      free( self );
-	      return (NULL);
-	    }
+      if( !DuplicateHandle(
+                   GetCurrentProcess(),
+                   GetCurrentThread(),
+                   GetCurrentProcess(),
+                   &self->threadH,
+                   0,
+                   FALSE,
+                   DUPLICATE_SAME_ACCESS ) )
+        {
+          free( self );
+          return (NULL);
+        }
 #endif
 
 Rational: On WinCE, DuplicateHandle does not exist.  I could not understand
@@ -154,18 +154,18 @@ an already initialized library:
 int
 ptw32_processInitialize (void)
 {
-	if (ptw32_processInitialized) {
-		/* 
-		 * ignore if already initialized. this is useful for 
-		 * programs that uses a non-dll pthread
-		 * library. such programs must call ptw32_processInitialize() explicitely,
-		 * since this initialization routine is automatically called only when
-		 * the dll is loaded.
-		 */
-		return TRUE;
-	}
+    if (ptw32_processInitialized) {
+        /* 
+         * ignore if already initialized. this is useful for 
+         * programs that uses a non-dll pthread
+         * library. such programs must call ptw32_processInitialize() explicitely,
+         * since this initialization routine is automatically called only when
+         * the dll is loaded.
+         */
+        return TRUE;
+    }
     ptw32_processInitialized = TRUE;
-  	[...]
+      [...]
 }
 
 ------------------------------------

@@ -71,13 +71,13 @@ SGameMtl* XrGameMaterialLibraryEditors::AppendMaterial(SGameMtl* parent)
 
     materials.push_back(M);
     UpdateMtlPairs(M);
-    if (parent)	CopyMtlPairs(parent, M);
-    return 					M;
+    if (parent)    CopyMtlPairs(parent, M);
+    return                     M;
 }
 void XrGameMaterialLibraryEditors::RemoveMaterial(LPCSTR name)
 {
     // find material
-    GameMtlIt 	rem_it = GetMaterialIt(name);
+    GameMtlIt     rem_it = GetMaterialIt(name);
     R_ASSERT(rem_it != materials.end());
     // remove dependent pairs
     RemoveMaterialPair((*rem_it)->GetID());
@@ -91,17 +91,17 @@ void XrGameMaterialLibraryEditors::RemoveMaterial(LPCSTR name)
 LPCSTR XrGameMaterialLibraryEditors::MtlPairToName(int mtl0, int mtl1)
 {
     static string512 buf;
-    SGameMtl* M0 = GetMaterialByID(mtl0);	R_ASSERT(M0);
-    SGameMtl* M1 = GetMaterialByID(mtl1);	R_ASSERT(M1);
+    SGameMtl* M0 = GetMaterialByID(mtl0);    R_ASSERT(M0);
+    SGameMtl* M1 = GetMaterialByID(mtl1);    R_ASSERT(M1);
     string256 buf0, buf1;
-    strcpy(buf0, *M0->m_Name);	_ChangeSymbol(buf0, '\\', '/');
-    strcpy(buf1, *M1->m_Name);	_ChangeSymbol(buf1, '\\', '/');
+    strcpy(buf0, *M0->m_Name);    _ChangeSymbol(buf0, '\\', '/');
+    strcpy(buf1, *M1->m_Name);    _ChangeSymbol(buf1, '\\', '/');
     sprintf(buf, "%s \\ %s", buf0, buf1);
     return buf;
 }
 void XrGameMaterialLibraryEditors::NameToMtlPair(LPCSTR name, int& mtl0, int& mtl1)
 {
-    string256 		buf0, buf1;
+    string256         buf0, buf1;
     if (_GetItemCount(name, '\\') < 2) {
         mtl0 = GAMEMTL_NONE_ID;
         mtl1 = GAMEMTL_NONE_ID;
@@ -111,14 +111,14 @@ void XrGameMaterialLibraryEditors::NameToMtlPair(LPCSTR name, int& mtl0, int& mt
     _GetItem(name, 1, buf1, '\\');
     _ChangeSymbol(buf0, '/', '\\');
     _ChangeSymbol(buf1, '/', '\\');
-    SGameMtl* M0 = GetMaterial(buf0);	mtl0 = M0 ? M0->GetID() : GAMEMTL_NONE_ID;
-    SGameMtl* M1 = GetMaterial(buf1);	mtl1 = M1 ? M1->GetID() : GAMEMTL_NONE_ID;
+    SGameMtl* M0 = GetMaterial(buf0);    mtl0 = M0 ? M0->GetID() : GAMEMTL_NONE_ID;
+    SGameMtl* M1 = GetMaterial(buf1);    mtl1 = M1 ? M1->GetID() : GAMEMTL_NONE_ID;
 }
 void XrGameMaterialLibraryEditors::MtlNameToMtlPair(LPCSTR name, int& mtl0, int& mtl1)
 {
     string256 buf;
-    SGameMtl* M0 = GetMaterial(_GetItem(name, 0, buf, ','));	R_ASSERT(M0); 	mtl0 = M0->GetID();
-    SGameMtl* M1 = GetMaterial(_GetItem(name, 1, buf, ','));	R_ASSERT(M1);	mtl1 = M1->GetID();
+    SGameMtl* M0 = GetMaterial(_GetItem(name, 0, buf, ','));    R_ASSERT(M0);     mtl0 = M0->GetID();
+    SGameMtl* M1 = GetMaterial(_GetItem(name, 1, buf, ','));    R_ASSERT(M1);    mtl1 = M1->GetID();
 }
 
 SGameMtlPair* XrGameMaterialLibraryEditors::CreateMaterialPair(int m0, int m1, SGameMtlPair* parent)
@@ -131,7 +131,7 @@ SGameMtlPair* XrGameMaterialLibraryEditors::CreateMaterialPair(int m0, int m1, S
     M->ID = material_pair_index++;
     M->SetPair(m0, m1);
     material_pairs.push_back(M);
-    return 		M;
+    return         M;
 }
 SGameMtlPair* XrGameMaterialLibraryEditors::AppendMaterialPair(int m0, int m1, SGameMtlPair* parent)
 {
@@ -140,7 +140,7 @@ SGameMtlPair* XrGameMaterialLibraryEditors::AppendMaterialPair(int m0, int m1, S
         return CreateMaterialPair(m0, m1, parent);
     }
     else {
-        return 		S;
+        return         S;
     }
 }
 void XrGameMaterialLibraryEditors::RemoveMaterialPair(LPCSTR name)
@@ -176,7 +176,7 @@ void XrGameMaterialLibraryEditors::RemoveMaterialPair(int mtl)
 }
 void XrGameMaterialLibraryEditors::RemoveMaterialPair(int mtl0, int mtl1)
 {
-    GameMtlPairIt 	rem_it = GetMaterialPairIt(mtl0, mtl1);
+    GameMtlPairIt     rem_it = GetMaterialPairIt(mtl0, mtl1);
     if (rem_it == material_pairs.end()) return;
     RemoveMaterialPair(rem_it);
 }
@@ -215,7 +215,7 @@ SGameMtlPairEditor* XrGameMaterialLibraryEditors::GetMaterialPair(LPCSTR name)
 
 void XrGameMaterialLibraryEditors::Load()
 {
-    string_path			name;
+    string_path            name;
     if (!FS.exist(name, _game_data_, GAMEMTL_FILENAME)) {
         Log("! Can't find game material file: ", name);
         return;
@@ -244,7 +244,7 @@ void XrGameMaterialLibraryEditors::Load()
 
     IReader* OBJ = fs.open_chunk(GAMEMTLS_CHUNK_MTLS);
     if (OBJ) {
-        u32				count;
+        u32                count;
         for (IReader* O = OBJ->open_chunk_iterator(count); O; O = OBJ->open_chunk_iterator(count, O)) {
             SGameMtl* M = new SGameMtlEditor();
             M->Load(*O);
@@ -255,7 +255,7 @@ void XrGameMaterialLibraryEditors::Load()
 
     OBJ = fs.open_chunk(GAMEMTLS_CHUNK_MTLS_PAIR);
     if (OBJ) {
-        u32				count;
+        u32                count;
         for (IReader* O = OBJ->open_chunk_iterator(count); O; O = OBJ->open_chunk_iterator(count, O)) {
             SGameMtlPair* M = new SGameMtlPairEditor(this);
             M->Load(*O);
@@ -310,8 +310,8 @@ void SGameMtlEditor::FillProp(PropItemVec& items, ListItem* owner)
 {
     PropValue* V = 0;
     PHelper().CreateRText(items, "Desc", &m_Desc);
-    // flags                                                      	
-    V = PHelper().CreateFlag32(items, "Flags\\Dynamic", &Flags, flDynamic);	V->Owner()->Enable(FALSE);
+    // flags                                                          
+    V = PHelper().CreateFlag32(items, "Flags\\Dynamic", &Flags, flDynamic);    V->Owner()->Enable(FALSE);
     PHelper().CreateFlag32(items, "Flags\\Passable", &Flags, flPassable);
     if (Flags.is(flDynamic))
         PHelper().CreateFlag32(items, "Flags\\Breakable", &Flags, flBreakable);
@@ -350,11 +350,11 @@ void  SGameMtlPairEditor::OnFlagChange(PropValue* sender)
 {
     bool bChecked = sender->Owner()->m_Flags.is(PropItem::flCBChecked);
     u32 mask = 0;
-    if (sender == propBreakingSounds)			mask = flBreakingSounds;
-    else if (sender == propStepSounds)		mask = flStepSounds;
-    else if (sender == propCollideSounds)		mask = flCollideSounds;
-    else if (sender == propCollideParticles)	mask = flCollideParticles;
-    else if (sender == propCollideMarks)		mask = flCollideMarks;
+    if (sender == propBreakingSounds)            mask = flBreakingSounds;
+    else if (sender == propStepSounds)        mask = flStepSounds;
+    else if (sender == propCollideSounds)        mask = flCollideSounds;
+    else if (sender == propCollideParticles)    mask = flCollideParticles;
+    else if (sender == propCollideMarks)        mask = flCollideMarks;
     else THROW;
 
     OwnProps.set(mask, bChecked);
@@ -370,16 +370,16 @@ IC u32 SetMask(u32 mask, Flags32 flags, u32 flag)
 
 IC SGameMtlPairEditor* GetLastParentValue(SGameMtlPairEditor* who, u32 flag)
 {
-    if (!who)					return 0;
+    if (!who)                    return 0;
     if ((GAMEMTL_NONE_ID == who->GetParent()) || (who->OwnProps.is(flag))) return who;
-    else						return GetLastParentValue(GameMaterialLibraryEditors->GetMaterialPair(who->GetParent()), flag);
+    else                        return GetLastParentValue(GameMaterialLibraryEditors->GetMaterialPair(who->GetParent()), flag);
 }
 
 IC BOOL ValidateParent(SGameMtlPair* who, SGameMtlPair* parent)
 {
-    if (!parent)				return TRUE;
-    if (who == parent)			return FALSE;
-    else						return ValidateParent(who, GameMaterialLibraryEditors->GetMaterialPair(parent->GetParent()));
+    if (!parent)                return TRUE;
+    if (who == parent)            return FALSE;
+    else                        return ValidateParent(who, GameMaterialLibraryEditors->GetMaterialPair(parent->GetParent()));
 }
 
 BOOL SGameMtlPairEditor::SetParent(int parent)
@@ -488,22 +488,22 @@ void SGameMtlPairEditor::FillProp(PropItemVec& items)
     if (show_CB)
     {
         SGameMtlPairEditor* O;
-        if (0 != (O = GetLastParentValue(this, flBreakingSounds)))	BreakingSounds = O->BreakingSounds;
-        if (0 != (O = GetLastParentValue(this, flStepSounds))) 		StepSounds = O->StepSounds;
-        if (0 != (O = GetLastParentValue(this, flCollideSounds))) 	CollideSounds = O->CollideSounds;
+        if (0 != (O = GetLastParentValue(this, flBreakingSounds)))    BreakingSounds = O->BreakingSounds;
+        if (0 != (O = GetLastParentValue(this, flStepSounds)))         StepSounds = O->StepSounds;
+        if (0 != (O = GetLastParentValue(this, flCollideSounds)))     CollideSounds = O->CollideSounds;
         if (0 != (O = GetLastParentValue(this, flCollideParticles))) CollideParticles = O->CollideParticles;
-        if (0 != (O = GetLastParentValue(this, flCollideMarks))) 	CollideMarks = O->CollideMarks;
+        if (0 != (O = GetLastParentValue(this, flCollideMarks)))     CollideMarks = O->CollideMarks;
     }
 }
 
 void SGameMtlPairEditor::TransferFromParent(SGameMtlPairEditor* parent)
 {
     R_ASSERT(parent);
-    if (!OwnProps.is(flBreakingSounds))		BreakingSounds = parent->BreakingSounds;
-    if (!OwnProps.is(flStepSounds))			StepSounds = parent->StepSounds;
-    if (!OwnProps.is(flCollideSounds))		CollideSounds = parent->CollideSounds;
-    if (!OwnProps.is(flCollideParticles))	CollideParticles = parent->CollideParticles;
-    if (!OwnProps.is(flCollideMarks))		CollideMarks = parent->CollideMarks;
+    if (!OwnProps.is(flBreakingSounds))        BreakingSounds = parent->BreakingSounds;
+    if (!OwnProps.is(flStepSounds))            StepSounds = parent->StepSounds;
+    if (!OwnProps.is(flCollideSounds))        CollideSounds = parent->CollideSounds;
+    if (!OwnProps.is(flCollideParticles))    CollideParticles = parent->CollideParticles;
+    if (!OwnProps.is(flCollideMarks))        CollideMarks = parent->CollideMarks;
 }
 
 void SGameMtlPairEditor::CopyFrom(SGameMtlPairEditor* parent)
@@ -598,7 +598,7 @@ void SGameMtlEditor::Save(IWriter& fs)
 
 void SGameMtlPairEditor::Load(IReader& fs)
 {
-    shared_str				buf;
+    shared_str                buf;
     
     R_ASSERT(fs.find_chunk(GAMEMTLPAIR_CHUNK_PAIR));
     mtl0 = fs.r_u32();
@@ -608,15 +608,15 @@ void SGameMtlPairEditor::Load(IReader& fs)
     OwnProps.assign(fs.r_u32());
 
     R_ASSERT(fs.find_chunk(GAMEMTLPAIR_CHUNK_BREAKING));
-    fs.r_stringZ(buf); 	BreakingSounds = *buf;
+    fs.r_stringZ(buf);     BreakingSounds = *buf;
 
     R_ASSERT(fs.find_chunk(GAMEMTLPAIR_CHUNK_STEP));
-    fs.r_stringZ(buf);	StepSounds = *buf;
+    fs.r_stringZ(buf);    StepSounds = *buf;
 
     R_ASSERT(fs.find_chunk(GAMEMTLPAIR_CHUNK_COLLIDE));
-    fs.r_stringZ(buf);	CollideSounds = *buf;
-    fs.r_stringZ(buf);	CollideParticles = *buf;
-    fs.r_stringZ(buf);	CollideMarks = *buf;
+    fs.r_stringZ(buf);    CollideSounds = *buf;
+    fs.r_stringZ(buf);    CollideParticles = *buf;
+    fs.r_stringZ(buf);    CollideMarks = *buf;
 }
 
 void SGameMtlPairEditor::Save(IWriter& fs)
@@ -646,11 +646,11 @@ void SGameMtlPairEditor::Save(IWriter& fs)
     /*
         else{
             OwnProps.zero();
-            if (!BreakingSounds.IsEmpty())	OwnProps.set(flBreakingSounds,TRUE);
-            if (!StepSounds.IsEmpty())		OwnProps.set(flStepSounds,TRUE);
-            if (!CollideSounds.IsEmpty())	OwnProps.set(flCollideSounds,TRUE);
+            if (!BreakingSounds.IsEmpty())    OwnProps.set(flBreakingSounds,TRUE);
+            if (!StepSounds.IsEmpty())        OwnProps.set(flStepSounds,TRUE);
+            if (!CollideSounds.IsEmpty())    OwnProps.set(flCollideSounds,TRUE);
             if (!CollideParticles.IsEmpty())OwnProps.set(flCollideParticles,TRUE);
-            if (!CollideMarks.IsEmpty())	OwnProps.set(flCollideMarks,TRUE);
+            if (!CollideMarks.IsEmpty())    OwnProps.set(flCollideMarks,TRUE);
         }
     */
     // save    

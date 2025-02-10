@@ -9,12 +9,12 @@
 namespace xray_re {
 
 template<typename T> struct _cylinder {
-	void		reset();
+    void        reset();
 
-	_vector3<T>	center;
-	_vector3<T>	direction;	// align axis
-	T		height;
-	T		radius;
+    _vector3<T>    center;
+    _vector3<T>    direction;    // align axis
+    T        height;
+    T        radius;
 };
 
 typedef _cylinder<float> fcylinder;
@@ -22,10 +22,10 @@ typedef _cylinder<double> dcylinder;
 
 template<typename T> void _cylinder<T>::reset()
 {
-	center.set();
-	direction.set();
-	height = 0;
-	radius = 0;
+    center.set();
+    direction.set();
+    height = 0;
+    radius = 0;
 }
 
 } // end of namespace xray_re

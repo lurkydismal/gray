@@ -21,42 +21,42 @@ extern "C"
 ///////////////////////////////////////////////////////////////////////////////
 
 // URL for sc services.
-#define WS_LOGIN_MAX_URL_LEN		  (128)
+#define WS_LOGIN_MAX_URL_LEN          (128)
 extern char wsAuthServiceURL[WS_LOGIN_MAX_URL_LEN];
 
 
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-#define	WSLogin_PARTNERCODE_GAMESPY        0
-#define	WSLogin_NAMESPACE_SHARED_NONUNIQUE 0
-#define	WSLogin_NAMESPACE_SHARED_UNIQUE    1
+#define    WSLogin_PARTNERCODE_GAMESPY        0
+#define    WSLogin_NAMESPACE_SHARED_NONUNIQUE 0
+#define    WSLogin_NAMESPACE_SHARED_UNIQUE    1
 
 typedef enum WSLoginValue
 {
-	// Login response code (mResponseCode)
-	//   -- GameSpy Devs: Must match server
-	WSLogin_Success = 0,
-	WSLogin_ServerInitFailed,
+    // Login response code (mResponseCode)
+    //   -- GameSpy Devs: Must match server
+    WSLogin_Success = 0,
+    WSLogin_ServerInitFailed,
 
-	WSLogin_UserNotFound,
-	WSLogin_InvalidPassword,
-	WSLogin_InvalidProfile,
-	WSLogin_UniqueNickExpired,
+    WSLogin_UserNotFound,
+    WSLogin_InvalidPassword,
+    WSLogin_InvalidProfile,
+    WSLogin_UniqueNickExpired,
 
-	WSLogin_DBError,
-	WSLogin_ServerError,
-	WSLogin_FailureMax, // must be the last failure
+    WSLogin_DBError,
+    WSLogin_ServerError,
+    WSLogin_FailureMax, // must be the last failure
 
-	// Login result (mLoginResult)
-	WSLogin_HttpError = 100,    // ghttp reported an error, response ignored
-	WSLogin_ParseError,         // couldn't parse http response
-	WSLogin_InvalidCertificate, // login success but certificate was invalid!
-	WSLogin_LoginFailed,        // failed login or other error condition
-	WSLogin_OutOfMemory,        // could not process due to insufficient memory
-	WSLogin_InvalidParameters,  // check the function arguments
-	WSLogin_NoAvailabilityCheck,// No availability check was performed
-	WSLogin_Cancelled,          // login request was cancelled
-	WSLogin_UnknownError        // error occured, but detailed information not available
+    // Login result (mLoginResult)
+    WSLogin_HttpError = 100,    // ghttp reported an error, response ignored
+    WSLogin_ParseError,         // couldn't parse http response
+    WSLogin_InvalidCertificate, // login success but certificate was invalid!
+    WSLogin_LoginFailed,        // failed login or other error condition
+    WSLogin_OutOfMemory,        // could not process due to insufficient memory
+    WSLogin_InvalidParameters,  // check the function arguments
+    WSLogin_NoAvailabilityCheck,// No availability check was performed
+    WSLogin_Cancelled,          // login request was cancelled
+    WSLogin_UnknownError        // error occured, but detailed information not available
 
 } WSLoginValue;
 
@@ -85,60 +85,60 @@ typedef enum WSLoginValue
 // Avoid use of pointer members so that structure may be easily copied
 typedef struct GSLoginCertificate
 {
-	gsi_bool mIsValid;
-	
-	gsi_u32 mLength;
-	gsi_u32 mVersion;
-	gsi_u32 mPartnerCode; // aka Account space
-	gsi_u32 mNamespaceId;
-	gsi_u32 mUserId;
-	gsi_u32 mProfileId;
-	gsi_u32 mExpireTime;
-	gsi_char mProfileNick[WS_LOGIN_NICK_LEN];
-	gsi_char mUniqueNick[WS_LOGIN_UNIQUENICK_LEN];
-	gsi_char mCdKeyHash[WS_LOGIN_KEYHASH_LEN];       // hexstr - bigendian
- 	gsCryptRSAKey mPeerPublicKey;
-	gsi_u8 mSignature[GS_CRYPT_RSA_BYTE_SIZE];   // binary - bigendian
-	gsi_u8 mServerData[WS_LOGIN_SERVERDATA_LEN]; // binary - bigendian
+    gsi_bool mIsValid;
+    
+    gsi_u32 mLength;
+    gsi_u32 mVersion;
+    gsi_u32 mPartnerCode; // aka Account space
+    gsi_u32 mNamespaceId;
+    gsi_u32 mUserId;
+    gsi_u32 mProfileId;
+    gsi_u32 mExpireTime;
+    gsi_char mProfileNick[WS_LOGIN_NICK_LEN];
+    gsi_char mUniqueNick[WS_LOGIN_UNIQUENICK_LEN];
+    gsi_char mCdKeyHash[WS_LOGIN_KEYHASH_LEN];       // hexstr - bigendian
+     gsCryptRSAKey mPeerPublicKey;
+    gsi_u8 mSignature[GS_CRYPT_RSA_BYTE_SIZE];   // binary - bigendian
+    gsi_u8 mServerData[WS_LOGIN_SERVERDATA_LEN]; // binary - bigendian
 } GSLoginCertificate;
 
 // Private information for the owner of the certificate only
 // -- careful! private key information must be kept secret --
 typedef struct GSLoginCertificatePrivate
 {
-	gsCryptRSAKey mPeerPrivateKey;
-	char mKeyHash[GS_CRYPT_MD5_HASHSIZE];
+    gsCryptRSAKey mPeerPrivateKey;
+    char mKeyHash[GS_CRYPT_MD5_HASHSIZE];
 } GSLoginPrivateData;
 
 //typedef char GSLoginCertificateKeyHash[GS_CRYPT_MD5_HASHSIZE]; // Hash of private key, for simple auth
 
 typedef enum 
 {
-	wsLoginType_INVALID,
-	wsLoginType_PROFILE,
-	wsLoginType_UNIQUENICK,
-	wsLoginType_GPTICKET,
-	wsLoginType_REMOTEAUTH
+    wsLoginType_INVALID,
+    wsLoginType_PROFILE,
+    wsLoginType_UNIQUENICK,
+    wsLoginType_GPTICKET,
+    wsLoginType_REMOTEAUTH
 } WSLoginType;
 
 /*
 typedef struct WSLoginProfileRequest
 {
-	int mPartnerCode;
-	char mProfileName[WS_LOGIN_NICK_LEN];
-	char mEmailAddress[WS_LOGIN_EMAIL_LEN];
-	char mPassword[WS_LOGIN_PASSWORD_LEN];
-	char mCdKeyHash[WS_LOGIN_KEYHASH_LEN];
-	void * mUserData;
+    int mPartnerCode;
+    char mProfileName[WS_LOGIN_NICK_LEN];
+    char mEmailAddress[WS_LOGIN_EMAIL_LEN];
+    char mPassword[WS_LOGIN_PASSWORD_LEN];
+    char mCdKeyHash[WS_LOGIN_KEYHASH_LEN];
+    void * mUserData;
 } WSLoginProfileRequest;
 
 typedef struct WSLoginUniqueRequest
 {
-	int mPartnerCode;
-	char mUniqueNick[WS_LOGIN_NICK_LEN];
-	char mPassword[WS_LOGIN_PASSWORD_LEN];
-	char mCdKeyHash[WS_LOGIN_KEYHASH_LEN];
-	void * mUserData;
+    int mPartnerCode;
+    char mUniqueNick[WS_LOGIN_NICK_LEN];
+    char mPassword[WS_LOGIN_PASSWORD_LEN];
+    char mCdKeyHash[WS_LOGIN_KEYHASH_LEN];
+    void * mUserData;
 } WSLoginUniqueRequest;*/
 
 
@@ -147,11 +147,11 @@ typedef struct WSLoginUniqueRequest
 // CERTIFICATE login callback format 
 typedef struct WSLoginResponse
 {
-	WSLoginValue mLoginResult;        // SDK high level result, e.g. LoginFailed
-	WSLoginValue mResponseCode;       // server's result code,  e.g. BadPassword
-	GSLoginCertificate mCertificate;  // Show this to others (prooves: "Bill is a valid user")
-	GSLoginPrivateData mPrivateData;  // Keep this secret!   (prooves: "I am Bill")
-	void * mUserData;
+    WSLoginValue mLoginResult;        // SDK high level result, e.g. LoginFailed
+    WSLoginValue mResponseCode;       // server's result code,  e.g. BadPassword
+    GSLoginCertificate mCertificate;  // Show this to others (prooves: "Bill is a valid user")
+    GSLoginPrivateData mPrivateData;  // Keep this secret!   (prooves: "I am Bill")
+    void * mUserData;
 } WSLoginResponse;
 
 typedef void (*WSLoginCallback)(GHTTPResult httpResult, WSLoginResponse * response, void * userData);
@@ -162,11 +162,11 @@ typedef void (*WSLoginCallback)(GHTTPResult httpResult, WSLoginResponse * respon
 // PS3 login callback format 
 typedef struct WSLoginPs3CertResponse
 {
-	WSLoginValue mLoginResult;   // SDK high level result, e.g. LoginFailed
-	WSLoginValue mResponseCode;  // server's result code,  e.g. BadPassword
-	char mRemoteAuthToken[WS_LOGIN_AUTHTOKEN_LEN];         // Show this to others
-	char mPartnerChallenge[WS_LOGIN_PARTNERCHALLENGE_LEN]; // keep this secret! (It's a "password" for the token.)
-	void * mUserData;
+    WSLoginValue mLoginResult;   // SDK high level result, e.g. LoginFailed
+    WSLoginValue mResponseCode;  // server's result code,  e.g. BadPassword
+    char mRemoteAuthToken[WS_LOGIN_AUTHTOKEN_LEN];         // Show this to others
+    char mPartnerChallenge[WS_LOGIN_PARTNERCHALLENGE_LEN]; // keep this secret! (It's a "password" for the token.)
+    void * mUserData;
 } WSLoginPs3CertResponse;
 
 typedef void (*WSLoginPs3CertCallback)(GHTTPResult httpResult, WSLoginPs3CertResponse * response, void * userData);

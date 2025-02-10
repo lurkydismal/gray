@@ -161,7 +161,7 @@ namespace Platform
         }
         return std::string(result, count);
     }
-	
+    
     IC std::string GetModuleNameForAddress(uintptr_t address) 
     {
         Dl_info dl_info;
@@ -171,7 +171,7 @@ namespace Platform
         }
         return {};
     }
-	
+    
     IC std::string GetUsrName() 
     {
         char UserName[LOGIN_NAME_MAX];

@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: fitter.h
-//	Created 	: 25.03.2002
-//  Modified 	: 09.10.2002
-//	Author		: Dmitriy Iassenev
-//	Description : Pattern Configuration Generation and Weight Fitting Algorithms
+//    Module         : fitter.h
+//    Created     : 25.03.2002
+//  Modified     : 09.10.2002
+//    Author        : Dmitriy Iassenev
+//    Description : Pattern Configuration Generation and Weight Fitting Algorithms
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -13,19 +13,19 @@
 ////////////////////////////////////////////////////////////////////////////
 
 typedef struct tagSConfiguration {
-	uint	uiCount;
-	bool	bUseIt;
-	uint	*uiaAtomicFeatures;
+    uint    uiCount;
+    bool    bUseIt;
+    uint    *uiaAtomicFeatures;
 } SConfiguration;
 
 typedef struct tagSPattern {
-	uint	uiCardinality;
-	uint	*uiaVariableIndexes;
+    uint    uiCardinality;
+    uint    *uiaVariableIndexes;
 } SPattern;
 
 typedef struct tagSEFHeader {
-	uint	uiBuilderVersion;
-	uint	uiDataFormat;
+    uint    uiBuilderVersion;
+    uint    uiDataFormat;
 } SEFHeader;
 
 ////////////////////////////////////////////////////////////////////////////
@@ -33,31 +33,31 @@ typedef struct tagSEFHeader {
 ////////////////////////////////////////////////////////////////////////////
 
 // weight fitting parameters
-#define EPSILON							0.00001
-#define ALPHA							1.0
-#define BETA							0.01
-#define MAX_ITERATION					10000
+#define EPSILON                            0.00001
+#define ALPHA                            1.0
+#define BETA                            0.01
+#define MAX_ITERATION                    10000
 // random weight fitting parameters
-#define RANDOM_FACTOR					4
-#define RANDOM_PROBABILITY				1
-#define RANDOM_UPDATE					1
-#define RANDOM_START_SEED				1
+#define RANDOM_FACTOR                    4
+#define RANDOM_PROBABILITY                1
+#define RANDOM_UPDATE                    1
+#define RANDOM_START_SEED                1
 
 // configuration generator parameters
-#define MATCH_THRESHOLD					1
-#define MAX_CARDINALITY					30
-#define PATTERN_EXISTANCE_COEFFICIENT	((double)(1.0))
+#define MATCH_THRESHOLD                    1
+#define MAX_CARDINALITY                    30
+#define PATTERN_EXISTANCE_COEFFICIENT    ((double)(1.0))
 
 extern double dEpsilon;
 extern double dAlphaCoefficient;
 extern double dBetaCoefficient;
-extern uint	  uiMaxIterationCount;
-extern uint	  uiRandomFactor;
-extern uint	  uiRandomProbability;
-extern uint	  uiRandomUpdate;
-extern uint	  uiRandomStartSeed;
-extern uint	  uiMatchThreshold;
-extern uint	  uiMaxCardinalityCount;
+extern uint      uiMaxIterationCount;
+extern uint      uiRandomFactor;
+extern uint      uiRandomProbability;
+extern uint      uiRandomUpdate;
+extern uint      uiRandomStartSeed;
+extern uint      uiMatchThreshold;
+extern uint      uiMaxCardinalityCount;
 extern double dPatternsExistanceCoefficient;
 
 ////////////////////////////////////////////////////////////////////////////

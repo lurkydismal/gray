@@ -11,8 +11,8 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 07-11-2007  2.07.03  RMV  FIX      Fixed gt2testc Project files to get rid of Unicode warnings and fixed other compiler warnings
 06-07-2007  2.07.02  SN   RELEASE  Released to Developer Site
 04-16-2007  2.07.02  SN   CLEANUP  Put back a removed calling convention
-			2.07.02  SN   CLEANUP  Added a check to the message handler to pass messages to unrecognized message callback
-			                       if a GT2Connection has not been complete.
+            2.07.02  SN   CLEANUP  Added a check to the message handler to pass messages to unrecognized message callback
+                                   if a GT2Connection has not been complete.
 01-16-2007  2.07.01  DES  FEATURE  Added X360 support
 12-15-2006  2.07.00  MJW  RELEASE  Released to Developer Site
 12-04-2006  2.06.78  SN   FIX      Added some checks to message size in test application for revolution
@@ -108,7 +108,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 08-25-2004  2.05.22  DES  FEATURE  Added OSX makefile
 08-16-2004  2.05.22  SN   FEATURE  Updated gt2hostmig and gt2nat to use QR2 instead of legacy Q & R
 08-05-2004  2.05.21  SN   RELEASE  Releasing to developer site.
-07-20-2004  2.05.21  SN   FIX	   Updated code with explicit casts to remove implicit cast error 
+07-20-2004  2.05.21  SN   FIX       Updated code with explicit casts to remove implicit cast error 
                                    when compiling at highest level and warnings treated as errors.
 06-18-2004  2.05.20  BED  RELEASE  Releasing to developer site.
 06-18-2004  2.05.20  DES  FIX      Checking for trying to connect to an invalid IP range.

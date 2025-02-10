@@ -2,57 +2,57 @@
 
 using namespace xray_re;
 
-#define MKCLSID(w1, w2)		((uint64_t(w1) << 32) | (w2))
+#define MKCLSID(w1, w2)        ((uint64_t(w1) << 32) | (w2))
 
 xr_blender* create_blender(uint64_t clsid)
 {
-	switch (clsid) {
-	case MKCLSID('BmmD', 'old '):
-		return new xr_blender_bmmd;
-	case MKCLSID('BLUR', '    '):
-		return new xr_blender_blur;
-	case MKCLSID('D_ST', 'ILL '):
-		return new xr_blender_detail_still;
-	case MKCLSID('D_TR', 'EE  '):
-		return new xr_blender_tree;
-	case MKCLSID('E_SE', 'L   '):
-		return new xr_blender_editor_selection;
-	case MKCLSID('LM  ', '    '):
-		return new xr_blender_default;
-	case MKCLSID('E_WI', 'RE  '):
-		return new xr_blender_editor_wire;
-	case MKCLSID('LM_A', 'REF '):
-		return new xr_blender_default_aref;
-	case MKCLSID('LaEm', 'B   '):
-		return new xr_blender_la_em_b;
-	case MKCLSID('LmEb', 'B   '):
-		return new xr_blender_lm_eb_b;
-	case MKCLSID('MODE', 'LEbB'):
-		return new xr_blender_model_eb_b;
-	case MKCLSID('MODE', 'L   '):
-		return new xr_blender_model;
-	case MKCLSID('PART', 'ICLE'):
-		return new xr_blender_particle;
-	case MKCLSID('SH_W', 'ORLD'):
-		return new xr_blender_sh_world;
-	case MKCLSID('S_GR', 'AY  '):
-		return new xr_blender_screen_gray;
-	case MKCLSID('V_AR', 'EF  '):
-		return new xr_blender_vertex_aref;
-	case MKCLSID('V   ', '    '):
-		return new xr_blender_vertex;
-	case MKCLSID('S_SE', 'T   '):
-		return new xr_blender_screen_set;
+    switch (clsid) {
+    case MKCLSID('BmmD', 'old '):
+        return new xr_blender_bmmd;
+    case MKCLSID('BLUR', '    '):
+        return new xr_blender_blur;
+    case MKCLSID('D_ST', 'ILL '):
+        return new xr_blender_detail_still;
+    case MKCLSID('D_TR', 'EE  '):
+        return new xr_blender_tree;
+    case MKCLSID('E_SE', 'L   '):
+        return new xr_blender_editor_selection;
+    case MKCLSID('LM  ', '    '):
+        return new xr_blender_default;
+    case MKCLSID('E_WI', 'RE  '):
+        return new xr_blender_editor_wire;
+    case MKCLSID('LM_A', 'REF '):
+        return new xr_blender_default_aref;
+    case MKCLSID('LaEm', 'B   '):
+        return new xr_blender_la_em_b;
+    case MKCLSID('LmEb', 'B   '):
+        return new xr_blender_lm_eb_b;
+    case MKCLSID('MODE', 'LEbB'):
+        return new xr_blender_model_eb_b;
+    case MKCLSID('MODE', 'L   '):
+        return new xr_blender_model;
+    case MKCLSID('PART', 'ICLE'):
+        return new xr_blender_particle;
+    case MKCLSID('SH_W', 'ORLD'):
+        return new xr_blender_sh_world;
+    case MKCLSID('S_GR', 'AY  '):
+        return new xr_blender_screen_gray;
+    case MKCLSID('V_AR', 'EF  '):
+        return new xr_blender_vertex_aref;
+    case MKCLSID('V   ', '    '):
+        return new xr_blender_vertex;
+    case MKCLSID('S_SE', 'T   '):
+        return new xr_blender_screen_set;
 #if 0
-	case MKCLSID('', ''):
-		return new xr_blender_;
-	case MKCLSID('', ''):
-		return new xr_blender_;
-	case MKCLSID('', ''):
-		return new xr_blender_;
+    case MKCLSID('', ''):
+        return new xr_blender_;
+    case MKCLSID('', ''):
+        return new xr_blender_;
+    case MKCLSID('', ''):
+        return new xr_blender_;
 #endif
-	};
-	return 0;
+    };
+    return 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

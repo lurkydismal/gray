@@ -32,14 +32,14 @@
 
 namespace luabind
 {
-	template<typename... Ts>
-	struct constructor
-	{
+    template<typename... Ts>
+    struct constructor
+    {
         static constexpr size_t arity() noexcept
         {
             return sizeof...(Ts);
         }
-	};
+    };
 }
 
 namespace luabind { namespace detail

@@ -11,140 +11,140 @@ struct ip_address;
 
 class XRNETSERVER_API syncQueue
 {
-	static const u32 syncQueueSize = 512;
+    static const u32 syncQueueSize = 512;
 
-	u32				table[syncQueueSize];
-	u32				write;
-	u32				count;
+    u32                table[syncQueueSize];
+    u32                write;
+    u32                count;
 public:
-	syncQueue() { clear(); }
+    syncQueue() { clear(); }
 
-	IC void			push(u32 value)
-	{
-		table[write++] = value;
-		if (write == syncQueueSize)	write = 0;
+    IC void            push(u32 value)
+    {
+        table[write++] = value;
+        if (write == syncQueueSize)    write = 0;
 
-		if (count <= syncQueueSize)	count++;
-	}
-	IC u32*		begin() { return table; }
-	IC u32*		end() { return table + count; }
-	IC u32		size() { return count; }
-	IC void     clear() { write = 0; count = 0; }
+        if (count <= syncQueueSize)    count++;
+    }
+    IC u32*        begin() { return table; }
+    IC u32*        end() { return table + count; }
+    IC u32        size() { return count; }
+    IC void     clear() { write = 0; count = 0; }
 };
 
 // -----------------------------------------------------------------------------
 
 class XRNETSERVER_API BaseClient : public MultipacketReciever, private MultipacketSender
 {
-	friend void client_sync_thread(void* P);
+    friend void client_sync_thread(void* P);
 
 public:
-	enum ConnectionState
-	{
-		EnmConnectionFails = 0,
-		EnmConnectionWait = -1,
-		EnmConnectionCompleted = 1
-	};
+    enum ConnectionState
+    {
+        EnmConnectionFails = 0,
+        EnmConnectionWait = -1,
+        EnmConnectionCompleted = 1
+    };
 
 private:
-	ClientID            net_ClientID;
+    ClientID            net_ClientID;
 
 protected:
-	syncQueue           net_DeltaArray;
+    syncQueue           net_DeltaArray;
 
-	u32                 net_Time_LastUpdate;
-	s32                 net_TimeDelta;
-	s32                 net_TimeDelta_Calculated;
-	s32                 net_TimeDelta_User;
+    u32                 net_Time_LastUpdate;
+    s32                 net_TimeDelta;
+    s32                 net_TimeDelta_Calculated;
+    s32                 net_TimeDelta_User;
 
-	GameDescriptionData m_game_description;
-	CTimer*             device_timer;
+    GameDescriptionData m_game_description;
+    CTimer*             device_timer;
 
-	ConnectionState			net_Connected;
-	bool                net_Syncronised = FALSE;
-	bool                net_Disconnected = TRUE;
+    ConnectionState            net_Connected;
+    bool                net_Syncronised = FALSE;
+    bool                net_Disconnected = TRUE;
 
-	INetQueue           net_Queue;
-	IClientStatistic    net_Statistic;
+    INetQueue           net_Queue;
+    IClientStatistic    net_Statistic;
 
 public:
-	BaseClient(CTimer* tm);
-	virtual ~BaseClient();
+    BaseClient(CTimer* tm);
+    virtual ~BaseClient();
 
 private:
-	virtual void        _Recieve(const void* data, u32 data_size, u32 param);
-	virtual void        _SendTo_LL(const void* data, u32 size, u32 flags, u32 timeout);
+    virtual void        _Recieve(const void* data, u32 data_size, u32 param);
+    virtual void        _SendTo_LL(const void* data, u32 size, u32 flags, u32 timeout);
 
 protected:
-	virtual bool        IsConnectionInit() { return true; }
+    virtual bool        IsConnectionInit() { return true; }
 
-	void                SetClientID(ClientID const & local_client) { net_ClientID = local_client; };
+    void                SetClientID(ClientID const & local_client) { net_ClientID = local_client; };
 
-	void                ParseConnectionOptions(LPCSTR options, ClientConnectionOptions& out);
-	virtual bool        CreateConnection(ClientConnectionOptions& opt) { return true; };
-	virtual void        DestroyConnection() {};
+    void                ParseConnectionOptions(LPCSTR options, ClientConnectionOptions& out);
+    virtual bool        CreateConnection(ClientConnectionOptions& opt) { return true; };
+    virtual void        DestroyConnection() {};
 
-	bool                Sync_Thread();
-	void                Sync_Average();
-	virtual bool        GetPendingMessagesCount(DWORD& dwPending) { return true; };
-	virtual bool        SendPingMessage(MSYS_PING& clPing) { return true; };
+    bool                Sync_Thread();
+    void                Sync_Average();
+    virtual bool        GetPendingMessagesCount(DWORD& dwPending) { return true; };
+    virtual bool        SendPingMessage(MSYS_PING& clPing) { return true; };
 
-	virtual	void        SendTo_LL(void* data, u32 size, u32 dwFlags = DPNSEND_GUARANTEED, u32 dwTimeout = 0) {}
+    virtual    void        SendTo_LL(void* data, u32 size, u32 dwFlags = DPNSEND_GUARANTEED, u32 dwTimeout = 0) {}
 
 public:
-	bool                Connect(LPCSTR options);
-	void                Disconnect();
+    bool                Connect(LPCSTR options);
+    void                Disconnect();
 
-	ClientID const &	GetClientID() { return net_ClientID; };
+    ClientID const &    GetClientID() { return net_ClientID; };
 
-	bool                net_isCompleted_Connect() const { return net_Connected == EnmConnectionCompleted; }
-	bool                net_isFails_Connect() const { return net_Connected == EnmConnectionFails; }
-	bool                net_isCompleted_Sync() const { return net_Syncronised; }
-	bool                net_isDisconnected() const { return net_Disconnected; }
-	IC GameDescriptionData const & get_net_DescriptionData() const { return m_game_description; }
+    bool                net_isCompleted_Connect() const { return net_Connected == EnmConnectionCompleted; }
+    bool                net_isFails_Connect() const { return net_Connected == EnmConnectionFails; }
+    bool                net_isCompleted_Sync() const { return net_Syncronised; }
+    bool                net_isDisconnected() const { return net_Disconnected; }
+    IC GameDescriptionData const & get_net_DescriptionData() const { return m_game_description; }
 
-	virtual bool        HasSessionName() { return false; }
-	virtual LPCSTR      net_SessionName() const { return m_game_description.map_name; }
+    virtual bool        HasSessionName() { return false; }
+    virtual LPCSTR      net_SessionName() const { return m_game_description.map_name; }
 
-	bool                net_HasBandwidth();
+    bool                net_HasBandwidth();
 
-	bool                net_IsSyncronised() const { return net_Syncronised; };
-	void                net_Syncronize();
+    bool                net_IsSyncronised() const { return net_Syncronised; };
+    void                net_Syncronize();
 
-	// receive
-	IC void							StartProcessQueue() { net_Queue.Lock(); }; // WARNING ! after Start mast be End !!! <-
-	IC NET_Packet*			net_msg_Retreive() { return net_Queue.Retreive(); };//							|
-	IC void							net_msg_Release() { net_Queue.Release(); };//							|
-	IC void							EndProcessQueue() { net_Queue.Unlock(); };//							<-
+    // receive
+    IC void                            StartProcessQueue() { net_Queue.Lock(); }; // WARNING ! after Start mast be End !!! <-
+    IC NET_Packet*            net_msg_Retreive() { return net_Queue.Retreive(); };//                            |
+    IC void                            net_msg_Release() { net_Queue.Release(); };//                            |
+    IC void                            EndProcessQueue() { net_Queue.Unlock(); };//                            <-
 
-	// send
-	virtual	void			  Send(NET_Packet& P, u32 dwFlags = DPNSEND_GUARANTEED, u32 dwTimeout = 0);
-	virtual void			  Flush_Send_Buffer();
+    // send
+    virtual    void              Send(NET_Packet& P, u32 dwFlags = DPNSEND_GUARANTEED, u32 dwTimeout = 0);
+    virtual void              Flush_Send_Buffer();
 
-	virtual void        OnMessage(void* data, u32 size);
-	virtual void        OnInvalidHost() {};
-	virtual void        OnInvalidPassword() {};
-	virtual void        OnSessionFull() {};
-	virtual void        OnConnectRejected() {};
+    virtual void        OnMessage(void* data, u32 size);
+    virtual void        OnInvalidHost() {};
+    virtual void        OnInvalidPassword() {};
+    virtual void        OnSessionFull() {};
+    virtual void        OnConnectRejected() {};
 
 
-	virtual	LPCSTR      GetMsgId2Name(u16 ID) { return ""; }
-	virtual void        OnSessionTerminate(LPCSTR reason) {};
+    virtual    LPCSTR      GetMsgId2Name(u16 ID) { return ""; }
+    virtual void        OnSessionTerminate(LPCSTR reason) {};
 
-	virtual	bool        GetServerAddress(ip_address& pAddress, DWORD* pPort) { return false; }
+    virtual    bool        GetServerAddress(ip_address& pAddress, DWORD* pPort) { return false; }
 
-	// time management
-	IC u32              timeServer() { return TimeGlobal(device_timer) + net_TimeDelta + net_TimeDelta_User; }
-	IC u32              timeServer_Async() { return TimerAsync(device_timer) + net_TimeDelta + net_TimeDelta_User; }
-	IC u32              timeServer_Delta() { return net_TimeDelta; }
-	IC void             timeServer_UserDelta(s32 d) { net_TimeDelta_User = d; }
+    // time management
+    IC u32              timeServer() { return TimeGlobal(device_timer) + net_TimeDelta + net_TimeDelta_User; }
+    IC u32              timeServer_Async() { return TimerAsync(device_timer) + net_TimeDelta + net_TimeDelta_User; }
+    IC u32              timeServer_Delta() { return net_TimeDelta; }
+    IC void             timeServer_UserDelta(s32 d) { net_TimeDelta_User = d; }
 
-	// unused
-	//IC void				    timeServer_Correct(u32 sv_time, u32 cl_time);
+    // unused
+    //IC void                    timeServer_Correct(u32 sv_time, u32 cl_time);
 
-	// statistic
-	void					      ClearStatistic() { net_Statistic.Clear(); };
-	IClientStatistic&		GetStatistic() { return  net_Statistic; }
-	virtual	void			  UpdateStatistic() {}
+    // statistic
+    void                          ClearStatistic() { net_Statistic.Clear(); };
+    IClientStatistic&        GetStatistic() { return  net_Statistic; }
+    virtual    void              UpdateStatistic() {}
 };
 

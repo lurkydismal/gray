@@ -33,11 +33,11 @@ extern "C" {
 /* Chat.
 *******/
 #ifndef GSI_UNICODE
-#define piChatDisconnected		piChatDisconnectedA
-#define piChatPrivateMessage	piChatPrivateMessageA
+#define piChatDisconnected        piChatDisconnectedA
+#define piChatPrivateMessage    piChatPrivateMessageA
 #else
-#define piChatDisconnected		piChatDisconnectedW
-#define piChatPrivateMessage	piChatPrivateMessageW
+#define piChatDisconnected        piChatDisconnectedW
+#define piChatPrivateMessage    piChatPrivateMessageW
 #endif
 
 // Include both forms here so CodeWarrior will have it's happy prototypes

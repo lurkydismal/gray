@@ -28,18 +28,18 @@
 
 namespace luabind
 {
-	struct class_info
-	{
-		class_info(lua_State* L)
-			: methods(L)
-		{}
-		
-		string_class name;
-		object methods;
-		object attributes;
-	};
+    struct class_info
+    {
+        class_info(lua_State* L)
+            : methods(L)
+        {}
+        
+        string_class name;
+        object methods;
+        object attributes;
+    };
 
-	class_info get_class_info(const object&);
+    class_info get_class_info(const object&);
 
-	void bind_class_info(lua_State*);
+    void bind_class_info(lua_State*);
 }

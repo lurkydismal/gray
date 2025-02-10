@@ -2,12 +2,12 @@
 
 void EScene::UndoClear()
 {
-	while( !m_RedoStack.empty() ){
-		unlink( m_RedoStack.back().m_FileName );
-		m_RedoStack.pop_back(); }
-	while( !m_UndoStack.empty() ){
-		unlink( m_UndoStack.back().m_FileName );
-		m_UndoStack.pop_back(); }
+    while( !m_RedoStack.empty() ){
+        unlink( m_RedoStack.back().m_FileName );
+        m_RedoStack.pop_back(); }
+    while( !m_UndoStack.empty() ){
+        unlink( m_UndoStack.back().m_FileName );
+        m_UndoStack.pop_back(); }
 }
 
 void EScene::UndoSave()
@@ -18,70 +18,70 @@ void EScene::UndoSave()
 
     if (0==EPrefs->scene_undo_level) return;
 
-	UndoItem item;
-	GetTempFileNameA( FS.get_path(_temp_)->m_Path, "undo", 0, item.m_FileName );
+    UndoItem item;
+    GetTempFileNameA( FS.get_path(_temp_)->m_Path, "undo", 0, item.m_FileName );
 
-	Save( item.m_FileName, true, true );
-	m_UndoStack.push_back( item );
+    Save( item.m_FileName, true, true );
+    m_UndoStack.push_back( item );
 
-	while( !m_RedoStack.empty() ){
-		unlink( m_RedoStack.back().m_FileName );
-		m_RedoStack.pop_back(); }
+    while( !m_RedoStack.empty() ){
+        unlink( m_RedoStack.back().m_FileName );
+        m_RedoStack.pop_back(); }
 
-	if( m_UndoStack.size() > EPrefs->scene_undo_level ){
-		unlink( m_UndoStack.front().m_FileName );
-		m_UndoStack.pop_front(); }
+    if( m_UndoStack.size() > EPrefs->scene_undo_level ){
+        unlink( m_UndoStack.front().m_FileName );
+        m_UndoStack.pop_front(); }
 }
 
 bool EScene::Undo()
 {
-	if( m_UndoStack.size()>1 )
-	{
-		m_RedoStack.push_back( m_UndoStack.back() );
-		m_UndoStack.pop_back();
+    if( m_UndoStack.size()>1 )
+    {
+        m_RedoStack.push_back( m_UndoStack.back() );
+        m_UndoStack.pop_back();
 
-		if (m_RedoStack.size() > EPrefs->scene_undo_level)
-		{
-			Platform::Unlink(m_RedoStack.front().m_FileName);
-			m_RedoStack.pop_front();
+        if (m_RedoStack.size() > EPrefs->scene_undo_level)
+        {
+            Platform::Unlink(m_RedoStack.front().m_FileName);
+            m_RedoStack.pop_front();
         }
 
-		if( !m_UndoStack.empty() ){
-			Unload(TRUE);
-         	Load( m_UndoStack.back().m_FileName, true );
+        if( !m_UndoStack.empty() ){
+            Unload(TRUE);
+             Load( m_UndoStack.back().m_FileName, true );
         }
 
         UI->UpdateScene();
         Modified();
 
-		return true;
-	}
-	return false;
+        return true;
+    }
+    return false;
 }
 
 bool EScene::Redo()
 {
-	if (!m_RedoStack.empty()) 
-	{
-		Unload(TRUE);
-		Load(m_RedoStack.back().m_FileName, true);
+    if (!m_RedoStack.empty()) 
+    {
+        Unload(TRUE);
+        Load(m_RedoStack.back().m_FileName, true);
 
-		m_UndoStack.push_back(m_RedoStack.back());
-		m_RedoStack.pop_back();
+        m_UndoStack.push_back(m_RedoStack.back());
+        m_RedoStack.pop_back();
 
-		if (m_UndoStack.size() > EPrefs->scene_undo_level)
-		{
-			Platform::Unlink(m_UndoStack.front().m_FileName);
-			m_UndoStack.pop_front();
-		}
+        if (m_UndoStack.size() > EPrefs->scene_undo_level)
+        {
+            Platform::Unlink(m_UndoStack.front().m_FileName);
+            m_UndoStack.pop_front();
+        }
 
-		UI->UpdateScene();
-		Modified();
+        UI->UpdateScene();
+        Modified();
 
-		return true;
-	}
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 

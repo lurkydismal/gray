@@ -4,185 +4,185 @@
 
 class ENGINE_API CGameFont
 {
-	friend class dxFontRender;
-	friend class FontRender;
+    friend class dxFontRender;
+    friend class FontRender;
 
-	enum EStyle : u64
-	{
-		eBold = 4196692,
-		eStrike = 4196725,
-		eUnderline = 4196715,
-		eItalic = 4196708
-	};
+    enum EStyle : u64
+    {
+        eBold = 4196692,
+        eStrike = 4196725,
+        eUnderline = 4196715,
+        eItalic = 4196708
+    };
 public:
-	enum EAligment
-	{
-		alLeft = 0,
-		alRight,
-		alCenter
-	};
+    enum EAligment
+    {
+        alLeft = 0,
+        alRight,
+        alCenter
+    };
 
 private:
-	struct String
-	{
-		string1024 string;
-		xr_string  string_utf8;
-		float x, y;
-		float height;
-		u32 c;
-		EAligment align;
-	};
+    struct String
+    {
+        string1024 string;
+        xr_string  string_utf8;
+        float x, y;
+        float height;
+        u32 c;
+        EAligment align;
+    };
 
-	struct BaseData
-	{
-		bool OpenType = false;
-		u16 Size;
-		const char* Name;
-		const char* Shader;
-		const char* Style;
-	};
+    struct BaseData
+    {
+        bool OpenType = false;
+        u16 Size;
+        const char* Name;
+        const char* Shader;
+        const char* Style;
+    };
 
-	BaseData Data;
+    BaseData Data;
 protected:
-	float fCurrentHeight = 0.0f;
-	float fCurrentX = 0.0f;
-	float fCurrentY = 0.0f;
+    float fCurrentHeight = 0.0f;
+    float fCurrentX = 0.0f;
+    float fCurrentY = 0.0f;
 
-	u32 uFlags;
-	u32 dwCurrentColor;
+    u32 uFlags;
+    u32 dwCurrentColor;
 
-	EAligment eCurrentAlignment;
-	xr_vector<String> strings;
-	IFontRender* pFontRender;
-
-public:
-	enum
-	{
-		fsGradient = (1 << 0),
-		fsDeviceIndependent = (1 << 1), //#DELETE_ME deprecated
-		fsValid = (1 << 2),
-
-		fsMultibyte = (1 << 3),
-
-		fsForceDWORD = u32(-1)
-	};
-
+    EAligment eCurrentAlignment;
+    xr_vector<String> strings;
+    IFontRender* pFontRender;
 
 public:
-	CGameFont(const char* section, u32 flags = 0);
-	//CGameFont(const char* shader, const char* texture, u32 flags = 0);
-	~CGameFont();
+    enum
+    {
+        fsGradient = (1 << 0),
+        fsDeviceIndependent = (1 << 1), //#DELETE_ME deprecated
+        fsValid = (1 << 2),
 
-	void ReInit();
-	inline void SetColor(u32 C) { dwCurrentColor = C; };
+        fsMultibyte = (1 << 3),
 
-	//inline void SetHeightI(float S);
-	inline void SetHeight(float S);
+        fsForceDWORD = u32(-1)
+    };
 
-	inline float GetHeight() { return fCurrentHeight; };
-	inline void SetAligment(EAligment aligment) { eCurrentAlignment = aligment; }
 
-	float SizeOf_(const char* s);
-	float SizeOf_(const wide_char* wsStr);
-	float SizeOf_(int cChar);  // only ANSII
+public:
+    CGameFont(const char* section, u32 flags = 0);
+    //CGameFont(const char* shader, const char* texture, u32 flags = 0);
+    ~CGameFont();
 
-	float CurrentHeight_();
+    void ReInit();
+    inline void SetColor(u32 C) { dwCurrentColor = C; };
 
-	void OutSetI(float x, float y);
-	void OutSet(float x, float y);
+    //inline void SetHeightI(float S);
+    inline void SetHeight(float S);
 
-	void MasterOut(BOOL bCheckDevice, BOOL bUseCoords, BOOL bScaleCoords, BOOL bUseSkip, float _x, float _y, float _skip, const char* fmt, va_list p);
+    inline float GetHeight() { return fCurrentHeight; };
+    inline void SetAligment(EAligment aligment) { eCurrentAlignment = aligment; }
 
-	BOOL IsMultibyte() {
-		return uFlags & fsMultibyte;
-	};
-	u16 SplitByWidth(u16* puBuffer, u16 uBufferSize, float fTargetWidth, const char* pszText);
-	u16 GetCutLengthPos(float fTargetWidth, const char* pszText);
+    float SizeOf_(const char* s);
+    float SizeOf_(const wide_char* wsStr);
+    float SizeOf_(int cChar);  // only ANSII
 
-	void OutI(float _x, float _y, const char* fmt, ...);
-	void Out(float _x, float _y, const char* fmt, ...);
-	void OutNext(const char* fmt, ...);
+    float CurrentHeight_();
 
-	void OutSkip(float val = 1.f);
+    void OutSetI(float x, float y);
+    void OutSet(float x, float y);
 
-	void OnRender();
+    void MasterOut(BOOL bCheckDevice, BOOL bUseCoords, BOOL bScaleCoords, BOOL bUseSkip, float _x, float _y, float _skip, const char* fmt, va_list p);
 
-	inline void Clear() { strings.clear(); };
+    BOOL IsMultibyte() {
+        return uFlags & fsMultibyte;
+    };
+    u16 SplitByWidth(u16* puBuffer, u16 uBufferSize, float fTargetWidth, const char* pszText);
+    u16 GetCutLengthPos(float fTargetWidth, const char* pszText);
 
-	//shared_str m_font_name;
+    void OutI(float _x, float _y, const char* fmt, ...);
+    void Out(float _x, float _y, const char* fmt, ...);
+    void OutNext(const char* fmt, ...);
 
-	struct Style
-	{
-		u32 bold : 1;
-		u32 italic : 1;
-		u32 underline : 1;
-		u32 strike : 1;
-	};
+    void OutSkip(float val = 1.f);
 
-	struct Glyph
-	{
-		RECT TextureCoord;
-		ABC Abc;
-		int yOffset;
-	};
+    void OnRender();
 
-	inline u32 GetSize()
-	{
-		return Size;
-	}
+    inline void Clear() { strings.clear(); };
 
-	inline float GetLetterSpacing()
-	{
-		return LetterSpacing;
-	}
+    //shared_str m_font_name;
 
-	inline void SetLetterSpacing(float spacing)
-	{
-		LetterSpacing = spacing;
-	}
+    struct Style
+    {
+        u32 bold : 1;
+        u32 italic : 1;
+        u32 underline : 1;
+        u32 strike : 1;
+    };
 
-	inline float GetLineSpacing()
-	{
-		return LineSpacing;
-	}
+    struct Glyph
+    {
+        RECT TextureCoord;
+        ABC Abc;
+        int yOffset;
+    };
 
-	inline void SetLineSpacing(float spacing)
-	{
-		LineSpacing = spacing;
-	}
+    inline u32 GetSize()
+    {
+        return Size;
+    }
 
-	inline Style GetStyle()
-	{
-		return Style;
-	}
+    inline float GetLetterSpacing()
+    {
+        return LetterSpacing;
+    }
 
-	inline const char* GetName()
-	{
-		return Name;
-	}
+    inline void SetLetterSpacing(float spacing)
+    {
+        LetterSpacing = spacing;
+    }
 
-	const Glyph* GetGlyphInfo(int ch);
+    inline float GetLineSpacing()
+    {
+        return LineSpacing;
+    }
 
-	// returns symbol width in pixels
-	int WidthOf(int ch);
-	int WidthOf(const char* str);
+    inline void SetLineSpacing(float spacing)
+    {
+        LineSpacing = spacing;
+    }
+
+    inline Style GetStyle()
+    {
+        return Style;
+    }
+
+    inline const char* GetName()
+    {
+        return Name;
+    }
+
+    const Glyph* GetGlyphInfo(int ch);
+
+    // returns symbol width in pixels
+    int WidthOf(int ch);
+    int WidthOf(const char* str);
 
 private:
-	float LetterSpacing; //that must be in CUIText from new font system
-	float LineSpacing; //that must be in CUIText from new font system
+    float LetterSpacing; //that must be in CUIText from new font system
+    float LineSpacing; //that must be in CUIText from new font system
 
-	const char* Name; //#TODO change type
+    const char* Name; //#TODO change type
 
-	u32 Size;
-	Style Style;
+    u32 Size;
+    Style Style;
 
-	xr_map<int, Glyph> GlyphData;
+    xr_map<int, Glyph> GlyphData;
 
-	void Prepare(const char* name, const char* shader, const char* style, u32 size);
-	void Initialize(const char* name, const char* shader, const char* style, u32 size);
-	void Initialize2(const char* name, const char* shader, const char* style, u32 size);
+    void Prepare(const char* name, const char* shader, const char* style, u32 size);
+    void Initialize(const char* name, const char* shader, const char* style, u32 size);
+    void Initialize2(const char* name, const char* shader, const char* style, u32 size);
 
-	static bool bFreetypeInitialized;
+    static bool bFreetypeInitialized;
 
-	static void InitializeFreetype();
+    static void InitializeFreetype();
 };

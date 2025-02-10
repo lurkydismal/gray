@@ -31,7 +31,7 @@ void main(in vi v, out v2p o)
 
     o.hpos_curr = o.hpos;
     o.hpos_old = mul(m_WVP_old, v.p);
-	
+    
     o.hpos.xy += m_taa_jitter.xy * o.hpos.w;
 }
 

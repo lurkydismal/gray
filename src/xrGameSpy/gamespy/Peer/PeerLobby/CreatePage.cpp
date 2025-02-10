@@ -23,10 +23,10 @@ IMPLEMENT_DYNCREATE(CCreatePage, CPropertyPage)
 /////////////////////
 CCreatePage::CCreatePage() : CPropertyPage(CCreatePage::IDD)
 {
-	//{{AFX_DATA_INIT(CCreatePage)
-	m_name = _T("My Server");
-	m_maxPlayers = 8;
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CCreatePage)
+    m_name = _T("My Server");
+    m_maxPlayers = 8;
+    //}}AFX_DATA_INIT
 }
 
 CCreatePage::~CCreatePage()
@@ -35,44 +35,44 @@ CCreatePage::~CCreatePage()
 
 void CCreatePage::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CCreatePage)
-	DDX_Text(pDX, IDC_NAME, m_name);
-	DDX_Text(pDX, IDC_MAX_PLAYERS, m_maxPlayers);
-	DDV_MinMaxInt(pDX, m_maxPlayers, 2, 9999);
-	//}}AFX_DATA_MAP
+    CPropertyPage::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CCreatePage)
+    DDX_Text(pDX, IDC_NAME, m_name);
+    DDX_Text(pDX, IDC_MAX_PLAYERS, m_maxPlayers);
+    DDV_MinMaxInt(pDX, m_maxPlayers, 2, 9999);
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CCreatePage, CPropertyPage)
-	//{{AFX_MSG_MAP(CCreatePage)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CCreatePage)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 // Switching to this page.
 //////////////////////////
 BOOL CCreatePage::OnSetActive() 
 {
-	// Show the back and next buttons.
-	//////////////////////////////////
-	Wizard->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
+    // Show the back and next buttons.
+    //////////////////////////////////
+    Wizard->SetWizardButtons(PSWIZB_BACK | PSWIZB_NEXT);
 
-	// We're hosting the room.
-	//////////////////////////
-	Wizard->m_hosting = TRUE;
+    // We're hosting the room.
+    //////////////////////////
+    Wizard->m_hosting = TRUE;
 
-	return CPropertyPage::OnSetActive();
+    return CPropertyPage::OnSetActive();
 }
 
 // Going to the previous page.
 //////////////////////////////
 LRESULT CCreatePage::OnWizardBack() 
 {
-	// Not hosting anymore.
-	///////////////////////
-	Wizard->m_hosting = FALSE;
+    // Not hosting anymore.
+    ///////////////////////
+    Wizard->m_hosting = FALSE;
 
-	return CPropertyPage::OnWizardBack();
+    return CPropertyPage::OnWizardBack();
 }
 
 // Called when the staging room has been created (or the attempt failed).
@@ -80,36 +80,36 @@ LRESULT CCreatePage::OnWizardBack()
 static PEERBool createStagingSuccess;
 static void CreateStagingRoomCallback
 (
-	PEER peer,
-	PEERBool success,
-	PEERJoinResult result,
-	RoomType roomType,
-	void * param
+    PEER peer,
+    PEERBool success,
+    PEERJoinResult result,
+    RoomType roomType,
+    void * param
 )
 {
-	createStagingSuccess = success;
+    createStagingSuccess = success;
 
-	GSI_UNUSED(param);
-	GSI_UNUSED(roomType);
-	GSI_UNUSED(result);
-	GSI_UNUSED(peer);
+    GSI_UNUSED(param);
+    GSI_UNUSED(roomType);
+    GSI_UNUSED(result);
+    GSI_UNUSED(peer);
 }
 
 // Going to the next page.
 //////////////////////////
 LRESULT CCreatePage::OnWizardNext() 
 {
-	// Update the data.
-	///////////////////
-	UpdateData();
+    // Update the data.
+    ///////////////////
+    UpdateData();
 
 //PEERSTART
-	// Create the room.
-	///////////////////
-	Wizard->StartHourglass();
-	peerCreateStagingRoom(Wizard->m_peer, m_name, m_maxPlayers, NULL, CreateStagingRoomCallback, NULL, PEERTrue);
-	Wizard->StopHourglass();
+    // Create the room.
+    ///////////////////
+    Wizard->StartHourglass();
+    peerCreateStagingRoom(Wizard->m_peer, m_name, m_maxPlayers, NULL, CreateStagingRoomCallback, NULL, PEERTrue);
+    Wizard->StopHourglass();
 //PEERSTOP
 
-	return CPropertyPage::OnWizardNext();
+    return CPropertyPage::OnWizardNext();
 }

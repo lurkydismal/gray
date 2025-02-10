@@ -50,11 +50,11 @@ float sample_hw_pcf(float4 tc, float4 shift)
     static const float ts = KERNEL / float(SMAP_size);
 #ifndef SUNSHAFTS_DYNAMIC
     return tex2Dproj(s_smap, tc + tc.w * shift * ts).x;
-#else //	SUNSHAFTS_DYNAMIC
+#else //    SUNSHAFTS_DYNAMIC
     float4 tc2 = tc / tc.w + shift * ts;
     tc2.w = 0;
     return tex2Dlod(s_smap, tc2);
-#endif //	SUNSHAFTS_DYNAMIC
+#endif //    SUNSHAFTS_DYNAMIC
 }
 float shadow_hw(float4 tc)
 {
@@ -71,12 +71,12 @@ float shadow_hw(float4 tc)
 //////////////////////////////////////////////////////////////////////////////////////////
 
 /*
-float  	sample_hw_f4	(float4 tc,float4 shift){
-        static const float 	ts 	= KERNEL / 	float(SMAP_size);
-        float4	D4				= tex2Dproj	(s_smap,tc + tc.w*shift*ts);
-        float4 	dcmp			= tc.z/tc.w	;
-        float4	cmp				= dcmp<D4	;
-        return 	dot	(cmp,1.h/4.h);
+float      sample_hw_f4    (float4 tc,float4 shift){
+        static const float     ts     = KERNEL /     float(SMAP_size);
+        float4    D4                = tex2Dproj    (s_smap,tc + tc.w*shift*ts);
+        float4     dcmp            = tc.z/tc.w    ;
+        float4    cmp                = dcmp<D4    ;
+        return     dot    (cmp,1.h/4.h);
 }
 */
 
@@ -96,7 +96,7 @@ float sample_hw_f4(float4 tc, float4 shift)
     float4 fr4s = fr4.zywx;
 
     return dot(compare, fr4s);
-    // return 	dot	(compare, 1.h/4.h)	;
+    // return     dot    (compare, 1.h/4.h)    ;
 }
 
 float shadow_hw_f4(float4 tc)
@@ -141,12 +141,12 @@ float shadowtest_sun(float4 tc, float4 tcJ) // jittered sampling
 {
     float4 r;
 
-    //	const 	float 	scale 	= (2.0f/float(SMAP_size));
+    //    const     float     scale     = (2.0f/float(SMAP_size));
     const float scale = (0.7f / float(SMAP_size));
 
     float2 tc_J = frac(tc.xy / tc.w * SMAP_size / 4.0f) * .5f;
     float4 J0 = tex2D(jitter0, tc_J) * scale;
-    // float4	J1 	= tex2D	(jitter1,tc_J)*scale;
+    // float4    J1     = tex2D    (jitter1,tc_J)*scale;
 
     const float k = .5f / float(SMAP_size);
     r.x = test(tc, J0.xy + float2(-k, -k)).x;

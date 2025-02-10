@@ -14,8 +14,8 @@ struct v2p
 
 uniform float4 MiddleGray;
 
-//	perform 4x4 bilinear, 8x8p, the step (C)
-//	c):	8x8p	=> 1x1p		with exp
+//    perform 4x4 bilinear, 8x8p, the step (C)
+//    c):    8x8p    => 1x1p        with exp
 #ifdef FP16_FILTER
 // native bilinear
 float sample(float2 tc)
@@ -76,7 +76,7 @@ float4 main(v2p I) : COLOR
     float scale_prev = tex2D(s_tonemap, I.tc0).x;
     float rvalue = lerp(scale_prev, scale, MiddleGray.w);
 
-    //			clamp		(rvalue, 1.f/8.f, 2.0f);
+    //            clamp        (rvalue, 1.f/8.f, 2.0f);
 
     clamp(rvalue, 1.f / 128.f, 20.0f);
 

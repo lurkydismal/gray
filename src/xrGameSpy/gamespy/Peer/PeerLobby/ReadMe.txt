@@ -28,7 +28,7 @@ PeerLobby.rc
     This is a listing of all of the Microsoft Windows resources that the
     program uses.  It includes the icons, bitmaps, and cursors that are stored
     in the RES subdirectory.  This file can be directly edited in Microsoft
-	Visual C++.
+    Visual C++.
 
 PeerLobby.clw
     This file contains information used by ClassWizard to edit existing
@@ -42,8 +42,8 @@ res\PeerLobby.ico
 
 res\PeerLobby.rc2
     This file contains resources that are not edited by Microsoft 
-	Visual C++.  You should place all resources not editable by
-	the resource editor in this file.
+    Visual C++.  You should place all resources not editable by
+    the resource editor in this file.
 
 
 
@@ -56,7 +56,7 @@ PeerLobbyDlg.h, PeerLobbyDlg.cpp - the dialog
     These files contain your CPeerLobbyDlg class.  This class defines
     the behavior of your application's main dialog.  The dialog's
     template is in PeerLobby.rc, which can be edited in Microsoft
-	Visual C++.
+    Visual C++.
 
 
 /////////////////////////////////////////////////////////////////////////////

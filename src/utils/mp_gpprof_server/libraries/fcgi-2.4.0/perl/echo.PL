@@ -9,7 +9,7 @@ __END__
 #
 #  echo-perl --
 # 
-# 	Produce a page containing all FastCGI inputs
+#     Produce a page containing all FastCGI inputs
 # 
 # Copyright (c) 1996 Open Market, Inc.
 #
@@ -53,7 +53,7 @@ while($req->Accept() >= 0) {
                 print("Error: Not enough bytes received ",
                       "on standard input<p>\n");
                 last;
-	    }
+        }
             print($ch);
         }
         print("\n</pre><p>\n");

@@ -12,8 +12,8 @@
 #define USE_OUT_OF_MEMORY_HANDLER
 
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-	typedef void const* out_of_memory_handler_parameter_type;
-	typedef void (__stdcall *out_of_memory_handler_type)	(void*, out_of_memory_handler_parameter_type, int);
+    typedef void const* out_of_memory_handler_parameter_type;
+    typedef void (__stdcall *out_of_memory_handler_type)    (void*, out_of_memory_handler_parameter_type, int);
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 
 #ifndef MALLOC_ALIGNMENT
@@ -35,8 +35,8 @@
 #define MAP_ANONYMOUS        MAP_ANON
 #endif /* MAP_ANON */
 #ifdef MAP_ANONYMOUS
-#define MMAP_FLAGS			(MAP_PRIVATE|MAP_ANONYMOUS)
-#define CALL_MMAP( s )		mmap( 0, (s), PROT_READ|PROT_WRITE, MMAP_FLAGS, -1, 0)
+#define MMAP_FLAGS            (MAP_PRIVATE|MAP_ANONYMOUS)
+#define CALL_MMAP( s )        mmap( 0, (s), PROT_READ|PROT_WRITE, MMAP_FLAGS, -1, 0)
 #else /* MAP_ANONYMOUS */
 /*
    Nearly all versions of mmap support MAP_ANONYMOUS, so the following
@@ -50,7 +50,7 @@ static int dev_zero_fd = -1; /* Cached file descriptor for /dev/zero. */
             mmap(0, (s), PROT_READ|PROT_WRITE, MMAP_FLAGS, dev_zero_fd, 0)) : \
             mmap(0, (s), PROT_READ|PROT_WRITE, MMAP_FLAGS, dev_zero_fd, 0))
 #endif /* MAP_ANONYMOUS */
-#define CALL_MUNMAP( a, s)	munmap( (a), (s))
+#define CALL_MUNMAP( a, s)    munmap( (a), (s))
 
 struct malloc_chunk {
   size_t               prev_foot;  /* Size of previous chunk (if free).  */
@@ -103,8 +103,8 @@ struct malloc_state {
   void*      extp;
   size_t     exts;
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-  out_of_memory_handler_type			out_of_memory_handler;
-  out_of_memory_handler_parameter_type	out_of_memory_parameter;
+  out_of_memory_handler_type            out_of_memory_handler;
+  out_of_memory_handler_parameter_type    out_of_memory_parameter;
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 };
 

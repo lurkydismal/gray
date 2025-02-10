@@ -4,10 +4,10 @@
  * Module: sem_unlink.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -55,4 +55,4 @@ sem_unlink (const char *name)
 {
   errno = ENOSYS;
   return -1;
-}				/* sem_unlink */
+}                /* sem_unlink */

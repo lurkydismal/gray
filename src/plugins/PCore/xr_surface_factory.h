@@ -11,8 +11,8 @@ class xr_raw_surface;
 
 class xr_surface_factory {
 public:
-	virtual			~xr_surface_factory();
-	virtual xr_surface*	create_surface(const xr_raw_surface& raw_surface) const = 0;
+    virtual            ~xr_surface_factory();
+    virtual xr_surface*    create_surface(const xr_raw_surface& raw_surface) const = 0;
 };
 
 inline xr_surface_factory::~xr_surface_factory() {}

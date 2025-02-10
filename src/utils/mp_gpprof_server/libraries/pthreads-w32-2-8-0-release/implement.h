@@ -61,7 +61,7 @@ typedef VOID (APIENTRY *PAPCFUNC)(DWORD dwParam);
  * In case ETIMEDOUT hasn't been defined above somehow.
  */
 #ifndef ETIMEDOUT
-#  define ETIMEDOUT 10060	/* This is the value in winsock.h. */
+#  define ETIMEDOUT 10060    /* This is the value in winsock.h. */
 #endif
 
 #if !defined(malloc)
@@ -105,15 +105,15 @@ typedef enum
    * The thread is still "alive" if the numeric value of the
    * state is greater or equal "PThreadStateRunning".
    */
-  PThreadStateInitial = 0,	/* Thread not running                   */
-  PThreadStateRunning,		/* Thread alive & kicking               */
-  PThreadStateSuspended,	/* Thread alive but suspended           */
-  PThreadStateCancelPending,	/* Thread alive but is                  */
+  PThreadStateInitial = 0,    /* Thread not running                   */
+  PThreadStateRunning,        /* Thread alive & kicking               */
+  PThreadStateSuspended,    /* Thread alive but suspended           */
+  PThreadStateCancelPending,    /* Thread alive but is                  */
   /* has cancelation pending.        */
-  PThreadStateCanceling,	/* Thread alive but is                  */
+  PThreadStateCanceling,    /* Thread alive but is                  */
   /* in the process of terminating        */
   /* due to a cancellation request        */
-  PThreadStateException,	/* Thread alive but exiting             */
+  PThreadStateException,    /* Thread alive but exiting             */
   /* due to an exception                  */
   PThreadStateLast
 }
@@ -128,26 +128,26 @@ struct ptw32_thread_t_
   DWORD dummy[5];
 #endif
   DWORD thread;
-  HANDLE threadH;		/* Win32 thread handle - POSIX thread is invalid if threadH == 0 */
-  pthread_t ptHandle;		/* This thread's permanent pthread_t handle */
-  ptw32_thread_t * prevReuse;	/* Links threads on reuse stack */
+  HANDLE threadH;        /* Win32 thread handle - POSIX thread is invalid if threadH == 0 */
+  pthread_t ptHandle;        /* This thread's permanent pthread_t handle */
+  ptw32_thread_t * prevReuse;    /* Links threads on reuse stack */
   volatile PThreadState state;
   void *exitStatus;
   void *parms;
   int ptErrno;
   int detachState;
-  pthread_mutex_t threadLock;	/* Used for serialised access to public thread state */
-  int sched_priority;		/* As set, not as currently is */
-  pthread_mutex_t cancelLock;	/* Used for async-cancel safety */
+  pthread_mutex_t threadLock;    /* Used for serialised access to public thread state */
+  int sched_priority;        /* As set, not as currently is */
+  pthread_mutex_t cancelLock;    /* Used for async-cancel safety */
   int cancelState;
   int cancelType;
   HANDLE cancelEvent;
 #ifdef __CLEANUP_C
   jmp_buf start_mark;
-#endif				/* __CLEANUP_C */
+#endif                /* __CLEANUP_C */
 #if HAVE_SIGSET_T
   sigset_t sigmask;
-#endif				/* HAVE_SIGSET_T */
+#endif                /* HAVE_SIGSET_T */
   int implicit:1;
   void *keys;
   void *nextAssoc;
@@ -170,7 +170,7 @@ struct pthread_attr_t_
   int contentionscope;
 #if HAVE_SIGSET_T
   sigset_t sigmask;
-#endif				/* HAVE_SIGSET_T */
+#endif                /* HAVE_SIGSET_T */
 };
 
 
@@ -197,19 +197,19 @@ struct sem_t_
 
 struct pthread_mutex_t_
 {
-  LONG lock_idx;		/* Provides exclusive access to mutex state
-				   via the Interlocked* mechanism.
-				    0: unlocked/free.
-				    1: locked - no other waiters.
-				   -1: locked - with possible other waiters.
-				*/
-  int recursive_count;		/* Number of unlocks a thread needs to perform
-				   before the lock is released (recursive
-				   mutexes only). */
-  int kind;			/* Mutex type. */
+  LONG lock_idx;        /* Provides exclusive access to mutex state
+                   via the Interlocked* mechanism.
+                    0: unlocked/free.
+                    1: locked - no other waiters.
+                   -1: locked - with possible other waiters.
+                */
+  int recursive_count;        /* Number of unlocks a thread needs to perform
+                   before the lock is released (recursive
+                   mutexes only). */
+  int kind;            /* Mutex type. */
   pthread_t ownerThread;
-  HANDLE event;			/* Mutex release notification to waiting
-				   threads. */
+  HANDLE event;            /* Mutex release notification to waiting
+                   threads. */
 };
 
 struct pthread_mutexattr_t_
@@ -241,11 +241,11 @@ struct pthread_mutexattr_t_
 
 struct pthread_spinlock_t_
 {
-  long interlock;		/* Locking element for multi-cpus. */
+  long interlock;        /* Locking element for multi-cpus. */
   union
   {
-    int cpus;			/* No. of cpus if multi cpus, or   */
-    pthread_mutex_t mutex;	/* mutex if single cpu.            */
+    int cpus;            /* No. of cpus if multi cpus, or   */
+    pthread_mutex_t mutex;    /* mutex if single cpu.            */
   } u;
 };
 
@@ -285,18 +285,18 @@ struct ThreadParms
 
 struct pthread_cond_t_
 {
-  long nWaitersBlocked;		/* Number of threads blocked            */
-  long nWaitersGone;		/* Number of threads timed out          */
-  long nWaitersToUnblock;	/* Number of threads to unblock         */
-  sem_t semBlockQueue;		/* Queue up threads waiting for the     */
+  long nWaitersBlocked;        /* Number of threads blocked            */
+  long nWaitersGone;        /* Number of threads timed out          */
+  long nWaitersToUnblock;    /* Number of threads to unblock         */
+  sem_t semBlockQueue;        /* Queue up threads waiting for the     */
   /*   condition to become signalled      */
-  sem_t semBlockLock;		/* Semaphore that guards access to      */
+  sem_t semBlockLock;        /* Semaphore that guards access to      */
   /* | waiters blocked count/block queue  */
   /* +-> Mandatory Sync.LEVEL-1           */
-  pthread_mutex_t mtxUnblockLock;	/* Mutex that guards access to          */
+  pthread_mutex_t mtxUnblockLock;    /* Mutex that guards access to          */
   /* | waiters (to)unblock(ed) counts     */
   /* +-> Optional* Sync.LEVEL-2           */
-  pthread_cond_t next;		/* Doubly linked list                   */
+  pthread_cond_t next;        /* Doubly linked list                   */
   pthread_cond_t prev;
 };
 
@@ -512,7 +512,7 @@ struct ThreadKeyAssoc
 
 /* Declared in global.c */
 extern PTW32_INTERLOCKED_LONG (WINAPI *
-			       ptw32_interlocked_compare_exchange)
+                   ptw32_interlocked_compare_exchange)
   (PTW32_INTERLOCKED_LPLONG, PTW32_INTERLOCKED_LONG, PTW32_INTERLOCKED_LONG);
 
 /* Declared in pthread_cancel.c */
@@ -551,7 +551,7 @@ extern int pthread_count;
 #ifdef __cplusplus
 extern "C"
 {
-#endif				/* __cplusplus */
+#endif                /* __cplusplus */
 
 /*
  * =====================
@@ -569,16 +569,16 @@ extern "C"
 
   PTW32_INTERLOCKED_LONG WINAPI
     ptw32_InterlockedCompareExchange (PTW32_INTERLOCKED_LPLONG location,
-				      PTW32_INTERLOCKED_LONG value,
-				      PTW32_INTERLOCKED_LONG comparand);
+                      PTW32_INTERLOCKED_LONG value,
+                      PTW32_INTERLOCKED_LONG comparand);
 
   LONG WINAPI
     ptw32_InterlockedExchange (LPLONG location,
-			       LONG value);
+                   LONG value);
 
   DWORD
     ptw32_RegisterCancelation (PAPCFUNC callback,
-			       HANDLE threadH, DWORD callback_arg);
+                   HANDLE threadH, DWORD callback_arg);
 
   int ptw32_processInitialize (void);
 
@@ -637,7 +637,7 @@ extern "C"
 
 #ifdef __cplusplus
 }
-#endif				/* __cplusplus */
+#endif                /* __cplusplus */
 
 
 #ifdef _UWIN_
@@ -647,11 +647,11 @@ extern "C"
 {
 #       endif
   _CRTIMP unsigned long __cdecl _beginthread (void (__cdecl *) (void *),
-					      unsigned, void *);
+                          unsigned, void *);
   _CRTIMP void __cdecl _endthread (void);
   _CRTIMP unsigned long __cdecl _beginthreadex (void *, unsigned,
-						unsigned (__stdcall *) (void *),
-						void *, unsigned, unsigned *);
+                        unsigned (__stdcall *) (void *),
+                        void *, unsigned, unsigned *);
   _CRTIMP void __cdecl _endthreadex (unsigned);
 #       ifdef __cplusplus
 }
@@ -704,7 +704,7 @@ extern "C"
 
 #define _endthreadex ExitThread
 
-#endif				/* __CYGWIN32__ || __CYGWIN__ || NEED_CREATETHREAD */
+#endif                /* __CYGWIN32__ || __CYGWIN__ || NEED_CREATETHREAD */
 
 
-#endif				/* _IMPLEMENT_H */
+#endif                /* _IMPLEMENT_H */

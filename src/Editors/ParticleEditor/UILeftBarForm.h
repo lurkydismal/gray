@@ -1,11 +1,11 @@
 #pragma once
 class UILeftBarForm :
-	public IEditorWnd
+    public IEditorWnd
 {
 public:
-	UILeftBarForm();
-	virtual ~UILeftBarForm();
-	virtual void Draw();
+    UILeftBarForm();
+    virtual ~UILeftBarForm();
+    virtual void Draw();
 private:
 };
 

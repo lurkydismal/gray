@@ -144,16 +144,16 @@ DONE:
       cv->prev = ptw32_cond_list_tail;
 
       if (ptw32_cond_list_tail != NULL)
-	{
-	  ptw32_cond_list_tail->next = cv;
-	}
+    {
+      ptw32_cond_list_tail->next = cv;
+    }
 
       ptw32_cond_list_tail = cv;
 
       if (ptw32_cond_list_head == NULL)
-	{
-	  ptw32_cond_list_head = cv;
-	}
+    {
+      ptw32_cond_list_head = cv;
+    }
 
       LeaveCriticalSection (&ptw32_cond_list_lock);
     }
@@ -162,4 +162,4 @@ DONE:
 
   return result;
 
-}				/* pthread_cond_init */
+}                /* pthread_cond_init */

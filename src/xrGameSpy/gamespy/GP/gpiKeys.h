@@ -6,8 +6,8 @@
 
 typedef struct
 {
-	char *keyName;
-	char *keyValue;
+    char *keyName;
+    char *keyValue;
 } GPIKey;
 
 void gpiStatusInfoKeyFree(void *element);

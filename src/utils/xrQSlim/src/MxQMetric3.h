@@ -33,11 +33,11 @@ private:
 public:
     MxQuadric3() { clear(); }
     MxQuadric3(double a, double b, double c, double d, double area=1.0)
-	{ init(a, b, c, d, area); }
+    { init(a, b, c, d, area); }
     MxQuadric3(const float *n, double d, double area=1.0)
-	{ init(n[0], n[1], n[2], d, area); }
+    { init(n[0], n[1], n[2], d, area); }
     MxQuadric3(const double *n, double d, double area=1.0)
-	{ init(n[0], n[1], n[2], d, area); }
+    { init(n[0], n[1], n[2], d, area); }
     MxQuadric3(const MxQuadric3& Q) { *this = Q; }
 
     Mat3 tensor() const;
@@ -62,7 +62,7 @@ public:
     double evaluate(const float *v) const  {return evaluate(v[0], v[1], v[2]);}
 
     double operator()(double x, double y, double z) const
-	{ return evaluate(x, y, z); }
+    { return evaluate(x, y, z); }
     double operator()(const double *v) const {return evaluate(v[0],v[1],v[2]);}
     double operator()(const float *v) const  {return evaluate(v[0],v[1],v[2]);}
 
@@ -74,35 +74,35 @@ public:
 
 /*
     ostream& write(ostream& out)
-	{
-	    return out << a2 << " " << ab << " " << ac << " " << ad << " "
-		       << b2 << " " << bc << " " << bd << " " << c2 << " "
-		       << cd << " " << d2 << " " << r;
-	}
+    {
+        return out << a2 << " " << ab << " " << ac << " " << ad << " "
+               << b2 << " " << bc << " " << bd << " " << c2 << " "
+               << cd << " " << d2 << " " << r;
+    }
 
     ostream& write_full(ostream& out)
-	{
-	    return out << a2 << " " << ab << " " << ac << " " << ad << " "
-		       << ab << " " << b2 << " " << bc << " " << bd << " "
-		       << ac << " " << bc << " " << c2 << " " << cd << " "
-		       << ad << " " << bd << " " << cd << " " << d2;
-	}
+    {
+        return out << a2 << " " << ab << " " << ac << " " << ad << " "
+               << ab << " " << b2 << " " << bc << " " << bd << " "
+               << ac << " " << bc << " " << c2 << " " << cd << " "
+               << ad << " " << bd << " " << cd << " " << d2;
+    }
 
 
     istream& read(istream& in)
-	{
-	    return in >> a2 >> ab >> ac >> ad >> b2
-		      >> bc >> bd >> c2 >> cd >> d2 >> r;
-	}
+    {
+        return in >> a2 >> ab >> ac >> ad >> b2
+              >> bc >> bd >> c2 >> cd >> d2 >> r;
+    }
     
 
     istream& read_full(istream& in)
-	{
-	    return in >> a2 >> ab >> ac >> ad
-		      >> ab >> b2 >> bc >> bd
-		      >> ac >> bc >> c2 >> cd
-		      >> ad >> bd >> cd >> d2;
-	}
+    {
+        return in >> a2 >> ab >> ac >> ad
+              >> ab >> b2 >> bc >> bd
+              >> ac >> bc >> c2 >> cd
+              >> ad >> bd >> cd >> d2;
+    }
 */
 };
 

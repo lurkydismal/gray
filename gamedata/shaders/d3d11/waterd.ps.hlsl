@@ -22,7 +22,7 @@ Texture2D s_distort;
 float4 main(vf I, float4 pos2d : SV_POSITION) : SV_Target
 {
     float alpha = 1.0f - s_base.Sample(smp_base, I.tbase).w;
-	
+    
     float2 t_d0 = s_distort.Sample(smp_base, I.tnorm0).xy;
     float2 t_d1 = s_distort.Sample(smp_base, I.tnorm1).xy;
     float2 distort = (t_d0 + t_d1) * 0.5f;
@@ -37,7 +37,7 @@ float4 main(vf I, float4 pos2d : SV_POSITION) : SV_Target
     alpha *= saturate(5.0f * waterDepth);
 #endif
 
-	float fog = 1.0f - calc_fogging(I.pos);
+    float fog = 1.0f - calc_fogging(I.pos);
     return float4(distort, 0.08f, alpha * fog * 0.25f);
 }
 

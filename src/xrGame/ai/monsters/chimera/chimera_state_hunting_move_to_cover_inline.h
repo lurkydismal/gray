@@ -1,7 +1,7 @@
 #pragma once
 
 #define TEMPLATE_SPECIALIZATION template <\
-	typename _Object\
+    typename _Object\
 >
 
 #define CStateChimeraHuntingMoveToCoverAbstract CStateChimeraHuntingMoveToCover<_Object>
@@ -14,21 +14,21 @@ CStateChimeraHuntingMoveToCoverAbstract::CStateChimeraHuntingMoveToCover(_Object
 TEMPLATE_SPECIALIZATION
 void CStateChimeraHuntingMoveToCoverAbstract::initialize()
 {
-	inherited::initialize();
-	
-	
+    inherited::initialize();
+    
+    
 }
 
 TEMPLATE_SPECIALIZATION
 bool CStateChimeraHuntingMoveToCoverAbstract::check_completion()
 {
-	return false;
+    return false;
 }
 
 TEMPLATE_SPECIALIZATION
 void CStateChimeraHuntingMoveToCoverAbstract::execute()
 {
-	
+    
 }
 
 

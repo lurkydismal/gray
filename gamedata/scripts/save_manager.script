@@ -13,7 +13,7 @@
 
     Usage:
     Ensure that the 'marshal' library is available and that 'isMarshal' is set to true if the library is loaded successfully. These functions can be called from anywhere in your Lua project to save or load game states or other table-based data.
-	
+    
     Example:
     -- Saving a game state
     local gameState = {
@@ -47,7 +47,7 @@ function ensureDirExists(path)
         error("LFS library is not available.")
         return
     end
-	
+    
     local attr = lfs.attributes(path)
     if attr == nil then -- Path does not exist
         local success, err = lfs.mkdir(path)
@@ -64,12 +64,12 @@ function BeforeSaveEvent(fName)
         error("Marshal library is not available.")
         return
     end
-	
+    
     -- Resolve the full path using the game's FS API
     local saveDir = getFS():update_path(SAVES_FILE_PATH, "")
     -- Ensure the directory exists
     ensureDirExists(saveDir)
-	
+    
     INFO_TO_SAVE = fName .. ".dat"
     SendScriptCallback("save_state")
 end 
@@ -79,7 +79,7 @@ function BeforeLoadEvent(fName)
         error("Marshal library is not available.")
         return
     end
-	
+    
     INFO_TO_LOAD = fName .. ".dat"
     SendScriptCallback("load_state")
 end 
@@ -120,7 +120,7 @@ function saveToMarshalFile(stateTable)
 
     -- Resolve the full path using the game's FS API
     local fullPath = getFS():update_path(SAVES_FILE_PATH, INFO_TO_SAVE)
-	printf("Attempting to save to %s" , fullPath)
+    printf("Attempting to save to %s" , fullPath)
     if fullPath then
         -- Write the serialized state using Lua's io library
         local file, err = io.open(fullPath, "wb")
@@ -143,7 +143,7 @@ function loadFromMarshalFile()
 
     -- Resolve the full path using the game's FS API
     local fullPath = getFS():update_path(SAVES_FILE_PATH, INFO_TO_LOAD)
-	printf("Attempting to load from %s" , fullPath)
+    printf("Attempting to load from %s" , fullPath)
     local file, err = io.open(fullPath, "rb")
     if not file then
         error("Failed to open file for loading with Lua io: " .. (err or "unknown error"))

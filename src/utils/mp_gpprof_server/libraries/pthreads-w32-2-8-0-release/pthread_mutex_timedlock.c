@@ -73,41 +73,41 @@ ptw32_timed_eventwait (HANDLE event, const struct timespec *abstime)
   else
     {
       if (abstime == NULL)
-	{
-	  milliseconds = INFINITE;
-	}
+    {
+      milliseconds = INFINITE;
+    }
       else
-	{
-	  /* 
-	   * Calculate timeout as milliseconds from current system time. 
-	   */
-	  milliseconds = ptw32_relmillisecs (abstime);
-	}
+    {
+      /* 
+       * Calculate timeout as milliseconds from current system time. 
+       */
+      milliseconds = ptw32_relmillisecs (abstime);
+    }
 
       status = WaitForSingleObject (event, milliseconds);
 
       if (status == WAIT_OBJECT_0)
-	{
-	  return 0;
-	}
+    {
+      return 0;
+    }
       else if (status == WAIT_TIMEOUT)
-	{
-	  return ETIMEDOUT;
-	}
+    {
+      return ETIMEDOUT;
+    }
       else
-	{
-	  return EINVAL;
-	}
+    {
+      return EINVAL;
+    }
     }
 
   return 0;
 
-}				/* ptw32_timed_semwait */
+}                /* ptw32_timed_semwait */
 
 
 int
 pthread_mutex_timedlock (pthread_mutex_t * mutex,
-			 const struct timespec *abstime)
+             const struct timespec *abstime)
 {
   int result;
   pthread_mutex_t mx;
@@ -125,9 +125,9 @@ pthread_mutex_timedlock (pthread_mutex_t * mutex,
   if (*mutex >= PTHREAD_ERRORCHECK_MUTEX_INITIALIZER)
     {
       if ((result = ptw32_mutex_check_need_init (mutex)) != 0)
-	{
-	  return (result);
-	}
+    {
+      return (result);
+    }
     }
 
   mx = *mutex;
@@ -135,19 +135,19 @@ pthread_mutex_timedlock (pthread_mutex_t * mutex,
   if (mx->kind == PTHREAD_MUTEX_NORMAL)
     {
       if ((LONG) PTW32_INTERLOCKED_EXCHANGE(
-		   (LPLONG) &mx->lock_idx,
-		   (LONG) 1) != 0)
-	{
+           (LPLONG) &mx->lock_idx,
+           (LONG) 1) != 0)
+    {
           while ((LONG) PTW32_INTERLOCKED_EXCHANGE(
                           (LPLONG) &mx->lock_idx,
-			  (LONG) -1) != 0)
+              (LONG) -1) != 0)
             {
-	      if (0 != (result = ptw32_timed_eventwait (mx->event, abstime)))
-		{
-		  return result;
-		}
-	    }
-	}
+          if (0 != (result = ptw32_timed_eventwait (mx->event, abstime)))
+        {
+          return result;
+        }
+        }
+    }
     }
   else
     {
@@ -155,41 +155,41 @@ pthread_mutex_timedlock (pthread_mutex_t * mutex,
 
       if ((PTW32_INTERLOCKED_LONG) PTW32_INTERLOCKED_COMPARE_EXCHANGE(
                    (PTW32_INTERLOCKED_LPLONG) &mx->lock_idx,
-		   (PTW32_INTERLOCKED_LONG) 1,
-		   (PTW32_INTERLOCKED_LONG) 0) == 0)
-	{
-	  mx->recursive_count = 1;
-	  mx->ownerThread = self;
-	}
+           (PTW32_INTERLOCKED_LONG) 1,
+           (PTW32_INTERLOCKED_LONG) 0) == 0)
+    {
+      mx->recursive_count = 1;
+      mx->ownerThread = self;
+    }
       else
-	{
-	  if (pthread_equal (mx->ownerThread, self))
-	    {
-	      if (mx->kind == PTHREAD_MUTEX_RECURSIVE)
-		{
-		  mx->recursive_count++;
-		}
-	      else
-		{
-		  return EDEADLK;
-		}
-	    }
-	  else
-	    {
+    {
+      if (pthread_equal (mx->ownerThread, self))
+        {
+          if (mx->kind == PTHREAD_MUTEX_RECURSIVE)
+        {
+          mx->recursive_count++;
+        }
+          else
+        {
+          return EDEADLK;
+        }
+        }
+      else
+        {
               while ((LONG) PTW32_INTERLOCKED_EXCHANGE(
                               (LPLONG) &mx->lock_idx,
-			      (LONG) -1) != 0)
+                  (LONG) -1) != 0)
                 {
-		  if (0 != (result = ptw32_timed_eventwait (mx->event, abstime)))
-		    {
-		      return result;
-		    }
-		}
+          if (0 != (result = ptw32_timed_eventwait (mx->event, abstime)))
+            {
+              return result;
+            }
+        }
 
-	      mx->recursive_count = 1;
-	      mx->ownerThread = self;
-	    }
-	}
+          mx->recursive_count = 1;
+          mx->ownerThread = self;
+        }
+    }
     }
 
   return 0;

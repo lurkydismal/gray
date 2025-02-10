@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: os_clipboard.cpp
-//	Created 	: 21.02.2008
-//	Author		: Evgeniy Sokolov
-//	Description : os clipboard class implementation
+//    Module         : os_clipboard.cpp
+//    Created     : 21.02.2008
+//    Author        : Evgeniy Sokolov
+//    Description : os clipboard class implementation
 ////////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -14,7 +14,7 @@ void os_clipboard::copy_to_clipboard(LPCSTR buf)
     SDL_SetClipboardText(buf);
 }
 
-void os_clipboard::paste_from_clipboard	( LPSTR buffer, u32 const& buffer_size )
+void os_clipboard::paste_from_clipboard    ( LPSTR buffer, u32 const& buffer_size )
 {
     if (!SDL_HasClipboardText())
         return;

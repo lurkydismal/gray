@@ -68,8 +68,8 @@ pthread_barrier_wait (pthread_barrier_t * barrier)
        * and will not be left stranded.
        */
       result = (b->nInitialBarrierHeight > 1
-		? sem_post_multiple (&(b->semBarrierBreeched[step]),
-				     b->nInitialBarrierHeight - 1) : 0);
+        ? sem_post_multiple (&(b->semBarrierBreeched[step]),
+                     b->nInitialBarrierHeight - 1) : 0);
     }
   else
     {
@@ -86,13 +86,13 @@ pthread_barrier_wait (pthread_barrier_t * barrier)
   if (0 == result)
     {
       result = ((PTW32_INTERLOCKED_LONG) step ==
-		PTW32_INTERLOCKED_COMPARE_EXCHANGE ((PTW32_INTERLOCKED_LPLONG)
-						    & (b->iStep),
-						    (PTW32_INTERLOCKED_LONG)
-						    (1L - step),
-						    (PTW32_INTERLOCKED_LONG)
-						    step) ?
-		PTHREAD_BARRIER_SERIAL_THREAD : 0);
+        PTW32_INTERLOCKED_COMPARE_EXCHANGE ((PTW32_INTERLOCKED_LPLONG)
+                            & (b->iStep),
+                            (PTW32_INTERLOCKED_LONG)
+                            (1L - step),
+                            (PTW32_INTERLOCKED_LONG)
+                            step) ?
+        PTHREAD_BARRIER_SERIAL_THREAD : 0);
     }
 
   return (result);

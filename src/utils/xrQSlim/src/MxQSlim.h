@@ -22,7 +22,7 @@ class MxQSlim : public MxStdSlim
 protected:
     MxBlock<MxQuadric3> quadrics;
 
-	void discontinuity_constraint(MxVertexID, MxVertexID, MxFaceID);
+    void discontinuity_constraint(MxVertexID, MxVertexID, MxFaceID);
     void discontinuity_constraint(MxVertexID, MxVertexID, const MxFaceList&);
     void collect_quadrics();
     void transform_quadrics(const Mat4&);
@@ -53,15 +53,15 @@ class MxEdgeQSlim : public MxQSlim
 private:
     typedef MxSizedDynBlock<MxQSlimEdge*, 6> edge_list;
 
-    MxBlock<edge_list>	edge_links;
+    MxBlock<edge_list>    edge_links;
 
     // Temporary variables used by methods
     using EdgeVec = xr_vector<MxQSlimEdge*>;
     using EdgeVecIt = EdgeVec::iterator;
 
-	EdgeVec				edges;
-	MxVertexList		star, star2;
-    MxPairContraction	conx_tmp;
+    EdgeVec                edges;
+    MxVertexList        star, star2;
+    MxPairContraction    conx_tmp;
 
 protected:
     double check_local_compactness(unsigned int v1, unsigned int v2, const float *vnew);
@@ -84,16 +84,16 @@ public:
     MxEdgeQSlim(MxStdModel*);
     virtual ~MxEdgeQSlim();
 
-    void initialize			();
-	void collect_edges		();
-	void collect_edges		(const MxEdge *edges, unsigned int count);
-    bool decimate			(unsigned int target, float max_error, void* cb_params=0);
+    void initialize            ();
+    void collect_edges        ();
+    void collect_edges        (const MxEdge *edges, unsigned int count);
+    bool decimate            (unsigned int target, float max_error, void* cb_params=0);
 
-    void apply_contraction	(const MxPairContraction& conx);
-    void apply_expansion	(const MxPairContraction& conx);
+    void apply_contraction    (const MxPairContraction& conx);
+    void apply_expansion    (const MxPairContraction& conx);
 
-    unsigned int edge_count	() const { return heap.size(); }
-    const MxQSlimEdge *edge	(unsigned int i) const {return (MxQSlimEdge *)heap.item(i);}
+    unsigned int edge_count    () const { return heap.size(); }
+    const MxQSlimEdge *edge    (unsigned int i) const {return (MxQSlimEdge *)heap.item(i);}
 };
 
 class MxFaceQSlim : public MxQSlim
@@ -102,8 +102,8 @@ private:
     class tri_info : public MxHeapable
     {
     public:
-	MxFaceID f;
-	float vnew[3];
+    MxFaceID f;
+    float vnew[3];
     };
 
     MxBlock<tri_info> f_info;

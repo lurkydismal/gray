@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: inventory_upgrade_property.h
-//	Created 	: 22.11.2007
-//  Modified 	: 27.11.2007
-//	Author		: Evgeniy Sokolov
-//	Description : inventory upgrade property class
+//    Module         : inventory_upgrade_property.h
+//    Created     : 22.11.2007
+//  Modified     : 27.11.2007
+//    Author        : Evgeniy Sokolov
+//    Description : inventory upgrade property class
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef INVENTORY_UPGRADE_PROPERTY_H_INCLUDED
@@ -20,39 +20,39 @@ namespace upgrade
 class Property
 {
 public:
-	typedef xr_vector<shared_str>		FunctorParams_type;
+    typedef xr_vector<shared_str>        FunctorParams_type;
 
 private:
-	typedef detail::functor2<LPCSTR>		StrFunctor;
+    typedef detail::functor2<LPCSTR>        StrFunctor;
 
 public:
-	Property(const Property& other) = delete;
-	Property& operator=(const Property& other) = delete;
-					Property();
-	virtual			~Property();
+    Property(const Property& other) = delete;
+    Property& operator=(const Property& other) = delete;
+                    Property();
+    virtual            ~Property();
 
-			void	construct( const shared_str& property_id, Manager& manager_r );
-	IC shared_str const& id() const;
-	IC LPCSTR		id_str() const;
-	IC LPCSTR		icon_name() const;
-	IC LPCSTR		name() const;
-	IC u32			icon_color() const;
+            void    construct( const shared_str& property_id, Manager& manager_r );
+    IC shared_str const& id() const;
+    IC LPCSTR        id_str() const;
+    IC LPCSTR        icon_name() const;
+    IC LPCSTR        name() const;
+    IC u32            icon_color() const;
 
-	IC FunctorParams_type const&	functor_params() const;
+    IC FunctorParams_type const&    functor_params() const;
 
-		bool		run_functor( LPCSTR parameter, string256& result );
+        bool        run_functor( LPCSTR parameter, string256& result );
 
 public:
-	
+    
 protected:
-	shared_str		m_id;
+    shared_str        m_id;
 
-	shared_str		m_name;
-	shared_str		m_icon;
-	u32				m_color;
+    shared_str        m_name;
+    shared_str        m_icon;
+    u32                m_color;
 
-	StrFunctor			m_desc;
-	FunctorParams_type	m_functor_params;
+    StrFunctor            m_desc;
+    FunctorParams_type    m_functor_params;
 
 }; // class Property
 

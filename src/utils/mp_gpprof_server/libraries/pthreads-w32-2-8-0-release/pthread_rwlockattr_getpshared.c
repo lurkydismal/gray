@@ -42,7 +42,7 @@
 
 int
 pthread_rwlockattr_getpshared (const pthread_rwlockattr_t * attr,
-			       int *pshared)
+                   int *pshared)
      /*
       * ------------------------------------------------------
       * DOCPUBLIC
@@ -95,4 +95,4 @@ pthread_rwlockattr_getpshared (const pthread_rwlockattr_t * attr,
 
   return (result);
 
-}				/* pthread_rwlockattr_getpshared */
+}                /* pthread_rwlockattr_getpshared */

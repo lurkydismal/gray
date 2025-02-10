@@ -3,9 +3,9 @@
 #define Texture_phi_n Texture_color
 #define Texture_phi_n_hat Texture_tempscalar
 
-//	Advect MCCormack
+//    Advect MCCormack
 
-//	Pixel
+//    Pixel
 float4 main(p_fluidsim input) : SV_Target
 {
     if (IsNonEmptyCell(input.texcoords.xyz))

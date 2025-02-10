@@ -76,7 +76,7 @@ Creates a new client and sends a request for authorization to the
 validation server.
 *********/
 void gcd_authenticate_user(int gameid, int localid, unsigned int userip, const char *challenge, 
-						   const char *response, AuthCallBackFn authfn, RefreshAuthCallBackFn refreshfn, void *instance);
+                           const char *response, AuthCallBackFn authfn, RefreshAuthCallBackFn refreshfn, void *instance);
 
 /********
 gcd_authenticate_user

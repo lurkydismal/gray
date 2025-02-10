@@ -38,37 +38,37 @@ extern "C" {
 #if !ONLY_MSPACES
 
 #ifdef USE_PT3_PREFIX
-#	define dlcalloc               pt3calloc
-#	define dlfree                 pt3free
-#	define dlmalloc               pt3malloc
-#	define dlmemalign             pt3memalign
-#	define dlrealloc              pt3realloc
-#	define dlvalloc               pt3valloc
-#	define dlpvalloc              pt3pvalloc
-#	define dlmallinfo             pt3mallinfo
-#	define dlmallopt              pt3mallopt
-#	define dlmalloc_trim          pt3malloc_trim
-#	define dlmalloc_stats         pt3malloc_stats
-#	define dlmalloc_usable_size   pt3malloc_usable_size
-#	define dlmalloc_footprint     pt3malloc_footprint
-#	define dlindependent_calloc   pt3independent_calloc
-#	define dlindependent_comalloc pt3independent_comalloc
+#    define dlcalloc               pt3calloc
+#    define dlfree                 pt3free
+#    define dlmalloc               pt3malloc
+#    define dlmemalign             pt3memalign
+#    define dlrealloc              pt3realloc
+#    define dlvalloc               pt3valloc
+#    define dlpvalloc              pt3pvalloc
+#    define dlmallinfo             pt3mallinfo
+#    define dlmallopt              pt3mallopt
+#    define dlmalloc_trim          pt3malloc_trim
+#    define dlmalloc_stats         pt3malloc_stats
+#    define dlmalloc_usable_size   pt3malloc_usable_size
+#    define dlmalloc_footprint     pt3malloc_footprint
+#    define dlindependent_calloc   pt3independent_calloc
+#    define dlindependent_comalloc pt3independent_comalloc
 #elif !defined(USE_DL_PREFIX) // #ifdef USE_PT3_PREFIX
-#	define dlcalloc               calloc
-#	define dlfree                 free
-#	define dlmalloc               malloc
-#	define dlmemalign             memalign
-#	define dlrealloc              realloc
-#	define dlvalloc               valloc
-#	define dlpvalloc              pvalloc
-#	define dlmallinfo             mallinfo
-#	define dlmallopt              mallopt
-#	define dlmalloc_trim          malloc_trim
-#	define dlmalloc_stats         malloc_stats
-#	define dlmalloc_usable_size   malloc_usable_size
-#	define dlmalloc_footprint     malloc_footprint
-#	define dlindependent_calloc   independent_calloc
-#	define dlindependent_comalloc independent_comalloc
+#    define dlcalloc               calloc
+#    define dlfree                 free
+#    define dlmalloc               malloc
+#    define dlmemalign             memalign
+#    define dlrealloc              realloc
+#    define dlvalloc               valloc
+#    define dlpvalloc              pvalloc
+#    define dlmallinfo             mallinfo
+#    define dlmallopt              mallopt
+#    define dlmalloc_trim          malloc_trim
+#    define dlmalloc_stats         malloc_stats
+#    define dlmalloc_usable_size   malloc_usable_size
+#    define dlmalloc_footprint     malloc_footprint
+#    define dlindependent_calloc   independent_calloc
+#    define dlindependent_comalloc independent_comalloc
 #endif // #if defined(USE_DL_PREFIX)
 
 /*
@@ -453,13 +453,13 @@ size_t destroy_mspace(mspace msp);
   space (if possible) but not the initial base.
 */
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-	typedef void const* out_of_memory_handler_parameter_type;
-	typedef void (__stdcall *out_of_memory_handler_type)	(mspace, out_of_memory_handler_parameter_type, int);
+    typedef void const* out_of_memory_handler_parameter_type;
+    typedef void (__stdcall *out_of_memory_handler_type)    (mspace, out_of_memory_handler_parameter_type, int);
 
-	mspace create_mspace_with_base(void* base, size_t capacity, int locked, out_of_memory_handler_type handler, out_of_memory_handler_parameter_type parameter);
-	void const* out_of_memory_handler_parameter	(void* arena);
+    mspace create_mspace_with_base(void* base, size_t capacity, int locked, out_of_memory_handler_type handler, out_of_memory_handler_parameter_type parameter);
+    void const* out_of_memory_handler_parameter    (void* arena);
 #else // #ifdef USE_OUT_OF_MEMORY_HANDLER
-	mspace create_mspace_with_base(void* base, size_t capacity, int locked);
+    mspace create_mspace_with_base(void* base, size_t capacity, int locked);
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 
 /*

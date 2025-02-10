@@ -76,29 +76,29 @@ extern "C" void pdebug_init(lua_State * L);
 
 struct lua_State;
 struct lua_Debug {
-	int event;
-	const char* name;    /* (n) */
-	const char* namewhat;    /* (n) `global', `local', `field', `method' */
-	const char* what;    /* (S) `Lua', `C', `main', `tail' */
-	const char* source;    /* (S) */
-	int currentline;    /* (l) */
-	int nups;        /* (u) number of upvalues */
-	int linedefined;    /* (S) */
-	int lastlinedefined;    /* (S) */
-	char short_src[LUA_IDSIZE]; /* (S) */
-	/* private part */
-	int i_ci;  /* active function */
+    int event;
+    const char* name;    /* (n) */
+    const char* namewhat;    /* (n) `global', `local', `field', `method' */
+    const char* what;    /* (S) `Lua', `C', `main', `tail' */
+    const char* source;    /* (S) */
+    int currentline;    /* (l) */
+    int nups;        /* (u) number of upvalues */
+    int linedefined;    /* (S) */
+    int lastlinedefined;    /* (S) */
+    char short_src[LUA_IDSIZE]; /* (S) */
+    /* private part */
+    int i_ci;  /* active function */
 };
 
 typedef LUA_INTEGER lua_Integer;
 typedef LUA_NUMBER lua_Number;
 typedef int (*lua_CFunction) (lua_State* L);
 typedef struct luaL_Reg {
-	const char* name;
-	lua_CFunction func;
+    const char* name;
+    lua_CFunction func;
 } luaL_Reg;
 
-#define LUA_KCONTEXT	ptrdiff_t
+#define LUA_KCONTEXT    ptrdiff_t
 typedef LUA_KCONTEXT lua_KContext;
 //lua function
 typedef lua_Integer(*luaDLL_checkinteger) (lua_State* L, int numArg);
@@ -119,7 +119,7 @@ typedef void  (*luaDLL_pushinteger) (lua_State* L, lua_Integer n);
 #if LUA_VERSION_NUM == 501
 typedef int(*luaDLL_sethook)(lua_State* L, void* func, int mask, int count);
 #else
-typedef	void (*luaDLL_sethook)(lua_State* L, lua_Hook f, int mask, int count);
+typedef    void (*luaDLL_sethook)(lua_State* L, lua_Hook f, int mask, int count);
 #endif
 typedef void (*luaDLL_pushnumber)(lua_State* L, lua_Number n);
 typedef lua_Number(*luaDLL_checknumber)(lua_State* L, int narg);
@@ -165,33 +165,33 @@ luaDLL_setfuncs luaL_setfuncs;
 luaDLL_tointegerx lua_tointegerx;
 luaDLL_getglobal lua_getglobal;
 luaDLL_pcallk lua_pcallk;
-#define lua_pcall(L,n,r,f)	lua_pcallk(L, (n), (r), (f), 0, NULL)
+#define lua_pcall(L,n,r,f)    lua_pcallk(L, (n), (r), (f), 0, NULL)
 #define lua_tointeger(L,i) lua_tointegerx(L,(i),NULL);
 
 #define PURE_API =0
 namespace slua {
-	struct LuaInterface {
-		virtual const lua_Number* lua_version(lua_State* L) PURE_API;
-		virtual const char* lua_pushstring(lua_State* L, const char* s) PURE_API;
-		virtual int lua_gettop(lua_State* L) PURE_API;
-		virtual void lua_settop(lua_State* L, int index) PURE_API;
-		virtual int lua_pcallk(lua_State* L, int nargs, int nresults, int msgh, lua_KContext ctx, lua_KFunction k) PURE_API;
-		virtual void lua_pushnumber(lua_State* L, lua_Number n) PURE_API;
-		virtual const char* luaL_checklstring(lua_State* L, int arg, size_t* l) PURE_API;
-		virtual const char* lua_tolstring(lua_State* L, int index, size_t* len) PURE_API;
-		virtual int lua_type(lua_State* L, int index) PURE_API;
-		virtual lua_Integer lua_tointegerx(lua_State* L, int index, int* isnum) PURE_API;
-		virtual void lua_pushnil(lua_State* L) PURE_API;
-		virtual int lua_getfield(lua_State* L, int index, const char* k) PURE_API;
-		virtual int lua_next(lua_State* L, int index) PURE_API;
-		virtual int lua_getinfo(lua_State* L, const char* what, lua_Debug* ar) PURE_API;
-		virtual void lua_sethook(lua_State* L, lua_Hook f, int mask, int count) PURE_API;
-		virtual lua_Number luaL_checknumber(lua_State* L, int arg) PURE_API;
-		virtual void lua_createtable(lua_State* L, int narr, int nrec) PURE_API;
-		virtual void luaL_setfuncs(lua_State* L, const luaL_Reg* l, int nup) PURE_API;
-		virtual int lua_getglobal(lua_State* L, const char* name) PURE_API;
-		virtual int lua_toboolean(lua_State* L, int index) PURE_API;
-	};
+    struct LuaInterface {
+        virtual const lua_Number* lua_version(lua_State* L) PURE_API;
+        virtual const char* lua_pushstring(lua_State* L, const char* s) PURE_API;
+        virtual int lua_gettop(lua_State* L) PURE_API;
+        virtual void lua_settop(lua_State* L, int index) PURE_API;
+        virtual int lua_pcallk(lua_State* L, int nargs, int nresults, int msgh, lua_KContext ctx, lua_KFunction k) PURE_API;
+        virtual void lua_pushnumber(lua_State* L, lua_Number n) PURE_API;
+        virtual const char* luaL_checklstring(lua_State* L, int arg, size_t* l) PURE_API;
+        virtual const char* lua_tolstring(lua_State* L, int index, size_t* len) PURE_API;
+        virtual int lua_type(lua_State* L, int index) PURE_API;
+        virtual lua_Integer lua_tointegerx(lua_State* L, int index, int* isnum) PURE_API;
+        virtual void lua_pushnil(lua_State* L) PURE_API;
+        virtual int lua_getfield(lua_State* L, int index, const char* k) PURE_API;
+        virtual int lua_next(lua_State* L, int index) PURE_API;
+        virtual int lua_getinfo(lua_State* L, const char* what, lua_Debug* ar) PURE_API;
+        virtual void lua_sethook(lua_State* L, lua_Hook f, int mask, int count) PURE_API;
+        virtual lua_Number luaL_checknumber(lua_State* L, int arg) PURE_API;
+        virtual void lua_createtable(lua_State* L, int narr, int nrec) PURE_API;
+        virtual void luaL_setfuncs(lua_State* L, const luaL_Reg* l, int nup) PURE_API;
+        virtual int lua_getglobal(lua_State* L, const char* name) PURE_API;
+        virtual int lua_toboolean(lua_State* L, int index) PURE_API;
+    };
 }
 typedef  slua::LuaInterface* (*dll_GetLuaInterface)();
 dll_GetLuaInterface getInter;

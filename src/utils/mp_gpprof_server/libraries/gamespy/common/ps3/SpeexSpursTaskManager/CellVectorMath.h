@@ -4,7 +4,7 @@
 #ifndef __CELLOS_LV2__
 class vec_float4
 {
-	float x, y, z, w;
+    float x, y, z, w;
 } 
 #ifdef __GNUC__
 __attribute__ ((aligned (16)));

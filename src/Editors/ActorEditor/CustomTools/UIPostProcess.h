@@ -13,12 +13,12 @@ public:
     };
 
 protected:
-	CPostprocessAnimator mAnimator;
+    CPostprocessAnimator mAnimator;
     xr_vector<PointItem> ListData;
     xr_string FileName;
 
-	int ModeIter = 0;
-	int ListIter = 0;
+    int ModeIter = 0;
+    int ListIter = 0;
     
     Fvector2 Duality;
     Fvector Noise;
@@ -56,14 +56,14 @@ private:
     void UpdateData();
 
 private:
-	void DrawChart();
-	void DrawTool();
+    void DrawChart();
+    void DrawTool();
     void DrawPicker();
 
 public:
     CMainPPE();
 
-	virtual void Draw();
+    virtual void Draw();
     static CMainPPE& Instance();
     bool& OpenState() { return bOpen; }
 };

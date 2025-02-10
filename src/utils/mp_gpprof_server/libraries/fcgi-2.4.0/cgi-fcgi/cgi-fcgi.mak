@@ -36,9 +36,9 @@ OutDir=.\..\cgi-fcgi\Release
 ALL : "$(OUTDIR)\cgi-fcgi.exe"
 
 CLEAN :
-	-@erase "$(INTDIR)\cgi-fcgi.obj"
-	-@erase "$(INTDIR)\vc60.idb"
-	-@erase "$(OUTDIR)\cgi-fcgi.exe"
+    -@erase "$(INTDIR)\cgi-fcgi.obj"
+    -@erase "$(INTDIR)\vc60.idb"
+    -@erase "$(OUTDIR)\cgi-fcgi.exe"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
@@ -82,12 +82,12 @@ RSC=rc.exe
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\cgifcgi.bsc" 
 BSC32_SBRS= \
-	
+    
 LINK32=link.exe
 LINK32_FLAGS=libfcgi.lib /nologo /pdb:none /machine:IX86 /out:"$(OUTDIR)\cgi-fcgi.exe" /libpath:"..\libfcgi\Release" 
 LINK32_OBJS= \
-	"$(INTDIR)\cgi-fcgi.obj" \
-	"..\libfcgi\Release\libfcgi.lib"
+    "$(INTDIR)\cgi-fcgi.obj" \
+    "..\libfcgi\Release\libfcgi.lib"
 
 "$(OUTDIR)\cgi-fcgi.exe" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
     $(LINK32) @<<
@@ -105,12 +105,12 @@ OutDir=.\../cgi-fcgi/Debug
 ALL : "$(OUTDIR)\cgi-fcgi.exe" "$(OUTDIR)\cgifcgi.bsc"
 
 CLEAN :
-	-@erase "$(INTDIR)\cgi-fcgi.obj"
-	-@erase "$(INTDIR)\cgi-fcgi.sbr"
-	-@erase "$(INTDIR)\vc60.idb"
-	-@erase "$(INTDIR)\vc60.pdb"
-	-@erase "$(OUTDIR)\cgi-fcgi.exe"
-	-@erase "$(OUTDIR)\cgifcgi.bsc"
+    -@erase "$(INTDIR)\cgi-fcgi.obj"
+    -@erase "$(INTDIR)\cgi-fcgi.sbr"
+    -@erase "$(INTDIR)\vc60.idb"
+    -@erase "$(INTDIR)\vc60.pdb"
+    -@erase "$(OUTDIR)\cgi-fcgi.exe"
+    -@erase "$(OUTDIR)\cgifcgi.bsc"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
@@ -154,7 +154,7 @@ RSC=rc.exe
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\cgifcgi.bsc" 
 BSC32_SBRS= \
-	"$(INTDIR)\cgi-fcgi.sbr"
+    "$(INTDIR)\cgi-fcgi.sbr"
 
 "$(OUTDIR)\cgifcgi.bsc" : "$(OUTDIR)" $(BSC32_SBRS)
     $(BSC32) @<<
@@ -164,8 +164,8 @@ BSC32_SBRS= \
 LINK32=link.exe
 LINK32_FLAGS=libfcgi.lib /nologo /profile /debug /machine:IX86 /out:"$(OUTDIR)\cgi-fcgi.exe" /libpath:"..\libfcgi\Debug" 
 LINK32_OBJS= \
-	"$(INTDIR)\cgi-fcgi.obj" \
-	"..\libfcgi\Debug\libfcgi.lib"
+    "$(INTDIR)\cgi-fcgi.obj" \
+    "..\libfcgi\Debug\libfcgi.lib"
 
 "$(OUTDIR)\cgi-fcgi.exe" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
     $(LINK32) @<<
@@ -176,11 +176,11 @@ LINK32_OBJS= \
 
 
 "..\cgi-fcgi\cgi-fcgi.c" : \
-	"..\include\fastcgi.h"\
-	"..\include\fcgi_config.h"\
-	"..\include\fcgiapp.h"\
-	"..\include\fcgimisc.h"\
-	"..\include\fcgios.h"\
+    "..\include\fastcgi.h"\
+    "..\include\fcgi_config.h"\
+    "..\include\fcgiapp.h"\
+    "..\include\fcgimisc.h"\
+    "..\include\fcgios.h"\
 
 
 !IF "$(CFG)" == "release" || "$(CFG)" == "debug"
@@ -190,14 +190,14 @@ SOURCE="..\cgi-fcgi\cgi-fcgi.c"
 
 
 "$(INTDIR)\cgi-fcgi.obj" : $(SOURCE) "$(INTDIR)"
-	$(CPP) $(CPP_PROJ) $(SOURCE)
+    $(CPP) $(CPP_PROJ) $(SOURCE)
 
 
 !ELSEIF  "$(CFG)" == "debug"
 
 
-"$(INTDIR)\cgi-fcgi.obj"	"$(INTDIR)\cgi-fcgi.sbr" : $(SOURCE) "$(INTDIR)"
-	$(CPP) $(CPP_PROJ) $(SOURCE)
+"$(INTDIR)\cgi-fcgi.obj"    "$(INTDIR)\cgi-fcgi.sbr" : $(SOURCE) "$(INTDIR)"
+    $(CPP) $(CPP_PROJ) $(SOURCE)
 
 
 !ENDIF 

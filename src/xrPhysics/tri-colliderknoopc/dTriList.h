@@ -12,7 +12,7 @@ extern int dTriListClass;
 
 struct dcVector3{
 
-	float x, y, z;
+    float x, y, z;
 
 };
 

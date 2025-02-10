@@ -9,16 +9,16 @@
 class CBlender_Screen_GRAY : public IBlender  
 {
 public:
-	virtual		LPCSTR		getComment()	{ return "INTERNAL: gray-scale effect"; }
-	virtual		BOOL		canBeLMAPped()	{ return FALSE; }
-	
-	virtual		void		Save			(IWriter&  fs);
-	virtual		void		Load			(IReader&	fs, u16 version);
-	
-	virtual		void		Compile			(CBlender_Compile& C);
-	
-	CBlender_Screen_GRAY();
-	virtual ~CBlender_Screen_GRAY();
+    virtual        LPCSTR        getComment()    { return "INTERNAL: gray-scale effect"; }
+    virtual        BOOL        canBeLMAPped()    { return FALSE; }
+    
+    virtual        void        Save            (IWriter&  fs);
+    virtual        void        Load            (IReader&    fs, u16 version);
+    
+    virtual        void        Compile            (CBlender_Compile& C);
+    
+    CBlender_Screen_GRAY();
+    virtual ~CBlender_Screen_GRAY();
 
 };
 

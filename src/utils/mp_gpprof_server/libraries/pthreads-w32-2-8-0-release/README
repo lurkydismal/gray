@@ -28,24 +28,24 @@ routines.
 Prerequisites
 -------------
 MSVC or GNU C (MinGW32 MSys development kit)
-	To build from source.
+    To build from source.
 
 QueueUserAPCEx by Panagiotis E. Hadjidoukas
-	For true async cancelation of threads (including blocked threads).
-	This is a DLL and Windows driver that provides pre-emptive APC
-	by forcing threads into an alertable state when the APC is queued.
-	Both the DLL and driver are provided with the pthreads-win32.exe
-	self-unpacking ZIP, and on the pthreads-win32 FTP site  (in source
-	and pre-built forms). Currently this is a separate LGPL package to
-	pthreads-win32. See the README in the QueueUserAPCEx folder for
-	installation instructions.
+    For true async cancelation of threads (including blocked threads).
+    This is a DLL and Windows driver that provides pre-emptive APC
+    by forcing threads into an alertable state when the APC is queued.
+    Both the DLL and driver are provided with the pthreads-win32.exe
+    self-unpacking ZIP, and on the pthreads-win32 FTP site  (in source
+    and pre-built forms). Currently this is a separate LGPL package to
+    pthreads-win32. See the README in the QueueUserAPCEx folder for
+    installation instructions.
 
-	Pthreads-win32 will automatically detect if the QueueUserAPCEx DLL
-	QuserEx.DLL is available and whether the driver AlertDrv.sys is
-	loaded. If it is not available, pthreads-win32 will simulate async
-	cancelation, which means that it can async cancel only threads that
-	are runnable. The simulated async cancellation cannot cancel blocked
-	threads.
+    Pthreads-win32 will automatically detect if the QueueUserAPCEx DLL
+    QuserEx.DLL is available and whether the driver AlertDrv.sys is
+    loaded. If it is not available, pthreads-win32 will simulate async
+    cancelation, which means that it can async cancel only threads that
+    are runnable. The simulated async cancellation cannot cancel blocked
+    threads.
 
 
 Library naming
@@ -79,23 +79,23 @@ can differentiate between binary incompatible versions of the
 libs and dlls.
 
 In general:
-	pthread[VG]{SE,CE,C}c.dll
-	pthread[VG]{SE,CE,C}c.lib
+    pthread[VG]{SE,CE,C}c.dll
+    pthread[VG]{SE,CE,C}c.lib
 
 where:
-	[VG] indicates the compiler
-	V	- MS VC, or
-	G	- GNU C
+    [VG] indicates the compiler
+    V    - MS VC, or
+    G    - GNU C
 
-	{SE,CE,C} indicates the exception handling scheme
-	SE	- Structured EH, or
-	CE	- C++ EH, or
-	C	- no exceptions - uses setjmp/longjmp
+    {SE,CE,C} indicates the exception handling scheme
+    SE    - Structured EH, or
+    CE    - C++ EH, or
+    C    - no exceptions - uses setjmp/longjmp
 
-	c	- DLL compatibility number indicating ABI and API
-		  compatibility with applications built against
-		  any snapshot with the same compatibility number.
-		  See 'Version numbering' below.
+    c    - DLL compatibility number indicating ABI and API
+          compatibility with applications built against
+          any snapshot with the same compatibility number.
+          See 'Version numbering' below.
 
 The name may also be suffixed by a 'd' to indicate a debugging version
 of the library. E.g. pthreadVC2d.lib. Debugging versions contain
@@ -103,18 +103,18 @@ additional information for debugging (symbols etc) and are often not
 optimised in any way (compiled with optimisation turned off).
 
 For example:
-	pthreadVSE.dll	(MSVC/SEH)
-	pthreadGCE.dll	(GNUC/C++ EH)
-	pthreadGC.dll	(GNUC/not dependent on exceptions)
-	pthreadVC1.dll	(MSVC/not dependent on exceptions - not binary
-			compatible with pthreadVC.dll)
-	pthreadVC2.dll	(MSVC/not dependent on exceptions - not binary
-			compatible with pthreadVC1.dll or pthreadVC.dll)
+    pthreadVSE.dll    (MSVC/SEH)
+    pthreadGCE.dll    (GNUC/C++ EH)
+    pthreadGC.dll    (GNUC/not dependent on exceptions)
+    pthreadVC1.dll    (MSVC/not dependent on exceptions - not binary
+            compatible with pthreadVC.dll)
+    pthreadVC2.dll    (MSVC/not dependent on exceptions - not binary
+            compatible with pthreadVC1.dll or pthreadVC.dll)
 
 The GNU library archive file names have correspondingly changed to:
 
-	libpthreadGCEc.a
-	libpthreadGCc.a
+    libpthreadGCEc.a
+    libpthreadGCc.a
 
 
 Versioning numbering
@@ -130,13 +130,13 @@ See the resource file 'version.rc'.
 
 Microsoft version numbers use 4 integers:
 
-	0.0.0.0
+    0.0.0.0
 
 Pthreads-win32 uses the first 3 following the Libtool convention.
 The fourth is commonly used for the build number, but will be reserved
 for future use.
 
-	current.revision.age.0
+    current.revision.age.0
 
 The numbers are changed as follows:
 
@@ -230,15 +230,15 @@ If your application contains catch(...) blocks in your POSIX
 threads then you will need to replace the "catch(...)" with the macro
 "PtW32Catch", eg.
 
-	#ifdef PtW32Catch
-		PtW32Catch {
-			...
-		}
-	#else
-		catch(...) {
-			...
-		}
-	#endif
+    #ifdef PtW32Catch
+        PtW32Catch {
+            ...
+        }
+    #else
+        catch(...) {
+            ...
+        }
+    #endif
 
 Otherwise neither pthreads cancelation nor pthread_exit() will work
 reliably when using versions of the library that use C++ exceptions
@@ -272,9 +272,9 @@ Cleanup code default style
 Previously, if not defined, the cleanup style was determined automatically
 from the compiler used, and one of the following was defined accordingly:
 
-	__CLEANUP_SEH	MSVC only
-	__CLEANUP_CXX	C++, including MSVC++, GNU G++
-	__CLEANUP_C	C, including GNU GCC, not MSVC
+    __CLEANUP_SEH    MSVC only
+    __CLEANUP_CXX    C++, including MSVC++, GNU G++
+    __CLEANUP_C    C, including GNU GCC, not MSVC
 
 These defines determine the style of cleanup (see pthread.h) and,
 most importantly, the way that cancelation and thread exit (via
@@ -300,9 +300,9 @@ used for the version of the library that you link with, so that the
 correct parts of pthread.h are included. That is, the possible
 defines require the following library versions:
 
-	__CLEANUP_SEH	pthreadVSE.dll
-	__CLEANUP_CXX	pthreadVCE.dll or pthreadGCE.dll
-	__CLEANUP_C	pthreadVC.dll or pthreadGC.dll
+    __CLEANUP_SEH    pthreadVSE.dll
+    __CLEANUP_CXX    pthreadVCE.dll or pthreadGCE.dll
+    __CLEANUP_C    pthreadVC.dll or pthreadGC.dll
 
 It is recommended that you let pthread.h use it's default __CLEANUP_C
 for both library and application builds. That is, don't define any of
@@ -474,26 +474,26 @@ Ready to run binaries
 For convenience, the following ready-to-run files can be downloaded
 from the FTP site (see under "Availability" below):
 
-	pthread.h
-	semaphore.h
-	sched.h
-	pthreadVC.dll	- built with MSVC compiler using C setjmp/longjmp
-	pthreadVC.lib
-	pthreadVCE.dll	- built with MSVC++ compiler using C++ EH
-	pthreadVCE.lib
-	pthreadVSE.dll	- built with MSVC compiler using SEH
-	pthreadVSE.lib
-	pthreadGC.dll	- built with Mingw32 GCC
-	libpthreadGC.a	- derived from pthreadGC.dll
-	pthreadGCE.dll	- built with Mingw32 G++
-	libpthreadGCE.a	- derived from pthreadGCE.dll
+    pthread.h
+    semaphore.h
+    sched.h
+    pthreadVC.dll    - built with MSVC compiler using C setjmp/longjmp
+    pthreadVC.lib
+    pthreadVCE.dll    - built with MSVC++ compiler using C++ EH
+    pthreadVCE.lib
+    pthreadVSE.dll    - built with MSVC compiler using SEH
+    pthreadVSE.lib
+    pthreadGC.dll    - built with Mingw32 GCC
+    libpthreadGC.a    - derived from pthreadGC.dll
+    pthreadGCE.dll    - built with Mingw32 G++
+    libpthreadGCE.a    - derived from pthreadGCE.dll
 
 As of August 2003 pthreads-win32 pthreadG* versions are built and tested
 using the MinGW + MsysDTK environment current as of that date or later.
 The following file MAY be needed for older MinGW environments.
 
-	gcc.dll 	- needed to build and run applications that use
-			  pthreadGCE.dll.
+    gcc.dll     - needed to build and run applications that use
+              pthreadGCE.dll.
 
 
 Building applications with GNU compilers
@@ -505,16 +505,16 @@ With the three header files, pthreadGC.dll and libpthreadGC.a in the
 same directory as your application myapp.c, you could compile, link
 and run myapp.c under Mingw32 as follows:
 
-	gcc -o myapp.exe myapp.c -I. -L. -lpthreadGC
-	myapp
+    gcc -o myapp.exe myapp.c -I. -L. -lpthreadGC
+    myapp
 
 Or put pthreadGC.dll in an appropriate directory in your PATH,
 put libpthreadGC.a in your system lib directory, and
 put the three header files in your system include directory,
 then use:
 
-	gcc -o myapp.exe myapp.c -lpthreadGC
-	myapp
+    gcc -o myapp.exe myapp.c -lpthreadGC
+    myapp
 
 
 If you're using pthreadGCE.dll:
@@ -523,16 +523,16 @@ With the three header files, pthreadGCE.dll, gcc.dll and libpthreadGCE.a
 in the same directory as your application myapp.c, you could compile,
 link and run myapp.c under Mingw32 as follows:
 
-	gcc -x c++ -o myapp.exe myapp.c -I. -L. -lpthreadGCE
-	myapp
+    gcc -x c++ -o myapp.exe myapp.c -I. -L. -lpthreadGCE
+    myapp
 
 Or put pthreadGCE.dll and gcc.dll in an appropriate directory in
 your PATH, put libpthreadGCE.a in your system lib directory, and
 put the three header files in your system include directory,
 then use:
 
-	gcc -x c++ -o myapp.exe myapp.c -lpthreadGCE
-	myapp
+    gcc -x c++ -o myapp.exe myapp.c -lpthreadGCE
+    myapp
 
 
 Availability
@@ -541,16 +541,16 @@ Availability
 The complete source code in either unbundled, self-extracting
 Zip file, or tar/gzipped format can be found at:
 
-	ftp://sources.redhat.com/pub/pthreads-win32
+    ftp://sources.redhat.com/pub/pthreads-win32
 
 The pre-built DLL, export libraries and matching pthread.h can
 be found at:
 
-	ftp://sources.redhat.com/pub/pthreads-win32/dll-latest
+    ftp://sources.redhat.com/pub/pthreads-win32/dll-latest
 
 Home page:
 
-	http://sources.redhat.com/pthreads-win32/
+    http://sources.redhat.com/pthreads-win32/
 
 
 Mailing list
@@ -559,11 +559,11 @@ Mailing list
 There is a mailing list for discussing pthreads on Win32.
 To join, send email to:
 
-	pthreads-win32-subscribe@sources.redhat.com
+    pthreads-win32-subscribe@sources.redhat.com
 
 Unsubscribe by sending mail to:
 
-	pthreads-win32-unsubscribe@sources.redhat.com
+    pthreads-win32-unsubscribe@sources.redhat.com
 
 
 Acknowledgements

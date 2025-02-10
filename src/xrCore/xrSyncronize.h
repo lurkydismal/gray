@@ -6,33 +6,33 @@
 class XRCORE_API xrCriticalSection
 {
 private:
-	xrCriticalSection(xrCriticalSection const & copy) {};
+    xrCriticalSection(xrCriticalSection const & copy) {};
 #ifdef IXR_WINDOWS
-	CRITICAL_SECTION pmutex;
+    CRITICAL_SECTION pmutex;
 #elif defined(IXR_LINUX)
-	pthread_mutex_t pmutex;
+    pthread_mutex_t pmutex;
 #else
     std::recursive_mutex pmutex;
 #endif
 public:
-    xrCriticalSection	();
-    ~xrCriticalSection	();
+    xrCriticalSection    ();
+    ~xrCriticalSection    ();
 
-    void				Enter	();
-    void				Leave	();
-	BOOL				TryEnter();
+    void                Enter    ();
+    void                Leave    ();
+    BOOL                TryEnter();
 };
 
 
 class XRCORE_API xrCriticalSectionGuard
 {
 public:
-	xrCriticalSectionGuard(xrCriticalSection*);
-	xrCriticalSectionGuard(xrCriticalSection&);
-	~xrCriticalSectionGuard();
+    xrCriticalSectionGuard(xrCriticalSection*);
+    xrCriticalSectionGuard(xrCriticalSection&);
+    ~xrCriticalSectionGuard();
 
 private:
-	xrCriticalSection* critical_section;
+    xrCriticalSection* critical_section;
 };
 
 
@@ -43,7 +43,7 @@ private:
 #ifdef IXR_WINDOWS
     SRWLOCK smutex;
 #elif defined(IXR_LINUX)
-	pthread_rwlock_t smutex;
+    pthread_rwlock_t smutex;
 #else
     std::shared_mutex smutex;
 #endif

@@ -9,10 +9,10 @@ float4 main(float2 uv : TEXCOORD0) : COLOR
     float V = YUV.z;
 
     /*
-    float	_T = 1.16406f*Y;
-    float R1 = _T 				+ 1.59765f*V 	- 0.86961f;
-    float G1 = _T - 0.390625f*U 	- 0.8125f*V  	+ 0.53076f;
-    float B1 = _T + 2.01562f*U 					- 1.0786f;
+    float    _T = 1.16406f*Y;
+    float R1 = _T                 + 1.59765f*V     - 0.86961f;
+    float G1 = _T - 0.390625f*U     - 0.8125f*V      + 0.53076f;
+    float B1 = _T + 2.01562f*U                     - 1.0786f;
     */
 
     float c = 1.16406f;

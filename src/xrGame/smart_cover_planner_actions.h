@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: smart_cover_planner_actions.h
-//	Created 	: 04.09.2007
-//	Author		: Alexander Dudin
-//	Description : Smart cover planner action classes
+//    Module         : smart_cover_planner_actions.h
+//    Created     : 04.09.2007
+//    Author        : Alexander Dudin
+//    Description : Smart cover planner action classes
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef SMART_COVER_PLANNER_ACTIONS_H_INCLUDED
@@ -22,21 +22,21 @@ class animation_planner;
 ////////////////////////////////////////////////////////////////////////////
 
 class action_base :
-	public CStalkerActionCombatBase
+    public CStalkerActionCombatBase
 {
 private:
-	typedef CStalkerActionCombatBase inherited;
+    typedef CStalkerActionCombatBase inherited;
 
 public:
-	action_base(const action_base& other) = delete;
-	action_base& operator=(const action_base& other) = delete;
-						action_base					(CAI_Stalker *object, LPCSTR action_name = "");
-	virtual void		select_animation			(shared_str &result) = 0;
-	virtual	void		on_animation_end			() = 0;
-	virtual	void		on_mark						();
-	virtual	void		on_no_mark					();
-	virtual bool		is_animated_action			();
-			void		setup_orientation			();
+    action_base(const action_base& other) = delete;
+    action_base& operator=(const action_base& other) = delete;
+                        action_base                    (CAI_Stalker *object, LPCSTR action_name = "");
+    virtual void        select_animation            (shared_str &result) = 0;
+    virtual    void        on_animation_end            () = 0;
+    virtual    void        on_mark                        ();
+    virtual    void        on_no_mark                    ();
+    virtual bool        is_animated_action            ();
+            void        setup_orientation            ();
 };
 
 ////////////////////////////////////////////////////////////////////////////
@@ -46,15 +46,15 @@ public:
 class change_loophole final : public action_base
 {
 private:
-	typedef action_base								inherited;
+    typedef action_base                                inherited;
 
 public:
-						change_loophole				(CAI_Stalker *object, LPCSTR action_name);
-	virtual void		initialize					();
-	virtual	void		execute						();
-	virtual void		finalize					();
-	virtual void		select_animation			(shared_str &result);
-	virtual	void		on_animation_end			();
+                        change_loophole                (CAI_Stalker *object, LPCSTR action_name);
+    virtual void        initialize                    ();
+    virtual    void        execute                        ();
+    virtual void        finalize                    ();
+    virtual void        select_animation            (shared_str &result);
+    virtual    void        on_animation_end            ();
 };
 
 ////////////////////////////////////////////////////////////////////////////
@@ -64,16 +64,16 @@ public:
 class non_animated_change_loophole final : public action_base
 {
 private:
-	typedef action_base								inherited;
+    typedef action_base                                inherited;
 
 public:
-						non_animated_change_loophole(CAI_Stalker *object, LPCSTR action_name);
-	virtual void		initialize					();
-	virtual void		execute						();
-	virtual void		finalize					();
-	virtual bool		is_animated_action			();
-	virtual void		select_animation			(shared_str &result);
-	virtual	void		on_animation_end			();
+                        non_animated_change_loophole(CAI_Stalker *object, LPCSTR action_name);
+    virtual void        initialize                    ();
+    virtual void        execute                        ();
+    virtual void        finalize                    ();
+    virtual bool        is_animated_action            ();
+    virtual void        select_animation            (shared_str &result);
+    virtual    void        on_animation_end            ();
 };
 
 ////////////////////////////////////////////////////////////////////////////
@@ -83,16 +83,16 @@ public:
 class exit final : public action_base
 {
 private:
-	typedef action_base								inherited;
+    typedef action_base                                inherited;
 
 public:
-						exit						(CAI_Stalker *object, LPCSTR action_name);
-	virtual void		initialize					();
-	virtual void		execute						();
-	virtual void		finalize					();
-	virtual bool		is_animated_action			();
-	virtual void		select_animation			(shared_str &result);
-	virtual	void		on_animation_end			();
+                        exit                        (CAI_Stalker *object, LPCSTR action_name);
+    virtual void        initialize                    ();
+    virtual void        execute                        ();
+    virtual void        finalize                    ();
+    virtual bool        is_animated_action            ();
+    virtual void        select_animation            (shared_str &result);
+    virtual    void        on_animation_end            ();
 };
 
 } // namespace smart_cover

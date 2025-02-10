@@ -30,9 +30,9 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 06-30-2006  1.00.44  SAH  FIX      Fixed NITRO project & linker command file (to work with CW 2.0/NitroSDK 3.1)
                      SAH  FIX      Fixed Linux makefile
 05-31-2006  1.00.43  SAH  RELEASE  Releasing to developer site
-		     SAH  FIX	   Fixed Linux makefile
+             SAH  FIX       Fixed Linux makefile
 05-30-2006  1.00.42  SAH  FIX      Fixed PS3 projects to work with PS3(084_001 SDK)
-				   Added PRE_ALIGN, POST_ALIGN for mem_managed to simpletest
+                   Added PRE_ALIGN, POST_ALIGN for mem_managed to simpletest
 05-25-2006  1.00.41  SAH  FIX      Changed PSP project warning levels
 05-22-2006  1.00.40  SAH  FIX      Changed ESTRING to unsigned int to remove warnings
 05-19-2006  1.00.39  SAH  FIX      Added gsTestMain.c to nitro CodeWarrior project
@@ -72,7 +72,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
                      DES  CLEANUP  Updated Win32 project configurations
 08-25-2004  1.00.21  DES  FEATURE  Added OSX makefile
 08-05-2004  1.00.20  SN   FIX      Releasing to developer site.
-07-19-2004  1.00.20  SN	  FIX      Updated code with explicit casts to remove implicit cast error 
+07-19-2004  1.00.20  SN      FIX      Updated code with explicit casts to remove implicit cast error 
                                    when compiling at highest level and warnings treated as errors.
 06-18-2004  1.00.19  BED  RELEASE  Releasing to developer site.
 06-17-2004  1.00.19  BED  FEATURE  Added PS2 Insock (LibNet) support

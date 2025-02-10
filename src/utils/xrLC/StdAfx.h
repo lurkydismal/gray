@@ -8,11 +8,11 @@
 
 
 #undef ENGINE_API
-#define ENGINE_API				// fake, to enable sharing with engine
+#define ENGINE_API                // fake, to enable sharing with engine
 //comment - ne figa oni ne sharyatsya
 
 #undef ECORE_API
-#define ECORE_API				// fake, to enable sharing with editors
+#define ECORE_API                // fake, to enable sharing with editors
 #define XR_EPROPS_API
 #include "../../xrCore/clsid.h"
 #include "defines.h"

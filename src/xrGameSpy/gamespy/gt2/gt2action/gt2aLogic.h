@@ -41,54 +41,54 @@ Copyright 2000 GameSpy Industries, Inc
 
 typedef enum
 {
-	ObjectRocket,
-	ObjectMine,
-	ObjectAsteroid,
-	ObjectExplosion,
-	NumObjects
+    ObjectRocket,
+    ObjectMine,
+    ObjectAsteroid,
+    ObjectExplosion,
+    NumObjects
 } ObjectType;
 
 typedef void (* Think)
 (
-	struct SObject * self
+    struct SObject * self
 );
 
 typedef void (* TouchObject)
 (
-	struct SObject * self,
-	struct SObject * object
+    struct SObject * self,
+    struct SObject * object
 );
 
 typedef void (* Die)
 (
-	struct SObject * self
+    struct SObject * self
 );
 
 typedef void (* TouchClient)
 (
-	struct SObject * self,
-	struct Client * client
+    struct SObject * self,
+    struct Client * client
 );
 
 typedef struct SObject
 {
-	GT2Bool used;              // If this slot is in use or not.
-	ObjectType type;          // The type of object.
-	int owner;                // The client that owns this object, or -1.
-	V2f position;             // The object's position.
-	float rotation;           // The object's rotation.
-	unsigned long startTime;  // The time this object was created.
-	Think think;              // This object's think function.
-	TouchObject touchObject;  // Called when touching another object.
-	TouchClient touchClient;  // Called when touching a client.
-	Die die;                  // Called when the object dies.
-	int count;                // Generic counter.
-	float radius;             // This object's radius (for collision).
-	GT2Bool explode;           // Explode this object when done thinking.
-	GT2Bool remove;            // Remove this object when done thinking.
-	
-	float heading;			  // The direction the object is moving
-	float speed;			  // The speed of the object
+    GT2Bool used;              // If this slot is in use or not.
+    ObjectType type;          // The type of object.
+    int owner;                // The client that owns this object, or -1.
+    V2f position;             // The object's position.
+    float rotation;           // The object's rotation.
+    unsigned long startTime;  // The time this object was created.
+    Think think;              // This object's think function.
+    TouchObject touchObject;  // Called when touching another object.
+    TouchClient touchClient;  // Called when touching a client.
+    Die die;                  // Called when the object dies.
+    int count;                // Generic counter.
+    float radius;             // This object's radius (for collision).
+    GT2Bool explode;           // Explode this object when done thinking.
+    GT2Bool remove;            // Remove this object when done thinking.
+    
+    float heading;              // The direction the object is moving
+    float speed;              // The speed of the object
 } SObject;
 
 extern SObject sObjects[MAX_OBJECTS];
@@ -96,24 +96,24 @@ extern int numObjects;
 
 void ObjectsThink
 (
-	unsigned long now,
-	unsigned long diff
+    unsigned long now,
+    unsigned long diff
 );
 
 void ClientPress
 (
-	int clientIndex,
-	const char * button
+    int clientIndex,
+    const char * button
 );
 
 void ClientSpawn
 (
-	Client * client
+    Client * client
 );
 
 void InitializeLogic
 (
-	void
+    void
 );
 
 #endif

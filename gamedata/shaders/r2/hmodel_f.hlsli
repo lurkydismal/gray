@@ -12,7 +12,7 @@ void hmodel(out float3 hdiffuse, out float3 hspecular, float m, float h, float s
 {
     // hscale - something like diffuse reflection
     float3 nw = mul(m_v2w, normal);
-    float hscale = h; //. *	(.5h + .5h*nw.y);
+    float hscale = h; //. *    (.5h + .5h*nw.y);
 #ifdef USE_GAMMA_22
     hscale = (hscale * hscale); // make it more linear
 #endif

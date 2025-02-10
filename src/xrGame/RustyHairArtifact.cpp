@@ -17,6 +17,6 @@ CRustyHairArtefact::~CRustyHairArtefact(void)
 
 void CRustyHairArtefact::Load(LPCSTR section) 
 {
-	inherited::Load(section);
+    inherited::Load(section);
 }
 

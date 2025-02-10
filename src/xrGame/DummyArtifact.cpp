@@ -18,6 +18,6 @@ CDummyArtefact::~CDummyArtefact(void)
 
 void CDummyArtefact::Load(LPCSTR section) 
 {
-	inherited::Load(section);
+    inherited::Load(section);
 }
 

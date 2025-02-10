@@ -47,33 +47,33 @@ ExceptionFilter (EXCEPTION_POINTERS * ep, DWORD * ei)
     {
     case EXCEPTION_PTW32_SERVICES:
       {
-	DWORD param;
-	DWORD numParams = ep->ExceptionRecord->NumberParameters;
+    DWORD param;
+    DWORD numParams = ep->ExceptionRecord->NumberParameters;
 
-	numParams = (numParams > 3) ? 3 : numParams;
+    numParams = (numParams > 3) ? 3 : numParams;
 
-	for (param = 0; param < numParams; param++)
-	  {
-	    ei[param] = ep->ExceptionRecord->ExceptionInformation[param];
-	  }
+    for (param = 0; param < numParams; param++)
+      {
+        ei[param] = ep->ExceptionRecord->ExceptionInformation[param];
+      }
 
-	return EXCEPTION_EXECUTE_HANDLER;
-	break;
+    return EXCEPTION_EXECUTE_HANDLER;
+    break;
       }
     default:
       {
-	/*
-	 * A system unexpected exception has occurred running the user's
-	 * routine. We need to cleanup before letting the exception
-	 * out of thread scope.
-	 */
-	pthread_t self = pthread_self ();
+    /*
+     * A system unexpected exception has occurred running the user's
+     * routine. We need to cleanup before letting the exception
+     * out of thread scope.
+     */
+    pthread_t self = pthread_self ();
 
-	(void) pthread_mutex_destroy (&((ptw32_thread_t *)self.p)->cancelLock);
-	ptw32_callUserDestroyRoutines (self);
+    (void) pthread_mutex_destroy (&((ptw32_thread_t *)self.p)->cancelLock);
+    ptw32_callUserDestroyRoutines (self);
 
-	return EXCEPTION_CONTINUE_SEARCH;
-	break;
+    return EXCEPTION_CONTINUE_SEARCH;
+    break;
       }
     }
 }
@@ -189,18 +189,18 @@ ptw32_threadStart (void *vthreadParms)
     switch (ei[0])
       {
       case PTW32_EPS_CANCEL:
-	status = sp->exitStatus = PTHREAD_CANCELED;
+    status = sp->exitStatus = PTHREAD_CANCELED;
 #ifdef _UWIN
-	if (--pthread_count <= 0)
-	  exit (0);
+    if (--pthread_count <= 0)
+      exit (0);
 #endif
-	break;
+    break;
       case PTW32_EPS_EXIT:
-	status = sp->exitStatus;
-	break;
+    status = sp->exitStatus;
+    break;
       default:
-	status = sp->exitStatus = PTHREAD_CANCELED;
-	break;
+    status = sp->exitStatus = PTHREAD_CANCELED;
+    break;
       }
   }
 
@@ -221,17 +221,17 @@ ptw32_threadStart (void *vthreadParms)
   else
     {
       switch (setjmp_rc)
-	{
-	case PTW32_EPS_CANCEL:
-	  status = sp->exitStatus = PTHREAD_CANCELED;
-	  break;
-	case PTW32_EPS_EXIT:
-	  status = sp->exitStatus;
-	  break;
-	default:
-	  status = sp->exitStatus = PTHREAD_CANCELED;
-	  break;
-	}
+    {
+    case PTW32_EPS_CANCEL:
+      status = sp->exitStatus = PTHREAD_CANCELED;
+      break;
+    case PTW32_EPS_EXIT:
+      status = sp->exitStatus;
+      break;
+    default:
+      status = sp->exitStatus = PTHREAD_CANCELED;
+      break;
+    }
     }
 
 #else /* __CLEANUP_C */
@@ -270,13 +270,13 @@ ptw32_threadStart (void *vthreadParms)
        */
 
       terminate_function
-	term_func = set_terminate (0);
+    term_func = set_terminate (0);
       set_terminate (term_func);
 
       if (term_func != 0)
-	{
-	  term_func ();
-	}
+    {
+      term_func ();
+    }
 
       throw;
     }
@@ -357,4 +357,4 @@ ptw32_threadStart (void *vthreadParms)
   return (unsigned) status;
 #endif
 
-}				/* ptw32_threadStart */
+}                /* ptw32_threadStart */

@@ -18,24 +18,24 @@ Mat4 Mat4::I()
 Mat4 translation_matrix(const Vec3& d)
 {
     return Mat4(Vec4(1, 0, 0, d[0]),
-		Vec4(0, 1, 0, d[1]),
-		Vec4(0, 0, 1, d[2]),
-		Vec4(0, 0, 0, 1));
+        Vec4(0, 1, 0, d[1]),
+        Vec4(0, 0, 1, d[2]),
+        Vec4(0, 0, 0, 1));
 }
 
 Mat4 scaling_matrix(const Vec3& s)
 {
     return Mat4(Vec4(s[0], 0,    0,    0),
-		Vec4(0,    s[1], 0,    0),
-		Vec4(0,    0,    s[2], 0),
-		Vec4(0,    0,    0,    1));
+        Vec4(0,    s[1], 0,    0),
+        Vec4(0,    0,    s[2], 0),
+        Vec4(0,    0,    0,    1));
 }
 
 Mat4 rotation_matrix_rad(double theta, const Vec3& axis)
 {
     double c=_cos(theta), s=_sin(theta),
-	xx=axis[0]*axis[0],  yy=axis[1]*axis[1],  zz=axis[2]*axis[2],
-	xy=axis[0]*axis[1],  yz=axis[1]*axis[2],  xz=axis[0]*axis[2];
+    xx=axis[0]*axis[0],  yy=axis[1]*axis[1],  zz=axis[2]*axis[2],
+    xy=axis[0]*axis[1],  yz=axis[1]*axis[2],  xz=axis[0]*axis[2];
 
     double xs=axis[0]*s, ys=axis[1]*s, zs=axis[2]*s;
 
@@ -55,12 +55,12 @@ Mat4 perspective_matrix(double fovy, double aspect, double zmin, double zmax)
 
     if( zmax==0.0 )
     {
-	A = B = 1.0;
+    A = B = 1.0;
     }
     else
     {
-	A = (zmax+zmin)/(zmin-zmax);
-	B = (2*zmax*zmin)/(zmin-zmax);
+    A = (zmax+zmin)/(zmin-zmax);
+    B = (2*zmax*zmin)/(zmin-zmax);
     }
 
     double f = 1.0/tan(fovy*M_PI/180.0/2.0);
@@ -94,7 +94,7 @@ Mat4 lookat_matrix(const Vec3& from, const Vec3& at, const Vec3& v_up)
 Mat4 viewport_matrix(double w, double h)
 {
     return scaling_matrix(Vec3(w/2.0, -h/2.0, 1)) *
-	translation_matrix(Vec3(1, -1, 0));
+    translation_matrix(Vec3(1, -1, 0));
 }
 
 Mat4 operator*(const Mat4& n, const Mat4& m)
@@ -103,8 +103,8 @@ Mat4 operator*(const Mat4& n, const Mat4& m)
     int i,j;
 
     for(i=0;i<4;i++)
-	for(j=0;j<4;j++)
-	    A(i,j) = n[i]*m.col(j);
+    for(j=0;j<4;j++)
+        A(i,j) = n[i]*m.col(j);
 
     return A;
 }
@@ -127,7 +127,7 @@ double invert_cramer(Mat4& inv, const Mat4& m)
     double d = A[0] * m[0];
 
     if( d==0.0 )
-	return 0.0;
+    return 0.0;
 
     inv = transpose(A) / d;
     return d;

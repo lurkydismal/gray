@@ -97,14 +97,14 @@ on_timer2 = 9000 | {!is_playing_sound -jup_b1_sd_8} %=play_sound(jup_b1_stalkers
 
 [meet@get_on_air]
 close_snd_hello = nil
-close_snd_bye	= nil
-snd_on_use 		= nil
+close_snd_bye    = nil
+snd_on_use         = nil
 close_distance  = 10
 close_anim      = guard
 close_victim    = actor
 abuse           = false
-meet_dialog		= jup_b1_st_go_to_exit
-trade_enable	= false
+meet_dialog        = jup_b1_st_go_to_exit
+trade_enable    = false
 allow_break     = false
 
 [walker@on_air]:walker@generic
@@ -126,7 +126,7 @@ close_distance  = 10
 close_anim      = guard
 close_victim    = actor
 abuse           = false
-trade_enable	= false
+trade_enable    = false
 allow_break     = false
 
 [patrol@go_to_base]:walker@generic
@@ -196,11 +196,11 @@ ignore_distance_hit = 0
 ignore_distance_sound = 0
 
 [wounded]
-hp_state 		= 0|wounded_heavy@help_heavy
-hp_state_see 	= 0|wounded_heavy@help_heavy
-hp_victim 		= 0|nil
-hp_fight 		= 0|false
-hp_cover		= 0|false
+hp_state         = 0|wounded_heavy@help_heavy
+hp_state_see     = 0|wounded_heavy@help_heavy
+hp_victim         = 0|nil
+hp_fight         = 0|false
+hp_cover        = 0|false
 
 [combat]
 on_info = {=actor_enemy} %+jup_b1_actor_atk_squad%

@@ -6,7 +6,7 @@ struct v2p_TL
 {
     float2 Tex0 : TEXCOORD0;
     float4 Color : COLOR;
-    float4 HPos : POSITION; // Clip-space position 	(for rasterization)
+    float4 HPos : POSITION; // Clip-space position     (for rasterization)
 };
 
 v2p_TL main(v_vert I)
@@ -21,7 +21,7 @@ v2p_TL main(v_vert I)
     }
 
     O.Tex0 = 0; // I.uv + screen_res.zw * 0.5f;
-    O.Color = I.color.rgba; //	swizzle vertex colour
+    O.Color = I.color.rgba; //    swizzle vertex colour
 
     return O;
 }

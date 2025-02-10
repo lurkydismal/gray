@@ -16,26 +16,26 @@ static char THIS_FILE[] = __FILE__;
 
 
 CWaitingDlg::CWaitingDlg(CWnd* pParent /*=NULL*/)
-	: CDialog(CWaitingDlg::IDD, pParent)
+    : CDialog(CWaitingDlg::IDD, pParent)
 {
-	//{{AFX_DATA_INIT(CWaitingDlg)
-		// NOTE: the ClassWizard will add member initialization here
-	//}}AFX_DATA_INIT
+    //{{AFX_DATA_INIT(CWaitingDlg)
+        // NOTE: the ClassWizard will add member initialization here
+    //}}AFX_DATA_INIT
 }
 
 
 void CWaitingDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDialog::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CWaitingDlg)
-		// NOTE: the ClassWizard will add DDX and DDV calls here
-	//}}AFX_DATA_MAP
+    CDialog::DoDataExchange(pDX);
+    //{{AFX_DATA_MAP(CWaitingDlg)
+        // NOTE: the ClassWizard will add DDX and DDV calls here
+    //}}AFX_DATA_MAP
 }
 
 
 BEGIN_MESSAGE_MAP(CWaitingDlg, CDialog)
-	//{{AFX_MSG_MAP(CWaitingDlg)
-	//}}AFX_MSG_MAP
+    //{{AFX_MSG_MAP(CWaitingDlg)
+    //}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

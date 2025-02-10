@@ -58,57 +58,57 @@ pthread_mutex_unlock (pthread_mutex_t * mutex)
   if (mx < PTHREAD_ERRORCHECK_MUTEX_INITIALIZER)
     {
       if (mx->kind == PTHREAD_MUTEX_NORMAL)
-	{
-	  LONG idx;
+    {
+      LONG idx;
 
-	  idx = (LONG) PTW32_INTERLOCKED_EXCHANGE ((LPLONG) &mx->lock_idx,
-						   (LONG) 0);
-	  if (idx != 0)
-	    {
-	      if (idx < 0)
-		{
-		  /*
-		   * Someone may be waiting on that mutex.
-		   */
-		  if (SetEvent (mx->event) == 0)
-		    {
-		      result = EINVAL;
-		    }
-		}
-	    }
-	  else
-	    {
-	      /*
-	       * Was not locked (so can't be owned by us).
-	       */
-	      result = EPERM;
-	    }
-	}
+      idx = (LONG) PTW32_INTERLOCKED_EXCHANGE ((LPLONG) &mx->lock_idx,
+                           (LONG) 0);
+      if (idx != 0)
+        {
+          if (idx < 0)
+        {
+          /*
+           * Someone may be waiting on that mutex.
+           */
+          if (SetEvent (mx->event) == 0)
+            {
+              result = EINVAL;
+            }
+        }
+        }
       else
-	{
-	  if (pthread_equal (mx->ownerThread, pthread_self ()))
-	    {
-	      if (mx->kind != PTHREAD_MUTEX_RECURSIVE
-		  || 0 == --mx->recursive_count)
-		{
-		  mx->ownerThread.p = NULL;
+        {
+          /*
+           * Was not locked (so can't be owned by us).
+           */
+          result = EPERM;
+        }
+    }
+      else
+    {
+      if (pthread_equal (mx->ownerThread, pthread_self ()))
+        {
+          if (mx->kind != PTHREAD_MUTEX_RECURSIVE
+          || 0 == --mx->recursive_count)
+        {
+          mx->ownerThread.p = NULL;
 
-		  if ((LONG) PTW32_INTERLOCKED_EXCHANGE ((LPLONG) &mx->lock_idx,
-							 (LONG) 0) < 0)
-		    {
-		      /* Someone may be waiting on that mutex */
-		      if (SetEvent (mx->event) == 0)
-			{
-			  result = EINVAL;
-			}
-		    }
-		}
-	    }
-	  else
-	    {
-	      result = EPERM;
-	    }
-	}
+          if ((LONG) PTW32_INTERLOCKED_EXCHANGE ((LPLONG) &mx->lock_idx,
+                             (LONG) 0) < 0)
+            {
+              /* Someone may be waiting on that mutex */
+              if (SetEvent (mx->event) == 0)
+            {
+              result = EINVAL;
+            }
+            }
+        }
+        }
+      else
+        {
+          result = EPERM;
+        }
+    }
     }
   else
     {

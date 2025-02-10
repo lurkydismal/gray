@@ -29,13 +29,13 @@ extern "C" {
 ///////////////////////////////////////////////////////////
 void peerConnectA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The nick to connect with.
-	int profileID,  // The profileID, or 0 if no profileID.
-	peerNickErrorCallback nickErrorCallback,  // Called if nick error.
-	peerConnectCallback connectCallback,  // Called on complete.
-	void * param,  // User-data.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * nick,  // The nick to connect with.
+    int profileID,  // The profileID, or 0 if no profileID.
+    peerNickErrorCallback nickErrorCallback,  // Called if nick error.
+    peerConnectCallback connectCallback,  // Called on complete.
+    void * param,  // User-data.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 // Same as peerConnect, but also authenticates using a uniquenick
@@ -43,16 +43,16 @@ void peerConnectA
 /////////////////////////////////////////////////////////////////
 void peerConnectLoginA
 (
-	PEER peer,  // The peer object.
-	int namespaceID,  // The namespace in which to login.
-	const char * email,  // The email to login with.
-	const char * profilenick,  // The profile to login with.
-	const char * uniquenick,  // The uniquenick to login with.
-	const char * password,  // The password for the login account.
-	peerNickErrorCallback nickErrorCallback,  // Called if nick error.
-	peerConnectCallback connectCallback,  // Called on complete.
-	void * param,  // User-data.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    int namespaceID,  // The namespace in which to login.
+    const char * email,  // The email to login with.
+    const char * profilenick,  // The profile to login with.
+    const char * uniquenick,  // The uniquenick to login with.
+    const char * password,  // The password for the login account.
+    peerNickErrorCallback nickErrorCallback,  // Called if nick error.
+    peerConnectCallback connectCallback,  // Called on complete.
+    void * param,  // User-data.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 // Same as peerConnect, but also authenticates using an authtoken
@@ -60,13 +60,13 @@ void peerConnectLoginA
 /////////////////////////////////////////////////////////////////
 void peerConnectPreAuthA
 (
-	PEER peer,  // The peer object.
-	const char * authtoken,  // The authtoken for this login.
-	const char * partnerchallenge,  // The partner challenge for this login.
-	peerNickErrorCallback nickErrorCallback,  // Called if nick error.
-	peerConnectCallback connectCallback,  // Called on complete.
-	void * param,  // User-data.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * authtoken,  // The authtoken for this login.
+    const char * partnerchallenge,  // The partner challenge for this login.
+    peerNickErrorCallback nickErrorCallback,  // Called if nick error.
+    peerConnectCallback connectCallback,  // Called on complete.
+    void * param,  // User-data.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 // If peerNickErrorCallback is called, call this to
@@ -76,8 +76,8 @@ void peerConnectPreAuthA
 ///////////////////////////////////////////////////////
 void peerRetryWithNickA
 (
-	PEER peer,
-	const char * nick
+    PEER peer,
+    const char * nick
 );
 
 // Register a uniquenick.
@@ -88,10 +88,10 @@ void peerRetryWithNickA
 /////////////////////////////////////////////////////////////////////////
 void peerRegisterUniqueNickA
 (
-	PEER peer,
-	int namespaceID,
-	const char * uniquenick,
-	const char * cdkey
+    PEER peer,
+    int namespaceID,
+    const char * uniquenick,
+    const char * cdkey
 );
 
 // Sets the current title.
@@ -102,16 +102,16 @@ void peerRegisterUniqueNickA
 /////////////////////////////////////////////////////////
 PEERBool peerSetTitleA
 (
-	PEER peer,  // The peer object.
-	const char * title,  // The title to make current (ie., ut, gmtest).
-	const char * qrSecretKey,  // The queryreporting secret key.
-	const char * sbName,  // The serverbrowsing name.
-	const char * sbSecretKey,  // The serverbrowsing secret key.
-	int sbGameVersion,  // The version of the game doing the browsing.
-	int sbMaxUpdates,  // The maximum number of concurent updates (10-15 for modem users, 20-30 for high-bandwidth).
-	PEERBool natNegotiate,  // PEERTrue if the title supports GameSpy's NAT-negotiation technology (or another similar technology).
-	PEERBool pingRooms[NumRooms],  // To do pings int a room, set it to PEERTrue.
-	PEERBool crossPingRooms[NumRooms]  // To do cross-pings in a room, set it to PEERTrue.
+    PEER peer,  // The peer object.
+    const char * title,  // The title to make current (ie., ut, gmtest).
+    const char * qrSecretKey,  // The queryreporting secret key.
+    const char * sbName,  // The serverbrowsing name.
+    const char * sbSecretKey,  // The serverbrowsing secret key.
+    int sbGameVersion,  // The version of the game doing the browsing.
+    int sbMaxUpdates,  // The maximum number of concurent updates (10-15 for modem users, 20-30 for high-bandwidth).
+    PEERBool natNegotiate,  // PEERTrue if the title supports GameSpy's NAT-negotiation technology (or another similar technology).
+    PEERBool pingRooms[NumRooms],  // To do pings int a room, set it to PEERTrue.
+    PEERBool crossPingRooms[NumRooms]  // To do cross-pings in a room, set it to PEERTrue.
 );
 
 // Gets the currently set title.
@@ -127,8 +127,8 @@ const char * peerGetNickA(PEER peer);
 ////////////////////////////////////////////////////////////
 void peerFixNickA
 (
-	char * newNick,
-	const char * oldNick
+    char * newNick,
+    const char * oldNick
 );
 
 // Removes the namespace extension from a chat unique nick.
@@ -137,19 +137,19 @@ void peerFixNickA
 ///////////////////////////////////////////////////////////
 const char * peerTranslateNickA
 (
-	char * nick,  // The nick to translate
-	const char * extension  // The extension to be removed.
+    char * nick,  // The nick to translate
+    const char * extension  // The extension to be removed.
 );
 
 // Changes the user's nickname.
 ///////////////////////////////
 void peerChangeNickA
 (
-	PEER peer,  // The peer object.
-	const char * newNick,  // The nickname to which to change.
-	peerChangeNickCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * newNick,  // The nickname to which to change.
+    peerChangeNickCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Sets the away mode.
@@ -158,8 +158,8 @@ void peerChangeNickA
 ////////////////////////////////////////////////
 void peerSetAwayModeA
 (
-	PEER peer,  // The peer object.
-	const char * reason  // The away reason.  If NULL or "", not away.
+    PEER peer,  // The peer object.
+    const char * reason  // The away reason.  If NULL or "", not away.
 );
 
 // When using peerStartReportingWithSocket or peerCreateStagingRoomWithSocket,
@@ -168,10 +168,10 @@ void peerSetAwayModeA
 //////////////////////////////////////////////////////////////////////////////
 void peerParseQueryA
 (
-	PEER peer,  // The peer object.
-	char * query,  // String of query data.
-	int len,  // The length of the string, not including the NUL.
-	struct sockaddr * sender  // The address the query was received from.
+    PEER peer,  // The peer object.
+    char * query,  // String of query data.
+    int len,  // The length of the string, not including the NUL.
+    struct sockaddr * sender  // The address the query was received from.
 );
 
 // Sends a CD Key to the chat server for authentication.
@@ -182,11 +182,11 @@ void peerParseQueryA
 /////////////////////////////////////////////////////////////
 void peerAuthenticateCDKeyA
 (
-	PEER peer,  // The peer object.
-	const char * cdkey,  // The CD key to authenticate.
-	peerAuthenticateCDKeyCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * cdkey,  // The CD key to authenticate.
+    peerAuthenticateCDKeyCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 /**********
@@ -196,11 +196,11 @@ void peerAuthenticateCDKeyA
 ///////////////////////////////////////////////////
 void peerJoinTitleRoomA
 (
-	PEER peer,  // The peer object.
-	const char password[PEER_PASSWORD_LEN],  // An optional password, normally NULL.
-	peerJoinRoomCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char password[PEER_PASSWORD_LEN],  // An optional password, normally NULL.
+    peerJoinRoomCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Joins a staging room.
@@ -211,12 +211,12 @@ void peerJoinTitleRoomA
 ////////////////////////////////////////////////////////////////////////////
 void peerJoinStagingRoomA
 (
-	PEER peer,  // The peer object.
-	SBServer server,  // The server passed into peerlistingGamesCallback().
-	const char password[PEER_PASSWORD_LEN],  // The password of the room being joined.  Can be NULL or "".
-	peerJoinRoomCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    SBServer server,  // The server passed into peerlistingGamesCallback().
+    const char password[PEER_PASSWORD_LEN],  // The password of the room being joined.  Can be NULL or "".
+    peerJoinRoomCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 // Joins a staging room by its channel name.
@@ -227,12 +227,12 @@ void peerJoinStagingRoomA
 ///////////////////////////////////////////////////////////////////
 void peerJoinStagingRoomByChannelA
 (
-	PEER peer,  // The peer object.
-	const char * channel,  // The channel to join.
-	const char password[PEER_PASSWORD_LEN],  // The password of the room being joined.  Can be NULL or "".
-	peerJoinRoomCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * channel,  // The channel to join.
+    const char password[PEER_PASSWORD_LEN],  // The password of the room being joined.  Can be NULL or "".
+    peerJoinRoomCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 // Creates a new staging room, with the local player hosting.
@@ -247,13 +247,13 @@ void peerJoinStagingRoomByChannelA
 /////////////////////////////////////////////////////////////
 void peerCreateStagingRoomA
 (
-	PEER peer,  // The peer object.
-	const char * name,  // The name of the room.
-	int maxPlayers,  // The max number of players allowed in the room.
-	const char password[PEER_PASSWORD_LEN],  // An optional password for the staging room
-	peerJoinRoomCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * name,  // The name of the room.
+    int maxPlayers,  // The max number of players allowed in the room.
+    const char password[PEER_PASSWORD_LEN],  // An optional password for the staging room
+    peerJoinRoomCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking // If PEERTrue, don't return until finished.
 );
 
 // Same as peerCreateStagingRoom, but uses the provided socket for
@@ -263,15 +263,15 @@ void peerCreateStagingRoomA
 //////////////////////////////////////////////////////////////////
 void peerCreateStagingRoomWithSocketA
 (
-	PEER peer,  // The peer object.
-	const char * name,  // The name of the room.
-	int maxPlayers,  // The max number of players allowed in the room.
-	const char password[PEER_PASSWORD_LEN],  // An optional password for the staging room
-	SOCKET socket,  // The socket to be used for reporting.
-	unsigned short port,  // The local port to which the socket is bound.
-	peerJoinRoomCallback callback,  // Called when finished.
-	void * param,  // Passed to the callback.
-	PEERBool blocking // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * name,  // The name of the room.
+    int maxPlayers,  // The max number of players allowed in the room.
+    const char password[PEER_PASSWORD_LEN],  // An optional password for the staging room
+    SOCKET socket,  // The socket to be used for reporting.
+    unsigned short port,  // The local port to which the socket is bound.
+    peerJoinRoomCallback callback,  // Called when finished.
+    void * param,  // Passed to the callback.
+    PEERBool blocking // If PEERTrue, don't return until finished.
 );
 
 // Leave a room.
@@ -280,9 +280,9 @@ void peerCreateStagingRoomWithSocketA
 //////////////////////////////////////////////////////
 void peerLeaveRoomA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room you want to leave (TitleRoom, GroupRoom, or StagingRoom).
-	const char * reason  // The reason the player is leaving (can be NULL).  PANTS|03.13.01
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room you want to leave (TitleRoom, GroupRoom, or StagingRoom).
+    const char * reason  // The reason the player is leaving (can be NULL).  PANTS|03.13.01
 );
 
 // List all the groups rooms for the currently set title.
@@ -291,11 +291,11 @@ void peerLeaveRoomA
 /////////////////////////////////////////////////////////
 void peerListGroupRoomsA
 (
-	PEER peer,  // The peer object.
-	const char * fields,  // A backslash delimited list of fields.
-	peerListGroupRoomsCallback callback,  // Called for each group room.
-	void * param,  // Passed to the callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * fields,  // A backslash delimited list of fields.
+    peerListGroupRoomsCallback callback,  // Called for each group room.
+    void * param,  // Passed to the callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Start listing the currently running games and staging rooms.
@@ -311,33 +311,33 @@ void peerListGroupRoomsA
 /////////////////////////////////////////////////////////////////////
 void peerStartListingGamesA
 (
-	PEER peer,  // The peer object.
-	const unsigned char * fields,  // An array of registered QR2 keys to request from servers.
-	int numFields,  // The number of keys in the fields array.
-	const char * filter,  // A SQL-like rule filter.
-	peerListingGamesCallback callback,  // Called when finished.
-	void * param  // Passed to the callback.
+    PEER peer,  // The peer object.
+    const unsigned char * fields,  // An array of registered QR2 keys to request from servers.
+    int numFields,  // The number of keys in the fields array.
+    const char * filter,  // A SQL-like rule filter.
+    peerListingGamesCallback callback,  // Called when finished.
+    void * param  // Passed to the callback.
 );
 
 // Send a message to a room.
 ////////////////////////////
 void peerMessageRoomA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to send the message to.
-	const char * message,  // The message.
-	MessageType messageType  // The type of message.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to send the message to.
+    const char * message,  // The message.
+    MessageType messageType  // The type of message.
 );
 
 // Send a UTM to a room.
 ////////////////////////
 void peerUTMRoomA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to send the UTM to.
-	const char * command,  // The command.
-	const char * parameters,  // The UTM's parameters.
-	PEERBool authenticate  // If true, the server will authenticate this UTM (should normally be false).
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to send the UTM to.
+    const char * command,  // The command.
+    const char * parameters,  // The UTM's parameters.
+    PEERBool authenticate  // If true, the server will authenticate this UTM (should normally be false).
 );
 
 // Set a password in a room you're hosting.
@@ -347,9 +347,9 @@ void peerUTMRoomA
 ///////////////////////////////////////////////////////////
 void peerSetPasswordA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room in which to set the password.
-	const char password[PEER_PASSWORD_LEN]  // The password to set.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room in which to set the password.
+    const char password[PEER_PASSWORD_LEN]  // The password to set.
 );
 
 // Set the name of a room you're hosting.
@@ -358,9 +358,9 @@ void peerSetPasswordA
 ////////////////////////////////////////////////////////
 void peerSetRoomNameA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room in which to set the name.
-	const char * name  // The new name
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room in which to set the name.
+    const char * name  // The new name
 );
 
 // Get a room's name (the channel's title).
@@ -368,8 +368,8 @@ void peerSetRoomNameA
 ///////////////////////////////////////////
 const char * peerGetRoomNameA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType  // The room to get the name for.
+    PEER peer,  // The peer object.
+    RoomType roomType  // The room to get the name for.
 );
 
 // Get's the chat channel associated with the room.
@@ -377,8 +377,8 @@ const char * peerGetRoomNameA
 ///////////////////////////////////////////////////
 const char * peerGetRoomChannelA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType  // The room to get the channel for.
+    PEER peer,  // The peer object.
+    RoomType roomType  // The room to get the channel for.
 );
 
 // Use this channel for the title room for the currently set title.
@@ -386,8 +386,8 @@ const char * peerGetRoomChannelA
 ///////////////////////////////////////////////////////////////////
 void peerSetTitleRoomChannelA
 (
-	PEER peer,  // The peer object.
-	const char * channel  // The channel to use for the title room.
+    PEER peer,  // The peer object.
+    const char * channel  // The channel to use for the title room.
 );
 
 
@@ -398,21 +398,21 @@ void peerSetTitleRoomChannelA
 //////////////////////////////
 void peerMessagePlayerA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The nick of the player to send the message to.
-	const char * message,  // The message to send.
-	MessageType messageType  // The type of message.
+    PEER peer,  // The peer object.
+    const char * nick,  // The nick of the player to send the message to.
+    const char * message,  // The message to send.
+    MessageType messageType  // The type of message.
 );
 
 // Send a UTM to a player.
 //////////////////////////
 void peerUTMPlayerA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The nick of the player to send the UTM to.
-	const char * command,  // The command.
-	const char * parameters,  // The UTM's parameters.
-	PEERBool authenticate  // If true, the server will authenticate this UTM (should normally be false).
+    PEER peer,  // The peer object.
+    const char * nick,  // The nick of the player to send the UTM to.
+    const char * command,  // The command.
+    const char * parameters,  // The UTM's parameters.
+    PEERBool authenticate  // If true, the server will authenticate this UTM (should normally be false).
 );
 
 // Kick a player from a room.
@@ -420,10 +420,10 @@ void peerUTMPlayerA
 ///////////////////////////////////////////////////////
 void peerKickPlayerA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to kick the player from.
-	const char * nick,  // The nick of the player to kick.
-	const char * reason  // An optional reason for kicking the player
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to kick the player from.
+    const char * nick,  // The nick of the player to kick.
+    const char * reason  // An optional reason for kicking the player
 );
 
 // Gets a player's ping (between the local machine and the player's machine).
@@ -431,9 +431,9 @@ void peerKickPlayerA
 /////////////////////////////////////////////////////////////////////////////
 PEERBool peerGetPlayerPingA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player to get the ping for.
-	int * ping  // The player's ping is stored here, if we have it.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player to get the ping for.
+    int * ping  // The player's ping is stored here, if we have it.
 );
 
 // Gets the cross-ping between 2 players.
@@ -441,10 +441,10 @@ PEERBool peerGetPlayerPingA
 ///////////////////////////////////////////////////////////////////////////
 PEERBool peerGetPlayersCrossPingA
 (
-	PEER peer,  // The peer object.
-	const char * nick1,  // The first player.
-	const char * nick2,  // The second player.
-	int * crossPing  // The cross-ping is stored here, if we have it.
+    PEER peer,  // The peer object.
+    const char * nick1,  // The first player.
+    const char * nick2,  // The second player.
+    int * crossPing  // The cross-ping is stored here, if we have it.
 );
 
 // Peer already automatically pings all players that are in ping rooms.
@@ -456,8 +456,8 @@ PEERBool peerGetPlayersCrossPingA
 ////////////////////////////////////////////////////////////////////////////
 PEERBool peerPingPlayerA
 (
-	PEER peer,  // The peer object.
-	const char * nick  // The player to ping.
+    PEER peer,  // The peer object.
+    const char * nick  // The player to ping.
 );
 
 // Gets a player's info immediately.
@@ -465,21 +465,21 @@ PEERBool peerPingPlayerA
 /////////////////////////////////////////////////
 PEERBool peerGetPlayerInfoNoWaitA
 (
-	PEER peer,
-	const char * nick,
-	unsigned int * IP,
-	int * profileID
+    PEER peer,
+    const char * nick,
+    unsigned int * IP,
+    int * profileID
 );
 
 // Called to get a player's IP and profile ID.
 //////////////////////////////////////////////
 void peerGetPlayerInfoA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player's nick.
-	peerGetPlayerInfoCallback callback,  // Called when finished.
-	void * param,  // Passed to callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player's nick.
+    peerGetPlayerInfoCallback callback,  // Called when finished.
+    void * param,  // Passed to callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Called to get a player's profile ID.
@@ -487,11 +487,11 @@ void peerGetPlayerInfoA
 ///////////////////////////////////////
 void peerGetPlayerProfileIDA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player's nick.
-	peerGetPlayerProfileIDCallback callback,  // Called when finished.
-	void * param,  // Passed to callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player's nick.
+    peerGetPlayerProfileIDCallback callback,  // Called when finished.
+    void * param,  // Passed to callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Called to get a player's IP.
@@ -499,11 +499,11 @@ void peerGetPlayerProfileIDA
 //////////////////////////////////////
 void peerGetPlayerIPA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player's nick.
-	peerGetPlayerIPCallback callback,  // Called when finished.
-	void * param,  // Passed to callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player's nick.
+    peerGetPlayerIPCallback callback,  // Called when finished.
+    void * param,  // Passed to callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Checks if a player is a host (has ops).
@@ -511,9 +511,9 @@ void peerGetPlayerIPA
 ////////////////////////////////////////////
 PEERBool peerIsPlayerHostA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player's nick.
-	RoomType roomType  // The room to check in.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player's nick.
+    RoomType roomType  // The room to check in.
 );
 
 // Gets a player's flags in a room.  Returns PEERFalse if
@@ -521,10 +521,10 @@ PEERBool peerIsPlayerHostA
 /////////////////////////////////////////////////////////
 PEERBool peerGetPlayerFlagsA
 (
-	PEER peer,
-	const char * nick,
-	RoomType roomType,
-	int * flags
+    PEER peer,
+    const char * nick,
+    RoomType roomType,
+    int * flags
 );
 
 /*********
@@ -534,9 +534,9 @@ PEERBool peerGetPlayerFlagsA
 ///////////////////////////////
 PEERBool peerGetReadyA
 (
-	PEER peer,  // The peer object.
-	const char * nick, // The player's nick.
-	PEERBool * ready  // The player's ready state gets stored in here.
+    PEER peer,  // The peer object.
+    const char * nick, // The player's nick.
+    PEERBool * ready  // The player's ready state gets stored in here.
 );
 
 // Called only by a staging room host to start the game.
@@ -554,9 +554,9 @@ PEERBool peerGetReadyA
 /////////////////////////////////////////////////////////////////////////////
 void peerStartGameA
 (
-	PEER peer,  // The peer object.
-	const char * message,  // A message to send to everyone.
-	int reportingOptions  // Bitfield flags used to set reporting options.
+    PEER peer,  // The peer object.
+    const char * message,  // A message to send to everyone.
+    int reportingOptions  // Bitfield flags used to set reporting options.
 );
 
 /*********
@@ -566,10 +566,10 @@ void peerStartGameA
 ///////////////////////////////////////
 void peerSetGlobalKeysA
 (
-	PEER peer,  // The peer object.
-	int num,  // The number of keys to set.
-	const char ** keys,  // The keys to set.
-	const char ** values  // The values for the keys.
+    PEER peer,  // The peer object.
+    int num,  // The number of keys to set.
+    const char ** keys,  // The keys to set.
+    const char ** values  // The values for the keys.
 );
 
 
@@ -577,26 +577,26 @@ void peerSetGlobalKeysA
 //////////////////////////////
 void peerGetPlayerGlobalKeysA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player to get the keys for.
-	int num,  // The number of keys.
-	const char ** keys,  // The keys to get.
-	peerGetGlobalKeysCallback callback,  // Called with the keys.
-	void * param,  // Passed to callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player to get the keys for.
+    int num,  // The number of keys.
+    const char ** keys,  // The keys to get.
+    peerGetGlobalKeysCallback callback,  // Called with the keys.
+    void * param,  // Passed to callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Get the global keys for all players in a room we're in.
 //////////////////////////////////////////////////////////
 void peerGetRoomGlobalKeysA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to get the keys in.
-	int num,  // The number of keys.
-	const char ** keys,  // The keys to get.
-	peerGetGlobalKeysCallback callback,  // Called with the keys.
-	void * param,  // Passed to callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to get the keys in.
+    int num,  // The number of keys.
+    const char ** keys,  // The keys to get.
+    peerGetGlobalKeysCallback callback,  // Called with the keys.
+    void * param,  // Passed to callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Set the room keys for a player.
@@ -604,12 +604,12 @@ void peerGetRoomGlobalKeysA
 /////////////////////////////////////////////////
 void peerSetRoomKeysA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to set the keys in.
-	const char * nick,  // The player to set the keys on (NULL or "" for the room).
-	int num,  // The number of keys.
-	const char ** keys,  // The keys to set.
-	const char ** values  // The values to set.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to set the keys in.
+    const char * nick,  // The player to set the keys on (NULL or "" for the room).
+    int num,  // The number of keys.
+    const char ** keys,  // The keys to set.
+    const char ** values  // The values to set.
 );
 
 // Get the room keys for either a single player of an entire room.
@@ -618,14 +618,14 @@ void peerSetRoomKeysA
 //////////////////////////////////////////////////////////////////
 void peerGetRoomKeysA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to get the keys in.
-	const char * nick,  // The player to get the keys for.
-	int num,  // The number of keys.
-	const char ** keys,  // The keys to get.
-	peerGetRoomKeysCallback callback,  // Called with the keys.
-	void * param,  // Passed to callback.
-	PEERBool blocking  // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to get the keys in.
+    const char * nick,  // The player to get the keys for.
+    int num,  // The number of keys.
+    const char ** keys,  // The keys to get.
+    peerGetRoomKeysCallback callback,  // Called with the keys.
+    void * param,  // Passed to callback.
+    PEERBool blocking  // If PEERTrue, don't return until finished.
 );
 
 // Set the global watch keys for a room type.
@@ -638,11 +638,11 @@ void peerGetRoomKeysA
 ////////////////////////////////////////////////////////////
 void peerSetGlobalWatchKeysA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The type of room to set the watch keys for.
-	int num,  // The number of keys.
-	const char ** keys,  // The keys to watch for.
-	PEERBool addKeys  // If PEERTrue, add these keys to the existing global watch keys for this room.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The type of room to set the watch keys for.
+    int num,  // The number of keys.
+    const char ** keys,  // The keys to watch for.
+    PEERBool addKeys  // If PEERTrue, add these keys to the existing global watch keys for this room.
 );
 
 // Set the room watch keys for a room type.
@@ -655,11 +655,11 @@ void peerSetGlobalWatchKeysA
 ////////////////////////////////////////////////////////////
 void peerSetRoomWatchKeysA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The type of room to set the watch keys for.
-	int num,  // The number of keys.
-	const char ** keys,  // The keys to watch for.
-	PEERBool addKeys  // If PEERTrue, add these keys to the existing room watch keys for this room.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The type of room to set the watch keys for.
+    int num,  // The number of keys.
+    const char ** keys,  // The keys to watch for.
+    PEERBool addKeys  // If PEERTrue, add these keys to the existing room watch keys for this room.
 );
 
 // Get the global watch key for a particular player.
@@ -669,9 +669,9 @@ void peerSetRoomWatchKeysA
 ///////////////////////////////////////////////////////////////
 const char * peerGetGlobalWatchKeyA
 (
-	PEER peer,  // The peer object.
-	const char * nick,  // The player to get the key for.
-	const char * key  // The key to get.
+    PEER peer,  // The peer object.
+    const char * nick,  // The player to get the key for.
+    const char * key  // The key to get.
 );
 
 // Get the room watch key for a particular player in a room.
@@ -681,10 +681,10 @@ const char * peerGetGlobalWatchKeyA
 ///////////////////////////////////////////////////////////////
 const char * peerGetRoomWatchKeyA
 (
-	PEER peer,  // The peer object.
-	RoomType roomType,  // The room to get the key in.
-	const char * nick,  // The player to get the key for.
-	const char * key  // The key to get.
+    PEER peer,  // The peer object.
+    RoomType roomType,  // The room to get the key in.
+    const char * nick,  // The player to get the key for.
+    const char * key  // The key to get.
 );
 
 /**************
@@ -699,13 +699,13 @@ const char * peerGetRoomWatchKeyA
 /////////////////////////////////////////////////////////////////////////////////
 void peerStartAutoMatchA
 (
-	PEER peer,  // The peer object.
-	int maxPlayers,  // The total number of players to match (including the local player).
-	const char * filter,  // Hard criteria - filters out servers.
-	peerAutoMatchStatusCallback statusCallback,  // Called as the attempt status changes.
-	peerAutoMatchRateCallback rateCallback,  // Used to rate possible matches.
-	void * param,  // User-data.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    int maxPlayers,  // The total number of players to match (including the local player).
+    const char * filter,  // Hard criteria - filters out servers.
+    peerAutoMatchStatusCallback statusCallback,  // Called as the attempt status changes.
+    peerAutoMatchRateCallback rateCallback,  // Used to rate possible matches.
+    void * param,  // User-data.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 // Same as peerStartAutoMatch, but uses the provided socket for
@@ -715,15 +715,15 @@ void peerStartAutoMatchA
 ////////////////////////////////////////////////////////////////
 void peerStartAutoMatchWithSocketA
 (
-	PEER peer,  // The peer object.
-	int maxPlayers,  // The total number of players to match (including the local player).
-	const char * filter,  // Hard criteria - filters out servers.
-	SOCKET socket,  // The socket to be used for reporting.
-	unsigned short port,  // The local port to which the socket is bound.
-	peerAutoMatchStatusCallback statusCallback,  // Called as the attempt status changes.
-	peerAutoMatchRateCallback rateCallback,  // Used to rate possible matches.
-	void * param,  // User-data.
-	PEERBool blocking   // If PEERTrue, don't return until finished.
+    PEER peer,  // The peer object.
+    int maxPlayers,  // The total number of players to match (including the local player).
+    const char * filter,  // Hard criteria - filters out servers.
+    SOCKET socket,  // The socket to be used for reporting.
+    unsigned short port,  // The local port to which the socket is bound.
+    peerAutoMatchStatusCallback statusCallback,  // Called as the attempt status changes.
+    peerAutoMatchRateCallback rateCallback,  // Used to rate possible matches.
+    void * param,  // User-data.
+    PEERBool blocking   // If PEERTrue, don't return until finished.
 );
 
 

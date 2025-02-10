@@ -57,7 +57,7 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
     pPixel = (u32*)D.pBits;
     pEnd = pPixel + u32(RCache.get_width() * RCache.get_height());
 
-    //	Kill alpha
+    //    Kill alpha
     for (; pPixel != pEnd; ++pPixel, ++pDst)
     {
         u32 p = *pPixel;
@@ -162,8 +162,8 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
         TGAdesc p;
         p.format = IMG_24B;
 
-        //	TODO: DX10: This is totally incorrect but mimics 
-        //	original behavior. Fix later.
+        //    TODO: DX10: This is totally incorrect but mimics 
+        //    original behavior. Fix later.
         hr = pFB->LockRect(&D, 0, D3DLOCK_NOSYSLOCK);
         if (hr != D3D_OK) {
             return;
@@ -206,21 +206,21 @@ void CRender::ScreenshotAsyncEnd(CMemoryWriter& memory_writer) {
         return;
     }
 
-#if	RENDER == R_R1
+#if    RENDER == R_R1
     u32 rtWidth = Target->get_rtwidth();
     u32 rtHeight = Target->get_rtheight();
-#else	//	RENDER != R_R1
+#else    //    RENDER != R_R1
     u32 rtWidth =  RCache.get_width();
     u32 rtHeight = RCache.get_height();
-#endif	//	RENDER != R_R1
+#endif    //    RENDER != R_R1
 
     // Image processing (gamma-correct)
     auto pPixel = static_cast<u32*>(D.pBits);
     auto pOrigin = pPixel;
     auto pEnd = pPixel + (rtWidth * rtHeight);
 
-    //	Kill alpha
-#if	RENDER != R_R1
+    //    Kill alpha
+#if    RENDER != R_R1
     if (Target->rt_Color->fmt == D3DFMT_A16B16G16R16F)
     {
         static const int iMaxPixelsInARow = 1024;
@@ -247,7 +247,7 @@ void CRender::ScreenshotAsyncEnd(CMemoryWriter& memory_writer) {
         }
     }
     else
-#endif	//	RENDER != R_R1
+#endif    //    RENDER != R_R1
     {
         for (; pPixel != pEnd; pPixel++) {
             u32 p = *pPixel;

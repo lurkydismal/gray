@@ -53,23 +53,23 @@ function actor_detector:update()
 end
 function actor_detector:save(packet)
   set_save_marker(packet, "save", false, "actor_detector")
-	if self.init_time == -1 then
-    	packet:w_u8(0)
-	else
-    	packet:w_u8(1)
-    	utils.w_CTime(packet, self.init_time)
-    	utils.w_CTime(packet, self.last_update_time)
-	end 
-	set_save_marker(packet, "save", true, "actor_detector")
+    if self.init_time == -1 then
+        packet:w_u8(0)
+    else
+        packet:w_u8(1)
+        utils.w_CTime(packet, self.init_time)
+        utils.w_CTime(packet, self.last_update_time)
+    end 
+    set_save_marker(packet, "save", true, "actor_detector")
 end
 function actor_detector:load(packet)
   set_save_marker(packet, "load", false, "actor_detector")
-	local flag = packet:r_u8()
-	if flag == 1 then
-    	self.init_time = utils.r_CTime(packet)
-    	self.last_update_time = utils.r_CTime(packet)
-	else
-    	self.init_time = -1
-	end
+    local flag = packet:r_u8()
+    if flag == 1 then
+        self.init_time = utils.r_CTime(packet)
+        self.last_update_time = utils.r_CTime(packet)
+    else
+        self.init_time = -1
+    end
   set_save_marker(packet, "load", true, "actor_detector")
 end

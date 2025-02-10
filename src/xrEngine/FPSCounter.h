@@ -2,17 +2,17 @@
 
 namespace FPS
 {
-	class FPSCounter final
-	{
-	public:
-		FPSCounter();
-		~FPSCounter() = default;
+    class FPSCounter final
+    {
+    public:
+        FPSCounter();
+        ~FPSCounter() = default;
 
-		void OnRender();
+        void OnRender();
 
-	protected:
-		CGameFont* pCGameFont;
-	};
+    protected:
+        CGameFont* pCGameFont;
+    };
 }
 
 extern ENGINE_API FPS::FPSCounter* pFPSCounter;

@@ -10,10 +10,10 @@ namespace xray_re {
 
 class xr_level_cform: public xr_cform {
 public:
-		xr_level_cform(xr_reader& r);
-		xr_level_cform(uint32_t xrlc_version, xr_reader& r);
+        xr_level_cform(xr_reader& r);
+        xr_level_cform(uint32_t xrlc_version, xr_reader& r);
 
-	void	load(uint32_t xrlc_version, xr_reader& r);
+    void    load(uint32_t xrlc_version, xr_reader& r);
 };
 
 inline xr_level_cform::xr_level_cform(xr_reader& r) { xr_cform::load(r); }

@@ -1,38 +1,38 @@
-		  =========================================
-		  PTHREADS-WIN32 Frequently Asked Questions
-		  =========================================
+          =========================================
+          PTHREADS-WIN32 Frequently Asked Questions
+          =========================================
 
 INDEX
 -----
 
-Q 1	What is it?
+Q 1    What is it?
 
-Q 2	Which of the several dll versions do I use?
-	or,
-	What are all these pthread*.dll and pthread*.lib files?
+Q 2    Which of the several dll versions do I use?
+    or,
+    What are all these pthread*.dll and pthread*.lib files?
 
-Q 3	What is the library naming convention?
+Q 3    What is the library naming convention?
 
-Q 4	Cleanup code default style or: it used to work when I built
-	the library myself, but now it doesn't - why?
+Q 4    Cleanup code default style or: it used to work when I built
+    the library myself, but now it doesn't - why?
 
-Q 5	Why is the default library version now less exception-friendly?
+Q 5    Why is the default library version now less exception-friendly?
 
-Q 6	Should I use Cygwin or Mingw32 as a development environment?
+Q 6    Should I use Cygwin or Mingw32 as a development environment?
 
-Q 7	Now that pthreads-win32 builds under Mingw32, why do I get
-	memory access violations (segfaults)?
+Q 7    Now that pthreads-win32 builds under Mingw32, why do I get
+    memory access violations (segfaults)?
 
-Q 8	How do I use pthread.dll for Win32 (Visual C++ 5.0)
+Q 8    How do I use pthread.dll for Win32 (Visual C++ 5.0)
 
-Q 9	Cancelation doesn't work for me, why?
+Q 9    Cancelation doesn't work for me, why?
 
-Q 10	How do I generate pthreadGCE.dll and libpthreadw32.a for use
-	with Mingw32?
+Q 10    How do I generate pthreadGCE.dll and libpthreadw32.a for use
+    with Mingw32?
 
 =============================================================================
 
-Q 1	What is it?
+Q 1    What is it?
 ---
 
 Pthreads-win32 is an Open Source Software implementation of the
@@ -49,9 +49,9 @@ conformance details and list of supported routines.
 
 ------------------------------------------------------------------------------
 
-Q 2	Which of the several dll versions do I use?
----	or,
-	What are all these pthread*.dll and pthread*.lib files?
+Q 2    Which of the several dll versions do I use?
+---    or,
+    What are all these pthread*.dll and pthread*.lib files?
 
 Simply, you only use one of them, but you need to choose carefully.
 
@@ -94,7 +94,7 @@ There are a couple of reasons:
 
 ------------------------------------------------------------------------------
 
-Q 3	What is the library naming convention?
+Q 3    What is the library naming convention?
 ---
 
 Because the library is being built using various exception
@@ -120,42 +120,42 @@ version (it should be arbitrary) as pthread.dll, including
 pthread.lib and libpthread.a as appropriate.
 
 In general:
-	pthread[VG]{SE,CE,C}.dll
-	pthread[VG]{SE,CE,C}.lib
+    pthread[VG]{SE,CE,C}.dll
+    pthread[VG]{SE,CE,C}.lib
 
 where:
-	[VG] indicates the compiler
-	V	- MS VC
-	G	- GNU C
+    [VG] indicates the compiler
+    V    - MS VC
+    G    - GNU C
 
-	{SE,CE,C} indicates the exception handling scheme
-	SE	- Structured EH
-	CE	- C++ EH
-	C	- no exceptions - uses setjmp/longjmp
+    {SE,CE,C} indicates the exception handling scheme
+    SE    - Structured EH
+    CE    - C++ EH
+    C    - no exceptions - uses setjmp/longjmp
 
 For example:
-	pthreadVSE.dll	(MSVC/SEH)
-	pthreadGCE.dll	(GNUC/C++ EH)
-	pthreadGC.dll	(GNUC/not dependent on exceptions)
+    pthreadVSE.dll    (MSVC/SEH)
+    pthreadGCE.dll    (GNUC/C++ EH)
+    pthreadGC.dll    (GNUC/not dependent on exceptions)
 
 The GNU library archive file names have changed to:
 
-	libpthreadGCE.a
-	libpthreadGC.a
+    libpthreadGCE.a
+    libpthreadGC.a
 
 
 ------------------------------------------------------------------------------
 
-Q 4	Cleanup code default style or: it used to work when I built
----	the library myself, but now it doesn't - why?
+Q 4    Cleanup code default style or: it used to work when I built
+---    the library myself, but now it doesn't - why?
 
 Up to and including snapshot 2001-07-12, if not defined, the cleanup
 style was determined automatically from the compiler used, and one
 of the following was defined accordingly:
 
-	__CLEANUP_SEH	MSVC only
-	__CLEANUP_CXX	C++, including MSVC++, GNU G++
-	__CLEANUP_C		C, including GNU GCC, not MSVC
+    __CLEANUP_SEH    MSVC only
+    __CLEANUP_CXX    C++, including MSVC++, GNU G++
+    __CLEANUP_C        C, including GNU GCC, not MSVC
 
 These defines determine the style of cleanup (see pthread.h) and,
 most importantly, the way that cancelation and thread exit (via
@@ -181,9 +181,9 @@ used for the version of the library that you link with, so that the
 correct parts of pthread.h are included. That is, the possible
 defines require the following library versions:
 
-	__CLEANUP_SEH	pthreadVSE.dll
-	__CLEANUP_CXX	pthreadVCE.dll or pthreadGCE.dll
-	__CLEANUP_C		pthreadVC.dll or pthreadGC.dll
+    __CLEANUP_SEH    pthreadVSE.dll
+    __CLEANUP_CXX    pthreadVCE.dll or pthreadGCE.dll
+    __CLEANUP_C        pthreadVC.dll or pthreadGC.dll
 
 THE POINT OF ALL THIS IS: if you have not been defining one of these
 explicitly, then the defaults have been set according to the compiler
@@ -215,7 +215,7 @@ pthreadVCE.dll as you did before.
 
 ------------------------------------------------------------------------------
 
-Q 5	Why is the default library version now less exception-friendly?
+Q 5    Why is the default library version now less exception-friendly?
 ---
 
 Because most commercial Unix POSIX threads implementations don't allow you to
@@ -242,7 +242,7 @@ There are a few reasons:
 
 ------------------------------------------------------------------------------
 
-Q 6	Should I use Cygwin or Mingw32 as a development environment?
+Q 6    Should I use Cygwin or Mingw32 as a development environment?
 ---
 
 Important: see Q7 also.
@@ -255,19 +255,19 @@ Consult that project's documentation for more information.
 
 ------------------------------------------------------------------------------
 
-Q 7	Now that pthreads-win32 builds under Mingw32, why do I get
----	memory access violations (segfaults)?
+Q 7    Now that pthreads-win32 builds under Mingw32, why do I get
+---    memory access violations (segfaults)?
 
 The latest Mingw32 package has thread-safe exception handling (see Q10).
 Also, see Q6 above.
 
 ------------------------------------------------------------------------------
 
-Q 8	How do I use pthread.dll for Win32 (Visual C++ 5.0)
----	
+Q 8    How do I use pthread.dll for Win32 (Visual C++ 5.0)
+---    
 
 >
-> I'm a "rookie" when it comes to your pthread implementation.	I'm currently
+> I'm a "rookie" when it comes to your pthread implementation.    I'm currently
 > desperately trying to install the prebuilt .dll file into my MSVC compiler.
 > Could you please provide me with explicit instructions on how to do this (or
 > direct me to a resource(s) where I can acquire such information)?
@@ -302,17 +302,17 @@ Ross
 
 ------------------------------------------------------------------------------
 
-Q 9	Cancelation doesn't work for me, why?
+Q 9    Cancelation doesn't work for me, why?
 ---
 
 > I'm investigating a problem regarding thread cancelation. The thread I want
 > to cancel has PTHREAD_CANCEL_ASYNCHRONOUS, however, this piece of code
 > blocks on the join():
 >
->		if ((retv = Pthread_cancel( recvThread )) == 0)
->		{
->			retv = Pthread_join( recvThread, 0 );
->		}
+>        if ((retv = Pthread_cancel( recvThread )) == 0)
+>        {
+>            retv = Pthread_join( recvThread, 0 );
+>        }
 >
 > Pthread_* are just macro's; they call pthread_*.
 >
@@ -360,40 +360,40 @@ the SUSV3.
 
 Effectively, the only mandatory cancelation points that pthreads-win32
 recognises are those the library implements itself, ie.
-	
-	pthread_testcancel
-	pthread_cond_wait
-	pthread_cond_timedwait
-	pthread_join
-	sem_wait
-	sem_timedwait
-	pthread_delay_np
+    
+    pthread_testcancel
+    pthread_cond_wait
+    pthread_cond_timedwait
+    pthread_join
+    sem_wait
+    sem_timedwait
+    pthread_delay_np
 
 The following routines from the non-mandatory list in SUSV3 are
 cancelation points in pthreads-win32:
 
-	pthread_rwlock_wrlock
-	pthread_rwlock_timedwrlock
+    pthread_rwlock_wrlock
+    pthread_rwlock_timedwrlock
 
 The following routines from the non-mandatory list in SUSV3 are not
 cancelation points in pthreads-win32:
 
-	pthread_rwlock_rdlock
-	pthread_rwlock_timedrdlock
+    pthread_rwlock_rdlock
+    pthread_rwlock_timedrdlock
 
 Pthreads-win32 also provides two functions that allow you to create
 cancelation points within your application, but only for cases where
 a thread is going to block on a Win32 handle. These are:
 
-	pthreadCancelableWait(HANDLE waitHandle) /* Infinite wait */
+    pthreadCancelableWait(HANDLE waitHandle) /* Infinite wait */
  
-	pthreadCancelableTimedWait(HANDLE waitHandle, DWORD timeout)
+    pthreadCancelableTimedWait(HANDLE waitHandle, DWORD timeout)
 
 ------------------------------------------------------------------------------
  
 
-Q 10	How do I create thread-safe applications using
-----	pthreadGCE.dll, libpthreadw32.a and Mingw32?
+Q 10    How do I create thread-safe applications using
+----    pthreadGCE.dll, libpthreadw32.a and Mingw32?
 
 This should not be a problem with recent versions of MinGW32.
 

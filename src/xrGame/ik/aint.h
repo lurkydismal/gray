@@ -64,7 +64,7 @@ inline int ge(float x, float y, const float eps = AINT_EPSILON)
 {
     return (x > y) || equal(x,y,eps);
 }
-			  
+              
 
 //
 // Puts an angle in the range 0..2*PI
@@ -72,14 +72,14 @@ inline int ge(float x, float y, const float eps = AINT_EPSILON)
 //inline float angle_normalize(float psi)
 //{
 //    if (fabs(psi-2*M_PI) < AINT_EPSILON)
-//	psi = 2*M_PI;
+//    psi = 2*M_PI;
 //    else
-//	while (psi > 2*M_PI)  psi -= 2* M_PI;
+//    while (psi > 2*M_PI)  psi -= 2* M_PI;
 //
 //    if (fabs(psi) < AINT_EPSILON)
-//	psi = 0.0;
+//    psi = 0.0;
 //    else
-//	while (psi < 0) psi += 2* M_PI;
+//    while (psi < 0) psi += 2* M_PI;
 //
 //    return psi;
 //}
@@ -98,18 +98,18 @@ inline float angle_distance(float a1, float a2)
 
     if (a1 > a2)
     {
-	t1 = 2*M_PI - a1 + a2;
-	t2 = a1 - a2;
+    t1 = 2*M_PI - a1 + a2;
+    t2 = a1 - a2;
     }
     else
     {
-	t1 = 2*M_PI - a2 + a1;
-	t2 = a2 - a1;
+    t1 = 2*M_PI - a2 + a1;
+    t2 = a2 - a1;
     }
     if (t2 < t1)
-	t1 = t2;
+    t1 = t2;
     if (t1 < AINT_EPSILON)
-	t1 = 0.0;
+    t1 = 0.0;
 
     return t1;
 }
@@ -142,8 +142,8 @@ public:
     // Splits an angle interval of the form low > high into two intervals with high > low
     void split(AngleInt &l, AngleInt &h) const
     {
-	l.Set(0, high);
-	h.Set(low, 2*M_PI);
+    l.Set(0, high);
+    h.Set(low, 2*M_PI);
     }
 
     AngleInt() : low(0), high(2*M_PI) {}
@@ -158,30 +158,30 @@ public:
 
     int IsFullRange(float eps = AINT_BIG_EPSILON) const
     {
-		return _abs(high-2*M_PI) < eps && _abs(low) < eps;
+        return _abs(high-2*M_PI) < eps && _abs(low) < eps;
     }
 
     int IsEmpty(float eps = AINT_BIG_EPSILON) const
     {
-		if (low <= high)
-			return (
-			_abs(low-high) < eps);
-		else
-			return (_abs(low-2*M_PI) + _abs(high) < eps);
-		}
+        if (low <= high)
+            return (
+            _abs(low-high) < eps);
+        else
+            return (_abs(low-2*M_PI) + _abs(high) < eps);
+        }
 
-		// returns T if a is in the angle range
-		int InRange(float a, float eps = AINT_EPSILON) const
-		{
-		if (IsEmpty())
-			return 0;
+        // returns T if a is in the angle range
+        int InRange(float a, float eps = AINT_EPSILON) const
+        {
+        if (IsEmpty())
+            return 0;
 
-		a = angle_normalize(a);
-		if (iszero(a) || istwopi(a))
-			return (low > high) || iszero(low) || istwopi(high);
-		else
-			return (low < high) ? 
-			le(low,a,eps) && le(a,high,eps) : le(a,high,eps) || ge(a,low,eps);
+        a = angle_normalize(a);
+        if (iszero(a) || istwopi(a))
+            return (low > high) || iszero(low) || istwopi(high);
+        else
+            return (low < high) ? 
+            le(low,a,eps) && le(a,high,eps) : le(a,high,eps) || ge(a,low,eps);
     }
 
 
@@ -238,7 +238,7 @@ struct AngleIntListNode
     short flag; 
 
     AngleIntListNode(float low, float high, AngleIntListNode *n)
-	: D(low,high), next(n), flag(0) {}
+    : D(low,high), next(n), flag(0) {}
 };
 
 class AngleIntList
@@ -254,13 +254,13 @@ public:
 
     void Clear()
     {
-	while (head)
-	{
-	    AngleIntListNode *temp = head;
-	    head = head->next;
-	    delete temp;
-	}
-	head = tail = 0;
+    while (head)
+    {
+        AngleIntListNode *temp = head;
+        head = head->next;
+        delete temp;
+    }
+    head = tail = 0;
     }
 
     ~AngleIntList() { Clear(); }
@@ -273,22 +273,22 @@ public:
 
     void Map(void (*f)(AngleInt &a, void *), void *data = 0) const
     {
-	for (AngleIntListNode *t = head; t; t = t->next)
-	    f(t->D, data);
+    for (AngleIntListNode *t = head; t; t = t->next)
+        f(t->D, data);
     }
 
     int IsEmpty() const { return !head; }
 
     AngleInt * Largest() const;
 
-	
+    
     // returns T if a is in the angle range of any of the entries
     int InRange(float a, float eps = AINT_BIG_EPSILON) const
     {
-	for (AngleIntListNode *t = head; t; t = t->next)
-	    if (t->D.InRange(a, eps))
-		return 1;
-	return 0;
+    for (AngleIntListNode *t = head; t; t = t->next)
+        if (t->D.InRange(a, eps))
+        return 1;
+    return 0;
     }
 
     float Distance(float a) const;
@@ -299,12 +299,12 @@ public:
 };
 
 void Union(const AngleIntList &a,
-	   const AngleIntList &b,
-	   AngleIntList &c);
+       const AngleIntList &b,
+       AngleIntList &c);
 
 void Intersect(const AngleIntList &a,
-	       const AngleIntList &b,
-	       AngleIntList &c);
+           const AngleIntList &b,
+           AngleIntList &c);
 
 
 //
@@ -325,10 +325,10 @@ public:
 
     AngleInt *Next()
     {
-	AngleIntListNode *t = a;
-	if (a)
-	    a = a->next;
-	return t ? &t->D : 0;
+    AngleIntListNode *t = a;
+    if (a)
+        a = a->next;
+    return t ? &t->D : 0;
     }
 };
 

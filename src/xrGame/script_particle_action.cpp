@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_particle_action.cpp
-//	Created 	: 30.09.2003
-//  Modified 	: 29.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script particle action class
+//    Module         : script_particle_action.cpp
+//    Created     : 30.09.2003
+//  Modified     : 29.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script particle action class
 ////////////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
@@ -11,16 +11,16 @@
 #include "../xrParticles/stdafx.h"
 #include "../xrParticles/ParticlesObject.h"
 
-CScriptParticleAction::~CScriptParticleAction	()
+CScriptParticleAction::~CScriptParticleAction    ()
 {
-	//xr_delete			(m_tpParticleSystem);
+    //xr_delete            (m_tpParticleSystem);
 }
 
-void CScriptParticleAction::SetParticle			(LPCSTR caParticleToRun, bool bAutoRemove)
+void CScriptParticleAction::SetParticle            (LPCSTR caParticleToRun, bool bAutoRemove)
 {
-	m_caParticleToRun	= caParticleToRun;
-	m_tGoalType			= eGoalTypeParticleAttached;
-	m_tpParticleSystem	= Particles::Details::Create(*m_caParticleToRun,BOOL(m_bAutoRemove = bAutoRemove));
-	m_bStartedToPlay	= false;
-	m_bCompleted		= false;
+    m_caParticleToRun    = caParticleToRun;
+    m_tGoalType            = eGoalTypeParticleAttached;
+    m_tpParticleSystem    = Particles::Details::Create(*m_caParticleToRun,BOOL(m_bAutoRemove = bAutoRemove));
+    m_bStartedToPlay    = false;
+    m_bCompleted        = false;
 }

@@ -2,9 +2,9 @@
 class UIMainMenuForm :public IEditorWnd
 {
 public:
-	UIMainMenuForm();
-	virtual ~UIMainMenuForm();
-	virtual void Draw();
-	void ExportLevelAsArchive();
+    UIMainMenuForm();
+    virtual ~UIMainMenuForm();
+    virtual void Draw();
+    void ExportLevelAsArchive();
 };
 

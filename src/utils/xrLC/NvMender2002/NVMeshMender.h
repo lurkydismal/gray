@@ -39,8 +39,8 @@ Comments:
   NVMeshMender aMender;
 
 
-  xr_vector<NVMeshMender::VertexAttribute> inputAtts;		// What you have
-  xr_vector<NVMeshMender::VertexAttribute> outputAtts;	// What you want.
+  xr_vector<NVMeshMender::VertexAttribute> inputAtts;        // What you have
+  xr_vector<NVMeshMender::VertexAttribute> outputAtts;    // What you want.
 
   NVMeshMender::VertexAttribute posAtt;
   posAtt.Name_ = "position";
@@ -102,8 +102,8 @@ Comments:
   vpos = outputAtts[0].floatVector_; // Note that there may be more vertices than you sent in.
   vnor = outputAtts[2].floatVector_;
   xr_vector<float> texCoords = outputAtts[3].floatVector_; // texcoords
-  xr_vector<float> vtgt = outputAtts[4].floatVector_;		 // tgts
-  triIndices = outputAtts[1].intVector_;					 // new indices.
+  xr_vector<float> vtgt = outputAtts[4].floatVector_;         // tgts
+  triIndices = outputAtts[1].intVector_;                     // new indices.
   xr_vector<float> vbin = outputAtts[5].floatVector_;      // binormals.
 
   // Now the outputAtts may contain more vertex then you sent in !
@@ -134,21 +134,21 @@ class NVMeshMender
         mutable xr_vector< xr_string > LastErrors_;
 
 
-		struct Edge
-		{
-			unsigned int v0;
-			unsigned int v1;
+        struct Edge
+        {
+            unsigned int v0;
+            unsigned int v1;
 
-			unsigned int face;
-			unsigned int face2;
+            unsigned int face;
+            unsigned int face2;
 
-			bool operator==( const Edge& rhs ) const
-			{
+            bool operator==( const Edge& rhs ) const
+            {
                 return ( ( v0 == rhs.v0 ) && ( v1 == rhs.v1 ) );
-			}
+            }
 
-			bool operator<( const Edge& rhs ) const
-			{
+            bool operator<( const Edge& rhs ) const
+            {
                 if ( v0 < rhs.v0 ) 
                 {
                     return true;
@@ -160,8 +160,8 @@ class NVMeshMender
                 }
 
                 return  ( v1 < rhs.v1 );
-			}
-		};
+            }
+        };
 
     public :
 
@@ -221,34 +221,34 @@ class NVMeshMender
 
         typedef xr_vector< VertexAttribute > VAVector;
 
-		enum Option
-		{
-			FixTangents,
-			DontFixTangents,
+        enum Option
+        {
+            FixTangents,
+            DontFixTangents,
 
-			FixCylindricalTexGen,
-			DontFixCylindricalTexGen,
+            FixCylindricalTexGen,
+            DontFixCylindricalTexGen,
 
             WeightNormalsByFaceSize,
             DontWeightNormalsByFaceSize
-		};
+        };
 
         bool Munge( const NVMeshMender::VAVector& input, 
-			                   NVMeshMender::VAVector& output, 
-							   const float bSmoothCreaseAngleRadians = 3.141592654f / 3.0f,
-							   const float* pTextureMatrix = 0,
-							   const Option _FixTangents = FixTangents,
-							   const Option _FixCylindricalTexGen = FixCylindricalTexGen,
+                               NVMeshMender::VAVector& output, 
+                               const float bSmoothCreaseAngleRadians = 3.141592654f / 3.0f,
+                               const float* pTextureMatrix = 0,
+                               const Option _FixTangents = FixTangents,
+                               const Option _FixCylindricalTexGen = FixCylindricalTexGen,
                                const Option _WeightNormalsByFaceSize = WeightNormalsByFaceSize
-							   );
-		bool MungeD3DX( const NVMeshMender::VAVector& input, 
-			                   NVMeshMender::VAVector& output, 
-							   const float bSmoothCreaseAngleRadians = 3.141592654f / 3.0f,
-							   const float* pTextureMatrix = 0,
-							   const Option _FixTangents = FixTangents,
-							   const Option _FixCylindricalTexGen = FixCylindricalTexGen,
+                               );
+        bool MungeD3DX( const NVMeshMender::VAVector& input, 
+                               NVMeshMender::VAVector& output, 
+                               const float bSmoothCreaseAngleRadians = 3.141592654f / 3.0f,
+                               const float* pTextureMatrix = 0,
+                               const Option _FixTangents = FixTangents,
+                               const Option _FixCylindricalTexGen = FixCylindricalTexGen,
                                const Option _WeightNormalsByFaceSize = WeightNormalsByFaceSize
-							   );
+                               );
 };
 
 #endif  //_NVMeshMender_H_

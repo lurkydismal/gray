@@ -8,34 +8,34 @@ class CVoicePacketsPacker;
 class CSoundRecorderA : public ISoundRecorder
 {
 public:
-	CSoundRecorderA(u32 sampleRate, int format, u32 samplesPerBuffer);
-	~CSoundRecorderA();
+    CSoundRecorderA(u32 sampleRate, int format, u32 samplesPerBuffer);
+    ~CSoundRecorderA();
 
-	bool Init(CVoicePacketsPacker* packetsPacker);
-	void Destroy();
+    bool Init(CVoicePacketsPacker* packetsPacker);
+    void Destroy();
 
-	virtual bool IsStarted() { return m_started; }
+    virtual bool IsStarted() { return m_started; }
 
-	virtual void Start();
-	virtual void Stop();
+    virtual void Start();
+    virtual void Stop();
 
-	void Update();
-
-private:
-	void ChangeGain(s8* buffer, int length);
+    void Update();
 
 private:
-	u32 m_sampleRate;
-	int m_format;
-	int m_samplesPerBuffer;
+    void ChangeGain(s8* buffer, int length);
 
-	u32 m_bytesPerSample;
+private:
+    u32 m_sampleRate;
+    int m_format;
+    int m_samplesPerBuffer;
 
-	s8* m_buffer;
-	bool m_started = false;
+    u32 m_bytesPerSample;
 
-	CSpeexPreprocess* m_speexPreprocess = nullptr;
-	CVoicePacketsPacker* m_packetsPacker = nullptr;
+    s8* m_buffer;
+    bool m_started = false;
 
-	ALCdevice* m_pCaptureDevice = nullptr;
+    CSpeexPreprocess* m_speexPreprocess = nullptr;
+    CVoicePacketsPacker* m_packetsPacker = nullptr;
+
+    ALCdevice* m_pCaptureDevice = nullptr;
 };

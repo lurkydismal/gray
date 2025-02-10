@@ -5,23 +5,23 @@
 
 void main(p_bumped_new I, out f_editor_gbuffer O)
 {
-	if(is_lighting_enable.x < 0.5f) {
-		O.Color = tex2D(s_base, I.tcdh.xy);
-		
+    if(is_lighting_enable.x < 0.5f) {
+        O.Color = tex2D(s_base, I.tcdh.xy);
+        
 #ifdef USE_AREF
     clip(O.Color.w - def_aref);
 #endif
 
 #ifndef FORWARD_ONLY
-		O.Normal = float4(I.M1.xyz, def_gloss);
-		O.Albedo = float4(O.Color.xyz, def_gloss);
-		O.PointZ = float4(I.position.xyz, xmaterial);
+        O.Normal = float4(I.M1.xyz, def_gloss);
+        O.Albedo = float4(O.Color.xyz, def_gloss);
+        O.PointZ = float4(I.position.xyz, xmaterial);
 #endif
 
-		return;
-	}
-	
-	cotangent_frame(I);
+        return;
+    }
+    
+    cotangent_frame(I);
     XrayMaterial M;
 
     M.Sun = I.tcdh.w;
@@ -42,11 +42,11 @@ void main(p_bumped_new I, out f_editor_gbuffer O)
     float MaterialID = xmaterial;
 
     float Gloss = 1.0f - M.Roughness;
-	
+    
 #ifndef FORWARD_ONLY
-	O.Albedo = float4(M.Color.xyz, Gloss);
-	O.Normal = float4(M.Normal.xyz, Gloss);
-	O.PointZ = float4(M.Point.xyz, MaterialID);
+    O.Albedo = float4(M.Color.xyz, Gloss);
+    O.Normal = float4(M.Normal.xyz, Gloss);
+    O.PointZ = float4(M.Point.xyz, MaterialID);
 #endif
 
     float4 Light = float4(L_sun_color, 1.0f) * M.Sun * plight_infinity(MaterialID, M.Point, M.Normal, L_sun_dir_e);

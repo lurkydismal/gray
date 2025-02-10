@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: smart_cover_evaluators.cpp
-//	Created 	: 05.11.2007
-//	Author		: Alexander Dudin
-//	Description : Smart cover evaluators classes
+//    Module         : smart_cover_evaluators.cpp
+//    Created     : 05.11.2007
+//    Author        : Alexander Dudin
+//    Description : Smart cover evaluators classes
 ////////////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
@@ -29,7 +29,7 @@
 
 namespace smart_cover {
 
-shared_str	transform_vertex(shared_str const &vertex_id, bool const &in);
+shared_str    transform_vertex(shared_str const &vertex_id, bool const &in);
 
 };
 
@@ -55,43 +55,43 @@ typedef CStalkerPropertyEvaluator::_value_type _value_type;
 // in_cover_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-in_cover_evaluator::in_cover_evaluator				(CAI_Stalker *object, LPCSTR evaluator_name) :
-	inherited										(object ? object->lua_game_object() : 0, evaluator_name)
+in_cover_evaluator::in_cover_evaluator                (CAI_Stalker *object, LPCSTR evaluator_name) :
+    inherited                                        (object ? object->lua_game_object() : 0, evaluator_name)
 {
 }
 
-_value_type in_cover_evaluator::evaluate			()
+_value_type in_cover_evaluator::evaluate            ()
 {
-	return						(!!object().movement().current_params().cover());
+    return                        (!!object().movement().current_params().cover());
 }
 
 //////////////////////////////////////////////////////////////////////////
 // cover_actual_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-cover_actual_evaluator::cover_actual_evaluator		(CAI_Stalker *object, LPCSTR evaluator_name) :
-	inherited					(object ? object->lua_game_object() : 0, evaluator_name)
+cover_actual_evaluator::cover_actual_evaluator        (CAI_Stalker *object, LPCSTR evaluator_name) :
+    inherited                    (object ? object->lua_game_object() : 0, evaluator_name)
 {
 }
 
-_value_type cover_actual_evaluator::evaluate		()
+_value_type cover_actual_evaluator::evaluate        ()
 {
-	VERIFY						(object().movement().current_params().cover());
-	return						(object().movement().current_params().cover() == object().movement().target_params().cover());
+    VERIFY                        (object().movement().current_params().cover());
+    return                        (object().movement().current_params().cover() == object().movement().target_params().cover());
 }
 
 //////////////////////////////////////////////////////////////////////////
 // cover_entered_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-cover_entered_evaluator::cover_entered_evaluator	(CAI_Stalker *object, LPCSTR evaluator_name) :
-	inherited					(object ? object->lua_game_object() : 0, evaluator_name)
+cover_entered_evaluator::cover_entered_evaluator    (CAI_Stalker *object, LPCSTR evaluator_name) :
+    inherited                    (object ? object->lua_game_object() : 0, evaluator_name)
 {
 }
 
-_value_type cover_entered_evaluator::evaluate		()
+_value_type cover_entered_evaluator::evaluate        ()
 {
-	return						(!!object().movement().current_params().cover());
+    return                        (!!object().movement().current_params().cover());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -99,22 +99,22 @@ _value_type cover_entered_evaluator::evaluate		()
 //////////////////////////////////////////////////////////////////////////
 
 loophole_actual_evaluator::loophole_actual_evaluator(CAI_Stalker *object, LPCSTR evaluator_name, animation_planner *planner, u32 const &loophole_value) :
-	inherited					(object ? object->lua_game_object() : 0, evaluator_name),
-	m_loophole_value			(loophole_value),
-	m_planner					(planner)
+    inherited                    (object ? object->lua_game_object() : 0, evaluator_name),
+    m_loophole_value            (loophole_value),
+    m_planner                    (planner)
 {
 
 }
 
-_value_type loophole_actual_evaluator::evaluate		()
+_value_type loophole_actual_evaluator::evaluate        ()
 {
-	if (object().movement().current_params().cover() != object().movement().target_params().cover())
-		return					(false);
+    if (object().movement().current_params().cover() != object().movement().target_params().cover())
+        return                    (false);
 
-	if (object().movement().current_params().cover_loophole() != object().movement().target_params().cover_loophole())
-		return					(false);
+    if (object().movement().current_params().cover_loophole() != object().movement().target_params().cover_loophole())
+        return                    (false);
 
-	return						(true);
+    return                        (true);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -122,53 +122,53 @@ _value_type loophole_actual_evaluator::evaluate		()
 //////////////////////////////////////////////////////////////////////////
 
 loophole_hit_long_ago_evaluator::loophole_hit_long_ago_evaluator(animation_planner *object, LPCSTR evaluator_name, u32 const &time_to_wait) :
-	inherited					(object, evaluator_name),
-	m_time_to_wait				(time_to_wait)
+    inherited                    (object, evaluator_name),
+    m_time_to_wait                (time_to_wait)
 {
-	
+    
 }
 
 _value_type loophole_hit_long_ago_evaluator::evaluate()
 {
-	return						((m_object->time_object_hit() + m_time_to_wait) < Device.dwTimeGlobal);
+    return                        ((m_object->time_object_hit() + m_time_to_wait) < Device.dwTimeGlobal);
 }
 
 //////////////////////////////////////////////////////////////////////////
 // is_action_available_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-is_action_available_evaluator::is_action_available_evaluator	(animation_planner *object, LPCSTR evaluator_name, LPCSTR action_id) : 
-	inherited					(object, evaluator_name),
-	m_action_id					(action_id)
+is_action_available_evaluator::is_action_available_evaluator    (animation_planner *object, LPCSTR evaluator_name, LPCSTR action_id) : 
+    inherited                    (object, evaluator_name),
+    m_action_id                    (action_id)
 {
 
 }
 
-_value_type is_action_available_evaluator::evaluate	()
+_value_type is_action_available_evaluator::evaluate    ()
 {
-	if (!m_object->m_object->movement().current_params().cover())
-		return					(false);
+    if (!m_object->m_object->movement().current_params().cover())
+        return                    (false);
 
-	if (!m_object->m_object->movement().current_params().cover_loophole())
-		return					(false);
+    if (!m_object->m_object->movement().current_params().cover_loophole())
+        return                    (false);
 
-	return						(m_object->m_object->movement().current_params().cover_loophole()->is_action_available(m_action_id));
+    return                        (m_object->m_object->movement().current_params().cover_loophole()->is_action_available(m_action_id));
 }
 
 //////////////////////////////////////////////////////////////////////////
 // loophole_planner_const_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-loophole_planner_const_evaluator::loophole_planner_const_evaluator	(animation_planner *object, LPCSTR evaluator_name, bool const &value) :
-	inherited					(object, evaluator_name),
-	m_value						(value)
+loophole_planner_const_evaluator::loophole_planner_const_evaluator    (animation_planner *object, LPCSTR evaluator_name, bool const &value) :
+    inherited                    (object, evaluator_name),
+    m_value                        (value)
 {
 
 }
 
-_value_type loophole_planner_const_evaluator::evaluate		()
+_value_type loophole_planner_const_evaluator::evaluate        ()
 {
-	return						(m_value);
+    return                        (m_value);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -176,17 +176,17 @@ _value_type loophole_planner_const_evaluator::evaluate		()
 //////////////////////////////////////////////////////////////////////////
 
 loophole_exitable_evaluator::loophole_exitable_evaluator(CAI_Stalker *object, LPCSTR evaluator_name) :
-	inherited					(object ? object->lua_game_object() : 0, evaluator_name)
+    inherited                    (object ? object->lua_game_object() : 0, evaluator_name)
 {
 
 }
 
-_value_type loophole_exitable_evaluator::evaluate			()
+_value_type loophole_exitable_evaluator::evaluate            ()
 {
-	if (!m_object->movement().current_params().cover_loophole())
-		return					(false);
+    if (!m_object->movement().current_params().cover_loophole())
+        return                    (false);
 
-	return						(object().movement().current_params().cover_loophole()->exitable());
+    return                        (object().movement().current_params().cover_loophole()->exitable());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -194,88 +194,88 @@ _value_type loophole_exitable_evaluator::evaluate			()
 //////////////////////////////////////////////////////////////////////////
 
 can_exit_loophole_with_animation::can_exit_loophole_with_animation(CAI_Stalker *object, LPCSTR evaluator_name) :
-	inherited					(object ? object->lua_game_object() : 0, evaluator_name)
+    inherited                    (object ? object->lua_game_object() : 0, evaluator_name)
 {
 
 }
 
-_value_type can_exit_loophole_with_animation::evaluate			()
+_value_type can_exit_loophole_with_animation::evaluate            ()
 {
-	stalker_movement_manager_smart_cover& movement = object().movement();
-	stalker_movement_params const& current	= movement.current_params();
-	VERIFY						(current.cover());
+    stalker_movement_manager_smart_cover& movement = object().movement();
+    stalker_movement_params const& current    = movement.current_params();
+    VERIFY                        (current.cover());
 
-	stalker_movement_params const& target	= object().movement().target_params();
+    stalker_movement_params const& target    = object().movement().target_params();
 
-	smart_cover::cover const*	current_cover = current.cover();
-	smart_cover::cover const*	target_cover = target.cover();
-	if (current_cover != target_cover) {
+    smart_cover::cover const*    current_cover = current.cover();
+    smart_cover::cover const*    target_cover = target.cover();
+    if (current_cover != target_cover) {
 #ifdef DEBUG
-		Msg						(
-			"transition guard(cover): [%s] -> [%s]",
-			current_cover ? current_cover->id().c_str() : "<world>",
-			target_cover ? target_cover->id().c_str() : "<world>"
-		);
+        Msg                        (
+            "transition guard(cover): [%s] -> [%s]",
+            current_cover ? current_cover->id().c_str() : "<world>",
+            target_cover ? target_cover->id().c_str() : "<world>"
+        );
 #endif // #ifdef DEBUG
-		return					(movement.current_transition().animation().has_animation());
-	}
+        return                    (movement.current_transition().animation().has_animation());
+    }
 
-	smart_cover::loophole const*current_loophole = current.cover_loophole();
-	smart_cover::loophole const*target_loophole = target.cover_loophole();
-	if (current_loophole != target_loophole) {
+    smart_cover::loophole const*current_loophole = current.cover_loophole();
+    smart_cover::loophole const*target_loophole = target.cover_loophole();
+    if (current_loophole != target_loophole) {
 #ifdef DEBUG
-		Msg						(
-			"transition guard(loophole): [%s] -> [%s]",
-			current_loophole ? current_loophole->id().c_str() : "<world>",
-			target_loophole ? target_loophole->id().c_str() : "<world>"
-		);
+        Msg                        (
+            "transition guard(loophole): [%s] -> [%s]",
+            current_loophole ? current_loophole->id().c_str() : "<world>",
+            target_loophole ? target_loophole->id().c_str() : "<world>"
+        );
 #endif // #ifdef DEBUG
-		return					(movement.current_transition().animation().has_animation());
-	}
+        return                    (movement.current_transition().animation().has_animation());
+    }
 
-	return						(false);
+    return                        (false);
 }
 
 //////////////////////////////////////////////////////////////////////////
 // default_behaviour_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-default_behaviour_evaluator::default_behaviour_evaluator		(animation_planner *object, LPCSTR evaluator_name) :
-	inherited					(object, evaluator_name)
+default_behaviour_evaluator::default_behaviour_evaluator        (animation_planner *object, LPCSTR evaluator_name) :
+    inherited                    (object, evaluator_name)
 {
 
 }
 
-_value_type default_behaviour_evaluator::evaluate			()
+_value_type default_behaviour_evaluator::evaluate            ()
 {
-	return						(
-		m_object->m_object->movement().default_behaviour() ||
-		m_object->m_object->movement().combat_behaviour()
-	);
+    return                        (
+        m_object->m_object->movement().default_behaviour() ||
+        m_object->m_object->movement().combat_behaviour()
+    );
 }
 
 //////////////////////////////////////////////////////////////////////////
 // can_fire_at_enemy_evaluator
 //////////////////////////////////////////////////////////////////////////
 
-can_fire_at_enemy_evaluator::can_fire_at_enemy_evaluator	(animation_planner *object, LPCSTR evaluator_name) :
-	inherited					(object, evaluator_name)
+can_fire_at_enemy_evaluator::can_fire_at_enemy_evaluator    (animation_planner *object, LPCSTR evaluator_name) :
+    inherited                    (object, evaluator_name)
 {
 
 }
 
-_value_type can_fire_at_enemy_evaluator::evaluate			()
+_value_type can_fire_at_enemy_evaluator::evaluate            ()
 {
-	if (!m_object->m_object->movement().default_behaviour())
-		return					(true);
+    if (!m_object->m_object->movement().default_behaviour())
+        return                    (true);
 
-	if (m_object->m_object->movement().current_params().cover_fire_position())
-		return					(true);
+    if (m_object->m_object->movement().current_params().cover_fire_position())
+        return                    (true);
 
-	if (!m_object->m_object->movement().enemy_in_fov())
-		return					(false);
+    if (!m_object->m_object->movement().enemy_in_fov())
+        return                    (false);
 
-	return						(true);
+    return                        (true);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -283,30 +283,30 @@ _value_type can_fire_at_enemy_evaluator::evaluate			()
 //////////////////////////////////////////////////////////////////////////
 
 idle_time_interval_passed_evaluator::idle_time_interval_passed_evaluator(animation_planner *object, LPCSTR evaluator_name, u32 const &time_interval) :
-	inherited					(object, evaluator_name),
-	m_time_interval				(time_interval)
+    inherited                    (object, evaluator_name),
+    m_time_interval                (time_interval)
 {
 
 }
 
-_value_type idle_time_interval_passed_evaluator::evaluate		()
+_value_type idle_time_interval_passed_evaluator::evaluate        ()
 {
-	if (!m_object->stay_idle())
-		return					(false);
+    if (!m_object->stay_idle())
+        return                    (false);
 
-	u32 const					&current_time = Device.dwTimeGlobal;
-	if (current_time <= m_object->last_idle_time() + m_time_interval) {
-		m_object->stay_idle		(true);
-		
-		return					(true);
-	}
-	else {
-		m_object->last_lookout_time(current_time);
-		m_time_interval			= m_object->default_idle_interval();
-		m_object->stay_idle		(false);
-		
-		return					(false);
-	}
+    u32 const                    &current_time = Device.dwTimeGlobal;
+    if (current_time <= m_object->last_idle_time() + m_time_interval) {
+        m_object->stay_idle        (true);
+        
+        return                    (true);
+    }
+    else {
+        m_object->last_lookout_time(current_time);
+        m_time_interval            = m_object->default_idle_interval();
+        m_object->stay_idle        (false);
+        
+        return                    (false);
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -314,28 +314,28 @@ _value_type idle_time_interval_passed_evaluator::evaluate		()
 //////////////////////////////////////////////////////////////////////////
 
 lookout_time_interval_passed_evaluator::lookout_time_interval_passed_evaluator(animation_planner *object, LPCSTR evaluator_name, u32 const &time_interval) :
-	inherited					(object, evaluator_name),
-	m_time_interval				(time_interval)
+    inherited                    (object, evaluator_name),
+    m_time_interval                (time_interval)
 {
 
 }
 
-_value_type lookout_time_interval_passed_evaluator::evaluate		()
+_value_type lookout_time_interval_passed_evaluator::evaluate        ()
 {
-	if (m_object->stay_idle())
-		return					(false);
+    if (m_object->stay_idle())
+        return                    (false);
 
-	u32 const					&current_time = Device.dwTimeGlobal;
-	if (current_time <= m_object->last_lookout_time() + m_time_interval) {
-		m_object->stay_idle		(false);
+    u32 const                    &current_time = Device.dwTimeGlobal;
+    if (current_time <= m_object->last_lookout_time() + m_time_interval) {
+        m_object->stay_idle        (false);
 
-		return					(true);
-	}
-	else {
-		m_object->last_idle_time(current_time);
-		m_time_interval			= m_object->default_lookout_interval();
-		m_object->stay_idle		(true);
+        return                    (true);
+    }
+    else {
+        m_object->last_idle_time(current_time);
+        m_time_interval            = m_object->default_lookout_interval();
+        m_object->stay_idle        (true);
 
-		return					(false);
-	}
+        return                    (false);
+    }
 }

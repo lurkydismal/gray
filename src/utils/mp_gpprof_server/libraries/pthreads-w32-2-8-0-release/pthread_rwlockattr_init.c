@@ -81,4 +81,4 @@ pthread_rwlockattr_init (pthread_rwlockattr_t * attr)
   *attr = rwa;
 
   return (result);
-}				/* pthread_rwlockattr_init */
+}                /* pthread_rwlockattr_init */

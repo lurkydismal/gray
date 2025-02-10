@@ -18,5 +18,5 @@ CBlackDrops::~CBlackDrops(void)
 
 void CBlackDrops::Load(LPCSTR section) 
 {
-	inherited::Load(section);
+    inherited::Load(section);
 }

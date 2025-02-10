@@ -10,7 +10,7 @@ class CDUInterface;
 extern XRCORE_API CDUInterface* DU;
 
 struct xr_token;
-extern XRCORE_API xr_token*	vid_mode_token;
+extern XRCORE_API xr_token*    vid_mode_token;
 
 class IUIRender;
 extern XRCORE_API IUIRender* UIRender;
@@ -19,8 +19,8 @@ class CGameMtlLibrary;
 extern XRCORE_API CGameMtlLibrary* PGMLib;
 
 #ifdef DEBUG_DRAW
-	class IDebugRender;
-	extern XRCORE_API IDebugRender*	DRender;
+    class IDebugRender;
+    extern XRCORE_API IDebugRender*    DRender;
 #endif // DEBUG
 
 

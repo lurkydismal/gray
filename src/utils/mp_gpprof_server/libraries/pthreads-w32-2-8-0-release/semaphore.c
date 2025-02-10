@@ -4,14 +4,14 @@
  * Module: semaphore.c
  *
  * Purpose:
- *	Concatenated version of separate modules to allow
- *	inlining optimisation, which it is assumed can only
- *	be effective within a single module.
+ *    Concatenated version of separate modules to allow
+ *    inlining optimisation, which it is assumed can only
+ *    be effective within a single module.
  *
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *

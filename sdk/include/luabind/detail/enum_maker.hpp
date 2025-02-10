@@ -30,73 +30,73 @@
 
 namespace luabind
 {
-	struct value;
+    struct value;
 
-	struct value_vector;
+    struct value_vector;
 
-	struct value
-	{
-		friend class vector_class<value>;
+    struct value
+    {
+        friend class vector_class<value>;
 
-		template<class T>
-		value(const char* name, T v)
-			: name_(name)
-			, val_(v)
-		{}
+        template<class T>
+        value(const char* name, T v)
+            : name_(name)
+            , val_(v)
+        {}
 
-		const char* name_;
-		int val_;
+        const char* name_;
+        int val_;
 
-		inline value_vector operator,(const value& rhs) const;
+        inline value_vector operator,(const value& rhs) const;
 
-	private: 
+    private: 
 
-		value() {}
-	};
+        value() {}
+    };
 
-	struct value_vector : public vector_class<value>
-	{
-		// a bug in intel's compiler forces us to declare these constructors explicitly.
-		value_vector();
-		virtual ~value_vector();
-		value_vector(const value_vector& v);
-		value_vector& operator,(const value& rhs);
-	};
+    struct value_vector : public vector_class<value>
+    {
+        // a bug in intel's compiler forces us to declare these constructors explicitly.
+        value_vector();
+        virtual ~value_vector();
+        value_vector(const value_vector& v);
+        value_vector& operator,(const value& rhs);
+    };
 
-	inline value_vector value::operator,(const value& rhs) const
-	{
-		value_vector v;
+    inline value_vector value::operator,(const value& rhs) const
+    {
+        value_vector v;
 
-		v.push_back(*this);
-		v.push_back(rhs);
+        v.push_back(*this);
+        v.push_back(rhs);
 
-		return v;
-	}
+        return v;
+    }
 
-	inline value_vector::value_vector()
-		: vector_class<value>()
-	{
-	}
+    inline value_vector::value_vector()
+        : vector_class<value>()
+    {
+    }
 
-	inline value_vector::~value_vector() {}
+    inline value_vector::~value_vector() {}
 
-	inline value_vector::value_vector(const value_vector& rhs)
-		: vector_class<value>(rhs)
-	{
-	}
+    inline value_vector::value_vector(const value_vector& rhs)
+        : vector_class<value>(rhs)
+    {
+    }
 
-	inline value_vector& value_vector::operator,(const value& rhs)
-	{
-		push_back(rhs);
-		return *this;
-	}
+    inline value_vector& value_vector::operator,(const value& rhs)
+    {
+        push_back(rhs);
+        return *this;
+    }
 
-	namespace detail
-	{
-		template<typename From>
-		struct enum_maker
-		{
-			explicit enum_maker(From&& from): from_(std::move(from)) {}
+    namespace detail
+    {
+        template<typename From>
+        struct enum_maker
+        {
+            explicit enum_maker(From&& from): from_(std::move(from)) {}
 
             enum_maker(const enum_maker&) = delete;
             enum_maker& operator= (const enum_maker&) = delete;
@@ -112,24 +112,24 @@ namespace luabind
                 return *this;
             }
 
-			From operator[](const value& val) &&
-			{
-				from_.add_static_constant(val.name_, val.val_);
-				return std::move(from_);
-			}
+            From operator[](const value& val) &&
+            {
+                from_.add_static_constant(val.name_, val.val_);
+                return std::move(from_);
+            }
 
-			From operator[](const value_vector& values) &&
-			{
-				for (value_vector::const_iterator i = values.begin(); i != values.end(); ++i)
-				{
-					from_.add_static_constant(i->name_, i->val_);
-				}
+            From operator[](const value_vector& values) &&
+            {
+                for (value_vector::const_iterator i = values.begin(); i != values.end(); ++i)
+                {
+                    from_.add_static_constant(i->name_, i->val_);
+                }
 
-				return std::move(from_);
-			}
+                return std::move(from_);
+            }
 
-		private:
+        private:
             From from_;
-		};
-	}
+        };
+    }
 }

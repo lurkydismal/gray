@@ -5,16 +5,16 @@ template <class T>
 class _cylinder
 {
 public:
-	typedef T			TYPE;
-	typedef _cylinder<T>Self;
-	typedef Self&		SelfRef;
-	typedef const Self&	SelfCRef;
+    typedef T            TYPE;
+    typedef _cylinder<T>Self;
+    typedef Self&        SelfRef;
+    typedef const Self&    SelfCRef;
 
 public:
-	_vector3<T>	m_center;
-	_vector3<T>	m_direction;
-	T			m_height;
-	T			m_radius;
+    _vector3<T>    m_center;
+    _vector3<T>    m_direction;
+    T            m_height;
+    T            m_radius;
 
 
 public:
@@ -24,9 +24,9 @@ public:
     }
 
 public:
-	IC SelfRef	invalidate	()	{ m_center.set(0,0,0); m_direction.set(0,0,0); m_height=0; m_radius=0; return *this; }
-	enum ecode { cyl_cap, cyl_wall, cyl_none };
-    IC int		intersect	(const _vector3<T>& start, const _vector3<T>& dir, T afT[2], ecode code[2] ) const
+    IC SelfRef    invalidate    ()    { m_center.set(0,0,0); m_direction.set(0,0,0); m_height=0; m_radius=0; return *this; }
+    enum ecode { cyl_cap, cyl_wall, cyl_none };
+    IC int        intersect    (const _vector3<T>& start, const _vector3<T>& dir, T afT[2], ecode code[2] ) const
     {
         T fEpsilon = 1e-12f;
 
@@ -50,8 +50,8 @@ public:
                 fTmp0 = fInvDLength/kD.z;
                 afT[0] = (+fHalfHeight - kP.z)*fTmp0;
                 afT[1] = (-fHalfHeight - kP.z)*fTmp0;
-				code[0] = cyl_cap;
-				code[1] = cyl_cap;
+                code[0] = cyl_cap;
+                code[1] = cyl_cap;
                 return 2;
             }
             else{
@@ -79,12 +79,12 @@ public:
                 fTmp0 = fInvDLength/fA;
                 afT[0] = (-fB - fRoot)*fTmp0;
                 afT[1] = (-fB + fRoot)*fTmp0;
-				code[0] = cyl_wall;
-				code[1] = cyl_wall;
-                return 2;	//wall
+                code[0] = cyl_wall;
+                code[1] = cyl_wall;
+                return 2;    //wall
             }else{
                 afT[0] = -fB*fInvDLength/fA;
-				code[0] = cyl_wall;
+                code[0] = cyl_wall;
                 return 1; //wall
             }
         }
@@ -96,20 +96,20 @@ public:
         fTmp0 = kP.x + fT0*kD.x;
         fTmp1 = kP.y + fT0*kD.y;
         if ( fTmp0*fTmp0 + fTmp1*fTmp1 <= fRadiusSqr )
-		{
-            code[iQuantity]	= cyl_cap;
-			afT[iQuantity++]= fT0*fInvDLength;
-			
-		}
+        {
+            code[iQuantity]    = cyl_cap;
+            afT[iQuantity++]= fT0*fInvDLength;
+            
+        }
 
         fT1 = (-fHalfHeight - kP.z)*fInv;
         fTmp0 = kP.x + fT1*kD.x;
         fTmp1 = kP.y + fT1*kD.y;
         if ( fTmp0*fTmp0 + fTmp1*fTmp1 <= fRadiusSqr )
-		{
-            code[iQuantity]	= cyl_cap;
-			afT[iQuantity++] = fT1*fInvDLength;
-		}
+        {
+            code[iQuantity]    = cyl_cap;
+            afT[iQuantity++] = fT1*fInvDLength;
+        }
 
         if ( iQuantity == 2 ){
             // line intersects both top and bottom
@@ -135,18 +135,18 @@ public:
             fT = (-fB - fRoot)*fInv;
             if ( fT0 <= fT1 ){
                 if ( fT0 <= fT && fT <= fT1 )
-				{
-					code[iQuantity]	= cyl_wall;                    
-					afT[iQuantity++] = fT*fInvDLength;
+                {
+                    code[iQuantity]    = cyl_wall;                    
+                    afT[iQuantity++] = fT*fInvDLength;
 
-				}
+                }
             }else{
                 if ( fT1 <= fT && fT <= fT0 )
-				{
-					code[iQuantity]	= cyl_wall;
-					afT[iQuantity++] = fT*fInvDLength;
+                {
+                    code[iQuantity]    = cyl_wall;
+                    afT[iQuantity++] = fT*fInvDLength;
 
-				}
+                }
             }
 
             if ( iQuantity == 2 ){
@@ -158,66 +158,66 @@ public:
             fT = (-fB + fRoot)*fInv;
             if ( fT0 <= fT1 ){
                 if ( fT0 <= fT && fT <= fT1 )
-				{
-                    code[iQuantity]	= cyl_wall;
-					afT[iQuantity++] = fT*fInvDLength;
-				}
+                {
+                    code[iQuantity]    = cyl_wall;
+                    afT[iQuantity++] = fT*fInvDLength;
+                }
             }else{
                 if ( fT1 <= fT && fT <= fT0 )
-				{
-                    code[iQuantity]	= cyl_wall;
-					afT[iQuantity++] = fT*fInvDLength;
-				}
+                {
+                    code[iQuantity]    = cyl_wall;
+                    afT[iQuantity++] = fT*fInvDLength;
+                }
             }
         }else{
             fT = -fB/fA;
             if ( fT0 <= fT1 ){
                 if ( fT0 <= fT && fT <= fT1 )
-				{
-                    code[iQuantity]	= cyl_wall;
-					afT[iQuantity++] = fT*fInvDLength;
-				}
+                {
+                    code[iQuantity]    = cyl_wall;
+                    afT[iQuantity++] = fT*fInvDLength;
+                }
             }else{
                 if ( fT1 <= fT && fT <= fT0 )
-				{
-					code[iQuantity]	= cyl_wall;
+                {
+                    code[iQuantity]    = cyl_wall;
                     afT[iQuantity++] = fT*fInvDLength;
-				}
+                }
             }
         }
 
         return iQuantity;
     }
-	enum ERP_Result{
-		rpNone			= 0,
-		rpOriginInside	= 1,
-		rpOriginOutside	= 2,
-		fcv_forcedword	= u32(-1)
-	};
-    IC ERP_Result	intersect	(const _vector3<T>& start, const _vector3<T>& dir, T& dist) const
+    enum ERP_Result{
+        rpNone            = 0,
+        rpOriginInside    = 1,
+        rpOriginOutside    = 2,
+        fcv_forcedword    = u32(-1)
+    };
+    IC ERP_Result    intersect    (const _vector3<T>& start, const _vector3<T>& dir, T& dist) const
     {
-    	T				afT[2];
-		ecode 			code[2];
+        T                afT[2];
+        ecode             code[2];
         int cnt;
-		if (0!=(cnt=intersect(start,dir,afT,code))){
-			bool		o_inside	= false;
-			bool		b_result	= false;
-			for (int k=0; k<cnt; k++){
-				if (afT[k]<0.f)		{if(cnt==2)o_inside=true;	continue;	}
-				if (afT[k]<dist)	{dist=afT[k];		b_result=true;				}
-			}
-			return		b_result?(o_inside?rpOriginInside:rpOriginOutside):rpNone;
-		}else{
-			return		rpNone;
-		}
+        if (0!=(cnt=intersect(start,dir,afT,code))){
+            bool        o_inside    = false;
+            bool        b_result    = false;
+            for (int k=0; k<cnt; k++){
+                if (afT[k]<0.f)        {if(cnt==2)o_inside=true;    continue;    }
+                if (afT[k]<dist)    {dist=afT[k];        b_result=true;                }
+            }
+            return        b_result?(o_inside?rpOriginInside:rpOriginOutside):rpNone;
+        }else{
+            return        rpNone;
+        }
     }
 //----------------------------------------------------------------------------
 };
 
-typedef _cylinder<float>	Fcylinder;
-typedef _cylinder<double>	Dcylinder;
+typedef _cylinder<float>    Fcylinder;
+typedef _cylinder<double>    Dcylinder;
 
 template <class T>
-BOOL	_valid			(const _cylinder<T>& c)	{ return _valid(c.m_center) && _valid(c.m_direction) && _valid(c.m_height) && _valid(c.m_radius);	}
+BOOL    _valid            (const _cylinder<T>& c)    { return _valid(c.m_center) && _valid(c.m_direction) && _valid(c.m_height) && _valid(c.m_radius);    }
 
 #endif // _DEBUG

@@ -6,12 +6,12 @@ class CSnork;
 class CStateManagerSnork : public CMonsterStateManager<CSnork> 
 {
 private:
-	typedef				CMonsterStateManager<CSnork>	inherited;
+    typedef                CMonsterStateManager<CSnork>    inherited;
 
 public:
-						CStateManagerSnork		(CSnork *obj);
-	virtual				~CStateManagerSnork		();
+                        CStateManagerSnork        (CSnork *obj);
+    virtual                ~CStateManagerSnork        ();
 
-	virtual	void		execute					();
-	virtual void		remove_links			(CObject* object_) { inherited::remove_links(object_);}
+    virtual    void        execute                    ();
+    virtual void        remove_links            (CObject* object_) { inherited::remove_links(object_);}
 };

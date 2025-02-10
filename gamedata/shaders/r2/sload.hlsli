@@ -109,7 +109,7 @@ void SloadNew(inout p_bumped_new I, inout XrayMaterial M)
     float4 Bump = tex2D(s_bump, I.tcdh.xy);
     float4 BumpX = tex2D(s_bumpX, I.tcdh.xy);
 
-    //	#ifndef USE_PBR
+    //    #ifndef USE_PBR
     M.Normal = Bump.wzy + BumpX.xyz - 1.0f;
     M.Normal.z *= 0.5f;
 
@@ -118,7 +118,7 @@ void SloadNew(inout p_bumped_new I, inout XrayMaterial M)
 
     M.SSS = 0.0;
     M.AO = 1.0;
-//	#endif
+//    #endif
 #else
     M.Normal = float3(0.0f, 0.0f, 1.0f);
 

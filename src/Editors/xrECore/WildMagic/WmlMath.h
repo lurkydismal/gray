@@ -119,7 +119,7 @@ public:
     WML_ITEM static const Real EPSILON;
     WML_ITEM static const Real ZERO_TOLERANCE;
     WML_ITEM static const Real MAX_REAL;
-	WML_ITEM static const Real _PI;
+    WML_ITEM static const Real _PI;
     WML_ITEM static const Real TWO_PI;
     WML_ITEM static const Real HALF_PI;
     WML_ITEM static const Real INV_PI;

@@ -57,35 +57,35 @@ pthread_mutex_trylock (pthread_mutex_t * mutex)
   if (*mutex >= PTHREAD_ERRORCHECK_MUTEX_INITIALIZER)
     {
       if ((result = ptw32_mutex_check_need_init (mutex)) != 0)
-	{
-	  return (result);
-	}
+    {
+      return (result);
+    }
     }
 
   mx = *mutex;
 
   if (0 == (LONG) PTW32_INTERLOCKED_COMPARE_EXCHANGE (
-		     (PTW32_INTERLOCKED_LPLONG) &mx->lock_idx,
-		     (PTW32_INTERLOCKED_LONG) 1,
-		     (PTW32_INTERLOCKED_LONG) 0))
+             (PTW32_INTERLOCKED_LPLONG) &mx->lock_idx,
+             (PTW32_INTERLOCKED_LONG) 1,
+             (PTW32_INTERLOCKED_LONG) 0))
     {
       if (mx->kind != PTHREAD_MUTEX_NORMAL)
-	{
-	  mx->recursive_count = 1;
-	  mx->ownerThread = pthread_self ();
-	}
+    {
+      mx->recursive_count = 1;
+      mx->ownerThread = pthread_self ();
+    }
     }
   else
     {
       if (mx->kind == PTHREAD_MUTEX_RECURSIVE &&
-	  pthread_equal (mx->ownerThread, pthread_self ()))
-	{
-	  mx->recursive_count++;
-	}
+      pthread_equal (mx->ownerThread, pthread_self ()))
+    {
+      mx->recursive_count++;
+    }
       else
-	{
-	  result = EBUSY;
-	}
+    {
+      result = EBUSY;
+    }
     }
 
   return (result);

@@ -4,11 +4,11 @@
 class CAI_Flesh;
 
 class CStateManagerFlesh : public CMonsterStateManager<CAI_Flesh> {
-	typedef CMonsterStateManager<CAI_Flesh> inherited;
+    typedef CMonsterStateManager<CAI_Flesh> inherited;
 
 public:
 
-					CStateManagerFlesh	(CAI_Flesh *monster); 
-	virtual void	execute				();
-	virtual void	remove_links		(CObject* object_) { inherited::remove_links(object_);}
+                    CStateManagerFlesh    (CAI_Flesh *monster); 
+    virtual void    execute                ();
+    virtual void    remove_links        (CObject* object_) { inherited::remove_links(object_);}
 };

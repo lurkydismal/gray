@@ -526,7 +526,7 @@ float shadow_hw_hq(float4 tc)
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
-//	D24X8+PCF
+//    D24X8+PCF
 //////////////////////////////////////////////////////////////////////////////////////////
 
 float4 test(float4 tc, float2 offset)
@@ -540,12 +540,12 @@ float shadowtest_sun(float4 tc, float4 tcJ) // jittered sampling
 {
     float4 r;
 
-    //	const 	float 	scale 	= (2.0f/float(SMAP_size));
+    //    const     float     scale     = (2.0f/float(SMAP_size));
     const float scale = (0.7f / float(SMAP_size));
 
     float2 tc_J = frac(tc.xy / tc.w * SMAP_size / 4.0f) * 0.5f;
     float4 J0 = jitter0.Sample(smp_jitter, tc_J) * scale;
-    // float4	J1 	= tex2D	(jitter1,tc_J)*scale;
+    // float4    J1     = tex2D    (jitter1,tc_J)*scale;
 
     const float k = 0.5f / float(SMAP_size);
     r.x = test(tc, J0.xy + float2(-k, -k)).x;
@@ -626,8 +626,8 @@ float shadow_rain(float4 tc, float2 tcJ) // jittered sampling
     float4 r;
 
     const float scale = (4.0f / float(SMAP_size));
-    //	float4	J0 	= jitter0.Sample( smp_jitter, tcJ )*scale;
-    //	float4	J1 	= jitter1.Sample( smp_jitter, tcJ )*scale;
+    //    float4    J0     = jitter0.Sample( smp_jitter, tcJ )*scale;
+    //    float4    J1     = jitter1.Sample( smp_jitter, tcJ )*scale;
     float4 J0 = jitter0.Sample(smp_linear, tcJ) * scale;
     float4 J1 = jitter1.Sample(smp_linear, tcJ) * scale;
 

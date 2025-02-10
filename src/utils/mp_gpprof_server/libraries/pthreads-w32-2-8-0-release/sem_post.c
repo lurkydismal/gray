@@ -4,10 +4,10 @@
  * Module: sem_post.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -92,27 +92,27 @@ sem_post (sem_t * sem)
         }
 
       if (s->value < SEM_VALUE_MAX)
-	{
+    {
 #ifdef NEED_SEM
-	  if (++s->value <= 0
-	      && !SetEvent(s->sem))
-	    {
-	      s->value--;
-	      result = EINVAL;
-	    }
+      if (++s->value <= 0
+          && !SetEvent(s->sem))
+        {
+          s->value--;
+          result = EINVAL;
+        }
 #else
-	  if (++s->value <= 0
-	      && !ReleaseSemaphore (s->sem, 1, NULL))
-	    {
-	      s->value--;
-	      result = EINVAL;
-	    }
+      if (++s->value <= 0
+          && !ReleaseSemaphore (s->sem, 1, NULL))
+        {
+          s->value--;
+          result = EINVAL;
+        }
 #endif /* NEED_SEM */
-	}
+    }
       else
-	{
-	  result = ERANGE;
-	}
+    {
+      result = ERANGE;
+    }
 
       (void) pthread_mutex_unlock (&s->lock);
     }
@@ -125,4 +125,4 @@ sem_post (sem_t * sem)
 
   return 0;
 
-}				/* sem_post */
+}                /* sem_post */

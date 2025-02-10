@@ -45,24 +45,24 @@ const double TwoPi = 2*M_PI;
 static double angle_normalize(double theta)
 {
     while (theta < LowBound)
-	theta += TwoPi;
+    theta += TwoPi;
     while (theta > HighBound)
-	theta -= TwoPi;
+    theta -= TwoPi;
 
     return theta;
 }
 */
 
 static int solve_trig1_aux(float c, 
-			   float a2b2,
-			   float atan2ba,
-			   float theta[2])
+               float a2b2,
+               float atan2ba,
+               float theta[2])
 {
     float temp  = a2b2-c*c;
     int num;
 
     if (temp < 0.0f)
-	return 0;
+    return 0;
 
     temp  = atan2(_sqrt(temp), c);
     num =  (_abs(temp) > 1e-6f) ? 2 : 1;
@@ -73,16 +73,16 @@ static int solve_trig1_aux(float c,
         theta[1] = theta[0] - temp;
         theta[0] += temp;
 
-	//theta[0] = angle_normalize(theta[0]);
-	//theta[1] = angle_normalize(theta[1]);
+    //theta[0] = angle_normalize(theta[0]);
+    //theta[1] = angle_normalize(theta[1]);
 
-	if (theta[0] > theta[1])
-	{
-		swap(theta[0],theta[1]);
-	//	temp = theta[0]; 
-	//    theta[0] = theta[1];
-	 //   theta[1] = temp;
-	}
+    if (theta[0] > theta[1])
+    {
+        swap(theta[0],theta[1]);
+    //    temp = theta[0]; 
+    //    theta[0] = theta[1];
+     //   theta[1] = temp;
+    }
     }
     return num;
 }
@@ -110,22 +110,22 @@ int PsiEquation::crit_points(float *t) const
 {
     if (!(*status_ptr & GOT_CRITS))
     {
-	// CANNOT use solve_trig1_aux here 
-	*num_crits_ptr = (u8)local_solve_trig1(beta, -alpha, 0, (float *) crit_pts);
-	*status_ptr |= GOT_CRITS;
+    // CANNOT use solve_trig1_aux here 
+    *num_crits_ptr = (u8)local_solve_trig1(beta, -alpha, 0, (float *) crit_pts);
+    *status_ptr |= GOT_CRITS;
     }
 
     switch(num_crits)
     {
     case 1:
-	t[0] = crit_pts[0];
-	break;
+    t[0] = crit_pts[0];
+    break;
     case 2:
-	t[0] = crit_pts[0];
-	t[1] = crit_pts[1];
-	break;
+    t[0] = crit_pts[0];
+    t[1] = crit_pts[1];
+    break;
     default:
-	break;
+    break;
     }
     return num_crits;
 }
@@ -138,21 +138,21 @@ int PsiEquation::roots(float *t) const
 {
     if (!(*status_ptr & GOT_ROOTS))
     {
-	*num_roots_ptr =(u8) solve_trig1_aux(-xi, a2b2, atan2ba, (float *) root_pts);
-	*status_ptr  |= GOT_ROOTS;
+    *num_roots_ptr =(u8) solve_trig1_aux(-xi, a2b2, atan2ba, (float *) root_pts);
+    *status_ptr  |= GOT_ROOTS;
     }
 
     switch(num_roots)
     {
     case 1:
-	t[0] = root_pts[0];
-	break;
+    t[0] = root_pts[0];
+    break;
     case 2:
-	t[0] = root_pts[0];
-	t[1] = root_pts[1];
-	break;
+    t[0] = root_pts[0];
+    t[1] = root_pts[1];
+    break;
     default:
-	break;
+    break;
     }
     return num_roots;
 }
@@ -167,9 +167,9 @@ int PsiEquation::solve(float v, float *t) const
 /*
  * Returns the regions of intersections of 
  *
- *	a * cos(psi) + b*sin(psi) + c = low 
+ *    a * cos(psi) + b*sin(psi) + c = low 
  * and
- *	a * cos(psi) + b*sin(psi) + c = high
+ *    a * cos(psi) + b*sin(psi) + c = high
  * 
  * from 0 to 3 possible regions
  *

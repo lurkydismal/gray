@@ -8,11 +8,11 @@
 class CDB_OptimizeTree : public Opcode::AABBNoLeafTree
 {
 public:
-	CDB_OptimizeTree();
-	~CDB_OptimizeTree();
+    CDB_OptimizeTree();
+    ~CDB_OptimizeTree();
 
-	void Store(IWriter* pWriter);
-	bool Restore(IReader* pReader);
+    void Store(IWriter* pWriter);
+    bool Restore(IReader* pReader);
 
-	bool Build(Opcode::AABBTree* tree);
+    bool Build(Opcode::AABBTree* tree);
 };

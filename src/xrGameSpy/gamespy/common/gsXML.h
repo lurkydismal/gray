@@ -22,8 +22,8 @@ extern "C"
 //   The buffer should not be released until after the stream is destroyed
 //
 //
-//	Limitations:
-//	  Processing instructions other than '<?xml' are not supported.
+//    Limitations:
+//      Processing instructions other than '<?xml' are not supported.
 //    CDATA sections are not supported.
 //    XML versions other than '1.0' are not supported.
 //    Encoding types other than 'UTF-8' are not supported.
@@ -35,9 +35,9 @@ extern "C"
 ///////////////////////////////////////////////////////////////////////////////
 // XML does not have set size restrictions on many string items.  We set some
 // reasonable length limitations for parsing efficiency.
-#define	GS_XML_MAX_ELEMENT_NAME_LENGTH		128
-#define GS_XML_MAX_ATTRIBUTE_NAME_LENGTH	128
-#define GS_XML_MAX_ATTRIBUTE_VALUE_LENGTH	1024
+#define    GS_XML_MAX_ELEMENT_NAME_LENGTH        128
+#define GS_XML_MAX_ATTRIBUTE_NAME_LENGTH    128
+#define GS_XML_MAX_ATTRIBUTE_VALUE_LENGTH    1024
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -108,13 +108,13 @@ int      gsXmlCountChildren     (GSXmlStreamReader stream, const char * matchtag
 
 // Unicode compatible string read/write functions
 #ifdef GSI_UNICODE
-	#define gsXmlWriteTStringElement(s,n,t,v)	gsXmlWriteUnicodeStringElement(s,n,t,v)
-	//#define gsXmlReadChildAsTString(s,m,v,l)	gsXmlReadChildAsUnicodeString(s,m,v,l)
-	#define gsXmlReadChildAsTStringNT(s,m,v,l)	gsXmlReadChildAsUnicodeStringNT(s,m,v,l)
+    #define gsXmlWriteTStringElement(s,n,t,v)    gsXmlWriteUnicodeStringElement(s,n,t,v)
+    //#define gsXmlReadChildAsTString(s,m,v,l)    gsXmlReadChildAsUnicodeString(s,m,v,l)
+    #define gsXmlReadChildAsTStringNT(s,m,v,l)    gsXmlReadChildAsUnicodeStringNT(s,m,v,l)
 #else
-	#define gsXmlWriteTStringElement(s,n,t,v)	gsXmlWriteStringElement(s,n,t,v)
-	//#define gsXmlReadChildAsTString(s,m,v,l)	gsXmlReadChildAsString(s,m,v,l)
-	#define gsXmlReadChildAsTStringNT(s,m,v,l)	gsXmlReadChildAsStringNT(s,m,v,l)
+    #define gsXmlWriteTStringElement(s,n,t,v)    gsXmlWriteStringElement(s,n,t,v)
+    //#define gsXmlReadChildAsTString(s,m,v,l)    gsXmlReadChildAsString(s,m,v,l)
+    #define gsXmlReadChildAsTStringNT(s,m,v,l)    gsXmlReadChildAsStringNT(s,m,v,l)
 #endif
 
 

@@ -29,16 +29,16 @@ extern const char * GSI_SAKE_SERVICE_NAMESPACES[GSI_SAKE_SERVICE_NAMESPACE_COUNT
 ///////////////////////////////////////////////////////////////////////////////
 typedef enum
 {
-	SAKEIRequestType_CREATE_RECORD,
-	SAKEIRequestType_UPDATE_RECORD,
-	SAKEIRequestType_DELETE_RECORD,
-	SAKEIRequestType_SEARCH_FOR_RECORDS,
-	SAKEIRequestType_GET_MY_RECORDS,
-	SAKEIRequestType_GET_SPECIFIC_RECORDS,
-	SAKEIRequestType_GET_RANDOM_RECORD,
-	SAKEIRequestType_RATE_RECORD,
-	SAKEIRequestType_GET_RECORD_LIMIT,
-	SAKEIRequestType_GET_RECORD_COUNT
+    SAKEIRequestType_CREATE_RECORD,
+    SAKEIRequestType_UPDATE_RECORD,
+    SAKEIRequestType_DELETE_RECORD,
+    SAKEIRequestType_SEARCH_FOR_RECORDS,
+    SAKEIRequestType_GET_MY_RECORDS,
+    SAKEIRequestType_GET_SPECIFIC_RECORDS,
+    SAKEIRequestType_GET_RANDOM_RECORD,
+    SAKEIRequestType_RATE_RECORD,
+    SAKEIRequestType_GET_RECORD_LIMIT,
+    SAKEIRequestType_GET_RECORD_COUNT
 } SAKEIRequestType;
 
 
@@ -46,15 +46,15 @@ typedef enum
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct SAKERequestInternal
 {
-	SAKE                mSake;
-	SAKEIRequestType    mType;
-	void               *mInput;
-	void               *mOutput;
-	SAKERequestCallback mCallback;
-	void               *mUserData;
-	GSXmlStreamWriter   mSoapRequest;
-	GSXmlStreamWriter   mSoapResponse;
-	SAKEIRequestInfo   *mInfo;
+    SAKE                mSake;
+    SAKEIRequestType    mType;
+    void               *mInput;
+    void               *mOutput;
+    SAKERequestCallback mCallback;
+    void               *mUserData;
+    GSXmlStreamWriter   mSoapRequest;
+    GSXmlStreamWriter   mSoapResponse;
+    SAKEIRequestInfo   *mInfo;
 } SAKERequestInternal;
 
 

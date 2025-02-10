@@ -69,15 +69,15 @@ pthread_rwlock_unlock (pthread_rwlock_t * rwlock)
   if (rwl->nExclusiveAccessCount == 0)
     {
       if ((result =
-	   pthread_mutex_lock (&(rwl->mtxSharedAccessCompleted))) != 0)
-	{
-	  return result;
-	}
+       pthread_mutex_lock (&(rwl->mtxSharedAccessCompleted))) != 0)
+    {
+      return result;
+    }
 
       if (++rwl->nCompletedSharedAccessCount == 0)
-	{
-	  result = pthread_cond_signal (&(rwl->cndSharedAccessCompleted));
-	}
+    {
+      result = pthread_cond_signal (&(rwl->cndSharedAccessCompleted));
+    }
 
       result1 = pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted));
     }

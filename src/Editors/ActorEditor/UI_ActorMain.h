@@ -5,7 +5,7 @@
 
 
 enum {
-	COMMAND_EXTFIRST_EXT = COMMAND_MAIN_LAST-1,
+    COMMAND_EXTFIRST_EXT = COMMAND_MAIN_LAST-1,
 
     COMMAND_MAKE_PREVIEW,
     COMMAND_IMPORT,
@@ -17,7 +17,7 @@ enum {
     COMMAND_BATCH_CONVERT,
     COMMAND_PREVIEW_OBJ_PREF,
     COMMAND_SELECT_PREVIEW_OBJ,
-	COMMAND_SHOW_CLIPMAKER,
+    COMMAND_SHOW_CLIPMAKER,
     COMMAND_OPTIMIZE_MOTIONS,
     COMMAND_MAKE_THUMBNAIL,
     COMMAND_CHANGE_TARGET,
@@ -30,34 +30,34 @@ enum {
 class CActorMain: 
     public TUI
 {
-	typedef TUI inherited;
-    virtual void 	RealUpdateScene			();
+    typedef TUI inherited;
+    virtual void     RealUpdateScene            ();
 
 public:
-    				CActorMain 				();
-    virtual 		~CActorMain				();
+                    CActorMain                 ();
+    virtual         ~CActorMain                ();
 
-    virtual LPSTR	GetCaption				();
+    virtual LPSTR    GetCaption                ();
 
-    virtual void 	ResetStatus				();
-    virtual void 	SetStatus				(LPCSTR s, bool bOutLog);
-    virtual void	ProgressDraw			();
+    virtual void     ResetStatus                ();
+    virtual void     SetStatus                (LPCSTR s, bool bOutLog);
+    virtual void    ProgressDraw            ();
 
-    virtual LPCSTR	EditorName				(){return "actor";}
-    virtual LPCSTR	EditorDesc				(){return "Actor Editor";}
+    virtual LPCSTR    EditorName                (){return "actor";}
+    virtual LPCSTR    EditorDesc                (){return "Actor Editor";}
 
-    virtual bool 	ApplyShortCut			(DWORD Key, TShiftState Shift);
-    virtual bool 	ApplyGlobalShortCut		(DWORD Key, TShiftState Shift);
+    virtual bool     ApplyShortCut            (DWORD Key, TShiftState Shift);
+    virtual bool     ApplyGlobalShortCut        (DWORD Key, TShiftState Shift);
 
     // commands
-	virtual	void	RegisterCommands		(); 
+    virtual    void    RegisterCommands        (); 
 protected:
     virtual void    OnDrawUI();
 
     virtual Ivector2 GetRenderMousePosition()const;
 };    
 
-extern CActorMain*	AUI;
+extern CActorMain*    AUI;
 
 class CAEPreferences :
     public CCustomPreferences
@@ -68,13 +68,13 @@ public:
     size_t PrefConfigVer = 0;
 
 public:
-					CAEPreferences():bAlwaysShowKeyBar12(FALSE),bAlwaysShowKeyBar34(FALSE){}
-    BOOL							bAlwaysShowKeyBar12;
-    BOOL							bAlwaysShowKeyBar34;
+                    CAEPreferences():bAlwaysShowKeyBar12(FALSE),bAlwaysShowKeyBar34(FALSE){}
+    BOOL                            bAlwaysShowKeyBar12;
+    BOOL                            bAlwaysShowKeyBar34;
 
-    virtual void 	Load			();
-    virtual void 	Save			();
-    virtual void	FillProp        (PropItemVec& items);
+    virtual void     Load            ();
+    virtual void     Save            ();
+    virtual void    FillProp        (PropItemVec& items);
 
 };
 //---------------------------------------------------------------------------

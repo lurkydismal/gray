@@ -22,7 +22,7 @@ uniform float4 pos_decompression_params;
 
 #if defined(USE_SOFT_WATER) && defined(NEED_SOFT_WATER)
 float3 water_intensity;
-#endif //	defined(USE_SOFT_WATER) && defined(NEED_SOFT_WATER)
+#endif //    defined(USE_SOFT_WATER) && defined(NEED_SOFT_WATER)
 
 float4 main(vf I) : COLOR
 {
@@ -38,7 +38,7 @@ float4 main(vf I) : COLOR
 
     float fresnel = saturate(dot(vreflect, v2point));
 
-    //	true remapping. Slow.
+    //    true remapping. Slow.
     float3 vreflectabs = abs(vreflect);
     float vreflectmax = max(vreflectabs.x, max(vreflectabs.y, vreflectabs.z));
     vreflect /= vreflectmax;
@@ -58,7 +58,7 @@ float4 main(vf I) : COLOR
 #ifdef NEED_SOFT_WATER
 
     float alpha = 0.75f + 0.25f * power;
-    //	Igor: additional depth test
+    //    Igor: additional depth test
     #ifdef USE_SOFT_WATER
     float4 _P = tex2Dproj(s_position, I.tctexgen);
 
@@ -66,14 +66,14 @@ float4 main(vf I) : COLOR
     float3 waterPos = float3((PosTc * 2 - 1) * pos_decompression_params.xy, 1) * I.tctexgen.z;
     float waterDepth = length(waterPos - _P) * 0.75f;
 
-	//	water fog
+    //    water fog
     float3 Fc = float3(0.1f, 0.1f, 0.1f) * water_intensity.r;
     final = lerp(Fc, final, alpha);
 
     alpha = min(alpha, saturate(waterDepth));
     alpha = max(1.0f - exp(-4.0f * waterDepth), alpha);
 
-    //	Leaves
+    //    Leaves
     float4 leaves = tex2D(s_leaves, I.tbase);
     leaves.rgb *= water_intensity.r;
     float calc_cos = -dot(float3(I.M1.z, I.M2.z, I.M3.z), normalize(v2point));
@@ -83,13 +83,13 @@ float4 main(vf I) : COLOR
     final = lerp(final, leaves, leaves.a * fLeavesFactor);
     alpha = lerp(alpha, leaves.a, leaves.a * fLeavesFactor);
 
-    #endif //	USE_SOFT_WATER
+    #endif //    USE_SOFT_WATER
     final *= I.c0;
 
-	return lerp(float4(final, alpha), fog_color, 1.0f - calc_fogging(I.v2point + eye_position));
+    return lerp(float4(final, alpha), fog_color, 1.0f - calc_fogging(I.v2point + eye_position));
 
-#else //	NEED_SOFT_WATER
-	return lerp(float4(final, 1.0f), fog_color, 1.0f - calc_fogging(I.v2point + eye_position));
-#endif //	NEED_SOFT_WATER
+#else //    NEED_SOFT_WATER
+    return lerp(float4(final, 1.0f), fog_color, 1.0f - calc_fogging(I.v2point + eye_position));
+#endif //    NEED_SOFT_WATER
 }
 

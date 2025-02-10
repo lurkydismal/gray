@@ -66,18 +66,18 @@ ptw32_getprocessors (int *count)
 #else
 
   if (GetProcessAffinityMask (GetCurrentProcess (),
-			      &vProcessCPUs, &vSystemCPUs))
+                  &vProcessCPUs, &vSystemCPUs))
     {
       DWORD_PTR bit;
       int CPUs = 0;
 
       for (bit = 1; bit != 0; bit <<= 1)
-	{
-	  if (vProcessCPUs & bit)
-	    {
-	      CPUs++;
-	    }
-	}
+    {
+      if (vProcessCPUs & bit)
+        {
+          CPUs++;
+        }
+    }
       *count = CPUs;
     }
   else

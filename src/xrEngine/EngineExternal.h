@@ -1,59 +1,59 @@
 #pragma once
 
 enum class EEngineExternalUI {
-	HQIcons,
-	DisableCharacterInfo,
-	None
+    HQIcons,
+    DisableCharacterInfo,
+    None
 };
 
 enum class EEngineExternalPhysical {
-	DeadBodyRagdoll,
-	None
+    DeadBodyRagdoll,
+    None
 };
 
 enum class EEngineExternalGame
 {
-	EnableThirst,
-	EnableSleepiness,
-	EnableAiDieInAnomaly,
-	EnableNPCLookAtActor,
-	EnableBlockSprintInReload,
-	EnableAutoreload,
-	EnableMonstersInventory,
-	EnableWeaponInertion,
-	EnableWeaponCollision
+    EnableThirst,
+    EnableSleepiness,
+    EnableAiDieInAnomaly,
+    EnableNPCLookAtActor,
+    EnableBlockSprintInReload,
+    EnableAutoreload,
+    EnableMonstersInventory,
+    EnableWeaponInertion,
+    EnableWeaponCollision
 };
 
 enum class EEngineExternalRender 
 {
-	DisableLoadScreenTips,
-	LargeFontAtlas,
-	None
+    DisableLoadScreenTips,
+    LargeFontAtlas,
+    None
 };
 
 enum class EEngineExternalEnvironment
 {
-	ReadSunConfig,
-	None
+    ReadSunConfig,
+    None
 };
 
 
 class ENGINE_API CEngineExternal final
 {
-	CInifile* pOptions = nullptr;
+    CInifile* pOptions = nullptr;
 
 public:
-	CEngineExternal();
-	~CEngineExternal();
+    CEngineExternal();
+    ~CEngineExternal();
 
-	xr_string GetTitle() const;
-	const char* GetPlayerHudOmfAdditional() const;
+    xr_string GetTitle() const;
+    const char* GetPlayerHudOmfAdditional() const;
 
-	bool operator[](const EEngineExternalUI& ID) const;
-	bool operator[](const EEngineExternalPhysical& ID) const;
-	bool operator[](const EEngineExternalGame& ID) const;
-	bool operator[](const EEngineExternalRender& ID) const;
-	bool operator[](const EEngineExternalEnvironment& ID) const;
+    bool operator[](const EEngineExternalUI& ID) const;
+    bool operator[](const EEngineExternalPhysical& ID) const;
+    bool operator[](const EEngineExternalGame& ID) const;
+    bool operator[](const EEngineExternalRender& ID) const;
+    bool operator[](const EEngineExternalEnvironment& ID) const;
 };
 
 ENGINE_API CEngineExternal& EngineExternal();

@@ -2,11 +2,11 @@
 #include "UIFrameLineWnd.h"
 
 class UI_API CUIScrollBox :
-	public CUIFrameLineWnd
+    public CUIFrameLineWnd
 {
-	typedef	CUIFrameLineWnd		inherited;
+    typedef    CUIFrameLineWnd        inherited;
 public:
-								CUIScrollBox			();
+                                CUIScrollBox            ();
 
-	virtual bool				OnMouseAction					(float x, float y, EUIMessages mouse_action);
+    virtual bool                OnMouseAction                    (float x, float y, EUIMessages mouse_action);
 };

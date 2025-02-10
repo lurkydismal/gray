@@ -10,22 +10,22 @@
 namespace xray_re {
 
 template<typename T> struct _rect {
-	_rect<T>&	invalidate();
-	_rect<T>&	extend(const _vector2<T>& v);
-	union {
-		struct {
-			_vector2<T>	lt;
-			_vector2<T>	rb;
-		};
-		struct {
-			T		x1, y1;
-			T		x2, y2;
-		};
-		struct {
-			T		left, top;
-			T		right, bottom;
-		};
-	};
+    _rect<T>&    invalidate();
+    _rect<T>&    extend(const _vector2<T>& v);
+    union {
+        struct {
+            _vector2<T>    lt;
+            _vector2<T>    rb;
+        };
+        struct {
+            T        x1, y1;
+            T        x2, y2;
+        };
+        struct {
+            T        left, top;
+            T        right, bottom;
+        };
+    };
 };
 
 typedef _rect<float> frect;
@@ -33,16 +33,16 @@ typedef _rect<int> irect;
 
 template<typename T> _rect<T>& _rect<T>::invalidate()
 {
-	x1 = y1 = xr_numeric_limits<T>::max();
-	x2 = y2 = xr_numeric_limits<T>::real_min();
-	return *this;
+    x1 = y1 = xr_numeric_limits<T>::max();
+    x2 = y2 = xr_numeric_limits<T>::real_min();
+    return *this;
 }
 
 template<typename T> _rect<T>& _rect<T>::extend(const _vector2<T>& v)
 {
-	lt.min(v);
-	rb.max(v);
-	return *this;
+    lt.min(v);
+    rb.max(v);
+    return *this;
 }
 
 } // end of namespace xray_re

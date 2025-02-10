@@ -37,7 +37,7 @@ bool TUI_ControlWallmarkMove::Start(TShiftState Shift)
 {
     if ((Shift & ssCtrl))
     {
-        ESceneWallmarkTool* S 	= (ESceneWallmarkTool*)parent_tool;
+        ESceneWallmarkTool* S     = (ESceneWallmarkTool*)parent_tool;
         if (S->MoveSelectedWallmarkTo(UI->m_CurrentRStart,UI->m_CurrentRDir))
             Scene->UndoSave();
     }

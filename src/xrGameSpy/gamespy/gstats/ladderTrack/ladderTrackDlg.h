@@ -8,7 +8,7 @@
 #include "HostOrJoinDlg.h"
 #include "../../gt2/gt2.h"
 #include "../../gt2/gt2Encode.h"
-#include "WaitingDlg.h"	// Added by ClassView
+#include "WaitingDlg.h"    // Added by ClassView
 
 #if _MSC_VER > 1000
 #pragma once
@@ -41,74 +41,74 @@ class CLadderTrackDlg : public CDialog
 {
 // Construction
 public:
-	void FakeStats();
-	CString m_remoteNick;
-	DWORD m_remoteTime;
-	DWORD m_localTime;
-	int m_totalSteps;
-	int m_step;
-	int m_numSteps;
-	DWORD m_start;
-	BOOL m_racing;
-	int m_countdown;
-	BOOL m_challenged;
-	CString m_remoteResponse;
-	int m_state;
-	BOOL m_hosting;
-	CString m_challenge;
-	int m_remoteProfile;
-	CLoginDlg m_loginDlg;
-	CHostOrJoinDlg m_hostOrJoinDlg;
-	CWaitingDlg m_waitingDlg;
+    void FakeStats();
+    CString m_remoteNick;
+    DWORD m_remoteTime;
+    DWORD m_localTime;
+    int m_totalSteps;
+    int m_step;
+    int m_numSteps;
+    DWORD m_start;
+    BOOL m_racing;
+    int m_countdown;
+    BOOL m_challenged;
+    CString m_remoteResponse;
+    int m_state;
+    BOOL m_hosting;
+    CString m_challenge;
+    int m_remoteProfile;
+    CLoginDlg m_loginDlg;
+    CHostOrJoinDlg m_hostOrJoinDlg;
+    CWaitingDlg m_waitingDlg;
 
-	GT2Socket	  m_GT2Socket;		// raw socket
-	GT2Connection m_GT2Connection;	// established connection
+    GT2Socket      m_GT2Socket;        // raw socket
+    GT2Connection m_GT2Connection;    // established connection
 
-	BOOL SetupHosting();
-	BOOL SetupJoining();
-	BOOL SetupMatch();
-	void UpdatePlayerPositions();
-	void Countdown();
-	void Logout();
-	void StartRace();
-	void ReportStats();
-	CLadderTrackDlg(CWnd* pParent = NULL);	// standard constructor
+    BOOL SetupHosting();
+    BOOL SetupJoining();
+    BOOL SetupMatch();
+    void UpdatePlayerPositions();
+    void Countdown();
+    void Logout();
+    void StartRace();
+    void ReportStats();
+    CLadderTrackDlg(CWnd* pParent = NULL);    // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CLadderTrackDlg)
-	enum { IDD = IDD_LADDERTRACK_DIALOG };
-	CButton	m_startRace;
-	CProgressCtrl	m_remoteProgress;
-	CProgressCtrl	m_localProgress;
-	CString	m_localPosition;
-	CString	m_remotePosition;
-	CString	m_info;
-	//}}AFX_DATA
+    //{{AFX_DATA(CLadderTrackDlg)
+    enum { IDD = IDD_LADDERTRACK_DIALOG };
+    CButton    m_startRace;
+    CProgressCtrl    m_remoteProgress;
+    CProgressCtrl    m_localProgress;
+    CString    m_localPosition;
+    CString    m_remotePosition;
+    CString    m_info;
+    //}}AFX_DATA
 
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CLadderTrackDlg)
-	public:
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CLadderTrackDlg)
+    public:
+    virtual BOOL PreTranslateMessage(MSG* pMsg);
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
-	HICON m_hIcon;
+    HICON m_hIcon;
 
-	// Generated message map functions
-	//{{AFX_MSG(CLadderTrackDlg)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg void OnStart();
-	afx_msg void OnDestroy();
-	afx_msg void OnTimer(UINT nIDEvent);
-	afx_msg void OnLogout();
-	afx_msg void OnUpdatePositions();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CLadderTrackDlg)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnPaint();
+    afx_msg HCURSOR OnQueryDragIcon();
+    afx_msg void OnStart();
+    afx_msg void OnDestroy();
+    afx_msg void OnTimer(UINT nIDEvent);
+    afx_msg void OnLogout();
+    afx_msg void OnUpdatePositions();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

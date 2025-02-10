@@ -7,7 +7,7 @@
     <texture id="ui_servinfo_t_e" x="0" y="17" width="13" height="16" />
     <texture id="ui_servinfo_t_h" x="13" y="17" width="13" height="16" />
     <texture id="ui_servinfo_t_t" x="26" y="17" width="13" height="16" />
-    <texture id="ui_listline2" 	  x="0" y="37" width="36" height="18" />
+    <texture id="ui_listline2"       x="0" y="37" width="36" height="18" />
 <!--
     <texture id="ui_listline_b" x="0" y="37" width="4" height="18" />
     <texture id="ui_listline_back" x="4" y="37" width="28" height="18" />
@@ -61,13 +61,13 @@
     <texture id="ui_slider_button_t" x="89" y="45" width="24" height="17" />
     <texture id="ui_slider_button_d" x="147" y="198" width="24" height="17" />
 
-    <texture id="ui_slider_e_b"		x="41" y="65" width="24" height="17" />
-    <texture id="ui_slider_e_back"	x="65" y="65" width="24" height="17" />
-    <texture id="ui_slider_e_e"		x="89" y="65" width="24" height="17" />
+    <texture id="ui_slider_e_b"        x="41" y="65" width="24" height="17" />
+    <texture id="ui_slider_e_back"    x="65" y="65" width="24" height="17" />
+    <texture id="ui_slider_e_e"        x="89" y="65" width="24" height="17" />
 
-    <texture id="ui_slider_d_b"		x="141" y="215" width="24" height="17" />
-    <texture id="ui_slider_d_back"	x="165" y="215" width="24" height="17" />
-    <texture id="ui_slider_d_e"		x="189" y="215" width="24" height="17" />
+    <texture id="ui_slider_d_b"        x="141" y="215" width="24" height="17" />
+    <texture id="ui_slider_d_back"    x="165" y="215" width="24" height="17" />
+    <texture id="ui_slider_d_e"        x="189" y="215" width="24" height="17" />
 
     <texture id="ui_tablist_textbox_lt" x="117" y="45" width="32" height="32" />
     <texture id="ui_tablist_textbox_l" x="117" y="77" width="32" height="32" />
@@ -109,9 +109,9 @@
     <texture id="ui_table_button_h_back" x="152" y="160" width="28" height="19" />
     <texture id="ui_table_button_h_e" x="180" y="160" width="5" height="19" />
 
-    <texture id="ui_table_button_o_b"		x="147" y="160" width="4"	height="19" />
-    <texture id="ui_table_button_o_back"	x="151" y="160" width="30"	height="19" />
-    <texture id="ui_table_button_o_e"		x="181" y="160" width="4"	height="19" />
+    <texture id="ui_table_button_o_b"        x="147" y="160" width="4"    height="19" />
+    <texture id="ui_table_button_o_back"    x="151" y="160" width="30"    height="19" />
+    <texture id="ui_table_button_o_e"        x="181" y="160" width="4"    height="19" />
 
     <texture id="ui_table_button_t_b" x="147" y="179" width="5" height="19" />
     <texture id="ui_table_button_t_back" x="152" y="179" width="28" height="19" />
@@ -466,26 +466,26 @@
     <texture id="ui_pda_m_noupdate"       x="670" y="998" width="9" height="11"/>
     <texture id="ui_pda_m_update"         x="680" y="998" width="9" height="11"/>
 
-	<texture id="ui_teambase" x="749" y="880" width="29" height="29" />
+    <texture id="ui_teambase" x="749" y="880" width="29" height="29" />
 
     <texture id="ui_mini_af_spot_2"       x="751" y="910" width="9" height="9" />
     <texture id="ui_mini_af_spot_above_2" x="751" y="910" width="9" height="5" />
     <texture id="ui_mini_af_spot_below_2" x="751" y="914" width="9" height="5" />
 
-	<texture id="ui_mini_af_spot"       x="757" y="854" width="13" height="15" />
+    <texture id="ui_mini_af_spot"       x="757" y="854" width="13" height="15" />
     <texture id="ui_mini_af_spot_below" x="757" y="861" width="13" height="15" />
     <texture id="ui_mini_af_spot_above" x="757" y="847" width="13" height="15" />
 
     <texture id="ui_mini_sn_spot_below" x="757" y="861" width="13" height="13" />
     <texture id="ui_mini_sn_spot_above" x="757" y="849" width="13" height="13" />
 
-    <texture id="ui_listline2_b"		x="946" y="108"	width="4" height="16" />
-    <texture id="ui_listline2_back"		x="950" y="108" width="28" height="16" />
-    <texture id="ui_listline2_e"		x="978" y="108" width="4" height="16" />
+    <texture id="ui_listline2_b"        x="946" y="108"    width="4" height="16" />
+    <texture id="ui_listline2_back"        x="950" y="108" width="28" height="16" />
+    <texture id="ui_listline2_e"        x="978" y="108" width="4" height="16" />
 
-    <texture id="ui_listline3_b"		x="986" y="108" width="4" height="16" />
-    <texture id="ui_listline3_back"		x="990" y="108" width="28" height="16" />
-    <texture id="ui_listline3_e"		x="1008" y="108" width="4" height="16" />
+    <texture id="ui_listline3_b"        x="986" y="108" width="4" height="16" />
+    <texture id="ui_listline3_back"        x="990" y="108" width="28" height="16" />
+    <texture id="ui_listline3_e"        x="1008" y="108" width="4" height="16" />
 
   <texture id="ui_pda2_exit_point"   x="752" y="771" width="19" height="21" />
   <texture id="ui_pda2_filter"       x="752" y="795" width="19" height="19" />
@@ -526,98 +526,98 @@
 
 <!-- map pointers -->
 
-  <texture id="ui_mmap_squad_leader"	x="807" y="797" width="9" height="9" />
-  <texture id="ui_pda2_squad_leader"	x="751" y="824" width="11" height="11" />
+  <texture id="ui_mmap_squad_leader"    x="807" y="797" width="9" height="9" />
+  <texture id="ui_pda2_squad_leader"    x="751" y="824" width="11" height="11" />
 
-  <texture id="ui_mmap_common_actor"	x="808" y="790" width="7" height="7" />
-  <texture id="ui_pda2_common_actor"	x="751" y="816" width="7" height="7" />
+  <texture id="ui_mmap_common_actor"    x="808" y="790" width="7" height="7" />
+  <texture id="ui_pda2_common_actor"    x="751" y="816" width="7" height="7" />
 
-  <texture id="ui_mmap_quest"		x="806" y="774" width="15" height="15" />
-  <texture id="ui_pda2_quest"		x="751" y="794" width="21" height="21" />
+  <texture id="ui_mmap_quest"        x="806" y="774" width="15" height="15" />
+  <texture id="ui_pda2_quest"        x="751" y="794" width="21" height="21" />
 
-  <texture id="ui_mmap_secondary_task"	x="792" y="762" width="11" height="11" />
-  <texture id="ui_pda2_secondary_task"	x="790" y="774" width="15" height="15" />
-  <texture id="ui_pda2_secondary_task2"	x="859" y="977" width="19" height="19" />
+  <texture id="ui_mmap_secondary_task"    x="792" y="762" width="11" height="11" />
+  <texture id="ui_pda2_secondary_task"    x="790" y="774" width="15" height="15" />
+  <texture id="ui_pda2_secondary_task2"    x="859" y="977" width="19" height="19" />
 
-  <texture id="ui_mmap_secondary_alert"	x="776" y="762" width="11" height="11" />
-  <texture id="ui_pda2_secondary_alert"	x="774" y="774" width="15" height="15" />
-  <texture id="ui_pda2_secondary_alert2"	x="859" y="997" width="19" height="19" />
+  <texture id="ui_mmap_secondary_alert"    x="776" y="762" width="11" height="11" />
+  <texture id="ui_pda2_secondary_alert"    x="774" y="774" width="15" height="15" />
+  <texture id="ui_pda2_secondary_alert2"    x="859" y="997" width="19" height="19" />
 
-  <texture id="ui_pda2_trader"		x="807" y="761" width="13" height="13" />
-  <texture id="ui_pda2_mechanic"	x="821" y="761" width="13" height="13" />
-  <texture id="ui_pda2_guide"		x="882" y="805" width="13" height="13" />
-  <texture id="ui_pda2_important1"	x="882" y="819" width="13" height="13" />
-  <texture id="ui_pda2_important2"	x="896" y="805" width="13" height="13" />
+  <texture id="ui_pda2_trader"        x="807" y="761" width="13" height="13" />
+  <texture id="ui_pda2_mechanic"    x="821" y="761" width="13" height="13" />
+  <texture id="ui_pda2_guide"        x="882" y="805" width="13" height="13" />
+  <texture id="ui_pda2_important1"    x="882" y="819" width="13" height="13" />
+  <texture id="ui_pda2_important2"    x="896" y="805" width="13" height="13" />
 
-  <texture id="ui_mmap_stask_last_01"	x="824" y="776" width="17" height="17" />
-  <texture id="ui_pda2_stask_last_01"	x="822" y="795" width="21" height="21" />
-  <texture id="ui_pda2_stask_last_01a"	x="869" y="776" width="25" height="25" />
+  <texture id="ui_mmap_stask_last_01"    x="824" y="776" width="17" height="17" />
+  <texture id="ui_pda2_stask_last_01"    x="822" y="795" width="21" height="21" />
+  <texture id="ui_pda2_stask_last_01a"    x="869" y="776" width="25" height="25" />
 
-  <texture id="ui_mmap_stask_last_02"	x="848" y="776" width="17" height="17" />
-  <texture id="ui_pda2_stask_last_02"	x="846" y="795" width="21" height="21" />
-  <texture id="ui_pda2_stask_last_02a"	x="896" y="776" width="25" height="25" />
+  <texture id="ui_mmap_stask_last_02"    x="848" y="776" width="17" height="17" />
+  <texture id="ui_pda2_stask_last_02"    x="846" y="795" width="21" height="21" />
+  <texture id="ui_pda2_stask_last_02a"    x="896" y="776" width="25" height="25" />
 
-  <texture id="ui_mmap_base"		x="836" y="760" width="15" height="15" />
-  <texture id="ui_pda2_base"		x="831" y="818" width="21" height="21" />
+  <texture id="ui_mmap_base"        x="836" y="760" width="15" height="15" />
+  <texture id="ui_pda2_base"        x="831" y="818" width="21" height="21" />
 
-  <texture id="ui_mmap_bring_item"	x="846" y="841" width="11" height="11" />
-  <texture id="ui_pda2_bring_item"	x="830" y="841" width="15" height="15" />
-  <texture id="ui_pda2_bring_item2"	x="859" y="817" width="19" height="19" />
+  <texture id="ui_mmap_bring_item"    x="846" y="841" width="11" height="11" />
+  <texture id="ui_pda2_bring_item"    x="830" y="841" width="15" height="15" />
+  <texture id="ui_pda2_bring_item2"    x="859" y="817" width="19" height="19" />
 
-  <texture id="ui_mmap_upgrades"	x="846" y="856" width="11" height="11" />
-  <texture id="ui_pda2_upgrades"	x="830" y="856" width="15" height="15" />
-  <texture id="ui_pda2_upgrades2"	x="859" y="837" width="19" height="19" />
+  <texture id="ui_mmap_upgrades"    x="846" y="856" width="11" height="11" />
+  <texture id="ui_pda2_upgrades"    x="830" y="856" width="15" height="15" />
+  <texture id="ui_pda2_upgrades2"    x="859" y="837" width="19" height="19" />
 
-  <texture id="ui_mmap_capture_base"	x="846" y="871" width="11" height="11" />
-  <texture id="ui_pda2_capture_base"	x="830" y="871" width="15" height="15" />
-  <texture id="ui_pda2_capture_base2"	x="859" y="857" width="19" height="19" />
+  <texture id="ui_mmap_capture_base"    x="846" y="871" width="11" height="11" />
+  <texture id="ui_pda2_capture_base"    x="830" y="871" width="15" height="15" />
+  <texture id="ui_pda2_capture_base2"    x="859" y="857" width="19" height="19" />
 
-  <texture id="ui_mmap_attack_base"	x="846" y="886" width="11" height="11" />
-  <texture id="ui_pda2_attack_base"	x="830" y="886" width="15" height="15" />
-  <texture id="ui_pda2_attack_base2"	x="859" y="877" width="19" height="19" />
+  <texture id="ui_mmap_attack_base"    x="846" y="886" width="11" height="11" />
+  <texture id="ui_pda2_attack_base"    x="830" y="886" width="15" height="15" />
+  <texture id="ui_pda2_attack_base2"    x="859" y="877" width="19" height="19" />
 
-  <texture id="ui_mmap_defend_base"	x="846" y="901" width="11" height="11" />
-  <texture id="ui_pda2_defend_base"	x="830" y="901" width="15" height="15" />
-  <texture id="ui_pda2_defend_base2"	x="859" y="897" width="19" height="19" />
+  <texture id="ui_mmap_defend_base"    x="846" y="901" width="11" height="11" />
+  <texture id="ui_pda2_defend_base"    x="830" y="901" width="15" height="15" />
+  <texture id="ui_pda2_defend_base2"    x="859" y="897" width="19" height="19" />
 
-  <texture id="ui_mmap_destroy_enemy"	x="846" y="916" width="11" height="11" />
-  <texture id="ui_pda2_destroy_enemy"	x="830" y="916" width="15" height="15" />
-  <texture id="ui_pda2_destroy_enemy2"	x="859" y="917" width="19" height="19" />
+  <texture id="ui_mmap_destroy_enemy"    x="846" y="916" width="11" height="11" />
+  <texture id="ui_pda2_destroy_enemy"    x="830" y="916" width="15" height="15" />
+  <texture id="ui_pda2_destroy_enemy2"    x="859" y="917" width="19" height="19" />
 
-  <texture id="ui_mmap_mutant"		x="846" y="931" width="11" height="11" />
-  <texture id="ui_pda2_mutant"		x="830" y="931" width="15" height="15" />
-  <texture id="ui_pda2_mutant2"		x="859" y="937" width="19" height="19" />
+  <texture id="ui_mmap_mutant"        x="846" y="931" width="11" height="11" />
+  <texture id="ui_pda2_mutant"        x="830" y="931" width="15" height="15" />
+  <texture id="ui_pda2_mutant2"        x="859" y="937" width="19" height="19" />
 
-  <texture id="ui_mmap_info"		x="846" y="946" width="11" height="11" />
-  <texture id="ui_pda2_info"		x="830" y="946" width="15" height="15" />
-  <texture id="ui_pda2_info2"		x="859" y="957" width="19" height="19" />
+  <texture id="ui_mmap_info"        x="846" y="946" width="11" height="11" />
+  <texture id="ui_pda2_info"        x="830" y="946" width="15" height="15" />
+  <texture id="ui_pda2_info2"        x="859" y="957" width="19" height="19" />
 
 <!-- new PDA scrollers -->
 
-  <texture id="ui_scroll_PDA_btn_left_e"	x="975" y="777" width="21" height="17" />
-  <texture id="ui_scroll_PDA_btn_left_h"	x="931" y="777" width="21" height="17" />
-  <texture id="ui_scroll_PDA_btn_left_t"	x="931" y="796" width="21" height="17" />
-  <texture id="ui_scroll_PDA_btn_left_d"	x="975" y="796" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_left_e"    x="975" y="777" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_left_h"    x="931" y="777" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_left_t"    x="931" y="796" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_left_d"    x="975" y="796" width="21" height="17" />
 
-  <texture id="ui_scroll_PDA_btn_right_e"	x="996" y="777" width="21" height="17" />
-  <texture id="ui_scroll_PDA_btn_right_h"	x="952" y="777" width="21" height="17" />
-  <texture id="ui_scroll_PDA_btn_right_t"	x="952" y="796" width="21" height="17" />
-  <texture id="ui_scroll_PDA_btn_right_d"	x="996" y="796" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_right_e"    x="996" y="777" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_right_h"    x="952" y="777" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_right_t"    x="952" y="796" width="21" height="17" />
+  <texture id="ui_scroll_PDA_btn_right_d"    x="996" y="796" width="21" height="17" />
 
-  <texture id="ui_scroll_PDA_btn_up_e"		x="1006" y="440" width="17" height="21" />
-  <texture id="ui_scroll_PDA_btn_up_h"		x="1006" y="354" width="17" height="21" />
-  <texture id="ui_scroll_PDA_btn_up_t"		x="987" y="354" width="17" height="21" />
-  <texture id="ui_scroll_PDA_btn_up_d"		x="987" y="469" width="17" height="21" />
+  <texture id="ui_scroll_PDA_btn_up_e"        x="1006" y="440" width="17" height="21" />
+  <texture id="ui_scroll_PDA_btn_up_h"        x="1006" y="354" width="17" height="21" />
+  <texture id="ui_scroll_PDA_btn_up_t"        x="987" y="354" width="17" height="21" />
+  <texture id="ui_scroll_PDA_btn_up_d"        x="987" y="469" width="17" height="21" />
 
-  <texture id="ui_scroll_PDA_btn_down_e"	x="1006" y="461" width="17" height="30" />
-  <texture id="ui_scroll_PDA_btn_down_h"	x="1006" y="375" width="17" height="30" />
-  <texture id="ui_scroll_PDA_btn_down_t"	x="987" y="437" width="17" height="30" />
-  <texture id="ui_scroll_PDA_btn_down_d"	x="987" y="552" width="17" height="30" />
+  <texture id="ui_scroll_PDA_btn_down_e"    x="1006" y="461" width="17" height="30" />
+  <texture id="ui_scroll_PDA_btn_down_h"    x="1006" y="375" width="17" height="30" />
+  <texture id="ui_scroll_PDA_btn_down_t"    x="987" y="437" width="17" height="30" />
+  <texture id="ui_scroll_PDA_btn_down_d"    x="987" y="552" width="17" height="30" />
 
-  <texture id="ui_scroll_PDA_back"		x="987" y="417" width="17" height="17" />
-  <texture id="ui_scroll_PDA_move"		x="987" y="382" width="17" height="17" />
-  <texture id="ui_scroll_PDA_back_16"		x="987" y="417" width="14" height="14" />
-  <texture id="ui_scroll_PDA_move_16"		x="987" y="382" width="14" height="14" />
+  <texture id="ui_scroll_PDA_back"        x="987" y="417" width="17" height="17" />
+  <texture id="ui_scroll_PDA_move"        x="987" y="382" width="17" height="17" />
+  <texture id="ui_scroll_PDA_back_16"        x="987" y="417" width="14" height="14" />
+  <texture id="ui_scroll_PDA_move_16"        x="987" y="382" width="14" height="14" />
 
   <texture id="ui_scroll_btn_up" x="124" y="173" width="15" height="16" />
 

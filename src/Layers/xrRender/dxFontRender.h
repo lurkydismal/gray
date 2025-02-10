@@ -5,16 +5,16 @@
 class dxFontRender : public IFontRender
 {
 public:
-	dxFontRender();
-	virtual ~dxFontRender();
+    dxFontRender();
+    virtual ~dxFontRender();
 
-	virtual void Initialize(const char* cShader, const char* cTexture);
-	virtual void OnRender(CGameFont& owner);
+    virtual void Initialize(const char* cShader, const char* cTexture);
+    virtual void OnRender(CGameFont& owner);
 
-	virtual void CreateFontAtlas(u32 width, u32 height, const char* name, void* bitmap) override;
+    virtual void CreateFontAtlas(u32 width, u32 height, const char* name, void* bitmap) override;
 
 private:
-	ref_shader				pShader;
-	ref_geom				pGeom;
-	ref_texture				pTexture;
+    ref_shader                pShader;
+    ref_geom                pGeom;
+    ref_texture                pTexture;
 };

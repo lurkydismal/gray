@@ -4,12 +4,12 @@
 #include "../xrScripts/script_export_space.h"
 
 class CRGD5 :
-	public CGrenade
+    public CGrenade
 {
-	typedef CGrenade inherited;
+    typedef CGrenade inherited;
 public:
-	CRGD5(void);
-	virtual ~CRGD5(void);
+    CRGD5(void);
+    virtual ~CRGD5(void);
 
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

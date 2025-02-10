@@ -48,17 +48,17 @@ class DDSWriter :
     public nvtt::OutputHandler 
 {
 public:
-	HFILE& file;
+    HFILE& file;
 
-	DDSWriter(HFILE& file) : file(file) {};
-	virtual void beginImage(int size, int width, int height, int depth, int face, int miplevel) override {}
-	virtual bool writeData(const void* data, int size) override;
-	virtual void endImage() override {};
+    DDSWriter(HFILE& file) : file(file) {};
+    virtual void beginImage(int size, int width, int height, int depth, int face, int miplevel) override {}
+    virtual bool writeData(const void* data, int size) override;
+    virtual void endImage() override {};
 };
 
 class DDSErrorHandler : 
     public nvtt::ErrorHandler 
 {
 public:
-	virtual void error(nvtt::Error e) override;
+    virtual void error(nvtt::Error e) override;
 };

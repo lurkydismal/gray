@@ -4,20 +4,20 @@
 class CSpeexPreprocess
 {
 public:
-	CSpeexPreprocess(int sampleRate, int samplesPerBuffer);
-	~CSpeexPreprocess();
+    CSpeexPreprocess(int sampleRate, int samplesPerBuffer);
+    ~CSpeexPreprocess();
 
-	bool EnableAGC(bool enable);
-	bool IsAGCEnabled();
+    bool EnableAGC(bool enable);
+    bool IsAGCEnabled();
 
-	bool IsDenoiseEnabled();
-	bool EnableDenoise(bool enable);
+    bool IsDenoiseEnabled();
+    bool EnableDenoise(bool enable);
 
-	int GetDenoiseLevel();
-	bool SetDenoiseLevel(int level);
+    int GetDenoiseLevel();
+    bool SetDenoiseLevel(int level);
 
-	void RunPreprocess(short* buffer);
+    void RunPreprocess(short* buffer);
 
 private:
-	SpeexPreprocessState* m_pState = nullptr;
+    SpeexPreprocessState* m_pState = nullptr;
 };

@@ -15,19 +15,19 @@
 
 // #define USE_GAMMA_22
 // #define USE_FETCH4
-// #define USE_HWSMAP                	//- HW-options defined
+// #define USE_HWSMAP                    //- HW-options defined
 
-// #define USE_HWSMAP_PCF				//- nVidia GF3+, R600+
+// #define USE_HWSMAP_PCF                //- nVidia GF3+, R600+
 
-// #define USE_BRANCHING        		//- HW-options defined
-// #define USE_VTF                		//- HW-options defined, VertexTextureFetch
-// #define FP16_FILTER                	//- HW-options defined
-// #define FP16_BLEND                	//- HW-options defined
+// #define USE_BRANCHING                //- HW-options defined
+// #define USE_VTF                        //- HW-options defined, VertexTextureFetch
+// #define FP16_FILTER                    //- HW-options defined
+// #define FP16_BLEND                    //- HW-options defined
 //
-// #define USE_PARALLAX                	//- shader defined
-// #define USE_TDETAIL                	//- shader defined
-// #define USE_LM_HEMI                	//- shader defined
-// #define USE_DISTORT                	//- shader defined
+// #define USE_PARALLAX                    //- shader defined
+// #define USE_TDETAIL                    //- shader defined
+// #define USE_LM_HEMI                    //- shader defined
+// #define USE_DISTORT                    //- shader defined
 // #define DBG_TMAPPING
 //////////////////////////////////////////////////////////////////////////////////////////
 #ifndef SMAP_size
@@ -184,10 +184,10 @@ struct p_flat
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// struct                  f_deffer        		{
-// float4           position        		: COLOR0;        // px,py,pz, m-id
-// float4           Ne                		: COLOR1;        // nx,ny,nz, hemi
-// float4       	C                		: COLOR2;        // r, g, b,  gloss
+// struct                  f_deffer                {
+// float4           position                : COLOR0;        // px,py,pz, m-id
+// float4           Ne                        : COLOR1;        // nx,ny,nz, hemi
+// float4           C                        : COLOR2;        // r, g, b,  gloss
 // };
 
 struct f_deffer
@@ -214,13 +214,13 @@ struct p_screen
     float2 tc0 : TEXCOORD0;
 };
 //////////////////////////////////////////////////////////////////////////////////////////
-// Geometry phase / deferring               	//
+// Geometry phase / deferring                   //
 uniform sampler2D s_base; //
 uniform sampler2D s_bump; //
 uniform sampler2D s_bumpX; //
 uniform sampler2D s_detail; //
 uniform sampler2D s_detailBump; //
-uniform sampler2D s_detailBumpX; //	Error for bump detail
+uniform sampler2D s_detailBumpX; //    Error for bump detail
 uniform sampler2D s_bumpD; //
 uniform sampler2D s_hemi; //
 
@@ -294,7 +294,7 @@ float3 v_sun_wrap(float3 n, float w)
 }
 float3 p_hemi(float2 tc)
 {
-    //        float3        	t_lmh         = tex2D             	(s_hemi, tc);
+    //        float3            t_lmh         = tex2D                 (s_hemi, tc);
     //        return  dot     (t_lmh,1.h/4.h);
     float4 t_lmh = tex2D(s_hemi, tc);
     return t_lmh.a;
@@ -310,7 +310,7 @@ float get_sun(float4 lmh)
     return lmh.g;
 }
 
-//	contrast function
+//    contrast function
 float Contrast(float Input, float ContrastPower)
 {
     // piecewise contrast function

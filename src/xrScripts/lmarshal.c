@@ -536,7 +536,7 @@ static const struct luaL_reg R[] =
     {"encode",      mar_encode},
     {"decode",      mar_decode},
     {"clone",       mar_clone},
-    {NULL,	    NULL},
+    {NULL,        NULL},
 };
 
 int luaopen_marshal(lua_State* L)

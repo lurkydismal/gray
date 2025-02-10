@@ -2,13 +2,13 @@
 
 void ESceneDummyTool::CreateControls()
 {
-	inherited::CreateDefaultControls(estDefault);
+    inherited::CreateDefaultControls(estDefault);
 }
 
  
 void ESceneDummyTool::RemoveControls()
 {
-	inherited::RemoveControls();
+    inherited::RemoveControls();
 }
 
 

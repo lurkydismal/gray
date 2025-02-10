@@ -167,36 +167,36 @@ pthread_cancel (pthread_t thread)
       && tp->state < PThreadStateCanceling)
     {
       if (cancel_self)
-	{
-	  tp->state = PThreadStateCanceling;
-	  tp->cancelState = PTHREAD_CANCEL_DISABLE;
+    {
+      tp->state = PThreadStateCanceling;
+      tp->cancelState = PTHREAD_CANCEL_DISABLE;
 
-	  (void) pthread_mutex_unlock (&tp->cancelLock);
-	  ptw32_throw (PTW32_EPS_CANCEL);
+      (void) pthread_mutex_unlock (&tp->cancelLock);
+      ptw32_throw (PTW32_EPS_CANCEL);
 
-	  /* Never reached */
-	}
+      /* Never reached */
+    }
       else
-	{
-	  HANDLE threadH = tp->threadH;
+    {
+      HANDLE threadH = tp->threadH;
 
-	  SuspendThread (threadH);
+      SuspendThread (threadH);
 
-	  if (WaitForSingleObject (threadH, 0) == WAIT_TIMEOUT)
-	    {
-	      tp->state = PThreadStateCanceling;
-	      tp->cancelState = PTHREAD_CANCEL_DISABLE;
-	      /*
-	       * If alertdrv and QueueUserAPCEx is available then the following
-	       * will result in a call to QueueUserAPCEx with the args given, otherwise
-	       * this will result in a call to ptw32_RegisterCancelation and only
-	       * the threadH arg will be used.
-	       */
-	      ptw32_register_cancelation (ptw32_cancel_callback, threadH, 0);
-	      (void) pthread_mutex_unlock (&tp->cancelLock);
-	      ResumeThread (threadH);
-	    }
-	}
+      if (WaitForSingleObject (threadH, 0) == WAIT_TIMEOUT)
+        {
+          tp->state = PThreadStateCanceling;
+          tp->cancelState = PTHREAD_CANCEL_DISABLE;
+          /*
+           * If alertdrv and QueueUserAPCEx is available then the following
+           * will result in a call to QueueUserAPCEx with the args given, otherwise
+           * this will result in a call to ptw32_RegisterCancelation and only
+           * the threadH arg will be used.
+           */
+          ptw32_register_cancelation (ptw32_cancel_callback, threadH, 0);
+          (void) pthread_mutex_unlock (&tp->cancelLock);
+          ResumeThread (threadH);
+        }
+    }
     }
   else
     {
@@ -204,17 +204,17 @@ pthread_cancel (pthread_t thread)
        * Set for deferred cancellation.
        */
       if (tp->state < PThreadStateCancelPending)
-	{
-	  tp->state = PThreadStateCancelPending;
-	  if (!SetEvent (tp->cancelEvent))
-	    {
-	      result = ESRCH;
-	    }
-	}
+    {
+      tp->state = PThreadStateCancelPending;
+      if (!SetEvent (tp->cancelEvent))
+        {
+          result = ESRCH;
+        }
+    }
       else if (tp->state >= PThreadStateCanceling)
-	{
-	  result = ESRCH;
-	}
+    {
+      result = ESRCH;
+    }
 
       (void) pthread_mutex_unlock (&tp->cancelLock);
     }

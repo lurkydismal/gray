@@ -104,14 +104,14 @@ on_info = {+pri_a17_actor_has_gauss_rifle} walker@fintalk
 meet = meet@get_f_gauss
 
 [meet@get_f_gauss]
-meet_state 	= 15| guard
-meet_state_wpn 	= 15| guard
-victim 		= 15| actor
-victim_wpn 	= 15| actor
-use			= true
-use_wpn		= true
-meet_dialog	= pri_a17_military_recon_squad_after_scene_dialog 
-trade_enable	= false
+meet_state     = 15| guard
+meet_state_wpn     = 15| guard
+victim         = 15| actor
+victim_wpn     = 15| actor
+use            = true
+use_wpn        = true
+meet_dialog    = pri_a17_military_recon_squad_after_scene_dialog 
+trade_enable    = false
 
 [walker@fintalk]:walker@generic
 path_walk = val_final_talk
@@ -140,11 +140,11 @@ out_restr = pri_a16_sr_noweap
 ;-------------------------------------------------------------
 
 [wounded]
-hp_state 		= 0|wounded_heavy@help_heavy
-hp_state_see 	= 0|wounded_heavy@help_heavy
-hp_victim 		= 0|nil
-hp_fight 		= 0|false
-hp_cover		= 0|false
+hp_state         = 0|wounded_heavy@help_heavy
+hp_state_see     = 0|wounded_heavy@help_heavy
+hp_victim         = 0|nil
+hp_fight         = 0|false
+hp_cover        = 0|false
 
 [combat]
 on_info = {=actor_enemy} %+pri_a17_actor_attack_military%

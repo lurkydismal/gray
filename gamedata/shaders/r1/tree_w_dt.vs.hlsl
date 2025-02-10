@@ -48,7 +48,7 @@ vf main(av v)
     o.HPOS = mul(m_VP, f_pos);
 
     // Lighting
-    float3 N = mul(m_xform, unpack_normal(v.nc)); // normalize 	(mul (m_xform,  unpack_normal(v.nc)));
+    float3 N = mul(m_xform, unpack_normal(v.nc)); // normalize     (mul (m_xform,  unpack_normal(v.nc)));
     float L_base = v.nc.w; // base hemisphere
     float4 L_unpack = c_scale * L_base + c_bias; // unpacked and decompressed
     float3 L_rgb = L_unpack.xyz; // precalculated RGB lighting

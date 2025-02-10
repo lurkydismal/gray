@@ -46,21 +46,21 @@ extern "C" {
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct 
 {
-	gsLargeInt_t modulus;
-	gsLargeInt_t exponent;
+    gsLargeInt_t modulus;
+    gsLargeInt_t exponent;
 } gsCryptRSAKey;
 
 typedef struct 
 {
-	gsi_u8 headerByte; // always 0x00
-	gsi_u8 maskedSeed[GS_CRYPT_HASHSIZE]; // not a MD5 hash, but must be same size
-	gsi_u8 maskedData[GS_CRYPT_RSA_DATABLOCKSIZE]; // data block xor'd
+    gsi_u8 headerByte; // always 0x00
+    gsi_u8 maskedSeed[GS_CRYPT_HASHSIZE]; // not a MD5 hash, but must be same size
+    gsi_u8 maskedData[GS_CRYPT_RSA_DATABLOCKSIZE]; // data block xor'd
 } gsCryptRSAOAEPPacket;
 
 typedef struct 
 {
-	gsi_u8 headerByte[2]; // always 0x00 0x02
-	gsi_u8 data[GS_CRYPT_RSA_BYTE_SIZE-2]; // data block xor'd
+    gsi_u8 headerByte[2]; // always 0x00 0x02
+    gsi_u8 data[GS_CRYPT_RSA_BYTE_SIZE-2]; // data block xor'd
 } gsCryptRSAPKCS1Packet;
 
 

@@ -34,42 +34,42 @@ double internal_solve(double *_a, double *b, const int N)
     /*---------- forward elimination ----------*/
 
     det = 1.0;
-    for (i=0; i<N; i++) {		/* eliminate in column i */
-	max = -1.0;
-	for (k=i; k<N; k++)		/* find pivot for column i */
-	    if (_abs(A(k, i)) > max) {
-		max = _abs(A(k, i));
-		j = k;
-	    }
-	if (max<=0.) return 0.0;	/* if no nonzero pivot, PUNT */
-	if (j!=i) {			/* swap rows i and j */
-	    for (k=i; k<N; k++)
-		SWAP(A(i, k), A(j, k), t);
-	    det = -det;
-	    SWAP(b[i], b[j], t);	/* swap elements of column vector */
-	}
-	pivot = A(i, i);
-	det *= pivot;
-	for (k=i+1; k<N; k++)		/* only do elems to right of pivot */
-	    A(i, k) /= pivot;
+    for (i=0; i<N; i++) {        /* eliminate in column i */
+    max = -1.0;
+    for (k=i; k<N; k++)        /* find pivot for column i */
+        if (_abs(A(k, i)) > max) {
+        max = _abs(A(k, i));
+        j = k;
+        }
+    if (max<=0.) return 0.0;    /* if no nonzero pivot, PUNT */
+    if (j!=i) {            /* swap rows i and j */
+        for (k=i; k<N; k++)
+        SWAP(A(i, k), A(j, k), t);
+        det = -det;
+        SWAP(b[i], b[j], t);    /* swap elements of column vector */
+    }
+    pivot = A(i, i);
+    det *= pivot;
+    for (k=i+1; k<N; k++)        /* only do elems to right of pivot */
+        A(i, k) /= pivot;
 
-	/* we know that A(i, i) will be set to 1, so don't bother to do it */
-	b[i] /= pivot;
-	for (j=i+1; j<N; j++) {		/* eliminate in rows below i */
-	    t = A(j, i);		/* we're gonna zero this guy */
-	    for (k=i+1; k<N; k++)	/* subtract scaled row i from row j */
-		A(j, k) -= A(i, k)*t;	/* (ignore k<=i, we know they're 0) */
-	    b[j] -= b[i]*t;
-	}
+    /* we know that A(i, i) will be set to 1, so don't bother to do it */
+    b[i] /= pivot;
+    for (j=i+1; j<N; j++) {        /* eliminate in rows below i */
+        t = A(j, i);        /* we're gonna zero this guy */
+        for (k=i+1; k<N; k++)    /* subtract scaled row i from row j */
+        A(j, k) -= A(i, k)*t;    /* (ignore k<=i, we know they're 0) */
+        b[j] -= b[i]*t;
+    }
     }
 
     /*---------- back substitution ----------*/
 
-    for (i=N-1; i>=0; i--) {		/* solve for x[i] (put it in b[i]) */
-	sum = b[i];
-	for (k=i+1; k<N; k++)		/* really A(i, k)*x[k] */
-	    sum -= A(i, k)*b[k];
-	b[i] = sum;
+    for (i=N-1; i>=0; i--) {        /* solve for x[i] (put it in b[i]) */
+    sum = b[i];
+    for (k=i+1; k<N; k++)        /* really A(i, k)*x[k] */
+        sum -= A(i, k)*b[k];
+    b[i] = sum;
     }
 
     return det;
@@ -191,32 +191,32 @@ int mxm_cholesky(double *U, const double *A, const int N)
 
     for(int i=0; i<N; i++)
     {
-	/* First compute U[i][i] */
-	sum = mxm_ref(A, i, i, N);
+    /* First compute U[i][i] */
+    sum = mxm_ref(A, i, i, N);
 
-	for(int j=0; j<=(i-1); j++)
-	    sum -= mxm_ref(U, j, i, N) * mxm_ref(U, j, i, N);
+    for(int j=0; j<=(i-1); j++)
+        sum -= mxm_ref(U, j, i, N) * mxm_ref(U, j, i, N);
 
-	if( sum > 0 )
-	{
-	    mxm_ref(U, i, i, N) = _sqrt(sum);
+    if( sum > 0 )
+    {
+        mxm_ref(U, i, i, N) = _sqrt(sum);
 
-	    /* Now find elements U[i][k], k > i. */
-	    for(int k=(i+1); k<N; k++)
-	    {
-		sum = mxm_ref(A, i, k, N);
+        /* Now find elements U[i][k], k > i. */
+        for(int k=(i+1); k<N; k++)
+        {
+        sum = mxm_ref(A, i, k, N);
 
-		for(int j=0; j<=(i-1); j++)
-		    sum -= mxm_ref(U, j, i, N)*mxm_ref(U, j, k, N);
-		
-		mxm_ref(U, i, k, N) = sum / mxm_ref(U, i, i, N);
-	    }
-	}
-	else
-	{
-	    for(int k=i; k<N; k++) mxm_ref(U, i, k, N) = 0.0;
-	    nullity++;
-	}
+        for(int j=0; j<=(i-1); j++)
+            sum -= mxm_ref(U, j, i, N)*mxm_ref(U, j, k, N);
+        
+        mxm_ref(U, i, k, N) = sum / mxm_ref(U, i, i, N);
+        }
+    }
+    else
+    {
+        for(int k=i; k<N; k++) mxm_ref(U, i, k, N) = 0.0;
+        nullity++;
+    }
     }
 
     return nullity;

@@ -51,9 +51,9 @@ public:
         Real& rfCurv0, Real& rfCurv1, Vector3& rkDir0, Vector3& rkDir1);
 
 protected:
-	Function m_oF;
-	Function m_aoDF[3];
-	Function m_aoD2F[6];
+    Function m_oF;
+    Function m_aoDF[3];
+    Function m_aoD2F[6];
 };
 
 } // namespace Mgc

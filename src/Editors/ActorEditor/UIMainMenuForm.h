@@ -2,8 +2,8 @@
 class UIMainMenuForm :public IEditorWnd
 {
 public:
-	UIMainMenuForm();
-	virtual ~UIMainMenuForm();
-	virtual void Draw();
+    UIMainMenuForm();
+    virtual ~UIMainMenuForm();
+    virtual void Draw();
 };
 

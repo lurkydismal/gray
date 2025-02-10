@@ -14,34 +14,34 @@ class CLoginDlg : public CDialog
 {
 // Construction
 public:
-	int m_profile;
-	CLoginDlg(CWnd* pParent = NULL);   // standard constructor
+    int m_profile;
+    CLoginDlg(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CLoginDlg)
-	enum { IDD = IDD_LOGIN };
-	CString	m_email;
-	CString	m_nick;
-	CString	m_password;
-	//}}AFX_DATA
+    //{{AFX_DATA(CLoginDlg)
+    enum { IDD = IDD_LOGIN };
+    CString    m_email;
+    CString    m_nick;
+    CString    m_password;
+    //}}AFX_DATA
 
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CLoginDlg)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CLoginDlg)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CLoginDlg)
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CLoginDlg)
+    virtual BOOL OnInitDialog();
+    virtual void OnOK();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

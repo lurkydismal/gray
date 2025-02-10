@@ -4,10 +4,10 @@
  * Module: sem_trywait.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -95,13 +95,13 @@ sem_trywait (sem_t * sem)
         }
 
       if (s->value > 0)
-	{
-	  s->value--;
-	}
+    {
+      s->value--;
+    }
       else
-	{
-	  result = EAGAIN;
-	}
+    {
+      result = EAGAIN;
+    }
 
       (void) pthread_mutex_unlock (&s->lock);
     }
@@ -114,4 +114,4 @@ sem_trywait (sem_t * sem)
 
   return 0;
 
-}				/* sem_trywait */
+}                /* sem_trywait */

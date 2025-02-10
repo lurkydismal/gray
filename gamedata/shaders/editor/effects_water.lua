@@ -10,7 +10,7 @@ local tex_env = "sky\\sky_8_cube"
 
 function normal(shader, t_base, t_second, t_detail)
     shader:begin("water", "water")
-	
+    
         :sorting(2, false)
         :blend(true, blend.srcalpha, blend.invsrcalpha)
         :zb(true, false)
@@ -27,6 +27,6 @@ function normal(shader, t_base, t_second, t_detail)
 
     shader:sampler("s_image"):texture("$user$rt_color")
     shader:sampler("s_caustic"):texture(tex_caustic)
-	
+    
     shader:sampler("s_env"):texture(tex_env)
 end

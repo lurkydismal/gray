@@ -438,7 +438,7 @@ DEFAULT_MMAP_THRESHOLD       default: 256K
 
 */
 #ifdef DEBUG
-#	undef DEBUG
+#    undef DEBUG
 #endif // DEBUG
 
 #ifndef WIN32

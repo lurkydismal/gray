@@ -50,10 +50,10 @@
 
 enum 
 {
-    ZXY = 0,	// left shoulder, ankle, hip
-    YXZ = 1,	// left wrist
-    Yxz = 2,	// right wrist
-    zxY = 3	// right shoulder, ankle, hip
+    ZXY = 0,    // left shoulder, ankle, hip
+    YXZ = 1,    // left wrist
+    Yxz = 2,    // right wrist
+    zxY = 3    // right shoulder, ankle, hip
 };
 
 
@@ -61,7 +61,7 @@ enum
 void EulerSolve(int euler_type, const Matrix R, float t[3], int family = 1);
 void EulerSolve2(int euler_type, const Matrix R, float f1[3], float f2[3]);
 
-void EulerEval(int euler_type, const float t[3], Matrix R);		 
+void EulerEval(int euler_type, const float t[3], Matrix R);         
 
 
 class EulerPsiSolver
@@ -82,26 +82,26 @@ private:
 public:
 
     EulerPsiSolver(int etype, 
-		   const Matrix c,
-		   const Matrix s,
-		   const Matrix o,
-		   const float low[3],
-		   const float high[3]);
+           const Matrix c,
+           const Matrix s,
+           const Matrix o,
+           const float low[3],
+           const float high[3]);
 
     ~EulerPsiSolver() {}
 
     // Solve for psi ranges that lie in joint limits. Return each 
     // family for each joint in psi1[0..2] and psi2[0..2]
     void SolvePsiRanges(AngleIntList psi1[3], 
-			AngleIntList psi2[3]) const;
+            AngleIntList psi2[3]) const;
 
     // Given a matrix or psi angle find the corresponding euler angles
     void Solve(const Matrix R, float t[3], int family = 1) const;
     void Solve(float psi, float t[3], int family = 1) const;
 
     void Solve2(const Matrix R,
-		float f1[3], 
-		float f2[3]) const;
+        float f1[3], 
+        float f2[3]) const;
 
 
     // Given a psi angle find the derivatives of the euler angles relative to psi

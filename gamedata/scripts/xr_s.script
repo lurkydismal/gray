@@ -25,29 +25,29 @@ end
 ----------callbacks-----------
 
 local callbacks={
-	update={},
-	game_load={},
-	death={},
-	npc_death={},
-	monster_death={},
-	offline_death={},
-	net_spawn={},
-	net_destroy={},
-	info={},
-	item_drop={},
-	item_take={},
-	item_take_from_box={},
-	hit={},
-	monster_hit={},
-	npc_hit={},
-	enemy_see_actor={},
-	actor_see_enemy={},
-	npc_shot_actor={},
-	respawn={},
-	use={},
-	actor_destroy={},
-	main_menu_on={},
-	main_menu_off={}
+    update={},
+    game_load={},
+    death={},
+    npc_death={},
+    monster_death={},
+    offline_death={},
+    net_spawn={},
+    net_destroy={},
+    info={},
+    item_drop={},
+    item_take={},
+    item_take_from_box={},
+    hit={},
+    monster_hit={},
+    npc_hit={},
+    enemy_see_actor={},
+    actor_see_enemy={},
+    npc_shot_actor={},
+    respawn={},
+    use={},
+    actor_destroy={},
+    main_menu_on={},
+    main_menu_off={}
 }
 
 function register_callback(name,func,userobj)
@@ -74,7 +74,7 @@ function on_game_load()
   if db.storage[db.actor:id()].pstor == nil then
     db.storage[db.actor:id()].pstor = {}
   end
-	math.randomseed (device():time_global())
+    math.randomseed (device():time_global())
   for func,o in pairs(callbacks.game_load) do
     func(o.userobj)
   end  
@@ -180,44 +180,44 @@ end
 
 --выпарсиваем секцию инифайла в табличку
 function parse_ini_section_to_array(ini,section)
-	local tmp=nil
-	if ini and ini:section_exist(section) then
-		tmp={}
-		local result, id, value = nil, nil, nil
-		for a=0,ini:line_count(section)-1 do
-			result, id, value = ini:r_line(section,a,"","")
-			if id~=nil and trim(id)~="" and trim(id)~=nil then
-				tmp[trim(id)]=trim(value)
-			end
-		end
-	end
-	return tmp
+    local tmp=nil
+    if ini and ini:section_exist(section) then
+        tmp={}
+        local result, id, value = nil, nil, nil
+        for a=0,ini:line_count(section)-1 do
+            result, id, value = ini:r_line(section,a,"","")
+            if id~=nil and trim(id)~="" and trim(id)~=nil then
+                tmp[trim(id)]=trim(value)
+            end
+        end
+    end
+    return tmp
 end
 
 --обрезаем пробельные символы в начале и в конце строки
 function trim (s)
-	return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
+    return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
 end
 
 --разбиваем строку по разделителям
 function str_explode(div,str,clear)
-	local t={}
-	local cpt = string.find (str, div, 1, true)
-	if cpt then
-		repeat
-			if clear then
-				table.insert( t, trim(string.sub(str, 1, cpt-1)) )
-			else
-				table.insert( t, string.sub(str, 1, cpt-1) )
-			end
-			str = string.sub( str, cpt+string.len(div) )
-			cpt = string.find (str, div, 1, true)
-		until cpt==nil
-	end
-	if clear then
-		table.insert(t, trim(str))
-	else
-		table.insert(t, str)
-	end
-	return t
+    local t={}
+    local cpt = string.find (str, div, 1, true)
+    if cpt then
+        repeat
+            if clear then
+                table.insert( t, trim(string.sub(str, 1, cpt-1)) )
+            else
+                table.insert( t, string.sub(str, 1, cpt-1) )
+            end
+            str = string.sub( str, cpt+string.len(div) )
+            cpt = string.find (str, div, 1, true)
+        until cpt==nil
+    end
+    if clear then
+        table.insert(t, trim(str))
+    else
+        table.insert(t, str)
+    end
+    return t
 end

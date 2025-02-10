@@ -1,16 +1,16 @@
-#ifndef	_XRLIGHT_IMPLICIED_H_
-#define	_XRLIGHT_IMPLICIED_H_
+#ifndef    _XRLIGHT_IMPLICIED_H_
+#define    _XRLIGHT_IMPLICIED_H_
  
 class ImplicitExecute
 {
-	// Data for this thread
+    // Data for this thread
  public:
-	ImplicitExecute()
-	{
+    ImplicitExecute()
+    {
 
-	}
+    }
 
-	void		Execute			();
+    void        Execute            ();
 };
 
 

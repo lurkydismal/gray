@@ -56,7 +56,7 @@ LINK32=snLink.exe
 # ADD LINK32 eenetctl.ilb netcnf.ilb C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.o /nologo /pdb:none /debug /machine:IX86 /out:"c:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnf.irx" /D:SN_TARGET_PS2_IOP
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PreLink_Cmds=ioplibgen C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnf.tbl -e C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s	ps2cc -iop -o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s
+PreLink_Cmds=ioplibgen C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnf.tbl -e C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s    ps2cc -iop -o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s
 # End Special Build Tool
 
 !ELSEIF  "$(CFG)" == "ent_cnf - Win32 PS2 IOP Release"
@@ -86,7 +86,7 @@ LINK32=snLink.exe
 # ADD LINK32 eenetctl.ilb netcnf.ilb C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.o /nologo /pdb:none /machine:IX86 /out:"c:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnf.irx" /D:SN_TARGET_PS2_IOP
 # Begin Special Build Tool
 SOURCE="$(InputPath)"
-PreLink_Cmds=ioplibgen C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnf.tbl -e C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s	ps2cc -iop -o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s
+PreLink_Cmds=ioplibgen C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnf.tbl -e C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s    ps2cc -iop -o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.o C:\usr\local\sce\iop\sample\libeenet\ent_cnf\ent_cnfent.s
 # End Special Build Tool
 
 !ENDIF 

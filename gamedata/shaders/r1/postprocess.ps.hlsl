@@ -27,9 +27,9 @@ float4 main(v2p I) : COLOR
     float3 noised = image * t_noise * 2.0f; // mul_2x
     image = lerp(noised, image, I.color.w); // lrp ?
     image = (image * I.color + c_brightness) * 2.0f; // mad
-    //			image	= (image + c_brightness) * I.color;		// mad ?
+    //            image    = (image + c_brightness) * I.color;        // mad ?
 
     // out
-    // return  float4	(image.r,0,0,1);					// +mov
+    // return  float4    (image.r,0,0,1);                    // +mov
     return float4(image, 1.0f); // +mov
 }

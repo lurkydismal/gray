@@ -39,46 +39,46 @@ private:
 protected:
     MxBlock() { }
     void init_block(int n)
-	{
-	    // Allocate memory for block
-	    N=n; block = xr_alloc<T>(n);
+    {
+        // Allocate memory for block
+        N=n; block = xr_alloc<T>(n);
 
-	    // Initialize each entry
-	    for(int i=0;i<n;i++) new((void *)&block[i],ARRAY_ALLOC_INPLACE) T;
-	}
+        // Initialize each entry
+        for(int i=0;i<n;i++) new((void *)&block[i],ARRAY_ALLOC_INPLACE) T;
+    }
     void resize_block(int n)
-	{
-	    T *old = block;
+    {
+        T *old = block;
 
-	    // Allocate new block
-	    block = (T *)xr_realloc(old, sizeof(T)*n);
+        // Allocate new block
+        block = (T *)xr_realloc(old, sizeof(T)*n);
 
-	    // Initialize all the newly allocated entries
-	    for(int i=N;i<n;i++) new((void *)&block[i],ARRAY_ALLOC_INPLACE) T;
+        // Initialize all the newly allocated entries
+        for(int i=N;i<n;i++) new((void *)&block[i],ARRAY_ALLOC_INPLACE) T;
 
-	    N = n;
-	}
+        N = n;
+    }
     void free_block()
-	{
+    {
 /*
 //.
 #if defined(_MSC_VER)
-	    // The Microsoft compiler has a problem with the 
-	    // standard syntax below.  For some reason,
-	    // expanding it into the following pointer-based
-	    // version makes it work.  Don't ask me why.
-	    //
-		for(int i=0; i<N; i++)  { T *p = &block[i]; p->~T(); }
-	    xr_free(block);
+        // The Microsoft compiler has a problem with the 
+        // standard syntax below.  For some reason,
+        // expanding it into the following pointer-based
+        // version makes it work.  Don't ask me why.
+        //
+        for(int i=0; i<N; i++)  { T *p = &block[i]; p->~T(); }
+        xr_free(block);
 #else
 */
-	    // Call the relevant destructors for each element before
-	    // freeing the block.  Has now effect for types like 'int'.
-	    //
-	    for(int i=0; i<N; i++)  block[i].~T();
-	    xr_free(block);
+        // Call the relevant destructors for each element before
+        // freeing the block.  Has now effect for types like 'int'.
+        //
+        for(int i=0; i<N; i++)  block[i].~T();
+        xr_free(block);
 //#endif
-	}
+    }
 
 public:
     MxBlock(int n) { init_block(n); }
@@ -98,9 +98,9 @@ public:
     //
     void resize(int n) { resize_block(n); }
     void bitcopy(const T *a, int n) // copy bits directly
-	{ CopyMemory(block, a, _min(n,N)*sizeof(T)); }
+    { CopyMemory(block, a, _min(n,N)*sizeof(T)); }
     void copy(const T *a, const int n) // copy using assignment operator
-	{ for(int i=0; i<_min(n,N); i++) block[i] = a[i]; }
+    { for(int i=0; i<_min(n,N); i++) block[i] = a[i]; }
     void bitcopy(const MxBlock<T>& b) { bitcopy(b, b.length()); }
     void copy(const MxBlock<T>& b) { copy(b, b.length()); }
 

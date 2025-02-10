@@ -24,11 +24,11 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 06-02-2006  2.04.58  SAH  FIX      Added GS_STATIC_CALLBACK on comparator functions for __fastcall support
 05-31-2006  2.04.57  SAH  RELEASE  Releasing to developer site
 05-30-2006  2.04.56  SAH  FIX      Fixed PS3 projects to work with PS3(084_001 SDK)
-05-25-2006  2.04.55  SAH  FIX	   Added GSI_UNUSED calls to get rid of PSP warnings
-		     SAH  FIX	   Changed PSP project warning levels
-05-23-2006  2.04.54  SAH  FIX	   added GSI_UNUSED calls to get rid of PS3 warnings
-05-19-2006  2.04.53  SAH  FIX	   Added gsTestMain.c to nitro CodeWarrior project
-05-15-2006  2.04.52  SAH  FIX	   Added "PS3 Release" configuration to project
+05-25-2006  2.04.55  SAH  FIX       Added GSI_UNUSED calls to get rid of PSP warnings
+             SAH  FIX       Changed PSP project warning levels
+05-23-2006  2.04.54  SAH  FIX       added GSI_UNUSED calls to get rid of PS3 warnings
+05-19-2006  2.04.53  SAH  FIX       Added gsTestMain.c to nitro CodeWarrior project
+05-15-2006  2.04.52  SAH  FIX       Added "PS3 Release" configuration to project
 04-25-2006  2.04.51  SAH  RELEASE  Releasing to developer site
 04-24-2006  2.04.51  SAH  FIX      Fixed some compile errors with UNICODE build, mainly typecasts
 04-24-2006  2.04.50  SAH  FIX      Fixed Nitro project files to work on build machine
@@ -91,7 +91,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 08-16-2004  2.02.18  BED  FIX      Fixed case where players would become stuck in automatch searching phase
 08-05-2004  2.02.17  SN   RELEASE  Releasing to developer site.
 08-05-2004  2.02.17  SN   FIX      Added a parameter missing in a prototype (BAD, compiler could not catch it!!!).
-07-19-2004  2.02.17  SN	  FIX      Updated code with explicit casts to remove implicit cast error 
+07-19-2004  2.02.17  SN      FIX      Updated code with explicit casts to remove implicit cast error 
                                    when compiling at highest level and warnings treated as errors.
 06-21-2004  2.02.16  BED  FIX      Fixed bug with peerc sample's handling of NickErrorCallback
 06-18-2004  2.02.15  BED  RELEASE  Releasing to developer site.

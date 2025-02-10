@@ -1,7 +1,7 @@
 #include "fluid_common_render.hlsli"
 
-//	Pixel
-//	TODO: DX10: replace WorldViewProjection with m_WVP
+//    Pixel
+//    TODO: DX10: replace WorldViewProjection with m_WVP
 float4 main(PS_INPUT_RAYDATA_FRONT input) : SV_Target
 {
     float4 output;

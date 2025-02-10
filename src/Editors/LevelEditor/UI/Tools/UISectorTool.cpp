@@ -1,7 +1,7 @@
 #include "stdafx.h"
 UISectorTool::UISectorTool()
 {
-	m_Edit = false;
+    m_Edit = false;
     m_CreateNewMultiple = false;
     m_CreateNewSingle = false;
     m_MeshAdd = true;

@@ -7,46 +7,46 @@
 
 bool  TUI_ControlSpawnAdd::AppendCallback(SBeforeAppendCallbackParams* p)
 {
-	LPCSTR ref_name = ((UISpawnTool*)parent_tool->pForm)->Current();
+    LPCSTR ref_name = ((UISpawnTool*)parent_tool->pForm)->Current();
     if (!ref_name){
-    	ELog.DlgMsg(mtInformation,"Nothing selected.");
-    	return false;
+        ELog.DlgMsg(mtInformation,"Nothing selected.");
+        return false;
     }
     if(Scene->LevelPrefix().c_str())
     {
-		p->name_prefix 	= 	Scene->LevelPrefix().c_str();
-    	p->name_prefix 	+= 	"_";
+        p->name_prefix     =     Scene->LevelPrefix().c_str();
+        p->name_prefix     +=     "_";
     }
-	p->name_prefix 	+= 	ref_name;
-	p->data 		= (void*)ref_name;
+    p->name_prefix     +=     ref_name;
+    p->data         = (void*)ref_name;
     return (0!=p->name_prefix.length());
 }
 
 bool  TUI_ControlSpawnAdd::Start(TShiftState Shift)
 {
     UISpawnTool* F = (UISpawnTool*)parent_tool->pForm;
-	if (F->IsAttachObject()){
-		CCustomObject* from = Scene->RayPickObject(UI->ZFar(), UI->m_CurrentRStart, UI->m_CurrentRDir, OBJCLASS_DUMMY, 0, 0);
+    if (F->IsAttachObject()){
+        CCustomObject* from = Scene->RayPickObject(UI->ZFar(), UI->m_CurrentRStart, UI->m_CurrentRDir, OBJCLASS_DUMMY, 0, 0);
         if (from&&from->FClassID!=OBJCLASS_SPAWNPOINT){
-            ObjectList 	lst;
-            int cnt 	= Scene->GetQueryObjects(lst,OBJCLASS_SPAWNPOINT,1,1,0);
-            if (1!=cnt)	ELog.DlgMsg(mtError,"Select one shape.");
+            ObjectList     lst;
+            int cnt     = Scene->GetQueryObjects(lst,OBJCLASS_SPAWNPOINT,1,1,0);
+            if (1!=cnt)    ELog.DlgMsg(mtError,"Select one shape.");
             else{
                 CSpawnPoint* base = smart_cast<CSpawnPoint*>(lst.back()); R_ASSERT(base);
                 if (base->AttachObject(from)){
                     if (!(Shift&ssAlt)){
                         F->SetAttachObject(false);
-                        ResetActionToSelect		();
+                        ResetActionToSelect        ();
                     }
                 }else{
-		        	ELog.DlgMsg(mtError,"Attach impossible.");
+                    ELog.DlgMsg(mtError,"Attach impossible.");
                 }
             }
         }else{
-        	ELog.DlgMsg(mtError,"Attach impossible.");
+            ELog.DlgMsg(mtError,"Attach impossible.");
         }
     }else{
-	    DefaultAddObject(Shift, TBeforeAppendCallback(this,& TUI_ControlSpawnAdd::AppendCallback));
+        DefaultAddObject(Shift, TBeforeAppendCallback(this,& TUI_ControlSpawnAdd::AppendCallback));
     }
     return false;
 }

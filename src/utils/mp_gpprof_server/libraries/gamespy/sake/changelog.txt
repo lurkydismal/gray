@@ -51,7 +51,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 07-05-2006  1.00.04  SAH  OTHER    Updated saketest.c to have a larger size upload test (5K by default)
 06-21-2006  1.00.03  DES  FEATURE  sakeSetGame now requires the game's secret key
 05-31-2006  1.00.02  SAH  RELEASE  Releasing to developer site
-05-30-2006  1.00.01  SAH  FIX	   #ifdef PS2 Unicode hack to get rid of PS2 Unicode warnings
+05-30-2006  1.00.01  SAH  FIX       #ifdef PS2 Unicode hack to get rid of PS2 Unicode warnings
                      SAH  FIX      Added GSI_UNUSED calls, newline at end of files
 05-18-2006  1.00.00  DES  RELEASE  Initial limited release
 

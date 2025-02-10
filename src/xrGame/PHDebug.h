@@ -4,8 +4,8 @@
 
 struct SPHDBGDrawAbsract
 {
-	virtual void				render() = 0;
-	virtual						~SPHDBGDrawAbsract() { };
+    virtual void                render() = 0;
+    virtual                        ~SPHDBGDrawAbsract() { };
 };
 
 using PHABS_DBG_V = xr_vector<SPHDBGDrawAbsract*>;
@@ -23,22 +23,22 @@ struct dContact;
 
 
 
-extern	Flags32			ph_dbg_draw_mask						;
-extern	Flags32			ph_dbg_draw_mask1						;
-extern	bool			draw_frame								;
-extern	u32				dbg_tries_num							;
-extern	u32				dbg_saved_tries_for_active_objects		;
-extern	u32				dbg_total_saved_tries					;
-extern	u32 			dbg_reused_queries_per_step				;
-extern	u32 			dbg_new_queries_per_step				;
-extern	u32 			dbg_bodies_num							;
-extern	u32 			dbg_joints_num							;
-extern	u32 			dbg_islands_num							;
-extern	u32 			dbg_contacts_num						;
-extern	float			dbg_vel_collid_damage_to_display		;
-extern	LPCSTR			dbg_trace_object						;
-class	CObject													;
-extern	CObject			*trace_object							;
+extern    Flags32            ph_dbg_draw_mask                        ;
+extern    Flags32            ph_dbg_draw_mask1                        ;
+extern    bool            draw_frame                                ;
+extern    u32                dbg_tries_num                            ;
+extern    u32                dbg_saved_tries_for_active_objects        ;
+extern    u32                dbg_total_saved_tries                    ;
+extern    u32             dbg_reused_queries_per_step                ;
+extern    u32             dbg_new_queries_per_step                ;
+extern    u32             dbg_bodies_num                            ;
+extern    u32             dbg_joints_num                            ;
+extern    u32             dbg_islands_num                            ;
+extern    u32             dbg_contacts_num                        ;
+extern    float            dbg_vel_collid_damage_to_display        ;
+extern    LPCSTR            dbg_trace_object                        ;
+class    CObject                                                    ;
+extern    CObject            *trace_object                            ;
 #ifdef DRAW_CONTACTS
 
 
@@ -53,13 +53,13 @@ extern	CObject			*trace_object							;
 //using PHOBJ_DBG_V = xr_vector<SPHObjDBGDraw>;
 //using PHOBJ_DBG_I = PHOBJ_DBG_V::iterator;
 
-//extern PHOBJ_DBG_V	dbg_draw_objects0;
-//extern PHOBJ_DBG_V	dbg_draw_objects1;
+//extern PHOBJ_DBG_V    dbg_draw_objects0;
+//extern PHOBJ_DBG_V    dbg_draw_objects1;
 class CPHObject;
 
 
-extern PHABS_DBG_V	dbg_draw_abstruct0;
-extern PHABS_DBG_V	dbg_draw_abstruct1;
+extern PHABS_DBG_V    dbg_draw_abstruct0;
+extern PHABS_DBG_V    dbg_draw_abstruct1;
 
 void DBG_DrawStatBeforeFrameStep( );
 void DBG_DrawStatAfterFrameStep( );
@@ -96,26 +96,26 @@ void DBG_PH_NetRelcase( CObject* obj );
 struct CFunctionGraph
 {
 public:
-	using type_function = xr_delegate<float(float)>;
+    using type_function = xr_delegate<float(float)>;
 private:
-	CStatGraph						*m_stat_graph																																					;
-	type_function					m_function																																						;
-	float x_min,x_max,s;
-	//float y_min,y_max;
-	//Fvector2 left_bottom;
-	//Fvector2 range;
+    CStatGraph                        *m_stat_graph                                                                                                                                                    ;
+    type_function                    m_function                                                                                                                                                        ;
+    float x_min,x_max,s;
+    //float y_min,y_max;
+    //Fvector2 left_bottom;
+    //Fvector2 range;
 public:
 
-	CFunctionGraph						( )																																								;
-	~CFunctionGraph						( )																																								;
-	void	Init(type_function fun, float x0, float x1, int l, int t, int w, int h, int points_num = 500, u32 color = color_xrgb(0, 255, 0), u32 bk_color = color_xrgb(255, 255, 255));
-	void	Clear						( )																																								;
-	bool	IsActive					( )																																								;
-	void	AddMarker					( CStatGraph::EStyle Style, float pos, u32 Color )																												;
-	void	UpdateMarker				( u32 ID, float M1 )																																				;
-IC	float	ScaleX						( float x )  { VERIFY( IsActive( ) ); return( x-x_min )/s; }	
-	void	ScaleMarkerPos				( u32 ID, float &p )																																				;
-	void	ScaleMarkerPos				( CStatGraph::EStyle Style, float &p )																															;
-IC	float	ResolutionX					( ){ VERIFY( IsActive( ) ); return s; } 
+    CFunctionGraph                        ( )                                                                                                                                                                ;
+    ~CFunctionGraph                        ( )                                                                                                                                                                ;
+    void    Init(type_function fun, float x0, float x1, int l, int t, int w, int h, int points_num = 500, u32 color = color_xrgb(0, 255, 0), u32 bk_color = color_xrgb(255, 255, 255));
+    void    Clear                        ( )                                                                                                                                                                ;
+    bool    IsActive                    ( )                                                                                                                                                                ;
+    void    AddMarker                    ( CStatGraph::EStyle Style, float pos, u32 Color )                                                                                                                ;
+    void    UpdateMarker                ( u32 ID, float M1 )                                                                                                                                                ;
+IC    float    ScaleX                        ( float x )  { VERIFY( IsActive( ) ); return( x-x_min )/s; }    
+    void    ScaleMarkerPos                ( u32 ID, float &p )                                                                                                                                                ;
+    void    ScaleMarkerPos                ( CStatGraph::EStyle Style, float &p )                                                                                                                            ;
+IC    float    ResolutionX                    ( ){ VERIFY( IsActive( ) ); return s; } 
 };
 #endif

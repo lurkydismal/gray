@@ -14,12 +14,12 @@ float4 main(_input I) : SV_Target0
 {
     IXrayGbuffer O;
     GbufferUnpack(I.tc0.xy, I.pos2d.xy, O);
-	
-	if(O.Depth > 0.9999f) {
-		return 1.0f;
-	}
+    
+    if(O.Depth > 0.9999f) {
+        return 1.0f;
+    }
 
-	float occ = calc_ssao(O.Depth, O.Normal, I.tc0.xy);
+    float occ = calc_ssao(O.Depth, O.Normal, I.tc0.xy);
     return float4(occ, occ, occ, occ);
 }
 

@@ -24,10 +24,10 @@ Please see the GameSpy Presence SDK documentation for more information
 ////////////
 typedef struct
 {
-	char * buffer;
-	int size;
-	int len;
-	int pos;
+    char * buffer;
+    int size;
+    int len;
+    int pos;
 } GPIBuffer;
 
 typedef struct GPIPeer_s * GPIPeer_st;
@@ -57,15 +57,15 @@ gpiAppendStringToBuffer(
 );
 
 GPResult gpiAppendShortToBuffer(
-	GPConnection * connection,
-	GPIBuffer * outputBuffer, 
-	short num
+    GPConnection * connection,
+    GPIBuffer * outputBuffer, 
+    short num
 );
 
 GPResult gpiAppendUShortToBuffer(
-	GPConnection * connection,
-	GPIBuffer * outputBuffer, 
-	unsigned short num
+    GPConnection * connection,
+    GPIBuffer * outputBuffer, 
+    unsigned short num
 );
 
 GPResult
@@ -100,10 +100,10 @@ gpiSendOrBufferStringLen(
 */
 GPResult
 gpiSendOrBufferStringLenToPeer(
-	GPConnection * connection,
-	GPIPeer_st peer,
-	const char * string,
-	int stringLen
+    GPConnection * connection,
+    GPIPeer_st peer,
+    const char * string,
+    int stringLen
 );
 
 GPResult
@@ -163,5 +163,5 @@ gpiClipBufferToPosition(
 );
 
 GPResult gpiSendBufferToPeer(GPConnection * connection, unsigned int ip, unsigned short port, 
-							 GPIBuffer * outputBuffer, GPIBool *closed, GPIBool clipSentData);
+                             GPIBuffer * outputBuffer, GPIBool *closed, GPIBool clipSentData);
 #endif

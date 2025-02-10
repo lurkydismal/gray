@@ -42,12 +42,12 @@ while test $# -gt 0; do
        ofile=$2
        shift
        case "$ofile" in
-	*.o | *.obj)
-	   ;;
-	*)
-	   args="$args -o $ofile"
-	   ofile=
-	   ;;
+    *.o | *.obj)
+       ;;
+    *)
+       args="$args -o $ofile"
+       ofile=
+       ;;
        esac
        ;;
     *.c)

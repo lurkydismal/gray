@@ -24,7 +24,7 @@ float4 main(v2p I) : COLOR
 
     float2 faded_bx2 = (faded * 2.0f - 1.0f) * W_DISTORT_POWER;
     float faded_dot = dot(float3(faded_bx2, 0.0f), 0.75f); // 0.75
-    float alpha = 0.5f; // abs  	(faded_dot);
+    float alpha = 0.5f; // abs      (faded_dot);
     // out
     return float4(faded, 0.0f, alpha);
 }

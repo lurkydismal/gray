@@ -19,10 +19,10 @@ extern "C" {
 
 // for simplicity, set the binary size to a value > gsCrypt.h binary size
 #ifndef GS_LARGEINT_BINARY_SIZE
-#define GS_LARGEINT_BINARY_SIZE		 (2048)   // *BIT* size (divide by 8 for byte size)
+#define GS_LARGEINT_BINARY_SIZE         (2048)   // *BIT* size (divide by 8 for byte size)
 #endif
 
-	//  !!!!!!WARNING!!!!!!  Encryption is fastest when digit type is the default system type, (ex: gsi_u32 on 32bit processor)
+    //  !!!!!!WARNING!!!!!!  Encryption is fastest when digit type is the default system type, (ex: gsi_u32 on 32bit processor)
 #define GS_LARGEINT_DIGIT_TYPE       gsi_u32
 #define GS_LARGEINT_DIGIT_LONG_TYPE  gsi_u64
 
@@ -41,8 +41,8 @@ extern "C" {
 
 typedef struct gsLargeInt_s
 {
-	GS_LARGEINT_DIGIT_TYPE mLength;
-	GS_LARGEINT_DIGIT_TYPE mData[GS_LARGEINT_MAX_DIGITS];
+    GS_LARGEINT_DIGIT_TYPE mLength;
+    GS_LARGEINT_DIGIT_TYPE mData[GS_LARGEINT_MAX_DIGITS];
 } gsLargeInt_t;
 
 

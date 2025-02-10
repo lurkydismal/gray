@@ -25,7 +25,7 @@ on_game_timer = 50 | sr_cutscene@cam2_p1
 [sr_cutscene@cam1]
 point = pri_a16_pri_b305_actor_walk
 look = pri_a16_pri_b305_actor_walk
-cam_effector = scenario_cam\pripyat\pri_b305_catscene_1_medik_back	
+cam_effector = scenario_cam\pripyat\pri_b305_catscene_1_medik_back    
 global_cameffect = true
 on_game_timer = 10 | {-pri_b305_first_cam_ready} %+pri_b305_first_cam_ready =stop_postprocess(5612)%
 on_info = {+pri_b305_actor_understand_done_end} %=stop_sr_cutscene =enable_ui +pri_b305_first_cam_end%

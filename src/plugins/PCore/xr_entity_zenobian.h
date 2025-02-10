@@ -10,20 +10,20 @@ namespace xray_re {
 
 class se_turret_mgun: public cse_alife_helicopter {
 public:
-			se_turret_mgun();
-	virtual void	state_read(xr_packet& packet, uint16_t size);
-	virtual void	state_write(xr_packet& packet);
+            se_turret_mgun();
+    virtual void    state_read(xr_packet& packet, uint16_t size);
+    virtual void    state_write(xr_packet& packet);
 protected:
-	float		m_health;
+    float        m_health;
 };
 
 class se_anomaly_field: public cse_alife_space_restrictor {
 public:
-			se_anomaly_field();
-	virtual void	state_read(xr_packet& packet, uint16_t size);
-	virtual void	state_write(xr_packet& packet);
+            se_anomaly_field();
+    virtual void    state_read(xr_packet& packet, uint16_t size);
+    virtual void    state_write(xr_packet& packet);
 protected:
-	bool		m_initialized;
+    bool        m_initialized;
 };
 
 } // end of namespace xray_re

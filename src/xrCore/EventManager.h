@@ -2,28 +2,28 @@
 #include "EventAPI.h"
 
 class XRCORE_API CEventManager {
-	friend class CApplication;
+    friend class CApplication;
 
 public:
-	CEventAPI Event;
+    CEventAPI Event;
 
 private:
-	EVENT eQuit;
-	EVENT eStart;
-	EVENT eAssert;
-	EVENT eStartLoad;
-	EVENT eDisconnect;
-	EVENT eConsole;
-	EVENT eStartMPDemo;
+    EVENT eQuit;
+    EVENT eStart;
+    EVENT eAssert;
+    EVENT eStartLoad;
+    EVENT eDisconnect;
+    EVENT eConsole;
+    EVENT eStartMPDemo;
 
 public:
-	CEventManager();
+    CEventManager();
 
-	void Attach(IEventReceiver* Holder) noexcept;
-	void Detach(IEventReceiver* Holder) noexcept;
-	void OnEvent(EVENT E, u64 P1, u64 P2);
+    void Attach(IEventReceiver* Holder) noexcept;
+    void Detach(IEventReceiver* Holder) noexcept;
+    void OnEvent(EVENT E, u64 P1, u64 P2);
 
-	bool IsEventThread() const;
+    bool IsEventThread() const;
 };
 
 extern XRCORE_API CEventManager* g_pEventManager;

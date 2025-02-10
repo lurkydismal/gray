@@ -16,76 +16,76 @@ class xr_reader;
 
 class xr_ogf: public xr_object {
 public:
-			xr_ogf(ogf_version version);
-	virtual		~xr_ogf();
+            xr_ogf(ogf_version version);
+    virtual        ~xr_ogf();
 
-	// auto-detect version and load
-	static xr_ogf*	load_ogf(const std::string& path);
+    // auto-detect version and load
+    static xr_ogf*    load_ogf(const std::string& path);
 
-	virtual void	clear();
-	virtual bool	load_ogf(const char* path, const std::string& name);
-	virtual void	load_ogf(xr_reader& r) = 0;
-	virtual void	to_object();
+    virtual void    clear();
+    virtual bool    load_ogf(const char* path, const std::string& name);
+    virtual void    load_ogf(xr_reader& r) = 0;
+    virtual void    to_object();
 
-	class ogf_error: public xr_error {};
+    class ogf_error: public xr_error {};
 
-	virtual bool	hierarchical() const = 0;
-	virtual bool	skeletal() const = 0;
-	virtual bool	animated() const = 0;
-	virtual bool	progressive() const = 0;
-	virtual bool	versioned() const = 0;
+    virtual bool    hierarchical() const = 0;
+    virtual bool    skeletal() const = 0;
+    virtual bool    animated() const = 0;
+    virtual bool    progressive() const = 0;
+    virtual bool    versioned() const = 0;
 
-	const std::string&		path() const;
-	ogf_version			version() const;
-	ogf_model_type			model_type() const;
-	const fbox&			bbox() const;
-	const fsphere&			bsphere() const;
-	const std::vector<xr_ogf*>&	children() const;
-	const std::vector<uint32_t>&	children_l() const;
-	const std::vector<xr_ogf*>&	lods() const;
-	virtual const std::string&	texture() const;
-	virtual const std::string&	shader() const;
-	virtual uint32_t		texture_l() const = 0;
-	virtual uint32_t		shader_l() const = 0;
-	virtual const xr_vbuf&		vb() const;
-	virtual const xr_ibuf&		ib() const;
-	const ogf4_lod_face*	lod_faces() const;
+    const std::string&        path() const;
+    ogf_version            version() const;
+    ogf_model_type            model_type() const;
+    const fbox&            bbox() const;
+    const fsphere&            bsphere() const;
+    const std::vector<xr_ogf*>&    children() const;
+    const std::vector<uint32_t>&    children_l() const;
+    const std::vector<xr_ogf*>&    lods() const;
+    virtual const std::string&    texture() const;
+    virtual const std::string&    shader() const;
+    virtual uint32_t        texture_l() const = 0;
+    virtual uint32_t        shader_l() const = 0;
+    virtual const xr_vbuf&        vb() const;
+    virtual const xr_ibuf&        ib() const;
+    const ogf4_lod_face*    lod_faces() const;
 
-	struct bone_motion_io: public xr_bone_motion {
-		void	insert_key(float time, const ogf_key_qr* value);
-		void	insert_key(float time, const fvector3* value);
-	};
-
-protected:
-	virtual xr_surface*	create_surface(const xr_raw_surface& raw_surface) const;
-
-	bool	is_chunk_loaded(uint32_t id) const;
-	void	set_chunk_loaded(uint32_t id);
-	void	check_unhandled_chunks(xr_reader& r) const;
-
-	void	load_texture(xr_reader& r);
+    struct bone_motion_io: public xr_bone_motion {
+        void    insert_key(float time, const ogf_key_qr* value);
+        void    insert_key(float time, const fvector3* value);
+    };
 
 protected:
-	uint32_t		m_loaded;	// mask of loaded chunks (mostly for debugging)
-	std::string		m_path;		// empty if embedded
+    virtual xr_surface*    create_surface(const xr_raw_surface& raw_surface) const;
 
-	ogf_version		m_version;	// OGF_HEADER
-	ogf_model_type		m_model_type;
-	ogf_bbox		m_bbox;		// OGF_HEADER or OGF_BBOX (v3)
-	ogf_bsphere		m_bsphere;	// OGF_HEADER or OGF_BSPHERE (v3)
+    bool    is_chunk_loaded(uint32_t id) const;
+    void    set_chunk_loaded(uint32_t id);
+    void    check_unhandled_chunks(xr_reader& r) const;
 
-	std::string		m_texture;	// OGF_TEXTURE
-	std::string		m_shader;
+    void    load_texture(xr_reader& r);
 
-	xr_vbuf			m_vb;		// OGF_VERTICES/OGF_GCONTAINER/OGF_VCONTAINER
-	xr_ibuf			m_ib;		// OGF_INDICES/OGF_GCONTAINER/OGF_ICONTAINER
+protected:
+    uint32_t        m_loaded;    // mask of loaded chunks (mostly for debugging)
+    std::string        m_path;        // empty if embedded
 
-	std::vector<xr_ogf*>	m_children;	// OGF_CHILDREN/OGF_CHILD_REFS
-	std::vector<uint32_t>	m_children_l;	// OGF_CHILDREN_L
+    ogf_version        m_version;    // OGF_HEADER
+    ogf_model_type        m_model_type;
+    ogf_bbox        m_bbox;        // OGF_HEADER or OGF_BBOX (v3)
+    ogf_bsphere        m_bsphere;    // OGF_HEADER or OGF_BSPHERE (v3)
 
-	std::vector<xr_ogf*>	m_lods;		// OGF_LODS and OGF_S_LODS
+    std::string        m_texture;    // OGF_TEXTURE
+    std::string        m_shader;
 
-	ogf4_lod_face	m_lod_faces[8];	// OGF_LODDEF2
+    xr_vbuf            m_vb;        // OGF_VERTICES/OGF_GCONTAINER/OGF_VCONTAINER
+    xr_ibuf            m_ib;        // OGF_INDICES/OGF_GCONTAINER/OGF_ICONTAINER
+
+    std::vector<xr_ogf*>    m_children;    // OGF_CHILDREN/OGF_CHILD_REFS
+    std::vector<uint32_t>    m_children_l;    // OGF_CHILDREN_L
+
+    std::vector<xr_ogf*>    m_lods;        // OGF_LODS and OGF_S_LODS
+
+    ogf4_lod_face    m_lod_faces[8];    // OGF_LODDEF2
 };
 
 TYPEDEF_STD_VECTOR_PTR(xr_ogf)

@@ -7,52 +7,52 @@ void decompress( LPCSTR f_in, LPCSTR f_out );
 
 void compress( LPCSTR f_in, LPCSTR f_out )
 {
-	FILE * file;
-	fopen_s(&file, f_in, "rb" );
-	u32 buff_size = 1024*1024/2;
+    FILE * file;
+    fopen_s(&file, f_in, "rb" );
+    u32 buff_size = 1024*1024/2;
 
-	
-	void *buff = _alloca( buff_size );
-	gzFile z_file = gzopen(f_out, "wb");
-	u32 const length	= _filelength( _fileno( file ) );
+    
+    void *buff = _alloca( buff_size );
+    gzFile z_file = gzopen(f_out, "wb");
+    u32 const length    = _filelength( _fileno( file ) );
 
 
-	for (int n = length/buff_size, i = 0; i<n; ++i) {
-		fread					( buff, 1, buff_size, file );
-		gzwrite					( z_file, buff, buff_size );
-	}
-	buff_size				= length % buff_size;
-	if (buff_size!=0) {
-		fread					( buff, 1, buff_size, file );
-		gzwrite					( z_file, buff, buff_size );
-	}
-	fclose( file );
-	gzclose( z_file );
+    for (int n = length/buff_size, i = 0; i<n; ++i) {
+        fread                    ( buff, 1, buff_size, file );
+        gzwrite                    ( z_file, buff, buff_size );
+    }
+    buff_size                = length % buff_size;
+    if (buff_size!=0) {
+        fread                    ( buff, 1, buff_size, file );
+        gzwrite                    ( z_file, buff, buff_size );
+    }
+    fclose( file );
+    gzclose( z_file );
 }
 
 void decompress( LPCSTR f_in, LPCSTR f_out )
 {
 
-	FILE * file;
-	fopen_s(&file, f_out, "wb" );
-	u32 buff_size = 1024*1024/2;
+    FILE * file;
+    fopen_s(&file, f_out, "wb" );
+    u32 buff_size = 1024*1024/2;
 
-	//u32 const length	= _filelength( _fileno( file ) );
+    //u32 const length    = _filelength( _fileno( file ) );
 
-	void *buff = _alloca( buff_size );
-	gzFile z_file = gzopen(f_in, "rb");
-	
+    void *buff = _alloca( buff_size );
+    gzFile z_file = gzopen(f_in, "rb");
+    
 
-	for (;;) {
-		u32 read = gzread		( z_file, buff, buff_size );
-		fwrite					( buff, 1, read, file );
-		if(read<buff_size)
-			break;
-	}
+    for (;;) {
+        u32 read = gzread        ( z_file, buff, buff_size );
+        fwrite                    ( buff, 1, read, file );
+        if(read<buff_size)
+            break;
+    }
 
-	fclose( file );
-	gzclose( z_file );
-	
+    fclose( file );
+    gzclose( z_file );
+    
 }
 
 
@@ -60,27 +60,27 @@ void decompress( LPCSTR f_in, LPCSTR f_out )
 
 void compress( LPCSTR f_in_out )
 {
- 	string_path	tmp;
- 	xr_strconcat(tmp, f_in_out, "___ctmp" );
-	compress( f_in_out, tmp );
+     string_path    tmp;
+     xr_strconcat(tmp, f_in_out, "___ctmp" );
+    compress( f_in_out, tmp );
 
-	if ( GetFileAttributesA(f_in_out) != u32(-1) ) 
-			_unlink(f_in_out);
+    if ( GetFileAttributesA(f_in_out) != u32(-1) ) 
+            _unlink(f_in_out);
     // physically rename file
-    VerifyPath			(f_in_out);
-    rename				(tmp,f_in_out);
+    VerifyPath            (f_in_out);
+    rename                (tmp,f_in_out);
 
-	
+    
 }
 
 void decompress( LPCSTR f_in_out )
 {
- 	string_path	tmp;
-	xr_strconcat(tmp, f_in_out, "___dtmp" );
-	decompress( f_in_out, tmp );
-	if ( GetFileAttributesA(f_in_out) != u32(-1) ) 
-			_unlink(f_in_out);
+     string_path    tmp;
+    xr_strconcat(tmp, f_in_out, "___dtmp" );
+    decompress( f_in_out, tmp );
+    if ( GetFileAttributesA(f_in_out) != u32(-1) ) 
+            _unlink(f_in_out);
     // physically rename file
-    VerifyPath			(f_in_out);
-    rename				(tmp,f_in_out);
+    VerifyPath            (f_in_out);
+    rename                (tmp,f_in_out);
 }

@@ -19,14 +19,14 @@ extern "C" {
 // SDK instance
 typedef struct
 {
-	SCWebServices mWebServices;
-	gsi_u32       mGameId;
-	//gsi_u32	  mOptionsFlags;
-	gsi_bool      mInit;
-	const char *  mServiceURL;
-	GSCoreMgr *   mSdkCore;
-	gsi_u8        mSessionId[SC_SESSION_GUID_SIZE];
-	gsi_u8        mConnectionId[SC_CONNECTION_GUID_SIZE];
+    SCWebServices mWebServices;
+    gsi_u32       mGameId;
+    //gsi_u32      mOptionsFlags;
+    gsi_bool      mInit;
+    const char *  mServiceURL;
+    GSCoreMgr *   mSdkCore;
+    gsi_u8        mSessionId[SC_SESSION_GUID_SIZE];
+    gsi_u8        mConnectionId[SC_CONNECTION_GUID_SIZE];
 } SCInterface;
 
 

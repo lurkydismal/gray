@@ -99,4 +99,4 @@ pthread_testcancel (void)
     }
 
   (void) pthread_mutex_unlock (&sp->cancelLock);
-}				/* pthread_testcancel */
+}                /* pthread_testcancel */

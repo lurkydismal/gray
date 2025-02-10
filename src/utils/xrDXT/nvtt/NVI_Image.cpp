@@ -89,10 +89,10 @@ UINT NVI_Image::GetBytesPerPixel()
     case NVI_R16_G16_B16_A16:
         return 8;
         break;
-	default:
-		break;
+    default:
+        break;
     }
-    //.	FDebug("Unrecognized format! %d\n", m_Format );
+    //.    FDebug("Unrecognized format! %d\n", m_Format );
     assert(false);
     return 0;
 }
@@ -169,7 +169,7 @@ void NVI_Image::ABGR8_To_ARGB8()
     {
         DWORD col;
         GetPixel_ARGB8(&col, i);
-		// A part of conditional expression is always true: 0x000000FF.
+        // A part of conditional expression is always true: 0x000000FF.
         DWORD a = (col >> 24) & 0x000000FF;
         DWORD b = (col >> 16) & 0x000000FF;
         DWORD g = (col >> 8) & 0x000000FF;
@@ -249,10 +249,10 @@ void NVI_ImageBordered::CopyDataFromSource()
     DWORD* pPadArray = (DWORD*)m_pArray;
     assert(m_pArray != NULL);
     // Duplicate values into the padded region, taking wrapping into account
-    //.	ASSERT_MSG( m_nBorderXLow < sx, "Borders larger than image not supported! ulow\n" );
-    //.	ASSERT_MSG( m_nBorderYLow < sy, "Borders larger than image not supported! uhigh\n" );
-    //.	ASSERT_MSG( m_nBorderXHigh < sx, "Borders larger than image not supported! vlow\n" );
-    //.	ASSERT_MSG( m_nBorderYHigh < sy, "Borders larger than image not supported! vhigh\n" );
+    //.    ASSERT_MSG( m_nBorderXLow < sx, "Borders larger than image not supported! ulow\n" );
+    //.    ASSERT_MSG( m_nBorderYLow < sy, "Borders larger than image not supported! uhigh\n" );
+    //.    ASSERT_MSG( m_nBorderXHigh < sx, "Borders larger than image not supported! vlow\n" );
+    //.    ASSERT_MSG( m_nBorderYHigh < sy, "Borders larger than image not supported! vhigh\n" );
     // First, copy source image within the borders
     for (int j = 0; j < sy; j++)
     {
@@ -330,7 +330,7 @@ void NVI_ImageBordered::CopyDataFromSource()
         }
     }
     // To save the result of the padding operation:
-    //	ulTarga newfile;
-    //	newfile.WriteFile( "temp_result1.tga", (unsigned char*) pPadArray,
-    //						(DWORD) m_nSizeX, (DWORD) m_nSizeY, 32, 32, 0 );
+    //    ulTarga newfile;
+    //    newfile.WriteFile( "temp_result1.tga", (unsigned char*) pPadArray,
+    //                        (DWORD) m_nSizeX, (DWORD) m_nSizeY, 32, 32, 0 );
 }

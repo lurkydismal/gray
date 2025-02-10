@@ -42,7 +42,7 @@
 
 int
 pthread_rwlock_init (pthread_rwlock_t * rwlock,
-		     const pthread_rwlockattr_t * attr)
+             const pthread_rwlockattr_t * attr)
 {
   int result;
   pthread_rwlock_t rwl = 0;
@@ -54,7 +54,7 @@ pthread_rwlock_init (pthread_rwlock_t * rwlock,
 
   if (attr != NULL && *attr != NULL)
     {
-      result = EINVAL;		/* Not supported */
+      result = EINVAL;        /* Not supported */
       goto DONE;
     }
 

@@ -59,7 +59,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 06-27-2006  1.09.57  SAH  FIX      Removed unused variables in gpiInfo.c and gpiSearch.c
 06-26-2006  1.09.56  BMS  FEATURE  Passwords no longer go over the wire in cleartext
 05-31-2006  1.09.55  SAH  RELEASE  Releasing to developer site
-                     SAH  FIX	   Fixed Linux makefile
+                     SAH  FIX       Fixed Linux makefile
 05-30-2006  1.09.54  SAH  FIX      Fixed PS3 project to work with newest PS3(084_001 SDK) release
 05-25-2006  1.09.53  SAH  FIX      Added PS3 required typecasts
                      SAH  FIX      Changed PSP project warning levels

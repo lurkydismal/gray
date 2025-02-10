@@ -2,13 +2,13 @@
 // Defines
 //--------------------------------------------------------------------------------------
 // #define OCCLUDED_PIXEL_RAYVALUE     float4(1, 0, 0, 0)
-//	Use very large value for aplha to help edge detection
+//    Use very large value for aplha to help edge detection
 #define OCCLUDED_PIXEL_RAYVALUE float4(1, 0, 0, 100000)
 #define NEARCLIPPED_PIXEL_RAYPOS float3(0, -1, 0)
 
-//	Z for skybox is zero, so patch this in shader
+//    Z for skybox is zero, so patch this in shader
 #define Z_EPSILON 0.00001
-//	Value for skybox depth
+//    Value for skybox depth
 #define Z_MAX 100000
 
 #pragma warning(disable : 4000)
@@ -38,15 +38,15 @@ sampler samRepeat;
 //--------------------------------------------------------------------------------------
 // Variables
 //--------------------------------------------------------------------------------------
-//	Set once per volume
-//	Use for all rendering passes
+//    Set once per volume
+//    Use for all rendering passes
 cbuffer FluidRenderConfig
 {
     float RTWidth;
     float RTHeight;
 
     float4 DiffuseLight;
-	float4 DepthUnpack;
+    float4 DepthUnpack;
 
     float4x4 WorldViewProjection;
     float4x4 InvWorldViewProjection;
@@ -54,23 +54,23 @@ cbuffer FluidRenderConfig
     float ZNear;
     float ZFar;
 
-    float4 gridDim; //	float3
-    float4 recGridDim; //	float3
+    float4 gridDim; //    float3
+    float4 recGridDim; //    float3
     float maxGridDim;
     float gridScaleFactor = 1.0;
-    float4 eyeOnGrid; //	float3
+    float4 eyeOnGrid; //    float3
 }
 
-// static	float		edgeThreshold = 0.2;
-// static	float		edgeThreshold = 0.1;
+// static    float        edgeThreshold = 0.2;
+// static    float        edgeThreshold = 0.1;
 static float edgeThreshold = 0.01;
 
 static const bool g_bRaycastFilterTricubic = false; // true: tricubic; false: trilinear
-// static const bool	g_bRaycastFilterTricubic = true; // true: tricubic; false: trilinear
+// static const bool    g_bRaycastFilterTricubic = true; // true: tricubic; false: trilinear
 
 #include "fluid_common_tricubic.hlsli"
 
-//	Fire setup
+//    Fire setup
 static const float RednessFactor = 5.0f;
 static const float fireAlphaMultiplier = 0.95f;
 // static const float smokeAlphaMultiplier = 0.05f;
@@ -149,8 +149,8 @@ void DoSample(float weight, float3 O, inout float4 color )
 
     texcoords = float3( O.x, 1 - O.y, O.z) ;
 //    sample = weight * colorTex.SampleLevel(samLinearClamp, texcoords, 0);
-//	sample = weight * abs(SampleTricubic(colorTex, texcoords));
-//	sample = weight * abs(SampleTrilinear(colorTex, texcoords));
+//    sample = weight * abs(SampleTricubic(colorTex, texcoords));
+//    sample = weight * abs(SampleTrilinear(colorTex, texcoords));
         sample = weight * abs(Sample(colorTex, texcoords));
     sample.a = (sample.r) * OPACITY_MODULATOR;
 
@@ -182,7 +182,7 @@ float4 Raycast( PS_INPUT_RAYCAST input )
        // Initialize the position of the fragment and adjust the depth
        rayData.xyz = input.posInGrid;
        rayData.w = rayData.w - ZNear;
-//	   return float4 (1,0,0,saturate(rayData.w/5));
+//       return float4 (1,0,0,saturate(rayData.w/5));
     }
 
     float3 rayOrigin = rayData.xyz;
@@ -225,7 +225,7 @@ float4 Raycast( PS_INPUT_RAYCAST input )
 }
 */
 
-// #define	RENDER_FIRE
+// #define    RENDER_FIRE
 void DoSample(float weight, float3 O, inout float4 color)
 {
 // This value can be tuned to produce denser or thinner looking smoke
@@ -243,12 +243,12 @@ void DoSample(float weight, float3 O, inout float4 color)
     t = sample.a * (1.0 - color.a);
     color.rgb += t * sample.r;
     color.a += t;
-#else //	RENDER_FIRE
+#else //    RENDER_FIRE
       // render fire and smoke with back to front blending
 
     // dont render the area below where the fire originates
-    //	if(O.z < OBSTACLE_MAX_HEIGHT/gridDim.z)
-    //		return;
+    //    if(O.z < OBSTACLE_MAX_HEIGHT/gridDim.z)
+    //        return;
 
     // this is the threshold at which we decide whether to render fire or smoke
     float threshold = 1.4;
@@ -276,7 +276,7 @@ void DoSample(float weight, float3 O, inout float4 color)
         color.rgb = (1 - sample.a) * color.rgb + sample.a * sample.rrr * smokeColor * smokeColorMultiplier * 5.0;
         color.a = (1 - sample.a) * color.a + sample.a;
     }
-#endif //	RENDER_FIRE
+#endif //    RENDER_FIRE
 }
 
 float4 Raycast(PS_INPUT_RAYCAST input)
@@ -298,7 +298,7 @@ float4 Raycast(PS_INPUT_RAYCAST input)
         // Initialize the position of the fragment and adjust the depth
         rayData.xyz = input.posInGrid;
         rayData.w = rayData.w - ZNear;
-        //	   return float4 (1,0,0,saturate(rayData.w/5));
+        //       return float4 (1,0,0,saturate(rayData.w/5));
     }
 
     float3 rayOrigin = rayData.xyz;
@@ -316,7 +316,7 @@ float4 Raycast(PS_INPUT_RAYCAST input)
     // In back-to-front blending we start raycasting from the surface point and step towards the eye
     O += fSamples * stepVec;
     stepVec = -stepVec;
-#endif //	RENDER_FIRE
+#endif //    RENDER_FIRE
 
     for (int i = 0; i < nSamples; i++)
     {
@@ -329,7 +329,7 @@ float4 Raycast(PS_INPUT_RAYCAST input)
         {
             break;
         }
-#endif //	RENDER_FIRE
+#endif //    RENDER_FIRE
     }
 
     // The last sample is weighted by the fractional part of the ray length in voxel

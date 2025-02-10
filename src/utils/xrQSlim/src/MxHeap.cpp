@@ -41,13 +41,13 @@ void MxHeap::upheap(unsigned int i)
 
     while( index>0 && moving->heap_key() > ref(p)->heap_key() )
     {
-	place(ref(p), index);
-	index = p;
-	p = parent(p);
+    place(ref(p), index);
+    index = p;
+    p = parent(p);
     }
 
     if( index != i )
-	place(moving, index);
+    place(moving, index);
 }
 
 void MxHeap::downheap(unsigned int i)
@@ -60,24 +60,24 @@ void MxHeap::downheap(unsigned int i)
 
     while( l<(unsigned int)length() )
     {
-	if( r<(unsigned int)length() && ref(l)->heap_key() < ref(r)->heap_key() )
-	    largest = r;
-	else 
-	    largest = l;
+    if( r<(unsigned int)length() && ref(l)->heap_key() < ref(r)->heap_key() )
+        largest = r;
+    else 
+        largest = l;
 
-	if( moving->heap_key() < ref(largest)->heap_key() )
-	{
-	    place(ref(largest), index);
-	    index = largest;
-	    l = left(index);
-	    r = right(index);
-	}
-	else
-	    break;
+    if( moving->heap_key() < ref(largest)->heap_key() )
+    {
+        place(ref(largest), index);
+        index = largest;
+        l = left(index);
+        r = right(index);
+    }
+    else
+        break;
     }
 
     if( index != i )
-	place(moving, index);
+    place(moving, index);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -104,9 +104,9 @@ void MxHeap::update(MxHeapable *t, float v)
     unsigned int i = t->get_heap_pos();
 
     if( i>0 && v>ref(parent(i))->heap_key() )
-	upheap(i);
+    upheap(i);
     else
-	downheap(i);
+    downheap(i);
 }
 
 MxHeapable *MxHeap::extract()
@@ -131,9 +131,9 @@ MxHeapable *MxHeap::remove(MxHeapable *t)
     t->not_in_heap();
 
     if( ref(i)->heap_key() < t->heap_key() )
-	downheap(i);
+    downheap(i);
     else
-	upheap(i);
+    upheap(i);
 
     return t;
 }

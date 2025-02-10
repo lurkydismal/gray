@@ -5,8 +5,8 @@ INCLUDEDIR  = ../include
 CPPFLAGS    = @CPPFLAGS@ -I$(top_srcdir)/include
 
 INCLUDE_FILES   = $(INCLUDEDIR)/fastcgi.h  \
-		  $(INCLUDEDIR)/fcgiapp.h  \
-		  $(INCLUDEDIR)/fcgimisc.h
+          $(INCLUDEDIR)/fcgiapp.h  \
+          $(INCLUDEDIR)/fcgimisc.h
 
 LIBDIR      = ../libfcgi
 LIBFCGI     = $(LIBDIR)/libfcgi.la

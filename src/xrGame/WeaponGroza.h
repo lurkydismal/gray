@@ -4,12 +4,12 @@
 #include "../xrScripts/script_export_space.h"
 
 class CWeaponGroza :
-	public CWeaponMagazinedWGrenade
+    public CWeaponMagazinedWGrenade
 {
-	typedef CWeaponMagazinedWGrenade inherited;
+    typedef CWeaponMagazinedWGrenade inherited;
 public:
-				CWeaponGroza();
-	virtual		~CWeaponGroza();
+                CWeaponGroza();
+    virtual        ~CWeaponGroza();
 
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

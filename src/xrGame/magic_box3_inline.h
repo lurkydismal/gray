@@ -8,13 +8,13 @@ IC MagicBox3::MagicBox3 ()
 
 IC MagicBox3::MagicBox3 (const Fmatrix &m, const Fvector &half_size)
 {
-	m_kCenter		= m.c;
-	m_akAxis[0]		= m.i;
-	m_akAxis[1]		= m.j;
-	m_akAxis[2]		= m.k;
-	m_afExtent[0]	= half_size.x;
-	m_afExtent[1]	= half_size.y;
-	m_afExtent[2]	= half_size.z;
+    m_kCenter        = m.c;
+    m_akAxis[0]        = m.i;
+    m_akAxis[1]        = m.j;
+    m_akAxis[2]        = m.k;
+    m_afExtent[0]    = half_size.x;
+    m_afExtent[1]    = half_size.y;
+    m_afExtent[2]    = half_size.z;
 }
 
 //----------------------------------------------------------------------------

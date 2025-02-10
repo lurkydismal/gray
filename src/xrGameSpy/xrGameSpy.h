@@ -13,8 +13,8 @@
 // This class is exported from the xrGameSpy.dll
 class XRGAMESPY_API CxrGameSpy {
 public:
-	CxrGameSpy(void);
-	// TODO: add your methods here.
+    CxrGameSpy(void);
+    // TODO: add your methods here.
 };
 
 extern XRGAMESPY_API int nxrGameSpy;
@@ -32,8 +32,8 @@ XRGAMESPY_API int fnxrGameSpy(void);
 
 extern "C"
 {
-	EXPORT_FN_DECL(const char*, GetGameVersion,		());
-	EXPORT_FN_DECL(void,		GetGameID,			(int* GameID, int verID));
+    EXPORT_FN_DECL(const char*, GetGameVersion,        ());
+    EXPORT_FN_DECL(void,        GetGameID,            (int* GameID, int verID));
 }
 
 

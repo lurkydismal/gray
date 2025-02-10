@@ -35,14 +35,14 @@
 
 namespace luabind
 {
-	namespace detail
-	{
+    namespace detail
+    {
 
-		namespace free_functions
-		{
+        namespace free_functions
+        {
 
-			struct overload_rep: public overload_rep_base
-			{
+            struct overload_rep: public overload_rep_base
+            {
                 template<typename R, typename... Args, typename... Policies>
                 overload_rep(R(*f)(Args...), const policy_cons<Policies...>)
                     : fun(reinterpret_cast<void(*)()>(f))
@@ -55,76 +55,76 @@ namespace luabind
                     m_arity = calcHasArg<0, 1, sizeof...(Args), Policies...>();
                 }
 
-				bool operator==(const overload_rep& o) const
-				{
-					if (o.m_arity != m_arity) return false;
-					if (o.m_params_.size() != m_params_.size()) return false;
-					for (size_t i = 0; i < m_params_.size(); ++i)
-						if (!(LUABIND_TYPE_INFO_EQUAL(m_params_[i], o.m_params_[i]))) return false;
-					return true;
-				}
+                bool operator==(const overload_rep& o) const
+                {
+                    if (o.m_arity != m_arity) return false;
+                    if (o.m_params_.size() != m_params_.size()) return false;
+                    for (size_t i = 0; i < m_params_.size(); ++i)
+                        if (!(LUABIND_TYPE_INFO_EQUAL(m_params_[i], o.m_params_[i]))) return false;
+                    return true;
+                }
 
-				typedef int(*call_ptr)(lua_State*, void(*)());
+                typedef int(*call_ptr)(lua_State*, void(*)());
 
-				void set_fun(call_ptr f) { call_fun = f; }
-				int call(lua_State* L, void(*f)()) const { return call_fun(L, f); }
+                void set_fun(call_ptr f) { call_fun = f; }
+                int call(lua_State* L, void(*f)()) const { return call_fun(L, f); }
 
-				// this is the actual function pointer to be called when this overload is invoked
-				void (*fun)();
+                // this is the actual function pointer to be called when this overload is invoked
+                void (*fun)();
 
-				call_ptr call_fun;
+                call_ptr call_fun;
 
-				// the types of the parameter it takes
-				vector_class<LUABIND_TYPE_INFO> m_params_;
+                // the types of the parameter it takes
+                vector_class<LUABIND_TYPE_INFO> m_params_;
 
                 char end;
-			};
+            };
 
-    		struct LUABIND_API function_rep
-			{
-				function_rep(const char* name): m_name(name) {}
-				void add_overload(const free_functions::overload_rep& o);
+            struct LUABIND_API function_rep
+            {
+                function_rep(const char* name): m_name(name) {}
+                void add_overload(const free_functions::overload_rep& o);
 
-				const vector_class<overload_rep>& overloads() const throw() { return m_overloads; }
+                const vector_class<overload_rep>& overloads() const throw() { return m_overloads; }
 
-				const char* name() const { return m_name; }
+                const char* name() const { return m_name; }
 
-			private:
-				const char* m_name;
+            private:
+                const char* m_name;
 
-				// this have to be write protected, since each time an overload is
-				// added it has to be checked for existence. add_overload() should
-				// be used.
+                // this have to be write protected, since each time an overload is
+                // added it has to be checked for existence. add_overload() should
+                // be used.
 #pragma warning(push)
 #pragma warning(disable:4251)
-				vector_class<free_functions::overload_rep> m_overloads;
+                vector_class<free_functions::overload_rep> m_overloads;
 #pragma warning(pop)
-			};
+            };
 
-			template<typename... Policies>
-			struct maybe_yield
-			{
-				static int apply(lua_State* L, int nret)
-				{
-					return ret(L, nret, has_yield<Policies...>());
-				}
+            template<typename... Policies>
+            struct maybe_yield
+            {
+                static int apply(lua_State* L, int nret)
+                {
+                    return ret(L, nret, has_yield<Policies...>());
+                }
 
-				static int ret(lua_State* L, int nret, std::true_type)
-				{
-					return lua_yield(L, nret);
-				}
+                static int ret(lua_State* L, int nret, std::true_type)
+                {
+                    return lua_yield(L, nret);
+                }
 
-				static int ret(lua_State*, int nret, std::false_type)
-				{
-					return nret;
-				}
-			};
+                static int ret(lua_State*, int nret, std::false_type)
+                {
+                    return nret;
+                }
+            };
 
-		
-			template<typename T>
-			struct returns
-			{
-			private:
+        
+            template<typename T>
+            struct returns
+            {
+            private:
 
                 template <typename U, size_t Index, typename... Policies>
                 static auto genConverter()
@@ -190,7 +190,7 @@ namespace luabind
                     policy_list_postcall<Policies...>::apply(L, indices);
                 }
 
-			public:
+            public:
 
                 template<typename... Args, typename... Policies>
                 static int call(T(*f)(Args...), lua_State* L, const policy_cons<Policies...> policies)
@@ -207,7 +207,7 @@ namespace luabind
 
                     return maybe_yield<Policies...>::apply(L, nret);
                 }
-			};
+            };
 
             template<typename R, typename... Args, typename... Policies>
             int call(R(*f)(Args...), lua_State* L, const policy_cons<Policies...> policies)
@@ -221,137 +221,137 @@ namespace luabind
                 return match_params<Args...>(L, 1, policies);
             }
 
-			template<typename F, typename... Policies>
-			struct function_callback_s
-			{
-				static int apply(lua_State* L, void(*fun)())
-				{
-					return free_functions::call(reinterpret_cast<F>(fun), L, policy_cons<Policies...>());
-				}
-			};
+            template<typename F, typename... Policies>
+            struct function_callback_s
+            {
+                static int apply(lua_State* L, void(*fun)())
+                {
+                    return free_functions::call(reinterpret_cast<F>(fun), L, policy_cons<Policies...>());
+                }
+            };
 
-			template<typename F, typename... Policies>
-			struct match_function_callback_s
-			{
-				static int apply(lua_State* L)
-				{
-					F fptr = nullptr;
-					return free_functions::match(fptr, L, policy_cons<Policies...>());
-				}
+            template<typename F, typename... Policies>
+            struct match_function_callback_s
+            {
+                static int apply(lua_State* L)
+                {
+                    F fptr = nullptr;
+                    return free_functions::match(fptr, L, policy_cons<Policies...>());
+                }
 
-				static int callback(lua_State* L)
-				{
-					F fptr = nullptr;
-					return free_functions::match(fptr, L, policy_cons<Policies...>());
-				}
-			};
+                static int callback(lua_State* L)
+                {
+                    F fptr = nullptr;
+                    return free_functions::match(fptr, L, policy_cons<Policies...>());
+                }
+            };
 
-			LUABIND_API int function_dispatcher(lua_State* L);
-		}
-	}
+            LUABIND_API int function_dispatcher(lua_State* L);
+        }
+    }
 
-	namespace detail
-	{
-		template<typename F, typename... Policies>
-		struct function_commiter : detail::registration
-		{
-			function_commiter(const char* n, F f, const policy_cons<Policies...> p)
-				: m_name(n)
-				, fun(f)
-				, policies(p)
-			{}
+    namespace detail
+    {
+        template<typename F, typename... Policies>
+        struct function_commiter : detail::registration
+        {
+            function_commiter(const char* n, F f, const policy_cons<Policies...> p)
+                : m_name(n)
+                , fun(f)
+                , policies(p)
+            {}
 
-			virtual void register_(lua_State* L) const
-			{
-				detail::free_functions::overload_rep o(fun, policies);
+            virtual void register_(lua_State* L) const
+            {
+                detail::free_functions::overload_rep o(fun, policies);
 
-				o.set_match_fun(&detail::free_functions::match_function_callback_s<F, Policies...>::apply);
-				o.set_fun(&detail::free_functions::function_callback_s<F, Policies...>::apply);
+                o.set_match_fun(&detail::free_functions::match_function_callback_s<F, Policies...>::apply);
+                o.set_fun(&detail::free_functions::function_callback_s<F, Policies...>::apply);
 
 #ifndef LUABIND_NO_ERROR_CHECKING
-				o.set_sig_fun(&detail::get_free_function_signature<F>::apply);
+                o.set_sig_fun(&detail::get_free_function_signature<F>::apply);
 #endif
 
-				lua_pushstring(L, m_name);
-				lua_gettable(L, -2);
+                lua_pushstring(L, m_name);
+                lua_gettable(L, -2);
 
-				detail::free_functions::function_rep* rep = nullptr;
-				if (lua_iscfunction(L, -1))
-				{
-					if (lua_getupvalue(L, -1, 2) != nullptr)
-					{
-						// check the magic number that identifies luabind's functions
-						if (lua_touserdata(L, -1) == (void*)0x1337)
-						{
-							if (lua_getupvalue(L, -2, 1) != 0)
-							{
-								rep = static_cast<detail::free_functions::function_rep*>(lua_touserdata(L, -1));
-								lua_pop(L, 1);
-							}
-						}
-						lua_pop(L, 1);
-					}
-				}
-				lua_pop(L, 1);
+                detail::free_functions::function_rep* rep = nullptr;
+                if (lua_iscfunction(L, -1))
+                {
+                    if (lua_getupvalue(L, -1, 2) != nullptr)
+                    {
+                        // check the magic number that identifies luabind's functions
+                        if (lua_touserdata(L, -1) == (void*)0x1337)
+                        {
+                            if (lua_getupvalue(L, -2, 1) != 0)
+                            {
+                                rep = static_cast<detail::free_functions::function_rep*>(lua_touserdata(L, -1));
+                                lua_pop(L, 1);
+                            }
+                        }
+                        lua_pop(L, 1);
+                    }
+                }
+                lua_pop(L, 1);
 
-				if (rep == nullptr)
-				{
-					lua_pushstring(L, m_name);
-					// create a new function_rep
-					rep = static_cast<detail::free_functions::function_rep*>(lua_newuserdata(L, sizeof(detail::free_functions::function_rep)));
-					new(rep) detail::free_functions::function_rep(m_name);
+                if (rep == nullptr)
+                {
+                    lua_pushstring(L, m_name);
+                    // create a new function_rep
+                    rep = static_cast<detail::free_functions::function_rep*>(lua_newuserdata(L, sizeof(detail::free_functions::function_rep)));
+                    new(rep) detail::free_functions::function_rep(m_name);
 
                     // STORE IN REGISTRY
                     lua_pushvalue(L, -1);
                     detail::ref(L);
 
-					detail::class_registry* r = detail::class_registry::get_registry(L);
-					assert(r && "you must call luabind::open() prior to any function registrations");
-					detail::getref(L, r->lua_function());
-					const int ret = lua_setmetatable(L, -2);
-					(void)ret;
-					assert(ret != 0);
+                    detail::class_registry* r = detail::class_registry::get_registry(L);
+                    assert(r && "you must call luabind::open() prior to any function registrations");
+                    detail::getref(L, r->lua_function());
+                    const int ret = lua_setmetatable(L, -2);
+                    (void)ret;
+                    assert(ret != 0);
 
-					// this is just a magic number to identify functions that luabind created
-					lua_pushlightuserdata(L, (void*)0x1337);
+                    // this is just a magic number to identify functions that luabind created
+                    lua_pushlightuserdata(L, (void*)0x1337);
 
-					lua_pushcclosure(L, &free_functions::function_dispatcher, 2);
-					lua_settable(L, -3);
-				}
+                    lua_pushcclosure(L, &free_functions::function_dispatcher, 2);
+                    lua_settable(L, -3);
+                }
 
-				rep->add_overload(o);
-			}
+                rep->add_overload(o);
+            }
 
-			char const* m_name;
-			F fun;
+            char const* m_name;
+            F fun;
             policy_cons<Policies...> policies;
-		};
-	}
+        };
+    }
 
-	template<typename F, typename... Policies>
-	scope def(const char* name, F f, const detail::policy_cons<Policies...> policies)
-	{
-		return scope(luabind_new<detail::function_commiter<F, Policies...>>(name, f, policies));
-	}
+    template<typename F, typename... Policies>
+    scope def(const char* name, F f, const detail::policy_cons<Policies...> policies)
+    {
+        return scope(luabind_new<detail::function_commiter<F, Policies...>>(name, f, policies));
+    }
 
-	template<typename F>
-	scope def(const char* name, F f)
-	{
-		return scope(luabind_new<detail::function_commiter<F>>(name, f, detail::policy_cons<>()));
-	}
+    template<typename F>
+    scope def(const char* name, F f)
+    {
+        return scope(luabind_new<detail::function_commiter<F>>(name, f, detail::policy_cons<>()));
+    }
 
-	// deprecated
-	template<typename F, typename... Policies>
-	void function(lua_State* L, const char* name, F f, const detail::policy_cons<Policies...> p)
-	{
-		module(L)[def(name, f, p)];
-	}
+    // deprecated
+    template<typename F, typename... Policies>
+    void function(lua_State* L, const char* name, F f, const detail::policy_cons<Policies...> p)
+    {
+        module(L)[def(name, f, p)];
+    }
 
-	// deprecated
-	template<typename F>
-	void function(lua_State* L, const char* name, F f)
-	{
-		luabind::function(L, name, f, detail::policy_cons<>());
-	}
+    // deprecated
+    template<typename F>
+    void function(lua_State* L, const char* name, F f)
+    {
+        luabind::function(L, name, f, detail::policy_cons<>());
+    }
 
 } // namespace luabind

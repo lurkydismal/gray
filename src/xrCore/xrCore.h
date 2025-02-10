@@ -5,25 +5,25 @@
 
 // Our headers
 #ifdef XRCORE_STATIC
-#	define XRCORE_API
+#    define XRCORE_API
 #else
-#	ifdef XRCORE_EXPORTS
-#		define XRCORE_API __declspec(dllexport)
-#	else
-#		define XRCORE_API __declspec(dllimport)
-#	endif
+#    ifdef XRCORE_EXPORTS
+#        define XRCORE_API __declspec(dllexport)
+#    else
+#        define XRCORE_API __declspec(dllimport)
+#    endif
 #endif
 
 #define IC inline
 
-#define _inline			inline
-#define __inline		inline
-#define ICF				__forceinline			// !!! this should be used only in critical places found by PROFILER
-#define ICN		    	__declspec (noinline)
+#define _inline            inline
+#define __inline        inline
+#define ICF                __forceinline            // !!! this should be used only in critical places found by PROFILER
+#define ICN                __declspec (noinline)
 
 #ifndef DEBUG
-	#pragma inline_depth	( 254 )
-	#pragma inline_recursion( on )
+    #pragma inline_depth    ( 254 )
+    #pragma inline_recursion( on )
 #endif
 
 #pragma intrinsic(abs, fabs, fmod, sin, cos, tan, asin, acos, atan, sqrt, exp, log, log10, strcat)
@@ -33,16 +33,16 @@
 // work-around dumb borland compiler
 
 // Warnings
-#pragma warning (disable : 4251 )		// object needs DLL interface
-#pragma warning (disable : 4201 )		// nonstandard extension used : nameless struct/union
-#pragma warning (disable : 4100 )		// unreferenced formal parameter
-#pragma warning (disable : 4127 )		// conditional expression is constant
-//#pragma warning (disable : 4530 )		// C++ exception handler used, but unwind semantics are not enabled
+#pragma warning (disable : 4251 )        // object needs DLL interface
+#pragma warning (disable : 4201 )        // nonstandard extension used : nameless struct/union
+#pragma warning (disable : 4100 )        // unreferenced formal parameter
+#pragma warning (disable : 4127 )        // conditional expression is constant
+//#pragma warning (disable : 4530 )        // C++ exception handler used, but unwind semantics are not enabled
 #pragma warning (disable : 4345 )
-#pragma warning (disable : 4714 )		// __forceinline not inlined
+#pragma warning (disable : 4714 )        // __forceinline not inlined
 #ifndef DEBUG
-#pragma warning (disable : 4189 )		//  local variable is initialized but not refenced
-#endif									//	frequently in release code due to large amount of VERIFY
+#pragma warning (disable : 4189 )        //  local variable is initialized but not refenced
+#endif                                    //    frequently in release code due to large amount of VERIFY
 
 #ifdef IXR_X64
 #pragma warning (disable : 4512 )
@@ -80,7 +80,7 @@
 #include <string>
 
 #pragma warning (pop)
-#pragma warning (disable : 4100 )		// unreferenced formal parameter
+#pragma warning (disable : 4100 )        // unreferenced formal parameter
 
 // Engine
 #include "Platform/PlatformAPI.h"
@@ -110,12 +110,12 @@
 // stl ext
 struct XRCORE_API xr_rtoken
 {
-    shared_str	name;
-    int	   	id;
-           	xr_rtoken	(LPCSTR _nm, int _id){name=_nm;id=_id;}
+    shared_str    name;
+    int           id;
+               xr_rtoken    (LPCSTR _nm, int _id){name=_nm;id=_id;}
 public:
-    void	rename		(LPCSTR _nm)		{name=_nm;}
-    bool	equal		(LPCSTR _nm)		{return (0==xr_strcmp(*name,_nm));}
+    void    rename        (LPCSTR _nm)        {name=_nm;}
+    bool    equal        (LPCSTR _nm)        {return (0==xr_strcmp(*name,_nm));}
 };
 
 #pragma pack (push,1)
@@ -123,22 +123,22 @@ struct XRCORE_API xr_shortcut
 {
     enum
     {
-        flShift	= 0x20,
-        flCtrl	= 0x40,
-        flAlt	= 0x80,
+        flShift    = 0x20,
+        flCtrl    = 0x40,
+        flAlt    = 0x80,
     };
     union
     {
-    	struct
+        struct
         {
-            u8	 	key;
-            Flags8	ext;
+            u8         key;
+            Flags8    ext;
         };
-        u16		hotkey;
+        u16        hotkey;
     };
-                xr_shortcut		(u8 k, BOOL a, BOOL c, BOOL s):key(k){ext.assign(u8((a?flAlt:0)|(c?flCtrl:0)|(s?flShift:0)));}
-                xr_shortcut		(){ext.zero();key=0;}
-    bool		similar			(const xr_shortcut& v)const{return ext.equal(v.ext)&&(key==v.key);}
+                xr_shortcut        (u8 k, BOOL a, BOOL c, BOOL s):key(k){ext.assign(u8((a?flAlt:0)|(c?flCtrl:0)|(s?flShift:0)));}
+                xr_shortcut        (){ext.zero();key=0;}
+    bool        similar            (const xr_shortcut& v)const{return ext.equal(v.ext)&&(key==v.key);}
 };
 #pragma pack (pop)
 
@@ -171,36 +171,36 @@ using RTokenVecIt = RTokenVec::iterator;
 template <class T>
 class destructor
 {
-	T* ptr;
+    T* ptr;
 public:
-	destructor(T* p)	{ ptr=p;			}
-	~destructor()		{ xr_delete(ptr);	}
-	IC T& operator() ()
-	{	return *ptr; }
+    destructor(T* p)    { ptr=p;            }
+    ~destructor()        { xr_delete(ptr);    }
+    IC T& operator() ()
+    {    return *ptr; }
 };
 
 // ********************************************** The Core definition
 class XRCORE_API xrCore 
 {
 public:
-	string64	ApplicationName;
-	string_path	ApplicationPath;
-	string_path	WorkingPath;
-	string64	UserName;
-	string64	CompName;
-	string512	Params;
+    string64    ApplicationName;
+    string_path    ApplicationPath;
+    string_path    WorkingPath;
+    string64    UserName;
+    string64    CompName;
+    string512    Params;
     Flags64     ParamsData;
 
 public:
-	void _initialize	(LPCSTR ApplicationName, xrLogger::LogCallback cb=0, BOOL init_fs=TRUE, LPCSTR fs_fname=0);
-	void _destroy	    ();
+    void _initialize    (LPCSTR ApplicationName, xrLogger::LogCallback cb=0, BOOL init_fs=TRUE, LPCSTR fs_fname=0);
+    void _destroy        ();
 };
 
 //Borland class dll interface
-#define	_BCL
+#define    _BCL
 
 //Borland global function dll interface
-#define	_BGCL	
+#define    _BGCL    
 
 #include <DirectXMath.h>
 namespace Platform

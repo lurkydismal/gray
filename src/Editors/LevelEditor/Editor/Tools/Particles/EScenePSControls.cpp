@@ -6,14 +6,14 @@
 
 bool  TUI_ControlPSAdd::AfterAppendCallback(TShiftState Shift, CCustomObject* obj)
 {
-	EParticlesObject* pg= smart_cast<EParticlesObject*>(obj); R_ASSERT(pg);
-    LPCSTR ref_name		= ((UIParticlesTool*)parent_tool->pForm)->Current();
+    EParticlesObject* pg= smart_cast<EParticlesObject*>(obj); R_ASSERT(pg);
+    LPCSTR ref_name        = ((UIParticlesTool*)parent_tool->pForm)->Current();
     if (!ref_name){
-    	ELog.DlgMsg(mtInformation,"Nothing selected.");
-    	return false;
+        ELog.DlgMsg(mtInformation,"Nothing selected.");
+        return false;
     }
-	if (!pg->Compile(ref_name)){
-    	ELog.DlgMsg(mtInformation,"Can't compile particle system '%s'.",ref_name);
+    if (!pg->Compile(ref_name)){
+        ELog.DlgMsg(mtInformation,"Can't compile particle system '%s'.",ref_name);
         return false;
     }
     return true;

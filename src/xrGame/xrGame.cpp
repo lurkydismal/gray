@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: xrGame.cpp
-//	Created 	: 07.01.2001
-//  Modified 	: 27.05.2004
-//	Author		: Aleksandr Maksimchuk and Oles' Shyshkovtsov
-//	Description : Defines the entry point for the DLL application.
+//    Module         : xrGame.cpp
+//    Created     : 07.01.2001
+//  Modified     : 27.05.2004
+//    Author        : Aleksandr Maksimchuk and Oles' Shyshkovtsov
+//    Description : Defines the entry point for the DLL application.
 ////////////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
@@ -11,77 +11,77 @@
 #include "../../xrUI/xrUIXmlParser.h"
 #include "../xrEngine/xr_level_controller.h"
 
-void CCC_RegisterCommands	();
+void CCC_RegisterCommands    ();
 void RegisterExpressionDelegates();
 
 CInifile* pGameGlobals = nullptr;
 
 extern void RegisterImGuiInGame();
 static LPVOID __cdecl luabind_allocator(
-	luabind::memory_allocation_function_parameter const,
-	void const* const pointer,
-	size_t const size
+    luabind::memory_allocation_function_parameter const,
+    void const* const pointer,
+    size_t const size
 )
 {
-	if (!size) 
-	{
-		LPVOID	non_const_pointer = const_cast<LPVOID>(pointer);
-		xr_free(non_const_pointer);
-		return	(0);
-	}
+    if (!size) 
+    {
+        LPVOID    non_const_pointer = const_cast<LPVOID>(pointer);
+        xr_free(non_const_pointer);
+        return    (0);
+    }
 
-	if (!pointer) 
-	{
-		return	(Memory.mem_alloc(size));
-	}
+    if (!pointer) 
+    {
+        return    (Memory.mem_alloc(size));
+    }
 
-	LPVOID non_const_pointer = const_cast<LPVOID>(pointer);
-	return (Memory.mem_realloc(non_const_pointer, size));
+    LPVOID non_const_pointer = const_cast<LPVOID>(pointer);
+    return (Memory.mem_realloc(non_const_pointer, size));
 }
 
-void setup_luabind_allocator		()
+void setup_luabind_allocator        ()
 {
-	if (!Device.IsEditorMode())
-	{
-		luabind::allocator = &luabind_allocator;
-		luabind::allocator_parameter = 0;
-	}
+    if (!Device.IsEditorMode())
+    {
+        luabind::allocator = &luabind_allocator;
+        luabind::allocator_parameter = 0;
+    }
 }
 
 extern "C" 
 {
-	DLL_API void __cdecl xrGameInitialize()
-	{
-		CCC_RegisterCommands();
-		// keyboard binding
-		CCC_RegisterInput();
-		setup_luabind_allocator	();
-		RegisterExpressionDelegates();
+    DLL_API void __cdecl xrGameInitialize()
+    {
+        CCC_RegisterCommands();
+        // keyboard binding
+        CCC_RegisterInput();
+        setup_luabind_allocator    ();
+        RegisterExpressionDelegates();
 
 #ifdef DEBUG_DRAW
-		RegisterImGuiInGame();
+        RegisterImGuiInGame();
 #endif
 
-		string_path GameGlobals = {};
-		FS.update_path(GameGlobals, "$game_config$", "game_global.ltx");
-		pGameGlobals = new CInifile(GameGlobals);
-	}
+        string_path GameGlobals = {};
+        FS.update_path(GameGlobals, "$game_config$", "game_global.ltx");
+        pGameGlobals = new CInifile(GameGlobals);
+    }
 
-	DLL_API DLL_Pure* __cdecl xrFactory_Create(CLASS_ID clsid)
-	{
-		DLL_Pure* object = object_factory().client_object(clsid);
+    DLL_API DLL_Pure* __cdecl xrFactory_Create(CLASS_ID clsid)
+    {
+        DLL_Pure* object = object_factory().client_object(clsid);
 
 #ifdef DEBUG
-		if (!object)
-			return			(0);
+        if (!object)
+            return            (0);
 #endif
 
-		object->CLS_ID = clsid;
-		return				(object);
-	}
+        object->CLS_ID = clsid;
+        return                (object);
+    }
 
-	DLL_API void		__cdecl	xrFactory_Destroy(DLL_Pure* O)
-	{
-		xr_delete(O);
-	}
+    DLL_API void        __cdecl    xrFactory_Destroy(DLL_Pure* O)
+    {
+        xr_delete(O);
+    }
 }

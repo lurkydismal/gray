@@ -15,7 +15,7 @@
 #include "Max.h"
 
 /*
-*	xray-re
+*    xray-re
 */
 #include <xr_types.h>
 #include <xr_file_system.h>
@@ -25,8 +25,8 @@
 /*
 #undef _MIN
 #undef _MAX
-#define _MIN(a,b)		(a)<(b)?(a):(b)
-#define _MAX(a,b)		(a)>(b)?(a):(b)
+#define _MIN(a,b)        (a)<(b)?(a):(b)
+#define _MAX(a,b)        (a)>(b)?(a):(b)
 template <class T>
 T min(T a, T b) { return _MIN(a,b); }
 template <class T>
@@ -65,7 +65,7 @@ enum TMsgDlgBtn { mbYes, mbNo, mbOK, mbCancel, mbAbort, mbRetry, mbIgnore, mbAll
 typedef TMsgDlgBtn TMsgDlgButtons[mbHelp];
 
 /*
- *	std
+ *    std
  */
 #include <string>
 #include <vector>
@@ -85,7 +85,7 @@ TYPEDEF_STD_VECTOR(LPSTR)
 
 #define THROW xr_assert(0)
 
-#define GAMEMTL_NONE		u32(-1)
+#define GAMEMTL_NONE        u32(-1)
 #define _game_data_ "$game_data$"
 
 #pragma warning (default:4995)

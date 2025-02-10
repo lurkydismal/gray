@@ -1,22 +1,22 @@
 #pragma once
 
 class CUIThmProperties:
-	public IEditorWnd
+    public IEditorWnd
 {
 public:
-	CUIThmProperties();
+    CUIThmProperties();
 
-	void Load(const xr_path& File);
-	void Show();
+    void Load(const xr_path& File);
+    void Show();
 
-	virtual void Draw() override;
-
-private:
-	static void OnPropChange(PropValue* prop);
+    virtual void Draw() override;
 
 private:
-	class EImageThumbnail* ThmPtr = nullptr;
-	UIPropertiesForm mProps;
+    static void OnPropChange(PropValue* prop);
 
-	xr_string FileName;
+private:
+    class EImageThumbnail* ThmPtr = nullptr;
+    UIPropertiesForm mProps;
+
+    xr_string FileName;
 };

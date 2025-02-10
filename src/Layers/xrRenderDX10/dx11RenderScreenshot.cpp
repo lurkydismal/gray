@@ -137,7 +137,7 @@ void CRender::ScreenshotImpl(ScreenshotMode mode, LPCSTR name, CMemoryWriter* me
 void CRender::ScreenshotAsyncEnd(CMemoryWriter& memory_writer) {
     VERIFY(!m_bMakeAsyncSS);
 
-    //	Don't own. No need to release.
+    //    Don't own. No need to release.
     auto pTex = Target->t_ss_async;
     D3D_MAPPED_TEXTURE2D MappedData;
     RContext->Map(pTex, 0, D3D_MAP_READ, 0, &MappedData);
@@ -147,7 +147,7 @@ void CRender::ScreenshotAsyncEnd(CMemoryWriter& memory_writer) {
         u32 Height = (u32)(RCache.get_target_height());
         auto pEnd = pPixel + Width * Height;
 
-        //	Kill alpha and swap r and b.
+        //    Kill alpha and swap r and b.
         for (; pPixel != pEnd; pPixel++) {
             auto p = *pPixel;
             *pPixel = color_xrgb(

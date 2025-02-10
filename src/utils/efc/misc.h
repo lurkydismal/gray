@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: misc.h
-//	Created 	: 20.03.2002
-//  Modified 	: 09.10.2002
-//	Author		: Dmitriy Iassenev
-//	Description : Miscellanious routines
+//    Module         : misc.h
+//    Created     : 20.03.2002
+//  Modified     : 09.10.2002
+//    Author        : Dmitriy Iassenev
+//    Description : Miscellanious routines
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -12,14 +12,14 @@
 // exportes variables
 ////////////////////////////////////////////////////////////////////////////
 
-extern char caLogDataFormat[260]		;
-extern char caTextDataFormat[260]		;
-extern char caBinaryDataFormat[260]		;
-extern char caConfigDataFormat[260]		;
-extern char caPatternDataFormat[260]	;
-extern char caCoreDataFormat[260]		;
-extern char caParametersDataFormat[260]	;
-extern char caEFDataFormat[260]			;
+extern char caLogDataFormat[260]        ;
+extern char caTextDataFormat[260]        ;
+extern char caBinaryDataFormat[260]        ;
+extern char caConfigDataFormat[260]        ;
+extern char caPatternDataFormat[260]    ;
+extern char caCoreDataFormat[260]        ;
+extern char caParametersDataFormat[260]    ;
+extern char caEFDataFormat[260]            ;
 
 extern FILE  *fOutput;
 

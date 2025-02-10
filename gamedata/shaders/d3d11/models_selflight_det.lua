@@ -2,7 +2,7 @@ function normal(shader, t_base, t_second, t_detail)
     shader:begin("deffer_model", "deffer_base")
         :fog(false)
         :emissive(true)
-    --	shader:sampler	("s_base")      :texture	(t_base)
+    --    shader:sampler    ("s_base")      :texture    (t_base)
     shader:dx10texture("s_base", t_base)
     shader:dx10sampler("smp_base")
     shader:dx10stencil(true, cmp_func.always,

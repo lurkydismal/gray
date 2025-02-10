@@ -43,9 +43,9 @@ typedef struct DArrayImplementation *DArray;
  * If the two elements are "equal", return 0.
  */
 #if defined(WIN32)
-	typedef int (__cdecl *ArrayCompareFn)(const void *elem1, const void *elem2);
+    typedef int (__cdecl *ArrayCompareFn)(const void *elem1, const void *elem2);
 #else
-	typedef int (*ArrayCompareFn)(const void *elem1, const void *elem2);
+    typedef int (*ArrayCompareFn)(const void *elem1, const void *elem2);
 #endif
 
 
@@ -234,7 +234,7 @@ void ArrayReplaceAt(DArray array, const void *newElem, int n);
 void ArraySort(DArray array, ArrayCompareFn comparator);
 
 
-#define NOT_FOUND -1	// returned when a search fails to find the key
+#define NOT_FOUND -1    // returned when a search fails to find the key
 
 /* ArraySearch
  * -----------

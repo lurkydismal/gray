@@ -4,10 +4,10 @@
  * Module: sem_timedwait.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -69,26 +69,26 @@ ptw32_sem_timedwait_cleanup (void * args)
        * which is ok.
        */
       if (WaitForSingleObject(s->sem, 0) == WAIT_OBJECT_0)
-	{
-	  /* We got the semaphore on the second attempt */
-	  *(a->resultPtr) = 0;
-	}
+    {
+      /* We got the semaphore on the second attempt */
+      *(a->resultPtr) = 0;
+    }
       else
-	{
-	  /* Indicate we're no longer waiting */
-	  s->value++;
+    {
+      /* Indicate we're no longer waiting */
+      s->value++;
 #ifdef NEED_SEM
-	  if (s->value > 0)
-	    {
-	      s->leftToUnblock = 0;
-	    }
+      if (s->value > 0)
+        {
+          s->leftToUnblock = 0;
+        }
 #else
           /*
            * Don't release the W32 sema, it doesn't need adjustment
            * because it doesn't record the number of waiters.
            */
 #endif
-	}
+    }
       (void) pthread_mutex_unlock (&s->lock);
     }
 }
@@ -148,80 +148,80 @@ sem_timedwait (sem_t * sem, const struct timespec *abstime)
       DWORD milliseconds;
 
       if (abstime == NULL)
-	{
-	  milliseconds = INFINITE;
-	}
+    {
+      milliseconds = INFINITE;
+    }
       else
-	{
-	  /* 
-	   * Calculate timeout as milliseconds from current system time. 
-	   */
-	  milliseconds = ptw32_relmillisecs (abstime);
-	}
+    {
+      /* 
+       * Calculate timeout as milliseconds from current system time. 
+       */
+      milliseconds = ptw32_relmillisecs (abstime);
+    }
 
       if ((result = pthread_mutex_lock (&s->lock)) == 0)
-	{
-	  int v;
+    {
+      int v;
 
-	  /* See sem_destroy.c
-	   */
-	  if (*sem == NULL)
-	    {
-	      (void) pthread_mutex_unlock (&s->lock);
-	      errno = EINVAL;
-	      return -1;
-	    }
+      /* See sem_destroy.c
+       */
+      if (*sem == NULL)
+        {
+          (void) pthread_mutex_unlock (&s->lock);
+          errno = EINVAL;
+          return -1;
+        }
 
-	  v = --s->value;
-	  (void) pthread_mutex_unlock (&s->lock);
+      v = --s->value;
+      (void) pthread_mutex_unlock (&s->lock);
 
-	  if (v < 0)
-	    {
+      if (v < 0)
+        {
 #ifdef NEED_SEM
-	      int timedout;
+          int timedout;
 #endif
-	      sem_timedwait_cleanup_args_t cleanup_args;
+          sem_timedwait_cleanup_args_t cleanup_args;
 
-	      cleanup_args.sem = s;
-	      cleanup_args.resultPtr = &result;
+          cleanup_args.sem = s;
+          cleanup_args.resultPtr = &result;
 
 #ifdef _MSC_VER
 #pragma inline_depth(0)
 #endif
-	      /* Must wait */
+          /* Must wait */
               pthread_cleanup_push(ptw32_sem_timedwait_cleanup, (void *) &cleanup_args);
 #ifdef NEED_SEM
-	      timedout =
+          timedout =
 #endif
-	      result = pthreadCancelableTimedWait (s->sem, milliseconds);
-	      pthread_cleanup_pop(result);
+          result = pthreadCancelableTimedWait (s->sem, milliseconds);
+          pthread_cleanup_pop(result);
 #ifdef _MSC_VER
 #pragma inline_depth()
 #endif
 
 #ifdef NEED_SEM
 
-	      if (!timedout && pthread_mutex_lock (&s->lock) == 0)
-	        {
-        	  if (*sem == NULL)
-        	    {
-        	      (void) pthread_mutex_unlock (&s->lock);
-        	      errno = EINVAL;
-        	      return -1;
-        	    }
+          if (!timedout && pthread_mutex_lock (&s->lock) == 0)
+            {
+              if (*sem == NULL)
+                {
+                  (void) pthread_mutex_unlock (&s->lock);
+                  errno = EINVAL;
+                  return -1;
+                }
 
-	          if (s->leftToUnblock > 0)
-	            {
-		      --s->leftToUnblock;
-		      SetEvent(s->sem);
-		    }
-	          (void) pthread_mutex_unlock (&s->lock);
-	        }
+              if (s->leftToUnblock > 0)
+                {
+              --s->leftToUnblock;
+              SetEvent(s->sem);
+            }
+              (void) pthread_mutex_unlock (&s->lock);
+            }
 
 #endif /* NEED_SEM */
 
-	    }
-	}
+        }
+    }
 
     }
 
@@ -235,4 +235,4 @@ sem_timedwait (sem_t * sem, const struct timespec *abstime)
 
   return 0;
 
-}				/* sem_timedwait */
+}                /* sem_timedwait */

@@ -12,53 +12,53 @@
 
 class CStagingPage : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CStagingPage)
+    DECLARE_DYNCREATE(CStagingPage)
 
 // Construction
 public:
-	CStagingPage();
-	~CStagingPage();
+    CStagingPage();
+    ~CStagingPage();
 
 // Dialog Data
-	//{{AFX_DATA(CStagingPage)
-	enum { IDD = IDD_STAGING_PAGE };
-	CListCtrl	m_players;
-	CListBox	m_chatWindow;
-	CString	m_message;
-	int		m_ready;
-	//}}AFX_DATA
+    //{{AFX_DATA(CStagingPage)
+    enum { IDD = IDD_STAGING_PAGE };
+    CListCtrl    m_players;
+    CListBox    m_chatWindow;
+    CString    m_message;
+    int        m_ready;
+    //}}AFX_DATA
 
-	int FindPlayer(const char * nick);
-	void UpdatePlayerPing(const char * nick, int ping);
-	void UpdatePlayerReady(const char * nick, BOOL ready);
-	void RemovePlayer(const char * nick);
-	void ChangePlayerNick(const char * oldNick, const char * newNick);
+    int FindPlayer(const char * nick);
+    void UpdatePlayerPing(const char * nick, int ping);
+    void UpdatePlayerReady(const char * nick, BOOL ready);
+    void RemovePlayer(const char * nick);
+    void ChangePlayerNick(const char * oldNick, const char * newNick);
 
-	void SendMessage();
+    void SendMessage();
 
-	void CheckEnableFinish();
+    void CheckEnableFinish();
 
 // Overrides
-	// ClassWizard generate virtual function overrides
-	//{{AFX_VIRTUAL(CStagingPage)
-	public:
-	virtual BOOL OnSetActive();
-	virtual LRESULT OnWizardBack();
-	virtual BOOL OnWizardFinish();
-	virtual BOOL OnKillActive();
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generate virtual function overrides
+    //{{AFX_VIRTUAL(CStagingPage)
+    public:
+    virtual BOOL OnSetActive();
+    virtual LRESULT OnWizardBack();
+    virtual BOOL OnWizardFinish();
+    virtual BOOL OnKillActive();
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
-	// Generated message map functions
-	//{{AFX_MSG(CStagingPage)
-	afx_msg void OnReady();
-	afx_msg void OnNotReady();
-	virtual BOOL OnInitDialog();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CStagingPage)
+    afx_msg void OnReady();
+    afx_msg void OnNotReady();
+    virtual BOOL OnInitDialog();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

@@ -5,15 +5,15 @@
 }
 bool  TUI_ControlPortalSelect::Start(TShiftState Shift)
 {
-	return SelectStart(Shift);
+    return SelectStart(Shift);
 }
 void  TUI_ControlPortalSelect::Move(TShiftState Shift)
 {
-	SelectProcess(Shift);
+    SelectProcess(Shift);
 }
 
 bool  TUI_ControlPortalSelect::End(TShiftState Shift)
 {
-	return SelectEnd(Shift);
+    return SelectEnd(Shift);
 }
 

@@ -12,8 +12,8 @@ struct v2p
     float4 tc7 : TEXCOORD7; // -7,+7
 };
 
-//	perform 4x4 bilinear, 8x8p, the step (B)
-//	b):	64x64p	=> 8x8p
+//    perform 4x4 bilinear, 8x8p, the step (B)
+//    b):    64x64p    => 8x8p
 #ifdef FP16_FILTER
 // native bilinear
 float sample(float2 tc)

@@ -8,19 +8,19 @@
 
 ISHTools::ISHTools(const ISHInit& init)
 {
-	m_bModified			= FALSE;
-    m_bLockUpdate		= FALSE;
-    Ext					= init;
+    m_bModified            = FALSE;
+    m_bLockUpdate        = FALSE;
+    Ext                    = init;
 }
 //---------------------------------------------------------------------------
 
 void ISHTools::ViewSetCurrentItem(LPCSTR full_name)
 {
-	if (m_bLockUpdate) 	return;
+    if (m_bLockUpdate)     return;
 
-    m_bLockUpdate		= TRUE;
+    m_bLockUpdate        = TRUE;
     Ext.m_Items->SelectItem(full_name);
-    m_bLockUpdate		= FALSE;
+    m_bLockUpdate        = FALSE;
 }
 //---------------------------------------------------------------------------
 
@@ -71,41 +71,41 @@ xr_string ISHTools::ViewGetCurrentItem(bool bFolderOnly)
 /*
 TElTreeItem* ISHTools::ViewGetCurrentItem()
 {
-	return Ext.m_Items->GetSelected();
+    return Ext.m_Items->GetSelected();
 }*/
 //---------------------------------------------------------------------------
 
 void ISHTools::RemoveCurrent()
 {
-	Ext.m_Items->RemoveSelectItem();
+    Ext.m_Items->RemoveSelectItem();
 }
 //---------------------------------------------------------------------------
 
 void ISHTools::RenameCurrent()
 {
     R_ASSERT(0);
-//	Ext.m_Items->RenameSelItem();
+//    Ext.m_Items->RenameSelItem();
 }
 //---------------------------------------------------------------------------
 
 void ISHTools::OnFrame()
 {
     if (m_LastSelection.size()){
-	    SetCurrentItem				(m_LastSelection.c_str(),true);
-        m_LastSelection				= "";
+        SetCurrentItem                (m_LastSelection.c_str(),true);
+        m_LastSelection                = "";
     }
 }                
 void ISHTools::OnActivate()
 {
-    SetCurrentItem					(m_LastSelection.c_str(),true);
+    SetCurrentItem                    (m_LastSelection.c_str(),true);
     UI->RedrawScene();
 }
 void ISHTools::OnDeactivate()
 {
-	Ext.m_PreviewProps->ClearProperties();
-    m_LastSelection					= ViewGetCurrentItem(false);
-    ResetCurrentItem				();
-    Ext.m_Items->ClearList			();
+    Ext.m_PreviewProps->ClearProperties();
+    m_LastSelection                    = ViewGetCurrentItem(false);
+    ResetCurrentItem                ();
+    Ext.m_Items->ClearList            ();
 }
 //---------------------------------------------------------------------------
 void ISHTools::OnCloneItem(LPCSTR parent_path, LPCSTR new_full_name)

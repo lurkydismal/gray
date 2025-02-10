@@ -73,52 +73,52 @@
         </background>
     </progress_our_state>
     <progress_enemy_state x="525" y="300" width="220" height="57" min="0" max="100" pos="0" mode="back">
-		<progress>
-			<texture color="pda_green">ui_pda2_big_progress</texture>
-		</progress>
-		<background>
-			<texture a="60">ui_pda2_big_progress2</texture>
-		</background>
-	</progress_enemy_state>
-
-	<progress_our_mem_count x="62" y="470" width="433" height="38" min="0" max="100" pos="0" mode="horz">
-		<progress>
-			<texture color="pda_yellow">ui_pda2_small_progress</texture>
-		</progress>
-		<background>
-			<texture a="60">ui_pda2_small_progress2</texture>
-		</background>
-	</progress_our_mem_count>
-	<progress_enemy_mem_count x="530" y="470" width="433" height="38" min="0" max="100" pos="0" mode="back">
         <progress>
-			<texture color="pda_yellow">ui_pda2_small_progress</texture>
-		</progress>
-		<background>
-			<texture a="60">ui_pda2_small_progress2</texture>
-		</background>
+            <texture color="pda_green">ui_pda2_big_progress</texture>
+        </progress>
+        <background>
+            <texture a="60">ui_pda2_big_progress2</texture>
+        </background>
+    </progress_enemy_state>
+
+    <progress_our_mem_count x="62" y="470" width="433" height="38" min="0" max="100" pos="0" mode="horz">
+        <progress>
+            <texture color="pda_yellow">ui_pda2_small_progress</texture>
+        </progress>
+        <background>
+            <texture a="60">ui_pda2_small_progress2</texture>
+        </background>
+    </progress_our_mem_count>
+    <progress_enemy_mem_count x="530" y="470" width="433" height="38" min="0" max="100" pos="0" mode="back">
+        <progress>
+            <texture color="pda_yellow">ui_pda2_small_progress</texture>
+        </progress>
+        <background>
+            <texture a="60">ui_pda2_small_progress2</texture>
+        </background>
     </progress_enemy_mem_count>
 
     <progress_our_resource x="62" y="550" width="433" height="38" min="0" max="100" pos="0" mode="horz">
-		<progress>
-			<texture color="pda_yellow">ui_pda2_small_progress</texture>
-		</progress>
-		<background>
-			<texture a="60">ui_pda2_small_progress2</texture>
-		</background>
-	</progress_our_resource>
-	<progress_enemy_resource x="530" y="550" width="433" height="38" min="0" max="100" pos="0" mode="back">
         <progress>
-			<texture color="pda_yellow">ui_pda2_small_progress</texture>
-		</progress>
-		<background>
-			<texture a="60">ui_pda2_small_progress2</texture>
-		</background>
+            <texture color="pda_yellow">ui_pda2_small_progress</texture>
+        </progress>
+        <background>
+            <texture a="60">ui_pda2_small_progress2</texture>
+        </background>
+    </progress_our_resource>
+    <progress_enemy_resource x="530" y="550" width="433" height="38" min="0" max="100" pos="0" mode="back">
+        <progress>
+            <texture color="pda_yellow">ui_pda2_small_progress</texture>
+        </progress>
+        <background>
+            <texture a="60">ui_pda2_small_progress2</texture>
+        </background>
     </progress_enemy_resource>
 
     <static_vs_state x="310" y="370" width="65" height="31" dx="20" xcenter="512" delay="700">
-		<img x="0" y="0" width="65" height="31">
-			<!--texture>ui_fm_base_war_state</texture-->
-		</img>
+        <img x="0" y="0" width="65" height="31">
+            <!--texture>ui_fm_base_war_state</texture-->
+        </img>
     </static_vs_state>
 
     <static_our_bonuce x="62" y="620" width="1" height="1" dx="14" stretch="1">

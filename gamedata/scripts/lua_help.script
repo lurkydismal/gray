@@ -1528,8 +1528,8 @@ C++ class CALifeMonsterDetailPathManager {
 
     function failed() const;
 
-    function speed	(const number&);
-    function speed	() const;
+    function speed    (const number&);
+    function speed    () const;
 
     function actual() const;
 

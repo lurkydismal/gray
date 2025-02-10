@@ -61,8 +61,8 @@ BOOL ptw32_smp_system = PTW32_TRUE;  /* Safer if assumed true initially. */
  */
 PTW32_INTERLOCKED_LONG
   (WINAPI * ptw32_interlocked_compare_exchange) (PTW32_INTERLOCKED_LPLONG,
-						 PTW32_INTERLOCKED_LONG,
-						 PTW32_INTERLOCKED_LONG) =
+                         PTW32_INTERLOCKED_LONG,
+                         PTW32_INTERLOCKED_LONG) =
   NULL;
 
 /* 

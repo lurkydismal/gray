@@ -14,18 +14,18 @@ class xr_writer;
 
 class xr_level_ltx {
 public:
-				xr_level_ltx(xr_reader& r);
-	virtual			~xr_level_ltx();
+                xr_level_ltx(xr_reader& r);
+    virtual            ~xr_level_ltx();
 
-	void			load(xr_reader& r);
-	void			save(xr_writer& w) const;
+    void            load(xr_reader& r);
+    void            save(xr_writer& w) const;
 
-	const xr_ini_file*	ini() const;
-	const std::string&	data() const;
+    const xr_ini_file*    ini() const;
+    const std::string&    data() const;
 
 private:
-	xr_ini_file*		m_ini;
-	std::string		m_data;
+    xr_ini_file*        m_ini;
+    std::string        m_data;
 };
 
 inline xr_level_ltx::xr_level_ltx(xr_reader& r) { load(r); }

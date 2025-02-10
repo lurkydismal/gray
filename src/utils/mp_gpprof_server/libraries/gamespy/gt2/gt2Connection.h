@@ -18,10 +18,10 @@ GT2Result gti2NewIncomingConnection(GT2Socket socket, GT2Connection * connection
 
 GT2Result gti2StartConnectionAttempt
 (
-	GT2Connection connection,
-	const GT2Byte * message,
-	int len,
-	GT2ConnectionCallbacks * callbacks
+    GT2Connection connection,
+    const GT2Byte * message,
+    int len,
+    GT2ConnectionCallbacks * callbacks
 );
 
 GT2Bool gti2AcceptConnection(GT2Connection connection, GT2ConnectionCallbacks * callbacks);

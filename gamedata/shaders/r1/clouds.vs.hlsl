@@ -25,7 +25,7 @@ vf main(vi v)
 
     o.color.w *= pow(v.p.y, 25);
 
-    // if (length(float3(v.p.x,0,v.p.z))>CLOUD_FADE)	o.color.w = 0	;
+    // if (length(float3(v.p.x,0,v.p.z))>CLOUD_FADE)    o.color.w = 0    ;
 
     // generate tcs
     float2 d0 = v.dir.xy * 2 - 1;

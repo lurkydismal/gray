@@ -45,7 +45,7 @@
  * time between jan 1, 1601 and jan 1, 1970 in units of 100 nanoseconds
  */
 #define PTW32_TIMESPEC_TO_FILETIME_OFFSET \
-	  ( ((LONGLONG) 27111902 << 32) + (LONGLONG) 3577643008 )
+      ( ((LONGLONG) 27111902 << 32) + (LONGLONG) 3577643008 )
 
 INLINE void
 ptw32_timespec_to_filetime (const struct timespec *ts, FILETIME * ft)
@@ -77,7 +77,7 @@ ptw32_filetime_to_timespec (const FILETIME * ft, struct timespec *ts)
     (int) ((*(LONGLONG *) ft - PTW32_TIMESPEC_TO_FILETIME_OFFSET) / 10000000);
   ts->tv_nsec =
     (int) ((*(LONGLONG *) ft - PTW32_TIMESPEC_TO_FILETIME_OFFSET -
-	    ((LONGLONG) ts->tv_sec * (LONGLONG) 10000000)) * 100);
+        ((LONGLONG) ts->tv_sec * (LONGLONG) 10000000)) * 100);
 }
 
 #endif /* NEED_FTIME */

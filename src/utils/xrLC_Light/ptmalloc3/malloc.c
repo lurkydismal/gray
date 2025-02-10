@@ -484,7 +484,7 @@ MAX_RELEASE_CHECK_RATE   default: 255 unless not HAVE_MMAP
 #pragma warning(disable:4127)
 
 #ifdef DEBUG
-#	undef DEBUG
+#    undef DEBUG
 #endif // #ifdef DEBUG
 
 //#include <xray/macro_platform.h>
@@ -502,12 +502,12 @@ MAX_RELEASE_CHECK_RATE   default: 255 unless not HAVE_MMAP
 #endif  /* WIN32 */
 #ifdef WIN32
 #ifdef _XBOX
-#	include <xtl.h>
-#   define malloc_getpagesize	16*4096
-#	pragma warning(disable:4146)
+#    include <xtl.h>
+#   define malloc_getpagesize    16*4096
+#    pragma warning(disable:4146)
 #else
-#	define WIN32_LEAN_AND_MEAN
-#	include <windows.h>
+#    define WIN32_LEAN_AND_MEAN
+#    include <windows.h>
 #endif
 #define HAVE_MMAP 1
 #define HAVE_MORECORE 0
@@ -1142,12 +1142,12 @@ size_t destroy_mspace(mspace msp);
   space (if possible) but not the initial base.
 */
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-	typedef void const* out_of_memory_handler_parameter_type;
-	typedef void (__stdcall *out_of_memory_handler_type)	(mspace, out_of_memory_handler_parameter_type, int);
+    typedef void const* out_of_memory_handler_parameter_type;
+    typedef void (__stdcall *out_of_memory_handler_type)    (mspace, out_of_memory_handler_parameter_type, int);
 
-	mspace create_mspace_with_base(void* base, size_t capacity, int locked, out_of_memory_handler_type handler, out_of_memory_handler_parameter_type parameter);
+    mspace create_mspace_with_base(void* base, size_t capacity, int locked, out_of_memory_handler_type handler, out_of_memory_handler_parameter_type parameter);
 #else // #ifdef USE_OUT_OF_MEMORY_HANDLER
-	mspace create_mspace_with_base(void* base, size_t capacity, int locked);
+    mspace create_mspace_with_base(void* base, size_t capacity, int locked);
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 
 /*
@@ -1337,7 +1337,7 @@ LONG __cdecl _InterlockedExchange(LPLONG volatile Target, LONG Value);
 
 /* Declarations for bit scanning on win32 */
 #if defined(_MSC_VER) && _MSC_VER>=1300
-#ifndef BitScanForward	/* Try to avoid pulling in WinNT.h */
+#ifndef BitScanForward    /* Try to avoid pulling in WinNT.h */
 #ifdef __cplusplus
 extern "C" {
 #endif /* __cplusplus */
@@ -1351,8 +1351,8 @@ unsigned char _BitScanReverse(unsigned long *index, unsigned long mask);
 #define BitScanReverse _BitScanReverse
 
 #ifdef XRAY_PLATFORM_WINDOWS_32
-#	pragma intrinsic(_BitScanForward)
-#	pragma intrinsic(_BitScanReverse)
+#    pragma intrinsic(_BitScanForward)
+#    pragma intrinsic(_BitScanReverse)
 #endif // #ifdef XRAY_PLATFORM_WINDOWS_32
 
 #endif /* BitScanForward */
@@ -1522,7 +1522,7 @@ static FORCEINLINE int win32munmap(void* ptr, size_t size) {
 #define PROT_READ 1
 #define PROT_WRITE 2
 
-#define MMAP_FLAGS		  (MAP_PRIVATE|MAP_ANONYMOUS)
+#define MMAP_FLAGS          (MAP_PRIVATE|MAP_ANONYMOUS)
 #define CALL_MMAP(s)      mmap(0, (s), PROT_READ|PROT_WRITE, MMAP_FLAGS, -1, 0)
 #define CALL_MUNMAP(a, s) munmap((a), (s))
 #define DIRECT_MMAP(s)    CALL_MMAP(s)
@@ -2394,8 +2394,8 @@ struct malloc_state {
   void*      extp;      /* Unused but available for extensions */
   size_t     exts;
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-  out_of_memory_handler_type			out_of_memory_handler;
-  out_of_memory_handler_parameter_type	out_of_memory_parameter;
+  out_of_memory_handler_type            out_of_memory_handler;
+  out_of_memory_handler_parameter_type    out_of_memory_parameter;
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 };
 
@@ -3859,7 +3859,7 @@ static void* sys_alloc(mstate m, size_t nb) {
     size_t req = nb + TOP_FOOT_SIZE + SIZE_T_ONE;
     size_t rsize = granularity_align(req);
     if (rsize > nb) { /* Fail if wraps around zero */
-	  char* mp = (char*)(CALL_MMAP(rsize));
+      char* mp = (char*)(CALL_MMAP(rsize));
       if (mp != CMFAIL) {
         tbase = mp;
         tsize = rsize;
@@ -4278,7 +4278,7 @@ static void* internal_memalign(mstate m, size_t alignment, size_t bytes) {
   else {
     size_t nb = request2size(bytes);
     size_t req = nb + alignment + MIN_CHUNK_SIZE - CHUNK_OVERHEAD;
-	void* temp = internal_malloc(m, req);
+    void* temp = internal_malloc(m, req);
     char* mem = (char*)temp;
     if (mem != 0) {
       void* leader = 0;
@@ -4382,10 +4382,10 @@ static void** ialloc(mstate m,
   }
   else {
     /* if empty req, must still return chunk representing empty array */
-	if (n_elements == 0) {
-	  void* temp = internal_malloc(m, 0);
+    if (n_elements == 0) {
+      void* temp = internal_malloc(m, 0);
       return (void**)temp;
-	}
+    }
     marray = 0;
     array_size = request2size(n_elements * (sizeof(void*)));
   }
@@ -4882,16 +4882,16 @@ mspace create_mspace(size_t capacity, int locked) {
 }
 
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-void const* out_of_memory_handler_parameter	(mspace arena)
+void const* out_of_memory_handler_parameter    (mspace arena)
 {
-	return ((mstate)(arena))->out_of_memory_parameter;
+    return ((mstate)(arena))->out_of_memory_parameter;
 }
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-	mspace create_mspace_with_base(void* base, size_t capacity, int locked, out_of_memory_handler_type handler, out_of_memory_handler_parameter_type parameter)
+    mspace create_mspace_with_base(void* base, size_t capacity, int locked, out_of_memory_handler_type handler, out_of_memory_handler_parameter_type parameter)
 #else // #ifdef USE_OUT_OF_MEMORY_HANDLER
-	mspace create_mspace_with_base(void* base, size_t capacity, int locked)
+    mspace create_mspace_with_base(void* base, size_t capacity, int locked)
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
 {
   mstate m = 0;
@@ -4904,8 +4904,8 @@ void const* out_of_memory_handler_parameter	(mspace arena)
     m->seg.sflags = EXTERN_BIT;
     set_lock(m, locked);
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-    m->out_of_memory_handler		= handler;
-    m->out_of_memory_parameter	= parameter;
+    m->out_of_memory_handler        = handler;
+    m->out_of_memory_parameter    = parameter;
 #endif // #ifdef USE_OUT_OF_MEMORY_HANDLER
   }
   return (mspace)m;
@@ -4922,7 +4922,7 @@ size_t destroy_mspace(mspace msp) {
       flag_t flag = sp->sflags;
       sp = sp->next;
       if ((flag & IS_MMAPPED_BIT) && !(flag & EXTERN_BIT) &&
-		  CALL_MUNMAP(base, size) == 0)
+          CALL_MUNMAP(base, size) == 0)
         freed += size;
     }
   }
@@ -5046,17 +5046,17 @@ once_again:
     }
 
 #ifdef USE_OUT_OF_MEMORY_HANDLER
-	if (ms->out_of_memory_handler && first_time) {
-		first_time					= 0;
-		ms->out_of_memory_handler	(ms, ms->out_of_memory_parameter, 1);
-		goto once_again;
-	}
+    if (ms->out_of_memory_handler && first_time) {
+        first_time                    = 0;
+        ms->out_of_memory_handler    (ms, ms->out_of_memory_parameter, 1);
+        goto once_again;
+    }
 
-	if (ms->out_of_memory_handler) {
-		ms->out_of_memory_handler	(ms, ms->out_of_memory_parameter, 0);
-		MALLOC_FAILURE_ACTION
-		return 0;
-	}
+    if (ms->out_of_memory_handler) {
+        ms->out_of_memory_handler    (ms, ms->out_of_memory_parameter, 0);
+        MALLOC_FAILURE_ACTION
+        return 0;
+    }
 
     mem = sys_alloc(ms, nb);
 #else // #ifdef USE_OUT_OF_MEMORY_HANDLER
@@ -5092,7 +5092,7 @@ void mspace_free(mspace msp, void* mem) {
           if ((prevsize & IS_MMAPPED_BIT) != 0) {
             prevsize &= ~IS_MMAPPED_BIT;
             psize += prevsize + MMAP_FOOT_PAD;
-			if (CALL_MUNMAP((char*)p - prevsize, psize) == 0)
+            if (CALL_MUNMAP((char*)p - prevsize, psize) == 0)
               fm->footprint -= psize;
             goto postaction;
           }
@@ -5612,23 +5612,23 @@ static const int MultiplyDeBruijnBitPosition[32] = {
 
 unsigned char _BitScanForward(unsigned long *index, unsigned long mask)
 {
-	if ( !mask )
-		return		( 0 );
+    if ( !mask )
+        return        ( 0 );
 
-	*index			= MultiplyDeBruijnBitPosition[((mask & -(long)mask) * 0x077CB531UL) >> 27];
-	return			( 1 );
+    *index            = MultiplyDeBruijnBitPosition[((mask & -(long)mask) * 0x077CB531UL) >> 27];
+    return            ( 1 );
 }
 
 unsigned char _BitScanReverse(unsigned long *index, unsigned long mask)
 {
-	mask 			|= mask >> 1; // first round down to power of 2 
-	mask 			|= mask >> 2;
-	mask 			|= mask >> 4;
-	mask 			|= mask >> 8;
-	mask 			|= mask >> 16;
-	mask 			= (mask >> 1) + 1;
+    mask             |= mask >> 1; // first round down to power of 2 
+    mask             |= mask >> 2;
+    mask             |= mask >> 4;
+    mask             |= mask >> 8;
+    mask             |= mask >> 16;
+    mask             = (mask >> 1) + 1;
 
-	return			( _BitScanForward( index, 1 << MultiplyDeBruijnBitPosition[ ( mask * 0x077CB531UL ) >> 27] ) );
+    return            ( _BitScanForward( index, 1 << MultiplyDeBruijnBitPosition[ ( mask * 0x077CB531UL ) >> 27] ) );
 }
 
 #endif // #ifndef XRAY_PLATFORM_WINDOWS_32

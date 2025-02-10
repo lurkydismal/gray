@@ -5,7 +5,7 @@ v2p_TL main(v_TL_positiont I)
 {
     v2p_TL O;
 
-    //	O.HPos = P;
+    //    O.HPos = P;
 
     {
         I.P.xy += 0.5f;
@@ -15,7 +15,7 @@ v2p_TL main(v_TL_positiont I)
     }
 
     O.Tex0 = I.Tex0;
-    O.Color = I.Color.aaaa; //	swizzle vertex colour
+    O.Color = I.Color.aaaa; //    swizzle vertex colour
 
     return O;
 }

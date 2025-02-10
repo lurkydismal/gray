@@ -92,4 +92,4 @@ pthread_mutexattr_getpshared (const pthread_mutexattr_t * attr, int *pshared)
 
   return (result);
 
-}				/* pthread_mutexattr_getpshared */
+}                /* pthread_mutexattr_getpshared */

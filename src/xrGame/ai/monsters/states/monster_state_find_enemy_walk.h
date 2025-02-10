@@ -4,13 +4,13 @@
 
 template<typename _Object>
 class CStateMonsterFindEnemyWalkAround : public CState<_Object> {
-	typedef CState<_Object> inherited;
+    typedef CState<_Object> inherited;
 
 public:
-						CStateMonsterFindEnemyWalkAround	(_Object *obj) : inherited(obj) {}
-	virtual	void		execute						();
-	virtual bool		check_completion			() {return false;}
-	virtual void		remove_links				(CObject* object_) { inherited::remove_links(object_);}
+                        CStateMonsterFindEnemyWalkAround    (_Object *obj) : inherited(obj) {}
+    virtual    void        execute                        ();
+    virtual bool        check_completion            () {return false;}
+    virtual void        remove_links                (CObject* object_) { inherited::remove_links(object_);}
 };
 
 #include "monster_state_find_enemy_walk_inline.h"

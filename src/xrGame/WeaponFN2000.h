@@ -6,9 +6,9 @@
 class CWeaponFN2000: public CWeaponMagazined
 {
 private:
-	typedef CWeaponMagazined inherited;
+    typedef CWeaponMagazined inherited;
 public:
-					CWeaponFN2000	();
-	virtual			~CWeaponFN2000	();
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+                    CWeaponFN2000    ();
+    virtual            ~CWeaponFN2000    ();
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

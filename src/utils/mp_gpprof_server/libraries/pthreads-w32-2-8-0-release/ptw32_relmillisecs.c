@@ -90,7 +90,7 @@ ptw32_relmillisecs (const struct timespec * abstime)
 
   tmpCurrMilliseconds = (int64_t)currSysTime.tv_sec * MILLISEC_PER_SEC;
   tmpCurrMilliseconds += ((int64_t)currSysTime.tv_nsec + (NANOSEC_PER_MILLISEC/2))
-			   / NANOSEC_PER_MILLISEC;
+               / NANOSEC_PER_MILLISEC;
 
 #else /* ! NEED_FTIME */
 

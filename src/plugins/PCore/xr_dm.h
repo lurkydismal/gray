@@ -13,13 +13,13 @@
 namespace xray_re {
 
 enum {
-	DOF_NO_WAVING	= 0x1,
+    DOF_NO_WAVING    = 0x1,
 };
 
 // this is not used. just for the record.
 struct dm_vertex {
-	fvector3	point;
-	float		u, v;
+    fvector3    point;
+    float        u, v;
 };
 
 class xr_reader;
@@ -27,40 +27,40 @@ class xr_writer;
 
 class xr_dm: public xr_object {
 public:
-				xr_dm();
-	virtual			~xr_dm();
-	virtual void		to_object();
+                xr_dm();
+    virtual            ~xr_dm();
+    virtual void        to_object();
 
-	bool			load_dm(const char* path);
-	void			load_dm(xr_reader& r);
-	void			save_dm(xr_writer& w) const;
+    bool            load_dm(const char* path);
+    void            load_dm(xr_reader& r);
+    void            save_dm(xr_writer& w) const;
 
-	void			calc_uv_bounds(frect& bounds) const;
+    void            calc_uv_bounds(frect& bounds) const;
 
-	std::string&		shader();
-	const std::string&	shader() const;
-	std::string&		texture();
-	const std::string&	texture() const;
-	uint32_t&		flags();
-	uint32_t		flags() const;
-	float&			min_scale();
-	float			min_scale() const;
-	float&			max_scale();
-	float			max_scale() const;
-	const xr_vbuf&		vb() const;
-	const xr_ibuf&		ib() const;
+    std::string&        shader();
+    const std::string&    shader() const;
+    std::string&        texture();
+    const std::string&    texture() const;
+    uint32_t&        flags();
+    uint32_t        flags() const;
+    float&            min_scale();
+    float            min_scale() const;
+    float&            max_scale();
+    float            max_scale() const;
+    const xr_vbuf&        vb() const;
+    const xr_ibuf&        ib() const;
 
 protected:
-	virtual xr_surface*	create_surface(const xr_raw_surface& raw_surface) const;
+    virtual xr_surface*    create_surface(const xr_raw_surface& raw_surface) const;
 
 private:
-	std::string	m_shader;
-	std::string	m_texture;
-	uint32_t	m_flags;
-	float		m_min_scale;
-	float		m_max_scale;
-	xr_vbuf		m_vb;
-	xr_ibuf		m_ib;
+    std::string    m_shader;
+    std::string    m_texture;
+    uint32_t    m_flags;
+    float        m_min_scale;
+    float        m_max_scale;
+    xr_vbuf        m_vb;
+    xr_ibuf        m_ib;
 };
 
 TYPEDEF_STD_VECTOR_PTR(xr_dm)

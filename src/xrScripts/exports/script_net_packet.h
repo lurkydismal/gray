@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_net packet.h
-//	Created 	: 06.02.2004
-//  Modified 	: 24.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : XRay Script net packet class
+//    Module         : script_net packet.h
+//    Created     : 06.02.2004
+//  Modified     : 24.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : XRay Script net packet class
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

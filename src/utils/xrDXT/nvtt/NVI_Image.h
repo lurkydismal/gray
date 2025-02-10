@@ -19,7 +19,7 @@ Comments:
 #include <assert.h>
 // Debug test switch
 // Define to turn on debug _ASSERT()s
-// #define		NVIHDEBUG
+// #define        NVIHDEBUG
 
 
 #ifndef SAFE_ARRAY_DELETE
@@ -39,12 +39,12 @@ namespace xray_nvi
     {
         IMAGE_NOT_INITIALIZED,
         NVI_A8,
-        //@	NVI_R8_G8_B8_A8, // unsigned integer - A is most sig byte
+        //@    NVI_R8_G8_B8_A8, // unsigned integer - A is most sig byte
         NVI_A8_R8_G8_B8, // unsigned integer - A is most sig byte (0xAARRGGBB)        
         NVI_A1_R5_G5_B5,
         NVI_R5_G6_B5,
         NVI_A16, // 16-bit unsigned integer
-        //@	NVI_R16_G16_B16,
+        //@    NVI_R16_G16_B16,
         NVI_R16_G16_B16_A16,
         NVI_FMT_FORCEDWORD = 0xFFFFFFFF
     };
@@ -134,7 +134,7 @@ namespace xray_nvi
         int m_nBorderXLow; // ** Negative or zero ** 
         // This is the offset from source images' 0,0 
         //   that marks the left border.
-        //	 Border width on the left = -m_nBorderXLow;
+        //     Border width on the left = -m_nBorderXLow;
         //   x = 0 that pixels can be addressed
         int m_nBorderXHigh; // Size of border to 'right' of image.  >= 0
         int m_nBorderYLow; // Same thing for Y borders

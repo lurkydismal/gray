@@ -12,13 +12,13 @@ class CDeflector;
 class XRLC_LIGHT_API CLightmap  
 {
 public:
-	lm_layer					lm;
-	b_texture					lm_texture;
+    lm_layer                    lm;
+    b_texture                    lm_texture;
 public:
-	CLightmap					();
-	~CLightmap					();
+    CLightmap                    ();
+    ~CLightmap                    ();
  
-	void	Capture				( CDeflector *D, int b_u, int b_v, int s_u, int s_v, BOOL bRotate );
-	void	Save				( LPCSTR path );
+    void    Capture                ( CDeflector *D, int b_u, int b_v, int s_u, int s_v, BOOL bRotate );
+    void    Save                ( LPCSTR path );
  
 };

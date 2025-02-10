@@ -12,40 +12,40 @@
 
 class CConnectPage : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CConnectPage)
+    DECLARE_DYNCREATE(CConnectPage)
 
 // Construction
 public:
-	CConnectPage();
-	~CConnectPage();
+    CConnectPage();
+    ~CConnectPage();
 
 // Dialog Data
-	//{{AFX_DATA(CConnectPage)
-	enum { IDD = IDD_CONNECT_PAGE };
-	CString	m_nick;
-	CString	m_title;
-	BOOL	m_groupRooms;
-	CString	m_key;
-	//}}AFX_DATA
+    //{{AFX_DATA(CConnectPage)
+    enum { IDD = IDD_CONNECT_PAGE };
+    CString    m_nick;
+    CString    m_title;
+    BOOL    m_groupRooms;
+    CString    m_key;
+    //}}AFX_DATA
 
 
 // Overrides
-	// ClassWizard generate virtual function overrides
-	//{{AFX_VIRTUAL(CConnectPage)
-	public:
-	virtual BOOL OnSetActive();
-	virtual LRESULT OnWizardNext();
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generate virtual function overrides
+    //{{AFX_VIRTUAL(CConnectPage)
+    public:
+    virtual BOOL OnSetActive();
+    virtual LRESULT OnWizardNext();
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
-	// Generated message map functions
-	//{{AFX_MSG(CConnectPage)
-		// NOTE: the ClassWizard will add member functions here
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CConnectPage)
+        // NOTE: the ClassWizard will add member functions here
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 
 };
 

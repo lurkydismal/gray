@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Vertex
+//    Vertex
 v2g_fluidsim main(v_fluidsim input)
 {
     v2g_fluidsim output = (v2g_fluidsim)0;

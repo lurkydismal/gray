@@ -3,31 +3,31 @@
 #include <luabind/luabind.hpp>
 
 static LPVOID __cdecl luabind_allocator(
-	luabind::memory_allocation_function_parameter const,
-	void const* const pointer,
-	size_t const size
+    luabind::memory_allocation_function_parameter const,
+    void const* const pointer,
+    size_t const size
 )
 {
-	if (!size)
-	{
-		LPVOID	non_const_pointer = const_cast<LPVOID>(pointer);
-		xr_free(non_const_pointer);
-		return	(0);
-	}
+    if (!size)
+    {
+        LPVOID    non_const_pointer = const_cast<LPVOID>(pointer);
+        xr_free(non_const_pointer);
+        return    (0);
+    }
 
-	if (!pointer)
-	{
-		return	(Memory.mem_alloc(size));
-	}
+    if (!pointer)
+    {
+        return    (Memory.mem_alloc(size));
+    }
 
-	LPVOID non_const_pointer = const_cast<LPVOID>(pointer);
-	return (Memory.mem_realloc(non_const_pointer, size));
+    LPVOID non_const_pointer = const_cast<LPVOID>(pointer);
+    return (Memory.mem_realloc(non_const_pointer, size));
 }
 
 void setup_luabind_allocator()
 {
-	luabind::allocator = &luabind_allocator;
-	luabind::allocator_parameter = 0;
+    luabind::allocator = &luabind_allocator;
+    luabind::allocator_parameter = 0;
 }
 
 #pragma warning(disable:4995)
@@ -45,106 +45,106 @@ void InitialFactory();
 void DestroyFactory();
 
 void Help(const char* h_str) {
-	MessageBoxA(0, h_str, "Command line options", MB_OK | MB_ICONINFORMATION);
+    MessageBoxA(0, h_str, "Command line options", MB_OK | MB_ICONINFORMATION);
 }
 
 struct CompilersMode {
-	bool AI = false;
-	bool DO = false;
-	bool LC = false;
+    bool AI = false;
+    bool DO = false;
+    bool LC = false;
 
-	bool Silent = false;
+    bool Silent = false;
 };
 
 CompilersMode gCompilerMode;
 
 void Startup(LPSTR lpCmdLine) 
 {
-	u32 dwStartupTime = timeGetTime();
+    u32 dwStartupTime = timeGetTime();
 
-	u32 dwTimeLC = 0;
-	if (gCompilerMode.LC) {
-		dwTimeLC = timeGetTime();
-		Phase("xrLC Startup");
-		StartupLC(lpCmdLine);
+    u32 dwTimeLC = 0;
+    if (gCompilerMode.LC) {
+        dwTimeLC = timeGetTime();
+        Phase("xrLC Startup");
+        StartupLC(lpCmdLine);
 
-		dwTimeLC = (timeGetTime() - dwTimeLC) / 1000;
-	}
+        dwTimeLC = (timeGetTime() - dwTimeLC) / 1000;
+    }
 
-	u32 dwTimeAI = 0;
-	if (gCompilerMode.AI)
-	{
-		dwTimeAI = timeGetTime();
-		Phase("xrAI Startup");
+    u32 dwTimeAI = 0;
+    if (gCompilerMode.AI)
+    {
+        dwTimeAI = timeGetTime();
+        Phase("xrAI Startup");
 
-		setup_luabind_allocator();
-		InitialFactory();
-		StartupAI(lpCmdLine);
-		DestroyFactory();
-		dwTimeAI = (timeGetTime() - dwTimeAI) / 1000;
-	}
+        setup_luabind_allocator();
+        InitialFactory();
+        StartupAI(lpCmdLine);
+        DestroyFactory();
+        dwTimeAI = (timeGetTime() - dwTimeAI) / 1000;
+    }
 
-	u32 dwTimeDO = 0;
-	if (gCompilerMode.DO) {
-		dwTimeDO = timeGetTime();
-		Phase("xrDO Startup");
-		StartupDO(lpCmdLine);
-		dwTimeDO = (timeGetTime() - dwTimeDO) / 1000;
-	}
+    u32 dwTimeDO = 0;
+    if (gCompilerMode.DO) {
+        dwTimeDO = timeGetTime();
+        Phase("xrDO Startup");
+        StartupDO(lpCmdLine);
+        dwTimeDO = (timeGetTime() - dwTimeDO) / 1000;
+    }
 
-	// Show statistic
-	string256 stats;
-	extern std::string make_time(u32 sec);
-	u32 dwEndTime = timeGetTime();
+    // Show statistic
+    string256 stats;
+    extern std::string make_time(u32 sec);
+    u32 dwEndTime = timeGetTime();
 
-	xr_sprintf(
-		stats, 
-		"Time elapsed: %s \r\n xrLC: %s\r\n xrAI: %s\r\n xrDO: %s", 
-		make_time((dwEndTime - dwStartupTime) / 1000).c_str(), 
-		make_time(dwTimeLC).c_str(),
-		make_time(dwTimeAI).c_str(), 
-		make_time(dwTimeDO).c_str()
-	);
+    xr_sprintf(
+        stats, 
+        "Time elapsed: %s \r\n xrLC: %s\r\n xrAI: %s\r\n xrDO: %s", 
+        make_time((dwEndTime - dwStartupTime) / 1000).c_str(), 
+        make_time(dwTimeLC).c_str(),
+        make_time(dwTimeAI).c_str(), 
+        make_time(dwTimeDO).c_str()
+    );
 
-	if (!gCompilerMode.Silent) {
-		MessageBoxA(logWindow, stats, "Congratulation!", MB_OK | MB_ICONINFORMATION);
-	}
+    if (!gCompilerMode.Silent) {
+        MessageBoxA(logWindow, stats, "Congratulation!", MB_OK | MB_ICONINFORMATION);
+    }
 
-	extern volatile BOOL bClose;
+    extern volatile BOOL bClose;
 
-	// Close log
-	bClose = TRUE;
-	xrLogger::FlushLog();
-	Sleep(200);
+    // Close log
+    bClose = TRUE;
+    xrLogger::FlushLog();
+    Sleep(200);
 }
 
 int APIENTRY WinMain (
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR     lpCmdLine,
-	int       nCmdShow
+    HINSTANCE hInstance,
+    HINSTANCE hPrevInstance,
+    LPSTR     lpCmdLine,
+    int       nCmdShow
 ) {
-	// Initialize debugging
-	Debug._initialize(false);
-	Core._initialize("IX-Ray Compilers");
+    // Initialize debugging
+    Debug._initialize(false);
+    Core._initialize("IX-Ray Compilers");
 
-	// Read modes
-	bool SupportAll = strstr(lpCmdLine, "-all");
-	gCompilerMode.AI = SupportAll || strstr(lpCmdLine, "-ai");
-	gCompilerMode.LC = SupportAll || strstr(lpCmdLine, "-lc");
-	gCompilerMode.DO = SupportAll || strstr(lpCmdLine, "-do");
+    // Read modes
+    bool SupportAll = strstr(lpCmdLine, "-all");
+    gCompilerMode.AI = SupportAll || strstr(lpCmdLine, "-ai");
+    gCompilerMode.LC = SupportAll || strstr(lpCmdLine, "-lc");
+    gCompilerMode.DO = SupportAll || strstr(lpCmdLine, "-do");
 
-	gCompilerMode.Silent = strstr(lpCmdLine, "-silent");
+    gCompilerMode.Silent = strstr(lpCmdLine, "-silent");
 
-	// Give a LOG-thread a chance to startup
-	InitCommonControls();
-	Sleep(150);
-	thread_spawn(logThread, "log-update", 1024 * 1024, 0);
+    // Give a LOG-thread a chance to startup
+    InitCommonControls();
+    Sleep(150);
+    thread_spawn(logThread, "log-update", 1024 * 1024, 0);
 
-	while (!logWindow)
-		Sleep(100);
+    while (!logWindow)
+        Sleep(100);
 
-	Startup(lpCmdLine);
+    Startup(lpCmdLine);
 
-	return 0;
+    return 0;
 }

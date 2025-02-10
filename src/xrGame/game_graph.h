@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: game_graph.h
-//	Created 	: 18.02.2003
-//  Modified 	: 13.11.2003
-//	Author		: Dmitriy Iassenev
-//	Description : Game graph class
+//    Module         : game_graph.h
+//    Created     : 18.02.2003
+//  Modified     : 13.11.2003
+//    Author        : Dmitriy Iassenev
+//    Description : Game graph class
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -15,10 +15,10 @@
 class CGameGraph:public IGameGraph
 {
 private:
-	friend class CRenumbererConverter;
+    friend class CRenumbererConverter;
 public:
-	CGameGraph(const IReader &stream);
-	virtual ~CGameGraph();
-	virtual void set_current_level(u32 const level_id);
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    CGameGraph(const IReader &stream);
+    virtual ~CGameGraph();
+    virtual void set_current_level(u32 const level_id);
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

@@ -7,7 +7,7 @@
 //  Usage:
 //      1) #define GSI_COMMON_DEBUG to enable debug output
 //      2) Set target output (file or console or custom func)
-//		3) Use Debug macros to log output
+//        3) Use Debug macros to log output
 //
 //  Todo:
 //      Allow user to specify IP to send debug output to (remote log for PS2)
@@ -46,15 +46,15 @@ typedef gsi_u8 GSIDebugLevel;
 // Output types
 typedef enum 
 {
-	GSIDebugType_Network,  // Network activity
-	GSIDebugType_File,     // File output
-	GSIDebugType_Memory,   // Memory allocations
-	GSIDebugType_State,    // State update
-	GSIDebugType_Misc,     // None of the above
-	// add new ones here (update string table in gsiDebug.c!)
+    GSIDebugType_Network,  // Network activity
+    GSIDebugType_File,     // File output
+    GSIDebugType_Memory,   // Memory allocations
+    GSIDebugType_State,    // State update
+    GSIDebugType_Misc,     // None of the above
+    // add new ones here (update string table in gsiDebug.c!)
 
-	GSIDebugType_Count,
-	GSIDebugType_All = GSIDebugType_Count
+    GSIDebugType_Count,
+    GSIDebugType_All = GSIDebugType_Count
 } GSIDebugType;
 
 
@@ -63,23 +63,23 @@ typedef enum
 // Debug categories (SDKs)
 typedef enum
 {
-	GSIDebugCat_App,
-	GSIDebugCat_GP,
-	GSIDebugCat_Peer,
-	GSIDebugCat_QR2,
-	GSIDebugCat_SB,
-	GSIDebugCat_Voice,
-	GSIDebugCat_AD,
-	GSIDebugCat_NatNeg,
-	GSIDebugCat_HTTP,
-	GSIDebugCat_CDKey,
-	// Add new ones here (update string table in gsiDebug.c!)
+    GSIDebugCat_App,
+    GSIDebugCat_GP,
+    GSIDebugCat_Peer,
+    GSIDebugCat_QR2,
+    GSIDebugCat_SB,
+    GSIDebugCat_Voice,
+    GSIDebugCat_AD,
+    GSIDebugCat_NatNeg,
+    GSIDebugCat_HTTP,
+    GSIDebugCat_CDKey,
+    // Add new ones here (update string table in gsiDebug.c!)
 
 
-	GSIDebugCat_Common, // Common should be last to prevent display weirdness
-	                    // resulting from initialization order
-	GSIDebugCat_Count,
-	GSIDebugCat_All = GSIDebugCat_Count
+    GSIDebugCat_Common, // Common should be last to prevent display weirdness
+                        // resulting from initialization order
+    GSIDebugCat_Count,
+    GSIDebugCat_All = GSIDebugCat_Count
 } GSIDebugCategory;
 
 extern char* gGSIDebugCatStrings[GSIDebugCat_Count];
@@ -90,37 +90,37 @@ extern char* gGSIDebugLevelStrings[GSIDebugLevel_Count];
 ///////////////////////////////////////////////////////////////////////////////
 // Only include static data and functions if GSI_COMMON_DEBUG is defined
 #ifndef GSI_COMMON_DEBUG
-	// not using GSI debug!  Define functions to <blank>
-	// (put these here so VisualAssist will resolve the definitions below)
-	#if !defined(_WIN32) && !defined(__MWERKS__)
-		// WIN32 doesn't like "..." in a macro
-		#define gsDebugFormat(c,t,l,f,...)
-		#define gsDebugVaList(c,t,l,f,v)
-		#define gsDebugBinary(c,t,l,b,n)
-		#define gsSetDebugLevel(c,t,l)
-		#define gsSetDebugFile(f)
-		#define gsOpenDebugFile(f)
-		#define gsGetDebugFile
-		#define gsSetDebugCallback(c)
-	#elif defined(_NITRO)
-		#define gsDebugFormat(...)
-		#define gsDebugVaList(c,t,l,f,v)
-		#define gsDebugBinary(c,t,l,b,n)
-		#define gsSetDebugLevel(c,t,l)
-		#define gsSetDebugFile(f)
-		#define gsOpenDebugFile(f)
-		#define gsGetDebugFile
-		#define gsSetDebugCallback(c)
-	#else
-		#define gsDebugFormat
-		#define gsDebugVaList
-		#define gsDebugBinary
-		#define gsSetDebugLevel
-		#define gsSetDebugFile
-		#define gsOpenDebugFile
-		#define gsGetDebugFile
-		#define gsSetDebugCallback
-	#endif
+    // not using GSI debug!  Define functions to <blank>
+    // (put these here so VisualAssist will resolve the definitions below)
+    #if !defined(_WIN32) && !defined(__MWERKS__)
+        // WIN32 doesn't like "..." in a macro
+        #define gsDebugFormat(c,t,l,f,...)
+        #define gsDebugVaList(c,t,l,f,v)
+        #define gsDebugBinary(c,t,l,b,n)
+        #define gsSetDebugLevel(c,t,l)
+        #define gsSetDebugFile(f)
+        #define gsOpenDebugFile(f)
+        #define gsGetDebugFile
+        #define gsSetDebugCallback(c)
+    #elif defined(_NITRO)
+        #define gsDebugFormat(...)
+        #define gsDebugVaList(c,t,l,f,v)
+        #define gsDebugBinary(c,t,l,b,n)
+        #define gsSetDebugLevel(c,t,l)
+        #define gsSetDebugFile(f)
+        #define gsOpenDebugFile(f)
+        #define gsGetDebugFile
+        #define gsSetDebugCallback(c)
+    #else
+        #define gsDebugFormat
+        #define gsDebugVaList
+        #define gsDebugBinary
+        #define gsSetDebugLevel
+        #define gsSetDebugFile
+        #define gsOpenDebugFile
+        #define gsGetDebugFile
+        #define gsSetDebugCallback
+    #endif
 #else
 
 
@@ -137,16 +137,16 @@ typedef void (*GSIDebugCallback)(GSIDebugCategory,GSIDebugType,GSIDebugLevel,
 typedef struct GSIDebugInstance
 {
 #if !defined(_NITRO)
-	FILE* mGSIDebugFile;
+    FILE* mGSIDebugFile;
 #endif
-	GSIDebugCallback mDebugCallback;
-	gsi_i32 mInitialized;
+    GSIDebugCallback mDebugCallback;
+    gsi_i32 mInitialized;
 
 #if !defined(GSI_NO_THREADS)
-	GSICriticalSection mDebugCrit;
+    GSICriticalSection mDebugCrit;
 #endif
 
-	GSIDebugLevel mGSIDebugLevel[GSIDebugCat_Count][GSIDebugType_Count];
+    GSIDebugLevel mGSIDebugLevel[GSIDebugCat_Count][GSIDebugType_Count];
 } GSIDebugInstance;
 
 
@@ -158,7 +158,7 @@ void gsDebugFormat(GSIDebugCategory theCat, GSIDebugType theType,
 
 void gsDebugVaList(GSIDebugCategory theCat, GSIDebugType theType, 
              GSIDebugLevel theLevel, const char* theTokenStr, 
-			 va_list theParams);  
+             va_list theParams);  
 
 void gsDebugBinary(GSIDebugCategory theCat, GSIDebugType theType,
              GSIDebugLevel theLevel, const char* theBuffer, gsi_i32 theLength);
@@ -168,7 +168,7 @@ void gsDebugBinary(GSIDebugCategory theCat, GSIDebugType theType,
 ///////////////////////////////////////////////////////////////////////////////
 // Output functions
 void  gsSetDebugLevel(GSIDebugCategory theCat, GSIDebugType theType, 
-					  GSIDebugLevel theLevel);
+                      GSIDebugLevel theLevel);
 
 #if !defined(_NITRO)
 

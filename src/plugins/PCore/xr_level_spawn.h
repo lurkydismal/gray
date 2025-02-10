@@ -15,19 +15,19 @@ class xr_writer;
 
 class xr_level_spawn {
 public:
-			xr_level_spawn();
-			xr_level_spawn(xr_reader& r);
-	virtual		~xr_level_spawn();
+            xr_level_spawn();
+            xr_level_spawn(xr_reader& r);
+    virtual        ~xr_level_spawn();
 
-	bool		load(const char* path, const char* name);
-	bool		save(const char* path, const char* name);
-	void		load(xr_reader& r);
-	void		save(xr_writer& w);
+    bool        load(const char* path, const char* name);
+    bool        save(const char* path, const char* name);
+    void        load(xr_reader& r);
+    void        save(xr_writer& w);
 
-	std::vector<cse_abstract*>&	spawns();
+    std::vector<cse_abstract*>&    spawns();
 
 private:
-	std::vector<cse_abstract*>	m_spawns;
+    std::vector<cse_abstract*>    m_spawns;
 };
 
 inline xr_level_spawn::xr_level_spawn() {}

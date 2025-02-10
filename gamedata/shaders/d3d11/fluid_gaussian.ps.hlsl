@@ -1,6 +1,6 @@
 #include "fluid_common.hlsli"
 
-//	Pixel
+//    Pixel
 float4 main(p_fluidsim input) : SV_Target
 {
     if (IsNonEmptyCell(input.texcoords.xyz))
@@ -9,12 +9,12 @@ float4 main(p_fluidsim input) : SV_Target
     }
 
     float dist = length(input.cell0 - center.xyz) * size;
-    //	float dist = length( input.cell0 - center ) * size / 2;
+    //    float dist = length( input.cell0 - center ) * size / 2;
     float4 result;
     //    result.rgb = splatColor;    // + sin(splatColor.rgb*10.0+cell*5.0)*0.2;
     result.rgb = splatColor.xyz + length(splatColor) * sin(splatColor.xyz * 10.0 + input.cell0 * 5.0) * 0.2;
-    //	result.a = exp( -dist*dist/(0.05) );
-    //	result.a = exp( -dist*dist );
+    //    result.a = exp( -dist*dist/(0.05) );
+    //    result.a = exp( -dist*dist );
     result.a = exp(-dist * dist / 0.5);
 
     return result;

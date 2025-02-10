@@ -72,7 +72,7 @@ u32 calc_texture_size(int lod, u32 mip_cnt, u32 orig_size) {
 // Utility pack
 //////////////////////////////////////////////////////////////////////
 
-IC void	Reduce(int& w, int& h, int& l, int& skip) {
+IC void    Reduce(int& w, int& h, int& l, int& skip) {
     while ((l > 1) && (w > 4) && (h > 4) && skip)
     {
         w /= 2;

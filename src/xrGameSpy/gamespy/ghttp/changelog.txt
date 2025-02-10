@@ -39,18 +39,18 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 07-07-2006  1.07.41  SAH  FIX      Fixed HTTP DNS cleanup - needed to explicitly free handle pointer memory
 07-06-2006  1.07.40  SAH  FIX      Fixed PSP project file to not explicitly include the PSP linker file
 07-05-2006  1.07.39  SAH  FIX      Fixed postWaitContinue functionality to remain false when waiting
-	             SAH  FIX      Fixed log call define
+                 SAH  FIX      Fixed log call define
 06-30-2006  1.07.38  SAH  FIX      Fixed Linux makefile
 06-30-2006  1.07.37  SAH  FIX      Uncommented postWaitContinue if statement (caused extra newline sent in posts)
-		     SAH  FIX      Fixed Nitro project file & linker command file to work with CW 2.0/NitroSDK 3.1
+             SAH  FIX      Fixed Nitro project file & linker command file to work with CW 2.0/NitroSDK 3.1
 06-20-2006  1.07.36  SAH  FEATURE  Added asynchronous DNS lookup for LINUX (pthreads)
                      SAH  OTHER    Added some more debugging statements for failed host lookups
                      SAH  FIX      Fixed Linux makefile - added "-lpthread" compiler option for asynch DNS
 06-09-2006  1.07.35  SAH  FEATURE  Added asynchronous DNS lookup support for WIN32 (multi-threaded)
 05-31-2006  1.07.34  SAH  RELEASE  Releasing to developer site
 05-25-2006  1.07.33  SAH  FIX      Added GSI_UNUSED calls to get rid of PSP warnings
-		     SAH  FIX      Changed PSP project warning levels
-		     SAH  FIX      Fixed PS3 project to compile with 084_001 SDK
+             SAH  FIX      Changed PSP project warning levels
+             SAH  FIX      Fixed PS3 project to compile with 084_001 SDK
 05-24-2006  1.07.32  SAH  FIX      Uncommented secure page test in gptestc.c
 05-19-2006  1.07.31  SAH  FIX      Added gsTestMain.c to nitro CodeWarrior Project
 05-18-2006  1.07.30  BED  FIX      Fixed bug with byte alignment for SSL on DS/PS3
@@ -109,7 +109,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
                      DES  CLEANUP  Updated OSX Makefile
 08-13-2004  1.06.24  SN   FIX      Changed asserts in ghiParseProxyServer to reflect the correct checks on parameters
 08-04-2004  1.06.23  SN   RELEASE  Releasing to developer site.
-07-19-2004  1.06.23  SN   FIX	   Updated code with explicit casts to remove implicit cast error 
+07-19-2004  1.06.23  SN   FIX       Updated code with explicit casts to remove implicit cast error 
                                    when compiling at highest level and warnings treated as errors.
 06-18-2004  1.06.22  BED  RELEASE  Releasing to developer site.
 06-17-2004  1.06.22  BED  FIX      ghttpc sample no longer builds UNICODE mode by default

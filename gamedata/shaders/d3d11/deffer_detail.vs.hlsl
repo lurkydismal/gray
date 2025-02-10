@@ -39,10 +39,10 @@ void main(in v_detail I, out p_bumped_new O)
     pos.xz += calc_xz_wave(dir2D.xz * inten, frac);
 
     #ifndef DETAIL_SHADOW_PASS
-		float dp_old = calc_cyclic(dot(pos_old, wave_old));
-		float inten_old = H * dp_old;
+        float dp_old = calc_cyclic(dot(pos_old, wave_old));
+        float inten_old = H * dp_old;
 
-		pos_old.xz += calc_xz_wave(dir2D_old.xz * inten_old, frac);
+        pos_old.xz += calc_xz_wave(dir2D_old.xz * inten_old, frac);
     #endif
 #endif
 

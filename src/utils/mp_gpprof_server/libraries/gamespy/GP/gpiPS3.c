@@ -17,12 +17,12 @@ Please see the GameSpy Presence SDK documentation for more information
 #ifdef _PS3
 //GLOBALS
 //////////
-uint8_t	gpi_np_pool[SCE_NP_MIN_POOL_SIZE];
+uint8_t    gpi_np_pool[SCE_NP_MIN_POOL_SIZE];
 SceNpCommunicationId gpi_communication_id = {
-	{'N','P','X','S','0','0','0','0','5'},
-	'\0',
-	0,
-	0
+    {'N','P','X','S','0','0','0','0','5'},
+    '\0',
+    0,
+    0
 };
 
 //FUNCTIONS
@@ -34,23 +34,23 @@ int gpiNpBasicCallback(
   void *arg
 )
 {
-	// No-op - can ignore any events
-	////////////////////////////////
-	return 0;
+    // No-op - can ignore any events
+    ////////////////////////////////
+    return 0;
 }
 
 GPResult gpiInitializeNpBasic(
   GPConnection * connection
 )
 {
-	int ret = 0;
+    int ret = 0;
     GPIConnection * iconnection = (GPIConnection*)*connection;
 
     iconnection->npInitialized = gsi_true;
 
-	// Initial NP init - after this we wait for status to get to online
-	////////////////////////////////////////////////////////////////////
-	ret = sceNpInit(SCE_NP_MIN_POOL_SIZE, gpi_np_pool);
+    // Initial NP init - after this we wait for status to get to online
+    ////////////////////////////////////////////////////////////////////
+    ret = sceNpInit(SCE_NP_MIN_POOL_SIZE, gpi_np_pool);
 
     if (ret == SCE_NP_ERROR_ALREADY_INITIALIZED)
     {
@@ -58,17 +58,17 @@ GPResult gpiInitializeNpBasic(
         ////////////////////////////////////////////////////////////////////////////
         iconnection->npBasicGameInitialized = gsi_true;
     }
-	else if (ret < 0) 
-	{
-		iconnection->npBasicGameInitialized = gsi_true;
+    else if (ret < 0) 
+    {
+        iconnection->npBasicGameInitialized = gsi_true;
         gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-            "gpiInitializeNpBasic: sceNpInit() failed, NP-functionality disabled. ret = 0x%x\n", ret);	
+            "gpiInitializeNpBasic: sceNpInit() failed, NP-functionality disabled. ret = 0x%x\n", ret);    
         return GP_MISC_ERROR;
-	}
+    }
     else
         iconnection->npBasicGameInitialized = gsi_false; //GP initialized, so destroy after complete
 
-	return GP_NO_ERROR;
+    return GP_NO_ERROR;
 }
 
 // Freeing up transaction list darray
@@ -83,61 +83,61 @@ GPResult gpiCheckNpStatus(
   GPConnection * connection
 )
 {
-	int ret = 0;
-	int status = SCE_NP_MANAGER_STATUS_OFFLINE;
+    int ret = 0;
+    int status = SCE_NP_MANAGER_STATUS_OFFLINE;
     SceNpId npId;
-	GPIConnection * iconnection = (GPIConnection*)*connection;
+    GPIConnection * iconnection = (GPIConnection*)*connection;
 
-	// Get NP status
-	////////////////
-	ret = sceNpManagerGetStatus(&status);
-	if (ret < 0) 
-	{
-		gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-			"gpiCheckNpStatus: sceNpGetStatus() failed. ret = 0x%x\n", ret);	
-	}
-	gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
-		"gpiCheckNpStatus: sceNpGetStatus - status = %d\n", status);	
+    // Get NP status
+    ////////////////
+    ret = sceNpManagerGetStatus(&status);
+    if (ret < 0) 
+    {
+        gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+            "gpiCheckNpStatus: sceNpGetStatus() failed. ret = 0x%x\n", ret);    
+    }
+    gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
+        "gpiCheckNpStatus: sceNpGetStatus - status = %d\n", status);    
 
 
-	// If NP status != online after the timeout period, stop syncing 
-	////////////////////////////////////////////////////////////////
-	if (status != SCE_NP_MANAGER_STATUS_ONLINE && (current_time() - iconnection->loginTime > GPI_NP_STATUS_TIMEOUT))
-	{
-		gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-			"gpiCheckNpStatus: NP Status not online - timed out\n");	
-		
-		// Flag to stop the sync process
-		////////////////////////////////
-		iconnection->npPerformBuddySync = gsi_false;
+    // If NP status != online after the timeout period, stop syncing 
+    ////////////////////////////////////////////////////////////////
+    if (status != SCE_NP_MANAGER_STATUS_ONLINE && (current_time() - iconnection->loginTime > GPI_NP_STATUS_TIMEOUT))
+    {
+        gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+            "gpiCheckNpStatus: NP Status not online - timed out\n");    
+        
+        // Flag to stop the sync process
+        ////////////////////////////////
+        iconnection->npPerformBuddySync = gsi_false;
         iconnection->npPerformBlockSync = gsi_false;
 
-		return GP_MISC_ERROR;
-	}
+        return GP_MISC_ERROR;
+    }
 
-	// Once status is online, finish NP init
-	////////////////////////////////////////
-	if (status == SCE_NP_MANAGER_STATUS_ONLINE)
-	{
-		iconnection->loginTime = current_time();
+    // Once status is online, finish NP init
+    ////////////////////////////////////////
+    if (status == SCE_NP_MANAGER_STATUS_ONLINE)
+    {
+        iconnection->loginTime = current_time();
 
         // Note - we ignore error messages here - if something fails we really don't care
-		/////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
         if (!iconnection->npBasicGameInitialized)
         {
-		    ret = sceNpBasicInit(); //obsolete?
-		    if (ret < 0) 
-		    {
-			    gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-				    "gpiCheckNpStatus: sceNpBasicInit() failed. ret = 0x%x\n", ret);	
-		    }
+            ret = sceNpBasicInit(); //obsolete?
+            if (ret < 0) 
+            {
+                gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+                    "gpiCheckNpStatus: sceNpBasicInit() failed. ret = 0x%x\n", ret);    
+            }
 
-		    ret = sceNpBasicRegisterHandler(&gpi_communication_id, gpiNpBasicCallback, NULL);
-		    if (ret < 0) 
-		    {
-			    gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-				    "gpiCheckNpStatus: sceNpBasicRegisterHandler() failed. ret = 0x%x\n", ret);
-		    }
+            ret = sceNpBasicRegisterHandler(&gpi_communication_id, gpiNpBasicCallback, NULL);
+            if (ret < 0) 
+            {
+                gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+                    "gpiCheckNpStatus: sceNpBasicRegisterHandler() failed. ret = 0x%x\n", ret);
+            }
         }
 
         ret = sceNpLookupInit();
@@ -174,25 +174,25 @@ GPResult gpiCheckNpStatus(
 
         iconnection->npLookupTitleCtxId = ret;
 
-		// Mark status retrieval completed
-		//////////////////////////////////
-		iconnection->npStatusRetrieved = gsi_true;
+        // Mark status retrieval completed
+        //////////////////////////////////
+        iconnection->npStatusRetrieved = gsi_true;
         gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
-            "gpiCheckNpStatus: NP is now initialized with status.\n");	
+            "gpiCheckNpStatus: NP is now initialized with status.\n");    
 
         iconnection->npTransactionList = ArrayNew(sizeof(npIdLookupTrans), 1, gpiNpTransactionListFree);
         if (!iconnection->npTransactionList)
             Error(connection, GP_MEMORY_ERROR, "Out of memory.");
-	}
+    }
 
-	return GP_NO_ERROR;
+    return GP_NO_ERROR;
 }
 
 GPResult gpiDestroyNpBasic(
   GPConnection * connection
 )
 {
-	GPIConnection * iconnection = (GPIConnection*)*connection;	
+    GPIConnection * iconnection = (GPIConnection*)*connection;    
 
     // Explicitly destroy title context we used for lookup
     //////////////////////////////////////////////////////
@@ -206,10 +206,10 @@ GPResult gpiDestroyNpBasic(
 
     if (!iconnection->npBasicGameInitialized)
     {
-	    sceNpBasicUnregisterHandler();
+        sceNpBasicUnregisterHandler();
 
-	    // Obsolete?
-	    sceNpBasicTerm();
+        // Obsolete?
+        sceNpBasicTerm();
 
         sceNpTerm();
     }
@@ -219,56 +219,56 @@ GPResult gpiDestroyNpBasic(
     if (iconnection->npTransactionList)
         ArrayFree(iconnection->npTransactionList);
 
-	iconnection->npInitialized = gsi_false;
+    iconnection->npInitialized = gsi_false;
     iconnection->npStatusRetrieved = gsi_false;
 
-	return GP_NO_ERROR;
+    return GP_NO_ERROR;
 }
 
 GPResult gpiSyncNpBuddies(
   GPConnection * connection
 )
 {
-	int ret; 
-	SceNpId npId;	//Buffer to store friend list entry's NP ID
-	gsi_u32 i, count = 0;
-	GPIConnection * iconnection = (GPIConnection*)*connection;
+    int ret; 
+    SceNpId npId;    //Buffer to store friend list entry's NP ID
+    gsi_u32 i, count = 0;
+    GPIConnection * iconnection = (GPIConnection*)*connection;
 
 
-	// Flag sync as complete so we don't do it more than once per login
-	////////////////////////////////////////////////////////////////////
-	iconnection->npPerformBuddySync = gsi_false;
+    // Flag sync as complete so we don't do it more than once per login
+    ////////////////////////////////////////////////////////////////////
+    iconnection->npPerformBuddySync = gsi_false;
 
-	// Get buddy count
-	///////////////////
-	ret = sceNpBasicGetFriendListEntryCount(&count);
-	if ( ret < 0 ) 
-	{
-		gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-			"PS3BuddySync: Failed to get NP friend list count\n");
-	}
+    // Get buddy count
+    ///////////////////
+    ret = sceNpBasicGetFriendListEntryCount(&count);
+    if ( ret < 0 ) 
+    {
+        gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+            "PS3BuddySync: Failed to get NP friend list count\n");
+    }
 
-	// Loop through each buddy, check for existence of GSID account
-	///////////////////////////////////////////////////////////////
-	for (i = 0; i < count; i++) 
-	{
-		memset(&npId, 0x00, sizeof(npId));
-		ret = sceNpBasicGetFriendListEntry(i, &npId);
-		if (ret < 0) 
-		{
-			gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-				"PS3BuddySync: Failed to get NP friend entry #%d\n", i);
-			return GP_MISC_ERROR;
-		}
+    // Loop through each buddy, check for existence of GSID account
+    ///////////////////////////////////////////////////////////////
+    for (i = 0; i < count; i++) 
+    {
+        memset(&npId, 0x00, sizeof(npId));
+        ret = sceNpBasicGetFriendListEntry(i, &npId);
+        if (ret < 0) 
+        {
+            gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+                "PS3BuddySync: Failed to get NP friend entry #%d\n", i);
+            return GP_MISC_ERROR;
+        }
 
-		gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
-			"PS3BuddySync: NP friend entry #%d, npid = %s. Queueing Search.\n", i, npId.handle.data);
+        gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
+            "PS3BuddySync: NP friend entry #%d, npid = %s. Queueing Search.\n", i, npId.handle.data);
 
-		gpiProfileSearchUniquenick(connection, npId.handle.data, &iconnection->namespaceID, 
-			1, GP_NON_BLOCKING, (GPCallback)gpiSyncNpBuddiesCallback, NULL);
-	}
+        gpiProfileSearchUniquenick(connection, npId.handle.data, &iconnection->namespaceID, 
+            1, GP_NON_BLOCKING, (GPCallback)gpiSyncNpBuddiesCallback, NULL);
+    }
 
-	return GP_NO_ERROR;
+    return GP_NO_ERROR;
 }
 
 void gpiSyncNpBuddiesCallback(
@@ -277,36 +277,36 @@ void gpiSyncNpBuddiesCallback(
   void * param
 )
 {
-	if(arg->result == GP_NO_ERROR)
-	{
-		if(arg->numMatches == 1)
-		{
+    if(arg->result == GP_NO_ERROR)
+    {
+        if(arg->numMatches == 1)
+        {
             // Check if already a buddy
             ////////////////////////////
-		    if (!gpIsBuddy(pconnection, arg->matches[0].profile))
+            if (!gpIsBuddy(pconnection, arg->matches[0].profile))
             {
-				gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
-					"PS3BuddySync: NP Buddy \"%s\" found in namespace %d. Sending Request.\n", 
-					arg->matches[0].uniquenick, arg->matches[0].namespaceID);
+                gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
+                    "PS3BuddySync: NP Buddy \"%s\" found in namespace %d. Sending Request.\n", 
+                    arg->matches[0].uniquenick, arg->matches[0].namespaceID);
 
                 // Send the add request
                 ////////////////////////
-				gpSendBuddyRequest(pconnection, arg->matches[0].profile, _T("PS3 Buddy Sync"));
-			}
-			else
-				gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
-					"PS3BuddySync: \"%s\" is already a buddy\n", arg->matches[0].uniquenick);
-		}
-		else
-			gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
-				"PS3BuddySync: No suitable match found\n");
-	}
-	else
-		gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
-			"PS3BuddySync: Buddy Search FAILED!\n");
+                gpSendBuddyRequest(pconnection, arg->matches[0].profile, _T("PS3 Buddy Sync"));
+            }
+            else
+                gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
+                    "PS3BuddySync: \"%s\" is already a buddy\n", arg->matches[0].uniquenick);
+        }
+        else
+            gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_Comment,
+                "PS3BuddySync: No suitable match found\n");
+    }
+    else
+        gsDebugFormat(GSIDebugCat_GP, GSIDebugType_Misc, GSIDebugLevel_HotError,
+            "PS3BuddySync: Buddy Search FAILED!\n");
 
-	GSI_UNUSED(pconnection);
-	GSI_UNUSED(param);
+    GSI_UNUSED(pconnection);
+    GSI_UNUSED(param);
 }
 
 GPResult gpiSyncNpBlockList(
@@ -314,7 +314,7 @@ GPResult gpiSyncNpBlockList(
 )
 {
     int ret; 
-    SceNpId npId;	//Buffer to store block list entry's NP ID
+    SceNpId npId;    //Buffer to store block list entry's NP ID
     gsi_u32 i, count = 0;
     GPIConnection * iconnection = (GPIConnection*)*connection;
 
@@ -361,7 +361,7 @@ void gpiSyncNpBlockListCallback(
   void * param
 )
 {
-	GPIProfile * pProfile;
+    GPIProfile * pProfile;
     GPIConnection * iconnection = (GPIConnection*)*pconnection;
 
     if(arg->result == GP_NO_ERROR)

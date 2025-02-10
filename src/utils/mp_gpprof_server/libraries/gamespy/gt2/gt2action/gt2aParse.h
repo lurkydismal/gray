@@ -19,8 +19,8 @@ Copyright 2000 GameSpy Industries, Inc
 /////////////////////////////////////////
 char * ParseKeyValue
 (
-	char * input,
-	const char * key
+    char * input,
+    const char * key
 );
 
 #endif

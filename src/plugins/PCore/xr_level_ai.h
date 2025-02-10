@@ -12,15 +12,15 @@
 namespace xray_re {
 
 struct ai_node {
-	uint8_t		data[12];
-	uint16_t	cover;
-	uint16_t	low_cover;
-	uint16_t	plane;
-	uint32_t	packed_xz;
-	uint16_t	packed_y;
+    uint8_t        data[12];
+    uint16_t    cover;
+    uint16_t    low_cover;
+    uint16_t    plane;
+    uint32_t    packed_xz;
+    uint16_t    packed_y;
 
-	uint32_t	link(uint_fast32_t side) const;
-	bool		operator<(const ai_node& right) const;
+    uint32_t    link(uint_fast32_t side) const;
+    bool        operator<(const ai_node& right) const;
 };
 
 inline bool ai_node::operator<(const ai_node& right) const { return packed_xz < right.packed_xz; }
@@ -30,59 +30,59 @@ class xr_writer;
 
 class xr_level_ai {
 public:
-			xr_level_ai();
-			xr_level_ai(xr_reader& r);
-	virtual		~xr_level_ai();
+            xr_level_ai();
+            xr_level_ai(xr_reader& r);
+    virtual        ~xr_level_ai();
 
-	void		clear();
+    void        clear();
 
-	void		load(xr_reader& r);
-	void		save(xr_writer& w) const;
-	bool		load(const char* path, const char* name);
-	bool		save(const char* path, const char* name) const;
+    void        load(xr_reader& r);
+    void        save(xr_writer& w) const;
+    bool        load(const char* path, const char* name);
+    bool        save(const char* path, const char* name) const;
 
-	uint32_t	vertex_id(const fvector3& position) const;
-	void		vertex_position(uint32_t& packed_xz, uint16_t& packed_y, const fvector3& position) const;
-	void		unpack_xz(uint32_t packed_xz, float& x, float& z) const;
-	void		unpack_y(uint16_t packed_y, float& y) const;
-	float		vertex_plane_y(uint32_t node_id, float x, float z) const;
-	float		vertex_plane_y(const ai_node& node, float x, float z) const;
+    uint32_t    vertex_id(const fvector3& position) const;
+    void        vertex_position(uint32_t& packed_xz, uint16_t& packed_y, const fvector3& position) const;
+    void        unpack_xz(uint32_t packed_xz, float& x, float& z) const;
+    void        unpack_y(uint16_t packed_y, float& y) const;
+    float        vertex_plane_y(uint32_t node_id, float x, float z) const;
+    float        vertex_plane_y(const ai_node& node, float x, float z) const;
 
-	uint32_t&	version();
-	uint32_t	version() const;
-	uint32_t	num_nodes() const;
-	float		size() const;
-	float		size_y() const;
-	const fbox&	aabb() const;
-	const ai_node*	nodes() const;
+    uint32_t&    version();
+    uint32_t    version() const;
+    uint32_t    num_nodes() const;
+    float        size() const;
+    float        size_y() const;
+    const fbox&    aabb() const;
+    const ai_node*    nodes() const;
 
 private:
-	uint32_t	m_version;
-	uint32_t	m_num_nodes;
-	float		m_size;
-	float		m_size_y;
-	fbox		m_aabb;
-	xr_guid		m_guid;
-	ai_node*	m_nodes;
-	unsigned	m_row_length;
-	unsigned	m_column_length;
+    uint32_t    m_version;
+    uint32_t    m_num_nodes;
+    float        m_size;
+    float        m_size_y;
+    fbox        m_aabb;
+    xr_guid        m_guid;
+    ai_node*    m_nodes;
+    unsigned    m_row_length;
+    unsigned    m_column_length;
 };
 
 inline xr_level_ai::xr_level_ai(xr_reader& r) { load(r); }
 
 inline float xr_level_ai::vertex_plane_y(uint32_t node_id, float x, float z) const
 {
-	return vertex_plane_y(m_nodes[node_id], x, z);
+    return vertex_plane_y(m_nodes[node_id], x, z);
 }
 inline void xr_level_ai::unpack_xz(uint32_t packed_xz, float& x, float& z) const
 {
-	x = (packed_xz/m_row_length)*m_size + m_aabb.min.x;
-	z = (packed_xz%m_row_length)*m_size + m_aabb.min.z;
+    x = (packed_xz/m_row_length)*m_size + m_aabb.min.x;
+    z = (packed_xz%m_row_length)*m_size + m_aabb.min.z;
 }
 
 inline void xr_level_ai::unpack_y(uint16_t packed_y, float& y) const
 {
-	y = packed_y*(1.f/65535.f)*m_size_y + m_aabb.min.y;
+    y = packed_y*(1.f/65535.f)*m_size_y + m_aabb.min.y;
 }
 
 inline uint32_t& xr_level_ai::version() { return m_version; }

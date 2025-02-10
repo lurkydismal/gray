@@ -56,56 +56,56 @@ pthread_rwlock_destroy (pthread_rwlock_t * rwlock)
       rwl = *rwlock;
 
       if (rwl->nMagic != PTW32_RWLOCK_MAGIC)
-	{
-	  return EINVAL;
-	}
+    {
+      return EINVAL;
+    }
 
       if ((result = pthread_mutex_lock (&(rwl->mtxExclusiveAccess))) != 0)
-	{
-	  return result;
-	}
+    {
+      return result;
+    }
 
       if ((result =
-	   pthread_mutex_lock (&(rwl->mtxSharedAccessCompleted))) != 0)
-	{
-	  (void) pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
-	  return result;
-	}
+       pthread_mutex_lock (&(rwl->mtxSharedAccessCompleted))) != 0)
+    {
+      (void) pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
+      return result;
+    }
 
       /*
        * Check whether any threads own/wait for the lock (wait for ex.access);
        * report "BUSY" if so.
        */
       if (rwl->nExclusiveAccessCount > 0
-	  || rwl->nSharedAccessCount > rwl->nCompletedSharedAccessCount)
-	{
-	  result = pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted));
-	  result1 = pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
-	  result2 = EBUSY;
-	}
+      || rwl->nSharedAccessCount > rwl->nCompletedSharedAccessCount)
+    {
+      result = pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted));
+      result1 = pthread_mutex_unlock (&(rwl->mtxExclusiveAccess));
+      result2 = EBUSY;
+    }
       else
-	{
-	  rwl->nMagic = 0;
+    {
+      rwl->nMagic = 0;
 
-	  if ((result =
-	       pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted))) != 0)
-	    {
-	      pthread_mutex_unlock (&rwl->mtxExclusiveAccess);
-	      return result;
-	    }
+      if ((result =
+           pthread_mutex_unlock (&(rwl->mtxSharedAccessCompleted))) != 0)
+        {
+          pthread_mutex_unlock (&rwl->mtxExclusiveAccess);
+          return result;
+        }
 
-	  if ((result =
-	       pthread_mutex_unlock (&(rwl->mtxExclusiveAccess))) != 0)
-	    {
-	      return result;
-	    }
+      if ((result =
+           pthread_mutex_unlock (&(rwl->mtxExclusiveAccess))) != 0)
+        {
+          return result;
+        }
 
-	  *rwlock = NULL;	/* Invalidate rwlock before anything else */
-	  result = pthread_cond_destroy (&(rwl->cndSharedAccessCompleted));
-	  result1 = pthread_mutex_destroy (&(rwl->mtxSharedAccessCompleted));
-	  result2 = pthread_mutex_destroy (&(rwl->mtxExclusiveAccess));
-	  (void) free (rwl);
-	}
+      *rwlock = NULL;    /* Invalidate rwlock before anything else */
+      result = pthread_cond_destroy (&(rwl->cndSharedAccessCompleted));
+      result1 = pthread_mutex_destroy (&(rwl->mtxSharedAccessCompleted));
+      result2 = pthread_mutex_destroy (&(rwl->mtxExclusiveAccess));
+      (void) free (rwl);
+    }
     }
   else
     {
@@ -118,23 +118,23 @@ pthread_rwlock_destroy (pthread_rwlock_t * rwlock)
        * Check again.
        */
       if (*rwlock == PTHREAD_RWLOCK_INITIALIZER)
-	{
-	  /*
-	   * This is all we need to do to destroy a statically
-	   * initialised rwlock that has not yet been used (initialised).
-	   * If we get to here, another thread
-	   * waiting to initialise this rwlock will get an EINVAL.
-	   */
-	  *rwlock = NULL;
-	}
+    {
+      /*
+       * This is all we need to do to destroy a statically
+       * initialised rwlock that has not yet been used (initialised).
+       * If we get to here, another thread
+       * waiting to initialise this rwlock will get an EINVAL.
+       */
+      *rwlock = NULL;
+    }
       else
-	{
-	  /*
-	   * The rwlock has been initialised while we were waiting
-	   * so assume it's in use.
-	   */
-	  result = EBUSY;
-	}
+    {
+      /*
+       * The rwlock has been initialised while we were waiting
+       * so assume it's in use.
+       */
+      result = EBUSY;
+    }
 
       LeaveCriticalSection (&ptw32_rwlock_test_init_lock);
     }

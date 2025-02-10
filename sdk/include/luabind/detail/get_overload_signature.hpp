@@ -27,23 +27,23 @@
 namespace luabind { namespace detail
 {
 
-	template<class It>
-	string_class get_overload_signatures(lua_State* L, It start, It end, string_class name)
-	{
-		string_class s;
-		for (; start != end; ++start)
-		{
-			s += name;
-			start->get_signature(L, s);
-			s += "\n";
-		}
-		return s;
-	}
+    template<class It>
+    string_class get_overload_signatures(lua_State* L, It start, It end, string_class name)
+    {
+        string_class s;
+        for (; start != end; ++start)
+        {
+            s += name;
+            start->get_signature(L, s);
+            s += "\n";
+        }
+        return s;
+    }
 
 
 #ifndef LUABIND_NO_ERROR_CHECKING
 
-	string_class get_overload_signatures_candidates(lua_State* L, vector_class<const overload_rep_base*>::iterator start, vector_class<const overload_rep_base*>::iterator end, string_class name);
+    string_class get_overload_signatures_candidates(lua_State* L, vector_class<const overload_rep_base*>::iterator start, vector_class<const overload_rep_base*>::iterator end, string_class name);
 
 #endif
 

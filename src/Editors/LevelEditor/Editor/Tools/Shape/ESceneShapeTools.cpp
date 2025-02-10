@@ -2,8 +2,8 @@
 
 void ESceneShapeTool::CreateControls()
 {
-	inherited::CreateDefaultControls(estDefault);
-    AddControl		(new TUI_ControlShapeAdd(estDefault,etaAdd,	this));
+    inherited::CreateDefaultControls(estDefault);
+    AddControl        (new TUI_ControlShapeAdd(estDefault,etaAdd,    this));
     pForm = new UIShapeTool();
     ((UIShapeTool*)pForm)->Tool = this;
 }
@@ -11,14 +11,14 @@ void ESceneShapeTool::CreateControls()
 
 void ESceneShapeTool::RemoveControls()
 {
-	inherited::RemoveControls();
+    inherited::RemoveControls();
 }
 
 
 CCustomObject* ESceneShapeTool::CreateObject(LPVOID data, LPCSTR name)
 {
-	CCustomObject* O	= new CEditShape(data,name);
-    O->FParentTools		= this;
+    CCustomObject* O    = new CEditShape(data,name);
+    O->FParentTools        = this;
     return O;
 }
 
@@ -32,30 +32,30 @@ void ESceneShapeTool::OnEditLevelBounds(bool recalc)
     
     for(; it!=it_e; ++it)
     {
-    	CEditShape* es = smart_cast<CEditShape*>(*it);
+        CEditShape* es = smart_cast<CEditShape*>(*it);
         R_ASSERT(es);
         if(es->m_shape_type==eShapeLevelBound)
         {
-         	level_shape = es;
-        	break;
+             level_shape = es;
+            break;
         }
     }
     bool b_recalc = recalc || (level_shape==NULL);
     
-	if(!level_shape)    
+    if(!level_shape)    
     {
-		level_shape 			= smart_cast<CEditShape*>(CreateObject(NULL, "level_bbox"));
+        level_shape             = smart_cast<CEditShape*>(CreateObject(NULL, "level_bbox"));
         level_shape->m_shape_type=eShapeLevelBound;
-    	Fmatrix 				M;	
-        M.identity				();
-    	level_shape->add_box	(M);
+        Fmatrix                 M;    
+        M.identity                ();
+        level_shape->add_box    (M);
 
-   		Scene->AppendObject		(level_shape);
+           Scene->AppendObject        (level_shape);
     }
 
     if(b_recalc)
     {
-        Fbox 	bg,br;
+        Fbox     bg,br;
         Scene->GetBox(br,OBJCLASS_SCENEOBJECT);
         bool r1 = Scene->GetBox(bg,OBJCLASS_GROUP);
         if (r1) br.merge(bg);
@@ -69,17 +69,17 @@ void ESceneShapeTool::OnEditLevelBounds(bool recalc)
         br.getcenter(vec);
         level_shape->FPosition = vec;
         level_shape->UpdateTransform();
-		
+        
     }
 }
 void ESceneShapeTool::OnActivate()
 {
-	inherited::OnActivate();
-	((UIShapeTool*)pForm)->EditLevelBound = false;
+    inherited::OnActivate();
+    ((UIShapeTool*)pForm)->EditLevelBound = false;
 }
 
 void ESceneShapeTool::OnDeactivate()
 {
-	inherited::OnDeactivate();
+    inherited::OnDeactivate();
     ((UIShapeTool*)pForm)->EditLevelBound = false;
 }

@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: object_actions.h
-//	Created 	: 12.03.2004
-//  Modified 	: 26.03.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Object actions
+//    Module         : object_actions.h
+//    Created     : 12.03.2004
+//  Modified     : 26.03.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Object actions
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -22,20 +22,20 @@ class CWeapon;
 template <typename _item_type>
 class CObjectActionBase : public CActionBase<CAI_Stalker> {
 protected:
-	typedef CActionBase<CAI_Stalker>					inherited;
-	typedef GraphEngineSpace::_solver_condition_type	_condition_type;
-	typedef GraphEngineSpace::_solver_value_type		_value_type;
+    typedef CActionBase<CAI_Stalker>                    inherited;
+    typedef GraphEngineSpace::_solver_condition_type    _condition_type;
+    typedef GraphEngineSpace::_solver_value_type        _value_type;
 
 protected:
-	_item_type			*m_item;
+    _item_type            *m_item;
 
 public:
-	IC					CObjectActionBase	(_item_type *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		initialize			();
-	IC		void		set_property		(_condition_type condition_id, _value_type value);
-	IC		CAI_Stalker &object				() const;
-			void		prevent_weapon_state_switch_ugly	( );
-			void		stop_hiding_operation_if_any		( ) const;
+    IC                    CObjectActionBase    (_item_type *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        initialize            ();
+    IC        void        set_property        (_condition_type condition_id, _value_type value);
+    IC        CAI_Stalker &object                () const;
+            void        prevent_weapon_state_switch_ugly    ( );
+            void        stop_hiding_operation_if_any        ( ) const;
 };
 
 class CGameObject;
@@ -49,17 +49,17 @@ typedef CObjectActionBase<CGameObject> CSObjectActionBase;
 template <typename _item_type>
 class CObjectActionMember : public CObjectActionBase<_item_type> {
 protected:
-	typedef CObjectActionBase<_item_type>			inherited;
+    typedef CObjectActionBase<_item_type>            inherited;
 
-	using _condition_type	= inherited::_condition_type;
-	using _value_type		= inherited::_value_type;
+    using _condition_type    = inherited::_condition_type;
+    using _value_type        = inherited::_value_type;
 protected:
-	_condition_type		m_condition_id;
-	_value_type			m_value;
+    _condition_type        m_condition_id;
+    _value_type            m_value;
 
 public:
-	IC					CObjectActionMember	(_item_type *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type condition_id, _value_type value, LPCSTR action_name = "");
-	virtual void		execute				();
+    IC                    CObjectActionMember    (_item_type *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type condition_id, _value_type value, LPCSTR action_name = "");
+    virtual void        execute                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -68,14 +68,14 @@ public:
 
 class CObjectActionCommand : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 protected:
-	u32					m_command;
+    u32                    m_command;
 
 public:
-						CObjectActionCommand(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, u32 command, LPCSTR action_name = "");
-	virtual void		initialize			();
+                        CObjectActionCommand(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, u32 command, LPCSTR action_name = "");
+    virtual void        initialize            ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -84,15 +84,15 @@ public:
 
 class CObjectActionShow : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 private:
-	CWeapon				*m_weapon;
+    CWeapon                *m_weapon;
 
 public:
-						CObjectActionShow	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		initialize			();
-	virtual void		execute				();
+                        CObjectActionShow    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        initialize            ();
+    virtual void        execute                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -101,12 +101,12 @@ public:
 
 class CObjectActionHide : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 public:
-						CObjectActionHide	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		execute				();
-	virtual void		finalize			();
+                        CObjectActionHide    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        execute                ();
+    virtual void        finalize            ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -115,15 +115,15 @@ public:
 
 class CObjectActionReload : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 protected:
-	_condition_type		m_type;
+    _condition_type        m_type;
 
 public:
-						CObjectActionReload	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
-	virtual void		initialize			();
-	virtual void		execute				();
+                        CObjectActionReload    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
+    virtual void        initialize            ();
+    virtual void        execute                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -132,16 +132,16 @@ public:
 
 class CObjectActionFire : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 protected:
-	_condition_type		m_type;
+    _condition_type        m_type;
 
 public:
-						CObjectActionFire	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
-	virtual void		initialize			();
-	virtual void		execute				();
-	virtual void		finalize			();
+                        CObjectActionFire    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
+    virtual void        initialize            ();
+    virtual void        execute                ();
+    virtual void        finalize            ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -150,17 +150,17 @@ public:
 
 class CObjectActionFireNoReload : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 protected:
-	_condition_type		m_type;
-	bool				m_fired;
+    _condition_type        m_type;
+    bool                m_fired;
 
 public:
-						CObjectActionFireNoReload	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
-	virtual void		initialize					();
-	virtual void		execute						();
-	virtual void		finalize					();
+                        CObjectActionFireNoReload    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
+    virtual void        initialize                    ();
+    virtual void        execute                        ();
+    virtual void        finalize                    ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -169,20 +169,20 @@ public:
 
 class CObjectActionStrapping : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 private:
-	bool				m_callback_removed;
+    bool                m_callback_removed;
 
 private:
-		void 	on_animation_end		();
+        void     on_animation_end        ();
 
 public:
-						CObjectActionStrapping	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual				~CObjectActionStrapping	();
-	virtual void		initialize				();
-	virtual void		execute					();
-	virtual void		finalize				();
+                        CObjectActionStrapping    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual                ~CObjectActionStrapping    ();
+    virtual void        initialize                ();
+    virtual void        execute                    ();
+    virtual void        finalize                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -191,20 +191,20 @@ public:
 
 class CObjectActionStrappingToIdle : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 private:
-	bool				m_callback_removed;
+    bool                m_callback_removed;
 
 private:
-		void 	on_animation_end		();
+        void     on_animation_end        ();
 
 public:
-						CObjectActionStrappingToIdle	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual				~CObjectActionStrappingToIdle	();
-	virtual void		initialize						();
-	virtual void		execute							();
-	virtual void		finalize						();
+                        CObjectActionStrappingToIdle    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual                ~CObjectActionStrappingToIdle    ();
+    virtual void        initialize                        ();
+    virtual void        execute                            ();
+    virtual void        finalize                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -213,20 +213,20 @@ public:
 
 class CObjectActionUnstrapping : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 private:
-	bool				m_callback_removed;
+    bool                m_callback_removed;
 
 private:
-		void 	on_animation_end			();
+        void     on_animation_end            ();
 
 public:
-						CObjectActionUnstrapping	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual				~CObjectActionUnstrapping	();
-	virtual void		initialize					();
-	virtual void		execute						();
-	virtual void		finalize					();
+                        CObjectActionUnstrapping    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual                ~CObjectActionUnstrapping    ();
+    virtual void        initialize                    ();
+    virtual void        execute                        ();
+    virtual void        finalize                    ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -235,20 +235,20 @@ public:
 
 class CObjectActionUnstrappingToIdle : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 private:
-	bool				m_callback_removed;
+    bool                m_callback_removed;
 
 private:
-		void 	on_animation_end		();
+        void     on_animation_end        ();
 
 public:
-						CObjectActionUnstrappingToIdle	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual				~CObjectActionUnstrappingToIdle	();
-	virtual void		initialize						();
-	virtual void		execute							();
-	virtual void		finalize						();
+                        CObjectActionUnstrappingToIdle    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual                ~CObjectActionUnstrappingToIdle    ();
+    virtual void        initialize                        ();
+    virtual void        execute                            ();
+    virtual void        finalize                        ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -257,17 +257,17 @@ public:
 
 class CObjectActionQueueWait : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 protected:
-	_condition_type		m_type;
-	CWeaponMagazined	*m_magazined;
+    _condition_type        m_type;
+    CWeaponMagazined    *m_magazined;
 
 public:
-						CObjectActionQueueWait	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
-	virtual void		initialize				();
-	virtual void		execute					();
-	virtual void		finalize				();
+                        CObjectActionQueueWait    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
+    virtual void        initialize                ();
+    virtual void        execute                    ();
+    virtual void        finalize                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -276,16 +276,16 @@ public:
 
 class CObjectActionSwitch : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 protected:
-	_condition_type		m_type;
+    _condition_type        m_type;
 
 public:
-						CObjectActionSwitch	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
-	virtual void		initialize			();
-	virtual void		execute				();
-	virtual void		finalize			();
+                        CObjectActionSwitch    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type type, LPCSTR action_name = "");
+    virtual void        initialize            ();
+    virtual void        execute                ();
+    virtual void        finalize            ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -294,11 +294,11 @@ public:
 
 class CObjectActionDrop : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 public:
-						CObjectActionDrop	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		initialize			();
+                        CObjectActionDrop    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        initialize            ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -307,16 +307,16 @@ public:
 
 class CObjectActionAim : public CObjectActionMember<CInventoryItem> {
 protected:
-	typedef CObjectActionMember<CInventoryItem> inherited;
+    typedef CObjectActionMember<CInventoryItem> inherited;
 
 private:
-	CWeaponMagazined	*m_weapon;
+    CWeaponMagazined    *m_weapon;
 
 public:
-						CObjectActionAim		(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type condition_id, _value_type value, LPCSTR action_name = "");
-	virtual void		initialize				();
-	virtual void		execute					();
-	virtual void		finalize			();
+                        CObjectActionAim        (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, _condition_type condition_id, _value_type value, LPCSTR action_name = "");
+    virtual void        initialize                ();
+    virtual void        execute                    ();
+    virtual void        finalize            ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -325,11 +325,11 @@ public:
 
 class CObjectActionIdle : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 public:
-						CObjectActionIdle		(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		initialize				();
+                        CObjectActionIdle        (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        initialize                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -338,11 +338,11 @@ public:
 
 class CObjectActionIdleMissile : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 public:
-						CObjectActionIdleMissile(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		initialize				();
+                        CObjectActionIdleMissile(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        initialize                ();
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -351,11 +351,11 @@ public:
 
 class CObjectActionThrowMissile : public CObjectActionBase<CInventoryItem> {
 protected:
-	typedef CObjectActionBase<CInventoryItem> inherited;
+    typedef CObjectActionBase<CInventoryItem> inherited;
 
 public:
-						CObjectActionThrowMissile	(CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
-	virtual void		initialize				();
-	virtual void		execute					();
+                        CObjectActionThrowMissile    (CInventoryItem *item, CAI_Stalker *owner, CPropertyStorage *storage, LPCSTR action_name = "");
+    virtual void        initialize                ();
+    virtual void        execute                    ();
 };
 #include "object_actions_inline.h"

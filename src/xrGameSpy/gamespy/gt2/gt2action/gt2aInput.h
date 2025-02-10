@@ -13,12 +13,12 @@ Copyright 2000 GameSpy Industries, Inc
 
 void InitializeInput
 (
-	void
+    void
 );
 
 const char * GetChatBuffer
 (
-	void
+    void
 );
 
 #endif

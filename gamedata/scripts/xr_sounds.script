@@ -28,9 +28,9 @@ function play_sound_rnd (obj, min_delay, max_delay, theme, sub_theme, phrase_set
 --    printf ("Phrase_set %d", phrase_set)
     if sub_phrase == nil or this.get_num_subphrases (theme, sub_theme, phrase_set) < sub_phrase then
        local num = get_num_subphrases (theme, sub_theme, phrase_set)
-	if num == nil then
-		return
-	end
+    if num == nil then
+        return
+    end
        if num == 0 then
           printf ("NO SOUNDS LOADED !!! Theme : %s, sub theme : %d, phrases set : %d", theme, sub_theme, phrase_set)
           return
@@ -44,7 +44,7 @@ function play_sound_rnd (obj, min_delay, max_delay, theme, sub_theme, phrase_set
        sub_phrase = sub_phrase - 1
     end
 --    printf ("Sub_phrase %d", sub_phrase)
-	stop_play_sound(obj)
+    stop_play_sound(obj)
     obj:play_sound (themes[theme][sub_theme][1] + phrase_set - 1, max_delay, min_delay, 1, 0, sub_phrase)
 end
 -----------------------------------------------------------------------------------------------------------------------------------
@@ -206,19 +206,19 @@ function load_common (obj, sounds_base)
               --}
               --}
 
-	themes["commander_agroprom"] =
-    		{
-			{
-			sounds_base,
-			obj:add_sound ("script_replics\\military\\replics\\military_phrase_12",  1, snd_type.talk, 2, 1, id ()),
-			obj:add_sound ("script_replics\\military\\replics\\military_phrase_13",  1, snd_type.talk, 2, 1, id ()),
-			obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_1", 1, snd_type.talk, 2, 1, id ()),
-			obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_2", 1, snd_type.talk, 2, 1, id ()),
-			obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_3", 1, snd_type.talk, 2, 1, id ()),
-			obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_4", 1, snd_type.talk, 2, 1, id ()),
-			obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_5", 1, snd_type.talk, 2, 1, id ())
-			}
-			}
+    themes["commander_agroprom"] =
+            {
+            {
+            sounds_base,
+            obj:add_sound ("script_replics\\military\\replics\\military_phrase_12",  1, snd_type.talk, 2, 1, id ()),
+            obj:add_sound ("script_replics\\military\\replics\\military_phrase_13",  1, snd_type.talk, 2, 1, id ()),
+            obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_1", 1, snd_type.talk, 2, 1, id ()),
+            obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_2", 1, snd_type.talk, 2, 1, id ()),
+            obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_3", 1, snd_type.talk, 2, 1, id ()),
+            obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_4", 1, snd_type.talk, 2, 1, id ()),
+            obj:add_sound ("script_replics\\military\\replics\\petrovich_mission_5", 1, snd_type.talk, 2, 1, id ())
+            }
+            }
 
     themes["trivial"] =
     --Звуки используемые в простеньких сюжетных скриптах
@@ -272,27 +272,27 @@ function load_common (obj, sounds_base)
               }
 
     themes["dolg_leader"] =
-			{
-			{
-			sounds_base,
-			obj:add_sound ("script_replics\\comandir_1\\drunk\\comandir_song_",         13, snd_type.talk, 2, 1, id ()), --snd_singing
-			0 * id (), --snd_stretch_himself
-			0 * id (), --snd_talk_path
-			0 * id (), --snd_enemy_stalker
-			0 * id (), --snd_enemy_monster
-			obj:add_sound ("script_replics\\comandir_1\\normal\\comandir_walking_",     13, snd_type.talk, 2, 1, id ()), --snd_walking
-			0 * id (), --snd_lost_box
-			0 * id (), --snd_lost_box_drunk
-			0 * id (), --snd_drunk
-			0 * id (), --snd_sleep
+            {
+            {
+            sounds_base,
+            obj:add_sound ("script_replics\\comandir_1\\drunk\\comandir_song_",         13, snd_type.talk, 2, 1, id ()), --snd_singing
+            0 * id (), --snd_stretch_himself
+            0 * id (), --snd_talk_path
+            0 * id (), --snd_enemy_stalker
+            0 * id (), --snd_enemy_monster
+            obj:add_sound ("script_replics\\comandir_1\\normal\\comandir_walking_",     13, snd_type.talk, 2, 1, id ()), --snd_walking
+            0 * id (), --snd_lost_box
+            0 * id (), --snd_lost_box_drunk
+            0 * id (), --snd_drunk
+            0 * id (), --snd_sleep
 
-			0 * id (), --radio_noise
-			0 * id (), --radio_voice
-			0 * id (), --radio_on
-			0 * id (), --radio_off
-			0 * id ()  --radio_commander
-			}
-			}
+            0 * id (), --radio_noise
+            0 * id (), --radio_voice
+            0 * id (), --radio_on
+            0 * id (), --radio_off
+            0 * id ()  --radio_commander
+            }
+            }
 
     themes["agroprom_military_commander"] =
               {
@@ -460,7 +460,7 @@ function load_common (obj, sounds_base)
              obj:add_sound ("script_replics\\trader\\trader_monolog",             30, snd_type.talk, 2, 1, id ())
              }
              }
-			 
+             
 
     return sounds_base
 end

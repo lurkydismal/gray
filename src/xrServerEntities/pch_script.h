@@ -1,16 +1,16 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: pch_script.h
-//	Created 	: 23.05.2007
-//  Modified 	: 10.08.2007
-//	Author		: Dmitriy Iassenev
-//	Description : precompiled header for lua and luabind users
+//    Module         : pch_script.h
+//    Created     : 23.05.2007
+//  Modified     : 10.08.2007
+//    Author        : Dmitriy Iassenev
+//    Description : precompiled header for lua and luabind users
 ////////////////////////////////////////////////////////////////////////////
 #pragma once
 
 extern "C" {
-	#include <lua/lua.h>
-	#include <lua/lualib.h>
-	#include <lua/lauxlib.h>
+    #include <lua/lua.h>
+    #include <lua/lualib.h>
+    #include <lua/lauxlib.h>
 };
 
 #pragma warning(push)

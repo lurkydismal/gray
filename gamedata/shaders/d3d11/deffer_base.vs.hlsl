@@ -15,7 +15,7 @@ void main(in v_in I, out p_bumped_new O)
     O.position = float4(Pe, 1.0f);
 
     float3 N = unpack_bx4(unpack_D3DCOLOR(I.Nh).xyz);
-	
+    
 #if defined(USE_BUMP) || defined(USE_TDETAIL_BUMP)
     float3 T = unpack_bx4(unpack_D3DCOLOR(I.T).xyz);
     float3 B = unpack_bx4(unpack_D3DCOLOR(I.B).xyz);
@@ -29,7 +29,7 @@ void main(in v_in I, out p_bumped_new O)
     O.M2 = xform[1];
     O.M3 = xform[2];
 #else
-	N = mul((float3x3)m_WV, N);
+    N = mul((float3x3)m_WV, N);
 
     O.M1 = N.xxx;
     O.M2 = N.yyy;
@@ -41,9 +41,9 @@ void main(in v_in I, out p_bumped_new O)
 #else
     O.tcdh.w = I.color.w;
 #endif
-	
-	O.hpos = mul(m_WVP, I.P);
-	
+    
+    O.hpos = mul(m_WVP, I.P);
+    
     O.hpos_curr = O.hpos;
     O.hpos_old = mul(m_WVP_old, I.P);
 

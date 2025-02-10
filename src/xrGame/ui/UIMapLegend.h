@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: UIMapLegend.h
-//	Created 	: 03.06.2008
-//	Author		: Evgeniy Sokolov
-//	Description : UI Map Legend Wnd (PDA : Task) class
+//    Module         : UIMapLegend.h
+//    Created     : 03.06.2008
+//    Author        : Evgeniy Sokolov
+//    Description : UI Map Legend Wnd (PDA : Task) class
 ////////////////////////////////////////////////////////////////////////////
 #pragma once
 #include "../../xrUI/Widgets/UIWindow.h"
@@ -19,23 +19,23 @@ class UIHint;
 class UIMapLegend : public CUIWindow
 {
 private:
-	typedef CUIWindow	inherited;
+    typedef CUIWindow    inherited;
 
 public:
-					UIMapLegend			() = default;
-	virtual			~UIMapLegend		();
+                    UIMapLegend            () = default;
+    virtual            ~UIMapLegend        ();
 
-			void	init_from_xml		( CUIXml& xml, LPCSTR path );
+            void    init_from_xml        ( CUIXml& xml, LPCSTR path );
 
-	virtual void	Show				( bool status );
-	virtual void	SendMessage			( CUIWindow* pWnd, s16 msg, void* pData );
+    virtual void    Show                ( bool status );
+    virtual void    SendMessage            ( CUIWindow* pWnd, s16 msg, void* pData );
 
 private: // m_
-	CUIFrameWindow*		m_background;
-	CUIScrollView*		m_list;
+    CUIFrameWindow*        m_background;
+    CUIScrollView*        m_list;
 
-	CUIStatic*			m_caption;
-	CUI3tButton*		m_btn_close;
+    CUIStatic*            m_caption;
+    CUI3tButton*        m_btn_close;
 
 }; // class UIMapLegend
 
@@ -44,17 +44,17 @@ private: // m_
 class UIMapLegendItem : public CUIWindow
 {
 private:
-	typedef CUIWindow	inherited;
+    typedef CUIWindow    inherited;
 
 public:
-					UIMapLegendItem		();
-	virtual			~UIMapLegendItem	();
+                    UIMapLegendItem        ();
+    virtual            ~UIMapLegendItem    ();
 
-			void	init_from_xml		( CUIXml& xml, int index );
-//	virtual void	Update				();
+            void    init_from_xml        ( CUIXml& xml, int index );
+//    virtual void    Update                ();
 
 private: // m_
-	CUIStatic*		m_image[4];
-	CUIStatic*		m_text;
+    CUIStatic*        m_image[4];
+    CUIStatic*        m_text;
 
 };

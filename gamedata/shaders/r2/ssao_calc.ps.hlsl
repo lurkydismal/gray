@@ -19,6 +19,6 @@ float4 main(_input I) : COLOR0
     float4 N = tex2D(s_normal, I.tc0); // normal.hemi
 
     float o = calc_ssao(P, N, I.tc0, I.tcJ);
-	
+    
     return float4(o, P.z, 0.0f, 0.0f);
 }

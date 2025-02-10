@@ -4,12 +4,12 @@
 #include "../xrScripts/script_export_space.h"
 
 class CWeaponVintorez :
-	public CWeaponMagazined
+    public CWeaponMagazined
 {
-	typedef CWeaponMagazined inherited;
+    typedef CWeaponMagazined inherited;
 public:
-	CWeaponVintorez(void);
-	virtual ~CWeaponVintorez(void);
+    CWeaponVintorez(void);
+    virtual ~CWeaponVintorez(void);
 
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

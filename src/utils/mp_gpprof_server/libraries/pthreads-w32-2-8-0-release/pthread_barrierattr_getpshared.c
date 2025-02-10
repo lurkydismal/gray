@@ -40,7 +40,7 @@
 
 int
 pthread_barrierattr_getpshared (const pthread_barrierattr_t * attr,
-				int *pshared)
+                int *pshared)
      /*
       * ------------------------------------------------------
       * DOCPUBLIC
@@ -92,4 +92,4 @@ pthread_barrierattr_getpshared (const pthread_barrierattr_t * attr,
     }
 
   return (result);
-}				/* pthread_barrierattr_getpshared */
+}                /* pthread_barrierattr_getpshared */

@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: steering_behaviour_cohesion.h
-//	Created 	: 07.11.2007
-//  Modified 	: 07.11.2007
-//	Author		: Dmitriy Iassenev
-//	Description : steering behaviour cohesion class
+//    Module         : steering_behaviour_cohesion.h
+//    Created     : 07.11.2007
+//  Modified     : 07.11.2007
+//    Author        : Dmitriy Iassenev
+//    Description : steering behaviour cohesion class
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef STEERING_BEHAVIOUR_COHESION_H_INCLUDED
@@ -19,13 +19,13 @@ namespace steering_behaviour {
 class cohesion final : public base
 {
 public:
-	cohesion(const cohesion& other) = delete;
-	cohesion& operator=(const cohesion& other) = delete;
-						cohesion	(CAI_Rat const *object);
-	virtual	Fvector		direction	();
+    cohesion(const cohesion& other) = delete;
+    cohesion& operator=(const cohesion& other) = delete;
+                        cohesion    (CAI_Rat const *object);
+    virtual    Fvector        direction    ();
 
 private:
-	typedef base		inherited;
+    typedef base        inherited;
 };
 
 } // namespace steering_behaviour

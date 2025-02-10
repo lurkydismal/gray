@@ -6,11 +6,11 @@
 class CWeaponFORT: public CWeaponPistol
 {
 private:
-	typedef CWeaponPistol inherited;
+    typedef CWeaponPistol inherited;
 protected:
 public:
-					CWeaponFORT			();
-	virtual			~CWeaponFORT		();
+                    CWeaponFORT            ();
+    virtual            ~CWeaponFORT        ();
 
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

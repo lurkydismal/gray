@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_reader.h
-//	Created 	: 05.10.2004
-//  Modified 	: 05.10.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script reader
+//    Module         : script_reader.h
+//    Created     : 05.10.2004
+//  Modified     : 05.10.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script reader
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

@@ -5,46 +5,46 @@
 
 struct v_model_skinned_0
 {
-    float4 P : POSITION; // (float,float,float,1) - quantized	// short4
-    float3 N : NORMAL; // normal				// DWORD
-    float3 T : TANGENT; // tangent				// DWORD
-    float3 B : BINORMAL; // binormal				// DWORD
-    float2 tc : TEXCOORD0; // (u,v)				// short2
+    float4 P : POSITION; // (float,float,float,1) - quantized    // short4
+    float3 N : NORMAL; // normal                // DWORD
+    float3 T : TANGENT; // tangent                // DWORD
+    float3 B : BINORMAL; // binormal                // DWORD
+    float2 tc : TEXCOORD0; // (u,v)                // short2
 };
 struct v_model_skinned_1 // 24 bytes
 {
-    float4 P : POSITION; // (float,float,float,1) - quantized	// short4
-    int4 N : NORMAL; // (nx,ny,nz,index)			// DWORD
-    float3 T : TANGENT; // tangent				// DWORD
-    float3 B : BINORMAL; // binormal				// DWORD
-    float2 tc : TEXCOORD0; // (u,v)				// short2
+    float4 P : POSITION; // (float,float,float,1) - quantized    // short4
+    int4 N : NORMAL; // (nx,ny,nz,index)            // DWORD
+    float3 T : TANGENT; // tangent                // DWORD
+    float3 B : BINORMAL; // binormal                // DWORD
+    float2 tc : TEXCOORD0; // (u,v)                // short2
 };
 struct v_model_skinned_2 // 28 bytes
 {
-    float4 P : POSITION; // (float,float,float,1) - quantized	// short4
-    float4 N : NORMAL; // (nx,ny,nz,weight)			// DWORD
-    float3 T : TANGENT; // tangent				// DWORD
-    float3 B : BINORMAL; // binormal				// DWORD
-    float4 tc : TEXCOORD0; // (u,v, w=m-index0, z=m-index1)  	// short4
+    float4 P : POSITION; // (float,float,float,1) - quantized    // short4
+    float4 N : NORMAL; // (nx,ny,nz,weight)            // DWORD
+    float3 T : TANGENT; // tangent                // DWORD
+    float3 B : BINORMAL; // binormal                // DWORD
+    float4 tc : TEXCOORD0; // (u,v, w=m-index0, z=m-index1)      // short4
 };
 
 struct v_model_skinned_3 // 28 bytes
 {
-    float4 P : POSITION; // (float,float,float,1) - quantized	// short4
-    float4 N : NORMAL; // (nx,ny,nz,weight0)			// DWORD
-    float4 T : TANGENT; // (tx,ty,tz,weight1)				// DWORD
-    float4 B : BINORMAL; // (bx,by,bz,m-index2)				// DWORD
-    float4 tc : TEXCOORD0; // (u,v, w=m-index0, z=m-index1)  	// short4
+    float4 P : POSITION; // (float,float,float,1) - quantized    // short4
+    float4 N : NORMAL; // (nx,ny,nz,weight0)            // DWORD
+    float4 T : TANGENT; // (tx,ty,tz,weight1)                // DWORD
+    float4 B : BINORMAL; // (bx,by,bz,m-index2)                // DWORD
+    float4 tc : TEXCOORD0; // (u,v, w=m-index0, z=m-index1)      // short4
 };
 
 struct v_model_skinned_4 // 28 bytes
 {
-    float4 P : POSITION; // (float,float,float,1) - quantized	// short4
-    float4 N : NORMAL; // (nx,ny,nz,weight0)			// DWORD
-    float4 T : TANGENT; // (tx,ty,tz,weight1)				// DWORD
-    float4 B : BINORMAL; // (bx,by,bz,weight2)				// DWORD
-    float2 tc : TEXCOORD0; // (u,v)  					// short2
-    float4 ind : TEXCOORD1; // (x=m-index0, y=m-index1, z=m-index2, w=m-index3)  	// DWORD
+    float4 P : POSITION; // (float,float,float,1) - quantized    // short4
+    float4 N : NORMAL; // (nx,ny,nz,weight0)            // DWORD
+    float4 T : TANGENT; // (tx,ty,tz,weight1)                // DWORD
+    float4 B : BINORMAL; // (bx,by,bz,weight2)                // DWORD
+    float2 tc : TEXCOORD0; // (u,v)                      // short2
+    float4 ind : TEXCOORD1; // (x=m-index0, y=m-index1, z=m-index2, w=m-index3)      // DWORD
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -55,8 +55,8 @@ float4 u_position(float4 v)
 } // -12..+12
 
 //////////////////////////////////////////////////////////////////////////////////////////
-// uniform float4 	sbones_array	[256-22] : register(vs,c22);
-//	Igor: some shaders in r1 need more free constant registers
+// uniform float4     sbones_array    [256-22] : register(vs,c22);
+//    Igor: some shaders in r1 need more free constant registers
 uniform float4 sbones_array[65 * 3] : register(vs, c22);
 float3 skinning_dir(float3 dir, float3 m0, float3 m1, float3 m2)
 {
@@ -224,7 +224,7 @@ v_model skinning_4(v_model_skinned_4 v)
 {
     // matrices
     float id[4];
-    float4 m[4][3]; //	[bone index][matrix row or column???]
+    float4 m[4][3]; //    [bone index][matrix row or column???]
     for (int i = 0; i < 4; ++i)
     {
         id[i] = v.ind[i] * 255 + 0.3;

@@ -21,8 +21,8 @@ struct vf
 #ifdef USE_SOFT_WATER
     #ifdef NEED_SOFT_WATER
     float4 tctexgen : TEXCOORD3;
-    #endif //	USE_SOFT_WATER
-#endif //	NEED_SOFT_WATER
+    #endif //    USE_SOFT_WATER
+#endif //    NEED_SOFT_WATER
 };
 
 vf main(v_vert v)
@@ -38,14 +38,14 @@ vf main(v_vert v)
     o.tdist1 = watermove_tc(o.tbase * W_DISTORT_BASE_TILE_1, P.xz, W_DISTORT_AMP_1);
     o.hpos = mul(m_VP, P); // xform, input in world coords
 
-//	Igor: for additional depth dest
+//    Igor: for additional depth dest
 #ifdef USE_SOFT_WATER
     #ifdef NEED_SOFT_WATER
     o.tctexgen = mul(m_texgen, P);
     float3 Pe = mul(m_V, P);
     o.tctexgen.z = Pe.z;
-    #endif //	USE_SOFT_WATER
-#endif //	NEED_SOFT_WATER
+    #endif //    USE_SOFT_WATER
+#endif //    NEED_SOFT_WATER
 
     return o;
 }

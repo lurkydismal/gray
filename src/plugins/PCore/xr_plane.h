@@ -9,29 +9,29 @@
 namespace xray_re {
 
 template<typename T> struct _plane {
-	_plane<T>&	build(const _vector3<T>& p, const _vector3<T>& normal);
-	_plane<T>&	build(const _vector3<T>& p, const _vector3<T>& axis0, const _vector3<T>& axis1);
-	T		distance(const _vector3<T>& p) const;
+    _plane<T>&    build(const _vector3<T>& p, const _vector3<T>& normal);
+    _plane<T>&    build(const _vector3<T>& p, const _vector3<T>& axis0, const _vector3<T>& axis1);
+    T        distance(const _vector3<T>& p) const;
 
-	_vector3<T>	n;
-	T		d;
+    _vector3<T>    n;
+    T        d;
 };
 
 typedef _plane<float> fplane;
 
 template<typename T> inline _plane<T>& _plane<T>::build(const _vector3<T>& p, const _vector3<T>& normal)
 {
-	n.set(normal).normalize();
-	d = -n.dot_product(p);
-	return *this;
+    n.set(normal).normalize();
+    d = -n.dot_product(p);
+    return *this;
 }
 
 template<typename T> inline _plane<T>&
 _plane<T>::build(const _vector3<T>& p, const _vector3<T>& axis0, const _vector3<T>& axis1)
 {
-	n.cross_product(axis0, axis1).normalize();
-	d = -n.dot_product(p);
-	return *this;
+    n.cross_product(axis0, axis1).normalize();
+    d = -n.dot_product(p);
+    return *this;
 }
 
 template<typename T> inline T

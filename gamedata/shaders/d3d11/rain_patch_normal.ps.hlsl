@@ -7,20 +7,20 @@ float3x4 m_sunmask; // ortho-projection
 
 Texture3D s_water;
 Texture2D s_waterFall;
-float4 RainDensity; //	float
+float4 RainDensity; //    float
 float4 RainFallof;
-float4 WorldX; //	Float3
-float4 WorldZ; //	Float3
+float4 WorldX; //    Float3
+float4 WorldZ; //    Float3
 
 float3 GetNVNMap(Texture3D s_texture, float2 tc, float time)
 {
-    //	Unpack NVidia normal map
+    //    Unpack NVidia normal map
     float4 water = s_texture.SampleBias(smp_base, float3(tc, time), -3.) - 0.5;
 
-    //	Swizzle
+    //    Swizzle
     water.xyz = water.wyz;
 
-    //	Renormalize (*2) and scale (*3)
+    //    Renormalize (*2) and scale (*3)
     water.xyz *= 6;
     water.y = 0;
 
@@ -29,7 +29,7 @@ float3 GetNVNMap(Texture3D s_texture, float2 tc, float time)
 
 float3 GetWaterNMap(Texture2D s_texture, float2 tc)
 {
-    //	Unpack normal map
+    //    Unpack normal map
     float4 water = s_texture.Sample(smp_base, tc);
     water.xyz = (water.xzy - 0.5) * 2;
 
@@ -62,18 +62,18 @@ float4 main(float2 tc : TEXCOORD0, float2 tcJ : TEXCOORD1, float4 Color : COLOR,
     // factor to jitter to make rain strips more realistic.
     float s = shadow_hw(PS) * saturate(O.Hemi * 10.0f);
 
-    //	Apply distance falloff
+    //    Apply distance falloff
     // Using fixed fallof factors according to float16 depth coordinate precision.
     float fAtten = 1 - smoothstep(min(RainFallof.y - 15.0f, RainFallof.x), RainFallof.y, P.z);
     s *= fAtten * fAtten;
-	s *= 1.0f - O.SSS;
+    s *= 1.0f - O.SSS;
 
-    //	Apply rain density
+    //    Apply rain density
     s *= RainDensity.x;
 
     float fIsUp = -dot(Ldynamic_dir.xyz, N.xyz);
     s *= saturate(fIsUp * 10.0f + 5.5);
-	
+    
     fIsUp = max(0, fIsUp);
 
     float fIsX = WorldN.x;
@@ -85,7 +85,7 @@ float4 main(float2 tc : TEXCOORD0, float2 tcJ : TEXCOORD1, float4 Color : COLOR,
     float fAngleFactor = 1 - fIsUp;
     fAngleFactor = 0.1 * ceil(10 * fAngleFactor);
 
-    //	Just slow down effect.
+    //    Just slow down effect.
     fAngleFactor *= 0.5;
 
     float3 waterFallX = GetWaterNMap(s_waterFall, float2(tc1.z, tc1.y + timers.x * fAngleFactor));
@@ -104,7 +104,7 @@ float4 main(float2 tc : TEXCOORD0, float2 tcJ : TEXCOORD1, float4 Color : COLOR,
     water += waterFallX.yxz * (abs(fIsX) * ApplyNormalCoeff);
     water += waterFallZ.zxy * (abs(fIsZ) * ApplyNormalCoeff);
 
-    //	Translate NM to view space
+    //    Translate NM to view space
     water.xyz = mul((float3x3)m_V, water.xyz);
 
     N += water.xyz;

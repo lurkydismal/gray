@@ -5,8 +5,8 @@ struct vf
     float4 hpos : POSITION;
     float2 tc0 : TEXCOORD0;
     float2 tc1 : TEXCOORD1;
-    float3 c0 : COLOR0; // c0=hemi, 			c0.a = dt*
-    float3 c1 : COLOR1; // c1=sun,			c1.a = dt+
+    float3 c0 : COLOR0; // c0=hemi,             c0.a = dt*
+    float3 c1 : COLOR1; // c1=sun,            c1.a = dt+
     float fog : FOG;
 };
 

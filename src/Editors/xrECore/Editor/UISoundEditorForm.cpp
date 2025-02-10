@@ -76,7 +76,7 @@ void UISoundEditorForm::Update()
 void UISoundEditorForm::Show(const xr_string fileKey = "")
 {
     VERIFY(!Form);
-	Form = new UISoundEditorForm();
+    Form = new UISoundEditorForm();
 
     if (!fileKey.empty())
         Form->m_ItemList->SelectItem(fileKey.c_str());
@@ -93,7 +93,7 @@ void UISoundEditorForm::RegisterModifiedTHM()
 {
     if (m_ItemProps->IsModified()) {
         for (THMIt t_it = m_THM_Current.begin(); t_it != m_THM_Current.end(); t_it++) {
-            //.            (*t_it)->Save	(0,0);
+            //.            (*t_it)->Save    (0,0);
             AppendModif((*t_it)->SrcName());
         }
     }
@@ -109,9 +109,9 @@ void UISoundEditorForm::UpdateLib()
     SaveUsedTHM();
     // save game sounds
     if (modif_map.size()) {
-        AStringVec 			modif;
+        AStringVec             modif;
         SndLib->SynchronizeSounds(true, true, true, &modif_map, 0);
-        //		SndLib->ChangeFileAgeTo		(&modif_map,time(NULL));
+        //        SndLib->ChangeFileAgeTo        (&modif_map,time(NULL));
         SndLib->RefreshSounds(false);
         modif_map.clear();
     }
@@ -119,8 +119,8 @@ void UISoundEditorForm::UpdateLib()
 
 void UISoundEditorForm::AppendModif(LPCSTR nm)
 {
-    FS_File 		dest;
-    string_path		fname;
+    FS_File         dest;
+    string_path        fname;
     FS.update_path(fname, _sounds_, EFS.ChangeFileExt(nm, ".wav").c_str());
     BOOL bFind = FS.file_find(fname, dest); R_ASSERT(bFind);
     modif_map.insert(dest);
@@ -129,8 +129,8 @@ void UISoundEditorForm::AppendModif(LPCSTR nm)
 void UISoundEditorForm::OnControlClick(ButtonValue* V, bool& bModif, bool& bSafe)
 {
     switch (V->btn_num) {
-    case 0: m_Snd.play(0, sm_2D); 	break;
-    case 1: m_Snd.stop();			break;
+    case 0: m_Snd.play(0, sm_2D);     break;
+    case 1: m_Snd.stop();            break;
     case 2: {
         bAutoPlay = !bAutoPlay;
         V->value[V->btn_num] = shared_str().printf("Auto (%s)", bAutoPlay ? "on" : "off");
@@ -190,7 +190,7 @@ void UISoundEditorForm::OnAttClick(ButtonValue* V, bool& bModif, bool& bSafe)
 
 void UISoundEditorForm::InitItemList()
 {
-    FS_FileSet		sound_map;
+    FS_FileSet        sound_map;
     SndLib->GetSounds(sound_map, TRUE);
 
     ListItemsVec items;
@@ -236,7 +236,7 @@ void UISoundEditorForm::OnItemsFocused(ListItem* item)
         C = PHelper().CreateCanvas(props, "Attenuation", "", 64);
         C->tag = (size_t)this;
         C->OnDrawCanvasEvent.bind(this, &UISoundEditorForm::OnAttenuationDraw);
-        //		C->OnTestEqual.bind			(this,&TfrmSoundLib::OnPointDataTestEqual);
+        //        C->OnTestEqual.bind            (this,&TfrmSoundLib::OnPointDataTestEqual);
         B = PHelper().CreateButton(props, "Auto Att", "By Min,By Max", ButtonValue::flFirstOnly);
         B->OnBtnClickEvent.bind(this, &UISoundEditorForm::OnAttClick);
 
@@ -279,7 +279,7 @@ void UISoundEditorForm::PlaySound(LPCSTR name, u32& size, u32& time)
         CSoundRender_Source* src = (CSoundRender_Source*)m_Snd._handle(); VERIFY(src);
         size = F.size;
         time = iFloor(src->fTimeTotal / 1000.0f);
-        if (!bAutoPlay)		m_Snd.stop();
+        if (!bAutoPlay)        m_Snd.stop();
     }
 }
 void UISoundEditorForm::OnAttenuationDraw(CanvasValue* sender)
@@ -292,7 +292,7 @@ void UISoundEditorForm::OnAttenuationDraw(CanvasValue* sender)
     for (int d = 1; d < WIETH+1; d++) {
         float R = d * d_cost;
         float b = thm->MinDist() / (psSoundRolloff * R);
-        //		float b = m_Brightness/(m_Attenuation0+m_Attenuation1*R+m_Attenuation2*R*R);
+        //        float b = m_Brightness/(m_Attenuation0+m_Attenuation1*R+m_Attenuation2*R*R);
         float bb =  (HEIGHT * b);
         float y = floorf(bb); clamp(y, 0.f, HEIGHT);
         values[d - 1] = y;

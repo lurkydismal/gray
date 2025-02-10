@@ -110,17 +110,17 @@ pthread_sigmask (int how, sigset_t const *set, sigset_t * oset)
   if (set != NULL)
     {
       switch (how)
-	{
-	case SIG_BLOCK:
-	  break;
-	case SIG_UNBLOCK:
-	  break;
-	case SIG_SETMASK:
-	  break;
-	default:
-	  /* Invalid `how' argument. */
-	  return EINVAL;
-	}
+    {
+    case SIG_BLOCK:
+      break;
+    case SIG_UNBLOCK:
+      break;
+    case SIG_SETMASK:
+      break;
+    default:
+      /* Invalid `how' argument. */
+      return EINVAL;
+    }
     }
 
   /* Copy the old mask before modifying it. */
@@ -140,25 +140,25 @@ pthread_sigmask (int how, sigset_t const *set, sigset_t * oset)
       unsigned long *dest = (unsigned long *) &(thread.p->sigmask);
 
       switch (how)
-	{
-	case SIG_BLOCK:
-	  for (i = 0; i < (sizeof (sigset_t) / sizeof (unsigned long)); i++)
-	    {
-	      /* OR the bit field longword-wise. */
-	      *dest++ |= *src++;
-	    }
-	  break;
-	case SIG_UNBLOCK:
-	  for (i = 0; i < (sizeof (sigset_t) / sizeof (unsigned long)); i++)
-	    {
-	      /* XOR the bitfield longword-wise. */
-	      *dest++ ^= *src++;
-	    }
-	case SIG_SETMASK:
-	  /* Replace the whole sigmask. */
-	  memcpy (&(thread.p->sigmask), set, sizeof (sigset_t));
-	  break;
-	}
+    {
+    case SIG_BLOCK:
+      for (i = 0; i < (sizeof (sigset_t) / sizeof (unsigned long)); i++)
+        {
+          /* OR the bit field longword-wise. */
+          *dest++ |= *src++;
+        }
+      break;
+    case SIG_UNBLOCK:
+      for (i = 0; i < (sizeof (sigset_t) / sizeof (unsigned long)); i++)
+        {
+          /* XOR the bitfield longword-wise. */
+          *dest++ ^= *src++;
+        }
+    case SIG_SETMASK:
+      /* Replace the whole sigmask. */
+      memcpy (&(thread.p->sigmask), set, sizeof (sigset_t));
+      break;
+    }
     }
 
   return 0;

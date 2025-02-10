@@ -3,8 +3,8 @@ set(NETSERV_SRC_FILES)
 
 # Files import
 file(GLOB_RECURSE NETSERV_SOURCE_ALL_FILES CONFIGURE_DEPENDS
-	"*.cpp"
-	"*.h"
+    "*.cpp"
+    "*.h"
 )
 
 # Source groups
@@ -15,8 +15,8 @@ list(APPEND NETSERV_SRC_FILES ${NETSERV_SOURCE_ALL_FILES})
 
 # Remove unused files
 if (NOT IXRAY_MP)
-	list(FILTER NETSERV_SRC_FILES EXCLUDE REGEX "SteamNetClient.cpp$")
-	list(FILTER NETSERV_SRC_FILES EXCLUDE REGEX "SteamNetServer.cpp$")
+    list(FILTER NETSERV_SRC_FILES EXCLUDE REGEX "SteamNetClient.cpp$")
+    list(FILTER NETSERV_SRC_FILES EXCLUDE REGEX "SteamNetServer.cpp$")
 endif()
 
 # xrNetServer project
@@ -29,7 +29,7 @@ target_compile_definitions(xrNetServer PRIVATE XR_NETSERVER_EXPORTS)
 target_compile_definitions(xrNetServer PRIVATE _USRDLL)
 
 if (IXRAY_MP)
-	target_compile_definitions(xrNetServer PUBLIC XR_MP_BUILD)
+    target_compile_definitions(xrNetServer PUBLIC XR_MP_BUILD)
 endif()
 
 # Linker list

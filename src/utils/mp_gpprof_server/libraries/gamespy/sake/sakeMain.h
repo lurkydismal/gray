@@ -26,16 +26,16 @@ extern "C" {
 ///////////////////////////////////////////////////////////////////////////////
 typedef struct SAKEInternal
 {
-	gsi_bool mIsGameAuthenticated;
-	char     mGameName[SAKEI_GAME_NAME_LENGTH + 1];
-	int      mGameId;
-	char     mSecretKey[SAKEI_SECRET_KEY_LENGTH + 1];
+    gsi_bool mIsGameAuthenticated;
+    char     mGameName[SAKEI_GAME_NAME_LENGTH + 1];
+    int      mGameId;
+    char     mSecretKey[SAKEI_SECRET_KEY_LENGTH + 1];
 
-	gsi_bool mIsProfileAuthenticated;
-	int      mProfileId;
-	char     mLoginTicket[SAKEI_LOGIN_TICKET_LENGTH + 1];
+    gsi_bool mIsProfileAuthenticated;
+    int      mProfileId;
+    char     mLoginTicket[SAKEI_LOGIN_TICKET_LENGTH + 1];
 
-	SAKEStartRequestResult mStartRequestResult;
+    SAKEStartRequestResult mStartRequestResult;
 } SAKEInternal;
 
 

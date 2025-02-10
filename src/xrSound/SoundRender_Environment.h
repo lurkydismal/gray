@@ -137,13 +137,13 @@ constexpr EFXEAXREVERBPROPERTIES reverbs[] =
 #define SNDENV_VER_IXR 5
 
 // refs
-class XRSOUND_API CSoundRender_Environment		: public CSound_environment
+class XRSOUND_API CSoundRender_Environment        : public CSound_environment
 {
 public:
-	u32				version;
-	shared_str			name;
+    u32                version;
+    shared_str            name;
 
-    u32				Environment;				// source environment
+    u32                Environment;                // source environment
     float           Room;                       // room effect level at low frequencies
     float           RoomHF;                     // room effect high-frequency level re. low frequency level
     float RoomLF; // room effect high-frequency level re. low frequency level
@@ -170,32 +170,32 @@ public:
     float LFReference; // frequency at which high frequency effects are measured
 
 public:
-                    CSoundRender_Environment	(void);
-                    ~CSoundRender_Environment	(void);
-	void			set_identity	            ();
-	void			set_default		            ();
-	void			clamp			            ();
-	void			lerp			            (CSoundRender_Environment& A, CSoundRender_Environment& B, float f);
-	bool			load			            (IReader* fs);
-	void			save			            (IWriter* fs);
+                    CSoundRender_Environment    (void);
+                    ~CSoundRender_Environment    (void);
+    void            set_identity                ();
+    void            set_default                    ();
+    void            clamp                        ();
+    void            lerp                        (CSoundRender_Environment& A, CSoundRender_Environment& B, float f);
+    bool            load                        (IReader* fs);
+    void            save                        (IWriter* fs);
 };
 
 class XRSOUND_API SoundEnvironment_LIB
 {
 public:
-	using SE_VEC = xr_vector<CSoundRender_Environment*>;
-	using SE_IT = SE_VEC::iterator;
+    using SE_VEC = xr_vector<CSoundRender_Environment*>;
+    using SE_IT = SE_VEC::iterator;
 private:
-	SE_VEC						library;
+    SE_VEC                        library;
 public:
-	void						Load	(LPCSTR name);
-	bool						Save	(LPCSTR name);
-	void						Unload	();
-	int							GetID	(LPCSTR name);
-	CSoundRender_Environment*	Get		(LPCSTR name);
-	CSoundRender_Environment*	Get		(int id);
-	CSoundRender_Environment*	Append	(CSoundRender_Environment* parent=0);
-	void						Remove	(LPCSTR name);
-	void						Remove	(int id);
-	SE_VEC&						Library	();
+    void                        Load    (LPCSTR name);
+    bool                        Save    (LPCSTR name);
+    void                        Unload    ();
+    int                            GetID    (LPCSTR name);
+    CSoundRender_Environment*    Get        (LPCSTR name);
+    CSoundRender_Environment*    Get        (int id);
+    CSoundRender_Environment*    Append    (CSoundRender_Environment* parent=0);
+    void                        Remove    (LPCSTR name);
+    void                        Remove    (int id);
+    SE_VEC&                        Library    ();
 };

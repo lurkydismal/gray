@@ -30,5 +30,5 @@ float4 main(v2p I) : COLOR
     final = lerp(fog_color.xyz, final, I.fog);
     // out
     return float4(final.rgb, 1.0f);
-    // return 	float4	(light*detail*2,1);
+    // return     float4    (light*detail*2,1);
 }

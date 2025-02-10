@@ -2,8 +2,8 @@
     <file name="ui\ui_pda2">
 
 <!-- fraction_place -->
-    <texture id="ui_pda2_place_up"	x="959" y="862"   width="9" height="5" />
-    <texture id="ui_pda2_place_down"	x="959" y="869"   width="9" height="5" />
+    <texture id="ui_pda2_place_up"    x="959" y="862"   width="9" height="5" />
+    <texture id="ui_pda2_place_down"    x="959" y="869"   width="9" height="5" />
 
 <!-- back -->
     <texture id="ui_pda2"         x="0" y="0"   width="1024" height="768" />
@@ -56,20 +56,20 @@
     <texture id="ui_pda2_delimiter_02"  x="961" y="891" width="42" height="50" />
 
 <!-- new tasks -->
-    <texture id="ui_pda2_close_e"	x="959" y="955" width="31" height="33" />
-    <texture id="ui_pda2_close_h"	x="959" y="990" width="31" height="33" />
-    <texture id="ui_pda2_close_t"	x="959" y="955" width="31" height="33" />
-    <texture id="ui_pda2_close_d"	x="959" y="955" width="31" height="33" />
+    <texture id="ui_pda2_close_e"    x="959" y="955" width="31" height="33" />
+    <texture id="ui_pda2_close_h"    x="959" y="990" width="31" height="33" />
+    <texture id="ui_pda2_close_t"    x="959" y="955" width="31" height="33" />
+    <texture id="ui_pda2_close_d"    x="959" y="955" width="31" height="33" />
 
-    <texture id="ui_pda2_center_e"	x="992" y="955" width="31" height="33" />
-    <texture id="ui_pda2_center_h"	x="992" y="990" width="31" height="33" />
-    <texture id="ui_pda2_center_t"	x="992" y="955" width="31" height="33" />
-    <texture id="ui_pda2_center_d"	x="992" y="955" width="31" height="33" />
+    <texture id="ui_pda2_center_e"    x="992" y="955" width="31" height="33" />
+    <texture id="ui_pda2_center_h"    x="992" y="990" width="31" height="33" />
+    <texture id="ui_pda2_center_t"    x="992" y="955" width="31" height="33" />
+    <texture id="ui_pda2_center_d"    x="992" y="955" width="31" height="33" />
 
-    <texture id="ui_pda2_center_top_e"	x="996" y="811" width="21" height="21" />
-    <texture id="ui_pda2_center_top_h"	x="996" y="833" width="21" height="21" />
-    <texture id="ui_pda2_center_top_t"	x="996" y="811" width="21" height="21" />
-    <texture id="ui_pda2_center_top_d"	x="996" y="811" width="21" height="21" />
+    <texture id="ui_pda2_center_top_e"    x="996" y="811" width="21" height="21" />
+    <texture id="ui_pda2_center_top_h"    x="996" y="833" width="21" height="21" />
+    <texture id="ui_pda2_center_top_t"    x="996" y="811" width="21" height="21" />
+    <texture id="ui_pda2_center_top_d"    x="996" y="811" width="21" height="21" />
 
    </file>
 </w>

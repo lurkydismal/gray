@@ -1,7 +1,7 @@
 /*
  * cgifcgi.c --
  *
- *	CGI to FastCGI bridge
+ *    CGI to FastCGI bridge
  *
  *
  * Copyright (c) 1996 Open Market, Inc.
@@ -189,7 +189,7 @@ static void FCGIexit(int exitCode)
 {
     if(appServerSock != -1) {
         OS_Close(appServerSock);
-	appServerSock = -1;
+    appServerSock = -1;
     }
     OS_LibShutdown();
     exit(exitCode);
@@ -231,10 +231,10 @@ static void AppServerReadHandler(ClientData dc, int bytesRead)
         if(headerLen > 0 || paddingLen > 0) {
             exit(FCGX_PROTOCOL_ERROR);
         }
-	if(appServerSock != -1) {
-	    OS_Close(appServerSock);
-	    appServerSock = -1;
-	}
+    if(appServerSock != -1) {
+        OS_Close(appServerSock);
+        appServerSock = -1;
+    }
         /*
          * XXX: Shouldn't be here if exitStatusSet.
          */
@@ -258,19 +258,19 @@ static void AppServerReadHandler(ClientData dc, int bytesRead)
             }
             if(header.version != FCGI_VERSION_1) {
                 exit(FCGX_UNSUPPORTED_VERSION);
-	    }
+        }
             if((header.requestIdB1 << 8) + header.requestIdB0 != requestId) {
                 exit(FCGX_PROTOCOL_ERROR);
-	    }
+        }
             contentLen = (header.contentLengthB1 << 8)
                          + header.contentLengthB0;
             paddingLen =  header.paddingLength;
-	} else {
+    } else {
             /*
              * Header is complete (possibly from previous call).  What now?
              */
             switch(header.type) {
-	        case FCGI_STDOUT:
+            case FCGI_STDOUT:
                 case FCGI_STDERR:
                     /*
                      * Write the buffered content to stdout or stderr.
@@ -286,35 +286,35 @@ static void AppServerReadHandler(ClientData dc, int bytesRead)
                         if(OS_Write(outFD, ptr, count) < 0) {
                             exit(OS_Errno);
                         }
-	            }
+                }
                     break;
                 case FCGI_END_REQUEST:
                     if(!readingEndRequestBody) {
                         if(contentLen != sizeof(erBody)) {
                             exit(FCGX_PROTOCOL_ERROR);
-		        }
+                }
                         readingEndRequestBody = TRUE;
-		    }
+            }
                     count = GetPtr(&ptr, contentLen, &fromAS);
                     if(count > 0) {
                         memcpy(&erBody + sizeof(erBody) - contentLen,
                                 ptr, count);
                         contentLen -= count;
-		    }
+            }
                     if(contentLen == 0) {
                         if(erBody.protocolStatus != FCGI_REQUEST_COMPLETE) {
                             /*
                              * XXX: What to do with FCGI_OVERLOADED?
                              */
                             exit(FCGX_PROTOCOL_ERROR);
-			}
+            }
                         exitStatus = (erBody.appStatusB3 << 24)
                                    + (erBody.appStatusB2 << 16)
                                    + (erBody.appStatusB1 <<  8)
                                    + (erBody.appStatusB0      );
                         exitStatusSet = TRUE;
                         readingEndRequestBody = FALSE;
-	            }
+                }
                     break;
                 case FCGI_GET_VALUES_RESULT:
                     /* coming soon */
@@ -322,19 +322,19 @@ static void AppServerReadHandler(ClientData dc, int bytesRead)
                     /* coming soon */
                 default:
                     exit(FCGX_PROTOCOL_ERROR);
-	    }
+        }
             if(contentLen == 0) {
                 if(paddingLen > 0) {
                     paddingLen -= GetPtr(&ptr, paddingLen, &fromAS);
-		}
+        }
                 /*
                  * If we've processed all the data and skipped all the
                  * padding, discard the header and look for the next one.
                  */
                 if(paddingLen == 0) {
                     headerLen = 0;
-	        }
-	    }
+            }
+        }
         } /* headerLen >= sizeof(header) */
     } /*while*/
     ScheduleIo();
@@ -354,7 +354,7 @@ static void WriteStdinEof(void)
     static int stdin_eof_sent = 0;
 
     if (stdin_eof_sent)
-    	return;
+        return;
 
     *((FCGI_Header *)fromWS.stop) = MakeHeader(FCGI_STDIN, requestId, 0, 0);
     fromWS.stop += sizeof(FCGI_Header);
@@ -393,7 +393,7 @@ static void WebServerReadHandler(ClientData dc, int bytesRead)
     webServerReadHandlerEOF = (bytesRead == 0);
 
     if (bytesToRead <= 0)
-	WriteStdinEof();
+    WriteStdinEof();
 
     ScheduleIo();
 }
@@ -456,13 +456,13 @@ static void ScheduleIo(void)
      */
     if(!fcgiWritePending && appServerSock != -1 &&
        ((length = fromWS.stop - fromWS.next) != 0)) {
-	if(OS_AsyncWrite(appServerSock, 0, fromWS.next, length,
-			 AppServerWriteHandler,
-			 (ClientData)appServerSock) == -1) {
-	    FCGIexit(OS_Errno);
-	} else {
-	    fcgiWritePending = TRUE;
-	}
+    if(OS_AsyncWrite(appServerSock, 0, fromWS.next, length,
+             AppServerWriteHandler,
+             (ClientData)appServerSock) == -1) {
+        FCGIexit(OS_Errno);
+    } else {
+        fcgiWritePending = TRUE;
+    }
     }
 
     /*
@@ -470,15 +470,15 @@ static void ScheduleIo(void)
      * one pending and there's room in the buffer.
      */
     if(!fcgiReadPending && appServerSock != -1) {
-	fromAS.next = &fromAS.buff[0];
+    fromAS.next = &fromAS.buff[0];
 
-	if(OS_AsyncRead(appServerSock, 0, fromAS.next, BUFFLEN,
-			AppServerReadHandler,
-			(ClientData)appServerSock) == -1) {
-	    FCGIexit(OS_Errno);
-	} else {
-	    fcgiReadPending = TRUE;
-	}
+    if(OS_AsyncRead(appServerSock, 0, fromAS.next, BUFFLEN,
+            AppServerReadHandler,
+            (ClientData)appServerSock) == -1) {
+        FCGIexit(OS_Errno);
+    } else {
+        fcgiReadPending = TRUE;
+    }
     }
 
     /*
@@ -487,13 +487,13 @@ static void ScheduleIo(void)
     if((bytesToRead > 0) && !webServerReadHandlerEOF && !wsReadPending &&
        !fcgiWritePending &&
        fromWS.next == &fromWS.buff[0]) {
-	if(OS_AsyncReadStdin(fromWS.next + sizeof(FCGI_Header),
-			     BUFFLEN - sizeof(FCGI_Header),
-			     WebServerReadHandler, STDIN_FILENO)== -1) {
-	    FCGIexit(OS_Errno);
-	} else {
-	    wsReadPending = TRUE;
-	}
+    if(OS_AsyncReadStdin(fromWS.next + sizeof(FCGI_Header),
+                 BUFFLEN - sizeof(FCGI_Header),
+                 WebServerReadHandler, STDIN_FILENO)== -1) {
+        FCGIexit(OS_Errno);
+    } else {
+        wsReadPending = TRUE;
+    }
     }
 }
 
@@ -519,8 +519,8 @@ static void FCGI_Start(char *bindPath, char *appPath, int nServers)
     }
 
     if(access(appPath, X_OK) == -1) {
-	fprintf(stderr, "%s is not executable\n", appPath);
-	exit(1);
+    fprintf(stderr, "%s is not executable\n", appPath);
+    exit(1);
     }
 
     /*
@@ -529,7 +529,7 @@ static void FCGI_Start(char *bindPath, char *appPath, int nServers)
     for(i = 0; i < nServers; i++) {
         if(OS_SpawnChild(appPath, listenFd) == -1) {
             exit(OS_Errno);
-	}
+    }
     }
     OS_Close(listenFd);
 }
@@ -579,17 +579,17 @@ static void FCGIUtil_BuildNameValueHeader(
 }
 
 
-#define MAXARGS	16
+#define MAXARGS    16
 static int ParseArgs(int argc, char *argv[],
         int *doBindPtr, int *doStartPtr,
         char *connectPathPtr, char *appPathPtr, int *nServersPtr) {
-    int	    i,
-	    x,
-	    err = 0,
-	    ac;
+    int        i,
+        x,
+        err = 0,
+        ac;
     char    *tp1,
-	    *tp2,
-	    *av[MAXARGS];
+        *tp2,
+        *av[MAXARGS];
     FILE    *fp;
     char    line[BUFSIZ];
 
@@ -604,79 +604,79 @@ static int ParseArgs(int argc, char *argv[],
     for(i = 1; i < argc; i++) {
         if(argv[i][0] == '-') {
             if(!strcmp(argv[i], "-f")) {
-		if(++i == argc) {
-		    fprintf(stderr,
+        if(++i == argc) {
+            fprintf(stderr,
                             "Missing command file name after -f\n");
-		    return 1;
-		}
-		if((fp = fopen(argv[i], "r")) == NULL) {
-		    fprintf(stderr, "Cannot open command file %s\n", argv[i]);
-		    return 1;
-		}
-		ac = 1;
-		while(fgets(line, BUFSIZ, fp)) {
-		    if(line[0] == '#') {
-			continue;
-		    }
-		    if((tp1 = (char *) strrchr(line,'\n')) != NULL) {
-			*tp1-- = 0;
-			while(*tp1 == ' ' || *tp1 =='\t') {
-			    *tp1-- = 0;
-		        }
-		    } else {
-			fprintf(stderr, "Line to long\n");
-			return 1;
-		    }
-		    tp1 = line;
-		    while(tp1) {
-			if((tp2 = strchr(tp1, ' ')) != NULL) {
-			    *tp2++ =  0;
-		        }
-    			if(ac >= MAXARGS) {
-			    fprintf(stderr,
+            return 1;
+        }
+        if((fp = fopen(argv[i], "r")) == NULL) {
+            fprintf(stderr, "Cannot open command file %s\n", argv[i]);
+            return 1;
+        }
+        ac = 1;
+        while(fgets(line, BUFSIZ, fp)) {
+            if(line[0] == '#') {
+            continue;
+            }
+            if((tp1 = (char *) strrchr(line,'\n')) != NULL) {
+            *tp1-- = 0;
+            while(*tp1 == ' ' || *tp1 =='\t') {
+                *tp1-- = 0;
+                }
+            } else {
+            fprintf(stderr, "Line to long\n");
+            return 1;
+            }
+            tp1 = line;
+            while(tp1) {
+            if((tp2 = strchr(tp1, ' ')) != NULL) {
+                *tp2++ =  0;
+                }
+                if(ac >= MAXARGS) {
+                fprintf(stderr,
                                     "To many arguments, "
                                     "%d is max from a file\n", MAXARGS);
-				exit(-1);
-			}
-			if((av[ac] = (char *)malloc(strlen(tp1)+1)) == NULL) {
-			    fprintf(stderr, "Cannot allocate %d bytes\n",
-				    strlen(tp1)+1);
-			    exit(-1);
-			}
-			strcpy(av[ac++], tp1);
-			tp1 = tp2;
-		    }
-		}
-		err = ParseArgs(ac, av, doBindPtr, doStartPtr,
+                exit(-1);
+            }
+            if((av[ac] = (char *)malloc(strlen(tp1)+1)) == NULL) {
+                fprintf(stderr, "Cannot allocate %d bytes\n",
+                    strlen(tp1)+1);
+                exit(-1);
+            }
+            strcpy(av[ac++], tp1);
+            tp1 = tp2;
+            }
+        }
+        err = ParseArgs(ac, av, doBindPtr, doStartPtr,
                         connectPathPtr, appPathPtr, nServersPtr);
-		for(x = 1; x < ac; x++) {
-		    ASSERT(av[x] != NULL);
-		    free(av[x]);
-	        }
-		return err;
+        for(x = 1; x < ac; x++) {
+            ASSERT(av[x] != NULL);
+            free(av[x]);
+            }
+        return err;
 #ifdef _WIN32
-	    } else if (!strcmp(argv[i], "-jitcgi")) {
-	        DebugBreak();
-	    } else if (!strcmp(argv[i], "-dbgfcgi")) {
-	        putenv("DEBUG_FCGI=TRUE");
+        } else if (!strcmp(argv[i], "-jitcgi")) {
+            DebugBreak();
+        } else if (!strcmp(argv[i], "-dbgfcgi")) {
+            putenv("DEBUG_FCGI=TRUE");
 #endif
-	    } else if(!strcmp(argv[i], "-start")) {
-		*doBindPtr = FALSE;
-	    } else if(!strcmp(argv[i], "-bind")) {
-		*doStartPtr = FALSE;
-	    } else if(!strcmp(argv[i], "-connect")) {
+        } else if(!strcmp(argv[i], "-start")) {
+        *doBindPtr = FALSE;
+        } else if(!strcmp(argv[i], "-bind")) {
+        *doStartPtr = FALSE;
+        } else if(!strcmp(argv[i], "-connect")) {
                 if(++i == argc) {
-	            fprintf(stderr,
+                fprintf(stderr,
                             "Missing connection name after -connect\n");
                     err++;
                 } else {
                     strcpy(connectPathPtr, argv[i]);
                 }
-	    } else {
-		fprintf(stderr, "Unknown option %s\n", argv[i]);
-		err++;
-	    }
-	} else if(*appPathPtr == '\0') {
+        } else {
+        fprintf(stderr, "Unknown option %s\n", argv[i]);
+        err++;
+        }
+    } else if(*appPathPtr == '\0') {
             strcpy(appPathPtr, argv[i]);
         } else if(isdigit((int)argv[i][0]) && *nServersPtr == 0) {
             *nServersPtr = atoi(argv[i]);
@@ -694,20 +694,20 @@ static int ParseArgs(int argc, char *argv[],
         err++;
     }
     if(*connectPathPtr == 0) {
-	fprintf(stderr, "Missing -connect <connName>\n");
-	err++;
+    fprintf(stderr, "Missing -connect <connName>\n");
+    err++;
     } else if(strchr(connectPathPtr, ':')) {
 /*
  * XXX: Test to see if we can use IP connect locally...
         This hack lets me test the ability to create a local process listening
-	to a TCP/IP port for connections and subsequently connect to the app
-	like we do for Unix domain and named pipes.
+    to a TCP/IP port for connections and subsequently connect to the app
+    like we do for Unix domain and named pipes.
 
         if(*doStartPtr && *doBindPtr) {
-	    fprintf(stderr,
+        fprintf(stderr,
                     "<connName> of form hostName:portNumber "
                     "requires -start or -bind\n");
-	    err++;
+        err++;
         }
  */
     }
@@ -727,12 +727,12 @@ int main(int argc, char **argv)
     int headerLen, valueLen;
     char *equalPtr;
     FCGI_BeginRequestRecord beginRecord;
-    int	doBind, doStart, nServers;
+    int    doBind, doStart, nServers;
     char appPath[MAXPATHLEN], bindPath[MAXPATHLEN];
 
     if(ParseArgs(argc, argv, &doBind, &doStart,
-		   (char *) &bindPath, (char *) &appPath, &nServers)) {
-	fprintf(stderr,
+           (char *) &bindPath, (char *) &appPath, &nServers)) {
+    fprintf(stderr,
 "Usage:\n"
 "    cgi-fcgi -f <cmdPath> , or\n"
 "    cgi-fcgi -connect <connName> <appPath> [<nServers>] , or\n"
@@ -741,12 +741,12 @@ int main(int argc, char **argv)
 "where <connName> is either the pathname of a UNIX domain socket\n"
 "or (if -bind is given) a hostName:portNumber specification\n"
 "or (if -start is given) a :portNumber specification (uses local host).\n");
-	exit(1);
+    exit(1);
     }
 
     if(OS_LibInit(stdinFds)) {
         fprintf(stderr, "Error initializing OS library: %d\n", OS_Errno);
-	exit(0);
+    exit(0);
     }
 
     equalPtr = getenv("CONTENT_LENGTH");
@@ -765,7 +765,7 @@ int main(int argc, char **argv)
             exit(0);
         } else {
             appServerSock = OS_FcgiConnect(bindPath);
-	}
+    }
     }
     if(appServerSock < 0) {
         fprintf(stderr, "Could not connect to %s\n", bindPath);
@@ -828,15 +828,15 @@ int main(int argc, char **argv)
     OS_SetFlags(appServerSock, O_NONBLOCK);
 
     if (bytesToRead <= 0)
-	WriteStdinEof();
+    WriteStdinEof();
 
     ScheduleIo();
 
     while(!exitStatusSet) {
         /*
-	 * NULL = wait forever (or at least until there's something
-	 *        to do.
-	 */
+     * NULL = wait forever (or at least until there's something
+     *        to do.
+     */
         OS_DoIo(NULL);
     }
     if(exitStatusSet) {

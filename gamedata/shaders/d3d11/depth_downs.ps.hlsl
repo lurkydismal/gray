@@ -9,7 +9,7 @@ struct _input
 
 float4 main(_input I) : SV_Target0
 {
-	float4 Depth;
+    float4 Depth;
 
 #ifndef SM_5
     Depth.x = s_position.SampleLevel(smp_nofilter, I.tc0.xy, int2(1, 0), 0).x;
@@ -21,6 +21,6 @@ float4 main(_input I) : SV_Target0
 #endif // SM_5
 
     Depth = depth_unpack.x * rcp(Depth - depth_unpack.y);
-	return min(min(Depth.x, Depth.y), min(Depth.z, Depth.w));
+    return min(min(Depth.x, Depth.y), min(Depth.z, Depth.w));
 }
 

@@ -92,45 +92,45 @@ ptw32_cond_unblock (pthread_cond_t * cond, int unblockAll)
   if (0 != cv->nWaitersToUnblock)
     {
       if (0 == cv->nWaitersBlocked)
-	{
-	  return pthread_mutex_unlock (&(cv->mtxUnblockLock));
-	}
+    {
+      return pthread_mutex_unlock (&(cv->mtxUnblockLock));
+    }
       if (unblockAll)
-	{
-	  cv->nWaitersToUnblock += (nSignalsToIssue = cv->nWaitersBlocked);
-	  cv->nWaitersBlocked = 0;
-	}
+    {
+      cv->nWaitersToUnblock += (nSignalsToIssue = cv->nWaitersBlocked);
+      cv->nWaitersBlocked = 0;
+    }
       else
-	{
-	  nSignalsToIssue = 1;
-	  cv->nWaitersToUnblock++;
-	  cv->nWaitersBlocked--;
-	}
+    {
+      nSignalsToIssue = 1;
+      cv->nWaitersToUnblock++;
+      cv->nWaitersBlocked--;
+    }
     }
   else if (cv->nWaitersBlocked > cv->nWaitersGone)
     {
       /* Use the non-cancellable version of sem_wait() */
       if (ptw32_semwait (&(cv->semBlockLock)) != 0)
-	{
-	  result = errno;
-	  (void) pthread_mutex_unlock (&(cv->mtxUnblockLock));
-	  return result;
-	}
+    {
+      result = errno;
+      (void) pthread_mutex_unlock (&(cv->mtxUnblockLock));
+      return result;
+    }
       if (0 != cv->nWaitersGone)
-	{
-	  cv->nWaitersBlocked -= cv->nWaitersGone;
-	  cv->nWaitersGone = 0;
-	}
+    {
+      cv->nWaitersBlocked -= cv->nWaitersGone;
+      cv->nWaitersGone = 0;
+    }
       if (unblockAll)
-	{
-	  nSignalsToIssue = cv->nWaitersToUnblock = cv->nWaitersBlocked;
-	  cv->nWaitersBlocked = 0;
-	}
+    {
+      nSignalsToIssue = cv->nWaitersToUnblock = cv->nWaitersBlocked;
+      cv->nWaitersBlocked = 0;
+    }
       else
-	{
-	  nSignalsToIssue = cv->nWaitersToUnblock = 1;
-	  cv->nWaitersBlocked--;
-	}
+    {
+      nSignalsToIssue = cv->nWaitersToUnblock = 1;
+      cv->nWaitersBlocked--;
+    }
     }
   else
     {
@@ -140,14 +140,14 @@ ptw32_cond_unblock (pthread_cond_t * cond, int unblockAll)
   if ((result = pthread_mutex_unlock (&(cv->mtxUnblockLock))) == 0)
     {
       if (sem_post_multiple (&(cv->semBlockQueue), nSignalsToIssue) != 0)
-	{
-	  result = errno;
-	}
+    {
+      result = errno;
+    }
     }
 
   return result;
 
-}				/* ptw32_cond_unblock */
+}                /* ptw32_cond_unblock */
 
 int
 pthread_cond_signal (pthread_cond_t * cond)
@@ -189,7 +189,7 @@ pthread_cond_signal (pthread_cond_t * cond)
    */
   return (ptw32_cond_unblock (cond, 0));
 
-}				/* pthread_cond_signal */
+}                /* pthread_cond_signal */
 
 int
 pthread_cond_broadcast (pthread_cond_t * cond)
@@ -228,4 +228,4 @@ pthread_cond_broadcast (pthread_cond_t * cond)
    */
   return (ptw32_cond_unblock (cond, PTW32_TRUE));
 
-}				/* pthread_cond_broadcast */
+}                /* pthread_cond_broadcast */

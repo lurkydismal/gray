@@ -55,10 +55,10 @@ pthread_barrier_destroy (pthread_barrier_t * barrier)
   if (0 == (result = sem_destroy (&(b->semBarrierBreeched[0]))))
     {
       if (0 == (result = sem_destroy (&(b->semBarrierBreeched[1]))))
-	{
-	  (void) free (b);
-	  return 0;
-	}
+    {
+      (void) free (b);
+      return 0;
+    }
       (void) sem_init (&(b->semBarrierBreeched[0]), b->pshared, 0);
     }
 

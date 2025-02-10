@@ -13,10 +13,10 @@
     use in-game UI (PDA, Inventory, etc)-->
     
     <info_portion id="ui_pda">
-		<disable>ui_pda_hide</disable>
+        <disable>ui_pda_hide</disable>
     </info_portion>
     <info_portion id="ui_pda_hide">
-		<disable>ui_pda</disable>
+        <disable>ui_pda</disable>
     </info_portion>
           
    <info_portion id="ui_pda_contacts"></info_portion>
@@ -33,10 +33,10 @@
    <info_portion id="ui_pda_jobs_current"></info_portion>
    
     <info_portion id="ui_pda_jobs">
-		<disable>ui_pda_jobs_hide</disable>
+        <disable>ui_pda_jobs_hide</disable>
     </info_portion>
     <info_portion id="ui_pda_jobs_hide">
-		<disable>ui_pda_jobs</disable>
+        <disable>ui_pda_jobs</disable>
     </info_portion>
 
    
@@ -59,31 +59,31 @@
 
    
    <info_portion id="ui_inventory">
-		<disable>ui_inventory_hide</disable>
+        <disable>ui_inventory_hide</disable>
    </info_portion>
    <info_portion id="ui_inventory_hide">
-		<disable>ui_inventory</disable>
+        <disable>ui_inventory</disable>
    </info_portion>
 
     <info_portion id="ui_talk">
-		<disable>ui_talk_hide</disable>
+        <disable>ui_talk_hide</disable>
     </info_portion>
     <info_portion id="ui_talk_hide">
-		<disable>ui_talk</disable>
+        <disable>ui_talk</disable>
     </info_portion>
 
     <info_portion id="ui_trade">
-		<disable>ui_trade_hide</disable>
+        <disable>ui_trade_hide</disable>
     </info_portion>
     <info_portion id="ui_trade_hide">
-		<disable>ui_trade</disable>
+        <disable>ui_trade</disable>
     </info_portion>
 
     <info_portion id="ui_car_body">
-		<disable>ui_car_body_hide</disable>
+        <disable>ui_car_body_hide</disable>
     </info_portion>
     <info_portion id="ui_car_body_hide">
-		<disable>ui_car_body</disable>
+        <disable>ui_car_body</disable>
     </info_portion>
     
     <info_portion id="test_info_1"></info_portion>
@@ -115,11 +115,11 @@
     <info_portion id="arena_final_battle"></info_portion>
     <info_portion id="arena_rupor_off"></info_portion>
     <info_portion id="arena_fourth_battle"></info_portion>
-	
-	<info_portion id="sim_capture_enemy_base_stalker_done"></info_portion>
-	<info_portion id="sim_capture_enemy_base_bandit_done"></info_portion>
-	<info_portion id="sim_capture_enemy_base_freedom_done"></info_portion>
-	<info_portion id="sim_capture_enemy_base_dolg_done"></info_portion>
+    
+    <info_portion id="sim_capture_enemy_base_stalker_done"></info_portion>
+    <info_portion id="sim_capture_enemy_base_bandit_done"></info_portion>
+    <info_portion id="sim_capture_enemy_base_freedom_done"></info_portion>
+    <info_portion id="sim_capture_enemy_base_dolg_done"></info_portion>
 
- 	<info_portion id="a"></info_portion>
+     <info_portion id="a"></info_portion>
 </game_information_portions>

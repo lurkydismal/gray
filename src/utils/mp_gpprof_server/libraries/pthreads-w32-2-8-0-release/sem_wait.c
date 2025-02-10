@@ -4,10 +4,10 @@
  * Module: sem_wait.c
  *
  * Purpose:
- *	Semaphores aren't actually part of the PThreads standard.
- *	They are defined by the POSIX Standard:
+ *    Semaphores aren't actually part of the PThreads standard.
+ *    They are defined by the POSIX Standard:
  *
- *		POSIX 1003.1b-1993	(POSIX.1b)
+ *        POSIX 1003.1b-1993    (POSIX.1b)
  *
  * -------------------------------------------------------------
  *
@@ -61,20 +61,20 @@ ptw32_sem_wait_cleanup(void * sem)
        * longer waiting.
        */
       if (*((sem_t *)sem) != NULL && !(WaitForSingleObject(s->sem, 0) == WAIT_OBJECT_0))
-	{
-	  ++s->value;
+    {
+      ++s->value;
 #ifdef NEED_SEM
-	  if (s->value > 0)
-	    {
-	      s->leftToUnblock = 0;
-	    }
+      if (s->value > 0)
+        {
+          s->leftToUnblock = 0;
+        }
 #else
-	  /*
-	   * Don't release the W32 sema, it doesn't need adjustment
-	   * because it doesn't record the number of waiters.
-	   */
+      /*
+       * Don't release the W32 sema, it doesn't need adjustment
+       * because it doesn't record the number of waiters.
+       */
 #endif /* NEED_SEM */
-	}
+    }
       (void) pthread_mutex_unlock (&s->lock);
     }
 }
@@ -122,57 +122,57 @@ sem_wait (sem_t * sem)
   else
     {
       if ((result = pthread_mutex_lock (&s->lock)) == 0)
-	{
-	  int v;
+    {
+      int v;
 
-	  /* See sem_destroy.c
-	   */
-	  if (*sem == NULL)
-	    {
-	      (void) pthread_mutex_unlock (&s->lock);
-	      errno = EINVAL;
-	      return -1;
-	    }
+      /* See sem_destroy.c
+       */
+      if (*sem == NULL)
+        {
+          (void) pthread_mutex_unlock (&s->lock);
+          errno = EINVAL;
+          return -1;
+        }
 
           v = --s->value;
-	  (void) pthread_mutex_unlock (&s->lock);
+      (void) pthread_mutex_unlock (&s->lock);
 
-	  if (v < 0)
-	    {
+      if (v < 0)
+        {
 #ifdef _MSC_VER
 #pragma inline_depth(0)
 #endif
-	      /* Must wait */
-	      pthread_cleanup_push(ptw32_sem_wait_cleanup, (void *) s);
-	      result = pthreadCancelableWait (s->sem);
-	      /* Cleanup if we're canceled or on any other error */
-	      pthread_cleanup_pop(result);
+          /* Must wait */
+          pthread_cleanup_push(ptw32_sem_wait_cleanup, (void *) s);
+          result = pthreadCancelableWait (s->sem);
+          /* Cleanup if we're canceled or on any other error */
+          pthread_cleanup_pop(result);
 #ifdef _MSC_VER
 #pragma inline_depth()
 #endif
-	    }
+        }
 #ifdef NEED_SEM
 
-	  if (!result && pthread_mutex_lock (&s->lock) == 0)
-	    {
-	      if (*sem == NULL)
-	        {
-	          (void) pthread_mutex_unlock (&s->lock);
-	          errno = EINVAL;
-	          return -1;
-	        }
+      if (!result && pthread_mutex_lock (&s->lock) == 0)
+        {
+          if (*sem == NULL)
+            {
+              (void) pthread_mutex_unlock (&s->lock);
+              errno = EINVAL;
+              return -1;
+            }
 
-	      if (s->leftToUnblock > 0)
-		{
-		  --s->leftToUnblock;
-		  SetEvent(s->sem);
-		}
-	      (void) pthread_mutex_unlock (&s->lock);
-	    }
+          if (s->leftToUnblock > 0)
+        {
+          --s->leftToUnblock;
+          SetEvent(s->sem);
+        }
+          (void) pthread_mutex_unlock (&s->lock);
+        }
 
 #endif /* NEED_SEM */
 
-	}
+    }
 
     }
 
@@ -184,4 +184,4 @@ sem_wait (sem_t * sem)
 
   return 0;
 
-}				/* sem_wait */
+}                /* sem_wait */

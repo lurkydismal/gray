@@ -10,7 +10,7 @@ struct vf
 {
     float4 hpos : POSITION;
     float2 tc : TEXCOORD0;
-	float4 proj : TEXCOORD1;
+    float4 proj : TEXCOORD1;
     float4 c : COLOR0;
     float fog : FOG;
 };
@@ -23,7 +23,7 @@ vf main(vv v)
     o.tc = v.tc; // copy tc
     o.c = v.c; // copy color
     o.fog = calc_fogging(v.P); // fog, input in world coords
-	o.proj = o.hpos;
+    o.proj = o.hpos;
 
     return o;
 }

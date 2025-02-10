@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_sound_type.h
-//	Created 	: 28.06.2004
-//  Modified 	: 28.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script sound type
+//    Module         : script_sound_type.h
+//    Created     : 28.06.2004
+//  Modified     : 28.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script sound type
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

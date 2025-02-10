@@ -9,10 +9,10 @@
     #include "../xrcompress/lzo/lzo1y.h"
     #pragma warning( default: 193 128 810 )
 
-	extern compression::ppmd::stream*   trained_model;
+    extern compression::ppmd::stream*   trained_model;
 
 
-    typedef compression::ppmd::stream	stream;
+    typedef compression::ppmd::stream    stream;
     typedef unsigned char               uint8_t;
 
     using namespace std;
@@ -112,10 +112,10 @@ static const char*      _DefaultMdlName             = "!PPMd.mdl";
 char*                   _ModelData                  = NULL;
 long                    _ModelDataSize              = 0;
 
-static const u32		_SuballocatorSize           = 32;
-static const u32		_OrderModel				    = 8;
-static const MR_METHOD	_RestorationMethodCutOff	= MRM_FREEZE;
-//static const MR_METHOD	_RestorationMethodCutOff	= MRM_RESTART;
+static const u32        _SuballocatorSize           = 32;
+static const u32        _OrderModel                    = 8;
+static const MR_METHOD    _RestorationMethodCutOff    = MRM_FREEZE;
+//static const MR_METHOD    _RestorationMethodCutOff    = MRM_RESTART;
 
 static char*            _LZOWrkMem                  = NULL;
 static uint8_t*         _LZO_Dict                   = NULL;
@@ -216,8 +216,8 @@ _ProcessFile_PPMd( const char* file_name )
 
         unsigned    comp_size = src_size * 4;
         char*       comp_data = new char[comp_size];
-	    stream      src( src_data, src_size );
-	    stream      dst( comp_data, comp_size );
+        stream      src( src_data, src_size );
+        stream      dst( comp_data, comp_size );
 
         memset( comp_data, 0xCC, comp_size );
 
@@ -226,7 +226,7 @@ _ProcessFile_PPMd( const char* file_name )
         timer.start();
         if( trained_model )
             trained_model->rewind();
-	    EncodeFile( &dst, &src, _OrderModel, _RestorationMethodCutOff );
+        EncodeFile( &dst, &src, _OrderModel, _RestorationMethodCutOff );
         timer.stop();
         printf( "PPMd1 :  %2.0f%% %1.5fms  %u->%u\n", 
                 100.0f*float(dst.tell())/float(src.tell()),
@@ -234,10 +234,10 @@ _ProcessFile_PPMd( const char* file_name )
                 src.tell(), dst.tell()
               );
 
-		timer.start();
+        timer.start();
         if( trained_model )
             trained_model->rewind();
-	    EncodeFile( &dst, &src, _OrderModel, _RestorationMethodCutOff );
+        EncodeFile( &dst, &src, _OrderModel, _RestorationMethodCutOff );
         timer.stop();
         printf( "PPMd2 :  %2.0f%% %1.5fms  %u->%u\n", 
                 100.0f*float(dst.tell())/float(src.tell()),
@@ -245,17 +245,17 @@ _ProcessFile_PPMd( const char* file_name )
                 src.tell(), dst.tell()
               );
 
-		timer.start();
+        timer.start();
         if( trained_model )
             trained_model->rewind();
-	    EncodeFile( &dst, &src, _OrderModel, _RestorationMethodCutOff );
+        EncodeFile( &dst, &src, _OrderModel, _RestorationMethodCutOff );
         timer.stop();
         printf( "PPMd3 :  %2.0f%% %1.5fms  %u->%u\n", 
                 100.0f*float(dst.tell())/float(src.tell()),
                 (float)timer.time(),
                 src.tell(), dst.tell()
               );
-		
+        
         _PPM_TotalUncompressed  += src.tell();
         _PPM_TotalCompressed    += (dst.tell() < src.tell())  ? dst.tell()  : src.tell();
 
@@ -263,7 +263,7 @@ _ProcessFile_PPMd( const char* file_name )
 
         unsigned    uncomp_size = src_size * 4;
         char*       uncomp_data = new char[uncomp_size];
-	    stream      uncomp( uncomp_data, uncomp_size );
+        stream      uncomp( uncomp_data, uncomp_size );
 
         memset( uncomp_data, 0xDD, uncomp_size );
 
@@ -272,7 +272,7 @@ _ProcessFile_PPMd( const char* file_name )
             trained_model->rewind();
         DecodeFile( &uncomp, &dst, _OrderModel, _RestorationMethodCutOff );
 
-		
+        
         // compare
 
         bool        ok      = true;
@@ -335,7 +335,7 @@ _ProcessFile_LZO( const char* file_name )
         fseek( file, 0, SEEK_END );
 
         unsigned    src_size    = ftell( file );
-        uint8_t*	src_data    = new uint8_t[src_size];
+        uint8_t*    src_data    = new uint8_t[src_size];
 
         fseek( file, 0, SEEK_SET );
         fread( src_data, src_size, 1, file );
@@ -576,6 +576,6 @@ main( int argc, char* argv[] )
 
     } // if( argc > 1 )
 
-	return 0;
+    return 0;
 }
 

@@ -14,7 +14,7 @@ class CSideBarCtrl : public CStatic
 {
 // Construction
 public:
-	CSideBarCtrl();
+    CSideBarCtrl();
 
 // Attributes
 public:
@@ -23,24 +23,24 @@ public:
 public:
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CSideBarCtrl)
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CSideBarCtrl)
+    //}}AFX_VIRTUAL
 
 // Implementation
 public:
-	virtual ~CSideBarCtrl();
+    virtual ~CSideBarCtrl();
 
-	// Generated message map functions
+    // Generated message map functions
 protected:
-	//{{AFX_MSG(CSideBarCtrl)
-	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
-	afx_msg void OnPaint();
-	//}}AFX_MSG
+    //{{AFX_MSG(CSideBarCtrl)
+    afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+    afx_msg void OnPaint();
+    //}}AFX_MSG
 
-	void DrawGradient(CDC* pDC, const CRect &rcGrad, COLORREF clrStart, COLORREF clrEnd, BOOL bVertical, COLORREF clrDither = 0xFFFFFFFF );
+    void DrawGradient(CDC* pDC, const CRect &rcGrad, COLORREF clrStart, COLORREF clrEnd, BOOL bVertical, COLORREF clrDither = 0xFFFFFFFF );
 
-	DECLARE_MESSAGE_MAP()
+    DECLARE_MESSAGE_MAP()
 };
 
 /////////////////////////////////////////////////////////////////////////////

@@ -19,107 +19,107 @@ class CEnvironment;
 
 struct SThunderboltDesc
 {
-	// geom
-	FactoryPtr<IThunderboltDescRender>	m_pRender;
+    // geom
+    FactoryPtr<IThunderboltDescRender>    m_pRender;
 
-	// sound
-	ref_sound					snd;
+    // sound
+    ref_sound                    snd;
 
-	// gradient
-	struct SFlare
-	{
-		float					fOpacity;
-		Fvector2				fRadius;
-		shared_str				texture;
-		shared_str				shader;
-		//ref_shader				hShader;
-		FactoryPtr<IFlareRender>	m_pFlare;
-		SFlare()				{ fOpacity = 0; fRadius.set(0.f,0.f);}
-	};
+    // gradient
+    struct SFlare
+    {
+        float                    fOpacity;
+        Fvector2                fRadius;
+        shared_str                texture;
+        shared_str                shader;
+        //ref_shader                hShader;
+        FactoryPtr<IFlareRender>    m_pFlare;
+        SFlare()                { fOpacity = 0; fRadius.set(0.f,0.f);}
+    };
 
-	SFlare*						m_GradientTop;
-	SFlare*						m_GradientCenter;
-	shared_str					name;
-	CLAItem*					color_anim;
+    SFlare*                        m_GradientTop;
+    SFlare*                        m_GradientCenter;
+    shared_str                    name;
+    CLAItem*                    color_anim;
 
 public:
-			SThunderboltDesc		();
-			~SThunderboltDesc		();
-	void	load(CInifile& pIni, shared_str const& sect);
-	void	create_top_gradient(CInifile& pIni, shared_str const& sect);
-	void	create_center_gradient(CInifile& pIni, shared_str const& sect);
+            SThunderboltDesc        ();
+            ~SThunderboltDesc        ();
+    void    load(CInifile& pIni, shared_str const& sect);
+    void    create_top_gradient(CInifile& pIni, shared_str const& sect);
+    void    create_center_gradient(CInifile& pIni, shared_str const& sect);
 };
 
 struct SThunderboltCollection
 {
-	using DescVec = xr_vector<SThunderboltDesc*>;
-	using DescIt = DescVec::iterator;
+    using DescVec = xr_vector<SThunderboltDesc*>;
+    using DescIt = DescVec::iterator;
 
-	DescVec			  			palette;
-	shared_str					section;
+    DescVec                          palette;
+    shared_str                    section;
 public:
-								SThunderboltCollection	();
-								~SThunderboltCollection	();
-						void	load					(CInifile* pIni, CInifile* thunderbolts, LPCSTR sect);
-	SThunderboltDesc*			GetRandomDesc			(){VERIFY(palette.size()>0); return palette[Random.randI((u32)palette.size())];}
+                                SThunderboltCollection    ();
+                                ~SThunderboltCollection    ();
+                        void    load                    (CInifile* pIni, CInifile* thunderbolts, LPCSTR sect);
+    SThunderboltDesc*            GetRandomDesc            (){VERIFY(palette.size()>0); return palette[Random.randI((u32)palette.size())];}
 };
 
-#define THUNDERBOLT_CACHE_SIZE	8
+#define THUNDERBOLT_CACHE_SIZE    8
 //
 class ENGINE_API CEffect_Thunderbolt
 {
-	friend class dxThunderboltRender;
+    friend class dxThunderboltRender;
 protected:
-	using CollectionVec = xr_vector<SThunderboltCollection*>;
-	using CollectionVecIt = CollectionVec::iterator;
+    using CollectionVec = xr_vector<SThunderboltCollection*>;
+    using CollectionVecIt = CollectionVec::iterator;
 
-	CollectionVec				collection;
-	SThunderboltDesc*			current;
+    CollectionVec                collection;
+    SThunderboltDesc*            current;
 private:
-	Fmatrix				  		current_xform;
-	Fvector3					current_direction;
+    Fmatrix                          current_xform;
+    Fvector3                    current_direction;
 
-	FactoryPtr<IThunderboltRender>	m_pRender;
-	//ref_geom			  		hGeom_model;
-	// states
-	enum EState
-	{
-		stIdle,
-		stWorking
-	};
-	EState						state;
+    FactoryPtr<IThunderboltRender>    m_pRender;
+    //ref_geom                      hGeom_model;
+    // states
+    enum EState
+    {
+        stIdle,
+        stWorking
+    };
+    EState                        state;
 
-	//ref_geom			  		hGeom_gradient;
+    //ref_geom                      hGeom_gradient;
 
-	Fvector						lightning_center;
-	float						lightning_size;
-	float						lightning_phase;
+    Fvector                        lightning_center;
+    float                        lightning_size;
+    float                        lightning_phase;
 
-	float						life_time;
-	float						current_time;
-	float						next_lightning_time;
-	BOOL						bEnabled;
+    float                        life_time;
+    float                        current_time;
+    float                        next_lightning_time;
+    BOOL                        bEnabled;
 
-	// params
-//	Fvector2					p_var_alt;
-//	float						p_var_long;
-//	float						p_min_dist;
-//	float						p_tilt;
-//	float						p_second_prop;
-//	float						p_sky_color;
-//	float						p_sun_color;
-//	float						p_fog_color;
+    // params
+//    Fvector2                    p_var_alt;
+//    float                        p_var_long;
+//    float                        p_min_dist;
+//    float                        p_tilt;
+//    float                        p_second_prop;
+//    float                        p_sky_color;
+//    float                        p_sun_color;
+//    float                        p_fog_color;
 private:
-	BOOL						RayPick				(const Fvector& s, const Fvector& d, float& range);
-	void						Bolt				(shared_str id, float period, float life_time);
+    BOOL                        RayPick                (const Fvector& s, const Fvector& d, float& range);
+    void                        Bolt                (shared_str id, float period, float life_time);
 public:                     
-								CEffect_Thunderbolt	(); 
-								~CEffect_Thunderbolt();
+                                CEffect_Thunderbolt    (); 
+                                ~CEffect_Thunderbolt();
 
-	void						OnFrame				(shared_str id,float period, float duration);
-	void						Render				();
+    void                        OnFrame                (shared_str id,float period, float duration);
+    void                        Render                ();
 
-	shared_str 					AppendDef			(CEnvironment& environment, CInifile* pIni, CInifile* thunderbolts, LPCSTR sect);
+    shared_str                     AppendDef            (CEnvironment& environment, CInifile* pIni, CInifile* thunderbolts, LPCSTR sect);
 };
 
 #endif //ThunderboltH

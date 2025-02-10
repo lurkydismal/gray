@@ -30,7 +30,7 @@
 #define MX_WEIGHT_AREA_AVG      4
 #define MX_WEIGHT_RAWNORMALS    5
 
-#define EDGE_BASE_ERROR		1.f
+#define EDGE_BASE_ERROR        1.f
 
 class MxStdSlim
 {
@@ -61,7 +61,7 @@ public:
 
     MxStdModel& model() { return *m; }
 public:
-	void (*contraction_callback)(const MxPairContraction&, float, void*);
+    void (*contraction_callback)(const MxPairContraction&, float, void*);
 };
 
 // MXSTDSLIM_INCLUDED

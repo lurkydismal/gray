@@ -3,12 +3,12 @@
 class CBlender_gtao : public IBlender  
 {
 public:
-	virtual		LPCSTR		getComment()	{ return "INTERNAL: ground-truth based ambient occlusion";	}
-	virtual		BOOL		canBeDetailed()	{ return FALSE;	}
-	virtual		BOOL		canBeLMAPped()	{ return FALSE;	}
+    virtual        LPCSTR        getComment()    { return "INTERNAL: ground-truth based ambient occlusion";    }
+    virtual        BOOL        canBeDetailed()    { return FALSE;    }
+    virtual        BOOL        canBeLMAPped()    { return FALSE;    }
 
-	virtual		void		Compile			(CBlender_Compile& C);
+    virtual        void        Compile            (CBlender_Compile& C);
 
-	CBlender_gtao();
-	virtual ~CBlender_gtao();
+    CBlender_gtao();
+    virtual ~CBlender_gtao();
 };

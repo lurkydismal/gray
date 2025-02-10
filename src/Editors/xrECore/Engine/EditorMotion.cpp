@@ -2,10 +2,10 @@
 #include "../../xrEngine/envelope.h"
 #include "../../xrEngine/motion.h"
 
-#define EOBJ_OMOTION   			0x1100
-#define EOBJ_SMOTION   			0x1200
-#define EOBJ_OMOTION_VERSION   	0x0005
-#define EOBJ_SMOTION_VERSION   	0x0007
+#define EOBJ_OMOTION               0x1100
+#define EOBJ_SMOTION               0x1200
+#define EOBJ_OMOTION_VERSION       0x0005
+#define EOBJ_SMOTION_VERSION       0x0007
 
 CSMotion::CSMotion() :CCustomMotion()
 {
@@ -54,7 +54,7 @@ void CSMotion::add_empty_motion(shared_str const& bone_id)
 {
     VERIFY(!FindBoneMotion(bone_id));
 
-    st_BoneMotion			motion;
+    st_BoneMotion            motion;
 
     motion.SetName(bone_id.c_str());
     // flRKeyAbsent = (1<<1),
@@ -62,7 +62,7 @@ void CSMotion::add_empty_motion(shared_str const& bone_id)
 
     for (int ch = 0; ch < ctMaxChannel; ch++) {
         motion.envs[ch] = new CEnvelope();
-        //		motion.envs[ch];
+        //        motion.envs[ch];
     }
 
     bone_mots.push_back(motion);
@@ -109,7 +109,7 @@ void CSMotion::WorldRotate(int boneId, float h, float p, float b)
 }
 
 void CSMotion::SaveMotion(const char* buf) {
-    CMemoryWriter	F;
+    CMemoryWriter    F;
     F.open_chunk(EOBJ_SMOTION);
     Save(F);
     F.close_chunk();
@@ -119,7 +119,7 @@ void CSMotion::SaveMotion(const char* buf) {
 
 bool CSMotion::LoadMotion(const char* buf)
 {
-    destructor<IReader>	F(FS.r_open(buf));
+    destructor<IReader>    F(FS.r_open(buf));
     R_ASSERT(F().find_chunk(EOBJ_SMOTION));
     return Load(F());
 }
@@ -163,7 +163,7 @@ bool CSMotion::Load(IReader& F)
         fFalloff = F.r_float();
         fPower = F.r_float();
         bone_mots.resize(F.r_u32());
-        string64	temp_buf;
+        string64    temp_buf;
         for (BoneMotionIt bm_it = bone_mots.begin(); bm_it != bone_mots.end(); bm_it++) {
             bm_it->SetName(itoa(int(bm_it - bone_mots.begin()), temp_buf, 10));
             bm_it->m_Flags.assign((u8)F.r_u32());
@@ -182,7 +182,7 @@ bool CSMotion::Load(IReader& F)
             fFalloff = F.r_float();
             fPower = F.r_float();
             bone_mots.resize(F.r_u32());
-            string64 	buf;
+            string64     buf;
             for (BoneMotionIt bm_it = bone_mots.begin(); bm_it != bone_mots.end(); bm_it++) {
                 F.r_stringZ(buf, sizeof(buf));
                 bm_it->SetName(buf);
@@ -203,7 +203,7 @@ bool CSMotion::Load(IReader& F)
                 fFalloff = F.r_float();
                 fPower = F.r_float();
                 bone_mots.resize(F.r_u16());
-                string64 	buf;
+                string64     buf;
                 for (BoneMotionIt bm_it = bone_mots.begin(); bm_it != bone_mots.end(); bm_it++) {
                     F.r_stringZ(buf, sizeof(buf));
                     bm_it->SetName(buf);

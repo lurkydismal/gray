@@ -2,14 +2,14 @@
 
 class CHudInitializer {
 public:
-	CHudInitializer(bool);
-	~CHudInitializer();
+    CHudInitializer(bool);
+    ~CHudInitializer();
 
-	void SetHudMode();
-	void SetDefaultMode();
+    void SetHudMode();
+    void SetDefaultMode();
 private:
-	bool b_auto_setup;
-	Fmatrix mView_saved;
-	Fmatrix mProject_saved;
-	Fmatrix mFullTransform_saved;
+    bool b_auto_setup;
+    Fmatrix mView_saved;
+    Fmatrix mProject_saved;
+    Fmatrix mFullTransform_saved;
 };

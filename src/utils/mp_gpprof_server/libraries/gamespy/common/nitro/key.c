@@ -60,17 +60,17 @@ const KeyInformation * KeyRead(void)
 
 void WaitForA(void)
 {
-	while(1)
-	{
-		SVC_WaitVBlankIntr();
-		KeyRead();
-		if(KEY_A_PRESSED(&KeyInfo))
-			break;
-	}
+    while(1)
+    {
+        SVC_WaitVBlankIntr();
+        KeyRead();
+        if(KEY_A_PRESSED(&KeyInfo))
+            break;
+    }
 }
 
 void KeyInit(void)
 {
-	// empty call of key input information acquisition (pushing the A button in IPL)
-	KeyRead();
+    // empty call of key input information acquisition (pushing the A button in IPL)
+    KeyRead();
 }

@@ -24,7 +24,7 @@ public:
     //
     Mat2() { *this = 0.0; }
     Mat2(double a, double b, double c, double d)
-	{ row[0][0]=a; row[0][1]=b; row[1][0]=c; row[1][1]=d; }
+    { row[0][0]=a; row[0][1]=b; row[1][0]=c; row[1][1]=d; }
     Mat2(const Vec2 &r0,const Vec2 &r1) { row[0]=r0; row[1]=r1; }
     Mat2(const Mat2 &m) { *this = m; }
 
@@ -63,7 +63,7 @@ public:
     //
     static Mat2 I();
     static Mat2 outer_product(const Vec2 &u, const Vec2 &v)
-    	{ return Mat2(u[0]*v[0], u[0]*v[1],   u[1]*v[0], u[1]*v[1]); }
+        { return Mat2(u[0]*v[0], u[0]*v[1],   u[1]*v[0], u[1]*v[1]); }
     static Mat2 outer_product(const Vec2 &u) { return outer_product(u,u); }
 
     Mat2 &diag(double d);
@@ -76,22 +76,22 @@ public:
 //
 
 inline Mat2& Mat2::operator=(const Mat2& m)
-	{ row[0]=m[0];  row[1]=m[1];  return *this; }
+    { row[0]=m[0];  row[1]=m[1];  return *this; }
 
 inline Mat2& Mat2::operator=(double s)
-	{ row[0]=s;  row[1]=s;  return *this; }
+    { row[0]=s;  row[1]=s;  return *this; }
 
 inline Mat2& Mat2::operator+=(const Mat2& m)
-	{ row[0] += m.row[0]; row[1] += m.row[1];  return *this;}
+    { row[0] += m.row[0]; row[1] += m.row[1];  return *this;}
 
 inline Mat2& Mat2::operator-=(const Mat2& m)
-	{ row[0] -= m.row[0]; row[1] -= m.row[1];  return *this; }
+    { row[0] -= m.row[0]; row[1] -= m.row[1];  return *this; }
 
 inline Mat2& Mat2::operator*=(double s)
-	{ row[0] *= s; row[1] *= s;  return *this; }
+    { row[0] *= s; row[1] *= s;  return *this; }
 
 inline Mat2& Mat2::operator/=(double s)
-	{ row[0] /= s; row[1] /= s;  return *this; }
+    { row[0] /= s; row[1] /= s;  return *this; }
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -99,32 +99,32 @@ inline Mat2& Mat2::operator/=(double s)
 //
 
 inline Mat2 operator+(const Mat2 &n, const Mat2 &m)
-	{ return Mat2(n[0]+m[0], n[1]+m[1]); }
+    { return Mat2(n[0]+m[0], n[1]+m[1]); }
 
 inline Mat2 operator-(const Mat2 &n, const Mat2 &m)
-	{ return Mat2(n[0]-m[0], n[1]-m[1]); }
+    { return Mat2(n[0]-m[0], n[1]-m[1]); }
 
 inline Mat2 operator-(const Mat2 &m)
-	{ return Mat2(-m[0], -m[1]); }
+    { return Mat2(-m[0], -m[1]); }
 
 inline Mat2 operator*(double s, const Mat2 &m)
-	{ return Mat2(m[0]*s, m[1]*s); }
+    { return Mat2(m[0]*s, m[1]*s); }
 inline Mat2 operator*(const Mat2 &m, double s)
-	{ return s*m; }
+    { return s*m; }
 
 inline Mat2 operator/(const Mat2 &m, double s)
-	{ return Mat2(m[0]/s, m[1]/s); }
+    { return Mat2(m[0]/s, m[1]/s); }
 
 inline Vec2 operator*(const Mat2 &m, const Vec2 &v)
-	{ return Vec2(m[0]*v, m[1]*v); }
+    { return Vec2(m[0]*v, m[1]*v); }
 
 extern Mat2 operator*(const Mat2 &n, const Mat2 &m);
 /*
 inline std::ostream &operator<<(std::ostream &out, const Mat2& M)
-	{ return out << M[0] << std::endl  << M[1]; }
+    { return out << M[0] << std::endl  << M[1]; }
 
 inline std::istream &operator>>(std::istream &in, Mat2& M)
-	{ return in >> M[0] >> M[1]; }
+    { return in >> M[0] >> M[1]; }
 */
 ////////////////////////////////////////////////////////////////////////
 //
@@ -132,16 +132,16 @@ inline std::istream &operator>>(std::istream &in, Mat2& M)
 //
 
 inline double det(const Mat2 &m)
-	{ return m(0,0)*m(1,1) - m(0,1)*m(1,0); }
+    { return m(0,0)*m(1,1) - m(0,1)*m(1,0); }
 
 inline double trace(const Mat2 &m)
-	{ return m(0,0) + m(1,1); }
+    { return m(0,0) + m(1,1); }
 
 inline Mat2 transpose(const Mat2 &m)
-	{ return Mat2(m.col(0), m.col(1)); }
+    { return Mat2(m.col(0), m.col(1)); }
 
 inline Mat2 adjoint(const Mat2 &m)
-	{ return Mat2(perp(m[1]), -perp(m[0])); }
+    { return Mat2(perp(m[1]), -perp(m[0])); }
 
 extern double invert(Mat2 &m_inv, const Mat2 &m);
 

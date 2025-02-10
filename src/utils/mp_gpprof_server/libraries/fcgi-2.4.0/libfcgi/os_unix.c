@@ -67,8 +67,8 @@ static const char rcsid[] = "$Id: os_unix.c,v 1.37 2002/03/05 19:14:49 robs Exp 
  * This structure holds an entry for each oustanding async I/O operation.
  */
 typedef struct {
-    OS_AsyncProc procPtr;	    /* callout completion procedure */
-    ClientData clientData;	    /* caller private data */
+    OS_AsyncProc procPtr;        /* callout completion procedure */
+    ClientData clientData;        /* caller private data */
     int fd;
     int len;
     int offset;
@@ -156,10 +156,10 @@ static void OS_InstallSignalHandlers(int force)
  *            future to setup the multi-threaded environment.
  *
  * Results:
- *	Returns 0 if success, -1 if not.
+ *    Returns 0 if success, -1 if not.
  *
  * Side effects:
- *	Async I/O table allocated and initialized.
+ *    Async I/O table allocated and initialized.
  *
  *--------------------------------------------------------------
  */
@@ -193,13 +193,13 @@ int OS_LibInit(int stdioFds[3])
  *
  * OS_LibShutdown --
  *
- *	Shutdown the OS library.
+ *    Shutdown the OS library.
  *
  * Results:
- *	None.
+ *    None.
  *
  * Side effects:
- *	Memory freed, fds closed.
+ *    Memory freed, fds closed.
  *
  *--------------------------------------------------------------
  */
@@ -261,8 +261,8 @@ static int OS_BuildSockAddrUn(const char *bindPath,
     return 0;
 }
 union SockAddrUnion {
-    struct  sockaddr_un	unixVariant;
-    struct  sockaddr_in	inetVariant;
+    struct  sockaddr_un    unixVariant;
+    struct  sockaddr_in    inetVariant;
 };
 
 /*
@@ -286,7 +286,7 @@ int OS_CreateLocalIpcFd(const char *bindPath, int backlog)
 {
     int listenSock, servLen;
     union   SockAddrUnion sa;  
-    int	    tcp = FALSE;
+    int        tcp = FALSE;
     unsigned long tcp_ia = 0;
     char    *tp;
     short   port = 0;
@@ -294,47 +294,47 @@ int OS_CreateLocalIpcFd(const char *bindPath, int backlog)
 
     strcpy(host, bindPath);
     if((tp = strchr(host, ':')) != 0) {
-	*tp++ = 0;
-	if((port = atoi(tp)) == 0) {
-	    *--tp = ':';
-	 } else {
-	    tcp = TRUE;
-	 }
+    *tp++ = 0;
+    if((port = atoi(tp)) == 0) {
+        *--tp = ':';
+     } else {
+        tcp = TRUE;
+     }
     }
     if(tcp) {
       if (!*host || !strcmp(host,"*")) {
-	tcp_ia = htonl(INADDR_ANY);
+    tcp_ia = htonl(INADDR_ANY);
       } else {
-	tcp_ia = inet_addr(host);
-	if (tcp_ia == INADDR_NONE) {
-	  struct hostent * hep;
-	  hep = gethostbyname(host);
-	  if ((!hep) || (hep->h_addrtype != AF_INET || !hep->h_addr_list[0])) {
-	    fprintf(stderr, "Cannot resolve host name %s -- exiting!\n", host);
-	    exit(1);
-	  }
-	  if (hep->h_addr_list[1]) {
-	    fprintf(stderr, "Host %s has multiple addresses ---\n", host);
-	    fprintf(stderr, "you must choose one explicitly!!!\n");
-	    exit(1);
-	  }
-	  tcp_ia = ((struct in_addr *) (hep->h_addr))->s_addr;
-	}
+    tcp_ia = inet_addr(host);
+    if (tcp_ia == INADDR_NONE) {
+      struct hostent * hep;
+      hep = gethostbyname(host);
+      if ((!hep) || (hep->h_addrtype != AF_INET || !hep->h_addr_list[0])) {
+        fprintf(stderr, "Cannot resolve host name %s -- exiting!\n", host);
+        exit(1);
+      }
+      if (hep->h_addr_list[1]) {
+        fprintf(stderr, "Host %s has multiple addresses ---\n", host);
+        fprintf(stderr, "you must choose one explicitly!!!\n");
+        exit(1);
+      }
+      tcp_ia = ((struct in_addr *) (hep->h_addr))->s_addr;
+    }
       }
     }
 
     if(tcp) {
-	listenSock = socket(AF_INET, SOCK_STREAM, 0);
+    listenSock = socket(AF_INET, SOCK_STREAM, 0);
         if(listenSock >= 0) {
             int flag = 1;
             if(setsockopt(listenSock, SOL_SOCKET, SO_REUSEADDR,
                           (char *) &flag, sizeof(flag)) < 0) {
                 fprintf(stderr, "Can't set SO_REUSEADDR.\n");
-	        exit(1001);
-	    }
-	}
+            exit(1001);
+        }
+    }
     } else {
-	listenSock = socket(AF_UNIX, SOCK_STREAM, 0);
+    listenSock = socket(AF_UNIX, SOCK_STREAM, 0);
     }
     if(listenSock < 0) {
         return -1;
@@ -344,21 +344,21 @@ int OS_CreateLocalIpcFd(const char *bindPath, int backlog)
      * Bind the listening socket.
      */
     if(tcp) {
-	memset((char *) &sa.inetVariant, 0, sizeof(sa.inetVariant));
-	sa.inetVariant.sin_family = AF_INET;
-	sa.inetVariant.sin_addr.s_addr = tcp_ia;
-	sa.inetVariant.sin_port = htons(port);
-	servLen = sizeof(sa.inetVariant);
+    memset((char *) &sa.inetVariant, 0, sizeof(sa.inetVariant));
+    sa.inetVariant.sin_family = AF_INET;
+    sa.inetVariant.sin_addr.s_addr = tcp_ia;
+    sa.inetVariant.sin_port = htons(port);
+    servLen = sizeof(sa.inetVariant);
     } else {
-	unlink(bindPath);
-	if(OS_BuildSockAddrUn(bindPath, &sa.unixVariant, &servLen)) {
-	    fprintf(stderr, "Listening socket's path name is too long.\n");
-	    exit(1000);
-	}
+    unlink(bindPath);
+    if(OS_BuildSockAddrUn(bindPath, &sa.unixVariant, &servLen)) {
+        fprintf(stderr, "Listening socket's path name is too long.\n");
+        exit(1000);
+    }
     }
     if(bind(listenSock, (struct sockaddr *) &sa.unixVariant, servLen) < 0
        || listen(listenSock, backlog) < 0) {
-	perror("bind/listen");
+    perror("bind/listen");
         exit(errno);
     }
 
@@ -370,7 +370,7 @@ int OS_CreateLocalIpcFd(const char *bindPath, int backlog)
  *
  * OS_FcgiConnect --
  *
- *	Create the socket and connect to the remote application if
+ *    Create the socket and connect to the remote application if
  *      possible.
  *
  *      This was lifted from the cgi-fcgi application and was abstracted
@@ -393,34 +393,34 @@ int OS_FcgiConnect(char *bindPath)
     char    *tp;
     char    host[MAXPATHLEN];
     short   port = 0;
-    int	    tcp = FALSE;
+    int        tcp = FALSE;
 
     strcpy(host, bindPath);
     if((tp = strchr(host, ':')) != 0) {
-	*tp++ = 0;
-	if((port = atoi(tp)) == 0) {
-	    *--tp = ':';
-	 } else {
-	    tcp = TRUE;
-	 }
+    *tp++ = 0;
+    if((port = atoi(tp)) == 0) {
+        *--tp = ':';
+     } else {
+        tcp = TRUE;
+     }
     }
     if(tcp == TRUE) {
-	struct	hostent	*hp;
-	if((hp = gethostbyname((*host ? host : "localhost"))) == NULL) {
-	    fprintf(stderr, "Unknown host: %s\n", bindPath);
-	    exit(1000);
-	}
-	sa.inetVariant.sin_family = AF_INET;
-	memcpy(&sa.inetVariant.sin_addr, hp->h_addr, hp->h_length);
-	sa.inetVariant.sin_port = htons(port);
-	servLen = sizeof(sa.inetVariant);
-	resultSock = socket(AF_INET, SOCK_STREAM, 0);
+    struct    hostent    *hp;
+    if((hp = gethostbyname((*host ? host : "localhost"))) == NULL) {
+        fprintf(stderr, "Unknown host: %s\n", bindPath);
+        exit(1000);
+    }
+    sa.inetVariant.sin_family = AF_INET;
+    memcpy(&sa.inetVariant.sin_addr, hp->h_addr, hp->h_length);
+    sa.inetVariant.sin_port = htons(port);
+    servLen = sizeof(sa.inetVariant);
+    resultSock = socket(AF_INET, SOCK_STREAM, 0);
     } else {
-	if(OS_BuildSockAddrUn(bindPath, &sa.unixVariant, &servLen)) {
-	    fprintf(stderr, "Listening socket's path name is too long.\n");
-	    exit(1000);
-	}
-	resultSock = socket(AF_UNIX, SOCK_STREAM, 0);
+    if(OS_BuildSockAddrUn(bindPath, &sa.unixVariant, &servLen)) {
+        fprintf(stderr, "Listening socket's path name is too long.\n");
+        exit(1000);
+    }
+    resultSock = socket(AF_UNIX, SOCK_STREAM, 0);
     }
 
     ASSERT(resultSock >= 0);
@@ -443,14 +443,14 @@ int OS_FcgiConnect(char *bindPath)
  *
  * OS_Read --
  *
- *	Pass through to the unix read function.
+ *    Pass through to the unix read function.
  *
  * Results:
- *	Returns number of byes read, 0, or -1 failure: errno
+ *    Returns number of byes read, 0, or -1 failure: errno
  *      contains actual error.
  *
  * Side effects:
- *	None.
+ *    None.
  *
  *--------------------------------------------------------------
  */
@@ -465,14 +465,14 @@ int OS_Read(int fd, char * buf, size_t len)
  *
  * OS_Write --
  *
- *	Pass through to unix write function.
+ *    Pass through to unix write function.
  *
  * Results:
- *	Returns number of byes read, 0, or -1 failure: errno
+ *    Returns number of byes read, 0, or -1 failure: errno
  *      contains actual error.
  *
  * Side effects:
- *	none.
+ *    none.
  *
  *--------------------------------------------------------------
  */
@@ -487,7 +487,7 @@ int OS_Write(int fd, char * buf, size_t len)
  *
  * OS_SpawnChild --
  *
- *	Spawns a new FastCGI listener process.
+ *    Spawns a new FastCGI listener process.
  *
  * Results:
  *      0 if success, -1 if error.
@@ -528,21 +528,21 @@ int OS_SpawnChild(char *appPath, int listenFd)
             close(listenFd);
         }
 
-	close(STDOUT_FILENO);
-	close(STDERR_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
 
         /*
-	 * We're a child.  Exec the application.
+     * We're a child.  Exec the application.
          *
          * XXX: entire environment passes through
-	 */
-	execl(appPath, appPath, NULL);
-	/*
-	 * XXX: Can't do this as we've already closed STDERR!!!
-	 *
-	 * perror("exec");
-	 */
-	exit(errno);
+     */
+    execl(appPath, appPath, NULL);
+    /*
+     * XXX: Can't do this as we've already closed STDERR!!!
+     *
+     * perror("exec");
+     */
+    exit(errno);
     }
     return 0;
 }
@@ -552,18 +552,18 @@ int OS_SpawnChild(char *appPath, int listenFd)
  *
  * OS_AsyncReadStdin --
  *
- *	This initiates an asynchronous read on the standard
- *	input handle.
+ *    This initiates an asynchronous read on the standard
+ *    input handle.
  *
  *      The abstraction is necessary because Windows NT does not
  *      have a clean way of "select"ing a file descriptor for
  *      I/O.
  *
  * Results:
- *	-1 if error, 0 otherwise.
+ *    -1 if error, 0 otherwise.
  *
  * Side effects:
- *	Asynchronous bit is set in the readfd variable and
+ *    Asynchronous bit is set in the readfd variable and
  *      request is enqueued.
  *
  *--------------------------------------------------------------
@@ -608,27 +608,27 @@ static void GrowAsyncTable(void)
  *
  * OS_AsyncRead --
  *
- *	This initiates an asynchronous read on the file
- *	handle which may be a socket or named pipe.
+ *    This initiates an asynchronous read on the file
+ *    handle which may be a socket or named pipe.
  *
- *	We also must save the ProcPtr and ClientData, so later
- *	when the io completes, we know who to call.
+ *    We also must save the ProcPtr and ClientData, so later
+ *    when the io completes, we know who to call.
  *
- *	We don't look at any results here (the ReadFile may
- *	return data if it is cached) but do all completion
- *	processing in OS_Select when we get the io completion
- *	port done notifications.  Then we call the callback.
+ *    We don't look at any results here (the ReadFile may
+ *    return data if it is cached) but do all completion
+ *    processing in OS_Select when we get the io completion
+ *    port done notifications.  Then we call the callback.
  *
  * Results:
- *	-1 if error, 0 otherwise.
+ *    -1 if error, 0 otherwise.
  *
  * Side effects:
- *	Asynchronous I/O operation is queued for completion.
+ *    Asynchronous I/O operation is queued for completion.
  *
  *--------------------------------------------------------------
  */
 int OS_AsyncRead(int fd, int offset, void *buf, int len,
-		 OS_AsyncProc procPtr, ClientData clientData)
+         OS_AsyncProc procPtr, ClientData clientData)
 {
     int index = AIO_RD_IX(fd);
 
@@ -659,26 +659,26 @@ int OS_AsyncRead(int fd, int offset, void *buf, int len,
  *
  * OS_AsyncWrite --
  *
- *	This initiates an asynchronous write on the "fake" file
- *	descriptor (which may be a file, socket, or named pipe).
- *	We also must save the ProcPtr and ClientData, so later
- *	when the io completes, we know who to call.
+ *    This initiates an asynchronous write on the "fake" file
+ *    descriptor (which may be a file, socket, or named pipe).
+ *    We also must save the ProcPtr and ClientData, so later
+ *    when the io completes, we know who to call.
  *
- *	We don't look at any results here (the WriteFile generally
- *	completes immediately) but do all completion processing
- *	in OS_DoIo when we get the io completion port done
- *	notifications.  Then we call the callback.
+ *    We don't look at any results here (the WriteFile generally
+ *    completes immediately) but do all completion processing
+ *    in OS_DoIo when we get the io completion port done
+ *    notifications.  Then we call the callback.
  *
  * Results:
- *	-1 if error, 0 otherwise.
+ *    -1 if error, 0 otherwise.
  *
  * Side effects:
- *	Asynchronous I/O operation is queued for completion.
+ *    Asynchronous I/O operation is queued for completion.
  *
  *--------------------------------------------------------------
  */
 int OS_AsyncWrite(int fd, int offset, void *buf, int len,
-		  OS_AsyncProc procPtr, ClientData clientData)
+          OS_AsyncProc procPtr, ClientData clientData)
 {
     int index = AIO_WR_IX(fd);
 
@@ -708,14 +708,14 @@ int OS_AsyncWrite(int fd, int offset, void *buf, int len,
  *
  * OS_Close --
  *
- *	Closes the descriptor.  This is a pass through to the
+ *    Closes the descriptor.  This is a pass through to the
  *      Unix close.
  *
  * Results:
- *	0 for success, -1 on failure
+ *    0 for success, -1 on failure
  *
  * Side effects:
- *	None.
+ *    None.
  *
  *--------------------------------------------------------------
  */
@@ -780,12 +780,12 @@ int OS_Close(int fd)
  *
  * OS_CloseRead --
  *
- *	Cancel outstanding asynchronous reads and prevent subsequent
+ *    Cancel outstanding asynchronous reads and prevent subsequent
  *      reads from completing.
  *
  * Results:
- *	Socket or file is shutdown. Return values mimic Unix shutdown:
- *		0 success, -1 failure
+ *    Socket or file is shutdown. Return values mimic Unix shutdown:
+ *        0 success, -1 failure
  *
  *--------------------------------------------------------------
  */
@@ -804,15 +804,15 @@ int OS_CloseRead(int fd)
  *
  * OS_DoIo --
  *
- *	This function was formerly OS_Select.  It's purpose is
+ *    This function was formerly OS_Select.  It's purpose is
  *      to pull I/O completion events off the queue and dispatch
  *      them to the appropriate place.
  *
  * Results:
- *	Returns 0.
+ *    Returns 0.
  *
  * Side effects:
- *	Handlers are called.
+ *    Handlers are called.
  *
  *--------------------------------------------------------------
  */
@@ -847,25 +847,25 @@ int OS_DoIo(struct timeval *tmo)
                               NULL, tmo);
         if(selectStatus < 0) {
             exit(errno);
-	}
+    }
 
         for(fd = 0; fd <= maxFd; fd++) {
-	    /*
-	     * Build up a list of completed events.  We'll work off of
-	     * this list as opposed to looping through the read and write
-	     * fd sets since they can be affected by a callbacl routine.
-	     */
-	    if(FD_ISSET(fd, &readFdSetCpy)) {
-	        numRdPosted++;
-		FD_SET(fd, &readFdSetPost);
-		FD_CLR(fd, &readFdSet);
-	    }
+        /*
+         * Build up a list of completed events.  We'll work off of
+         * this list as opposed to looping through the read and write
+         * fd sets since they can be affected by a callbacl routine.
+         */
+        if(FD_ISSET(fd, &readFdSetCpy)) {
+            numRdPosted++;
+        FD_SET(fd, &readFdSetPost);
+        FD_CLR(fd, &readFdSet);
+        }
 
             if(FD_ISSET(fd, &writeFdSetCpy)) {
-	        numWrPosted++;
-	        FD_SET(fd, &writeFdSetPost);
-		FD_CLR(fd, &writeFdSet);
-	    }
+            numWrPosted++;
+            FD_SET(fd, &writeFdSetPost);
+        FD_CLR(fd, &writeFdSet);
+        }
         }
     }
 
@@ -874,43 +874,43 @@ int OS_DoIo(struct timeval *tmo)
 
     for(fd = 0; fd <= maxFd; fd++) {
         /*
-	 * Do reads and dispatch callback.
-	 */
+     * Do reads and dispatch callback.
+     */
         if(FD_ISSET(fd, &readFdSetPost)
-	   && asyncIoTable[AIO_RD_IX(fd)].inUse) {
+       && asyncIoTable[AIO_RD_IX(fd)].inUse) {
 
-	    numRdPosted--;
-	    FD_CLR(fd, &readFdSetPost);
-	    aioPtr = &asyncIoTable[AIO_RD_IX(fd)];
+        numRdPosted--;
+        FD_CLR(fd, &readFdSetPost);
+        aioPtr = &asyncIoTable[AIO_RD_IX(fd)];
 
-	    len = read(aioPtr->fd, aioPtr->buf, aioPtr->len);
+        len = read(aioPtr->fd, aioPtr->buf, aioPtr->len);
 
-	    procPtr = aioPtr->procPtr;
-	    aioPtr->procPtr = NULL;
-	    clientData = aioPtr->clientData;
-	    aioPtr->inUse = 0;
+        procPtr = aioPtr->procPtr;
+        aioPtr->procPtr = NULL;
+        clientData = aioPtr->clientData;
+        aioPtr->inUse = 0;
 
-	    (*procPtr)(clientData, len);
-	}
+        (*procPtr)(clientData, len);
+    }
 
         /*
-	 * Do writes and dispatch callback.
-	 */
+     * Do writes and dispatch callback.
+     */
         if(FD_ISSET(fd, &writeFdSetPost) &&
            asyncIoTable[AIO_WR_IX(fd)].inUse) {
 
-	    numWrPosted--;
-	    FD_CLR(fd, &writeFdSetPost);
-	    aioPtr = &asyncIoTable[AIO_WR_IX(fd)];
+        numWrPosted--;
+        FD_CLR(fd, &writeFdSetPost);
+        aioPtr = &asyncIoTable[AIO_WR_IX(fd)];
 
-	    len = write(aioPtr->fd, aioPtr->buf, aioPtr->len);
+        len = write(aioPtr->fd, aioPtr->buf, aioPtr->len);
 
-	    procPtr = aioPtr->procPtr;
-	    aioPtr->procPtr = NULL;
-	    clientData = aioPtr->clientData;
-	    aioPtr->inUse = 0;
-	    (*procPtr)(clientData, len);
-	}
+        procPtr = aioPtr->procPtr;
+        aioPtr->procPtr = NULL;
+        clientData = aioPtr->clientData;
+        aioPtr->inUse = 0;
+        (*procPtr)(clientData, len);
+    }
     }
     return 0;
 }
@@ -937,7 +937,7 @@ static char * str_dup(const char * str)
  *      Checks if a client address is in a list of allowed addresses
  *
  * Results:
- *	TRUE if address list is empty or client address is present
+ *    TRUE if address list is empty or client address is present
  *      in the list, FALSE otherwise.
  *
  *----------------------------------------------------------------------
@@ -975,7 +975,7 @@ static int ClientAddrOK(struct sockaddr_in *saPtr, const char *clientList)
  *
  *      On platforms that implement concurrent calls to accept
  *      on a shared listening ipcFd, returns 0.  On other platforms,
- *	acquires an exclusive lock across all processes sharing a
+ *    acquires an exclusive lock across all processes sharing a
  *      listening ipcFd, blocking until the lock has been acquired.
  *
  * Results:
@@ -1016,7 +1016,7 @@ static int AcquireLock(int sock, int fail_on_intr)
  *
  *      On platforms that implement concurrent calls to accept
  *      on a shared listening ipcFd, does nothing.  On other platforms,
- *	releases an exclusive lock acquired by AcquireLock.
+ *    releases an exclusive lock acquired by AcquireLock.
  *
  * Results:
  *      0 for successful call, -1 in case of system error (fatal).
@@ -1130,7 +1130,7 @@ static int is_af_unix_keeper(const int fd)
  *
  * OS_Accept --
  *
- *	Accepts a new FastCGI connection.  This routine knows whether
+ *    Accepts a new FastCGI connection.  This routine knows whether
  *      we're dealing with TCP based sockets or NT Named Pipes for IPC.
  *
  * Results:
@@ -1219,7 +1219,7 @@ int OS_Accept(int listen_sock, int fail_on_intr, const char *webServerAddrs)
  *
  * OS_IpcClose
  *
- *	OS IPC routine to close an IPC connection.
+ *    OS IPC routine to close an IPC connection.
  *
  * Results:
  *
@@ -1239,7 +1239,7 @@ int OS_IpcClose(int ipcFd)
  *
  * OS_IsFcgi --
  *
- *	Determines whether this process is a FastCGI process or not.
+ *    Determines whether this process is a FastCGI process or not.
  *
  * Results:
  *      Returns 1 if FastCGI, 0 if not.
@@ -1251,7 +1251,7 @@ int OS_IpcClose(int ipcFd)
  */
 int OS_IsFcgi(int sock)
 {
-	union {
+    union {
         struct sockaddr_in in;
         struct sockaddr_un un;
     } sa;

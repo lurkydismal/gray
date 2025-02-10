@@ -1,15 +1,15 @@
 #pragma once
 
 class XREUI_API CUIHelp:
-	public IEditorWnd
+    public IEditorWnd
 {
 
 private:
-	CUIHelp();
-	virtual void Draw() override;
+    CUIHelp();
+    virtual void Draw() override;
 
 public:
-	static CUIHelp& Instance();
-	
-	void Show();
+    static CUIHelp& Instance();
+    
+    void Show();
 };

@@ -1,27 +1,27 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: object_factory.cpp
-//	Created 	: 27.05.2004
-//  Modified 	: 27.05.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Object factory
+//    Module         : object_factory.cpp
+//    Created     : 27.05.2004
+//  Modified     : 27.05.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Object factory
 ////////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
 #include "object_factory.h"
 #include "object_broker.h"
 
-CObjectFactory::CObjectFactory	()
+CObjectFactory::CObjectFactory    ()
 {
-	m_actual					= false;
-	register_classes			();
+    m_actual                    = false;
+    register_classes            ();
 }
 
-CObjectFactory::~CObjectFactory	()
+CObjectFactory::~CObjectFactory    ()
 {
-	delete_data					(m_clsids);
+    delete_data                    (m_clsids);
 }
 
-void CObjectFactory::init		()
+void CObjectFactory::init        ()
 {
-	register_script_classes		();
+    register_script_classes        ();
 }

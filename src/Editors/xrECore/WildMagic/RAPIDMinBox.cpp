@@ -79,11 +79,11 @@ void compute_moments(moment *M, Fvector* vertices, int num_tris)
     for(i=0; i<num_tris; i++){
         compute_moment(M[i], vertices[i*3+0], vertices[i*3+1], vertices[i*3+2]);
         if (M[i].A == 0.0f){
-    	    zero = 1;
-	    }else{
-	        if (Amin == 0.0f) Amin = M[i].A;
-    	    else if (M[i].A < Amin) Amin = M[i].A;
-	    }
+            zero = 1;
+        }else{
+            if (Amin == 0.0f) Amin = M[i].A;
+            else if (M[i].A < Amin) Amin = M[i].A;
+        }
     }
 
     if (zero){
@@ -94,8 +94,8 @@ void compute_moments(moment *M, Fvector* vertices, int num_tris)
         if (Amin == 0.0f) Amin = 1.0f;
 
         for(i=0; i<num_tris; i++){
-    	    if (M[i].A == 0.0f) M[i].A = Amin;
-	    }
+            if (M[i].A == 0.0f) M[i].A = Amin;
+        }
     }
 }
 
@@ -148,124 +148,124 @@ void covariance_from_accum(Fmatrix33& C, accum &a)
 // not a full sort -- just makes column 1 the largest
 int eigen_and_sort1(Fmatrix33& evecs, Fmatrix33& cov)
 {
-	float t;
-	Fvector evals;
-	int n;
+    float t;
+    Fvector evals;
+    int n;
 
-	n = evecs.Meigen( evals, cov);
+    n = evecs.Meigen( evals, cov);
 
-	if (evals.z > evals.x){
-		if (evals.z > evals.y){
-			// 2 is largest, swap with column 0
-			t = evecs.m[0][2];
-			evecs.m[0][2] = evecs.m[0][0];
-			evecs.m[0][0] = t;
-			t = evecs.m[1][2];
-			evecs.m[1][2] = evecs.m[1][0];
-			evecs.m[1][0] = t;
-			t = evecs.m[2][2];
-			evecs.m[2][2] = evecs.m[2][0];
-			evecs.m[2][0] = t;
-		}else{
-			// 1 is largest, swap with column 0
-			t = evecs.m[0][1];
-			evecs.m[0][1] = evecs.m[0][0];
-			evecs.m[0][0] = t;
-			t = evecs.m[1][1];
-			evecs.m[1][1] = evecs.m[1][0];
-			evecs.m[1][0] = t;
-			t = evecs.m[2][1];
-			evecs.m[2][1] = evecs.m[2][0];
-			evecs.m[2][0] = t;
-		}
-	}else{
-		if (evals.x > evals.y){
-			// 0 is largest, do nothing
-		}else{
-  			// 1 is largest
-			t = evecs.m[0][1];
-			evecs.m[0][1] = evecs.m[0][0];
-			evecs.m[0][0] = t;
-			t = evecs.m[1][1];
-			evecs.m[1][1] = evecs.m[1][0];
-			evecs.m[1][0] = t;
-			t = evecs.m[2][1];
-			evecs.m[2][1] = evecs.m[2][0];
-			evecs.m[2][0] = t;
-		}
-	}
+    if (evals.z > evals.x){
+        if (evals.z > evals.y){
+            // 2 is largest, swap with column 0
+            t = evecs.m[0][2];
+            evecs.m[0][2] = evecs.m[0][0];
+            evecs.m[0][0] = t;
+            t = evecs.m[1][2];
+            evecs.m[1][2] = evecs.m[1][0];
+            evecs.m[1][0] = t;
+            t = evecs.m[2][2];
+            evecs.m[2][2] = evecs.m[2][0];
+            evecs.m[2][0] = t;
+        }else{
+            // 1 is largest, swap with column 0
+            t = evecs.m[0][1];
+            evecs.m[0][1] = evecs.m[0][0];
+            evecs.m[0][0] = t;
+            t = evecs.m[1][1];
+            evecs.m[1][1] = evecs.m[1][0];
+            evecs.m[1][0] = t;
+            t = evecs.m[2][1];
+            evecs.m[2][1] = evecs.m[2][0];
+            evecs.m[2][0] = t;
+        }
+    }else{
+        if (evals.x > evals.y){
+            // 0 is largest, do nothing
+        }else{
+              // 1 is largest
+            t = evecs.m[0][1];
+            evecs.m[0][1] = evecs.m[0][0];
+            evecs.m[0][0] = t;
+            t = evecs.m[1][1];
+            evecs.m[1][1] = evecs.m[1][0];
+            evecs.m[1][0] = t;
+            t = evecs.m[2][1];
+            evecs.m[2][1] = evecs.m[2][0];
+            evecs.m[2][0] = t;
+        }
+    }
 
-	// we are returning the number of iterations Meigen took.
-	// too many iterations means our chosen orientation is bad.
-	return n;
+    // we are returning the number of iterations Meigen took.
+    // too many iterations means our chosen orientation is bad.
+    return n;
 }
 
 void minmax(float &mn, float &mx, float v)
 {
-	if (v < mn) mn = v;
-	else if (v > mx) mx = v;
+    if (v < mn) mn = v;
+    else if (v > mx) mx = v;
 }
 
 void reaccum_moments(accum &A, int n, moment* RAPID_moment)
 {
-	clear_accum(A);
-	for(int i=0; i<n; i++)
-		accum_moment(A, RAPID_moment[i]);
+    clear_accum(A);
+    for(int i=0; i<n; i++)
+        accum_moment(A, RAPID_moment[i]);
 }
 
 BOOL RAPIDMinBox(Fobb& B, Fvector* vertices, u32 v_count)
 {
-	u32 num_tris 		= v_count/3;
+    u32 num_tris         = v_count/3;
 
-	// Determine initial orientation, mean point, and splitting axis.
-	accum 				M;
-	Fmatrix33			C;
+    // Determine initial orientation, mean point, and splitting axis.
+    accum                 M;
+    Fmatrix33            C;
     
-	moment* RAPID_moment= xr_alloc<moment>(num_tris);
-    VERIFY				(RAPID_moment);
+    moment* RAPID_moment= xr_alloc<moment>(num_tris);
+    VERIFY                (RAPID_moment);
 
-	compute_moments		(RAPID_moment, vertices, num_tris);
+    compute_moments        (RAPID_moment, vertices, num_tris);
 
-	clear_accum			(M);
-	for(u32 i=0; i<num_tris; i++)
-		accum_moment	(M, RAPID_moment[i]);
+    clear_accum            (M);
+    for(u32 i=0; i<num_tris; i++)
+        accum_moment    (M, RAPID_moment[i]);
 
-	mean_from_accum		(B.m_translate, M);
-	covariance_from_accum(C, M);
+    mean_from_accum        (B.m_translate, M);
+    covariance_from_accum(C, M);
 
-	eigen_and_sort1		(B.m_rotate, C);
+    eigen_and_sort1        (B.m_rotate, C);
     
-	// do the build
-	Fvector 			c;
-	Fvector 			minval, maxval;
-    B.m_rotate.MTxV		(c,vertices[0]);
-    minval.set			(c);
-    maxval.set			(c);
-	for(u32 i=0; i<v_count; i++){
-	    B.m_rotate.MTxV	(c,vertices[i]);
-		minmax			(minval.x, maxval.x, c.x);
-		minmax			(minval.y, maxval.y, c.y);
-		minmax			(minval.z, maxval.z, c.z);
-	}
+    // do the build
+    Fvector             c;
+    Fvector             minval, maxval;
+    B.m_rotate.MTxV        (c,vertices[0]);
+    minval.set            (c);
+    maxval.set            (c);
+    for(u32 i=0; i<v_count; i++){
+        B.m_rotate.MTxV    (c,vertices[i]);
+        minmax            (minval.x, maxval.x, c.x);
+        minmax            (minval.y, maxval.y, c.y);
+        minmax            (minval.z, maxval.z, c.z);
+    }
 
-	// With the max and min data, determine the center point and dimensions
-	// of the parent box.
-    c.add				(minval,maxval);
-    c.mul				(0.5f);
+    // With the max and min data, determine the center point and dimensions
+    // of the parent box.
+    c.add                (minval,maxval);
+    c.mul                (0.5f);
 
-	B.m_translate.x 	= c[0] * B.m_rotate.m[0][0] + c[1] * B.m_rotate.m[0][1] + c[2] * B.m_rotate.m[0][2];
-	B.m_translate.y 	= c[0] * B.m_rotate.m[1][0] + c[1] * B.m_rotate.m[1][1] + c[2] * B.m_rotate.m[1][2];
-	B.m_translate.z 	= c[0] * B.m_rotate.m[2][0] + c[1] * B.m_rotate.m[2][1] + c[2] * B.m_rotate.m[2][2];
-    B.m_halfsize.sub	(maxval,minval);
-    B.m_halfsize.mul	(0.5f);
+    B.m_translate.x     = c[0] * B.m_rotate.m[0][0] + c[1] * B.m_rotate.m[0][1] + c[2] * B.m_rotate.m[0][2];
+    B.m_translate.y     = c[0] * B.m_rotate.m[1][0] + c[1] * B.m_rotate.m[1][1] + c[2] * B.m_rotate.m[1][2];
+    B.m_translate.z     = c[0] * B.m_rotate.m[2][0] + c[1] * B.m_rotate.m[2][1] + c[2] * B.m_rotate.m[2][2];
+    B.m_halfsize.sub    (maxval,minval);
+    B.m_halfsize.mul    (0.5f);
 
-	// free the moment list
-	xr_free				(RAPID_moment);
+    // free the moment list
+    xr_free                (RAPID_moment);
 
     // need for our use (RAPID has OpenGL column<->line)
     B.m_rotate.transpose();
     
-	return TRUE;
+    return TRUE;
 }
 //------------------------------------------------------------------------------
 

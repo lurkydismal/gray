@@ -24,11 +24,11 @@ extern "C" {
 
 typedef enum 
 {
-	CDResponseMethod_NEWAUTH, // method = 0 for normal auth
-	CDResponseMethod_REAUTH   // method = 1 for ison proof
+    CDResponseMethod_NEWAUTH, // method = 0 for normal auth
+    CDResponseMethod_REAUTH   // method = 1 for ison proof
 } CDResponseMethod;
-	
-	
+    
+    
 void gcd_compute_response(char *cdkey, char *challenge,/*out*/ char response[73], CDResponseMethod method);
 
 

@@ -67,34 +67,34 @@ ptw32_processTerminate (void)
       ptw32_thread_t * tp, * tpNext;
 
       if (ptw32_selfThreadKey != NULL)
-	{
-	  /*
-	   * Release ptw32_selfThreadKey
-	   */
-	  pthread_key_delete (ptw32_selfThreadKey);
+    {
+      /*
+       * Release ptw32_selfThreadKey
+       */
+      pthread_key_delete (ptw32_selfThreadKey);
 
-	  ptw32_selfThreadKey = NULL;
-	}
+      ptw32_selfThreadKey = NULL;
+    }
 
       if (ptw32_cleanupKey != NULL)
-	{
-	  /*
-	   * Release ptw32_cleanupKey
-	   */
-	  pthread_key_delete (ptw32_cleanupKey);
+    {
+      /*
+       * Release ptw32_cleanupKey
+       */
+      pthread_key_delete (ptw32_cleanupKey);
 
-	  ptw32_cleanupKey = NULL;
-	}
+      ptw32_cleanupKey = NULL;
+    }
 
       EnterCriticalSection (&ptw32_thread_reuse_lock);
 
       tp = ptw32_threadReuseTop;
       while (tp != PTW32_THREAD_REUSE_EMPTY)
-	{
-	  tpNext = tp->prevReuse;
-	  free (tp);
-	  tp = tpNext;
-	}
+    {
+      tpNext = tp->prevReuse;
+      free (tp);
+      tp = tpNext;
+    }
 
       LeaveCriticalSection (&ptw32_thread_reuse_lock);
 
@@ -111,4 +111,4 @@ ptw32_processTerminate (void)
       ptw32_processInitialized = PTW32_FALSE;
     }
 
-}				/* processTerminate */
+}                /* processTerminate */

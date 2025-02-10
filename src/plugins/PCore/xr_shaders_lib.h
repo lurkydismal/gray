@@ -14,15 +14,15 @@ class xr_reader;
 
 class xr_shaders_lib {
 public:
-	virtual		~xr_shaders_lib();
+    virtual        ~xr_shaders_lib();
 
-	bool		load(const char* path, const char* name);
-	void		load(xr_reader& r);
+    bool        load(const char* path, const char* name);
+    void        load(xr_reader& r);
 
-	const std::vector<std::string>&	names() const;
+    const std::vector<std::string>&    names() const;
 
 private:
-	std::vector<std::string>	m_names;
+    std::vector<std::string>    m_names;
 };
 
 inline const std::vector<std::string>& xr_shaders_lib::names() const { return m_names; }

@@ -31,21 +31,21 @@
 namespace luabind { namespace detail
 {
 
-	class class_rep;
+    class class_rep;
 
-	/*
-		contains information about a method. It contains
-		a list of all overloads of the function. If a class
-		derives from another class all methods and overloads
-		are copied into the derived class and the pointer
-		offset is applied to each copied method. The pointer
-		offset is needed because if the method is called
-		on a derived object the method needs a pointer
-		to the base class, and that typecast may need
-		an offseted pointer (if multiple inheritance is used).
-	*/
-	struct method_rep
-	{
+    /*
+        contains information about a method. It contains
+        a list of all overloads of the function. If a class
+        derives from another class all methods and overloads
+        are copied into the derived class and the pointer
+        offset is applied to each copied method. The pointer
+        offset is needed because if the method is called
+        on a derived object the method needs a pointer
+        to the base class, and that typecast may need
+        an offseted pointer (if multiple inheritance is used).
+    */
+    struct method_rep
+    {
         method_rep() = default;
         method_rep(const method_rep&) = default;
 
@@ -71,11 +71,11 @@ namespace luabind { namespace detail
             return *this;
         }
 
-		void add_overload(const overload_rep& o)
-		{
+        void add_overload(const overload_rep& o)
+        {
             auto copy = o;
             add_overload(std::move(copy));
-		}
+        }
 
         void add_overload(overload_rep&& o)
         {
@@ -92,20 +92,20 @@ namespace luabind { namespace detail
             }
         }
 
-		const vector_class<overload_rep>& overloads() const throw() { return m_overloads; }
+        const vector_class<overload_rep>& overloads() const throw() { return m_overloads; }
 
-		// this is a pointer to the string kept in class_rep::m_methods, and those strings are deleted
-		// at the end of the lua session.
-		const char* name;
+        // this is a pointer to the string kept in class_rep::m_methods, and those strings are deleted
+        // at the end of the lua session.
+        const char* name;
 
-		// the class_rep in which this method_rep is found
-		const class_rep* crep;
+        // the class_rep in which this method_rep is found
+        const class_rep* crep;
 
-	private:
-		// this have to be write protected, since each time an overload is
-		// added it has to be checked for existence. add_overload() should
-		// be used.
-		vector_class<overload_rep> m_overloads;
-	};
+    private:
+        // this have to be write protected, since each time an overload is
+        // added it has to be checked for existence. add_overload() should
+        // be used.
+        vector_class<overload_rep> m_overloads;
+    };
 
 }}

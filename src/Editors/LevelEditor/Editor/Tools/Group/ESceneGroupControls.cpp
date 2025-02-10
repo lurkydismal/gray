@@ -6,15 +6,15 @@
 
 bool  TUI_ControlGroupAdd::AfterAppendCallback(TShiftState Shift, CCustomObject* obj)
 {
-	bool result 			= false;
-    ESceneGroupTool* ot		= smart_cast<ESceneGroupTool*>(parent_tool);
+    bool result             = false;
+    ESceneGroupTool* ot        = smart_cast<ESceneGroupTool*>(parent_tool);
     if (ot->GetCurrentObject())
     {
-        CGroupObject* group	= smart_cast<CGroupObject*>(obj); R_ASSERT(group);
-        LPCSTR short_name	= ot->GetCurrentObject();
-        result 				= group->SetReference(short_name);
+        CGroupObject* group    = smart_cast<CGroupObject*>(obj); R_ASSERT(group);
+        LPCSTR short_name    = ot->GetCurrentObject();
+        result                 = group->SetReference(short_name);
         if (result){
-            string256 			namebuffer;
+            string256             namebuffer;
             Scene->GenObjectName(OBJCLASS_GROUP, namebuffer, short_name);
             group->SetName(namebuffer);
         }
@@ -23,7 +23,7 @@ bool  TUI_ControlGroupAdd::AfterAppendCallback(TShiftState Shift, CCustomObject*
 }
 bool  TUI_ControlGroupAdd::Start(TShiftState Shift)
 {
-	DefaultAddObject	(Shift,0, TAfterAppendCallback(this, &TUI_ControlGroupAdd::AfterAppendCallback));
+    DefaultAddObject    (Shift,0, TAfterAppendCallback(this, &TUI_ControlGroupAdd::AfterAppendCallback));
     return false;
 }
 void  TUI_ControlGroupAdd::Move(TShiftState _Shift)

@@ -80,4 +80,4 @@ pthread_mutexattr_destroy (pthread_mutexattr_t * attr)
     }
 
   return (result);
-}				/* pthread_mutexattr_destroy */
+}                /* pthread_mutexattr_destroy */

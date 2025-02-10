@@ -79,7 +79,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 10-21-2003  1.16.00  BED  RELEASE  Releasing to developer site.  (UNIQUE NICK AND UNICODE SUPPORT)
 10-01-2003  1.16.00  DDW  FEATURE  Added modified time checking/reporting to persistent storage
                                    NOTE: Persistent Storage callbacks modified w/ additional parameter
-                                   Prepend hostname with gamename for unique DNS names							
+                                   Prepend hostname with gamename for unique DNS names                            
 09-08-2003  1.15.11  BED  FEATURE  Added UTF-8 wrapper for UNICODE support.
 07-24-2003  1.15.10  DES  RELEASE  Releasing to developer site.
 07-18-2003  1.15.10  BED  FEATURE  Added CodeWarrior (PS2) sample project file.

@@ -72,9 +72,9 @@ inline __T *mxm_xform(__T *r, const __T *A, const __T *x, __DIM)
     const __T *a = A;
     for(unsigned int i=0; i<(unsigned int)N; i++)
     {
-	r[i] = 0.0;
-	for(unsigned int j=0; j<(unsigned int)N; j++)
-	    r[i] += (*a++) * x[j];
+    r[i] = 0.0;
+    for(unsigned int j=0; j<(unsigned int)N; j++)
+        r[i] += (*a++) * x[j];
     }
     return r;
 }
@@ -88,7 +88,7 @@ inline __T *mxm_xform(__T *r, const __T *A, const __T *x, __DIM)
 inline __T *mxm_outerprod(__T *A, const __T *u, const __T *v, __DIM)
 {
     for(unsigned int i=0; i<(unsigned int)N; i++) for(unsigned int j=0; j<(unsigned int)N; j++)
-	mxm_ref(A, i, j, N) = u[i] * v[j];
+    mxm_ref(A, i, j, N) = u[i] * v[j];
     return A;
 }
 
@@ -98,8 +98,8 @@ inline __T *mxm_mul(__T *r, const __T *a, const __T *b, __DIM)
 
     for(unsigned int i=0; i<(unsigned int)N; i++) for(unsigned int j=0; j<(unsigned int)N; j++)
     {
-	for(unsigned int k=0; k<(unsigned int)N; k++)
-	    mxm_ref(r, i, j, N) += mxm_ref(a, i, k, N) * mxm_ref(b, k, j, N);
+    for(unsigned int k=0; k<(unsigned int)N; k++)
+        mxm_ref(r, i, j, N) += mxm_ref(a, i, k, N) * mxm_ref(b, k, j, N);
     }
 
     return r;
@@ -116,9 +116,9 @@ inline ostream& mxm_write(ostream& out, const __T *a, __DIM)
 {
     for(unsigned int i=0; i<N; i++)
     {
-	for(unsigned int j=0; j<N; j++)
-	    out << mxm_ref(a, i, j, N) << " ";
-	out << endl;
+    for(unsigned int j=0; j<N; j++)
+        out << mxm_ref(a, i, j, N) << " ";
+    out << endl;
     }
 
     return out;

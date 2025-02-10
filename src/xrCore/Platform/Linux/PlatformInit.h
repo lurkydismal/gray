@@ -17,10 +17,10 @@
 #include <bits/local_lim.h>
 
 #ifdef IXR_ARM64
-#	include <arm64_neon.h>
-#	include <sse2neon/sse2neon.h>
+#    include <arm64_neon.h>
+#    include <sse2neon/sse2neon.h>
 #else
-#	include <xmmintrin.h>
+#    include <xmmintrin.h>
 #endif
 
 #define __declspec(t)

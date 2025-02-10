@@ -22,7 +22,7 @@ Free the memory used by an lwEnvelope.
 ====================================================================== */
 
 void w_free(void* p){
-	free(p);
+    free(p);
 }
 
 void lwFreeEnvelope( lwEnvelope *env )

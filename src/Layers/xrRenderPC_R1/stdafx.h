@@ -21,10 +21,10 @@
 
 #include "../xrRender/Debug/dxPixEventWrapper.h"
 
-#define		R_R1	1
-#define		R_R2	2
-#define		R_R4	4
-#define		RENDER	R_R1
+#define        R_R1    1
+#define        R_R2    2
+#define        R_R4    4
+#define        RENDER    R_R1
 
 #include "../xrRender/ResourceManager.h"
 
@@ -41,8 +41,8 @@
 #endif
 #include "../xrRender/dxRenderDeviceRender.h"
 
-#define		TEX_POINT_ATT	"internal\\internal_light_attpoint"
-#define		TEX_SPOT_ATT	"internal\\internal_light_attclip"
+#define        TEX_POINT_ATT    "internal\\internal_light_attpoint"
+#define        TEX_SPOT_ATT    "internal\\internal_light_attclip"
 
 
 #include "../xrRender/blenders/Blender.h"

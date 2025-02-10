@@ -29,75 +29,75 @@
 
 namespace luabind { namespace detail {
 
-	struct copy_pointer_to
-	{
-		template<typename T>
-		void apply(lua_State* L, const T* ptr)
-		{
-			if (ptr == 0) 
-			{
-				lua_pushnil(L);
-				return;
-			}
+    struct copy_pointer_to
+    {
+        template<typename T>
+        void apply(lua_State* L, const T* ptr)
+        {
+            if (ptr == 0) 
+            {
+                lua_pushnil(L);
+                return;
+            }
 
-			class_registry* registry = class_registry::get_registry(L);
+            class_registry* registry = class_registry::get_registry(L);
 
-			class_rep* crep = registry->find_class(LUABIND_TYPEID(T));
+            class_rep* crep = registry->find_class(LUABIND_TYPEID(T));
 
-			// if you get caught in this assert you are trying
-			// to use an unregistered type
-			assert(crep && "you are trying to use an unregistered type");
+            // if you get caught in this assert you are trying
+            // to use an unregistered type
+            assert(crep && "you are trying to use an unregistered type");
 
-			T* copied_obj = luabind_new<T>(*ptr);
+            T* copied_obj = luabind_new<T>(*ptr);
 
-			// create the struct to hold the object
-			void* obj = lua_newuserdata(L, sizeof(object_rep));
-			// we send 0 as destructor since we know it will never be called
-			new(obj) object_rep(copied_obj, crep, object_rep::owner, delete_s<T>::apply);
+            // create the struct to hold the object
+            void* obj = lua_newuserdata(L, sizeof(object_rep));
+            // we send 0 as destructor since we know it will never be called
+            new(obj) object_rep(copied_obj, crep, object_rep::owner, delete_s<T>::apply);
 
-			// set the meta table
-			detail::getref(L, crep->metatable_ref());
-			lua_setmetatable(L, -2);
-		}
-	};
+            // set the meta table
+            detail::getref(L, crep->metatable_ref());
+            lua_setmetatable(L, -2);
+        }
+    };
 
-	struct copy_reference_to
-	{
-		template<typename T>
-		void apply(lua_State* L, const T& ref)
-		{
-			class_registry* registry = class_registry::get_registry(L);
-			class_rep* crep = registry->find_class(LUABIND_TYPEID(T));
+    struct copy_reference_to
+    {
+        template<typename T>
+        void apply(lua_State* L, const T& ref)
+        {
+            class_registry* registry = class_registry::get_registry(L);
+            class_rep* crep = registry->find_class(LUABIND_TYPEID(T));
 
-			// if you get caught in this assert you are trying
-			// to use an unregistered type
-			assert(crep && "you are trying to use an unregistered type");
+            // if you get caught in this assert you are trying
+            // to use an unregistered type
+            assert(crep && "you are trying to use an unregistered type");
 
-			T* copied_obj = luabind_new<T>(ref);
+            T* copied_obj = luabind_new<T>(ref);
 
-			// create the struct to hold the object
-			void* obj = lua_newuserdata(L, sizeof(object_rep));
-			// we send 0 as destructor since we know it will never be called
-			new(obj) object_rep(copied_obj, crep, object_rep::owner, delete_s<T>::apply);
+            // create the struct to hold the object
+            void* obj = lua_newuserdata(L, sizeof(object_rep));
+            // we send 0 as destructor since we know it will never be called
+            new(obj) object_rep(copied_obj, crep, object_rep::owner, delete_s<T>::apply);
 
-			// set the meta table
-			detail::getref(L, crep->metatable_ref());
-			lua_setmetatable(L, -2);
-		}
-	};
+            // set the meta table
+            detail::getref(L, crep->metatable_ref());
+            lua_setmetatable(L, -2);
+        }
+    };
 
-	template<size_t N>
-	struct copy_policy : conversion_policy<N>
-	{
-		struct only_accepts_pointers_or_references {};
-		struct only_converts_from_cpp_to_lua {};
+    template<size_t N>
+    struct copy_policy : conversion_policy<N>
+    {
+        struct only_accepts_pointers_or_references {};
+        struct only_converts_from_cpp_to_lua {};
 
-		static void precall(lua_State*, const index_map&) {}
-		static void postcall(lua_State*, const index_map&) {}
+        static void precall(lua_State*, const index_map&) {}
+        static void postcall(lua_State*, const index_map&) {}
 
-		template<typename T, Direction Dir>
-		struct generate_converter
-		{
+        template<typename T, Direction Dir>
+        struct generate_converter
+        {
             using type = std::conditional_t<
                 Dir == Direction::cpp_to_lua,
                 std::conditional_t<
@@ -111,13 +111,13 @@ namespace luabind { namespace detail {
                 >,
                 only_converts_from_cpp_to_lua
             >;
-		};
-	};
+        };
+    };
 }}
 
 namespace luabind
 {
-	template<size_t N>
-	detail::policy_cons<detail::copy_policy<N>> 
-	copy() { return detail::policy_cons<detail::copy_policy<N>>(); }
+    template<size_t N>
+    detail::policy_cons<detail::copy_policy<N>> 
+    copy() { return detail::policy_cons<detail::copy_policy<N>>(); }
 }

@@ -18,62 +18,62 @@ devsupport@gamespy.com
 ** FUNCTIONS **
 **************/
 #ifdef __MWERKS__ // CodeWarrior will warn if not prototyped
-PEERBool piStartHosting (PEER peer, SOCKET socket, unsigned short port);	// peerOperations.c
-void piStopHosting(PEER peer, PEERBool stopReporting);						// peerOperations.c
+PEERBool piStartHosting (PEER peer, SOCKET socket, unsigned short port);    // peerOperations.c
+void piStopHosting(PEER peer, PEERBool stopReporting);                        // peerOperations.c
 #endif
 
 PEERBool piStartHosting
 (
-	PEER peer,
-	SOCKET socket,
-	unsigned short port
+    PEER peer,
+    SOCKET socket,
+    unsigned short port
 )
 {
-	PEER_CONNECTION;
+    PEER_CONNECTION;
 
-	// Check that we're not hosting.
-	////////////////////////////////
-	assert(!connection->hosting);
-	if(connection->hosting)
-		return PEERFalse;
+    // Check that we're not hosting.
+    ////////////////////////////////
+    assert(!connection->hosting);
+    if(connection->hosting)
+        return PEERFalse;
 
-	// Now we're hosting.
-	/////////////////////
-	connection->hosting = PEERTrue;
+    // Now we're hosting.
+    /////////////////////
+    connection->hosting = PEERTrue;
 
-	// Start reporting.
-	///////////////////
-	if(!piStartReporting(peer, socket, port))
-		return PEERFalse;
+    // Start reporting.
+    ///////////////////
+    if(!piStartReporting(peer, socket, port))
+        return PEERFalse;
 
-	return PEERTrue;
+    return PEERTrue;
 }
 
 void piStopHosting
 (
-	PEER peer,
-	PEERBool stopReporting
+    PEER peer,
+    PEERBool stopReporting
 )
 {
-	PEER_CONNECTION;
+    PEER_CONNECTION;
 
-	// Stop reporting.
-	//////////////////
-	if(stopReporting)
-		piStopReporting(peer);
+    // Stop reporting.
+    //////////////////
+    if(stopReporting)
+        piStopReporting(peer);
 
-	// Check that we're hosting.
-	////////////////////////////
-	if(!connection->hosting)
-		return;
+    // Check that we're hosting.
+    ////////////////////////////
+    if(!connection->hosting)
+        return;
 
-	// Reset states.
-	////////////////
-	connection->hosting = PEERFalse;
-	connection->playing = PEERFalse;
-	connection->ready = PEERFalse;
+    // Reset states.
+    ////////////////
+    connection->hosting = PEERFalse;
+    connection->playing = PEERFalse;
+    connection->ready = PEERFalse;
 
-	// Set the flags.
-	/////////////////
-	piSetLocalFlags(peer);
+    // Set the flags.
+    /////////////////
+    piSetLocalFlags(peer);
 }

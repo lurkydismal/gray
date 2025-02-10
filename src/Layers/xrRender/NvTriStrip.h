@@ -17,24 +17,24 @@
 
 enum PrimType
 {
-	PT_LIST,
-	PT_STRIP,
-	PT_FAN
+    PT_LIST,
+    PT_STRIP,
+    PT_FAN
 };
 
 struct PrimitiveGroup
 {
-	PrimType		type;
-	unsigned int	numIndices;
-	unsigned short* indices;
+    PrimType        type;
+    unsigned int    numIndices;
+    unsigned short* indices;
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-	PrimitiveGroup() : type(PT_STRIP), numIndices(0), indices(NULL) {}
-	~PrimitiveGroup()
-	{
-		if(indices)	xr_free(indices);
-	}
+    PrimitiveGroup() : type(PT_STRIP), numIndices(0), indices(NULL) {}
+    ~PrimitiveGroup()
+    {
+        if(indices)    xr_free(indices);
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////

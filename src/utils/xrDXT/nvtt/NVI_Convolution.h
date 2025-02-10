@@ -21,7 +21,7 @@ namespace xray_nvi
 {
     struct ConvolutionKernelElement
     {
-        int	x_offset; // Coordinates of sample point
+        int    x_offset; // Coordinates of sample point
         int y_offset; //   relative to center
         float weight; // Weight to multiply sample point by
     };
@@ -65,4 +65,4 @@ namespace xray_nvi
     };
 };
 
-#endif			// __NVIMAGELIB_CONVOLUTION_H
+#endif            // __NVIMAGELIB_CONVOLUTION_H

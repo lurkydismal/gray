@@ -3,7 +3,7 @@
 
 #include "common.hlsli"
 
-// Lighting formulas			//
+// Lighting formulas            //
 float4 plight_infinity(float m, float3 _point, float3 normal, float3 light_direction)
 {
     float3 N = normal; // normal

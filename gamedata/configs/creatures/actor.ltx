@@ -29,7 +29,7 @@ run_back_coef           = 1.8
 walk_back_coef          = 0.5
 air_control_param       = 0.1
 walk_accel              = 19; 20 ;18.1 ;17
-show_corpses_dist		= 10
+show_corpses_dist        = 10
 ;радиус в котром над предметами выводятся их названия
 pickup_info_radius                = 5        ;3
 feel_grenade_radius               = 10.0    ;расстояние (в метрах) на котором актер чувствует гранату (любую)
@@ -60,10 +60,10 @@ weapon_bone2                                = bip01_r_finger11
 
 damage                                                = actor_damage
 
-hit_probability_gd_novice	= 1 ;0.20
-hit_probability_gd_stalker	= 1 ;0.30
-hit_probability_gd_veteran	= 1 ;0.40
-hit_probability_gd_master	= 1 ;0.50
+hit_probability_gd_novice    = 1 ;0.20
+hit_probability_gd_stalker    = 1 ;0.30
+hit_probability_gd_veteran    = 1 ;0.40
+hit_probability_gd_master    = 1 ;0.50
 
 hit_sounds                                        = actor_hit_snds
 ;actor condition
@@ -130,7 +130,7 @@ radiation_immunity      = 0.3 ;0.45
 telepatic_immunity      = 0.3 ;0.45
 chemical_burn_immunity  = 0.3 ;0.45
 explosion_immunity      = 0.05 ;0.45
-fire_wound_immunity 	= 0.15
+fire_wound_immunity     = 0.15
 
 [actor_immunities_gd_stalker]
 burn_immunity           = 0.7                               ;коэффициенты иммунитета
@@ -141,7 +141,7 @@ radiation_immunity      = 0.7
 telepatic_immunity      = 0.7
 chemical_burn_immunity  = 0.7
 explosion_immunity      = 0.15
-fire_wound_immunity 	= 0.5 ;0.65
+fire_wound_immunity     = 0.5 ;0.65
 
 [actor_immunities_gd_veteran]
 burn_immunity           = 0.85                                ;коэффициенты иммунитета
@@ -149,41 +149,41 @@ strike_immunity         = 0.75
 shock_immunity          = 0.85
 wound_immunity          = 0.5
 radiation_immunity      = 0.85
-telepatic_immunity      = 0.85	
+telepatic_immunity      = 0.85    
 chemical_burn_immunity  = 0.85
 explosion_immunity      = 0.5
-fire_wound_immunity     = 0.75		
+fire_wound_immunity     = 0.75        
 
 [actor_immunities_gd_master]
 burn_immunity           = 1.0                                ;коэффициенты иммунитета
 strike_immunity         = 1.0
 shock_immunity          = 1.0
 wound_immunity          = 0.75
-radiation_immunity		= 1.0
-telepatic_immunity 		= 1.0
-chemical_burn_immunity 	= 1.0
-explosion_immunity 		= 1.0
-fire_wound_immunity 	= 1.0
+radiation_immunity        = 1.0
+telepatic_immunity         = 1.0
+chemical_burn_immunity     = 1.0
+explosion_immunity         = 1.0
+fire_wound_immunity     = 1.0
 
 [actor_condition]
-satiety_v				= 0.0000162 	;скорость уменьшения сытости со временем
-radiation_v				= 0.0	;скорость уменьшения радиации
-satiety_power_v			= 0.005		;увеличение силы при уменьшении сытости
-satiety_health_v		= 0.0001    ;увеличение здоровья при уменьшении сытости
-satiety_critical		= 0.3       ;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
-radiation_health_v		= 0.002     ;уменьшение здоровья при воздействии радиации
-morale_v				= 0.0001	;скорость восстановления морали
-psy_health_v			= 0.001		;скорость восстановления psy-здоровья
-alcohol_v				= -0.0003
-health_hit_part			= 1.0		;процент хита, уходящий на отнимание здоровья
-power_hit_part			= 0.1		;процент хита, уходящий на отнимание силы
-max_power_leak_speed	= 0.0		;накопление усталости (макс граница, до которой восстанавливается сила) в секунду игрового времени
-max_walk_weight			= 60
+satiety_v                = 0.0000162     ;скорость уменьшения сытости со временем
+radiation_v                = 0.0    ;скорость уменьшения радиации
+satiety_power_v            = 0.005        ;увеличение силы при уменьшении сытости
+satiety_health_v        = 0.0001    ;увеличение здоровья при уменьшении сытости
+satiety_critical        = 0.3       ;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
+radiation_health_v        = 0.002     ;уменьшение здоровья при воздействии радиации
+morale_v                = 0.0001    ;скорость восстановления морали
+psy_health_v            = 0.001        ;скорость восстановления psy-здоровья
+alcohol_v                = -0.0003
+health_hit_part            = 1.0        ;процент хита, уходящий на отнимание здоровья
+power_hit_part            = 0.1        ;процент хита, уходящий на отнимание силы
+max_power_leak_speed    = 0.0        ;накопление усталости (макс граница, до которой восстанавливается сила) в секунду игрового времени
+max_walk_weight            = 60
 
-bleeding_v 				= 0.002	 ;0.0005	;потеря крови при номинальной ране в секунду
+bleeding_v                 = 0.002     ;0.0005    ;потеря крови при номинальной ране в секунду
 
-wound_incarnation_v		= 0.0003 ;0.003     ;скорость заживления раны
-min_wound_size 			= 0.0256	;минимальный размер раны, после которого она считается зажившей
+wound_incarnation_v        = 0.0003 ;0.003     ;скорость заживления раны
+min_wound_size             = 0.0256    ;минимальный размер раны, после которого она считается зажившей
 
 ;--when actor in sleep
 satiety_v_sleep          = 0.00001
@@ -204,15 +204,15 @@ health_restore_v              = 0.0001
 ;;;;;;;;
 ;actor_condition only
 
-jump_power 				= 0.01 ;умешьшение силы с прыжком без учета веса ноши
+jump_power                 = 0.01 ;умешьшение силы с прыжком без учета веса ноши
 jump_weight_power       = 0.05  ;0.045                                        ;умешьшение силы с прыжком с учетом веса ноши, для максимального допустимого веса
-overweight_jump_k       = 5		;10                ;10                                        ;коэффициент влияние перегрузки прыжок с весом (умножается на jump_weight_power)
+overweight_jump_k       = 5        ;10                ;10                                        ;коэффициент влияние перегрузки прыжок с весом (умножается на jump_weight_power)
 
 stand_power             = -0.001.1
 walk_power              = 0.00002  ;0.000012                                ;умешьшение силы за секнду во время ходьбы без учета веса ноши
 walk_weight_power       = 0.0002   ;0.0001;                        ;умешьшение силы за секнду во время ходьбы с учетом веса ноши, для максимального допустимого веса
-overweight_walk_k       = 5			;9        ;10                                ;коэффициент влияние перегрузки ноши (умножается на walk_weight_power)
-accel_k                 = 3			;5                                        ;коэффициент на бег (умножается walk_power, walk_weight_power)
+overweight_walk_k       = 5            ;9        ;10                                ;коэффициент влияние перегрузки ноши (умножается на walk_weight_power)
+accel_k                 = 3            ;5                                        ;коэффициент на бег (умножается walk_power, walk_weight_power)
 sprint_k                = 100 ;75        ;коэффициент на "sprint" бег (умножается walk_power, walk_weight_power)
 
 ; хромота
@@ -231,38 +231,38 @@ cant_sprint_power_end   =        0.30        ;порог силы больше которого актер с
 can_sleep_callback                        = dream.can_sleep_callback
 sleep_video_name_callback        = dream.sleep_video_name_callback
 
-radio_zone_max_power		= 0.03			;пределы зон для датчиков и для инвентаря (% защит броников)
-fire_zone_max_power			= 0.2
-acid_zone_max_power			= 0.2
-psi_zone_max_power			= 0.1
-electra_zone_max_power		= 0.8
+radio_zone_max_power        = 0.03            ;пределы зон для датчиков и для инвентаря (% защит броников)
+fire_zone_max_power            = 0.2
+acid_zone_max_power            = 0.2
+psi_zone_max_power            = 0.1
+electra_zone_max_power        = 0.8
 
-max_power_restore_speed		= 0.020
-max_fire_wound_protection	= 1.45
-max_wound_protection		= 0.5
+max_power_restore_speed        = 0.020
+max_fire_wound_protection    = 1.45
+max_wound_protection        = 0.5
 
 hud_health_blink        = 0.05
 
 
-[actor_thd_gd_novice]				; Секция настроек неодноударного убийства для сложности novice
-killing_hit_treshold		= 0.2	; Если наносится потенциально смертельный хит, и у игрока хитов больше, чем killing_hit_treshold,
-last_chance_health			= 0.1	; его хиты уменьшаются до last_chance_health (должно быть меньше, чем killing_hit_treshold) и
-invulnerable_time			= 500	; включается бессмертие на время invulnerable_time (в миллисекундах)
+[actor_thd_gd_novice]                ; Секция настроек неодноударного убийства для сложности novice
+killing_hit_treshold        = 0.2    ; Если наносится потенциально смертельный хит, и у игрока хитов больше, чем killing_hit_treshold,
+last_chance_health            = 0.1    ; его хиты уменьшаются до last_chance_health (должно быть меньше, чем killing_hit_treshold) и
+invulnerable_time            = 500    ; включается бессмертие на время invulnerable_time (в миллисекундах)
 
-[actor_thd_gd_stalker]				; Секция настроек неодноударного убийства для сложности stalker
-killing_hit_treshold		= 0.2
-last_chance_health			= 0.1
-invulnerable_time			= 500
+[actor_thd_gd_stalker]                ; Секция настроек неодноударного убийства для сложности stalker
+killing_hit_treshold        = 0.2
+last_chance_health            = 0.1
+invulnerable_time            = 500
 
-[actor_thd_gd_veteran]				; Секция настроек неодноударного убийства для сложности veteran
-killing_hit_treshold		= 0.0
-last_chance_health			= 0.0
-invulnerable_time			= 0.0
+[actor_thd_gd_veteran]                ; Секция настроек неодноударного убийства для сложности veteran
+killing_hit_treshold        = 0.0
+last_chance_health            = 0.0
+invulnerable_time            = 0.0
 
-[actor_thd_gd_master]				; Секция настроек неодноударного убийства для сложности master
-killing_hit_treshold		= 0.0
-last_chance_health			= 0.0
-invulnerable_time			= 0.0
+[actor_thd_gd_master]                ; Секция настроек неодноударного убийства для сложности master
+killing_hit_treshold        = 0.0
+last_chance_health            = 0.0
+invulnerable_time            = 0.0
 
 [actor_damage]
 ;bone_name                 = <hit_scale>,<fwd_damage_anim_index>,<wound_scale>
@@ -344,7 +344,7 @@ wound_2              =actor\hurt1,actor\hurt2,actor\hurt3,actor\hurt4
 light_burn           =actor\pain1,actor\pain2,actor\pain3
 
 [actor_hud]
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_01
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_01
 
 position                = -0.044000,-0.156000,0.100000
 orientation             = -0.500000,1.000000,-2.000000
@@ -354,18 +354,18 @@ ancor_0        = lead_gun ;r_hand
 ancor_1        = l_hand
 
 [actor_hud_01]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_01
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_01
 [actor_hud_02]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_02
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_02
 [actor_hud_03]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_03
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_03
 [actor_hud_04]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_04
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_04
 [actor_hud_05]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_05
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_05
 [actor_hud_06]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_06
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_06
 [actor_hud_07]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_07
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_07
 [actor_hud_exo]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_exo
+visual                     = dynamics\weapons\wpn_hand\wpn_hand_exo

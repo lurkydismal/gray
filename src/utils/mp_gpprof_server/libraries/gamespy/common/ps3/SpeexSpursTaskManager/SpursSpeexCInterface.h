@@ -6,9 +6,9 @@
 
 #define PL_DECLARE_HANDLE(name) typedef struct name##__ { int unused; } *name
 
-typedef float	plReal;
-typedef plReal	plVector3[3];
-typedef plReal	plQuaternion[4];
+typedef float    plReal;
+typedef plReal    plVector3[3];
+typedef plReal    plQuaternion[4];
 
 #ifdef __cplusplus
 extern "C" { 
@@ -30,9 +30,9 @@ int issueSampleTaskEncodeInit(int quality, int samplesPerFrame, struct SpursSpee
                               char *userAllocatedSpeexBuffer, int userAllocatedSpeexBufferSize);
 ///not finished, need to pass proper data
 int issueSampleTaskDecodeAdd(char *decoderStateBuffer, int decoderStateBufferSize, char *inBuffer, int inBufferSize, int encodedFrameSize,
-							 short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
+                             short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
 int issueSampleTaskDecodeSet(char *decoderStateBuffer, int decoderStateBufferSize, char *inBuffer, int inBufferSize, int encodedFrameSize,
-							 short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
+                             short* outBuffer, int outBufferSize, struct SpursSpeexTaskOutput *taskOutput);
 ///not finished, need to pass proper data
 int issueSampleTaskDecodeInit(char *decoderStateBuffer, int decoderStateBufferSize, int sampleRate, struct SpursSpeexTaskOutput *taskOutput);
 

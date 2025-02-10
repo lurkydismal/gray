@@ -6,5 +6,5 @@ class CSceneObject;
 class EGarbageGenerator
 {
 public:
-	void Generate(CSceneObject* terrain);
+    void Generate(CSceneObject* terrain);
 };

@@ -8,7 +8,7 @@
 #include "HostOrJoinDlg.h"
 #include "../../gt2/gt2.h"
 #include "../../gt2/gt2Encode.h"
-#include "WaitingDlg.h"	// Added by ClassView
+#include "WaitingDlg.h"    // Added by ClassView
 
 #if _MSC_VER > 1000
 #pragma once
@@ -24,20 +24,20 @@
 #define HOST_LISTENING       11
 #define HOST_CONNECTED       12
 #define HOST_ERROR           13
-#define HOST_EXCHANGE_CERT	 14
-#define HOST_VERIFY_CERT	 15
-#define HOST_EXCHANGE_KEYS	 16
-#define HOST_WAITING		 17
-#define HOST_SEND_SESSID	 18
+#define HOST_EXCHANGE_CERT     14
+#define HOST_VERIFY_CERT     15
+#define HOST_EXCHANGE_KEYS     16
+#define HOST_WAITING         17
+#define HOST_SEND_SESSID     18
 
 #define JOIN_CONNECTING      21
 #define JOIN_CONNECTED       22
 #define JOIN_ERROR           23
-#define JOIN_EXCHANGE_CERT	 24
-#define JOIN_VERIFY_CERT	 25
-#define JOIN_EXCHANGE_KEYS	 26
-#define JOIN_WAITING		 27
-#define JOIN_SEND_CONNID	 28
+#define JOIN_EXCHANGE_CERT     24
+#define JOIN_VERIFY_CERT     25
+#define JOIN_EXCHANGE_KEYS     26
+#define JOIN_WAITING         27
+#define JOIN_SEND_CONNID     28
 
 
 #define NONE  -1
@@ -52,81 +52,81 @@ class CScRaceSampleDlg : public CDialog
 {
 // Construction
 public:
-	void FakeStats();
-	CString m_remoteNick;
-	DWORD m_remoteTime;
-	DWORD m_localTime;
-	int m_totalSteps;
-	int m_step;
-	int m_numSteps;
-	DWORD m_start;
-	BOOL m_racing;
-	int m_countdown;
-	CString m_remoteResponse;
-	int m_state;
-	BOOL m_hosting;
-	CString m_challenge;
+    void FakeStats();
+    CString m_remoteNick;
+    DWORD m_remoteTime;
+    DWORD m_localTime;
+    int m_totalSteps;
+    int m_step;
+    int m_numSteps;
+    DWORD m_start;
+    BOOL m_racing;
+    int m_countdown;
+    CString m_remoteResponse;
+    int m_state;
+    BOOL m_hosting;
+    CString m_challenge;
 
-	// stats markers
-	gsi_bool m_win;
-	gsi_bool m_tie;
-	gsi_bool m_disconnect;
-	gsi_bool m_reportSent;
+    // stats markers
+    gsi_bool m_win;
+    gsi_bool m_tie;
+    gsi_bool m_disconnect;
+    gsi_bool m_reportSent;
 
-	CLoginDlg m_loginDlg;
-	CHostOrJoinDlg m_hostOrJoinDlg;
-	CWaitingDlg m_waitingDlg;
+    CLoginDlg m_loginDlg;
+    CHostOrJoinDlg m_hostOrJoinDlg;
+    CWaitingDlg m_waitingDlg;
 
-	GT2Socket	  m_GT2Socket;		// raw socket
-	GT2Connection m_GT2Connection;	// established connection
+    GT2Socket      m_GT2Socket;        // raw socket
+    GT2Connection m_GT2Connection;    // established connection
 
-	SCInterfacePtr		m_interface; //pointer to the stats interface
-	int					m_remoteProfile;
-	GSLoginCertificate	m_remoteCertificate;
-	gsi_u8				m_remoteConnId[SC_CONNECTION_GUID_SIZE];
+    SCInterfacePtr        m_interface; //pointer to the stats interface
+    int                    m_remoteProfile;
+    GSLoginCertificate    m_remoteCertificate;
+    gsi_u8                m_remoteConnId[SC_CONNECTION_GUID_SIZE];
 
 
-	BOOL SetupHosting();
-	BOOL SetupJoining();
-	BOOL SetupMatch();
-	void Countdown();
-	void Logout();
-	void StartRace();
-	void ReportStats();
-	CScRaceSampleDlg(CWnd* pParent = NULL);	// standard constructor
+    BOOL SetupHosting();
+    BOOL SetupJoining();
+    BOOL SetupMatch();
+    void Countdown();
+    void Logout();
+    void StartRace();
+    void ReportStats();
+    CScRaceSampleDlg(CWnd* pParent = NULL);    // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CScRaceSampleDlg)
-	enum { IDD = IDD_SCRACESAMPLE_DIALOG };
-	CButton	m_startRace;
-	CProgressCtrl	m_remoteProgress;
-	CProgressCtrl	m_localProgress;
-	CString	m_info;
-	//}}AFX_DATA
+    //{{AFX_DATA(CScRaceSampleDlg)
+    enum { IDD = IDD_SCRACESAMPLE_DIALOG };
+    CButton    m_startRace;
+    CProgressCtrl    m_remoteProgress;
+    CProgressCtrl    m_localProgress;
+    CString    m_info;
+    //}}AFX_DATA
 
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CScRaceSampleDlg)
-	public:
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CScRaceSampleDlg)
+    public:
+    virtual BOOL PreTranslateMessage(MSG* pMsg);
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
-	HICON m_hIcon;
+    HICON m_hIcon;
 
-	// Generated message map functions
-	//{{AFX_MSG(CScRaceSampleDlg)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
-	afx_msg void OnStart();
-	afx_msg void OnDestroy();
-	afx_msg void OnTimer(UINT nIDEvent);
-	afx_msg void OnLogout();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CScRaceSampleDlg)
+    virtual BOOL OnInitDialog();
+    afx_msg void OnPaint();
+    afx_msg HCURSOR OnQueryDragIcon();
+    afx_msg void OnStart();
+    afx_msg void OnDestroy();
+    afx_msg void OnTimer(UINT nIDEvent);
+    afx_msg void OnLogout();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

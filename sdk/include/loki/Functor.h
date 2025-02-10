@@ -61,10 +61,10 @@ namespace Loki
         {
             if (!pObj) return 0;
             U* pClone = static_cast<U*>(pObj->DoClone());
-			//MSVC7: warning C4541: 'typeid' used on polymorphic type 'Loki::FunctorImpl<R,TList,ThreadingModel>' with /GR-; unpredictable behavior may result
-			//I rather RTTI wasn't a requirement
+            //MSVC7: warning C4541: 'typeid' used on polymorphic type 'Loki::FunctorImpl<R,TList,ThreadingModel>' with /GR-; unpredictable behavior may result
+            //I rather RTTI wasn't a requirement
             //TODOSGB find another way
-			//assert(typeid(*pClone) == typeid(*pObj));
+            //assert(typeid(*pClone) == typeid(*pObj));
             return pClone;
         }
     };

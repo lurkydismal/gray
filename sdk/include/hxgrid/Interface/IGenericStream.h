@@ -12,8 +12,8 @@ namespace VITALENGINE
 //===========================================================
 typedef struct 
 {
-	void* data;
-	DWORD length;
+    void* data;
+    DWORD length;
 } TGENERICSTREAMCREATIONPARAMETERS;
 
 //===========================================================

@@ -13,7 +13,7 @@ bool PointIsInsideBox(float3 p, float3 LBUcorner, float3 RTDcorner)
         (p.z > LBUcorner.z) && (p.z < RTDcorner.z));
 }
 
-//	Pixel
+//    Pixel
 PSDrawBoxOut main(p_fluidsim_clip input)
 {
     PSDrawBoxOut voxel;

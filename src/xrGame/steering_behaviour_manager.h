@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: steering_behaviour_manager.h
-//	Created 	: 07.11.2007
-//  Modified 	: 07.11.2007
-//	Author		: Dmitriy Iassenev
-//	Description : steering behaviour manager class
+//    Module         : steering_behaviour_manager.h
+//    Created     : 07.11.2007
+//  Modified     : 07.11.2007
+//    Author        : Dmitriy Iassenev
+//    Description : steering behaviour manager class
 ////////////////////////////////////////////////////////////////////////////
 
 #ifndef STEERING_BEHAVIOUR_MANAGER_H_INCLUDED
@@ -17,25 +17,25 @@ class CAI_Rat;
 // #include "../../../steering_behaviour_cohesion.h"
 // #include "../../../steering_behaviour_alignment.h"
 // #include "../../../steering_behaviour_separation.h"
-	private debug::make_final<manager>,
+    private debug::make_final<manager>,
 {
 public:
-	 manager(const& manager) = delete;
-					const& operator= (const manager&) = delete;
-					manager			(CAI_Rat const *object);
-					~manager		();
-			void	add				(base *behaviour, float const &factor);
-			void	remove			(base *behaviour);
-			Fvector	new_position	(float const &time_delta);
+     manager(const& manager) = delete;
+                    const& operator= (const manager&) = delete;
+                    manager            (CAI_Rat const *object);
+                    ~manager        ();
+            void    add                (base *behaviour, float const &factor);
+            void    remove            (base *behaviour);
+            Fvector    new_position    (float const &time_delta);
 
 private:
-			void	clear			();
+            void    clear            ();
 
 private:
-	typedef xr_map<base*,float>		Behaviours;
+    typedef xr_map<base*,float>        Behaviours;
 
 private:
-	Behaviours		m_behaviours;
+    Behaviours        m_behaviours;
 };
 
 } // namespace steering_behaviour

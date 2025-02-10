@@ -9,76 +9,76 @@
 class CTelekinesis : public CPHUpdateObject {
 
 protected:
-	using TELE_OBJECTS = xr_vector<CTelekineticObject*>;
-	using TELE_OBJECTS_IT = TELE_OBJECTS::iterator;
+    using TELE_OBJECTS = xr_vector<CTelekineticObject*>;
+    using TELE_OBJECTS_IT = TELE_OBJECTS::iterator;
 
-	TELE_OBJECTS			objects;
-	xr_vector<CObject*>		m_nearest;
-	bool					active;
+    TELE_OBJECTS            objects;
+    xr_vector<CObject*>        m_nearest;
+    bool                    active;
 
 public:
-					CTelekinesis		();
-	virtual			~CTelekinesis		();
+                    CTelekinesis        ();
+    virtual            ~CTelekinesis        ();
 
-			// allocates relevant TelekineticObject
-
-
-			// активировать объект
-virtual		CTelekineticObject*	activate(CPhysicsShellHolder *obj, float strength, float height, u32 max_time_keep, bool rot = true);
-
-			// деактивировать все объекты
-			void	deactivate			();
-
-			//clear objects (does not call release, but call switch to TS_None)
-			void	clear_deactivate	();
-			// clear 
-virtual		void	clear				();
-virtual		void	clear_notrelevant   ();
-			// деактивировать объект
-			void	deactivate			(CPhysicsShellHolder *obj);
-			void	remove_object		(TELE_OBJECTS_IT it);
-			void	remove_object		(CPhysicsShellHolder *obj);
-			// бросить все объекты в позицию 'target'
-			void	fire_all			(const Fvector &target);
-			
-			// бросить объект 'obj' в позицию 'target' с учетом коэф силы 
-			void	fire				(CPhysicsShellHolder *obj, const Fvector &target, float power);
-
-			// бросить объект 'obj' в позицию 'target' с учетом коэф силы 
-			void	fire_t				(CPhysicsShellHolder *obj, const Fvector &target, float time);
+            // allocates relevant TelekineticObject
 
 
-			// вернуть активность телекинеза
-			bool	is_active			() {return active;}
+            // активировать объект
+virtual        CTelekineticObject*    activate(CPhysicsShellHolder *obj, float strength, float height, u32 max_time_keep, bool rot = true);
 
-			// вернуть активность объекта		
-			bool	is_active_object	(CPhysicsShellHolder *obj);
-			
-			// вернуть количество контролируемых объектов (в состо€нии TS_Raise & TS_Keep)
-			u32		get_objects_count	();
+            // деактивировать все объекты
+            void    deactivate            ();
 
-			// вернуть количество контролируемых объектов (всех)
-			u32		get_objects_total_count() {return (u32)objects.size();}
+            //clear objects (does not call release, but call switch to TS_None)
+            void    clear_deactivate    ();
+            // clear 
+virtual        void    clear                ();
+virtual        void    clear_notrelevant   ();
+            // деактивировать объект
+            void    deactivate            (CPhysicsShellHolder *obj);
+            void    remove_object        (TELE_OBJECTS_IT it);
+            void    remove_object        (CPhysicsShellHolder *obj);
+            // бросить все объекты в позицию 'target'
+            void    fire_all            (const Fvector &target);
+            
+            // бросить объект 'obj' в позицию 'target' с учетом коэф силы 
+            void    fire                (CPhysicsShellHolder *obj, const Fvector &target, float power);
+
+            // бросить объект 'obj' в позицию 'target' с учетом коэф силы 
+            void    fire_t                (CPhysicsShellHolder *obj, const Fvector &target, float time);
 
 
-			// вернуть объект по индексу в массиве
-			// a	copy of the object!
-CTelekineticObject	get_object_by_index (u32 index) {VERIFY(objects.size() > index); return *objects[index];}
-					
-			// обновить состон€ие на shedule_Update			
-			void	schedule_update		();
+            // вернуть активность телекинеза
+            bool    is_active            () {return active;}
 
-			// объект был удален - удалить все св€зи на объект
-			void	remove_links		(CObject *O);
+            // вернуть активность объекта        
+            bool    is_active_object    (CPhysicsShellHolder *obj);
+            
+            // вернуть количество контролируемых объектов (в состо€нии TS_Raise & TS_Keep)
+            u32        get_objects_count    ();
+
+            // вернуть количество контролируемых объектов (всех)
+            u32        get_objects_total_count() {return (u32)objects.size();}
+
+
+            // вернуть объект по индексу в массиве
+            // a    copy of the object!
+CTelekineticObject    get_object_by_index (u32 index) {VERIFY(objects.size() > index); return *objects[index];}
+                    
+            // обновить состон€ие на shedule_Update            
+            void    schedule_update        ();
+
+            // объект был удален - удалить все св€зи на объект
+            void    remove_links        (CObject *O);
 
 protected:
-	virtual CTelekineticObject*	alloc_tele_object(){return new CTelekineticObject();}
+    virtual CTelekineticObject*    alloc_tele_object(){return new CTelekineticObject();}
 private:
 
-	// обновление на шагах физики
-	virtual void 	PhDataUpdate		(float step);
-	virtual void 	PhTune				(float step);
-	
+    // обновление на шагах физики
+    virtual void     PhDataUpdate        (float step);
+    virtual void     PhTune                (float step);
+    
 
 };
 

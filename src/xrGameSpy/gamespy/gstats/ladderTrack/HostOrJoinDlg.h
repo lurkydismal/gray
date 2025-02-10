@@ -17,32 +17,32 @@ class CHostOrJoinDlg : public CDialog
 {
 // Construction
 public:
-	CHostOrJoinDlg(CWnd* pParent = NULL);   // standard constructor
+    CHostOrJoinDlg(CWnd* pParent = NULL);   // standard constructor
 
 // Dialog Data
-	//{{AFX_DATA(CHostOrJoinDlg)
-	enum { IDD = IDD_HOST_OR_JOIN };
-	CString	m_joinAddress;
-	int		m_hostOrJoin;
-	//}}AFX_DATA
+    //{{AFX_DATA(CHostOrJoinDlg)
+    enum { IDD = IDD_HOST_OR_JOIN };
+    CString    m_joinAddress;
+    int        m_hostOrJoin;
+    //}}AFX_DATA
 
 
 // Overrides
-	// ClassWizard generated virtual function overrides
-	//{{AFX_VIRTUAL(CHostOrJoinDlg)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+    // ClassWizard generated virtual function overrides
+    //{{AFX_VIRTUAL(CHostOrJoinDlg)
+    protected:
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+    //}}AFX_VIRTUAL
 
 // Implementation
 protected:
 
-	// Generated message map functions
-	//{{AFX_MSG(CHostOrJoinDlg)
-	virtual void OnOK();
-	afx_msg void OnSetfocusJoinAddress();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+    // Generated message map functions
+    //{{AFX_MSG(CHostOrJoinDlg)
+    virtual void OnOK();
+    afx_msg void OnSetfocusJoinAddress();
+    //}}AFX_MSG
+    DECLARE_MESSAGE_MAP()
 };
 
 //{{AFX_INSERT_LOCATION}}

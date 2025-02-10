@@ -18,7 +18,7 @@ devsupport@gamespy.com
 extern "C" {
 #endif
 
-void ghiDoSocketInit	  (GHIConnection * connection);
+void ghiDoSocketInit      (GHIConnection * connection);
 void ghiDoHostLookup      (GHIConnection * connection);
 void ghiDoLookupPending   (GHIConnection * connection);
 void ghiDoConnecting      (GHIConnection * connection);

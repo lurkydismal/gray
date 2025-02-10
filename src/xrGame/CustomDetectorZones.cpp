@@ -6,17 +6,17 @@
 
 BOOL CAfList::feel_touch_contact(CObject* O)
 {
-	TypesMapIt it = m_TypesMap.find(O->cNameSect());
+    TypesMapIt it = m_TypesMap.find(O->cNameSect());
 
-	bool res = (it != m_TypesMap.end());
-	if (res)
-	{
-		CArtefact* pAf = smart_cast<CArtefact*>(O);
+    bool res = (it != m_TypesMap.end());
+    if (res)
+    {
+        CArtefact* pAf = smart_cast<CArtefact*>(O);
 
-		if (pAf->GetAfRank() > m_af_rank)
-			res = false;
-	}
-	return						res;
+        if (pAf->GetAfRank() > m_af_rank)
+            res = false;
+    }
+    return                        res;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -24,19 +24,19 @@ BOOL CAfList::feel_touch_contact(CObject* O)
 
 BOOL CZoneList::feel_touch_contact(CObject* O)
 {
-	TypesMapIt it = m_TypesMap.find(O->cNameSect());
-	bool res = (it != m_TypesMap.end());
+    TypesMapIt it = m_TypesMap.find(O->cNameSect());
+    bool res = (it != m_TypesMap.end());
 
-	CCustomZone* pZone = smart_cast<CCustomZone*>(O);
-	if (pZone && !pZone->IsEnabled())
-	{
-		res = false;
-	}
-	return res;
+    CCustomZone* pZone = smart_cast<CCustomZone*>(O);
+    if (pZone && !pZone->IsEnabled())
+    {
+        res = false;
+    }
+    return res;
 }
 
 CZoneList::~CZoneList()
 {
-	clear();
-	destroy();
+    clear();
+    destroy();
 }

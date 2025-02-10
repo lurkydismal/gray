@@ -19,7 +19,7 @@ class XREPROPS_API UIChooseForm :  public IEditorWnd
     SChooseItem* GetSelectedItem();
     UIChooseFormItem* m_SelectedItem;
     SChooseItem m_ItemNone;
-    ChooseItemVec	m_Items;
+    ChooseItemVec    m_Items;
     u32 m_ChooseID;
     void  FillItems(u32 choose_id);
     void CheckFavorite();
@@ -27,9 +27,9 @@ protected:
     using EventsMap = xr_map<u32, SChooseEvents>;
     using EventsMapIt = EventsMap::iterator;
 
-    static EventsMap			m_Events;
+    static EventsMap            m_Events;
 private:
-    SChooseEvents 	E;
+    SChooseEvents     E;
     static UIChooseForm* Form;
     static ImTextureID NullTexture;
 

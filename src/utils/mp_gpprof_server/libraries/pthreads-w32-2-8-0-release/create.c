@@ -43,8 +43,8 @@
 
 int
 pthread_create (pthread_t * tid,
-		const pthread_attr_t * attr,
-		void *(*start) (void *), void *arg)
+        const pthread_attr_t * attr,
+        void *(*start) (void *), void *arg)
      /*
       * ------------------------------------------------------
       * DOCPUBLIC
@@ -164,17 +164,17 @@ pthread_create (pthread_t * tid,
        * PTHREAD_EXPLICIT_SCHED and priority THREAD_PRIORITY_NORMAL.
        */
       if (PTHREAD_INHERIT_SCHED == a->inheritsched)
-	{
-	  /*
-	   * If the thread that called pthread_create() is a Win32 thread
-	   * then the inherited priority could be the result of a temporary
-	   * system adjustment. This is not the case for POSIX threads.
-	   */
+    {
+      /*
+       * If the thread that called pthread_create() is a Win32 thread
+       * then the inherited priority could be the result of a temporary
+       * system adjustment. This is not the case for POSIX threads.
+       */
 #if ! defined(HAVE_SIGSET_T)
-	  self = pthread_self ();
+      self = pthread_self ();
 #endif
-	  priority = ((ptw32_thread_t *) self.p)->sched_priority;
-	}
+      priority = ((ptw32_thread_t *) self.p)->sched_priority;
+    }
 
 #endif
 
@@ -204,25 +204,25 @@ pthread_create (pthread_t * tid,
 
   tp->threadH =
     threadH =
-    (HANDLE) _beginthreadex ((void *) NULL,	/* No security info             */
-			     (unsigned) stackSize,	/* default stack size   */
-			     ptw32_threadStart,
-			     parms,
-			     (unsigned)
-			     CREATE_SUSPENDED,
-			     (unsigned *) &(tp->thread));
+    (HANDLE) _beginthreadex ((void *) NULL,    /* No security info             */
+                 (unsigned) stackSize,    /* default stack size   */
+                 ptw32_threadStart,
+                 parms,
+                 (unsigned)
+                 CREATE_SUSPENDED,
+                 (unsigned *) &(tp->thread));
 
   if (threadH != 0)
     {
       if (a != NULL)
-	{
-	  (void) ptw32_setthreadpriority (thread, SCHED_OTHER, priority);
-	}
+    {
+      (void) ptw32_setthreadpriority (thread, SCHED_OTHER, priority);
+    }
 
       if (run)
-	{
-	  ResumeThread (threadH);
-	}
+    {
+      ResumeThread (threadH);
+    }
     }
 
 #else /* __MINGW32__ && ! __MSVCRT__ */
@@ -235,8 +235,8 @@ pthread_create (pthread_t * tid,
 
   tp->threadH =
     threadH =
-    (HANDLE) _beginthread (ptw32_threadStart, (unsigned) stackSize,	/* default stack size   */
-			   parms);
+    (HANDLE) _beginthread (ptw32_threadStart, (unsigned) stackSize,    /* default stack size   */
+               parms);
 
   /*
    * Make the return code match _beginthreadex's.
@@ -248,19 +248,19 @@ pthread_create (pthread_t * tid,
   else
     {
       if (!run)
-	{
-	  /* 
-	   * beginthread does not allow for create flags, so we do it now.
-	   * Note that beginthread itself creates the thread in SUSPENDED
-	   * mode, and then calls ResumeThread to start it.
-	   */
-	  SuspendThread (threadH);
-	}
+    {
+      /* 
+       * beginthread does not allow for create flags, so we do it now.
+       * Note that beginthread itself creates the thread in SUSPENDED
+       * mode, and then calls ResumeThread to start it.
+       */
+      SuspendThread (threadH);
+    }
 
       if (a != NULL)
-	{
-	  (void) ptw32_setthreadpriority (thread, SCHED_OTHER, priority);
-	}
+    {
+      (void) ptw32_setthreadpriority (thread, SCHED_OTHER, priority);
+    }
     }
 
   (void) pthread_mutex_unlock (&tp->cancelLock);
@@ -287,9 +287,9 @@ FAIL0:
       tp = NULL;
 
       if (parms != NULL)
-	{
-	  free (parms);
-	}
+    {
+      free (parms);
+    }
     }
   else
     {
@@ -302,4 +302,4 @@ FAIL0:
 #endif
   return (result);
 
-}				/* pthread_create */
+}                /* pthread_create */

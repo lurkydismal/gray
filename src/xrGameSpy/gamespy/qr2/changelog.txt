@@ -36,10 +36,10 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 06-09-2006  3.01.24  MJ   FEATURE  Added NN_GROUP_ID_KEY for new nat negotiation SDK
 06-06-2006  3.01.23  SAH  FIX      moved the (len<4) check for ip-verify queries into the IF block
 05-31-2006  3.01.22  SAH  RELEASE  Releasing to developer site
-		     SAH  FIX	   Fixed Linux makefile
+             SAH  FIX       Fixed Linux makefile
 05-30-2006  3.01.20  SAH  FIX      Fixed PS3 projects to work with PS3(084_001 SDK)
 05-25-2006  3.01.19  SAH  FIX      Moved GSI_UNUSED in qr2csample
-		     SAH  FIX      Changed PSP project warning levels
+             SAH  FIX      Changed PSP project warning levels
 05-24-2006  3.01.18  SAH  FIX      redid previous change, added necessary #ifdefs
 05-23-2006  3.01.17  SAH  FIX      Added gsSetDebug for PS3, and GSI_UNUSED statements to qr2csample.c
 05-19-2006  3.01.16  SAH  FIX      Added gsTestMain.c to nitro CodeWarrior project
@@ -86,7 +86,7 @@ DATE        VERSION  BY   TYPE     DESCRIPTION
 08-25-2004  3.00.38  DES  FEATURE  Added OSX makefile
 08-05-2004  3.00.37  SN   RELEASE  Releasing to developer site.
 07-19-2004  3.00.37  SN   FIX      Updated code with explicit casts to remove implicit cast error 
-                                   when compiling at highest level and warnings treated as errors.							
+                                   when compiling at highest level and warnings treated as errors.                            
 07-15-2004  3.00.36  BED  FIX      Now must manually call qr2_internal_key_list_free when using GSI_UNICODE
 06-18-2004  3.00.35  BED  FIX      Removed confusing key name from sample.
                      BED  FIX      Added some comments to sample, cleaned up Unicode support in sample.

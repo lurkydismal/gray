@@ -33,22 +33,22 @@ extern int screenHeight;
 
 void InitializeDisplay
 (
-	void
+    void
 );
 
 void ShutdownDisplay
 (
-	void
+    void
 );
 
 void DisplayThink
 (
-	unsigned long now
+    unsigned long now
 );
 
 void DisplayChat
 (
-	const char * message
+    const char * message
 );
 
 #endif

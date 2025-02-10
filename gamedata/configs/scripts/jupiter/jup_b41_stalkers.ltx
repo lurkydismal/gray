@@ -1,10 +1,10 @@
 [meet@jup_b41_animpoint_meet]
-close_anim 		= nil
-close_victim 	= nil
-far_anim 		= nil
-far_victim 		= nil
-close_distance 	= 0
-far_distance 	= 0
+close_anim         = nil
+close_victim     = nil
+far_anim         = nil
+far_victim         = nil
+close_distance     = 0
+far_distance     = 0
 snd_on_use = {=is_wounded} nil, {=actor_enemy} nil, {=has_enemy} meet_use_no_fight, {=actor_has_weapon} meet_use_no_weapon, {!dist_to_actor_le(3)} nil
 use = {=is_wounded} false, {=actor_enemy} false, {=has_enemy} false, {=actor_has_weapon} false, {=dist_to_actor_le(3)} true, false
 meet_on_talking = false
@@ -35,12 +35,12 @@ in_restr = jup_b41_sr_light
 meet = meet@default
 
 [meet@default]
-close_anim 		= nil
-close_victim 	= nil
-far_anim 		= nil
-far_victim 		= nil
+close_anim         = nil
+close_victim     = nil
+far_anim         = nil
+far_victim         = nil
 close_distance  = 2
-far_distance 	= 0
+far_distance     = 0
 close_snd_distance = 2
 use =  true
 allow_break = false
@@ -74,8 +74,8 @@ on_info2 = {=has_enemy} walker@jup_b1_stalker_1_home
 out_restr = jup_b41_sr_light
 
 [meet@stalker_1]
-close_distance 	= 0
-far_distance 	= 0
+close_distance     = 0
+far_distance     = 0
 
 [animpoint@jup_b41_stalker_1_hide]
 cover_name = jup_b41_animp_surge_1

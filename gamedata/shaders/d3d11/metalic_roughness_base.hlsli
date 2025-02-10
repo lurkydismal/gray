@@ -51,9 +51,9 @@ struct IXrayGbuffer
     float3 Point;
     float3 PointHud;
     float3 PointReal;
-	
-	float3 View;
-	float ViewDist;
+    
+    float3 View;
+    float ViewDist;
 
     float SSS;
 };
@@ -95,43 +95,43 @@ void GbufferPack(inout IXrayGbufferPack O, inout IXrayMaterial M)
 
 float4 GbufferGetPoint(in float2 HPos)
 {
-	float Depth = s_position.Load(int3(HPos, 0)).x;
-	HPos = HPos - m_taa_jitter.xy * float2(0.5f, -0.5f) * pos_decompression_params2.xy;
-	float3 Point = float3(HPos * pos_decompression_params.zw - pos_decompression_params.xy, 1.0f);
+    float Depth = s_position.Load(int3(HPos, 0)).x;
+    HPos = HPos - m_taa_jitter.xy * float2(0.5f, -0.5f) * pos_decompression_params2.xy;
+    float3 Point = float3(HPos * pos_decompression_params.zw - pos_decompression_params.xy, 1.0f);
     Point *= depth_unpack.x * rcp(Depth - depth_unpack.y);
     return float4(Point, 1.0f);
 }
 
 float3 GbufferGetPointRealUnjitter(in float2 TexCoord, in float Depth)
 {
-	float3 Point = float3(TexCoord * 2.0f - 1.0f, 1.0f);
-	
-	if(Depth < 0.02f) {
-		Point.z = depth_unpack.z * rcp(Depth * 50.0f - depth_unpack.w);
-		Point.xy *= pos_decompression_params_hud.xy * Point.z;
-	} else {
-		Point.z = depth_unpack.x * rcp(Depth - depth_unpack.y);
-		Point.xy *= pos_decompression_params.xy * Point.z;
-	}
-	
-	return Point;
+    float3 Point = float3(TexCoord * 2.0f - 1.0f, 1.0f);
+    
+    if(Depth < 0.02f) {
+        Point.z = depth_unpack.z * rcp(Depth * 50.0f - depth_unpack.w);
+        Point.xy *= pos_decompression_params_hud.xy * Point.z;
+    } else {
+        Point.z = depth_unpack.x * rcp(Depth - depth_unpack.y);
+        Point.xy *= pos_decompression_params.xy * Point.z;
+    }
+    
+    return Point;
 }
 
 float3 GbufferGetPointRealUnjitter(in float2 TexCoord)
 {
-	float Depth = s_position.Load(int3(TexCoord * pos_decompression_params2.xy, 0)).x;
-	return GbufferGetPointRealUnjitter(TexCoord, Depth);
+    float Depth = s_position.Load(int3(TexCoord * pos_decompression_params2.xy, 0)).x;
+    return GbufferGetPointRealUnjitter(TexCoord, Depth);
 }
 
 void GbufferUnpack(in float2 TexCoord, in float2 HPos, inout IXrayGbuffer O)
 {
     float4 NormalHemi = s_normal.Load(int3(HPos, 0));
-	
+    
     float4 Material = s_surface.Load(int3(HPos, 0));
     float4 ColorSSS = s_diffuse.Load(int3(HPos, 0));
 
     O.Depth = s_position.Load(int3(HPos, 0)).x;
-	
+    
     HPos = HPos - m_taa_jitter.xy * float2(0.5f, -0.5f) * pos_decompression_params2.xy;
 
     float3 P = float3(HPos * pos_decompression_params.zw - pos_decompression_params.xy, 1.0f);
@@ -141,9 +141,9 @@ void GbufferUnpack(in float2 TexCoord, in float2 HPos, inout IXrayGbuffer O)
     O.PointHud = P_hud * depth_unpack.z * rcp(O.Depth * 50.0f - depth_unpack.w);
 
     O.PointReal = O.Depth < 0.02f ? O.PointHud : O.Point;
-	
-	O.ViewDist = length(O.PointReal);
-	O.View = O.PointReal * rcp(O.ViewDist);
+    
+    O.ViewDist = length(O.PointReal);
+    O.View = O.PointReal * rcp(O.ViewDist);
 
     O.Normal.xyz = NormalDecode(NormalHemi.xyz);
     O.Hemi = NormalHemi.w;

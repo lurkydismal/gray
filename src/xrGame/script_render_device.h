@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: script_render_device.h
-//	Created 	: 28.06.2004
-//  Modified 	: 28.06.2004
-//	Author		: Dmitriy Iassenev
-//	Description : Script render device
+//    Module         : script_render_device.h
+//    Created     : 28.06.2004
+//  Modified     : 28.06.2004
+//    Author        : Dmitriy Iassenev
+//    Description : Script render device
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once

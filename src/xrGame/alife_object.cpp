@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: alife_object.cpp
-//	Created 	: 27.10.2005
-//  Modified 	: 27.10.2005
-//	Author		: Dmitriy Iassenev
-//	Description : ALife object class
+//    Module         : alife_object.cpp
+//    Created     : 27.10.2005
+//  Modified     : 27.10.2005
+//    Author        : Dmitriy Iassenev
+//    Description : ALife object class
 ////////////////////////////////////////////////////////////////////////////
 
 #include "StdAfx.h"
@@ -26,14 +26,14 @@ void CSE_ALifeObject::spawn_supplies(LPCSTR ini_string)
 
 #pragma warning(push)
 #pragma warning(disable:4238)
-	IReader temp(
-		(void*) (ini_string),
-		xr_strlen(ini_string)
-	);
+    IReader temp(
+        (void*) (ini_string),
+        xr_strlen(ini_string)
+    );
 
-	CInifile ini(&temp,
-		FS.get_path("$game_config$")->m_Path
-	);
+    CInifile ini(&temp,
+        FS.get_path("$game_config$")->m_Path
+    );
 #pragma warning(pop)
 
     // This will spawn a single random section listed in [spawn_loadout]
@@ -246,5 +246,5 @@ void CSE_ALifeObject::spawn_supplies(LPCSTR ini_string)
 
 bool CSE_ALifeObject::keep_saved_data_anyway() const
 {
-    return			(false);
+    return            (false);
 }

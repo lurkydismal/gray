@@ -56,17 +56,17 @@ end
 function update_task (id_task, subtask, id_state, actor)
 
     local state
-	if subtask == 0 then
-		if id_state == task.fail then
-			state = "fail"
-		elseif id_state == task.completed then
-			state = "complete"
-		else
-			state = "new"
-		end
-	else
-		state = "update"
-	end
+    if subtask == 0 then
+        if id_state == task.fail then
+            state = "fail"
+        elseif id_state == task.completed then
+            state = "complete"
+        else
+            state = "new"
+        end
+    else
+        state = "update"
+    end
 
     local t = 
             {

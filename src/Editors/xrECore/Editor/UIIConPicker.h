@@ -4,22 +4,22 @@
 class UIIconPicker :public IEditorWnd
 {
 public:
-	UIIconPicker();
-	virtual ~UIIconPicker();
-	virtual void Draw();
+    UIIconPicker();
+    virtual ~UIIconPicker();
+    virtual void Draw();
 public:
-	static void Update();
-	static void Show(const xr_string);
+    static void Update();
+    static void Show(const xr_string);
 private:
-	FS_FileSet	texture_map;
+    FS_FileSet    texture_map;
 
-	xr_hash_map<xr_string, ref_texture> Icons;
-	static UIIconPicker* Form;
-	xr_string file_path;
-	
+    xr_hash_map<xr_string, ref_texture> Icons;
+    static UIIconPicker* Form;
+    xr_string file_path;
+    
 private:
-	void InitItemList();
-	void HideLib();
-	bool ShowIcons();
-	void InitPreviewTexture(const xr_string&, const string_path&);
+    void InitItemList();
+    void HideLib();
+    bool ShowIcons();
+    void InitPreviewTexture(const xr_string&, const string_path&);
 };

@@ -15,9 +15,9 @@ void ESceneCustomOTool::UpdateSnapList()
 }
 
 
-ObjectList*	ESceneCustomOTool::GetSnapList()
+ObjectList*    ESceneCustomOTool::GetSnapList()
 {
-	return 0;
+    return 0;
 }
 
 
@@ -32,29 +32,29 @@ BOOL ESceneCustomOTool::_AppendObject(CCustomObject* object)
 BOOL ESceneCustomOTool::_RemoveObject(CCustomObject* object)
 {
     object->OnSceneRemove();
-	m_Objects.remove(object);
+    m_Objects.remove(object);
     return FALSE;
 }
 
 
 void ESceneCustomOTool::Clear(bool bInternal)
 {
-	inherited::Clear	();
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+    inherited::Clear    ();
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
     {
-    	(*it)->OnSceneRemove();
-    	xr_delete(*it);
+        (*it)->OnSceneRemove();
+        xr_delete(*it);
     }
     m_Objects.clear();
 }
 
 BOOL  ESceneCustomOTool::AllowMouseStart()
 {
-	for(ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); ++it)
+    for(ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); ++it)
     {
-    	CCustomObject* CO = *it;
+        CCustomObject* CO = *it;
        if(CO->Selected() && !CO->Editable() )
-       	return FALSE;
+           return FALSE;
     }
        
     return TRUE;
@@ -62,19 +62,19 @@ BOOL  ESceneCustomOTool::AllowMouseStart()
 
 void ESceneCustomOTool::OnFrame()
 {
-	ObjectList remove_objects;
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+    ObjectList remove_objects;
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
     {
-    	R_ASSERT				(*it);
-    	(*it)->OnFrame			();
-        if ((*it)->IsDeleted())	
-        	remove_objects.push_back(*it);
+        R_ASSERT                (*it);
+        (*it)->OnFrame            ();
+        if ((*it)->IsDeleted())    
+            remove_objects.push_back(*it);
     }
     bool need_undo = remove_objects.size();
     while (!remove_objects.empty()){
-    	CCustomObject* O	= remove_objects.back();
-        Scene->RemoveObject	(O,false,true);
-        xr_delete			(O);
+        CCustomObject* O    = remove_objects.back();
+        Scene->RemoveObject    (O,false,true);
+        xr_delete            (O);
         remove_objects.pop_back();
     }
     if (need_undo) Scene->UndoSave();
@@ -83,54 +83,54 @@ void ESceneCustomOTool::OnFrame()
 
 void ESceneCustomOTool::OnRender(int priority, bool strictB2F)
 {
-//	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-//    	(*it)->Render(priority,strictB2F);
+//    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+//        (*it)->Render(priority,strictB2F);
 }
 
 
 void ESceneCustomOTool::OnSynchronize()
 {
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-    	(*it)->OnSynchronize();
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+        (*it)->OnSynchronize();
 }
 
 
 void ESceneCustomOTool::OnSceneUpdate()
 {
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-    	(*it)->OnSceneUpdate();
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+        (*it)->OnSceneUpdate();
 }
 
 
 void ESceneCustomOTool::OnDeviceCreate()
 {
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-    	(*it)->OnDeviceCreate();
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+        (*it)->OnDeviceCreate();
 }
 
 
 void ESceneCustomOTool::OnDeviceDestroy()
 {
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-    	(*it)->OnDeviceDestroy();
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+        (*it)->OnDeviceDestroy();
 }
 
 
 bool ESceneCustomOTool::Validate(bool)
 {
-	for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-    	if (!(*it)->Validate(true)) return false;
+    for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
+        if (!(*it)->Validate(true)) return false;
     return true;
 }
 
 bool ESceneCustomOTool::Valid()
 {
-	return true;
+    return true;
 }
 
 bool ESceneCustomOTool::IsNeedSave()
 {
-	return !m_Objects.empty();
+    return !m_Objects.empty();
 }
 
 void ESceneCustomOTool::OnObjectRemove(CCustomObject* O, bool bDeleting)
@@ -152,7 +152,7 @@ void ESceneCustomOTool::SelectObjects(bool flag)
         }
     );
 
-    UI->RedrawScene		();
+    UI->RedrawScene        ();
 }
 
 void ESceneCustomOTool::RemoveSelection()
@@ -165,9 +165,9 @@ void ESceneCustomOTool::RemoveSelection()
             if ((*_F)->OnSelectionRemove())
             {
                 ObjectIt _D = _F; _F++;
-                CCustomObject* obj 	= *_D; 
-                Scene->RemoveObject	(obj,false,true);
-                xr_delete			(obj);
+                CCustomObject* obj     = *_D; 
+                Scene->RemoveObject    (obj,false,true);
+                xr_delete            (obj);
             }else{
                 _F++;
             }
@@ -178,7 +178,7 @@ void ESceneCustomOTool::RemoveSelection()
             _F++;
         }
     }
-	UI->RedrawScene		();
+    UI->RedrawScene        ();
 }
 
 void ESceneCustomOTool::InvertSelection()
@@ -188,15 +188,15 @@ void ESceneCustomOTool::InvertSelection()
             (*_F)->Select(-1);
         }
         
-    UI->RedrawScene		();
+    UI->RedrawScene        ();
 }
 
 int ESceneCustomOTool::SelectionCount(bool testflag)
 {
-	int count = 0;
+    int count = 0;
 
     for(ObjectIt _F = m_Objects.begin();_F!=m_Objects.end();_F++)
-        if((*_F)->Visible()	&& ((bool)(*_F)->Selected() == testflag)) count++;
+        if((*_F)->Visible()    && ((bool)(*_F)->Selected() == testflag)) count++;
         
     return count;
 }
@@ -231,65 +231,65 @@ BOOL ESceneCustomOTool::RayPick(CCustomObject*& object, float& distance, const F
             object = _F;
     }
 
-	return !!object;
+    return !!object;
 }
 
 BOOL ESceneCustomOTool::FrustumPick(ObjectList& lst, const CFrustum& frustum)
 {
     for(ObjectIt _F = m_Objects.begin();_F!=m_Objects.end();_F++)
         if((*_F)->Visible()&&(*_F)->FrustumPick(frustum))
-        	lst.push_back(*_F);
-	return !lst.empty();
+            lst.push_back(*_F);
+    return !lst.empty();
 }
 
 BOOL ESceneCustomOTool::SpherePick(ObjectList& lst, const Fvector& center, float radius)
 {
     for(ObjectIt _F = m_Objects.begin();_F!=m_Objects.end();_F++)
         if((*_F)->Visible()&&(*_F)->SpherePick(center, radius))
-        	lst.push_back(*_F);
-	return !lst.empty();
+            lst.push_back(*_F);
+    return !lst.empty();
 }
 
 int ESceneCustomOTool::RaySelect(int flag, float& distance, const Fvector& start, const Fvector& direction, BOOL bDistanceOnly)
 {
     CCustomObject* nearest_object=0;
     if (RayPick(nearest_object,distance,start,direction,0)&&!bDistanceOnly) 
-    	nearest_object->RaySelect(flag,start,direction,false);
-//    	nearest_object->Select(flag);
+        nearest_object->RaySelect(flag,start,direction,false);
+//        nearest_object->Select(flag);
     UI->RedrawScene();
     return !!nearest_object;
 }
 
 int ESceneCustomOTool::FrustumSelect(int flag, const CFrustum& frustum)
 {
-	ObjectList lst;
+    ObjectList lst;
 
     FrustumPick(lst,frustum);
     for(ObjectIt _F = lst.begin();_F!=lst.end();_F++)
-	    (*_F)->Select(flag);
+        (*_F)->Select(flag);
     
-	return 0;
+    return 0;
 }
 
 int ESceneCustomOTool::GetQueryObjects(ObjectList& lst, int iSel, int iVis, int iLock)
 {
-	int count=0;
+    int count=0;
     for(ObjectIt _F = m_Objects.begin();_F!=m_Objects.end();_F++)
     {
-        if(	((iSel==-1)||((*_F)->Selected()==iSel))&&
+        if(    ((iSel==-1)||((*_F)->Selected()==iSel))&&
             ((iVis==-1)||((*_F)->Visible()==iVis))&&
             ((iLock==-1)||((*_F)->Locked()==iLock)) )
             {
                 lst.push_back(*_F);
                 count++;
-        	}
+            }
     }
     return count;
 }
 
 int ESceneCustomOTool::LockObjects(bool flag, bool bAllowSelectionFlag, bool bSelFlag)
 {
-	int count=0;
+    int count=0;
     for(ObjectIt _F = m_Objects.begin();_F!=m_Objects.end();_F++)
         if(bAllowSelectionFlag){
             if((bool)(*_F)->Selected()==bSelFlag){
@@ -305,12 +305,12 @@ int ESceneCustomOTool::LockObjects(bool flag, bool bAllowSelectionFlag, bool bSe
 
 CCustomObject* ESceneCustomOTool::FindObjectByName(LPCSTR name, CCustomObject* pass)
 {
-	ObjectIt _I = m_Objects.begin();
+    ObjectIt _I = m_Objects.begin();
     ObjectIt _E = m_Objects.end();
-	for(;_I!=_E;_I++) 
+    for(;_I!=_E;_I++) 
     {
-    	CCustomObject* CO = (*_I);
-    	LPCSTR _name = CO->GetName();
+        CCustomObject* CO = (*_I);
+        LPCSTR _name = CO->GetName();
 
         if (!_name || _name == "" || _name == " ")
         {
@@ -321,27 +321,27 @@ CCustomObject* ESceneCustomOTool::FindObjectByName(LPCSTR name, CCustomObject* p
         }
 
         R_ASSERT3(_name, "Invalid object name, position:", (std::to_string(CO->GetPosition().x) + ", " + std::to_string(CO->GetPosition().y) + ", " + std::to_string(CO->GetPosition().z)).c_str());
-    	if((pass!=*_I) && (0==strcmp(_name,name)) ) 
-        	return (*_I);
+        if((pass!=*_I) && (0==strcmp(_name,name)) ) 
+            return (*_I);
     }
     return 0;
 }
 
 void setEditable(PropItemVec& items, u32 start_idx, bool bEditableTool, bool bObjectInGroup, bool bObjectInGroupUnique)
 {
-	PropItemIt it 	= items.begin()+start_idx;
-	PropItemIt it_e = items.end();
-	u32 idx=0;
+    PropItemIt it     = items.begin()+start_idx;
+    PropItemIt it_e = items.end();
+    u32 idx=0;
     
     bool bEditableObject = bEditableTool && (!bObjectInGroup || (bObjectInGroup&&bObjectInGroupUnique) );
     
     for(; it!=it_e;++it,++idx)
     {
-        bool bEnabledItem 	= bEditableObject;
+        bool bEnabledItem     = bEditableObject;
         if(!bEnabledItem && idx==4 && bObjectInGroup)
             bEnabledItem = true;
             
-    	(*it)->Enable(bEnabledItem);
+        (*it)->Enable(bEnabledItem);
     }
 }
 
@@ -351,13 +351,13 @@ void ESceneCustomOTool::FillPropObjects(LPCSTR pref, PropItemVec& items)
     {
         if ((*it)->Selected())
         {
-        	
+            
             u32 cnt = items.size();
-            (*it)->FillProp	(pref, items);
+            (*it)->FillProp    (pref, items);
 
-           	setEditable				(	items, 
-            							cnt,
-            							IsEditable(), 
+               setEditable                (    items, 
+                                        cnt,
+                                        IsEditable(), 
                                         (*it)->m_CO_Flags.test(CCustomObject::flObjectInGroup),
                                         (*it)->m_CO_Flags.test(CCustomObject::flObjectInGroupUnique));
         }
@@ -370,7 +370,7 @@ void ESceneCustomOTool::FillProp(LPCSTR pref, PropItemVec& items)
     for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); ++it)  
     {
         if ((*it)->Selected())
-            (*it)->FillProp	(PrepareKey(pref,"Items").c_str(), items);
+            (*it)->FillProp    (PrepareKey(pref,"Items").c_str(), items);
     }
 }
 */
@@ -378,13 +378,13 @@ void ESceneCustomOTool::FillProp(LPCSTR pref, PropItemVec& items)
 bool ESceneCustomOTool::GetSummaryInfo(SSceneSummary* inf)
 {
     for (ObjectIt it=m_Objects.begin(); it!=m_Objects.end(); it++)
-    	(*it)->GetSummaryInfo(inf);
+        (*it)->GetSummaryInfo(inf);
     return true;
 }
 
 void ESceneCustomOTool::GetBBox(Fbox& BB, bool bSelOnly)
 {
-	Fbox bb;
+    Fbox bb;
     ObjectList lst;
     if (GetQueryObjects(lst, bSelOnly, true, -1)){
         for(ObjectIt _F = lst.begin();_F!=lst.end();_F++)
@@ -394,15 +394,15 @@ void ESceneCustomOTool::GetBBox(Fbox& BB, bool bSelOnly)
 
 int ESceneCustomOTool::MultiRenameObjects()
 {
-	int cnt			= 0;
+    int cnt            = 0;
     for (ObjectIt o_it=m_Objects.begin(); o_it!=m_Objects.end(); o_it++){
-    	CCustomObject* obj	= *o_it;
-    	if (obj->Selected()){
-            string256 			buf;
-        	Scene->GenObjectName(obj->FClassID,buf,obj->RefName());
+        CCustomObject* obj    = *o_it;
+        if (obj->Selected()){
+            string256             buf;
+            Scene->GenObjectName(obj->FClassID,buf,obj->RefName());
             if (stricmp(obj->GetName(),buf)!=0)
             {
-	            obj->SetName(buf);
+                obj->SetName(buf);
                 cnt++; 
             }
         }
@@ -414,9 +414,9 @@ void ESceneCustomOTool::OnSelected(CCustomObject* object)
 {
     for (ObjectIt o_it=m_Objects.begin(); o_it!=m_Objects.end(); ++o_it)
     {
-    	CCustomObject* obj	= *o_it;
-    	obj->m_RT_Flags.set(CCustomObject::flRT_SelectedLast, FALSE);
-	}
+        CCustomObject* obj    = *o_it;
+        obj->m_RT_Flags.set(CCustomObject::flRT_SelectedLast, FALSE);
+    }
     object->m_RT_Flags.set(CCustomObject::flRT_SelectedLast, TRUE);
 }
 
@@ -424,10 +424,10 @@ const CCustomObject* ESceneCustomOTool::LastSelected() const
 {
     for (ObjectList::const_iterator o_it=m_Objects.begin(); o_it!=m_Objects.end(); ++o_it)
     {
-    	const CCustomObject* obj	= *o_it;
-    	if(obj->m_RT_Flags.test(CCustomObject::flRT_SelectedLast))
-        	return obj;
-	}
+        const CCustomObject* obj    = *o_it;
+        if(obj->m_RT_Flags.test(CCustomObject::flRT_SelectedLast))
+            return obj;
+    }
     return NULL;
 }
 

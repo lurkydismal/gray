@@ -25,7 +25,7 @@ Please see the GameSpy Presence SDK documentation for more information
 #include "gp.h"
 
 // Extended message support
-#define GPI_NEW_AUTH_NOTIFICATION	(1<<0)
+#define GPI_NEW_AUTH_NOTIFICATION    (1<<0)
 #define GPI_NEW_REVOKE_NOTIFICATION (1<<1)
 
 // New Status Info support
@@ -52,8 +52,8 @@ Please see the GameSpy Presence SDK documentation for more information
 ///////////
 typedef enum _GPIBool
 {
-	GPIFalse,
-	GPITrue
+    GPIFalse,
+    GPITrue
 } GPIBool;
 
 #include "gpiUtility.h"
@@ -106,21 +106,21 @@ typedef struct
   int nextOperationID;
   int numSearches;
   
-	// new style status info 
-	GPEnum lastStatusState;
-	unsigned int hostIp;
-	unsigned int hostPrivateIp;
-	unsigned short queryPort;
-	unsigned short hostPort;
-	unsigned int sessionFlags;
+    // new style status info 
+    GPEnum lastStatusState;
+    unsigned int hostIp;
+    unsigned int hostPrivateIp;
+    unsigned short queryPort;
+    unsigned short hostPort;
+    unsigned int sessionFlags;
 
-	char richStatus[GP_RICH_STATUS_LEN];
-	char gameType[GP_STATUS_BASIC_STR_LEN];
-	char gameVariant[GP_STATUS_BASIC_STR_LEN];
-	char gameMapName[GP_STATUS_BASIC_STR_LEN];
+    char richStatus[GP_RICH_STATUS_LEN];
+    char gameType[GP_STATUS_BASIC_STR_LEN];
+    char gameVariant[GP_STATUS_BASIC_STR_LEN];
+    char gameMapName[GP_STATUS_BASIC_STR_LEN];
 
-	// New Status Info extended info Keys
-	DArray extendedInfoKeys;
+    // New Status Info extended info Keys
+    DArray extendedInfoKeys;
 
   // Deprecated
   char lastStatusString[GP_STATUS_STRING_LEN];

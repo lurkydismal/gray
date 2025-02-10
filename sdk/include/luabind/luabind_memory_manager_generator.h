@@ -1,9 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////
-//	Module 		: luabind_memory_manager_generator.h
-//	Created 	: 05.01.2006
-//  Modified 	: 23.04.2008
-//	Author		: Dmitriy Iassenev
-//	Description : memory manager generator
+//    Module         : luabind_memory_manager_generator.h
+//    Created     : 05.01.2006
+//  Modified     : 23.04.2008
+//    Author        : Dmitriy Iassenev
+//    Description : memory manager generator
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -21,7 +21,7 @@ struct luabind_new_detail {
     template <typename T, typename... Args>
     static T* initialize(T *result, Args&&... args)
     {
-        return	(new (result) T(std::forward<Args>(args)...));
+        return    (new (result) T(std::forward<Args>(args)...));
     }
 };
 
@@ -30,7 +30,7 @@ struct luabind_new_detail<true> {
     template <typename T, typename... Args>
     static T* initialize(T *result, Args&&...)
     {
-        return	(result);
+        return    (result);
     }
 };
 
@@ -38,19 +38,19 @@ struct luabind_new_detail_copy_constructor {
     template <typename T>
     static T* initialize(T *result, const T &value)
     {
-        return	(new (result) T(value));
+        return    (new (result) T(value));
     }
 
     template <typename T>
     static T* initialize(T *result, T&& value)
     {
-        return	(new (result) T(std::move(value)));
+        return    (new (result) T(std::move(value)));
     }
 
     template <typename T, typename... Args>
     static T* initialize(T *result, Args&&... args)
     {
-        return	(luabind_new_detail<std::is_pod_v<T>>::initialize(result, std::forward<Args>(args)...));
+        return    (luabind_new_detail<std::is_pod_v<T>>::initialize(result, std::forward<Args>(args)...));
     }
 };
 

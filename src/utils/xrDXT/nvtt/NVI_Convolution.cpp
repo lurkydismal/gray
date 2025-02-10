@@ -38,7 +38,7 @@ ConvolutionKernel& ConvolutionKernel::operator=(const ConvolutionKernel& src)
     return *this;
 }
 
-HRESULT	ConvolutionKernel::Initialize(int numElements)
+HRESULT    ConvolutionKernel::Initialize(int numElements)
 {
     Free();
     m_pElements = new ConvolutionKernelElement[numElements];
@@ -47,11 +47,11 @@ HRESULT	ConvolutionKernel::Initialize(int numElements)
     return S_OK;
 }
 
-HRESULT	ConvolutionKernel::Free()
+HRESULT    ConvolutionKernel::Free()
 {
     if (m_pElements != NULL)
     {
-        delete[]	m_pElements;
+        delete[]    m_pElements;
         m_pElements = NULL;
     }
 
@@ -96,9 +96,9 @@ void ConvolutionKernel::GetKernelExtents(int* xlow, int* xhigh, int* ylow, int* 
     // querries the kernel elements & finds out what area they 
     //  extend over.
     // Return values written to pointer addresses
-    //.	ASSERT_MSG( m_pElements, "Initialize the m_pElements pointer!!\n");
-    //.	ASSERT_MSG( m_nNumElements > 0, "Kernel has no elements!\n");
-    //.	ASSERT_MSG( ((xlow!=NULL)&&(ylow!=NULL)&&(xhigh!=NULL)&&(yhigh!=NULL)), "Input pointer is null!\n");
+    //.    ASSERT_MSG( m_pElements, "Initialize the m_pElements pointer!!\n");
+    //.    ASSERT_MSG( m_nNumElements > 0, "Kernel has no elements!\n");
+    //.    ASSERT_MSG( ((xlow!=NULL)&&(ylow!=NULL)&&(xhigh!=NULL)&&(yhigh!=NULL)), "Input pointer is null!\n");
     *xlow = *xhigh = m_pElements[0].x_offset;
     *ylow = *yhigh = m_pElements[0].y_offset;
     for (int i = 1; i < m_nNumElements; i++)

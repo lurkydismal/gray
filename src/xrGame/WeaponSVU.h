@@ -4,12 +4,12 @@
 #include "../xrScripts/script_export_space.h"
 
 class CWeaponSVU :
-	public CWeaponCustomPistol
+    public CWeaponCustomPistol
 {
-	typedef CWeaponCustomPistol inherited;
+    typedef CWeaponCustomPistol inherited;
 public:
-	CWeaponSVU(void);
-	virtual ~CWeaponSVU(void);
+    CWeaponSVU(void);
+    virtual ~CWeaponSVU(void);
 
-	DECLARE_SCRIPT_REGISTER_FUNCTION
+    DECLARE_SCRIPT_REGISTER_FUNCTION
 };

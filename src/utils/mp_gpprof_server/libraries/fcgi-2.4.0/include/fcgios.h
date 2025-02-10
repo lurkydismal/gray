@@ -110,9 +110,9 @@ DLLAPI int OS_SpawnChild(char *execPath, int listenFd);
 DLLAPI int OS_AsyncReadStdin(void *buf, int len, OS_AsyncProc procPtr,
                       ClientData clientData);
 DLLAPI int OS_AsyncRead(int fd, int offset, void *buf, int len,
-		 OS_AsyncProc procPtr, ClientData clientData);
+         OS_AsyncProc procPtr, ClientData clientData);
 DLLAPI int OS_AsyncWrite(int fd, int offset, void *buf, int len,
-		  OS_AsyncProc procPtr, ClientData clientData);
+          OS_AsyncProc procPtr, ClientData clientData);
 DLLAPI int OS_Close(int fd);
 DLLAPI int OS_CloseRead(int fd);
 DLLAPI int OS_DoIo(struct timeval *tmo);

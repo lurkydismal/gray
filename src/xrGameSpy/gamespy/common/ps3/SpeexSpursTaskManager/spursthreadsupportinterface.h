@@ -25,19 +25,19 @@ class spursThreadSupportInterface
 {
 public:
 
-	virtual ~spursThreadSupportInterface();
+    virtual ~spursThreadSupportInterface();
 
 ///send messages to SPUs
-	virtual int sendRequest(uint32_t uiCommand, uint32_t uiArgument0, uint32_t uiArgument1) =0;
+    virtual int sendRequest(uint32_t uiCommand, uint32_t uiArgument0, uint32_t uiArgument1) =0;
 
 ///check for messages from SPUs
-	virtual	int waitForResponse(unsigned int *puiArgument0, unsigned int *puiArgument1) =0;
+    virtual    int waitForResponse(unsigned int *puiArgument0, unsigned int *puiArgument1) =0;
 
 ///start the spus (can be called at the beginning of each frame, to make sure that the right SPU program is loaded)
-	virtual	int startSPU() =0;
+    virtual    int startSPU() =0;
 
 ///tell the task scheduler we are done with the SPU tasks
-	virtual	int stopSPU()=0;
+    virtual    int stopSPU()=0;
 };
 
 #endif //THREAD_SUPPORT_INTERFACE_H

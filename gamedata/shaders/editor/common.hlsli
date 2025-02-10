@@ -5,7 +5,7 @@
 
 uniform float4 L_material; // per object, xyz=sun,w=hemi
 uniform float4 L_dynamic_props; // per object, xyz=sun,w=hemi
-uniform float4 L_dynamic_color; // dynamic light color (rgb1)	- spot/point
+uniform float4 L_dynamic_color; // dynamic light color (rgb1)    - spot/point
 uniform float4 L_dynamic_pos; // dynamic light pos+1/range(w) - spot/point
 uniform float4x4 L_dynamic_xform;
 
@@ -32,7 +32,7 @@ float2 calc_detail(float3 w_pos)
     float dtl = distance(w_pos, eye_position) * dt_params.w;
     dtl = min(dtl * dtl, 1.0f);
     float dt_mul = 1.0f - dtl; // dt*  [1 ..  0 ]
-    float dt_add = 0.5f * dtl; // dt+	[0 .. 0.5]
+    float dt_add = 0.5f * dtl; // dt+    [0 .. 0.5]
     return float2(dt_mul, dt_add);
 }
 
@@ -197,16 +197,16 @@ float3 v_sun_wrap(float3 n, float w)
 
 float3 p_hemi(float2 tc)
 {
-    // float3	t_lmh 	= tex2D		(s_hemi, tc);
-    // return  dot	(t_lmh,1.h/3.h);
+    // float3    t_lmh     = tex2D        (s_hemi, tc);
+    // return  dot    (t_lmh,1.h/3.h);
     float4 t_lmh = tex2D(s_hemi, tc);
     return t_lmh.a;
 }
 
 struct f_editor_gbuffer
 {
-	float4 Color : COLOR0;
-	
+    float4 Color : COLOR0;
+    
 #ifndef FORWARD_ONLY
     float4 Albedo : COLOR1;
     float4 Normal : COLOR2;
@@ -219,24 +219,24 @@ void cotangent_frame(inout p_bumped_new O)
     // Get edge vectors of the pixel triangle
     float3 dp1 = ddx(O.position.xyz);
     float3 dp2 = ddy(O.position.xyz);
-	
+    
     float2 duv1 = ddx(O.tcdh.xy);
     float2 duv2 = ddy(O.tcdh.xy);
 
-	float3 N = normalize(O.M1);
+    float3 N = normalize(O.M1);
 
     // Solve the linear system
     float3 dp2perp = cross(dp2, N);
     float3 dp1perp = cross(N, dp1);
-	
+    
     float3 T = normalize(dp2perp * duv1.x + dp1perp * duv2.x);
     float3 B = normalize(dp2perp * duv1.y + dp1perp * duv2.y);
-	
+    
     float3x3 xform = float3x3(
         T.x, B.x, N.x,
         T.y, B.y, N.y,
         T.z, B.z, N.z
-	);
+    );
 
     O.M1 = xform[0];
     O.M2 = xform[1];

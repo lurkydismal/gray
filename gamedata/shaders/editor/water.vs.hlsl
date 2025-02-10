@@ -76,7 +76,7 @@ void main(in vv v, out vf o)
 
     o.c0 = v.C;
 
-    //	Igor: for additional depth dest
+    //    Igor: for additional depth dest
     o.tctexgen = mul(m_texgen, P);
     o.tctexgen.z = mul(m_V, P).z;
 }

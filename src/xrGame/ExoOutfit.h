@@ -11,8 +11,8 @@
 class CExoOutfit: public CCustomOutfit
 {
 private:
-    typedef	CCustomOutfit inherited;
+    typedef    CCustomOutfit inherited;
 public:
-	CExoOutfit(void);
-	virtual ~CExoOutfit(void);
+    CExoOutfit(void);
+    virtual ~CExoOutfit(void);
 };

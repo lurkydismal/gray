@@ -3,25 +3,25 @@ class CActor;
 
 class CPickUpManager
 {
-	CActor* Owner;
+    CActor* Owner;
 
-	//расстояние подсветки предметов
-	float PickupInfoRadius;
+    //расстояние подсветки предметов
+    float PickupInfoRadius;
 
-	//режим подбирания предметов
-	bool PickupMode;
-	collide::rq_results RQR;
+    //режим подбирания предметов
+    bool PickupMode;
+    collide::rq_results RQR;
 public:
-	CPickUpManager(CActor* Owner);
-	
-	void RenderInfo();
+    CPickUpManager(CActor* Owner);
+    
+    void RenderInfo();
 
-	bool CanPickItem(const CFrustum& frustum, const Fvector& from, CObject* item);
+    bool CanPickItem(const CFrustum& frustum, const Fvector& from, CObject* item);
 
-	IC void SetPickupRadius(float Radius) { PickupInfoRadius = Radius; }
-	IC void SetPickupMode(bool State) { PickupMode = State; }
-	IC bool GetPickupMode() const { return PickupMode; }
+    IC void SetPickupRadius(float Radius) { PickupInfoRadius = Radius; }
+    IC void SetPickupMode(bool State) { PickupMode = State; }
+    IC bool GetPickupMode() const { return PickupMode; }
 
 private:
-	void PickupInfoDraw(CObject* object);
+    void PickupInfoDraw(CObject* object);
 };

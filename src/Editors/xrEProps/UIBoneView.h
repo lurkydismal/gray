@@ -2,20 +2,20 @@
 #include "NodeBuilder/Builder.h"
 
 class XREPROPS_API CUIBoneView:
-	public CNodeViewport
+    public CNodeViewport
 {
-	xr_hash_map<CBone*, CNodeBone*> BonesData;
+    xr_hash_map<CBone*, CNodeBone*> BonesData;
 
-	bool IsOpen = false;
+    bool IsOpen = false;
 
 public:
-	CUIBoneView();
-	~CUIBoneView();
+    CUIBoneView();
+    ~CUIBoneView();
 
-	virtual void Draw() override;
-	void FillBones(const BoneVec& List);
-	void Show(bool State);
+    virtual void Draw() override;
+    void FillBones(const BoneVec& List);
+    void Show(bool State);
 
 private:
-	float IterateChild(CBone* Bone, Fvector2 Offset);
+    float IterateChild(CBone* Bone, Fvector2 Offset);
 };

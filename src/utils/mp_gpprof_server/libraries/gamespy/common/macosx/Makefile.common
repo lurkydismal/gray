@@ -10,14 +10,14 @@ CFLAGS=$(BASE_CFLAGS) $(UNICODE_CFLAGS) -D_MACOSX -DGSI_COMMON_DEBUG -D_NO_NOPOR
 
 #optimization flags
 #CFLAGS=$(BASE_CFLAGS) $(UNICODE_CFLAGS) -O6 -ffast-math -funroll-loops \
-	-fomit-frame-pointer -fexpensive-optimizations -lpthreads
+    -fomit-frame-pointer -fexpensive-optimizations -lpthreads
 
 #############################################################################
 # SETUP AND BUILD
 #############################################################################
 
 $(PROJECT): $(PROG_OBJS)
-	$(CC) $(CFLAGS) -o $@ $(PROG_OBJS) $(LIBS)
+    $(CC) $(CFLAGS) -o $@ $(PROG_OBJS) $(LIBS)
 
 #############################################################################
 # MISC
@@ -25,9 +25,9 @@ $(PROJECT): $(PROG_OBJS)
 
 unicode: $(PROJECT)
 
-clean:	
-	rm -f $(PROG_OBJS)
+clean:    
+    rm -f $(PROG_OBJS)
 
 depend:
-	$(CC) -MM $(PROG_OBJS:.o=.c)
+    $(CC) -MM $(PROG_OBJS:.o=.c)
 

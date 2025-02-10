@@ -83,4 +83,4 @@ pthread_mutexattr_init (pthread_mutexattr_t * attr)
   *attr = ma;
 
   return (result);
-}				/* pthread_mutexattr_init */
+}                /* pthread_mutexattr_init */

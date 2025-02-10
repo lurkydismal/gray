@@ -25,7 +25,7 @@ float4 main(v2p I) : COLOR
         FxaaFloat4(0.0f, 0.0f, 0.0f, 0.0f), // FxaaFloat4 fxaaConsole360RcpFrameOpt2,
         0.35f, // FxaaFloat fxaaQualitySubpix,
         0.125f, // FxaaFloat fxaaQualityEdgeThreshold,
-        0.0f, // 0.0625f,								// FxaaFloat fxaaQualityEdgeThresholdMin,
+        0.0f, // 0.0625f,                                // FxaaFloat fxaaQualityEdgeThresholdMin,
         0.0f, // FxaaFloat fxaaConsoleEdgeSharpness,
         0.0f, // FxaaFloat fxaaConsoleEdgeThreshold,
         0.0f, // FxaaFloat fxaaConsoleEdgeThresholdMin,

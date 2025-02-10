@@ -14,4 +14,4 @@ PixEventWrapper::~PixEventWrapper()
     D3DPERF_EndEvent();
 }
 
-#endif	//	DEBUG
+#endif    //    DEBUG

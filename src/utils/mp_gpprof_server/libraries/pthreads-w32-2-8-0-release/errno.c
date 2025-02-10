@@ -89,6 +89,6 @@ _errno (void)
 
   return (result);
 
-}				/* _errno */
+}                /* _errno */
 
 #endif /* (NEED_ERRNO) */

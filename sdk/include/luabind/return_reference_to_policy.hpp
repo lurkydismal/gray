@@ -24,43 +24,43 @@
 
 namespace luabind { namespace detail
 {
-	template<Direction Dir>
-	struct return_reference_to_converter;
+    template<Direction Dir>
+    struct return_reference_to_converter;
 
-	template<>
-	struct return_reference_to_converter<Direction::cpp_to_lua>
-	{
-		template<typename T>
-		void apply(lua_State* L, const T&)
-		{
-			lua_pushnil(L);
-		}
-	};
+    template<>
+    struct return_reference_to_converter<Direction::cpp_to_lua>
+    {
+        template<typename T>
+        void apply(lua_State* L, const T&)
+        {
+            lua_pushnil(L);
+        }
+    };
 
-	template<int N>
-	struct return_reference_to_policy : conversion_policy<0>
-	{
-		static void precall(lua_State*, const index_map&) {}
-		static void postcall(lua_State* L, const index_map& indices) 
-		{
-			const int result_index = indices[0];
+    template<int N>
+    struct return_reference_to_policy : conversion_policy<0>
+    {
+        static void precall(lua_State*, const index_map&) {}
+        static void postcall(lua_State* L, const index_map& indices) 
+        {
+            const int result_index = indices[0];
             const int ref_to_index = indices[N];
 
-			lua_pushvalue(L, ref_to_index);
-			lua_replace(L, result_index);
-		}
+            lua_pushvalue(L, ref_to_index);
+            lua_replace(L, result_index);
+        }
 
-		template<typename T, Direction Dir>
-		struct generate_converter
-		{
-			typedef return_reference_to_converter<Dir> type;
-		};
-	};
+        template<typename T, Direction Dir>
+        struct generate_converter
+        {
+            typedef return_reference_to_converter<Dir> type;
+        };
+    };
 }}
 
 namespace luabind
 {
-	template<size_t N>
-	detail::policy_cons<detail::return_reference_to_policy<N>> 
-	return_reference_to() { return detail::policy_cons<detail::return_reference_to_policy<N>>(); }
+    template<size_t N>
+    detail::policy_cons<detail::return_reference_to_policy<N>> 
+    return_reference_to() { return detail::policy_cons<detail::return_reference_to_policy<N>>(); }
 }

@@ -227,7 +227,7 @@ tru64)
    if test -f "$tmpdepfile"; then
       sed -e "s,^.*\.[a-z]*:,$object:," < "$tmpdepfile" > "$depfile"
       # That's a space and a tab in the [].
-      sed -e 's,^.*\.[a-z]*:[ 	]*,,' -e 's,$,:,' < "$tmpdepfile" >> "$depfile"
+      sed -e 's,^.*\.[a-z]*:[     ]*,,' -e 's,$,:,' < "$tmpdepfile" >> "$depfile"
    else
       echo "#dummy" > "$depfile"
    fi
@@ -249,19 +249,19 @@ dashmstdout)
       for arg
       do # cycle over the arguments
         case "$arg" in
-	"--mode=compile")
-	  # insert --quiet before "--mode=compile"
-	  set fnord "$@" --quiet
-	  shift # fnord
-	  ;;
-	esac
-	set fnord "$@" "$arg"
-	shift # fnord
-	shift # "$arg"
+    "--mode=compile")
+      # insert --quiet before "--mode=compile"
+      set fnord "$@" --quiet
+      shift # fnord
+      ;;
+    esac
+    set fnord "$@" "$arg"
+    shift # fnord
+    shift # "$arg"
       done
       ;;
     esac
-    "$@" $dashmflag | sed 's:^[^:]*\:[ 	]*:'"$object"'\: :' > "$tmpdepfile"
+    "$@" $dashmflag | sed 's:^[^:]*\:[     ]*:'"$object"'\: :' > "$tmpdepfile"
   ) &
   proc=$!
   "$@"
@@ -292,15 +292,15 @@ makedepend)
     for arg in "$@"; do
       case $cleared in no)
         set ""; shift
-	cleared=yes
+    cleared=yes
       esac
       case "$arg" in
         -D*|-I*)
-	  set fnord "$@" "$arg"; shift;;
-	-*)
-	  ;;
-	*)
-	  set fnord "$@" "$arg"; shift;;
+      set fnord "$@" "$arg"; shift;;
+    -*)
+      ;;
+    *)
+      set fnord "$@" "$arg"; shift;;
       esac
     done
     obj_suffix="`echo $object | sed 's/^.*\././'`"
@@ -332,15 +332,15 @@ cpp)
       for arg
       do # cycle over the arguments
         case $arg in
-	"--mode=compile")
-	  # insert --quiet before "--mode=compile"
-	  set fnord "$@" --quiet
-	  shift # fnord
-	  ;;
-	esac
-	set fnord "$@" "$arg"
-	shift # fnord
-	shift # "$arg"
+    "--mode=compile")
+      # insert --quiet before "--mode=compile"
+      set fnord "$@" --quiet
+      shift # fnord
+      ;;
+    esac
+    set fnord "$@" "$arg"
+    shift # fnord
+    shift # "$arg"
       done
       ;;
     esac
@@ -370,15 +370,15 @@ msvisualcpp)
       for arg
       do # cycle over the arguments
         case $arg in
-	"--mode=compile")
-	  # insert --quiet before "--mode=compile"
-	  set fnord "$@" --quiet
-	  shift # fnord
-	  ;;
-	esac
-	set fnord "$@" "$arg"
-	shift # fnord
-	shift # "$arg"
+    "--mode=compile")
+      # insert --quiet before "--mode=compile"
+      set fnord "$@" --quiet
+      shift # fnord
+      ;;
+    esac
+    set fnord "$@" "$arg"
+    shift # fnord
+    shift # "$arg"
       done
       ;;
     esac
@@ -392,8 +392,8 @@ msvisualcpp)
   if test "$stat" != 0; then exit $stat; fi
   rm -f "$depfile"
   echo "$object : \\" > "$depfile"
-  . "$tmpdepfile" | sed 's% %\\ %g' | sed -n '/^\(.*\)$/ s::	\1 \\:p' >> "$depfile"
-  echo "	" >> "$depfile"
+  . "$tmpdepfile" | sed 's% %\\ %g' | sed -n '/^\(.*\)$/ s::    \1 \\:p' >> "$depfile"
+  echo "    " >> "$depfile"
   . "$tmpdepfile" | sed 's% %\\ %g' | sed -n '/^\(.*\)$/ s::\1\::p' >> "$depfile"
   rm -f "$tmpdepfile"
   ;;
