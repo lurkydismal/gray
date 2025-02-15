@@ -13,7 +13,11 @@ export BUILD_C_FLAGS_DEBUG="-Og -g"
 export BUILD_C_FLAGS_RELEASE="-Ofast -funroll-loops -fno-asynchronous-unwind-tables"
 export BUILD_C_FLAGS_PROFILE="$BUILD_C_FLAGS_RELEASE"
 
-export BUILD_DEFINES=""
+export declare BUILD_DEFINES=(
+)
+export declare BUILD_INCLUDES=(
+    "glad/include"
+)
 
 export LINK_FLAGS="-flto -fPIC -fuse-ld=mold -Wl,-O1 -Wl,--gc-sections -Wl,--no-eh-frame-hdr"
 export LINK_FLAGS_DEBUG="-g"
@@ -24,7 +28,6 @@ export declare LIBRARIES_TO_LINK=(
     "glfw"
     "dl"
     "mimalloc"
-    "GL"
 )
 export LINKER="ccache gcc"
 export EXECUTABLE_NAME="main.out"
@@ -63,7 +66,17 @@ elif [ $BUILD_TYPE -eq 2 ]; then
 fi
 
 for partToBuild in "${partsToBuild[@]}"; do
-    source "$partToBuild/config.sh" && './build_general.sh' "$partToBuild" "$BUILD_C_FLAGS" "$BUILD_DEFINES"
+    if [ ${#BUILD_DEFINES[@]} -ne 0 ]; then
+        printf -v definesAsString -- "-D %s " "${BUILD_DEFINES[@]}"
+        echo $definesAsString
+    fi
+
+    if [ ${#BUILD_INCLUDES[@]} -ne 0 ]; then
+        printf -v includesAsString -- "-I $SCRIPT_DIRECTORY/%s " "${BUILD_INCLUDES[@]}"
+        echo $includesAsString
+    fi
+
+    source "$partToBuild/config.sh" && './build_general.sh' "$partToBuild" "$BUILD_C_FLAGS" "$definesAsString" "$includesAsString"
 
     BUILD_STATUS=$?
 
@@ -73,20 +86,23 @@ for partToBuild in "${partsToBuild[@]}"; do
 done
 
 if [ $BUILD_STATUS -eq 0 ]; then
-    printf -v partsToBuildAsString "$BUILD_DIRECTORY/lib%s.a " "${partsToBuild[@]}"
+    if [ ${#partsToBuild[@]} -ne 0 ]; then
+        printf -v partsToBuildAsString -- "$BUILD_DIRECTORY/lib%s.a " "${partsToBuild[@]}"
+        echo $partsToBuildAsString
+    fi
 
-    echo $partsToBuildAsString
-
-    printf -v librariesToLinkAgainst -- "-l%s " "${LIBRARIES_TO_LINK[@]}"
-
-    echo $librariesToLinkAgainst
+    if [ ${#LIBRARIES_TO_LINK[@]} -ne 0 ]; then
+        printf -v librariesToLinkAgainst -- "-l%s " "${LIBRARIES_TO_LINK[@]}"
+        echo $librariesToLinkAgainst
+    fi
 
     $LINKER $LINK_FLAGS $partsToBuildAsString $librariesToLinkAgainst -o "$BUILD_DIRECTORY/$EXECUTABLE_NAME"
 
     if [ ! -z "${NEED_STRIP_EXECUTABLE+x}" ]; then
-        printf -v sectionsToStripAsString -- "--remove-section %s " "${EXECUTABLE_SECTIONS_TO_STRIP[@]}"
-
-        echo $sectionsToStripAsString
+        if [ ${#EXECUTABLE_SECTIONS_TO_STRIP[@]} -ne 0 ]; then
+            printf -v sectionsToStripAsString -- "--remove-section %s " "${EXECUTABLE_SECTIONS_TO_STRIP[@]}"
+            echo $sectionsToStripAsString
+        fi
 
         objcopy "$BUILD_DIRECTORY/$EXECUTABLE_NAME" $sectionsToStripAsString
 

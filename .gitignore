@@ -4,6 +4,9 @@
 **/.*~
 **/.*.swp
 
+# glad
+glad
+
 # Binary
 **/*.o
 **/out
