@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <glad/gl.h>
 #include <pthread.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <sys/time.h>
@@ -15,13 +16,14 @@
     ( _milliseconds * ONE_MILLISECOND_IN_NANOSECONDS )
 
 static size_t g_fps = 0;
+static bool g_exit = false;
 
 void* t( void* data ) {
     static size_t l_fps = 0;
 
     ( void )( sizeof( data ) );
 
-    for ( ;; ) {
+    while ( !g_exit ) {
         printf( "%lu\n", ( g_fps - l_fps ) );
 
         l_fps = g_fps;
@@ -48,6 +50,10 @@ int main( void ) {
 
     /* Make the window's context current */
     glfwMakeContextCurrent( window );
+
+    int version = gladLoadGL( glfwGetProcAddress );
+    printf( "GL %d.%d\n", GLAD_VERSION_MAJOR( version ),
+            GLAD_VERSION_MINOR( version ) );
 
     struct timespec next_frame;
 
@@ -79,6 +85,8 @@ int main( void ) {
         }
 
         if ( glfwWindowShouldClose( window ) ) {
+            g_exit = true;
+
             break;
         }
     }
