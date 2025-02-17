@@ -18,6 +18,10 @@
 static size_t g_fps = 0;
 static bool g_exit = false;
 
+void error_callback( int error, const char* description ) {
+    fprintf( stderr, "Error: %d %s\n", error, description );
+}
+
 void* t( void* data ) {
     static size_t l_fps = 0;
 
@@ -34,7 +38,19 @@ void* t( void* data ) {
     return ( NULL );
 }
 
+static void key_callback( GLFWwindow* window,
+                          int key,
+                          int scancode,
+                          int action,
+                          int mods ) {
+    if ( ( key == GLFW_KEY_ESCAPE ) && ( action == GLFW_PRESS ) ) {
+        glfwSetWindowShouldClose( window, GLFW_TRUE );
+    }
+}
+
 int main( void ) {
+    glfwSetErrorCallback( error_callback );
+
     GLFWwindow* window;
 
     /* Initialize the library */
@@ -48,6 +64,8 @@ int main( void ) {
         return -1;
     }
 
+    glfwSetKeyCallback( window, key_callback );
+
     /* Make the window's context current */
     glfwMakeContextCurrent( window );
 
@@ -55,33 +73,45 @@ int main( void ) {
     printf( "GL %d.%d\n", GLAD_VERSION_MAJOR( version ),
             GLAD_VERSION_MINOR( version ) );
 
+    glfwSwapInterval( 1 );
+
     struct timespec next_frame;
 
     next_frame.tv_sec = 0;
     next_frame.tv_nsec = MILLISECONDS_TO_NANOSECONDS( 16.6666667 );
 
+#if 1
     pthread_t tr;
 
     if ( pthread_create( &tr, NULL, t, NULL ) ) {
         printf( "error: \n" );
     }
+#endif
 
     for ( ;; ) {
         {
-            /* Render here */
-            glClear( GL_COLOR_BUFFER_BIT );
-
-            /* Swap front and back buffers */
-            glfwSwapBuffers( window );
-
             /* Poll for and process events */
             glfwPollEvents();
         }
 
         {
+            int width, height;
+            glfwGetFramebufferSize( window, &width, &height );
+            glViewport( 0, 0, width, height );
+
+            /* Render here */
+            glClear( GL_COLOR_BUFFER_BIT );
+
+            /* Swap front and back buffers */
+            glfwSwapBuffers( window );
+        }
+
+        {
             g_fps++;
 
+#if 0
             clock_nanosleep( CLOCK_MONOTONIC, 0, &next_frame, NULL );
+#endif
         }
 
         if ( glfwWindowShouldClose( window ) ) {
@@ -91,7 +121,9 @@ int main( void ) {
         }
     }
 
+#if 1
     pthread_join( tr, NULL );
+#endif
 
     glfwTerminate();
 
