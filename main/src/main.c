@@ -100,7 +100,7 @@ int main( void ) {
             glViewport( 0, 0, width, height );
 
             /* Render here */
-            glClear( GL_COLOR_BUFFER_BIT );
+            glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
             /* Swap front and back buffers */
             glfwSwapBuffers( window );
